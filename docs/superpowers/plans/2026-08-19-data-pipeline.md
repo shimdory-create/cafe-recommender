@@ -923,7 +923,7 @@ Store 인터페이스 뒤에 두어 나중에 DB로 옮길 경계를 만들어 �
 생겨도 배포가 필요 없다.
 ```
 
-## Task 3: 지역·키워드 상수 + 거리 계산 (순수 함수)
+## Task 3: 지역·키워드 상수 + 거리 계산 (순수 함수)  [완료 2026-08-20]
 
 > API 키가 없어도 진행 가능하다. Task 1 직후 바로 착수할 수 있다.
 
@@ -953,7 +953,7 @@ Store 인터페이스 뒤에 두어 나중에 DB로 옮길 경계를 만들어 �
 빼고, 실제 스캔 대상은 **65개**가 된다. 스펙 5절의 "66개 시군구"는 행정구역
 수이고 스캔 대상은 65개임을 `regions.ts` 주석에 남긴다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/config/regions.test.ts`:
 
@@ -1037,13 +1037,13 @@ describe('estimateDriveMinutes', () => {
 })
 ```
 
-- [ ] **Step 2: 테스트가 실패하는 것을 확인**
+- [x] **Step 2: 테스트가 실패하는 것을 확인**
 
 Run: `npx vitest run tests/config/regions.test.ts tests/pipeline/geo.test.ts`
 
 Expected: FAIL — 두 모듈 모두 import 해결 실패
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/config/regions.ts`:
 
@@ -1163,7 +1163,7 @@ export function estimateDriveMinutes(straightKm: number): number {
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인**
+- [x] **Step 4: 테스트 통과 확인**
 
 Run: `npx vitest run tests/config/regions.test.ts tests/pipeline/geo.test.ts`
 
@@ -1173,7 +1173,7 @@ Expected: PASS (8 tests)
 스펙 10.2절 예시의 "양평 80분" 과 대략 맞는다. 근사가 과대추정 쪽으로
 치우치는 편이 안전하다 — 예상보다 가까운 것이 예상보다 먼 것보다 낫다.
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/config/regions.ts src/config/keywords.ts src/pipeline/geo.ts tests/config/regions.test.ts tests/pipeline/geo.test.ts
