@@ -1401,7 +1401,7 @@ git commit -m "feat: 소스 어댑터 기반 — 레이트리미터와 헬스 �
 
 ---
 
-## Task 5: 카카오 로컬 어댑터 (장소 검색)
+## Task 5: 카카오 로컬 어댑터 (장소 검색)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/sources/kakao-local.ts`, `scripts/capture-fixture.ts`
@@ -1415,7 +1415,7 @@ git commit -m "feat: 소스 어댑터 기반 — 레이트리미터와 헬스 �
   - `parseKakaoLocal(payload: unknown): KakaoPlace[]`
   - `createKakaoLocal(deps): { searchKeyword(query, page): Promise<{ places, isEnd }> }`
 
-- [ ] **Step 1: fixture 캡처 스크립트 작성 후 실행**
+- [x] **Step 1: fixture 캡처 스크립트 작성 후 실행**
 
 `scripts/capture-fixture.ts` — 실제 API 를 **1회만** 호출해 응답을 저장한다.
 이후 모든 테스트는 이 파일만 읽는다 (Global Constraints).
@@ -1451,7 +1451,7 @@ console.log(`저장: ${path}`)
 npx tsx scripts/capture-fixture.ts local "양평군 베이커리카페"
 ```
 
-- [ ] **Step 2: 실패하는 테스트 작성**
+- [x] **Step 2: 실패하는 테스트 작성**
 
 `tests/sources/kakao-local.test.ts`:
 
@@ -1515,9 +1515,9 @@ describe('createKakaoLocal', () => {
 })
 ```
 
-- [ ] **Step 3: 실패 확인** — FAIL
+- [x] **Step 3: 실패 확인** — FAIL
 
-- [ ] **Step 4: 구현**
+- [x] **Step 4: 구현**
 
 `src/sources/kakao-local.ts`:
 
@@ -1591,9 +1591,9 @@ export function createKakaoLocal(deps: KakaoLocalDeps) {
 }
 ```
 
-- [ ] **Step 5: 테스트 통과 확인** — PASS
+- [x] **Step 5: 테스트 통과 확인** — PASS
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/sources/kakao-local.ts scripts/capture-fixture.ts tests/sources/kakao-local.test.ts tests/fixtures/
