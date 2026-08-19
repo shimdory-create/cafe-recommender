@@ -35,9 +35,16 @@ const checks = [
         headers: { Authorization: `KakaoAK ${env.KAKAO_REST_API_KEY}` },
       })
       const body = await res.json().catch(() => ({}))
-      if (res.status === 401) return { ok: false, detail: 'REST API 키가 잘못되었습니다 (401)' }
+      const msg = body.msg || body.message || ''
+      if (res.status === 401) return { ok: false, detail: 'REST API 키가 잘못되었습니다 (401). 앱 키 화면의 세 번째 값인지 확인하세요' }
       if (res.status === 403) {
-        return { ok: false, detail: '403 — 카카오 앱에서 [카카오맵] 활성화 또는 플랫폼(Web) 등록이 필요합니다' }
+        if (/OPEN_MAP_AND_LOCAL/i.test(msg)) {
+          return {
+            ok: false,
+detail: '403 — 앱에 카카오맵(로컬) 서비스가 꺼져 있습니다. '              + '카카오 개발자 콘솔 > 해당 앱 > 좌측 [카카오맵] 에서 활성화하세요. '              + '원문: ' + msg,
+          }
+        }
+        return { ok: false, detail: '403 — ' + (msg || '권한 없음') }
       }
       if (!res.ok) return { ok: false, detail: `HTTP ${res.status} ${JSON.stringify(body).slice(0, 120)}` }
       const first = body.documents?.[0]
