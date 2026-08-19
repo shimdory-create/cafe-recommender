@@ -2771,7 +2771,7 @@ git commit -m "feat: Layer 3 LLM 속성 추출"
 
 ---
 
-## Task 11: 그물 C — 블로그 큐레이션 수확
+## Task 11: 그물 C — 블로그 큐레이션 수확  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/harvest.ts`
@@ -2786,7 +2786,7 @@ git commit -m "feat: Layer 3 LLM 속성 추출"
 매칭 위주라 상호에 "대형"이 없는 대형카페를 놓친다. 블로거가 이미 손으로
 큐레이션한 "BEST N" 글에서 상호명을 뽑아 이 구멍을 메운다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -2837,9 +2837,9 @@ describe('harvestCurated', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/harvest.ts`:
 
@@ -2898,9 +2898,9 @@ export async function harvestCurated(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS
+- [x] **Step 4: 테스트 통과 확인** — PASS
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/harvest.ts tests/pipeline/harvest.test.ts
@@ -3390,7 +3390,7 @@ now 를 인자로 받아 계절 승수까지 결정론적으로 테스트된다.
 
 ---
 
-## Task 15: 발굴 잡 — 파이프라인 통합 (weekly-discover)
+## Task 15: 발굴 잡 — 파이프라인 통합 (weekly-discover)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/jobs/weekly-discover.ts`
@@ -3400,7 +3400,7 @@ now 를 인자로 받아 계절 승수까지 결정론적으로 테스트된다.
 - Consumes: Task 3~14 전부
 - Produces: `runDiscover(deps, opts): Promise<{ discovered, excluded, extracted, gated, errors }>`
 
-- [ ] **Step 1: 실패하는 테스트 작성** — 모든 의존을 가짜로 주입해 오프라인 검증
+- [x] **Step 1: 실패하는 테스트 작성** — 모든 의존을 가짜로 주입해 오프라인 검증
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -3475,9 +3475,9 @@ describe('runDiscover', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/jobs/weekly-discover.ts`:
 
@@ -3584,9 +3584,9 @@ export async function runDiscover(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS
+- [x] **Step 4: 테스트 통과 확인** — PASS
 
-- [ ] **Step 5: 소규모 실전 1회 실행**
+- [x] **Step 5: 소규모 실전 1회 실행**
 
 ```bash
 npx tsx -e "import('./src/jobs/weekly-discover.js')" # 실제 배선은 Task 17 의 CLI 로
@@ -3595,7 +3595,7 @@ npx tsx -e "import('./src/jobs/weekly-discover.js')" # 실제 배선은 Task 17 
 양평군 1개 지역만으로 실행해 `data/cafes.json` 이 생기는지, 블랙리스트가
 동작하는지 눈으로 확인한다.
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/jobs/weekly-discover.ts tests/jobs/
@@ -3616,7 +3616,7 @@ git commit -m "feat: 발굴 잡 — 그물 A·C 통합과 Layer 1 적용"
 
 ---
 
-## Task 16: 일일 화제량 잡 + 주간 후보 잡
+## Task 16: 일일 화제량 잡 + 주간 후보 잡  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/jobs/daily-buzz.ts`, `src/jobs/weekly-suggest.ts`
@@ -3627,7 +3627,7 @@ git commit -m "feat: 발굴 잡 — 그물 A·C 통합과 Layer 1 적용"
   - `runDailyBuzz(deps, opts?): Promise<{ updated, failed, dropped }>`
   - `runWeeklySuggest(deps, opts?): Promise<{ picked: Suggestion[] }>`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -3731,9 +3731,9 @@ describe('runWeeklySuggest', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/jobs/daily-buzz.ts`:
 
@@ -3868,9 +3868,9 @@ export async function runWeeklySuggest(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS
+- [x] **Step 4: 테스트 통과 확인** — PASS
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/jobs/daily-buzz.ts src/jobs/weekly-suggest.ts tests/jobs/
@@ -3890,7 +3890,7 @@ git 히스토리로 소급 가능하다 (스펙 9절).
 
 ---
 
-## Task 17: CLI 도구 + GitHub Actions + 카카오톡 알림
+## Task 17: CLI 도구 + GitHub Actions + 카카오톡 알림  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/cli/visited.ts`, `src/cli/inspect.ts`, `src/cli/health.ts`, `src/cli/hide.ts`, `src/cli/run.ts`
@@ -3901,7 +3901,7 @@ git 히스토리로 소급 가능하다 (스펙 9절).
 - Consumes: Task 15·16 잡, `Store`
 - Produces: `npm run` 스크립트 6종
 
-- [ ] **Step 1: 실패하는 테스트 작성 — 카페 이름 해석기**
+- [x] **Step 1: 실패하는 테스트 작성 — 카페 이름 해석기**
 
 CLI 는 사람이 `npm run visited 테라로사` 처럼 부분 이름을 친다. 해석 규칙이
 가장 실수하기 쉬운 부분이므로 여기만 테스트한다.
@@ -3937,9 +3937,9 @@ describe('resolveCafe', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/cli/visited.ts`:
 
@@ -4063,7 +4063,7 @@ npm pkg set scripts.buzz="tsx src/cli/run.ts buzz"
 npm pkg set scripts.suggest="tsx src/cli/run.ts suggest"
 ```
 
-- [ ] **Step 4: GitHub Actions 워크플로 작성**
+- [x] **Step 4: GitHub Actions 워크플로 작성**
 
 `.github/workflows/daily-buzz.yml`:
 
@@ -4106,7 +4106,7 @@ jobs:
 GitHub 저장소 Settings > Secrets 에 `KAKAO_REST_API_KEY` 와
 `GEMINI_API_KEY` 를 등록한다.
 
-- [ ] **Step 5: 카카오톡 알림 Phase 1 설정 (코드 0줄)**
+- [x] **Step 5: 카카오톡 알림 Phase 1 설정 (코드 0줄)**
 
 스펙 10.2절 Phase 1. claude.ai Routine 을 매주 금요일 12:00 KST 로 만들고
 다음을 시킨다:
@@ -4127,13 +4127,13 @@ data/suggestions.json 에서 이번 주(weekOf) 후보 3곳을 읽고,
 커넥터 인증이 클라우드 실행에서 붙는지 **첫 금요일에 확인**한다. 안 되면
 로컬 예약으로 폴백한다 (노트북이 켜져 있어야 함).
 
-- [ ] **Step 6: 전체 테스트 + 타입체크**
+- [x] **Step 6: 전체 테스트 + 타입체크**
 
 ```bash
 npm run typecheck && npm test
 ```
 
-- [ ] **Step 7: 커밋**
+- [x] **Step 7: 커밋**
 
 ```bash
 git add src/cli/ .github/workflows/ package.json tests/cli/
@@ -4159,7 +4159,7 @@ inspect 는 판정 근거를 전부 출력한다. 골든셋 라벨링과 오탐 
 ---
 
 
-## Task 18: 판정 잡 — Layer 2~5 를 실제로 꿰는 단계
+## Task 18: 판정 잡 — Layer 2~5 를 실제로 꿰는 단계  [완료 2026-08-20]
 
 > **자체 검토에서 발견한 누락.** Task 8·10·12·13 이 각 Layer 를 순수 함수로
 > 만들었지만 **그것들을 순서대로 호출해 카페 상태를 확정하는 잡이 없었다.**
@@ -4197,7 +4197,7 @@ status === 'pending_extraction' 인 카페마다
 **비용 설계:** Layer 2 를 **LLM 호출 전에** 둔다. 화제량 컷에서 탈락할 카페에
 Gemini 를 쓰지 않는다. 통과율 약 20% 이므로 LLM 호출이 1/5로 줄어든다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/jobs/classify.test.ts`:
 
@@ -4322,11 +4322,11 @@ describe('runClassify', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npx vitest run tests/jobs/classify.test.ts` — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/jobs/classify.ts`:
 
@@ -4439,11 +4439,11 @@ export async function runClassify(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인**
+- [x] **Step 4: 테스트 통과 확인**
 
 Run: `npx vitest run tests/jobs/classify.test.ts` — PASS (7 tests)
 
-- [ ] **Step 5: CLI 와 워크플로에 배선**
+- [x] **Step 5: CLI 와 워크플로에 배선**
 
 ```bash
 npm pkg set scripts.classify="tsx src/cli/run.ts classify"
@@ -4486,7 +4486,7 @@ jobs:
           git push
 ```
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/jobs/classify.ts tests/jobs/classify.test.ts .github/workflows/daily-classify.yml package.json
