@@ -493,7 +493,7 @@ loadEnv 는 source 를 주입받으므로 테스트가 process.env 를 오염시
 실수를 잡는다.
 ```
 
-## Task 2: zod 스키마 + JSON 저장소
+## Task 2: zod 스키마 + JSON 저장소  [완료 2026-08-20]
 
 > API 키가 없어도 진행 가능하다.
 
@@ -514,7 +514,7 @@ loadEnv 는 source 를 주입받으므로 테스트가 process.env 를 오염시
 TypeScript 타입을 따로 관리하며 어긋나는 문제가 없다. 읽을 때마다 `parse`
 하므로 손으로 편집한 JSON 이 깨져도 즉시 잡힌다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/schema.test.ts`:
 
@@ -633,13 +633,13 @@ describe('createJsonStore', () => {
 })
 ```
 
-- [ ] **Step 2: 테스트가 실패하는 것을 확인**
+- [x] **Step 2: 테스트가 실패하는 것을 확인**
 
 Run: `npx vitest run tests/schema.test.ts tests/store/json-store.test.ts`
 
 Expected: FAIL — 모듈 해결 실패
 
-- [ ] **Step 3: 스키마 구현**
+- [x] **Step 3: 스키마 구현**
 
 `src/schema.ts`:
 
@@ -757,7 +757,7 @@ export const BlacklistEntrySchema = z.object({
 export type BlacklistEntry = z.infer<typeof BlacklistEntrySchema>
 ```
 
-- [ ] **Step 4: 저장소 구현**
+- [x] **Step 4: 저장소 구현**
 
 `src/store/types.ts`:
 
@@ -863,13 +863,13 @@ export function createJsonStore(dataDir: string): Store {
 }
 ```
 
-- [ ] **Step 5: 테스트 통과 확인**
+- [x] **Step 5: 테스트 통과 확인**
 
 Run: `npx vitest run tests/schema.test.ts tests/store/json-store.test.ts`
 
 Expected: PASS (10 tests)
 
-- [ ] **Step 6: 초기 데이터 파일과 블랙리스트 생성**
+- [x] **Step 6: 초기 데이터 파일과 블랙리스트 생성**
 
 `data/blacklist.json` — 스펙 Layer 1. **코드가 아니라 데이터로 관리한다.**
 신규 프랜차이즈가 생겨도 배포가 필요 없다.
@@ -898,7 +898,7 @@ Expected: PASS (10 tests)
 > **주의:** 테라로사·앤트러사이트는 넣지 않는다. 다지점이지만 대형 특화매장을
 > 운영하며 **우리가 가장 원하는 부류**다. 스펙 정정 표 첫 줄 참조.
 
-- [ ] **Step 7: 커밋**
+- [x] **Step 7: 커밋**
 
 ```bash
 git add src/schema.ts src/store/ data/blacklist.json tests/schema.test.ts tests/store/
