@@ -1789,7 +1789,7 @@ totalCount 도 파싱하지만 점수에는 쓰지 않는다. OR 매칭이라 �
 
 ---
 
-## Task 7: Layer 1 — 하드 배제 (순수 함수)
+## Task 7: Layer 1 — 하드 배제 (순수 함수)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/exclude.ts`
@@ -1801,7 +1801,7 @@ totalCount 도 파싱하지만 점수에는 쓰지 않는다. OR 매칭이라 �
   - `type ExcludeReason = 'franchise' | 'category' | null`
   - `evaluateExclusion(input: { name, categoryName }, blacklist: BlacklistEntry[]): ExcludeReason`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/pipeline/exclude.test.ts`:
 
@@ -1852,9 +1852,9 @@ describe('evaluateExclusion', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/exclude.ts`:
 
@@ -1898,9 +1898,9 @@ export function evaluateExclusion(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS (6 tests)
+- [x] **Step 4: 테스트 통과 확인** — PASS (6 tests)
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/exclude.ts tests/pipeline/exclude.test.ts
