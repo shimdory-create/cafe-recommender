@@ -2562,7 +2562,7 @@ provider 를 갈아끼울 수 있음을 코드로 증명한다.
 
 ---
 
-## Task 10: Layer 3 — LLM 속성 추출
+## Task 10: Layer 3 — LLM 속성 추출  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/llm/prompts.ts`, `src/pipeline/extract.ts`
@@ -2574,7 +2574,7 @@ provider 를 갈아끼울 수 있음을 코드로 증명한다.
   - `buildExtractPrompt(input: { name, sigungu, categoryName, snippets, parkingSnippets }): string`
   - `extractAttributes(deps: { llm }, input): Promise<CafeAttributes>`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/pipeline/extract.test.ts`:
 
@@ -2637,9 +2637,9 @@ describe('extractAttributes', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/llm/prompts.ts`:
 
@@ -2731,9 +2731,9 @@ export async function extractAttributes(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS
+- [x] **Step 4: 테스트 통과 확인** — PASS
 
-- [ ] **Step 5: 실제 LLM 으로 1회 수동 검증**
+- [x] **Step 5: 실제 LLM 으로 1회 수동 검증**
 
 ```bash
 npx tsx -e "
@@ -2752,7 +2752,7 @@ console.log(await extractAttributes({ llm }, {
 
 `evidence` 에 원문이 인용되어 있는지 눈으로 확인한다.
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/llm/prompts.ts src/pipeline/extract.ts tests/pipeline/extract.test.ts
