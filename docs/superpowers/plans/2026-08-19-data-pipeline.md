@@ -1919,7 +1919,7 @@ git commit -m "feat: Layer 1 하드 배제 (순수 함수)"
 
 ---
 
-## Task 8: Layer 2 — 관련성 판정 + 화제량 (순수 함수)
+## Task 8: Layer 2 — 관련성 판정 + 화제량 (순수 함수)  [완료 2026-08-20]
 
 **이 태스크가 파이프라인 전체에서 가장 중요하다.** 동네 카페를 걸러내는
 신호가 여기서 나온다.
@@ -1937,7 +1937,7 @@ git commit -m "feat: Layer 1 하드 배제 (순수 함수)"
   - `type BuzzMetrics = { receivedCount, relevantCount, precision, spanDays, postsPer30, posts30d, postsPrev, firstPostDate, latestPostDate, acceleration, suspectAmbiguous }`
   - `passesLayer2(m: BuzzMetrics, opts?): { pass: boolean; reason?: string }`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/pipeline/relevance.test.ts`:
 
@@ -2079,9 +2079,9 @@ describe('passesLayer2', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/relevance.ts`:
 
@@ -2215,9 +2215,9 @@ export function passesLayer2(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — `npx vitest run tests/pipeline/` PASS (19 tests)
+- [x] **Step 4: 테스트 통과 확인** — `npx vitest run tests/pipeline/` PASS (19 tests)
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/relevance.ts src/pipeline/buzz.ts tests/pipeline/relevance.test.ts tests/pipeline/buzz.test.ts
