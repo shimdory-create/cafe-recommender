@@ -207,13 +207,18 @@ Task 0 진행 중 카카오 REST API 키가 대화 기록에 노출되었다. �
 
 ---
 
-## Task 1: 프로젝트 부트스트랩 + 환경변수 검증
+## Task 1: 프로젝트 부트스트랩 + 환경변수 검증  [완료 2026-08-20]
 
 > API 키가 없어도 진행 가능하다. Task 0과 병렬로 착수할 수 있다.
+>
+> **v3 반영 (2026-08-20).** 이 태스크는 원래 네이버·Supabase 키를 검증하도록
+> 쓰여 있었고 Task 9 에서 고치게 되어 있었다. 틀린 것을 알면서 짜고 다시
+> 짜는 낭비이므로 처음부터 v3 스키마(카카오 + LLM provider)로 쓴다.
 
 **Files:**
 - Create: `package.json`, `tsconfig.json`, `vitest.config.ts`
 - Create: `src/config/env.ts`
+- Modify: `.env.example` (v3 키 구성으로)
 - Test: `tests/config/env.test.ts`
 
 **Interfaces:**
@@ -224,7 +229,7 @@ Task 0 진행 중 카카오 REST API 키가 대화 기록에 노출되었다. �
     키가 문제인지 메시지에 담아 `throw`. 인자를 주입할 수 있으므로 테스트가
     `process.env` 를 건드리지 않는다
 
-- [ ] **Step 1: 스캐폴딩 생성**
+- [x] **Step 1: 스캐폴딩 생성**
 
 ```bash
 npm init -y
@@ -233,12 +238,14 @@ npm pkg set engines.node=">=22"
 npm pkg set scripts.test="vitest run"
 npm pkg set scripts.typecheck="tsc --noEmit"
 npm pkg set scripts.check-keys="node scripts/check-keys.mjs"
-npm pkg set scripts.check-schema="node scripts/check-schema.mjs"
-npm i zod @supabase/supabase-js @anthropic-ai/sdk
+npm i zod
 npm i -D typescript @types/node vitest tsx
 ```
 
 버전을 고정하지 않는다. 설치 시점의 최신을 쓰고 재현성은 lockfile이 보장한다.
+`@supabase/supabase-js` 와 `@anthropic-ai/sdk` 는 **설치하지 않는다** — v3 에서
+Supabase 를 뺐고, LLM 은 `fetch` 로 직접 호출한다 (SDK 의존 없이 어댑터
+인터페이스를 유지하기 위함).
 
 `tsconfig.json`:
 
@@ -274,7 +281,7 @@ export default defineConfig({
 })
 ```
 
-- [ ] **Step 2: 실패하는 테스트 작성**
+- [x] **Step 2: 실패하는 테스트 작성**
 
 `tests/config/env.test.ts`:
 
@@ -283,17 +290,13 @@ import { describe, it, expect } from 'vitest'
 import { loadEnv } from '../../src/config/env.js'
 
 const valid = {
-  KAKAO_REST_API_KEY: 'k',
-  NAVER_CLIENT_ID: 'n',
-  NAVER_CLIENT_SECRET: 's',
-  ANTHROPIC_API_KEY: 'a',
-  SUPABASE_URL: 'https://abc.supabase.co',
-  SUPABASE_SERVICE_ROLE_KEY: 'r',
+  KAKAO_REST_API_KEY: 'kakao-key',
+  GEMINI_API_KEY: 'gemini-key',
 }
 
 describe('loadEnv', () => {
   it('유효한 값을 통과시킨다', () => {
-    expect(loadEnv(valid).KAKAO_REST_API_KEY).toBe('k')
+    expect(loadEnv(valid).KAKAO_REST_API_KEY).toBe('kakao-key')
   })
 
   it('출발지 좌표를 부평 기본값으로 채운다', () => {
@@ -303,51 +306,103 @@ describe('loadEnv', () => {
   })
 
   it('좌표를 문자열로 주면 숫자로 변환한다', () => {
-    const env = loadEnv({ ...valid, HOME_LAT: '37.1', HOME_LNG: '127.2' })
-    expect(env.HOME_LAT).toBeCloseTo(37.1, 4)
+    expect(loadEnv({ ...valid, HOME_LAT: '37.1' }).HOME_LAT).toBeCloseTo(37.1, 4)
   })
 
-  it('키가 빠지면 어떤 키가 문제인지 메시지에 담아 실패한다', () => {
-    const { KAKAO_REST_API_KEY: _omit, ...rest } = valid
+  it('LLM_PROVIDER 기본값은 gemini 다', () => {
+    expect(loadEnv(valid).LLM_PROVIDER).toBe('gemini')
+  })
+
+  it('DATA_DIR 기본값은 data 다', () => {
+    expect(loadEnv(valid).DATA_DIR).toBe('data')
+  })
+
+  it('카카오 키가 빠지면 어떤 키가 문제인지 메시지에 담아 실패한다', () => {
+    const { KAKAO_REST_API_KEY: _o, ...rest } = valid
     expect(() => loadEnv(rest)).toThrow(/KAKAO_REST_API_KEY/)
   })
 
   it('빈 문자열도 누락으로 취급한다', () => {
-    expect(() => loadEnv({ ...valid, NAVER_CLIENT_SECRET: '' }))
-      .toThrow(/NAVER_CLIENT_SECRET/)
+    // .env 에 KEY= 만 남은 흔한 실수를 잡는다
+    expect(() => loadEnv({ ...valid, KAKAO_REST_API_KEY: '' })).toThrow(/KAKAO_REST_API_KEY/)
   })
 
-  it('SUPABASE_URL 이 URL 형식이 아니면 실패한다', () => {
-    expect(() => loadEnv({ ...valid, SUPABASE_URL: 'not-a-url' }))
-      .toThrow(/SUPABASE_URL/)
+  it('provider 가 gemini 인데 Gemini 키가 없으면 실패한다', () => {
+    expect(() => loadEnv({ KAKAO_REST_API_KEY: 'k' })).toThrow(/GEMINI_API_KEY/)
+  })
+
+  it('provider 가 anthropic 이면 Anthropic 키를 요구한다', () => {
+    expect(() => loadEnv({ KAKAO_REST_API_KEY: 'k', LLM_PROVIDER: 'anthropic' }))
+      .toThrow(/ANTHROPIC_API_KEY/)
+  })
+
+  it('anthropic 으로 전환해도 Gemini 키 없이 통과한다', () => {
+    // provider-agnostic 설계의 증명 — .env 두 줄로 갈아탄다
+    const env = loadEnv({
+      KAKAO_REST_API_KEY: 'k', LLM_PROVIDER: 'anthropic', ANTHROPIC_API_KEY: 'a',
+    })
+    expect(env.LLM_PROVIDER).toBe('anthropic')
+  })
+
+  it('알 수 없는 LLM_PROVIDER 를 거부한다', () => {
+    expect(() => loadEnv({ ...valid, LLM_PROVIDER: 'openai' })).toThrow(/LLM_PROVIDER/)
+  })
+
+  it('네이버·Supabase 키를 요구하지 않는다', () => {
+    // v3: 네이버는 신규 발급 불가, Supabase 는 JSON in git 으로 대체
+    expect(() => loadEnv(valid)).not.toThrow()
   })
 })
 ```
 
-- [ ] **Step 3: 테스트가 실패하는 것을 확인**
+- [x] **Step 3: 테스트가 실패하는 것을 확인**
 
 Run: `npx vitest run tests/config/env.test.ts`
 
 Expected: FAIL — `Failed to resolve import "../../src/config/env.js"`
 
-- [ ] **Step 4: 최소 구현**
+- [x] **Step 4: 최소 구현**
 
 `src/config/env.ts`:
 
 ```ts
 import { z } from 'zod'
 
-const EnvSchema = z.object({
-  KAKAO_REST_API_KEY: z.string().min(1),
-  NAVER_CLIENT_ID: z.string().min(1),
-  NAVER_CLIENT_SECRET: z.string().min(1),
-  ANTHROPIC_API_KEY: z.string().min(1),
-  SUPABASE_URL: z.string().url(),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
-  // 출발지: 인천 부평
-  HOME_LAT: z.coerce.number().default(37.5074),
-  HOME_LNG: z.coerce.number().default(126.7218),
-})
+const EnvSchema = z
+  .object({
+    // 수집: 장소 검색 + 블로그 검색을 이 키 하나로 한다 (스펙 v3 6.3)
+    KAKAO_REST_API_KEY: z.string().min(1),
+
+    // LLM: provider-agnostic. .env 두 줄로 갈아탄다 (스펙 6.6 원칙 3)
+    LLM_PROVIDER: z.enum(['gemini', 'anthropic']).default('gemini'),
+    GEMINI_API_KEY: z.string().min(1).optional(),
+    ANTHROPIC_API_KEY: z.string().min(1).optional(),
+
+    // 저장: DB 없음. JSON in git (스펙 v3 9절)
+    DATA_DIR: z.string().min(1).default('data'),
+
+    // 출발지: 인천 부평
+    HOME_LAT: z.coerce.number().default(37.5074),
+    HOME_LNG: z.coerce.number().default(126.7218),
+  })
+  .superRefine((v, ctx) => {
+    // 고른 provider 의 키만 요구한다. 둘 다 강제하면 무료 경로를 쓰는
+    // 사람이 쓰지도 않는 Anthropic 키를 발급해야 한다.
+    if (v.LLM_PROVIDER === 'gemini' && !v.GEMINI_API_KEY) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['GEMINI_API_KEY'],
+        message: 'LLM_PROVIDER=gemini 이면 필요하다',
+      })
+    }
+    if (v.LLM_PROVIDER === 'anthropic' && !v.ANTHROPIC_API_KEY) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['ANTHROPIC_API_KEY'],
+        message: 'LLM_PROVIDER=anthropic 이면 필요하다',
+      })
+    }
+  })
 
 export type Env = z.infer<typeof EnvSchema>
 
@@ -363,39 +418,82 @@ export function loadEnv(
 
   const parsed = EnvSchema.safeParse(cleaned)
   if (!parsed.success) {
-    const keys = parsed.error.issues.map((i) => i.path.join('.')).join(', ')
+    const keys = [...new Set(parsed.error.issues.map((i) => i.path.join('.')))].join(', ')
     throw new Error(`환경변수 오류 — 확인 필요: ${keys}`)
   }
   return parsed.data
 }
 ```
 
-- [ ] **Step 5: 테스트 통과 확인**
+- [x] **Step 5: 테스트 통과 확인**
 
 Run: `npx vitest run tests/config/env.test.ts`
 
-Expected: PASS (6 tests)
+Expected: PASS (12 tests)
 
 이어서 `npm run typecheck` 가 오류 없이 끝나는 것도 확인한다.
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: `.env.example` 을 v3 구성으로 교체**
+
+네이버·Supabase 항목을 지우고 Gemini 를 넣는다. 관리할 키가 2개다.
+
+```
+# ==========================================================
+#  cafe-recommender 환경변수 (v3)
+#    cp .env.example .env
+#  .env 는 .gitignore 로 차단되어 있습니다.
+# ==========================================================
+
+# --- 카카오 (developers.kakao.com) -----------------------
+# 내 애플리케이션 > [앱 설정] > 앱 키 > "REST API 키" (네 개 중 세 번째)
+# [제품 설정] > 카카오맵 활성화 ON 이 필수입니다.
+# 이 키 하나로 장소 검색과 블로그 검색을 모두 합니다.
+KAKAO_REST_API_KEY=
+
+# --- LLM ---------------------------------------------------
+# gemini(무료 티어) 또는 anthropic. 기본값 gemini.
+LLM_PROVIDER=gemini
+
+# Gemini: aistudio.google.com/apikey — 결제 수단 없이 발급됩니다.
+GEMINI_API_KEY=
+
+# Anthropic: console.anthropic.com — LLM_PROVIDER=anthropic 일 때만 필요.
+ANTHROPIC_API_KEY=
+
+# --- 저장소 ------------------------------------------------
+# DB 없음. JSON 파일이 git 에 커밋됩니다.
+DATA_DIR=data
+
+# --- 출발지: 인천 부평 (기본값 있음. 비워두어도 됩니다) ---
+HOME_LAT=37.5074
+HOME_LNG=126.7218
+```
+
+기존 `.env` 는 이미 카카오·Gemini 키가 채워져 있고 v3 스키마가 남는 항목을
+무시하므로 그대로 동작한다.
+
+- [x] **Step 7: 커밋**
 
 ```bash
-git add package.json package-lock.json tsconfig.json vitest.config.ts src/config/env.ts tests/config/env.test.ts
+git add package.json package-lock.json tsconfig.json vitest.config.ts src/config/env.ts tests/config/env.test.ts .env.example
 git commit -m "feat: 프로젝트 부트스트랩과 환경변수 검증"
 ```
 
 커밋 메시지 본문:
 
 ```
-zod 로 키 6종을 검증하고 부평 좌표를 기본값으로 채운다.
-loadEnv 는 source 를 주입받으므로 테스트가 process.env 를 오염시키지 않는다.
-빈 문자열을 미설정으로 취급해 ".env 에 KEY= 만 남은" 흔한 실수를 잡는다.
+v3 키 구성으로 검증한다 — 카카오 하나 + LLM provider 하나.
+네이버는 신규 발급 경로가 없고 Supabase 는 JSON in git 으로 대체했다.
+
+superRefine 으로 고른 provider 의 키만 요구한다. 둘 다 강제하면 무료
+경로를 쓰는 사람이 쓰지도 않는 Anthropic 키를 발급해야 한다.
+
+loadEnv 는 source 를 주입받으므로 테스트가 process.env 를 오염시키지
+않는다. 빈 문자열을 미설정으로 취급해 ".env 에 KEY= 만 남은" 흔한
+실수를 잡는다.
 ```
 
----
-
-## Task 2: zod 스키마 + JSON 저장소
+## Task 2: zod 스키마 + JSON 저장소  [완료 2026-08-20]
 
 > API 키가 없어도 진행 가능하다.
 
@@ -416,7 +514,7 @@ loadEnv 는 source 를 주입받으므로 테스트가 process.env 를 오염시
 TypeScript 타입을 따로 관리하며 어긋나는 문제가 없다. 읽을 때마다 `parse`
 하므로 손으로 편집한 JSON 이 깨져도 즉시 잡힌다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/schema.test.ts`:
 
@@ -535,13 +633,13 @@ describe('createJsonStore', () => {
 })
 ```
 
-- [ ] **Step 2: 테스트가 실패하는 것을 확인**
+- [x] **Step 2: 테스트가 실패하는 것을 확인**
 
 Run: `npx vitest run tests/schema.test.ts tests/store/json-store.test.ts`
 
 Expected: FAIL — 모듈 해결 실패
 
-- [ ] **Step 3: 스키마 구현**
+- [x] **Step 3: 스키마 구현**
 
 `src/schema.ts`:
 
@@ -659,7 +757,7 @@ export const BlacklistEntrySchema = z.object({
 export type BlacklistEntry = z.infer<typeof BlacklistEntrySchema>
 ```
 
-- [ ] **Step 4: 저장소 구현**
+- [x] **Step 4: 저장소 구현**
 
 `src/store/types.ts`:
 
@@ -765,13 +863,13 @@ export function createJsonStore(dataDir: string): Store {
 }
 ```
 
-- [ ] **Step 5: 테스트 통과 확인**
+- [x] **Step 5: 테스트 통과 확인**
 
 Run: `npx vitest run tests/schema.test.ts tests/store/json-store.test.ts`
 
 Expected: PASS (10 tests)
 
-- [ ] **Step 6: 초기 데이터 파일과 블랙리스트 생성**
+- [x] **Step 6: 초기 데이터 파일과 블랙리스트 생성**
 
 `data/blacklist.json` — 스펙 Layer 1. **코드가 아니라 데이터로 관리한다.**
 신규 프랜차이즈가 생겨도 배포가 필요 없다.
@@ -800,7 +898,7 @@ Expected: PASS (10 tests)
 > **주의:** 테라로사·앤트러사이트는 넣지 않는다. 다지점이지만 대형 특화매장을
 > 운영하며 **우리가 가장 원하는 부류**다. 스펙 정정 표 첫 줄 참조.
 
-- [ ] **Step 7: 커밋**
+- [x] **Step 7: 커밋**
 
 ```bash
 git add src/schema.ts src/store/ data/blacklist.json tests/schema.test.ts tests/store/
@@ -825,7 +923,7 @@ Store 인터페이스 뒤에 두어 나중에 DB로 옮길 경계를 만들어 �
 생겨도 배포가 필요 없다.
 ```
 
-## Task 3: 지역·키워드 상수 + 거리 계산 (순수 함수)
+## Task 3: 지역·키워드 상수 + 거리 계산 (순수 함수)  [완료 2026-08-20]
 
 > API 키가 없어도 진행 가능하다. Task 1 직후 바로 착수할 수 있다.
 
@@ -855,7 +953,7 @@ Store 인터페이스 뒤에 두어 나중에 DB로 옮길 경계를 만들어 �
 빼고, 실제 스캔 대상은 **65개**가 된다. 스펙 5절의 "66개 시군구"는 행정구역
 수이고 스캔 대상은 65개임을 `regions.ts` 주석에 남긴다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/config/regions.test.ts`:
 
@@ -939,13 +1037,13 @@ describe('estimateDriveMinutes', () => {
 })
 ```
 
-- [ ] **Step 2: 테스트가 실패하는 것을 확인**
+- [x] **Step 2: 테스트가 실패하는 것을 확인**
 
 Run: `npx vitest run tests/config/regions.test.ts tests/pipeline/geo.test.ts`
 
 Expected: FAIL — 두 모듈 모두 import 해결 실패
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/config/regions.ts`:
 
@@ -1065,7 +1163,7 @@ export function estimateDriveMinutes(straightKm: number): number {
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인**
+- [x] **Step 4: 테스트 통과 확인**
 
 Run: `npx vitest run tests/config/regions.test.ts tests/pipeline/geo.test.ts`
 
@@ -1075,7 +1173,7 @@ Expected: PASS (8 tests)
 스펙 10.2절 예시의 "양평 80분" 과 대략 맞는다. 근사가 과대추정 쪽으로
 치우치는 편이 안전하다 — 예상보다 가까운 것이 예상보다 먼 것보다 낫다.
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/config/regions.ts src/config/keywords.ts src/pipeline/geo.ts tests/config/regions.test.ts tests/pipeline/geo.test.ts
@@ -1098,7 +1196,7 @@ geo.ts 는 I/O 없는 순수 함수라 오프라인 단위 테스트가 된다.
 
 ---
 
-## Task 4: 소스 어댑터 기반 — 레이트리미터 + 헬스 기록
+## Task 4: 소스 어댑터 기반 — 레이트리미터 + 헬스 기록  [완료 2026-08-20]
 
 > API 키 없이 진행 가능하다 (가짜 fetch 를 주입해 테스트한다).
 
@@ -1117,7 +1215,7 @@ geo.ts 는 I/O 없는 순수 함수라 오프라인 단위 테스트가 된다.
 **설계 노트:** 레이트리미터는 시간을 **주입받는다** (`sleep`, `now`). 실제로
 기다리는 테스트는 느리고 불안정하다. 가짜 시계를 넣어 즉시 검증한다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/sources/rate-limiter.test.ts`:
 
@@ -1176,11 +1274,11 @@ describe('createRateLimiter', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npx vitest run tests/sources/rate-limiter.test.ts` — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/sources/rate-limiter.ts`:
 
@@ -1281,9 +1379,9 @@ export interface SourceAdapter<In, Out> {
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — `npx vitest run tests/sources/` PASS
+- [x] **Step 4: 테스트 통과 확인** — `npx vitest run tests/sources/` PASS
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/sources/ tests/sources/
@@ -1303,7 +1401,7 @@ git commit -m "feat: 소스 어댑터 기반 — 레이트리미터와 헬스 �
 
 ---
 
-## Task 5: 카카오 로컬 어댑터 (장소 검색)
+## Task 5: 카카오 로컬 어댑터 (장소 검색)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/sources/kakao-local.ts`, `scripts/capture-fixture.ts`
@@ -1317,7 +1415,7 @@ git commit -m "feat: 소스 어댑터 기반 — 레이트리미터와 헬스 �
   - `parseKakaoLocal(payload: unknown): KakaoPlace[]`
   - `createKakaoLocal(deps): { searchKeyword(query, page): Promise<{ places, isEnd }> }`
 
-- [ ] **Step 1: fixture 캡처 스크립트 작성 후 실행**
+- [x] **Step 1: fixture 캡처 스크립트 작성 후 실행**
 
 `scripts/capture-fixture.ts` — 실제 API 를 **1회만** 호출해 응답을 저장한다.
 이후 모든 테스트는 이 파일만 읽는다 (Global Constraints).
@@ -1353,7 +1451,7 @@ console.log(`저장: ${path}`)
 npx tsx scripts/capture-fixture.ts local "양평군 베이커리카페"
 ```
 
-- [ ] **Step 2: 실패하는 테스트 작성**
+- [x] **Step 2: 실패하는 테스트 작성**
 
 `tests/sources/kakao-local.test.ts`:
 
@@ -1417,9 +1515,9 @@ describe('createKakaoLocal', () => {
 })
 ```
 
-- [ ] **Step 3: 실패 확인** — FAIL
+- [x] **Step 3: 실패 확인** — FAIL
 
-- [ ] **Step 4: 구현**
+- [x] **Step 4: 구현**
 
 `src/sources/kakao-local.ts`:
 
@@ -1493,9 +1591,9 @@ export function createKakaoLocal(deps: KakaoLocalDeps) {
 }
 ```
 
-- [ ] **Step 5: 테스트 통과 확인** — PASS
+- [x] **Step 5: 테스트 통과 확인** — PASS
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/sources/kakao-local.ts scripts/capture-fixture.ts tests/sources/kakao-local.test.ts tests/fixtures/
@@ -1517,7 +1615,7 @@ git commit -m "feat: 카카오 로컬 어댑터와 fixture 캡처 스크립트"
 
 ---
 
-## Task 6: 카카오 블로그 검색 어댑터 + 쿼터 확인
+## Task 6: 카카오 블로그 검색 어댑터 + 쿼터 확인  [완료 2026-08-20, 쿼터 확인만 보류]
 
 **Files:**
 - Create: `src/sources/kakao-blog.ts`
@@ -1531,20 +1629,20 @@ git commit -m "feat: 카카오 로컬 어댑터와 fixture 캡처 스크립트"
   - `parseKakaoBlog(payload): { docs: BlogDoc[], totalCount: number }`
   - `createKakaoBlog(deps): { search(query, opts): Promise<{ docs, totalCount, payload }> }`
 
-- [ ] **Step 1: fixture 캡처**
+- [x] **Step 1: fixture 캡처**
 
 ```bash
 npx tsx scripts/capture-fixture.ts blog "양평군 테라로사"
 ```
 
-- [ ] **Step 2: 카카오 블로그 검색 쿼터 확인 (사람이 직접)**
+- [ ] **Step 2: 카카오 블로그 검색 쿼터 확인 (사람이 직접)**  <- 사람이 콘솔에서 확인해야 함 (미완)
 
 카카오 개발자 콘솔 > 내 애플리케이션 > **쿼터** 에서 **검색** API 의 일일
 한도를 확인하고 `src/sources/kakao-blog.ts` 의 `PER_SECOND` 주석에 기록한다.
 로컬 API 는 10만/일로 확인됐으나 검색 API 는 별도 쿼터일 수 있다.
 예상 사용량은 약 1,500/일 이다.
 
-- [ ] **Step 3: 실패하는 테스트 작성**
+- [x] **Step 3: 실패하는 테스트 작성**
 
 `tests/sources/kakao-blog.test.ts`:
 
@@ -1591,9 +1689,9 @@ describe('parseKakaoBlog', () => {
 })
 ```
 
-- [ ] **Step 4: 실패 확인** — FAIL
+- [x] **Step 4: 실패 확인** — FAIL
 
-- [ ] **Step 5: 구현**
+- [x] **Step 5: 구현**
 
 `src/sources/kakao-blog.ts`:
 
@@ -1670,9 +1768,9 @@ export function createKakaoBlog(deps: KakaoBlogDeps) {
 }
 ```
 
-- [ ] **Step 6: 테스트 통과 확인** — PASS
+- [x] **Step 6: 테스트 통과 확인** — PASS
 
-- [ ] **Step 7: 커밋**
+- [x] **Step 7: 커밋**
 
 ```bash
 git add src/sources/kakao-blog.ts tests/sources/kakao-blog.test.ts tests/fixtures/
@@ -1691,7 +1789,7 @@ totalCount 도 파싱하지만 점수에는 쓰지 않는다. OR 매칭이라 �
 
 ---
 
-## Task 7: Layer 1 — 하드 배제 (순수 함수)
+## Task 7: Layer 1 — 하드 배제 (순수 함수)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/exclude.ts`
@@ -1703,7 +1801,7 @@ totalCount 도 파싱하지만 점수에는 쓰지 않는다. OR 매칭이라 �
   - `type ExcludeReason = 'franchise' | 'category' | null`
   - `evaluateExclusion(input: { name, categoryName }, blacklist: BlacklistEntry[]): ExcludeReason`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/pipeline/exclude.test.ts`:
 
@@ -1754,9 +1852,9 @@ describe('evaluateExclusion', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/exclude.ts`:
 
@@ -1800,9 +1898,9 @@ export function evaluateExclusion(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS (6 tests)
+- [x] **Step 4: 테스트 통과 확인** — PASS (6 tests)
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/exclude.ts tests/pipeline/exclude.test.ts
@@ -1821,7 +1919,7 @@ git commit -m "feat: Layer 1 하드 배제 (순수 함수)"
 
 ---
 
-## Task 8: Layer 2 — 관련성 판정 + 화제량 (순수 함수)
+## Task 8: Layer 2 — 관련성 판정 + 화제량 (순수 함수)  [완료 2026-08-20]
 
 **이 태스크가 파이프라인 전체에서 가장 중요하다.** 동네 카페를 걸러내는
 신호가 여기서 나온다.
@@ -1839,7 +1937,7 @@ git commit -m "feat: Layer 1 하드 배제 (순수 함수)"
   - `type BuzzMetrics = { receivedCount, relevantCount, precision, spanDays, postsPer30, posts30d, postsPrev, firstPostDate, latestPostDate, acceleration, suspectAmbiguous }`
   - `passesLayer2(m: BuzzMetrics, opts?): { pass: boolean; reason?: string }`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/pipeline/relevance.test.ts`:
 
@@ -1981,9 +2079,9 @@ describe('passesLayer2', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/relevance.ts`:
 
@@ -2117,9 +2215,9 @@ export function passesLayer2(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — `npx vitest run tests/pipeline/` PASS (19 tests)
+- [x] **Step 4: 테스트 통과 확인** — `npx vitest run tests/pipeline/` PASS (19 tests)
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/relevance.ts src/pipeline/buzz.ts tests/pipeline/relevance.test.ts tests/pipeline/buzz.test.ts
@@ -2142,7 +2240,7 @@ now 를 주입받아 I/O 없이 테스트된다.
 
 ---
 
-## Task 9: LLM 클라이언트 (provider-agnostic)
+## Task 9: LLM 클라이언트 (provider-agnostic)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/llm/types.ts`, `src/llm/gemini.ts`, `src/llm/anthropic.ts`, `src/llm/index.ts`
@@ -2163,7 +2261,7 @@ now 를 주입받아 I/O 없이 테스트된다.
 - zod 스키마로 결과를 재검증한다. `responseSchema` 를 줘도 `evidence` 가 빈
   문자열로 오는 경우를 잡아야 한다
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/llm/gemini.test.ts`:
 
@@ -2230,9 +2328,9 @@ describe('createGemini', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/llm/types.ts`:
 
@@ -2427,28 +2525,18 @@ export function createLlm(
 }
 ```
 
-- [ ] **Step 4: `env.ts` 갱신**
+- [x] **Step 4: `env.ts` 갱신 — Task 1 에서 이미 처리됨**
 
-Task 1 의 `EnvSchema` 를 v3 에 맞춘다. 네이버·Supabase 를 빼고 Gemini 를 넣는다.
+원래 이 스텝에서 `EnvSchema` 를 v3 로 고치게 되어 있었다. 틀린 것을 알면서
+짜고 다시 짜는 낭비이므로 **Task 1 이 처음부터 v3 스키마로 작성**되도록
+계획을 고쳤다. `LLM_PROVIDER` / `GEMINI_API_KEY` / `ANTHROPIC_API_KEY` /
+`DATA_DIR` 이 이미 검증되고 있으므로 여기서 할 일이 없다.
 
-```ts
-const EnvSchema = z.object({
-  KAKAO_REST_API_KEY: z.string().min(1),
-  LLM_PROVIDER: z.enum(['gemini', 'anthropic']).default('gemini'),
-  GEMINI_API_KEY: z.string().min(1).optional(),
-  ANTHROPIC_API_KEY: z.string().min(1).optional(),
-  DATA_DIR: z.string().default('data'),
-  HOME_LAT: z.coerce.number().default(37.5074),
-  HOME_LNG: z.coerce.number().default(126.7218),
-})
-```
+`createLlm` 이 읽는 필드가 Task 1 의 `Env` 타입과 일치하는지만 확인한다.
 
-`tests/config/env.test.ts` 의 `valid` 픽스처도 함께 고친다.
-`.env.example` 도 갱신한다 (네이버·Supabase 항목 삭제, Gemini 추가).
+- [x] **Step 5: 테스트 통과 확인** — `npx vitest run` 전체 PASS
 
-- [ ] **Step 5: 테스트 통과 확인** — `npx vitest run` 전체 PASS
-
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/llm/ src/config/env.ts .env.example tests/llm/ tests/config/env.test.ts
@@ -2474,7 +2562,7 @@ provider 를 갈아끼울 수 있음을 코드로 증명한다.
 
 ---
 
-## Task 10: Layer 3 — LLM 속성 추출
+## Task 10: Layer 3 — LLM 속성 추출  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/llm/prompts.ts`, `src/pipeline/extract.ts`
@@ -2486,7 +2574,7 @@ provider 를 갈아끼울 수 있음을 코드로 증명한다.
   - `buildExtractPrompt(input: { name, sigungu, categoryName, snippets, parkingSnippets }): string`
   - `extractAttributes(deps: { llm }, input): Promise<CafeAttributes>`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/pipeline/extract.test.ts`:
 
@@ -2549,9 +2637,9 @@ describe('extractAttributes', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/llm/prompts.ts`:
 
@@ -2643,9 +2731,9 @@ export async function extractAttributes(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS
+- [x] **Step 4: 테스트 통과 확인** — PASS
 
-- [ ] **Step 5: 실제 LLM 으로 1회 수동 검증**
+- [x] **Step 5: 실제 LLM 으로 1회 수동 검증**
 
 ```bash
 npx tsx -e "
@@ -2664,7 +2752,7 @@ console.log(await extractAttributes({ llm }, {
 
 `evidence` 에 원문이 인용되어 있는지 눈으로 확인한다.
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/llm/prompts.ts src/pipeline/extract.ts tests/pipeline/extract.test.ts
@@ -2683,7 +2771,7 @@ git commit -m "feat: Layer 3 LLM 속성 추출"
 
 ---
 
-## Task 11: 그물 C — 블로그 큐레이션 수확
+## Task 11: 그물 C — 블로그 큐레이션 수확  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/harvest.ts`
@@ -2698,7 +2786,7 @@ git commit -m "feat: Layer 3 LLM 속성 추출"
 매칭 위주라 상호에 "대형"이 없는 대형카페를 놓친다. 블로거가 이미 손으로
 큐레이션한 "BEST N" 글에서 상호명을 뽑아 이 구멍을 메운다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -2749,9 +2837,9 @@ describe('harvestCurated', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/harvest.ts`:
 
@@ -2810,9 +2898,9 @@ export async function harvestCurated(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS
+- [x] **Step 4: 테스트 통과 확인** — PASS
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/harvest.ts tests/pipeline/harvest.test.ts
@@ -2834,7 +2922,7 @@ git commit -m "feat: 그물 C — 블로그 큐레이션 수확"
 
 ---
 
-## Task 12: Layer 4 — 태그·메뉴·주차 판정 (순수 함수)
+## Task 12: Layer 4 — 태그·메뉴·주차 판정 (순수 함수)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/tag.ts`
@@ -2846,7 +2934,7 @@ git commit -m "feat: 그물 C — 블로그 큐레이션 수확"
   - `const TAGS` — 성격 태그 8종 상수
   - `assignTags(attrs: CafeAttributes): string[]`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -2907,9 +2995,9 @@ describe('assignTags', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/tag.ts`:
 
@@ -2961,9 +3049,9 @@ export function assignTags(a: CafeAttributes): string[] {
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS (8 tests)
+- [x] **Step 4: 테스트 통과 확인** — PASS (8 tests)
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/tag.ts tests/pipeline/tag.test.ts
@@ -2981,7 +3069,7 @@ git commit -m "feat: Layer 4 성격 태그 8종 판정"
 
 ---
 
-## Task 13: Layer 5 — 최종 게이트 (순수 함수)
+## Task 13: Layer 5 — 최종 게이트 (순수 함수)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/gate.ts`
@@ -2990,7 +3078,7 @@ git commit -m "feat: Layer 4 성격 태그 8종 판정"
 **Interfaces:**
 - Produces: `passesGate(input: { tags, parkingGrade }, opts?: { cityMode?: boolean }): { pass: boolean; reason?: string }`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -3027,9 +3115,9 @@ describe('passesGate', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 ```ts
 export interface GateInput {
@@ -3063,13 +3151,13 @@ export function passesGate(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS (6 tests)
+- [x] **Step 4: 테스트 통과 확인** — PASS (6 tests)
 
-- [ ] **Step 5: 커밋** — `git commit -m "feat: Layer 5 최종 게이트"`
+- [x] **Step 5: 커밋** — `git commit -m "feat: Layer 5 최종 게이트"`
 
 ---
 
-## Task 14: 스코어링 — HotScore · FamilyFit · FinalScore (순수 함수)
+## Task 14: 스코어링 — HotScore · FamilyFit · FinalScore (순수 함수)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/score.ts`
@@ -3082,7 +3170,7 @@ export function passesGate(
   - `finalScore(hot, fit): number`
   - `pickWeekendCandidates(scored, n): Scored[]` — 태그 다양성 제약 적용
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -3178,9 +3266,9 @@ describe('pickWeekendCandidates', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/score.ts`:
 
@@ -3277,9 +3365,9 @@ export function pickWeekendCandidates(all: Scored[], n = 3): Scored[] {
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS (12 tests)
+- [x] **Step 4: 테스트 통과 확인** — PASS (12 tests)
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/score.ts tests/pipeline/score.test.ts
@@ -3302,7 +3390,7 @@ now 를 인자로 받아 계절 승수까지 결정론적으로 테스트된다.
 
 ---
 
-## Task 15: 발굴 잡 — 파이프라인 통합 (weekly-discover)
+## Task 15: 발굴 잡 — 파이프라인 통합 (weekly-discover)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/jobs/weekly-discover.ts`
@@ -3312,7 +3400,7 @@ now 를 인자로 받아 계절 승수까지 결정론적으로 테스트된다.
 - Consumes: Task 3~14 전부
 - Produces: `runDiscover(deps, opts): Promise<{ discovered, excluded, extracted, gated, errors }>`
 
-- [ ] **Step 1: 실패하는 테스트 작성** — 모든 의존을 가짜로 주입해 오프라인 검증
+- [x] **Step 1: 실패하는 테스트 작성** — 모든 의존을 가짜로 주입해 오프라인 검증
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -3387,9 +3475,9 @@ describe('runDiscover', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/jobs/weekly-discover.ts`:
 
@@ -3496,9 +3584,9 @@ export async function runDiscover(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS
+- [x] **Step 4: 테스트 통과 확인** — PASS
 
-- [ ] **Step 5: 소규모 실전 1회 실행**
+- [x] **Step 5: 소규모 실전 1회 실행**
 
 ```bash
 npx tsx -e "import('./src/jobs/weekly-discover.js')" # 실제 배선은 Task 17 의 CLI 로
@@ -3507,7 +3595,7 @@ npx tsx -e "import('./src/jobs/weekly-discover.js')" # 실제 배선은 Task 17 
 양평군 1개 지역만으로 실행해 `data/cafes.json` 이 생기는지, 블랙리스트가
 동작하는지 눈으로 확인한다.
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/jobs/weekly-discover.ts tests/jobs/
@@ -3528,7 +3616,7 @@ git commit -m "feat: 발굴 잡 — 그물 A·C 통합과 Layer 1 적용"
 
 ---
 
-## Task 16: 일일 화제량 잡 + 주간 후보 잡
+## Task 16: 일일 화제량 잡 + 주간 후보 잡  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/jobs/daily-buzz.ts`, `src/jobs/weekly-suggest.ts`
@@ -3539,7 +3627,7 @@ git commit -m "feat: 발굴 잡 — 그물 A·C 통합과 Layer 1 적용"
   - `runDailyBuzz(deps, opts?): Promise<{ updated, failed, dropped }>`
   - `runWeeklySuggest(deps, opts?): Promise<{ picked: Suggestion[] }>`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -3643,9 +3731,9 @@ describe('runWeeklySuggest', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/jobs/daily-buzz.ts`:
 
@@ -3780,9 +3868,9 @@ export async function runWeeklySuggest(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS
+- [x] **Step 4: 테스트 통과 확인** — PASS
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/jobs/daily-buzz.ts src/jobs/weekly-suggest.ts tests/jobs/
@@ -3802,7 +3890,7 @@ git 히스토리로 소급 가능하다 (스펙 9절).
 
 ---
 
-## Task 17: CLI 도구 + GitHub Actions + 카카오톡 알림
+## Task 17: CLI 도구 + GitHub Actions + 카카오톡 알림  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/cli/visited.ts`, `src/cli/inspect.ts`, `src/cli/health.ts`, `src/cli/hide.ts`, `src/cli/run.ts`
@@ -3813,7 +3901,7 @@ git 히스토리로 소급 가능하다 (스펙 9절).
 - Consumes: Task 15·16 잡, `Store`
 - Produces: `npm run` 스크립트 6종
 
-- [ ] **Step 1: 실패하는 테스트 작성 — 카페 이름 해석기**
+- [x] **Step 1: 실패하는 테스트 작성 — 카페 이름 해석기**
 
 CLI 는 사람이 `npm run visited 테라로사` 처럼 부분 이름을 친다. 해석 규칙이
 가장 실수하기 쉬운 부분이므로 여기만 테스트한다.
@@ -3849,9 +3937,9 @@ describe('resolveCafe', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/cli/visited.ts`:
 
@@ -3975,7 +4063,7 @@ npm pkg set scripts.buzz="tsx src/cli/run.ts buzz"
 npm pkg set scripts.suggest="tsx src/cli/run.ts suggest"
 ```
 
-- [ ] **Step 4: GitHub Actions 워크플로 작성**
+- [x] **Step 4: GitHub Actions 워크플로 작성**
 
 `.github/workflows/daily-buzz.yml`:
 
@@ -4018,7 +4106,7 @@ jobs:
 GitHub 저장소 Settings > Secrets 에 `KAKAO_REST_API_KEY` 와
 `GEMINI_API_KEY` 를 등록한다.
 
-- [ ] **Step 5: 카카오톡 알림 Phase 1 설정 (코드 0줄)**
+- [x] **Step 5: 카카오톡 알림 Phase 1 설정 (코드 0줄)**
 
 스펙 10.2절 Phase 1. claude.ai Routine 을 매주 금요일 12:00 KST 로 만들고
 다음을 시킨다:
@@ -4039,13 +4127,13 @@ data/suggestions.json 에서 이번 주(weekOf) 후보 3곳을 읽고,
 커넥터 인증이 클라우드 실행에서 붙는지 **첫 금요일에 확인**한다. 안 되면
 로컬 예약으로 폴백한다 (노트북이 켜져 있어야 함).
 
-- [ ] **Step 6: 전체 테스트 + 타입체크**
+- [x] **Step 6: 전체 테스트 + 타입체크**
 
 ```bash
 npm run typecheck && npm test
 ```
 
-- [ ] **Step 7: 커밋**
+- [x] **Step 7: 커밋**
 
 ```bash
 git add src/cli/ .github/workflows/ package.json tests/cli/
@@ -4071,7 +4159,7 @@ inspect 는 판정 근거를 전부 출력한다. 골든셋 라벨링과 오탐 
 ---
 
 
-## Task 18: 판정 잡 — Layer 2~5 를 실제로 꿰는 단계
+## Task 18: 판정 잡 — Layer 2~5 를 실제로 꿰는 단계  [완료 2026-08-20]
 
 > **자체 검토에서 발견한 누락.** Task 8·10·12·13 이 각 Layer 를 순수 함수로
 > 만들었지만 **그것들을 순서대로 호출해 카페 상태를 확정하는 잡이 없었다.**
@@ -4109,7 +4197,7 @@ status === 'pending_extraction' 인 카페마다
 **비용 설계:** Layer 2 를 **LLM 호출 전에** 둔다. 화제량 컷에서 탈락할 카페에
 Gemini 를 쓰지 않는다. 통과율 약 20% 이므로 LLM 호출이 1/5로 줄어든다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/jobs/classify.test.ts`:
 
@@ -4234,11 +4322,11 @@ describe('runClassify', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npx vitest run tests/jobs/classify.test.ts` — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/jobs/classify.ts`:
 
@@ -4351,11 +4439,11 @@ export async function runClassify(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인**
+- [x] **Step 4: 테스트 통과 확인**
 
 Run: `npx vitest run tests/jobs/classify.test.ts` — PASS (7 tests)
 
-- [ ] **Step 5: CLI 와 워크플로에 배선**
+- [x] **Step 5: CLI 와 워크플로에 배선**
 
 ```bash
 npm pkg set scripts.classify="tsx src/cli/run.ts classify"
@@ -4398,7 +4486,7 @@ jobs:
           git push
 ```
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/jobs/classify.ts tests/jobs/classify.test.ts .github/workflows/daily-classify.yml package.json

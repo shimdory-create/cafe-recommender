@@ -1,0 +1,31 @@
+{
+  "name": "cafe-recommender",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check-keys": "node scripts/check-keys.mjs",
+    "discover": "tsx --env-file=.env src/cli/run.ts discover",
+    "buzz": "tsx --env-file=.env src/cli/run.ts buzz",
+    "classify": "tsx --env-file=.env src/cli/run.ts classify",
+    "suggest": "tsx --env-file=.env src/cli/run.ts suggest",
+    "visited": "tsx --env-file=.env src/cli/run.ts visited",
+    "inspect": "tsx --env-file=.env src/cli/run.ts inspect",
+    "health": "tsx --env-file=.env src/cli/run.ts health",
+    "hide": "tsx --env-file=.env src/cli/run.ts hide"
+  },
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}
