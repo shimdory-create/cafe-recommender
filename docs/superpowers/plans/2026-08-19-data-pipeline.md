@@ -2922,7 +2922,7 @@ git commit -m "feat: 그물 C — 블로그 큐레이션 수확"
 
 ---
 
-## Task 12: Layer 4 — 태그·메뉴·주차 판정 (순수 함수)
+## Task 12: Layer 4 — 태그·메뉴·주차 판정 (순수 함수)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/tag.ts`
@@ -2934,7 +2934,7 @@ git commit -m "feat: 그물 C — 블로그 큐레이션 수확"
   - `const TAGS` — 성격 태그 8종 상수
   - `assignTags(attrs: CafeAttributes): string[]`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -2995,9 +2995,9 @@ describe('assignTags', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/tag.ts`:
 
@@ -3049,9 +3049,9 @@ export function assignTags(a: CafeAttributes): string[] {
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS (8 tests)
+- [x] **Step 4: 테스트 통과 확인** — PASS (8 tests)
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/tag.ts tests/pipeline/tag.test.ts
@@ -3069,7 +3069,7 @@ git commit -m "feat: Layer 4 성격 태그 8종 판정"
 
 ---
 
-## Task 13: Layer 5 — 최종 게이트 (순수 함수)
+## Task 13: Layer 5 — 최종 게이트 (순수 함수)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/gate.ts`
@@ -3078,7 +3078,7 @@ git commit -m "feat: Layer 4 성격 태그 8종 판정"
 **Interfaces:**
 - Produces: `passesGate(input: { tags, parkingGrade }, opts?: { cityMode?: boolean }): { pass: boolean; reason?: string }`
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -3115,9 +3115,9 @@ describe('passesGate', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 ```ts
 export interface GateInput {
@@ -3151,13 +3151,13 @@ export function passesGate(
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS (6 tests)
+- [x] **Step 4: 테스트 통과 확인** — PASS (6 tests)
 
-- [ ] **Step 5: 커밋** — `git commit -m "feat: Layer 5 최종 게이트"`
+- [x] **Step 5: 커밋** — `git commit -m "feat: Layer 5 최종 게이트"`
 
 ---
 
-## Task 14: 스코어링 — HotScore · FamilyFit · FinalScore (순수 함수)
+## Task 14: 스코어링 — HotScore · FamilyFit · FinalScore (순수 함수)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/pipeline/score.ts`
@@ -3170,7 +3170,7 @@ export function passesGate(
   - `finalScore(hot, fit): number`
   - `pickWeekendCandidates(scored, n): Scored[]` — 태그 다양성 제약 적용
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 ```ts
 import { describe, it, expect } from 'vitest'
@@ -3266,9 +3266,9 @@ describe('pickWeekendCandidates', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/pipeline/score.ts`:
 
@@ -3365,9 +3365,9 @@ export function pickWeekendCandidates(all: Scored[], n = 3): Scored[] {
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — PASS (12 tests)
+- [x] **Step 4: 테스트 통과 확인** — PASS (12 tests)
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/pipeline/score.ts tests/pipeline/score.test.ts
