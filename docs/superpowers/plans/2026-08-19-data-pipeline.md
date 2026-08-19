@@ -1196,7 +1196,7 @@ geo.ts 는 I/O 없는 순수 함수라 오프라인 단위 테스트가 된다.
 
 ---
 
-## Task 4: 소스 어댑터 기반 — 레이트리미터 + 헬스 기록
+## Task 4: 소스 어댑터 기반 — 레이트리미터 + 헬스 기록  [완료 2026-08-20]
 
 > API 키 없이 진행 가능하다 (가짜 fetch 를 주입해 테스트한다).
 
@@ -1215,7 +1215,7 @@ geo.ts 는 I/O 없는 순수 함수라 오프라인 단위 테스트가 된다.
 **설계 노트:** 레이트리미터는 시간을 **주입받는다** (`sleep`, `now`). 실제로
 기다리는 테스트는 느리고 불안정하다. 가짜 시계를 넣어 즉시 검증한다.
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/sources/rate-limiter.test.ts`:
 
@@ -1274,11 +1274,11 @@ describe('createRateLimiter', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인**
+- [x] **Step 2: 실패 확인**
 
 Run: `npx vitest run tests/sources/rate-limiter.test.ts` — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/sources/rate-limiter.ts`:
 
@@ -1379,9 +1379,9 @@ export interface SourceAdapter<In, Out> {
 }
 ```
 
-- [ ] **Step 4: 테스트 통과 확인** — `npx vitest run tests/sources/` PASS
+- [x] **Step 4: 테스트 통과 확인** — `npx vitest run tests/sources/` PASS
 
-- [ ] **Step 5: 커밋**
+- [x] **Step 5: 커밋**
 
 ```bash
 git add src/sources/ tests/sources/
