@@ -1615,7 +1615,7 @@ git commit -m "feat: 카카오 로컬 어댑터와 fixture 캡처 스크립트"
 
 ---
 
-## Task 6: 카카오 블로그 검색 어댑터 + 쿼터 확인
+## Task 6: 카카오 블로그 검색 어댑터 + 쿼터 확인  [완료 2026-08-20, 쿼터 확인만 보류]
 
 **Files:**
 - Create: `src/sources/kakao-blog.ts`
@@ -1629,20 +1629,20 @@ git commit -m "feat: 카카오 로컬 어댑터와 fixture 캡처 스크립트"
   - `parseKakaoBlog(payload): { docs: BlogDoc[], totalCount: number }`
   - `createKakaoBlog(deps): { search(query, opts): Promise<{ docs, totalCount, payload }> }`
 
-- [ ] **Step 1: fixture 캡처**
+- [x] **Step 1: fixture 캡처**
 
 ```bash
 npx tsx scripts/capture-fixture.ts blog "양평군 테라로사"
 ```
 
-- [ ] **Step 2: 카카오 블로그 검색 쿼터 확인 (사람이 직접)**
+- [ ] **Step 2: 카카오 블로그 검색 쿼터 확인 (사람이 직접)**  <- 사람이 콘솔에서 확인해야 함 (미완)
 
 카카오 개발자 콘솔 > 내 애플리케이션 > **쿼터** 에서 **검색** API 의 일일
 한도를 확인하고 `src/sources/kakao-blog.ts` 의 `PER_SECOND` 주석에 기록한다.
 로컬 API 는 10만/일로 확인됐으나 검색 API 는 별도 쿼터일 수 있다.
 예상 사용량은 약 1,500/일 이다.
 
-- [ ] **Step 3: 실패하는 테스트 작성**
+- [x] **Step 3: 실패하는 테스트 작성**
 
 `tests/sources/kakao-blog.test.ts`:
 
@@ -1689,9 +1689,9 @@ describe('parseKakaoBlog', () => {
 })
 ```
 
-- [ ] **Step 4: 실패 확인** — FAIL
+- [x] **Step 4: 실패 확인** — FAIL
 
-- [ ] **Step 5: 구현**
+- [x] **Step 5: 구현**
 
 `src/sources/kakao-blog.ts`:
 
@@ -1768,9 +1768,9 @@ export function createKakaoBlog(deps: KakaoBlogDeps) {
 }
 ```
 
-- [ ] **Step 6: 테스트 통과 확인** — PASS
+- [x] **Step 6: 테스트 통과 확인** — PASS
 
-- [ ] **Step 7: 커밋**
+- [x] **Step 7: 커밋**
 
 ```bash
 git add src/sources/kakao-blog.ts tests/sources/kakao-blog.test.ts tests/fixtures/
