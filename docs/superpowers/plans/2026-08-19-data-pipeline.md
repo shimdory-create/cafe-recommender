@@ -2240,7 +2240,7 @@ now 를 주입받아 I/O 없이 테스트된다.
 
 ---
 
-## Task 9: LLM 클라이언트 (provider-agnostic)
+## Task 9: LLM 클라이언트 (provider-agnostic)  [완료 2026-08-20]
 
 **Files:**
 - Create: `src/llm/types.ts`, `src/llm/gemini.ts`, `src/llm/anthropic.ts`, `src/llm/index.ts`
@@ -2261,7 +2261,7 @@ now 를 주입받아 I/O 없이 테스트된다.
 - zod 스키마로 결과를 재검증한다. `responseSchema` 를 줘도 `evidence` 가 빈
   문자열로 오는 경우를 잡아야 한다
 
-- [ ] **Step 1: 실패하는 테스트 작성**
+- [x] **Step 1: 실패하는 테스트 작성**
 
 `tests/llm/gemini.test.ts`:
 
@@ -2328,9 +2328,9 @@ describe('createGemini', () => {
 })
 ```
 
-- [ ] **Step 2: 실패 확인** — FAIL
+- [x] **Step 2: 실패 확인** — FAIL
 
-- [ ] **Step 3: 구현**
+- [x] **Step 3: 구현**
 
 `src/llm/types.ts`:
 
@@ -2534,9 +2534,9 @@ export function createLlm(
 
 `createLlm` 이 읽는 필드가 Task 1 의 `Env` 타입과 일치하는지만 확인한다.
 
-- [ ] **Step 5: 테스트 통과 확인** — `npx vitest run` 전체 PASS
+- [x] **Step 5: 테스트 통과 확인** — `npx vitest run` 전체 PASS
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: 커밋**
 
 ```bash
 git add src/llm/ src/config/env.ts .env.example tests/llm/ tests/config/env.test.ts
