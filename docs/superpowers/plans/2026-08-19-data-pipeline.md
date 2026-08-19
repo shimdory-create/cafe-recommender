@@ -207,13 +207,18 @@ Task 0 진행 중 카카오 REST API 키가 대화 기록에 노출되었다. �
 
 ---
 
-## Task 1: 프로젝트 부트스트랩 + 환경변수 검증
+## Task 1: 프로젝트 부트스트랩 + 환경변수 검증  [완료 2026-08-20]
 
 > API 키가 없어도 진행 가능하다. Task 0과 병렬로 착수할 수 있다.
+>
+> **v3 반영 (2026-08-20).** 이 태스크는 원래 네이버·Supabase 키를 검증하도록
+> 쓰여 있었고 Task 9 에서 고치게 되어 있었다. 틀린 것을 알면서 짜고 다시
+> 짜는 낭비이므로 처음부터 v3 스키마(카카오 + LLM provider)로 쓴다.
 
 **Files:**
 - Create: `package.json`, `tsconfig.json`, `vitest.config.ts`
 - Create: `src/config/env.ts`
+- Modify: `.env.example` (v3 키 구성으로)
 - Test: `tests/config/env.test.ts`
 
 **Interfaces:**
@@ -224,7 +229,7 @@ Task 0 진행 중 카카오 REST API 키가 대화 기록에 노출되었다. �
     키가 문제인지 메시지에 담아 `throw`. 인자를 주입할 수 있으므로 테스트가
     `process.env` 를 건드리지 않는다
 
-- [ ] **Step 1: 스캐폴딩 생성**
+- [x] **Step 1: 스캐폴딩 생성**
 
 ```bash
 npm init -y
@@ -233,12 +238,14 @@ npm pkg set engines.node=">=22"
 npm pkg set scripts.test="vitest run"
 npm pkg set scripts.typecheck="tsc --noEmit"
 npm pkg set scripts.check-keys="node scripts/check-keys.mjs"
-npm pkg set scripts.check-schema="node scripts/check-schema.mjs"
-npm i zod @supabase/supabase-js @anthropic-ai/sdk
+npm i zod
 npm i -D typescript @types/node vitest tsx
 ```
 
 버전을 고정하지 않는다. 설치 시점의 최신을 쓰고 재현성은 lockfile이 보장한다.
+`@supabase/supabase-js` 와 `@anthropic-ai/sdk` 는 **설치하지 않는다** — v3 에서
+Supabase 를 뺐고, LLM 은 `fetch` 로 직접 호출한다 (SDK 의존 없이 어댑터
+인터페이스를 유지하기 위함).
 
 `tsconfig.json`:
 
@@ -274,7 +281,7 @@ export default defineConfig({
 })
 ```
 
-- [ ] **Step 2: 실패하는 테스트 작성**
+- [x] **Step 2: 실패하는 테스트 작성**
 
 `tests/config/env.test.ts`:
 
@@ -283,17 +290,13 @@ import { describe, it, expect } from 'vitest'
 import { loadEnv } from '../../src/config/env.js'
 
 const valid = {
-  KAKAO_REST_API_KEY: 'k',
-  NAVER_CLIENT_ID: 'n',
-  NAVER_CLIENT_SECRET: 's',
-  ANTHROPIC_API_KEY: 'a',
-  SUPABASE_URL: 'https://abc.supabase.co',
-  SUPABASE_SERVICE_ROLE_KEY: 'r',
+  KAKAO_REST_API_KEY: 'kakao-key',
+  GEMINI_API_KEY: 'gemini-key',
 }
 
 describe('loadEnv', () => {
   it('유효한 값을 통과시킨다', () => {
-    expect(loadEnv(valid).KAKAO_REST_API_KEY).toBe('k')
+    expect(loadEnv(valid).KAKAO_REST_API_KEY).toBe('kakao-key')
   })
 
   it('출발지 좌표를 부평 기본값으로 채운다', () => {
@@ -303,51 +306,103 @@ describe('loadEnv', () => {
   })
 
   it('좌표를 문자열로 주면 숫자로 변환한다', () => {
-    const env = loadEnv({ ...valid, HOME_LAT: '37.1', HOME_LNG: '127.2' })
-    expect(env.HOME_LAT).toBeCloseTo(37.1, 4)
+    expect(loadEnv({ ...valid, HOME_LAT: '37.1' }).HOME_LAT).toBeCloseTo(37.1, 4)
   })
 
-  it('키가 빠지면 어떤 키가 문제인지 메시지에 담아 실패한다', () => {
-    const { KAKAO_REST_API_KEY: _omit, ...rest } = valid
+  it('LLM_PROVIDER 기본값은 gemini 다', () => {
+    expect(loadEnv(valid).LLM_PROVIDER).toBe('gemini')
+  })
+
+  it('DATA_DIR 기본값은 data 다', () => {
+    expect(loadEnv(valid).DATA_DIR).toBe('data')
+  })
+
+  it('카카오 키가 빠지면 어떤 키가 문제인지 메시지에 담아 실패한다', () => {
+    const { KAKAO_REST_API_KEY: _o, ...rest } = valid
     expect(() => loadEnv(rest)).toThrow(/KAKAO_REST_API_KEY/)
   })
 
   it('빈 문자열도 누락으로 취급한다', () => {
-    expect(() => loadEnv({ ...valid, NAVER_CLIENT_SECRET: '' }))
-      .toThrow(/NAVER_CLIENT_SECRET/)
+    // .env 에 KEY= 만 남은 흔한 실수를 잡는다
+    expect(() => loadEnv({ ...valid, KAKAO_REST_API_KEY: '' })).toThrow(/KAKAO_REST_API_KEY/)
   })
 
-  it('SUPABASE_URL 이 URL 형식이 아니면 실패한다', () => {
-    expect(() => loadEnv({ ...valid, SUPABASE_URL: 'not-a-url' }))
-      .toThrow(/SUPABASE_URL/)
+  it('provider 가 gemini 인데 Gemini 키가 없으면 실패한다', () => {
+    expect(() => loadEnv({ KAKAO_REST_API_KEY: 'k' })).toThrow(/GEMINI_API_KEY/)
+  })
+
+  it('provider 가 anthropic 이면 Anthropic 키를 요구한다', () => {
+    expect(() => loadEnv({ KAKAO_REST_API_KEY: 'k', LLM_PROVIDER: 'anthropic' }))
+      .toThrow(/ANTHROPIC_API_KEY/)
+  })
+
+  it('anthropic 으로 전환해도 Gemini 키 없이 통과한다', () => {
+    // provider-agnostic 설계의 증명 — .env 두 줄로 갈아탄다
+    const env = loadEnv({
+      KAKAO_REST_API_KEY: 'k', LLM_PROVIDER: 'anthropic', ANTHROPIC_API_KEY: 'a',
+    })
+    expect(env.LLM_PROVIDER).toBe('anthropic')
+  })
+
+  it('알 수 없는 LLM_PROVIDER 를 거부한다', () => {
+    expect(() => loadEnv({ ...valid, LLM_PROVIDER: 'openai' })).toThrow(/LLM_PROVIDER/)
+  })
+
+  it('네이버·Supabase 키를 요구하지 않는다', () => {
+    // v3: 네이버는 신규 발급 불가, Supabase 는 JSON in git 으로 대체
+    expect(() => loadEnv(valid)).not.toThrow()
   })
 })
 ```
 
-- [ ] **Step 3: 테스트가 실패하는 것을 확인**
+- [x] **Step 3: 테스트가 실패하는 것을 확인**
 
 Run: `npx vitest run tests/config/env.test.ts`
 
 Expected: FAIL — `Failed to resolve import "../../src/config/env.js"`
 
-- [ ] **Step 4: 최소 구현**
+- [x] **Step 4: 최소 구현**
 
 `src/config/env.ts`:
 
 ```ts
 import { z } from 'zod'
 
-const EnvSchema = z.object({
-  KAKAO_REST_API_KEY: z.string().min(1),
-  NAVER_CLIENT_ID: z.string().min(1),
-  NAVER_CLIENT_SECRET: z.string().min(1),
-  ANTHROPIC_API_KEY: z.string().min(1),
-  SUPABASE_URL: z.string().url(),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
-  // 출발지: 인천 부평
-  HOME_LAT: z.coerce.number().default(37.5074),
-  HOME_LNG: z.coerce.number().default(126.7218),
-})
+const EnvSchema = z
+  .object({
+    // 수집: 장소 검색 + 블로그 검색을 이 키 하나로 한다 (스펙 v3 6.3)
+    KAKAO_REST_API_KEY: z.string().min(1),
+
+    // LLM: provider-agnostic. .env 두 줄로 갈아탄다 (스펙 6.6 원칙 3)
+    LLM_PROVIDER: z.enum(['gemini', 'anthropic']).default('gemini'),
+    GEMINI_API_KEY: z.string().min(1).optional(),
+    ANTHROPIC_API_KEY: z.string().min(1).optional(),
+
+    // 저장: DB 없음. JSON in git (스펙 v3 9절)
+    DATA_DIR: z.string().min(1).default('data'),
+
+    // 출발지: 인천 부평
+    HOME_LAT: z.coerce.number().default(37.5074),
+    HOME_LNG: z.coerce.number().default(126.7218),
+  })
+  .superRefine((v, ctx) => {
+    // 고른 provider 의 키만 요구한다. 둘 다 강제하면 무료 경로를 쓰는
+    // 사람이 쓰지도 않는 Anthropic 키를 발급해야 한다.
+    if (v.LLM_PROVIDER === 'gemini' && !v.GEMINI_API_KEY) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['GEMINI_API_KEY'],
+        message: 'LLM_PROVIDER=gemini 이면 필요하다',
+      })
+    }
+    if (v.LLM_PROVIDER === 'anthropic' && !v.ANTHROPIC_API_KEY) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['ANTHROPIC_API_KEY'],
+        message: 'LLM_PROVIDER=anthropic 이면 필요하다',
+      })
+    }
+  })
 
 export type Env = z.infer<typeof EnvSchema>
 
@@ -363,37 +418,80 @@ export function loadEnv(
 
   const parsed = EnvSchema.safeParse(cleaned)
   if (!parsed.success) {
-    const keys = parsed.error.issues.map((i) => i.path.join('.')).join(', ')
+    const keys = [...new Set(parsed.error.issues.map((i) => i.path.join('.')))].join(', ')
     throw new Error(`환경변수 오류 — 확인 필요: ${keys}`)
   }
   return parsed.data
 }
 ```
 
-- [ ] **Step 5: 테스트 통과 확인**
+- [x] **Step 5: 테스트 통과 확인**
 
 Run: `npx vitest run tests/config/env.test.ts`
 
-Expected: PASS (6 tests)
+Expected: PASS (12 tests)
 
 이어서 `npm run typecheck` 가 오류 없이 끝나는 것도 확인한다.
 
-- [ ] **Step 6: 커밋**
+- [x] **Step 6: `.env.example` 을 v3 구성으로 교체**
+
+네이버·Supabase 항목을 지우고 Gemini 를 넣는다. 관리할 키가 2개다.
+
+```
+# ==========================================================
+#  cafe-recommender 환경변수 (v3)
+#    cp .env.example .env
+#  .env 는 .gitignore 로 차단되어 있습니다.
+# ==========================================================
+
+# --- 카카오 (developers.kakao.com) -----------------------
+# 내 애플리케이션 > [앱 설정] > 앱 키 > "REST API 키" (네 개 중 세 번째)
+# [제품 설정] > 카카오맵 활성화 ON 이 필수입니다.
+# 이 키 하나로 장소 검색과 블로그 검색을 모두 합니다.
+KAKAO_REST_API_KEY=
+
+# --- LLM ---------------------------------------------------
+# gemini(무료 티어) 또는 anthropic. 기본값 gemini.
+LLM_PROVIDER=gemini
+
+# Gemini: aistudio.google.com/apikey — 결제 수단 없이 발급됩니다.
+GEMINI_API_KEY=
+
+# Anthropic: console.anthropic.com — LLM_PROVIDER=anthropic 일 때만 필요.
+ANTHROPIC_API_KEY=
+
+# --- 저장소 ------------------------------------------------
+# DB 없음. JSON 파일이 git 에 커밋됩니다.
+DATA_DIR=data
+
+# --- 출발지: 인천 부평 (기본값 있음. 비워두어도 됩니다) ---
+HOME_LAT=37.5074
+HOME_LNG=126.7218
+```
+
+기존 `.env` 는 이미 카카오·Gemini 키가 채워져 있고 v3 스키마가 남는 항목을
+무시하므로 그대로 동작한다.
+
+- [x] **Step 7: 커밋**
 
 ```bash
-git add package.json package-lock.json tsconfig.json vitest.config.ts src/config/env.ts tests/config/env.test.ts
+git add package.json package-lock.json tsconfig.json vitest.config.ts src/config/env.ts tests/config/env.test.ts .env.example
 git commit -m "feat: 프로젝트 부트스트랩과 환경변수 검증"
 ```
 
 커밋 메시지 본문:
 
 ```
-zod 로 키 6종을 검증하고 부평 좌표를 기본값으로 채운다.
-loadEnv 는 source 를 주입받으므로 테스트가 process.env 를 오염시키지 않는다.
-빈 문자열을 미설정으로 취급해 ".env 에 KEY= 만 남은" 흔한 실수를 잡는다.
-```
+v3 키 구성으로 검증한다 — 카카오 하나 + LLM provider 하나.
+네이버는 신규 발급 경로가 없고 Supabase 는 JSON in git 으로 대체했다.
 
----
+superRefine 으로 고른 provider 의 키만 요구한다. 둘 다 강제하면 무료
+경로를 쓰는 사람이 쓰지도 않는 Anthropic 키를 발급해야 한다.
+
+loadEnv 는 source 를 주입받으므로 테스트가 process.env 를 오염시키지
+않는다. 빈 문자열을 미설정으로 취급해 ".env 에 KEY= 만 남은" 흔한
+실수를 잡는다.
+```
 
 ## Task 2: zod 스키마 + JSON 저장소
 
@@ -2427,24 +2525,14 @@ export function createLlm(
 }
 ```
 
-- [ ] **Step 4: `env.ts` 갱신**
+- [x] **Step 4: `env.ts` 갱신 — Task 1 에서 이미 처리됨**
 
-Task 1 의 `EnvSchema` 를 v3 에 맞춘다. 네이버·Supabase 를 빼고 Gemini 를 넣는다.
+원래 이 스텝에서 `EnvSchema` 를 v3 로 고치게 되어 있었다. 틀린 것을 알면서
+짜고 다시 짜는 낭비이므로 **Task 1 이 처음부터 v3 스키마로 작성**되도록
+계획을 고쳤다. `LLM_PROVIDER` / `GEMINI_API_KEY` / `ANTHROPIC_API_KEY` /
+`DATA_DIR` 이 이미 검증되고 있으므로 여기서 할 일이 없다.
 
-```ts
-const EnvSchema = z.object({
-  KAKAO_REST_API_KEY: z.string().min(1),
-  LLM_PROVIDER: z.enum(['gemini', 'anthropic']).default('gemini'),
-  GEMINI_API_KEY: z.string().min(1).optional(),
-  ANTHROPIC_API_KEY: z.string().min(1).optional(),
-  DATA_DIR: z.string().default('data'),
-  HOME_LAT: z.coerce.number().default(37.5074),
-  HOME_LNG: z.coerce.number().default(126.7218),
-})
-```
-
-`tests/config/env.test.ts` 의 `valid` 픽스처도 함께 고친다.
-`.env.example` 도 갱신한다 (네이버·Supabase 항목 삭제, Gemini 추가).
+`createLlm` 이 읽는 필드가 Task 1 의 `Env` 타입과 일치하는지만 확인한다.
 
 - [ ] **Step 5: 테스트 통과 확인** — `npx vitest run` 전체 PASS
 
