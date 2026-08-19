@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next.js
+.next/
+out/
+build/
+dist/
+
+# env — API 키 절대 커밋 금지
+.env
+.env.*
+!.env.example
+
+# 로그·캐시
+*.log
+npm-debug.log*
+.turbo/
+.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 에디터
+.vscode/
+.idea/
+
+# 테스트·커버리지
+coverage/
+.nyc_output/
+
+# 로컬 스크래치
+tmp/
+scratch/
