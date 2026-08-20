@@ -6,7 +6,7 @@ export async function GET() {
   const store = writeStore()
   try {
     const rows = await store.read<VisitRow>(VISITS_PATH, 30)
-    return NextResponse.json({ visits: rows, enabled: true })
+    return NextResponse.json({ visits: rows, enabled: store.enabled })
   } catch (e) {
     return NextResponse.json({ visits: [], enabled: true, error: (e as Error).message })
   }
@@ -20,6 +20,9 @@ export async function GET() {
  */
 export async function POST(req: Request) {
   const store = writeStore()
+  if (!store.enabled) {
+    return NextResponse.json({ error: '아직 기록 저장이 설정되지 않았어요' }, { status: 503 })
+  }
 
   let cafe = ''
   try {

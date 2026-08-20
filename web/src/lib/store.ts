@@ -78,7 +78,28 @@ function githubStore(cfg: NonNullable<ReturnType<typeof githubConfig>>): WriteSt
   }
 }
 
+/**
+ * 배포 환경에서 토큰이 없으면 **쓰기가 불가능하다** — Vercel 의 파일 시스템은
+ * 읽기 전용이라 로컬 폴백이 500 을 낸다. 그런 경우 `enabled: false` 로 알려
+ * 화면이 입력 UI 대신 "아직 설정 전" 을 띄우게 한다. 눌렀는데 실패하는 것보다
+ * 아예 안 보이는 것이 낫다.
+ */
+function disabledStore(): WriteStore {
+  return {
+    enabled: false,
+    kind: 'local',
+    async read<T>(): Promise<T[]> {
+      return []
+    },
+    async update<T>(): Promise<T[]> {
+      throw new Error('아직 별점 저장이 설정되지 않았어요')
+    },
+  }
+}
+
 export function writeStore(): WriteStore {
   const cfg = githubConfig()
-  return cfg ? githubStore(cfg) : localStore()
+  if (cfg) return githubStore(cfg)
+  // VERCEL 은 배포 환경에서 항상 설정된다
+  return process.env.VERCEL ? disabledStore() : localStore()
 }

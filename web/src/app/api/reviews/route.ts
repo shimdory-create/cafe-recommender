@@ -16,7 +16,7 @@ export async function GET(req: Request) {
     return NextResponse.json({
       reviews: sortByNewest(mine),
       summary: summarize(mine),
-      enabled: true,
+      enabled: store.enabled,
     })
   } catch (e) {
     // 읽기 실패가 화면을 깨뜨리지 않게 한다 (스펙 6.6 우아한 저하)
@@ -29,6 +29,9 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   const store = writeStore()
+  if (!store.enabled) {
+    return NextResponse.json({ error: '아직 후기 저장이 설정되지 않았어요' }, { status: 503 })
+  }
 
   let body: unknown
   try {
