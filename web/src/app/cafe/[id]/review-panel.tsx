@@ -89,10 +89,22 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
   useEffect(() => {
     // 별명은 각자 폰이 기억한다 — 매번 적게 하면 아무도 안 쓴다
     setNickname(localStorage.getItem(NICK_KEY) ?? '')
+
     fetch(`/api/reviews?cafe=${encodeURIComponent(cafeId)}`)
       .then((r) => r.json())
       .then(setData)
       .catch(() => setData({ reviews: [], summary: { count: 0, average: 0 }, enabled: false }))
+
+    // 방문 여부도 실시간으로 읽는다. 빌드 타임 값만 쓰면 다른 가족이 방금
+    // 누른 체크가 보이지 않아 두 번 누르게 된다.
+    fetch('/api/visited')
+      .then((r) => r.json())
+      .then((body: { visits?: { kakaoPlaceId: string }[] }) => {
+        if (body.visits?.some((v) => v.kakaoPlaceId === cafeId)) setVisited(true)
+      })
+      .catch(() => {
+        // 오프라인이면 빌드 타임 값을 그대로 쓴다
+      })
   }, [cafeId])
 
   const submit = async () => {
