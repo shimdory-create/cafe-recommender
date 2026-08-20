@@ -1,7 +1,8 @@
 name: weekly-suggest
 on:
   schedule:
-    - cron: '30 2 * * 5'
+    # 금 11:24 KST. 정오 카톡보다 40분 앞이면 충분하다
+    - cron: '24 2 * * 5'
   workflow_dispatch:
 
 # data/ 를 쓰는 워크플로는 하나씩 돈다.

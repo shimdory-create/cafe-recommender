@@ -1,7 +1,9 @@
 name: daily-buzz
 on:
   schedule:
-    - cron: '0 19 * * *'
+    # 정시(19:00 UTC)는 스케줄러가 가장 붐비는 시각이라 실행이 밀리거나
+    # 건너뛰어진다 (GitHub 문서가 권고하는 회피책: 정시를 피한다).
+    - cron: '17 19 * * *'
   workflow_dispatch:
 
 # data/ 를 쓰는 워크플로는 하나씩 돈다.

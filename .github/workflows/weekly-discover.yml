@@ -4,7 +4,7 @@ on:
     # 일 19:30 UTC = 월 04:30 KST. 주 초에 새 카페를 넣어두면 daily-classify 가
     # 금요일 추천 확정(금 11:30 KST)까지 나흘에 걸쳐 판정한다.
     # daily-buzz(19:00 UTC)와 30분 차이지만 data-write 그룹이 직렬화한다.
-    - cron: '30 19 * * 0'
+    - cron: '37 19 * * 0'
   workflow_dispatch:
 
 # data/ 를 쓰는 워크플로는 하나씩 돈다.

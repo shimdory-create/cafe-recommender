@@ -1,7 +1,8 @@
 name: daily-classify
 on:
   schedule:
-    - cron: '0 21 * * *'
+    # 정시를 피한다 (스케줄러 혼잡 시 건너뛰어진다)
+    - cron: '23 21 * * *'
   workflow_dispatch:
 
 # data/ 를 쓰는 워크플로는 하나씩 돈다.
