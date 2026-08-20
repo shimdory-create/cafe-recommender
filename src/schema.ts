@@ -90,12 +90,35 @@ export const BuzzSnapshotSchema = z.object({
 })
 export type BuzzSnapshot = z.infer<typeof BuzzSnapshotSchema>
 
-/** 서비스 전체에서 유일한 쓰기 대상. 익명 — 누가 눌렀는지 남기지 않는다. */
 export const VisitSchema = z.object({
   kakaoPlaceId: z.string(),
   visitedOn: z.string(), // YYYY-MM-DD
+  /** 그날 어땠는지 한 줄. 아빠가 CLI 로 남기는 메모 */
+  note: z.string().optional(),
 })
 export type Visit = z.infer<typeof VisitSchema>
+
+/**
+ * 다녀온 뒤 남기는 별점·후기.
+ *
+ * 링크로 들어온 사람 누구나 남길 수 있다 — 즉 **가족 구성원을 식별하지
+ * 않는다.** 별명만 받는다. 4명이 쓰는 페이지에 인증을 붙이면 아무도
+ * 쓰지 않는다.
+ *
+ * v3 의 "쓰기 엔드포인트 0개" 원칙을 되돌리는 유일한 기능이다. 대신
+ * 쓰기 대상을 이 스키마 하나로 좁혀 공격 표면을 최소화한다.
+ */
+export const ReviewSchema = z.object({
+  id: z.string().min(1),
+  kakaoPlaceId: z.string().min(1),
+  /** 1~5. 반점 없음 — 4인 가족에게 4.5 와 4 의 구분은 의미가 없다 */
+  rating: z.number().int().min(1).max(5),
+  /** 별명. 비어 있으면 "가족" 으로 표시한다 */
+  nickname: z.string().max(20).default(''),
+  comment: z.string().max(300).default(''),
+  createdAt: z.string(),
+})
+export type Review = z.infer<typeof ReviewSchema>
 
 export const SuggestionSchema = z.object({
   weekOf: z.string(),
@@ -188,6 +211,22 @@ export const SiteCafeSchema = z.object({
 })
 export type SiteCafe = z.infer<typeof SiteCafeSchema>
 
+/**
+ * 다녀온 곳. 게이트 통과 여부와 무관하게 싣는다 — 한 번 다녀온 곳이
+ * 목록에서 빠졌다고 기록까지 사라지면 안 된다.
+ */
+export const SiteVisitedSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  sigungu: z.string(),
+  visitedOn: z.string(),
+  note: z.string(),
+  tags: z.array(z.string()),
+  scale: z.enum(['대형', '중형', '소형']).nullable(),
+  naverMapUrl: z.string(),
+})
+export type SiteVisited = z.infer<typeof SiteVisitedSchema>
+
 export const SitePayloadSchema = z.object({
   generatedAt: z.string(),
   weekOf: z.string(),
@@ -197,6 +236,7 @@ export const SitePayloadSchema = z.object({
     finalScore: z.number(),
   })),
   cafes: z.array(SiteCafeSchema),
+  visited: z.array(SiteVisitedSchema),
   stats: z.object({
     discovered: z.number().int(),
     passed: z.number().int(),

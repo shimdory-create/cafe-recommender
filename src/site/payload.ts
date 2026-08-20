@@ -1,7 +1,7 @@
 import { driveMinutesOf } from '../jobs/drive-times.js'
 import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
-import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type Suggestion, type Visit } from '../schema.js'
+import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type SiteVisited, type Suggestion, type Visit } from '../schema.js'
 
 export interface PayloadInput {
   cafes: Cafe[]
@@ -115,6 +115,28 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
   // 종합점수 내림차순. 동점은 id 로 안정 정렬해 빌드마다 순서가 흔들리지 않게.
   rows.sort((x, y) => y.finalScore - x.finalScore || x.id.localeCompare(y.id))
 
+  // 다녀온 곳은 통과 여부와 무관하게 싣는다. 기록이 사라지면 안 된다.
+  const byPlaceId = new Map(cafes.map((c) => [c.kakaoPlaceId, c]))
+  const visited: SiteVisited[] = [...lastVisit.entries()]
+    .flatMap(([id, on]) => {
+      const c = byPlaceId.get(id)
+      if (!c) return []
+      const note = visits.find((v) => v.kakaoPlaceId === id && v.visitedOn === on)?.note ?? ''
+      return [{
+        id,
+        name: c.name,
+        sigungu: c.sigungu,
+        visitedOn: on,
+        note,
+        tags: c.tags,
+        scale: c.attributes?.scale ?? null,
+        naverMapUrl: c.naverMapUrl
+          ?? `https://map.naver.com/p/search/${encodeURIComponent(`${c.sigungu} ${c.name}`)}`,
+      }]
+    })
+    // 최근에 다녀온 것부터
+    .sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
+
   const ids = new Set(rows.map((r) => r.id))
   const week = suggestions
     .filter((s) => s.weekOf === weekOf && ids.has(s.kakaoPlaceId))
@@ -126,6 +148,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
     weekOf,
     week,
     cafes: rows,
+    visited,
     stats: {
       discovered: cafes.length,
       passed: rows.filter((r) => !r.cityOnly).length,

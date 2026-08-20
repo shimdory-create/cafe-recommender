@@ -9,7 +9,7 @@
  *   npm run site       -- [--out web/src/generated/site.json]
  *   npm run notify     -- [--url https://...] (문구만 출력. 발송하지 않는다)
  *   npm run suggest    -- [--city]
- *   npm run visited    -- <카페 이름> [--date YYYY-MM-DD]
+ *   npm run visited    -- <카페 이름> [--date YYYY-MM-DD] [--note "한 줄 메모"]
  *   npm run inspect    -- <카페 이름>
  *   npm run health
  *   npm run prune-raw -- [--days 7]
@@ -116,8 +116,13 @@ async function main() {
     case 'visited': {
       const ctx = createContext()
       const date = flag(rest, 'date')
-      const query = rest.filter((a, i) => !a.startsWith('--') && rest[i - 1] !== '--date').join(' ')
-      if (!query) die('사용법: npm run visited -- <카페 이름> [--date YYYY-MM-DD]')
+      const note = flag(rest, 'note')
+      const query = rest
+        .filter((a, i) => !a.startsWith('--') && rest[i - 1] !== '--date' && rest[i - 1] !== '--note')
+        .join(' ')
+      if (!query) {
+        die('사용법: npm run visited -- <카페 이름> [--date YYYY-MM-DD] [--note "한 줄"]')
+      }
       const visitedOn = date && date !== '' ? date : new Date().toISOString().slice(0, 10)
 
       const cafes = await ctx.store.readCafes()
@@ -133,7 +138,11 @@ async function main() {
         console.log(`이미 기록되어 있습니다: ${found.cafe.name} (${visitedOn})`)
         break
       }
-      visits.push({ kakaoPlaceId: found.cafe.kakaoPlaceId, visitedOn })
+      visits.push({
+        kakaoPlaceId: found.cafe.kakaoPlaceId,
+        visitedOn,
+        ...(note ? { note } : {}),
+      })
       await ctx.store.writeVisits(visits)
       console.log(`기록했습니다: ${found.cafe.sigungu} ${found.cafe.name} — ${visitedOn}`)
       console.log('추천에서 6개월간 내려갑니다.')

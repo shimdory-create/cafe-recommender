@@ -1,52 +1,18 @@
 import raw from '../generated/site.json'
+// 타입만 가져온다 — 런타임 import 가 아니므로 파이프라인 코드가 번들에
+// 들어가지 않는다. 이렇게 하면 웹에서 타입을 다시 적을 필요가 없고,
+// 생성기가 필드를 바꾸면 여기서 타입 오류로 드러난다.
+import type { SiteCafe, SitePayload, SiteVisited } from '../../../src/schema'
+
+export type { SiteCafe, SitePayload, SiteVisited }
 
 /**
- * 표시용 페이로드 타입.
- *
- * **단일 진실 원천은 `src/schema.ts` 의 `SitePayloadSchema` 다.**
- * 생성기(`npm run site`)가 zod 로 검증한 뒤 JSON 을 쓰므로, 여기서 다시
- * 런타임 검증을 하지 않는다. 대신 아래 대입문이 **빌드 타임 드리프트
- * 검사** 역할을 한다 — 생성기가 필드를 바꾸면 타입 오류로 즉시 드러난다.
+ * JSON import 는 값에서 타입을 추론하므로(널이 없으면 non-null, 문자열은
+ * string) 스키마 타입에 그대로 대입되지 않는다. 그래서 캐스트를 쓴다 —
+ * **런타임 검증은 생성기가 이미 했다** (npm run site 가 zod 로 parse 한 뒤
+ * 쓴다). 여기서 또 검증하면 매 빌드마다 페이로드만큼 파싱 비용을 낸다.
  */
-export interface SiteCafe {
-  id: string
-  name: string
-  sigungu: string
-  driveMinutes: number | null
-  scale: '대형' | '중형' | '소형' | null
-  parkingGrade: 'A' | 'B' | 'C' | 'D' | '?'
-  menuLevel: number
-  tags: string[]
-  evidence: string
-  parkingEvidence: string
-  signatureMenu: string | null
-  viewTypes: string[]
-  mealTypes: string[]
-  outdoorSeating: boolean | null
-  teenAppeal: number | null
-  stayDuration: string | null
-  naverMapUrl: string
-  kakaoPlaceUrl: string | null
-  hotScore: number
-  /** 화제도 x 가족 적합도. 홈 피드와 목록의 정렬 기준 */
-  finalScore: number
-  postsPer30: number
-  acceleration: number
-  /** 'unknown' 은 50건 창이 잘려 비교 불가라는 뜻. 늘었다고 쓰지 않는다 */
-  trend: 'rising' | 'steady' | 'unknown'
-  cityOnly: boolean
-  visitedOn: string | null
-}
-
-export interface SitePayload {
-  generatedAt: string
-  weekOf: string
-  week: { rank: number; id: string; finalScore: number }[]
-  cafes: SiteCafe[]
-  stats: { discovered: number; passed: number; regions: number; cityOnly: number }
-}
-
-export const payload = raw as SitePayload
+export const payload = raw as unknown as SitePayload
 
 /**
  * 목록 화면이 쓰는 필드만 남긴 투영.

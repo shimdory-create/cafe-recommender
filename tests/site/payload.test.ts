@@ -212,3 +212,56 @@ describe('trendOf', () => {
     expect(trendOf({ posts30d: 2, postsPrev: 40, spanDays: 200 })).toBe('steady')
   })
 })
+
+describe('다녀온 곳', () => {
+  it('방문 기록을 최근 순으로 싣는다', () => {
+    const p = build([cafe('1'), cafe('2', { name: '카페둘' })], [buzz('1'), buzz('2')], {
+      visits: [
+        { kakaoPlaceId: '1', visitedOn: '2026-06-01' },
+        { kakaoPlaceId: '2', visitedOn: '2026-08-16' },
+      ],
+    })
+    expect(p.visited.map((v) => v.name)).toEqual(['카페둘', '카페1'])
+  })
+
+  it('게이트에서 빠진 카페도 기록은 남긴다', () => {
+    // 한 번 다녀온 곳이 목록에서 빠졌다고 기록까지 사라지면 안 된다
+    const p = build(
+      [cafe('1', { status: 'excluded_auto', excludeReason: '주차 불가', attributes: null })],
+      [buzz('1')],
+      { visits: [{ kakaoPlaceId: '1', visitedOn: '2026-08-16' }] },
+    )
+    expect(p.cafes).toHaveLength(0)
+    expect(p.visited).toHaveLength(1)
+    expect(p.visited[0]!.name).toBe('카페1')
+  })
+
+  it('같은 곳을 여러 번 갔으면 마지막 방문만 싣는다', () => {
+    const p = build([cafe('1')], [buzz('1')], {
+      visits: [
+        { kakaoPlaceId: '1', visitedOn: '2026-05-01' },
+        { kakaoPlaceId: '1', visitedOn: '2026-08-16' },
+      ],
+    })
+    expect(p.visited).toHaveLength(1)
+    expect(p.visited[0]!.visitedOn).toBe('2026-08-16')
+  })
+
+  it('메모를 함께 싣는다', () => {
+    const p = build([cafe('1')], [buzz('1')], {
+      visits: [{ kakaoPlaceId: '1', visitedOn: '2026-08-16', note: '빵이 맛있었다' }],
+    })
+    expect(p.visited[0]!.note).toBe('빵이 맛있었다')
+  })
+
+  it('없는 카페의 방문 기록은 건너뛴다', () => {
+    const p = build([cafe('1')], [buzz('1')], {
+      visits: [{ kakaoPlaceId: '없는곳', visitedOn: '2026-08-16' }],
+    })
+    expect(p.visited).toEqual([])
+  })
+
+  it('방문 기록이 없으면 빈 배열이다', () => {
+    expect(build([cafe('1')], [buzz('1')]).visited).toEqual([])
+  })
+})
