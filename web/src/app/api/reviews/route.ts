@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { writeStore } from '@/lib/store'
+import { byId } from '@/lib/site'
 import {
   parseReviewInput, sortByNewest, summarize, REVIEWS_PATH, type Review,
 } from '@/lib/reviews'
@@ -48,6 +49,11 @@ export async function POST(req: Request) {
 
   const parsed = parseReviewInput(body as never, new Date())
   if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 })
+  // 목록에 없는 카페에는 후기를 붙이지 않는다 — 화면에 보이지 않는 곳에
+  // 데이터가 쌓이면 지울 방법도 화면에 없다.
+  if (!byId(parsed.review.kakaoPlaceId)) {
+    return NextResponse.json({ error: '목록에 없는 카페입니다' }, { status: 400 })
+  }
 
   try {
     const rows = await store.update<Review>(

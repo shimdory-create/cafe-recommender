@@ -87,8 +87,8 @@ npm run prune-raw -- --days 7   # 원본 스냅샷 정리 (하루 약 50MB 쌓�
 ```
 
 ```bash
-npm test              # 파이프라인 448건
-npm run test:web      # 웹 62건
+npm test              # 파이프라인 439건
+npm run test:web      # 웹 74건
 npm run typecheck
 npm run build:web     # site 생성 + Next 빌드
 ```

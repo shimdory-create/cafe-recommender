@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { writeStore } from '@/lib/store'
+import { byId } from '@/lib/site'
 import { addVisit, removeVisit, todayInSeoul, VISITS_PATH, type VisitRow } from '@/lib/reviews'
 
 /**
@@ -51,6 +52,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: '요청을 읽을 수 없습니다' }, { status: 400 })
   }
   if (!cafe) return NextResponse.json({ error: '카페를 알 수 없습니다' }, { status: 400 })
+
+  // 추가할 때만 목록에 있는 카페인지 본다. 취소는 검사하지 않는다 — 목록에서
+  // 빠진 카페의 기록도 취소할 수 있어야 한다.
+  if (!remove && !byId(cafe)) {
+    return NextResponse.json({ error: '목록에 없는 카페입니다' }, { status: 400 })
+  }
 
   const visitedOn = todayInSeoul()
   try {
