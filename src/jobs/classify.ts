@@ -1,3 +1,4 @@
+import { PROMPT_VERSION } from '../llm/prompts.js'
 import { passesLayer2 } from '../pipeline/buzz.js'
 import { extractAttributes } from '../pipeline/extract.js'
 import { assignTags } from '../pipeline/tag.js'
@@ -29,6 +30,14 @@ export interface ClassifyResult {
   failed: number
 }
 
+/** 프롬프트 판본이 낡아 재추출해야 하는가 */
+export function isStaleExtraction(c: Cafe): boolean {
+  return c.attributes !== null && !c.attributes.modelVersion.endsWith(`+${PROMPT_VERSION}`)
+}
+
+/** 중간 저장 간격. 이만큼마다 쓰면 죽어도 이만큼만 잃는다 */
+const FLUSH_EVERY = 20
+
 /**
  * Layer 2~5 를 순서대로 적용해 카페 상태를 확정한다.
  *
@@ -41,7 +50,7 @@ export interface ClassifyResult {
  */
 export async function runClassify(
   deps: ClassifyDeps,
-  opts: { limit?: number } = {},
+  opts: { limit?: number; redoStale?: boolean } = {},
 ): Promise<ClassifyResult> {
   const { store, blog, llm, now = new Date() } = deps
   const cafes = await store.readCafes()
@@ -53,16 +62,23 @@ export async function runClassify(
     if (!prev || b.capturedAt > prev.capturedAt) latest.set(b.kakaoPlaceId, b)
   }
 
-  const targets: Cafe[] = cafes
-    .filter((c) => c.status === 'pending_extraction')
-    .slice(0, opts.limit ?? Infinity)
+  // 재추출 대상을 먼저 처리한다. 프롬프트를 고친 직후에는 낡은 판정을
+  // 갱신하는 것이 새 카페를 늘리는 것보다 급하다.
+  const stale = opts.redoStale ? cafes.filter(isStaleExtraction) : []
+  const targets: Cafe[] = [
+    ...stale,
+    ...cafes.filter((c) => c.status === 'pending_extraction'),
+  ].slice(0, opts.limit ?? Infinity)
 
   let classified = 0
   let excluded = 0
   let skipped = 0
   let failed = 0
 
-  for (const c of targets) {
+  for (const [i, c] of targets.entries()) {
+    // 200곳이면 30분 넘게 돈다. 끝에서 한 번만 쓰면 중간에 죽을 때
+    // LLM 호출 전부를 잃는다.
+    if (i > 0 && i % FLUSH_EVERY === 0) await store.writeCafes(cafes)
     try {
       const b = latest.get(c.kakaoPlaceId)
       if (!b) {

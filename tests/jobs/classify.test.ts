@@ -85,7 +85,8 @@ describe('runClassify', () => {
     expect(c.tags).toContain('대형카페')
     expect(c.tags).toContain('대형베이커리')
     expect(c.tags).toContain('브런치카페')
-    expect(c.attributes!.modelVersion).toBe('gemini-3.1-flash-lite')
+    // 프롬프트 판본이 붙는다. 프롬프트를 고치면 재추출 대상을 이 값으로 고른다.
+    expect(c.attributes!.modelVersion).toBe('gemini-3.1-flash-lite+p2')
     expect(c.attributes!.extractedAt).toBe(NOW.toISOString())
   })
 
@@ -213,5 +214,51 @@ describe('runClassify', () => {
     ])
     const r = await runClassify(h.deps)
     expect(r.classified).toBe(1)
+  })
+  it('--redo-stale 은 낡은 프롬프트로 뽑은 카페를 다시 추출한다', async () => {
+    // 프롬프트를 고쳐도 이미 판정된 카페가 갱신되지 않으면 옛 판정이 남는다
+    const old = { ...goodAttrs, modelVersion: 'gemini-3.1-flash-lite+p1' }
+    const h = harness(
+      [cafe('1', { status: 'active', attributes: old as never, tags: ['대형카페'] })],
+      [buzz('1')],
+    )
+    const r = await runClassify(h.deps, { redoStale: true })
+    expect(r.classified).toBe(1)
+    expect(h.saved()[0]!.attributes!.modelVersion).toBe('gemini-3.1-flash-lite+p2')
+  })
+
+  it('--redo-stale 없이는 판본이 낡아도 그대로 둔다', async () => {
+    const old = { ...goodAttrs, modelVersion: 'gemini-3.1-flash-lite+p1' }
+    const h = harness([cafe('1', { status: 'active', attributes: old as never })], [buzz('1')])
+    expect((await runClassify(h.deps)).classified).toBe(0)
+  })
+
+  it('판본이 최신인 카페는 재추출하지 않는다', async () => {
+    const cur = { ...goodAttrs, modelVersion: 'gemini-3.1-flash-lite+p2' }
+    const h = harness([cafe('1', { status: 'active', attributes: cur as never })], [buzz('1')])
+    expect((await runClassify(h.deps, { redoStale: true })).classified).toBe(0)
+  })
+
+  it('LLM 을 쓰지 않고 탈락한 카페는 재추출 대상이 아니다', async () => {
+    // Layer 2 탈락은 attributes 가 null 이다. 다시 부를 이유가 없다.
+    const h = harness(
+      [cafe('1', { status: 'excluded_auto', excludeReason: '정밀도 10% < 30%' })],
+      [buzz('1')],
+    )
+    expect((await runClassify(h.deps, { redoStale: true })).classified).toBe(0)
+  })
+
+  it('중간에도 저장한다 (죽어도 LLM 호출 전부를 잃지 않게)', async () => {
+    let writes = 0
+    const cafes = Array.from({ length: 45 }, (_, i) => cafe(String(i)))
+    const rows = cafes.map((c) => buzz(c.kakaoPlaceId))
+    const h = harness(cafes, rows)
+    const spied: ClassifyDeps = {
+      ...h.deps,
+      store: { ...h.deps.store, writeCafes: async () => { writes++ } },
+    }
+    await runClassify(spied)
+    // 20곳마다 + 마지막 1회
+    expect(writes).toBeGreaterThan(1)
   })
 })

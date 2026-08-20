@@ -83,7 +83,7 @@ describe('extractAttributes', () => {
       { llm: fakeLlm(goodAttrs), now: new Date('2026-08-20T00:00:00Z') },
       input,
     )
-    expect(r.modelVersion).toBe('gemini-3.1-flash-lite')
+    expect(r.modelVersion).toBe('gemini-3.1-flash-lite+p2')
     expect(r.extractedAt).toBe('2026-08-20T00:00:00.000Z')
     expect(r.scale).toBe('대형')
     expect(r.parkingGrade).toBe('A')
@@ -97,7 +97,7 @@ describe('extractAttributes', () => {
       input,
     )
     expect(r.extractedAt).toBe('2026-08-20T00:00:00.000Z')
-    expect(r.modelVersion).toBe('gemini-3.1-flash-lite')
+    expect(r.modelVersion).toBe('gemini-3.1-flash-lite+p2')
   })
 
   it('evidence 가 비면 스키마가 거부한다', async () => {

@@ -36,6 +36,25 @@ describe('assignTags', () => {
     expect(assignTags({ ...base, viewStrength: 2 })).not.toContain('뷰맛집')
   })
 
+  it('도심 뷰만 있으면 임계가 1 올라간다', () => {
+    // 실측: 종로구 리제로가 뷰 언급 0 인데 viewStrength 3 · viewTypes ["도심"] 을
+    // 받아 뷰맛집이 되었다. 창밖에 건물이 보이는 것은 뷰가 아니다.
+    const city = { ...base, viewTypes: ['도심'] }
+    expect(assignTags({ ...city, viewStrength: 3 })).not.toContain('뷰맛집')
+    // 남산·한강 스카이라인처럼 진짜 도심 뷰는 후기가 압도적으로 쓴다
+    expect(assignTags({ ...city, viewStrength: 4 })).toContain('뷰맛집')
+  })
+
+  it('도심에 다른 뷰가 하나라도 섞이면 임계는 그대로다', () => {
+    const t = assignTags({ ...base, viewStrength: 3, viewTypes: ['도심', '산'] })
+    expect(t).toContain('뷰맛집')
+  })
+
+  it('뷰 종류가 비어 있으면 임계를 올리지 않는다', () => {
+    // 종류를 못 적었을 뿐 강도는 답한 경우를 벌하지 않는다
+    expect(assignTags({ ...base, viewStrength: 3, viewTypes: [] })).toContain('뷰맛집')
+  })
+
   it('소형은 뷰맛집 임계가 4로 올라간다', () => {
     // "작을수록 더 압도적이어야 통과" (스펙 7.5)
     const small = { ...base, scale: '소형' as const, seatsEstimate: 25 }

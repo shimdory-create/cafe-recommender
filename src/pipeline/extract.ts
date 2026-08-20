@@ -1,5 +1,5 @@
 import { CafeAttributesSchema, type CafeAttributes } from '../schema.js'
-import { buildExtractPrompt, type ExtractPromptInput } from '../llm/prompts.js'
+import { buildExtractPrompt, PROMPT_VERSION, type ExtractPromptInput } from '../llm/prompts.js'
 import type { LlmClient } from '../llm/types.js'
 
 /**
@@ -26,6 +26,8 @@ export async function extractAttributes(
   return CafeAttributesSchema.parse({
     ...raw,
     extractedAt: now.toISOString(),
-    modelVersion: llm.modelVersion,
+    // 프롬프트 판본을 함께 남긴다. 프롬프트를 고치면 재추출 대상을
+    // 이 값으로 골라낼 수 있다.
+    modelVersion: `${llm.modelVersion}+${PROMPT_VERSION}`,
   })
 }

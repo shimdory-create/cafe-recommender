@@ -43,7 +43,12 @@ export function assignTags(a: CafeAttributes): string[] {
 
   if (a.menuLevel === 3) tags.add('브런치카페')
 
-  const viewCut = isSmall ? 4 : 3
+  // 뷰 종류가 '도심' 뿐이면 임계를 올린다. 창밖에 건물이 보이는 것은
+  // 뷰가 아니고, 남산·한강 스카이라인처럼 도심 뷰가 진짜인 곳은 후기가
+  // 압도적으로 쓴다 (실측: 종로구 리제로가 뷰 언급 0 으로 3점을 받았다).
+  const types = a.viewTypes ?? []
+  const cityOnly = types.length > 0 && types.every((t) => t.includes('도심'))
+  const viewCut = (isSmall ? 4 : 3) + (cityOnly ? 1 : 0)
   if (a.viewStrength >= viewCut) tags.add('뷰맛집')
 
   const haystack = [...(a.viewTypes ?? []), ...(a.mealTypes ?? []), a.evidence].join(' ')

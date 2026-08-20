@@ -3,7 +3,8 @@
  *
  *   npm run discover   -- [--region 양평군] [--skip-harvest]
  *   npm run buzz       -- [--limit 200]
- *   npm run classify   -- [--limit 200]
+ *   npm run classify   -- [--limit 200] [--redo-stale]
+ *   npm run label      -- [--report] [--redo]
  *   npm run suggest    -- [--city]
  *   npm run visited    -- <카페 이름> [--date YYYY-MM-DD]
  *   npm run inspect    -- <카페 이름>
@@ -17,6 +18,7 @@ import { runDiscover } from '../jobs/weekly-discover.js'
 import { runDailyBuzz } from '../jobs/daily-buzz.js'
 import { runClassify } from '../jobs/classify.js'
 import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
+import { runLabel, runLabelReport } from './label.js'
 
 const argv = process.argv.slice(2)
 const cmd = argv[0]
@@ -61,8 +63,9 @@ async function main() {
     case 'classify': {
       const ctx = createContext()
       const limit = numFlag(rest, 'limit')
-      console.log(`판정 시작${limit ? ` (최대 ${limit}곳)` : ''}`)
-      const r = await runClassify(ctx, { limit })
+      const redoStale = flag(rest, 'redo-stale') !== undefined
+      console.log(`판정 시작${limit ? ` (최대 ${limit}곳)` : ''}${redoStale ? ' · 낡은 프롬프트 재추출 포함' : ''}`)
+      const r = await runClassify(ctx, { limit, redoStale })
       console.log(
         `  통과 ${r.classified}곳 / 배제 ${r.excluded}곳`
         + ` / 보류 ${r.skipped}곳 / 실패 ${r.failed}곳`,
@@ -198,6 +201,19 @@ async function main() {
       break
     }
 
+    case 'label': {
+      const ctx = createContext()
+      if (flag(rest, 'report') !== undefined) {
+        await runLabelReport({ store: ctx.store })
+        break
+      }
+      await runLabel(
+        { store: ctx.store },
+        { perStratum: numFlag(rest, 'per') ?? 10, redo: flag(rest, 'redo') !== undefined },
+      )
+      break
+    }
+
     case 'hide': {
       const ctx = createContext()
       const cafes = await ctx.store.readCafes()
@@ -232,7 +248,8 @@ async function main() {
 
     default:
       die(
-        '사용법: tsx src/cli/run.ts <discover|buzz|classify|suggest|visited|inspect|health|hide>',
+        '사용법: tsx src/cli/run.ts'
+          + ' <discover|buzz|classify|label|suggest|visited|inspect|health|hide>',
       )
   }
 }
