@@ -61,14 +61,17 @@ const relDoc = (name: string, daysAgo: number): BlogDoc => ({
   url: 'u',
   blogName: 'b',
   dateTime: new Date(NOW.getTime() - daysAgo * 86_400_000),
+  thumbnail: '',
 })
 
 describe('runDailyBuzz', () => {
-  function harness(cafes: Cafe[], rows: BuzzSnapshot[], over: Partial<DailyBuzzDeps> = {}) {
+  function harness(input: Cafe[], rows: BuzzSnapshot[], over: Partial<DailyBuzzDeps> = {}) {
     let saved = rows
+    let cafes = input
     const deps: DailyBuzzDeps = {
       store: {
         readCafes: async () => cafes,
+        writeCafes: async (c) => { cafes = c },
         readBuzz: async () => saved,
         writeBuzz: async (r) => { saved = r },
         appendRaw: async () => 'p',
@@ -84,7 +87,7 @@ describe('runDailyBuzz', () => {
       now: NOW,
       ...over,
     }
-    return { deps, saved: () => saved }
+    return { deps, saved: () => saved, cafes: () => cafes }
   }
 
   it('카페마다 화제량을 갱신한다', async () => {
@@ -162,6 +165,85 @@ describe('runDailyBuzz', () => {
     const h = harness([cafe('1'), cafe('2'), cafe('3')], [])
     expect((await runDailyBuzz(h.deps, { limit: 2 })).updated).toBe(2)
   })
+  it('active 카페를 먼저 처리한다', async () => {
+    // limit 으로 잘릴 때 추천에 뜨는 곳이 뒤로 밀리면 안 된다
+    const queries: string[] = []
+    const h = harness(
+      [
+        cafe('p', { name: '대기카페', status: 'pending_extraction' }),
+        cafe('a', { name: '노출카페', status: 'active' }),
+      ],
+      [],
+      {
+        blog: {
+          search: async (q: string) => {
+            queries.push(q)
+            return { docs: [], payload: {} }
+          },
+        },
+      },
+    )
+    await runDailyBuzz(h.deps, { limit: 1 })
+    expect(queries).toHaveLength(1)
+    expect(queries[0]).toContain('노출카페')
+  })
+
+  it('대표 이미지를 카페에 저장한다', async () => {
+    // 이 잡이 이미 카페별로 블로그를 부르므로 추가 호출이 없다
+    const h = harness([cafe('1', { name: '테라로사' })], [], {
+      blog: {
+        search: async () => ({
+          docs: [{ ...relDoc('테라로사', 1), thumbnail: 'https://cdn/right.jpg' }],
+          payload: {},
+        }),
+      },
+    })
+    const r = await runDailyBuzz(h.deps)
+    expect(r.images).toBe(1)
+    expect(h.cafes()[0]!.imageUrl).toBe('https://cdn/right.jpg')
+  })
+
+  it('관련 없는 글의 이미지는 쓰지 않는다', async () => {
+    // 엉뚱한 사진 한 장은 텍스트 오류보다 신뢰를 더 깎는다
+    const h = harness([cafe('1', { name: '테라로사' })], [], {
+      blog: {
+        search: async () => ({
+          docs: [
+            {
+              title: '전혀 무관한 글', contents: '', url: 'u', blogName: 'b',
+              dateTime: new Date('2026-08-19T00:00:00Z'),
+              thumbnail: 'https://cdn/wrong.jpg',
+            },
+            { ...relDoc('테라로사', 2), thumbnail: 'https://cdn/right.jpg' },
+          ],
+          payload: {},
+        }),
+      },
+    })
+    await runDailyBuzz(h.deps)
+    expect(h.cafes()[0]!.imageUrl).toBe('https://cdn/right.jpg')
+  })
+
+  it('썸네일이 없으면 기존 이미지를 지우지 않는다', async () => {
+    const h = harness([cafe('1', { name: '테라로사', imageUrl: 'https://cdn/old.jpg' })], [], {
+      blog: { search: async () => ({ docs: [relDoc('테라로사', 1)], payload: {} }) },
+    })
+    const r = await runDailyBuzz(h.deps)
+    expect(r.images).toBe(0)
+    expect(h.cafes()[0]!.imageUrl).toBe('https://cdn/old.jpg')
+  })
+
+  it('이미지가 그대로면 다시 쓰지 않는다', async () => {
+    const h = harness([cafe('1', { name: '테라로사', imageUrl: 'https://cdn/same.jpg' })], [], {
+      blog: {
+        search: async () => ({
+          docs: [{ ...relDoc('테라로사', 1), thumbnail: 'https://cdn/same.jpg' }],
+          payload: {},
+        }),
+      },
+    })
+    expect((await runDailyBuzz(h.deps)).images).toBe(0)
+  })
 })
 
 describe('mondayOf', () => {
@@ -196,20 +278,31 @@ describe('runWeeklySuggest', () => {
       },
       now: NOW,
     }
-    return { deps, saved: () => saved }
+    return { deps, saved: () => saved, cafes: () => cafes }
   }
 
-  it('상위 3곳을 골라 저장한다', async () => {
+  it('기본 10곳까지 골라 순위대로 저장한다', async () => {
+    // 3곳에서 10곳으로 늘렸다 — "3개는 너무 적다" 는 피드백 (스펙 10절 v3.2).
+    // 후보가 10곳보다 적으면 있는 만큼만 담는다.
     const ids = ['1', '2', '3', '4']
     const h = harness(
       ids.map((i) => cafe(i)),
       ids.map((i) => buzzRow(i, { postsPer30: 20 * Number(i) })),
     )
     const r = await runWeeklySuggest(h.deps)
-    expect(r.picked).toHaveLength(3)
-    expect(h.saved()).toHaveLength(3)
-    expect(h.saved()[0]!.rank).toBe(1)
+    expect(r.picked).toHaveLength(4)
+    expect(h.saved()).toHaveLength(4)
+    expect(h.saved().map((s) => s.rank)).toEqual([1, 2, 3, 4])
     expect(h.saved()[0]!.weekOf).toBe('2026-08-17')
+  })
+
+  it('count 로 개수를 줄일 수 있다', async () => {
+    const ids = ['1', '2', '3', '4']
+    const h = harness(
+      ids.map((i) => cafe(i)),
+      ids.map((i) => buzzRow(i, { postsPer30: 20 * Number(i) })),
+    )
+    expect((await runWeeklySuggest(h.deps, { count: 2 })).picked).toHaveLength(2)
   })
 
   it('점수 근거를 남긴다', async () => {

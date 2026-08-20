@@ -110,6 +110,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       naverMapUrl: c.naverMapUrl
         ?? `https://map.naver.com/p/search/${encodeURIComponent(`${c.sigungu} ${c.name}`)}`,
       kakaoPlaceUrl: c.kakaoPlaceUrl ?? null,
+      imageUrl: c.imageUrl ?? null,
       hotScore: Number(hot.toFixed(1)),
       finalScore: Number(finalScore(hot, fit).toFixed(3)),
       postsPer30: b.postsPer30,
@@ -133,6 +134,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       const c = byPlaceId.get(id)
       if (!c) return []
       const note = visits.find((v) => v.kakaoPlaceId === id && v.visitedOn === on)?.note ?? ''
+      const r = rated.get(id)
       return [{
         id,
         name: c.name,
@@ -143,6 +145,9 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
         scale: c.attributes?.scale ?? null,
         naverMapUrl: c.naverMapUrl
           ?? `https://map.naver.com/p/search/${encodeURIComponent(`${c.sigungu} ${c.name}`)}`,
+        imageUrl: c.imageUrl ?? null,
+        ratingAvg: Number(((r?.sum ?? 0) / (r?.n || 1)).toFixed(1)),
+        ratingCount: r?.n ?? 0,
       }]
     })
     // 최근에 다녀온 것부터

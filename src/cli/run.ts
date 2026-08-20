@@ -72,7 +72,10 @@ async function main() {
       const limit = numFlag(rest, 'limit')
       console.log(`화제량 수집 시작${limit ? ` (최대 ${limit}곳)` : ''}`)
       const r = await runDailyBuzz(ctx, { limit })
-      console.log(`  갱신 ${r.updated}곳 / 실패 ${r.failed}곳 / 정리 ${r.dropped}건`)
+      console.log(
+        `  갱신 ${r.updated}곳 / 실패 ${r.failed}곳`
+        + ` / 정리 ${r.dropped}건 / 대표 이미지 ${r.images}곳`,
+      )
       break
     }
 
@@ -88,6 +91,9 @@ async function main() {
         + ` / 보류 ${r.skipped}곳 / 실패 ${r.failed}곳`,
       )
       if (r.skipped > 0) console.log('  보류는 화제량 수집이 먼저 필요합니다 (npm run buzz)')
+      if (r.quotaExhausted) {
+        console.log('  LLM 일일 쿼터가 소진되어 중단했습니다. 내일 이어서 처리됩니다.')
+      }
       break
     }
 

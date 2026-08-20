@@ -4,12 +4,12 @@ import './globals.css'
 import { TabBar } from './tab-bar'
 
 export const metadata: Metadata = {
-  title: '우리 가족 카페',
+  title: '심김가족 카페',
   description: '수도권 대형·베이커리 카페 주말 나들이 추천',
   manifest: '/manifest.webmanifest',
   // 가족 전용이다. 색인되면 안 된다 (스펙 10절)
   robots: { index: false, follow: false, nocache: true },
-  appleWebApp: { capable: true, title: '우리 가족 카페', statusBarStyle: 'default' },
+  appleWebApp: { capable: true, title: '심김가족 카페', statusBarStyle: 'default' },
 }
 
 export const viewport: Viewport = {
@@ -29,11 +29,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* 데스크톱은 별도 레이아웃을 만들지 않는다 — 480px 센터 정렬 (스펙 10.1) */}
         <div className="mx-auto min-h-dvh max-w-[480px] pb-24">
           <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
-            <div className="flex items-center justify-between px-5 py-3.5">
+            <div className="flex items-center px-5 py-3.5">
               <Link href="/" className="text-[17px] font-bold tracking-tight">
-                우리 가족 카페
+                심김가족 카페
               </Link>
-              <span className="text-[13px] text-ink-soft">인천 부평 기준</span>
             </div>
           </header>
           <main className="px-5">{children}</main>

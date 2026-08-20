@@ -30,6 +30,8 @@ export interface SiteCafe {
   stayDuration: string | null
   naverMapUrl: string
   kakaoPlaceUrl: string | null
+  /** 대표 이미지 (130x130 정사각). 없으면 null */
+  imageUrl: string | null
   hotScore: number
   /** 화제도 x 가족 적합도. 홈 피드와 목록의 정렬 기준 */
   finalScore: number
@@ -53,6 +55,10 @@ export interface SiteVisited {
   tags: string[]
   scale: '대형' | '중형' | '소형' | null
   naverMapUrl: string
+  imageUrl: string | null
+  /** 가족 별점 요약 (빌드 시점). 화면은 실시간 값으로 덮어쓴다 */
+  ratingAvg: number
+  ratingCount: number
 }
 
 export interface SitePayload {

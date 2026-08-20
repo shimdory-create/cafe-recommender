@@ -146,7 +146,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
       const res = await fetch('/api/visited', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ kakaoPlaceId: cafeId }),
+        body: JSON.stringify({ kakaoPlaceId: cafeId, action: visited ? 'remove' : 'add' }),
       })
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? '기록에 실패했어요')
@@ -173,7 +173,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
             : 'border border-line bg-card text-ink active:bg-bean-soft'
         }`}
       >
-        {visited ? '✓ 다녀왔어요' : '다녀왔어요 체크'}
+        {visited ? '✓ 다녀왔어요 (누르면 취소)' : '다녀왔어요 체크'}
       </button>
 
       <h2 className="mt-6 text-[15px] font-bold">

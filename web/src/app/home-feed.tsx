@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { type ListRow } from '@/lib/site'
 import { CafeCard } from './cafe-card'
 
@@ -29,9 +29,29 @@ export interface FeedRow extends ListRow {
  */
 export function HomeFeed({ rows }: { rows: FeedRow[] }) {
   const [page, setPage] = useState(1)
-  const total = pageCount(rows.length)
-  const shown = pageOf(rows, page)
-  const offset = (page - 1) * PAGE_SIZE
+  const [visited, setVisited] = useState<Set<string> | null>(null)
+
+  useEffect(() => {
+    // 방금 체크한 카페는 즉시 빠져야 한다. 페이로드의 방문 기록은 빌드
+    // 시점이라, 체크하고 홈에 돌아오면 그 카페가 그대로 1위에 남는다.
+    fetch('/api/visited')
+      .then((r) => r.json())
+      .then((body: { visits?: { kakaoPlaceId: string }[] }) => {
+        setVisited(new Set((body.visits ?? []).map((v) => v.kakaoPlaceId)))
+      })
+      .catch(() => {
+        // 오프라인이면 빌드 타임 목록을 그대로 쓴다
+      })
+  }, [])
+
+  const feed = useMemo(
+    () => (visited ? rows.filter((r) => !visited.has(r.id)) : rows),
+    [rows, visited],
+  )
+
+  const total = pageCount(feed.length)
+  const shown = pageOf(feed, Math.min(page, total))
+  const offset = (Math.min(page, total) - 1) * PAGE_SIZE
 
   const go = (next: number) => {
     setPage(next)
@@ -60,7 +80,7 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
             ← 이전
           </button>
           <span className="shrink-0 text-[13px] text-ink-soft">
-            {page} / {total}
+            {Math.min(page, total)} / {total}
           </span>
           <button
             onClick={() => go(page + 1)}

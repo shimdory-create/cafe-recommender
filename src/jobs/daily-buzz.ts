@@ -1,4 +1,4 @@
-import { computeBuzz } from '../pipeline/buzz.js'
+import { computeBuzz, pickThumbnail } from '../pipeline/buzz.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import type { BlogDoc } from '../sources/kakao-blog.js'
 import type { BuzzSnapshot } from '../schema.js'
@@ -21,7 +21,8 @@ import type { Store } from '../store/types.js'
 export interface DailyBuzzDeps {
   store: Pick<
     Store,
-    'readCafes' | 'readBuzz' | 'writeBuzz' | 'appendRaw' | 'readHealth' | 'writeHealth'
+    'readCafes' | 'writeCafes' | 'readBuzz' | 'writeBuzz'
+    | 'appendRaw' | 'readHealth' | 'writeHealth'
   >
   blog: {
     search: (
@@ -36,6 +37,8 @@ export interface DailyBuzzResult {
   updated: number
   failed: number
   dropped: number
+  /** 대표 이미지를 새로 얻은 카페 수 */
+  images: number
 }
 
 /**
@@ -49,14 +52,18 @@ export async function runDailyBuzz(
 ): Promise<DailyBuzzResult> {
   const { store, blog, now = new Date() } = deps
   const cafes = await store.readCafes()
+  // 화면에 보이는 카페(active)를 먼저 처리한다. limit 으로 잘릴 때 추천에
+  // 뜨는 곳이 뒤로 밀리면 안 된다 — 대표 이미지도 여기서 얻기 때문이다.
   const targets = cafes
     .filter((c) => c.status === 'active' || c.status === 'pending_extraction')
+    .sort((a, b) => (a.status === b.status ? 0 : a.status === 'active' ? -1 : 1))
     .slice(0, opts.limit ?? Infinity)
 
   const rows = await store.readBuzz()
   const capturedAt = now.toISOString().slice(0, 10)
   let updated = 0
   let failed = 0
+  let images = 0
 
   for (const c of targets) {
     try {
@@ -73,6 +80,14 @@ export async function runDailyBuzz(
       if (i >= 0) rows[i] = snap
       else rows.push(snap)
       updated++
+
+      // 대표 이미지도 여기서 얻는다. 이 잡이 이미 카페별로 블로그를 부르므로
+      // 추가 호출이 없고, 매일 돌면서 깨진 URL 이 자동으로 회복된다.
+      const thumb = pickThumbnail({ docs: res.docs, cafeName: c.name })
+      if (thumb && thumb !== c.imageUrl) {
+        c.imageUrl = thumb
+        images++
+      }
     } catch (e) {
       failed++
       await recordFailure(store, 'kakao-blog', e, now)
@@ -89,6 +104,7 @@ export async function runDailyBuzz(
   const dropped = rows.length - kept.length
 
   await store.writeBuzz(kept)
+  if (images > 0) await store.writeCafes(cafes)
   if (updated > 0) await recordSuccess(store, 'kakao-blog', now)
-  return { updated, failed, dropped }
+  return { updated, failed, dropped, images }
 }

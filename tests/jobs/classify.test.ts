@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { runClassify, type ClassifyDeps } from '../../src/jobs/classify.js'
+import { SourceError } from '../../src/sources/rate-limiter.js'
 import type { BuzzSnapshot, Cafe } from '../../src/schema.js'
 
 const NOW = new Date('2026-08-20T00:00:00Z')
@@ -331,5 +332,61 @@ describe('runClassify', () => {
       },
     })
     expect((await runClassify(t.deps)).excluded).toBe(1)
+  })
+  it('LLM 쿼터가 소진되면 일찍 멈춘다', async () => {
+    // 판정은 카페당 블로그를 2회 부른 뒤에 LLM 을 탄다. 쿼터가 소진된 채로
+    // 200곳을 돌면 400번의 헛된 블로그 호출과 200건의 실패만 남는다
+    // (실측: 연속 실패 220회).
+    let llmCalls = 0
+    const cafes = Array.from({ length: 20 }, (_, i) => cafe(String(i)))
+    const h = harness(cafes, cafes.map((c) => buzz(c.kakaoPlaceId)), {
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => {
+          llmCalls++
+          throw new SourceError('gemini HTTP 429: quota exceeded', 429)
+        },
+      },
+    })
+    const r = await runClassify(h.deps)
+    expect(r.quotaExhausted).toBe(true)
+    expect(llmCalls).toBe(3)
+    expect(r.failed).toBe(3)
+    // 실패한 3곳도 pending 으로 남으므로 20곳 전부가 다음 회차 대상이다
+    expect(h.saved().filter((c) => c.status === 'pending_extraction')).toHaveLength(20)
+  })
+
+  it('쿼터가 아닌 오류는 계속 진행한다', async () => {
+    // 한 카페의 이상한 응답이 배치를 멈춰서는 안 된다
+    let calls = 0
+    const cafes = Array.from({ length: 5 }, (_, i) => cafe(String(i)))
+    const h = harness(cafes, cafes.map((c) => buzz(c.kakaoPlaceId)), {
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => { calls++; throw new Error('이상한 응답') },
+      },
+    })
+    const r = await runClassify(h.deps)
+    expect(r.quotaExhausted).toBe(false)
+    expect(calls).toBe(5)
+  })
+
+  it('중간에 쿼터 오류가 섞여도 연속이 아니면 계속한다', async () => {
+    let calls = 0
+    const cafes = Array.from({ length: 6 }, (_, i) => cafe(String(i)))
+    const h = harness(cafes, cafes.map((c) => buzz(c.kakaoPlaceId)), {
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => {
+          calls++
+          // 429, 정상, 429, 정상 ... 연속 3회가 되지 않는다
+          if (calls % 2 === 1) throw new SourceError('429', 429)
+          return goodAttrs as never
+        },
+      },
+    })
+    const r = await runClassify(h.deps)
+    expect(r.quotaExhausted).toBe(false)
+    expect(calls).toBe(6)
   })
 })

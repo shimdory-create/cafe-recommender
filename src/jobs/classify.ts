@@ -4,6 +4,7 @@ import { extractAttributes } from '../pipeline/extract.js'
 import { assignTags } from '../pipeline/tag.js'
 import { passesHardGate } from '../pipeline/gate.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
+import { SourceError } from '../sources/rate-limiter.js'
 import type { BuzzSnapshot, Cafe } from '../schema.js'
 import type { LlmClient } from '../llm/types.js'
 import type { Store } from '../store/types.js'
@@ -28,7 +29,19 @@ export interface ClassifyResult {
   excluded: number
   skipped: number
   failed: number
+  /** LLM 쿼터가 소진돼 중단했는가 */
+  quotaExhausted: boolean
 }
+
+/**
+ * 이만큼 연속으로 쿼터 오류가 나면 그날은 포기한다.
+ *
+ * 무료 티어 일일 한도를 넘기면 남은 카페 전부가 같은 오류로 실패한다.
+ * 그런데 판정은 카페당 블로그를 2회 부른 **뒤에** LLM 을 타므로, 계속 돌면
+ * 400번의 헛된 블로그 호출과 200건의 실패 기록만 남는다 (실측: 연속 실패
+ * 220회). 일찍 멈추는 것이 쿼터도 로그도 아낀다.
+ */
+const QUOTA_GIVE_UP = 3
 
 /** 프롬프트 판본이 낡아 재추출해야 하는가 */
 export function isStaleExtraction(c: Cafe): boolean {
@@ -85,6 +98,8 @@ export async function runClassify(
   let excluded = 0
   let skipped = 0
   let failed = 0
+  let quotaErrors = 0
+  let quotaExhausted = false
 
   for (const [i, c] of targets.entries()) {
     // 200곳이면 30분 넘게 돈다. 끝에서 한 번만 쓰면 중간에 죽을 때
@@ -146,15 +161,28 @@ export async function runClassify(
         c.excludeReason = null
         classified++
       }
+      // 한 곳이라도 통과했으면 쿼터가 살아 있다는 뜻이다
+      quotaErrors = 0
     } catch (e) {
       // 한 카페가 실패해도 나머지를 계속한다. pending_extraction 으로
       // 남으므로 다음 회차에 자동 재시도된다.
       failed++
       await recordFailure(store, 'classify', e, now)
+
+      // 쿼터 소진은 카페 문제가 아니라 그날의 한도 문제다. 계속 시도해도
+      // 전부 같은 오류이므로 멈춘다.
+      if (e instanceof SourceError && e.status === 429) {
+        if (++quotaErrors >= QUOTA_GIVE_UP) {
+          quotaExhausted = true
+          break
+        }
+      } else {
+        quotaErrors = 0
+      }
     }
   }
 
   await store.writeCafes(cafes)
   if (classified + excluded > 0) await recordSuccess(store, 'classify', now)
-  return { classified, excluded, skipped, failed }
+  return { classified, excluded, skipped, failed, quotaExhausted }
 }

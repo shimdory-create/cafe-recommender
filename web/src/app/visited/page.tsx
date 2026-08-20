@@ -1,7 +1,7 @@
 import { payload } from '@/lib/site'
 import { VisitedList, type KnownCafe } from './visited-list'
 
-export const metadata = { title: '다녀온 곳 — 우리 가족 카페' }
+export const metadata = { title: '다녀온 곳 — 심김가족 카페' }
 
 /**
  * 다녀온 곳 — 우리 가족의 기록.
@@ -21,6 +21,7 @@ export default function VisitedPage() {
     scale: c.scale,
     tags: c.tags,
     naverMapUrl: c.naverMapUrl,
+    imageUrl: c.imageUrl,
   }))
 
   return (

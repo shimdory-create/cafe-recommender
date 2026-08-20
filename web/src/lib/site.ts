@@ -25,8 +25,8 @@ export const payload = raw as unknown as SitePayload
 export type ListRow = Pick<
   SiteCafe,
   'id' | 'name' | 'sigungu' | 'driveMinutes' | 'scale' | 'parkingGrade'
-  | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'hotScore' | 'finalScore'
-  | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn'
+  | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'imageUrl' | 'hotScore'
+  | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -45,6 +45,7 @@ export function toListRow(c: SiteCafe): ListRow {
       ? c.evidence.slice(0, CARD_EVIDENCE_CHARS) + '…'
       : c.evidence,
     naverMapUrl: c.naverMapUrl,
+    imageUrl: c.imageUrl,
     hotScore: c.hotScore,
     finalScore: c.finalScore,
     ratingAvg: c.ratingAvg,
@@ -64,12 +65,16 @@ export const byId = (id: string): SiteCafe | undefined =>
  * 4인 가족이 취향을 맞추려면 폭이 필요하다. 그래서 "3곳 + 끝" 이 아니라
  * 끊기지 않는 피드로 만든다.
  */
-export function homeFeed(): SiteCafe[] {
+export function homeFeed(now = new Date()): SiteCafe[] {
+  // 다녀온 곳은 6개월간 추천에서 내려간다 (스펙 8.2). 점수를 깎는 것으로는
+  // 목록에 계속 남아 "또 거기?" 가 되므로 아예 뺀다. 전체 리스트에서는
+  // 계속 찾을 수 있다.
+  const fresh = (c: SiteCafe) => !c.cityOnly && !recentlyVisited(c.visitedOn, now)
   const ranked = payload.week
     .map((w) => byId(w.id))
-    .filter((c): c is SiteCafe => c !== undefined && !c.cityOnly)
+    .filter((c): c is SiteCafe => c !== undefined && fresh(c))
   const seen = new Set(ranked.map((c) => c.id))
-  const rest = payload.cafes.filter((c) => !c.cityOnly && !seen.has(c.id))
+  const rest = payload.cafes.filter((c) => fresh(c) && !seen.has(c.id))
   // payload.cafes 는 이미 종합점수 내림차순이다
   return [...ranked, ...rest]
 }

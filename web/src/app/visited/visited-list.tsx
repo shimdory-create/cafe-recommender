@@ -1,8 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import type { SiteVisited } from '@/lib/site'
+import type { Review } from '@/lib/reviews'
+import { Thumb } from '../thumb'
+import { Stars } from '../cafe/[id]/review-panel'
 
 function dateLabel(iso: string): string {
   const d = new Date(iso)
@@ -21,6 +24,7 @@ export interface KnownCafe {
   scale: string | null
   tags: string[]
   naverMapUrl: string
+  imageUrl: string | null
 }
 
 /**
@@ -29,21 +33,29 @@ export interface KnownCafe {
  * `built` 는 배치가 만든 목록이라 게이트에서 빠진 카페까지 들어 있다.
  * `live` 는 방금 API 에서 읽은 것이며, 오늘 누른 체크가 여기 있다 —
  * 이것을 합치지 않으면 **다녀왔어요를 눌러도 이 탭은 내일까지 비어 있다.**
+ *
+ * 반대로 취소된 기록은 `live` 에 없으므로 빠져야 한다. 그래서 `live` 를
+ * 받았을 때는 **`live` 에 있는 것만** 남긴다.
  */
 export function mergeVisits(
   built: SiteVisited[],
   live: { kakaoPlaceId: string; visitedOn: string; note?: string }[],
   known: Map<string, KnownCafe>,
+  hasLive = true,
 ): SiteVisited[] {
-  const out = new Map<string, SiteVisited>()
-  for (const v of built) out.set(v.id, v)
+  const byId = new Map(built.map((v) => [v.id, v]))
+  if (!hasLive) {
+    return [...built].sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
+  }
 
+  const out = new Map<string, SiteVisited>()
   for (const v of live) {
     const prev = out.get(v.kakaoPlaceId)
     // 같은 카페면 더 최근 방문만 남긴다
     if (prev && prev.visitedOn >= v.visitedOn) continue
-    const c = known.get(v.kakaoPlaceId) ?? prev
+    const c = known.get(v.kakaoPlaceId) ?? byId.get(v.kakaoPlaceId)
     if (!c) continue // 이름을 모르는 카페는 띄울 수 없다
+    const b = byId.get(v.kakaoPlaceId)
     out.set(v.kakaoPlaceId, {
       id: v.kakaoPlaceId,
       name: c.name,
@@ -53,6 +65,9 @@ export function mergeVisits(
       tags: c.tags,
       scale: (c.scale as SiteVisited['scale']) ?? null,
       naverMapUrl: c.naverMapUrl,
+      imageUrl: c.imageUrl ?? null,
+      ratingAvg: b?.ratingAvg ?? 0,
+      ratingCount: b?.ratingCount ?? 0,
     })
   }
 
@@ -62,19 +77,58 @@ export function mergeVisits(
 export function VisitedList({
   built, known,
 }: { built: SiteVisited[]; known: KnownCafe[] }) {
-  const [rows, setRows] = useState<SiteVisited[]>(built)
+  const [rows, setRows] = useState<SiteVisited[]>(
+    [...built].sort((a, b) => b.visitedOn.localeCompare(a.visitedOn)),
+  )
+  const [reviews, setReviews] = useState<Map<string, Review[]>>(new Map())
+  const [busy, setBusy] = useState('')
+  const [error, setError] = useState('')
 
-  useEffect(() => {
+  const load = useCallback(() => {
     const map = new Map(known.map((c) => [c.id, c]))
     fetch('/api/visited')
       .then((r) => r.json())
-      .then((body) => setRows(mergeVisits(built, body.visits ?? [], map)))
+      .then((body) => setRows(mergeVisits(built, body.visits ?? [], map, true)))
       .catch(() => {
         // 오프라인이면 빌드 타임 기록만 보여준다 (스펙 6.6 우아한 저하)
       })
+
+    // 별점·후기는 실시간으로 읽는다 — 방금 남긴 것이 보여야 한다
+    fetch('/api/reviews')
+      .then((r) => r.json())
+      .then((body: { reviews?: Review[] }) => {
+        const m = new Map<string, Review[]>()
+        for (const r of body.reviews ?? []) {
+          m.set(r.kakaoPlaceId, [...(m.get(r.kakaoPlaceId) ?? []), r])
+        }
+        setReviews(m)
+      })
+      .catch(() => {})
   }, [built, known])
 
-  let lastMonth = ''
+  useEffect(load, [load])
+
+  const cancel = async (id: string, name: string) => {
+    if (!window.confirm(`${name} 을(를) 다녀온 곳에서 뺄까요?\n이번 주 추천에 다시 올라옵니다.`)) {
+      return
+    }
+    setBusy(id)
+    setError('')
+    try {
+      const res = await fetch('/api/visited', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ kakaoPlaceId: id, action: 'remove' }),
+      })
+      const body = await res.json()
+      if (!res.ok) throw new Error(body.error ?? '취소에 실패했어요')
+      setRows((prev) => prev.filter((v) => v.id !== id))
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setBusy('')
+    }
+  }
 
   if (rows.length === 0) {
     return (
@@ -90,14 +144,24 @@ export function VisitedList({
     )
   }
 
+  let lastMonth = ''
+
   return (
     <>
       <p className="mt-1 text-[13px] text-ink-soft">{rows.length}곳</p>
+      {error && <p className="mt-2 text-[13px] text-red-600 dark:text-red-400">{error}</p>}
+
       <div className="mt-3 flex flex-col gap-4">
         {rows.map((v) => {
           const month = monthLabel(v.visitedOn)
           const showMonth = month !== lastMonth
           lastMonth = month
+          const mine = reviews.get(v.id) ?? []
+          const count = mine.length || v.ratingCount
+          const avg = mine.length
+            ? mine.reduce((s, r) => s + r.rating, 0) / mine.length
+            : v.ratingAvg
+
           return (
             <div key={v.id}>
               {showMonth && (
@@ -109,42 +173,78 @@ export function VisitedList({
                   aria-label={`${v.name} 자세히 보기`}
                   className="block px-4 pt-4 pb-3 active:bg-bean-soft/40"
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    <h2 className="text-[17px] font-bold leading-snug">{v.name}</h2>
-                    <span className="mt-0.5 shrink-0 text-[12px] text-ink-soft">
-                      {dateLabel(v.visitedOn)}
-                    </span>
-                  </div>
-                  <p className="mt-1 text-[13px] text-ink-soft">
-                    {v.sigungu}
-                    {v.scale ? ` · ${v.scale}` : ''}
-                  </p>
-                  {v.tags.length > 0 && (
-                    <div className="mt-2.5 flex flex-wrap gap-1.5">
-                      {v.tags.slice(0, 4).map((t) => (
-                        <span
-                          key={t}
-                          className="rounded-full bg-bean-soft px-2.5 py-1 text-[12px] font-medium text-bean"
-                        >
-                          {t}
+                  <div className="flex gap-3">
+                    <Thumb src={v.imageUrl} alt={v.name} size={60} />
+
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <h2 className="text-[17px] font-bold leading-snug">{v.name}</h2>
+                        <span className="mt-0.5 shrink-0 text-[12px] font-medium text-ink-soft">
+                          {dateLabel(v.visitedOn)}
                         </span>
-                      ))}
+                      </div>
+
+                      <p className="mt-0.5 text-[13px] text-ink-soft">
+                        {v.sigungu}
+                        {v.scale ? ` · ${v.scale}` : ''}
+                      </p>
+
+                      {count > 0 ? (
+                        <div className="mt-1.5 flex items-center gap-1.5">
+                          <Stars value={avg} />
+                          <span className="text-[13px] font-bold text-bean">
+                            {avg.toFixed(1)}
+                          </span>
+                          <span className="text-[12px] text-ink-soft">· {count}명</span>
+                        </div>
+                      ) : (
+                        <p className="mt-1.5 text-[12px] text-ink-soft">
+                          아직 별점이 없어요
+                        </p>
+                      )}
                     </div>
+                  </div>
+
+                  {mine.length > 0 && (
+                    <ul className="mt-3 flex flex-col gap-1.5">
+                      {mine.slice(0, 3).filter((r) => r.comment).map((r) => (
+                        <li
+                          key={r.id}
+                          className="border-l-2 border-line pl-2.5 text-[13px] leading-relaxed"
+                        >
+                          {r.comment}
+                          <span className="ml-1.5 text-[12px] text-ink-soft">
+                            — {r.nickname || '가족'}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   )}
+
                   {v.note && (
-                    <p className="mt-3 border-l-2 border-line pl-2.5 text-[13px] leading-relaxed">
+                    <p className="mt-2 border-l-2 border-line pl-2.5 text-[13px] leading-relaxed text-ink-soft">
                       {v.note}
                     </p>
                   )}
                 </Link>
-                <a
-                  href={v.naverMapUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex min-h-[44px] items-center justify-center border-t border-line text-[13px] font-semibold text-bean active:bg-bean-soft"
-                >
-                  네이버지도로 다시 보기 ↗
-                </a>
+
+                <div className="flex border-t border-line">
+                  <a
+                    href={v.naverMapUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex min-h-[44px] flex-1 items-center justify-center text-[13px] font-semibold text-bean active:bg-bean-soft"
+                  >
+                    지도 ↗
+                  </a>
+                  <button
+                    onClick={() => cancel(v.id, v.name)}
+                    disabled={busy === v.id}
+                    className="flex min-h-[44px] flex-1 items-center justify-center border-l border-line text-[13px] text-ink-soft active:bg-bean-soft disabled:opacity-50"
+                  >
+                    {busy === v.id ? '취소 중…' : '다녀온 곳에서 빼기'}
+                  </button>
+                </div>
               </article>
             </div>
           )

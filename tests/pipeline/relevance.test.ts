@@ -10,6 +10,7 @@ const doc = (title: string, contents = ''): BlogDoc => ({
   url: 'https://blog.naver.com/x',
   blogName: 'b',
   dateTime: new Date('2026-08-19T00:00:00Z'),
+  thumbnail: '',
 })
 
 describe('isRelevant', () => {

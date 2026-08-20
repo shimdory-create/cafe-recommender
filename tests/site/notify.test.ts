@@ -19,6 +19,7 @@ const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe 
   stayDuration: null,
   naverMapUrl: 'https://map.naver.com/p/search/x',
   kakaoPlaceUrl: null,
+  imageUrl: null,
   hotScore: 50,
   finalScore: 25,
   postsPer30: 60,

@@ -16,6 +16,7 @@ const rel = (offsets: number[], name = '테라로사'): BlogDoc[] =>
     url: 'u',
     blogName: 'b',
     dateTime: daysAgo(d),
+    thumbnail: '',
   }))
 
 const unrelated = (n: number): BlogDoc[] =>
@@ -25,6 +26,7 @@ const unrelated = (n: number): BlogDoc[] =>
     url: 'u',
     blogName: 'b',
     dateTime: daysAgo(1),
+    thumbnail: '',
   }))
 
 describe('computeBuzz', () => {

@@ -9,6 +9,8 @@ export interface BlogDoc {
   url: string
   blogName: string
   dateTime: Date
+  /** 카카오 CDN 썸네일 (130x130). 없는 문서도 많다 */
+  thumbnail: string
 }
 
 const ENTITIES: Record<string, string> = {
@@ -47,6 +49,8 @@ export function parseKakaoBlog(payload: unknown): { docs: BlogDoc[]; totalCount:
       url: r.url ?? '',
       blogName: clean(r.blogname ?? ''),
       dateTime: new Date(r.datetime ?? 0),
+      // 카드에 붙일 대표 이미지. 추가 호출 없이 여기서 얻는다.
+      thumbnail: typeof r.thumbnail === 'string' ? r.thumbnail : '',
     }
   })
   return { docs, totalCount: p?.meta?.total_count ?? 0 }

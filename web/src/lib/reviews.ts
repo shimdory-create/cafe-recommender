@@ -90,18 +90,29 @@ export function sortByNewest(reviews: Review[]): Review[] {
   return [...reviews].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 }
 
-/**
- * 방문 기록 토글.
- *
- * 같은 날 같은 카페를 두 번 누르면 취소로 본다 — 잘못 눌렀을 때 되돌릴
- * 길이 없으면 사람은 누르기를 망설인다.
- */
-export function toggleVisit(rows: VisitRow[], kakaoPlaceId: string, visitedOn: string): VisitRow[] {
-  const exists = rows.some((v) => v.kakaoPlaceId === kakaoPlaceId && v.visitedOn === visitedOn)
-  if (exists) {
-    return rows.filter((v) => !(v.kakaoPlaceId === kakaoPlaceId && v.visitedOn === visitedOn))
-  }
+/** 방문 기록 추가. 같은 날 두 번 눌러도 한 건이다 */
+export function addVisit(rows: VisitRow[], kakaoPlaceId: string, visitedOn: string): VisitRow[] {
+  if (rows.some((v) => v.kakaoPlaceId === kakaoPlaceId && v.visitedOn === visitedOn)) return rows
   return [...rows, { kakaoPlaceId, visitedOn }]
+}
+
+/**
+ * 방문 기록 취소. **가장 최근 1건만** 지운다.
+ *
+ * 전부 지우면 작년에 갔던 기록까지 사라진다. 잘못 누른 것을 되돌리는 것이
+ * 목적이므로 마지막 것만 지우는 것이 맞다.
+ *
+ * 날짜를 받지 않는 이유: 취소는 "오늘 누른 것" 만이 아니다. 어제 잘못 누른
+ * 것도 취소해야 하고, 화면은 그 날짜를 모른다.
+ */
+export function removeVisit(rows: VisitRow[], kakaoPlaceId: string): VisitRow[] {
+  const mine = rows
+    .map((v, i) => ({ v, i }))
+    .filter((x) => x.v.kakaoPlaceId === kakaoPlaceId)
+    .sort((a, b) => b.v.visitedOn.localeCompare(a.v.visitedOn))
+  const target = mine[0]
+  if (!target) return rows
+  return rows.filter((_, i) => i !== target.i)
 }
 
 export function todayInSeoul(now = new Date()): string {

@@ -67,6 +67,8 @@ export const CafeSchema = z.object({
   excludeReason: z.string().nullable().optional(),
   /** 일반명사 상호. 골든셋 경계 구간으로 강제 편입된다 (스펙 Layer 2) */
   ambiguousName: z.boolean().default(false),
+  /** 대표 이미지 (카카오 블로그 썸네일 130x130). 매일 갱신되므로 깨지면 회복된다 */
+  imageUrl: z.string().nullable().optional(),
   attributes: CafeAttributesSchema.nullable(),
   tags: z.array(z.string()).default([]),
 })
@@ -193,6 +195,8 @@ export const SiteCafeSchema = z.object({
 
   naverMapUrl: z.string(),
   kakaoPlaceUrl: z.string().nullable(),
+  /** 대표 이미지 (130x130 정사각). 없으면 null */
+  imageUrl: z.string().nullable(),
 
   hotScore: z.number(),
   /** 화제도 x 가족 적합도. 홈 피드 정렬 기준 */
@@ -230,6 +234,10 @@ export const SiteVisitedSchema = z.object({
   tags: z.array(z.string()),
   scale: z.enum(['대형', '중형', '소형']).nullable(),
   naverMapUrl: z.string(),
+  imageUrl: z.string().nullable(),
+  /** 가족 별점 요약 (빌드 시점). 화면은 실시간 값으로 덮어쓴다 */
+  ratingAvg: z.number(),
+  ratingCount: z.number().int(),
 })
 export type SiteVisited = z.infer<typeof SiteVisitedSchema>
 

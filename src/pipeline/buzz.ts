@@ -67,6 +67,25 @@ export function computeBuzz(input: {
   }
 }
 
+/**
+ * 카드에 붙일 대표 이미지를 고른다.
+ *
+ * **관련성 판정을 통과한 문서에서만 고른다.** 엉뚱한 사진 한 장은 텍스트
+ * 오류보다 신뢰를 더 깎는다 — 상호명과 카페 문맥어가 함께 있는 글에
+ * 올라온 사진이어야 그 카페 사진일 확률이 높다.
+ *
+ * 카카오 썸네일은 130x130 정사각이다. 카드 상단의 큰 사진으로 늘리면
+ * 뭉개지므로 상호명 옆 작은 정사각으로만 쓴다 (스펙 10.4).
+ */
+export function pickThumbnail(input: { docs: BlogDoc[]; cafeName: string }): string {
+  for (const d of input.docs) {
+    if (!d.thumbnail) continue
+    if (!isRelevant(d, input.cafeName)) continue
+    return d.thumbnail
+  }
+  return ''
+}
+
 export interface Layer2Options {
   now: Date
   minPrecision?: number

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
-  parseReviewInput, summarize, sortByNewest, toggleVisit, todayInSeoul,
-  MAX_COMMENT, MAX_NICKNAME, type Review,
+  parseReviewInput, summarize, sortByNewest, addVisit, removeVisit, todayInSeoul,
+  MAX_COMMENT, MAX_NICKNAME, type Review, type VisitRow,
 } from './reviews'
 
 const NOW = new Date('2026-08-20T14:30:00Z')
@@ -119,38 +119,51 @@ describe('sortByNewest', () => {
   })
 })
 
-describe('toggleVisit', () => {
+describe('addVisit', () => {
   it('없으면 추가한다', () => {
-    expect(toggleVisit([], '1', '2026-08-20')).toEqual([
+    expect(addVisit([], '1', '2026-08-20')).toEqual([
       { kakaoPlaceId: '1', visitedOn: '2026-08-20' },
     ])
   })
 
-  it('같은 날 다시 누르면 취소한다', () => {
-    // 잘못 눌렀을 때 되돌릴 길이 없으면 사람은 누르기를 망설인다
-    const rows = [{ kakaoPlaceId: '1', visitedOn: '2026-08-20' }]
-    expect(toggleVisit(rows, '1', '2026-08-20')).toEqual([])
+  it('같은 날 두 번 눌러도 한 건이다', () => {
+    const rows: VisitRow[] = [{ kakaoPlaceId: '1', visitedOn: '2026-08-20' }]
+    expect(addVisit(rows, '1', '2026-08-20')).toEqual(rows)
   })
 
   it('다른 날 방문은 따로 쌓인다', () => {
-    const rows = [{ kakaoPlaceId: '1', visitedOn: '2026-05-01' }]
-    expect(toggleVisit(rows, '1', '2026-08-20')).toHaveLength(2)
+    const rows: VisitRow[] = [{ kakaoPlaceId: '1', visitedOn: '2026-05-01' }]
+    expect(addVisit(rows, '1', '2026-08-20')).toHaveLength(2)
+  })
+})
+
+describe('removeVisit', () => {
+  it('가장 최근 방문만 지운다', () => {
+    // 전부 지우면 작년에 갔던 기록까지 사라진다
+    const rows: VisitRow[] = [
+      { kakaoPlaceId: '1', visitedOn: '2025-03-01' },
+      { kakaoPlaceId: '1', visitedOn: '2026-08-20' },
+    ]
+    expect(removeVisit(rows, '1')).toEqual([{ kakaoPlaceId: '1', visitedOn: '2025-03-01' }])
+  })
+
+  it('어제 잘못 누른 것도 취소된다 (날짜를 받지 않는다)', () => {
+    const rows: VisitRow[] = [{ kakaoPlaceId: '1', visitedOn: '2026-08-19' }]
+    expect(removeVisit(rows, '1')).toEqual([])
   })
 
   it('다른 카페의 기록은 건드리지 않는다', () => {
-    const rows = [
+    const rows: VisitRow[] = [
       { kakaoPlaceId: '1', visitedOn: '2026-08-20' },
-      { kakaoPlaceId: '2', visitedOn: '2026-08-20' },
+      { kakaoPlaceId: '2', visitedOn: '2026-08-20', note: '빵 맛집' },
     ]
-    expect(toggleVisit(rows, '1', '2026-08-20')).toEqual([
-      { kakaoPlaceId: '2', visitedOn: '2026-08-20' },
-    ])
+    const next = removeVisit(rows, '1')
+    expect(next).toHaveLength(1)
+    expect(next[0]!.note).toBe('빵 맛집')
   })
 
-  it('메모가 달린 기록도 보존한다', () => {
-    const rows = [{ kakaoPlaceId: '2', visitedOn: '2026-05-01', note: '빵 맛집' }]
-    const next = toggleVisit(rows, '1', '2026-08-20')
-    expect(next.find((v) => v.kakaoPlaceId === '2')!.note).toBe('빵 맛집')
+  it('기록이 없으면 그대로 둔다', () => {
+    expect(removeVisit([], '1')).toEqual([])
   })
 })
 

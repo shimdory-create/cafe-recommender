@@ -10,6 +10,9 @@ const built = (over: Partial<SiteVisited> & { id: string }): SiteVisited => ({
   tags: ['대형카페'],
   scale: '대형',
   naverMapUrl: 'https://map.naver.com/p/search/x',
+  imageUrl: null,
+  ratingAvg: 0,
+  ratingCount: 0,
   ...over,
 })
 
@@ -21,6 +24,7 @@ const known = (ids: string[]): Map<string, KnownCafe> =>
     scale: '대형',
     tags: ['대형카페', '뷰맛집'],
     naverMapUrl: 'https://map.naver.com/p/search/y',
+    imageUrl: null,
   }]))
 
 describe('mergeVisits', () => {
