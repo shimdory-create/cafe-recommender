@@ -47,6 +47,10 @@ export interface DailyBuzzResult {
   dropped: number
   /** 대표 이미지를 새로 얻은 카페 수 */
   images: number
+  /** 매일 재는 추천 대상 수 */
+  active: number
+  /** 오늘 회전분으로 잡힌 판정 대기 수 */
+  rotated: number
 }
 
 /**
@@ -83,6 +87,7 @@ export async function runDailyBuzz(
     .slice(0, opts.pendingPerDay ?? PENDING_PER_DAY)
 
   const targets = [...active, ...pending].slice(0, opts.limit ?? Infinity)
+  const activeTargets = targets.filter((c) => c.status === 'active').length
   const capturedAt = now.toISOString().slice(0, 10)
   let updated = 0
   let failed = 0
@@ -129,5 +134,9 @@ export async function runDailyBuzz(
   await store.writeBuzz(kept)
   if (images > 0) await store.writeCafes(cafes)
   if (updated > 0) await recordSuccess(store, 'kakao-blog', now)
-  return { updated, failed, dropped, images }
+  return {
+    updated, failed, dropped, images,
+    active: activeTargets,
+    rotated: targets.length - activeTargets,
+  }
 }

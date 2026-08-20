@@ -71,10 +71,13 @@ async function main() {
     case 'buzz': {
       const ctx = createContext()
       const limit = numFlag(rest, 'limit')
+      // 판정 대기는 회전식으로 잰다. 기본값은 daily-buzz.ts 의 PENDING_PER_DAY.
+      const pendingPerDay = numFlag(rest, 'pending')
       console.log(`화제량 수집 시작${limit ? ` (최대 ${limit}곳)` : ''}`)
-      const r = await runDailyBuzz(ctx, { limit })
+      const r = await runDailyBuzz(ctx, { limit, pendingPerDay })
       console.log(
-        `  갱신 ${r.updated}곳 / 실패 ${r.failed}곳`
+        `  추천 대상 ${r.active}곳 + 회전분 ${r.rotated}곳`
+        + ` -> 갱신 ${r.updated}곳 / 실패 ${r.failed}곳`
         + ` / 정리 ${r.dropped}건 / 대표 이미지 ${r.images}곳`,
       )
       break
