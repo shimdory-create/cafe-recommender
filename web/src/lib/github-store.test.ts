@@ -109,7 +109,7 @@ describe('updateJsonFile', () => {
     const put = calls.find((c) => c.method === 'PUT')!.body as Record<string, string>
     expect(put.message).toBe('메시지')
     expect(put.sha).toBe('sha1')
-    expect(Buffer.from(put.content, 'base64').toString('utf8'))
+    expect(Buffer.from(put.content!, 'base64').toString('utf8'))
       .toBe(`${JSON.stringify([{ id: 'a' }, { id: 'b' }], null, 2)}\n`)
   })
 
