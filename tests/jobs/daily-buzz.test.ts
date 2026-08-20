@@ -118,12 +118,23 @@ describe('runDailyBuzz', () => {
     expect(r.updated).toBe(1)
   })
 
-  it('180일보다 오래된 스냅샷을 정리한다', async () => {
-    const old = buzzRow('1', { capturedAt: '2025-01-01' })
-    const h = harness([cafe('1')], [old])
+  it('카페별 최신 1건만 남긴다', async () => {
+    // 180일 롤링은 카페 6,216곳에서 한 파일 403MB 가 되어 폐기했다.
+    // 이력을 읽는 코드도 없다 (가속도는 현재 50건 창에서 계산).
+    const stale = buzzRow('1', { capturedAt: '2025-01-01' })
+    const h = harness([cafe('1')], [stale])
     const r = await runDailyBuzz(h.deps)
     expect(r.dropped).toBe(1)
-    expect(h.saved().some((x) => x.capturedAt === '2025-01-01')).toBe(false)
+    expect(h.saved()).toHaveLength(1)
+    expect(h.saved()[0]!.capturedAt).toBe('2026-08-20')
+  })
+
+  it('다른 카페의 스냅샷은 지우지 않는다', async () => {
+    const other = buzzRow('99', { capturedAt: '2026-08-10' })
+    const h = harness([cafe('1')], [other])
+    await runDailyBuzz(h.deps)
+    expect(h.saved()).toHaveLength(2)
+    expect(h.saved().some((x) => x.kakaoPlaceId === '99')).toBe(true)
   })
 
   it('제외된 카페는 조회하지 않는다', async () => {
