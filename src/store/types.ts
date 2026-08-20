@@ -4,6 +4,7 @@ import type {
   Visit,
   Suggestion,
   GoldenLabel,
+  Review,
   Health,
   BlacklistEntry,
 } from '../schema.js'
@@ -26,6 +27,9 @@ export interface Store {
 
   readSuggestions(): Promise<Suggestion[]>
   writeSuggestions(rows: Suggestion[]): Promise<void>
+
+  /** 가족 별점. 웹앱이 GitHub 에 쓰고 파이프라인이 읽는다 (쓰기는 웹 담당) */
+  readReviews(): Promise<Review[]>
 
   readGolden(): Promise<GoldenLabel[]>
   writeGolden(rows: GoldenLabel[]): Promise<void>

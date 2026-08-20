@@ -1,12 +1,13 @@
 import { driveMinutesOf } from '../jobs/drive-times.js'
 import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
-import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type SiteVisited, type Suggestion, type Visit } from '../schema.js'
+import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type SiteVisited, type Suggestion, type Visit, type Review } from '../schema.js'
 
 export interface PayloadInput {
   cafes: Cafe[]
   buzz: BuzzSnapshot[]
   visits: Visit[]
+  reviews?: Review[]
   suggestions: Suggestion[]
   weekOf: string
   now: Date
@@ -46,7 +47,14 @@ export function trendOf(
 }
 
 export function buildSitePayload(input: PayloadInput): SitePayload {
-  const { cafes, buzz, visits, suggestions, weekOf, now } = input
+  const { cafes, buzz, visits, suggestions, weekOf, now, reviews = [] } = input
+
+  // 카페별 별점 요약
+  const rated = new Map<string, { sum: number; n: number }>()
+  for (const r of reviews) {
+    const cur = rated.get(r.kakaoPlaceId) ?? { sum: 0, n: 0 }
+    rated.set(r.kakaoPlaceId, { sum: cur.sum + r.rating, n: cur.n + 1 })
+  }
 
   const latestBuzz = new Map<string, BuzzSnapshot>()
   for (const b of buzz) {
@@ -107,6 +115,9 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       postsPer30: b.postsPer30,
       acceleration: b.acceleration,
       trend: trendOf(b),
+      ratingAvg: Number(((rated.get(c.kakaoPlaceId)?.sum ?? 0)
+        / (rated.get(c.kakaoPlaceId)?.n || 1)).toFixed(1)),
+      ratingCount: rated.get(c.kakaoPlaceId)?.n ?? 0,
       cityOnly: a.parkingGrade === 'C',
       visitedOn: lastVisit.get(c.kakaoPlaceId) ?? null,
     })

@@ -255,12 +255,12 @@ async function main() {
       const store = createJsonStore(process.env.DATA_DIR ?? 'data')
       const out = flag(rest, 'out') || 'web/src/generated/site.json'
       const now = new Date()
-      const [cafes, buzz, visits, suggestions] = await Promise.all([
+      const [cafes, buzz, visits, suggestions, reviews] = await Promise.all([
         store.readCafes(), store.readBuzz(),
-        store.readVisits(), store.readSuggestions(),
+        store.readVisits(), store.readSuggestions(), store.readReviews(),
       ])
       const payload = buildSitePayload({
-        cafes, buzz, visits, suggestions, weekOf: mondayOf(now), now,
+        cafes, buzz, visits, suggestions, reviews, weekOf: mondayOf(now), now,
       })
       await mkdir(dirname(out), { recursive: true })
       // 2칸 들여쓰기 + 끝 개행 — git diff 를 깨끗하게 (스펙 9절)

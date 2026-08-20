@@ -61,11 +61,19 @@ export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
             )}
             {cafe.name}
           </h2>
-          {visited && (
-            <span className="mt-0.5 shrink-0 rounded-full bg-line px-2 py-0.5 text-[11px] text-ink-soft">
-              다녀옴
-            </span>
-          )}
+          <span className="mt-0.5 flex shrink-0 items-center gap-1.5">
+            {/* 우리 가족 별점이 있으면 블로그 화제량보다 먼저 보인다 */}
+            {cafe.ratingCount > 0 && (
+              <span className="text-[13px] font-bold text-bean">
+                ★ {cafe.ratingAvg.toFixed(1)}
+              </span>
+            )}
+            {visited && (
+              <span className="rounded-full bg-line px-2 py-0.5 text-[11px] text-ink-soft">
+                다녀옴
+              </span>
+            )}
+          </span>
         </div>
 
         <p className="mt-1 text-[13px] text-ink-soft">

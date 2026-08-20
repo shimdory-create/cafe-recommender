@@ -4,6 +4,7 @@ import {
   byId, driveLabel, MENU_LABEL, PARKING_LABEL, payload, recentlyVisited,
 } from '@/lib/site'
 import { Badge } from '../../cafe-card'
+import { ReviewPanel } from './review-panel'
 
 export function generateStaticParams() {
   return payload.cafes.map((c) => ({ id: c.id }))
@@ -74,7 +75,10 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
         네이버지도로 열기 ↗
       </a>
 
-      <dl className="mt-5 overflow-hidden rounded-2xl border border-line bg-card">
+      {/* 다녀왔어요 · 별점 · 한 줄 — 가족 누구나 (스펙 10절 v3.3) */}
+      <ReviewPanel cafeId={cafe.id} initialVisited={cafe.visitedOn !== null} />
+
+      <dl className="mt-6 overflow-hidden rounded-2xl border border-line bg-card">
         {rows.map(([k, v]) => (
           <div key={k} className="flex justify-between gap-4 border-b border-line px-4 py-3 last:border-0">
             <dt className="shrink-0 text-[13px] text-ink-soft">{k}</dt>

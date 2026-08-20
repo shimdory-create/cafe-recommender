@@ -111,11 +111,14 @@ export type Visit = z.infer<typeof VisitSchema>
 export const ReviewSchema = z.object({
   id: z.string().min(1),
   kakaoPlaceId: z.string().min(1),
-  /** 1~5. 반점 없음 — 4인 가족에게 4.5 와 4 의 구분은 의미가 없다 */
-  rating: z.number().int().min(1).max(5),
+  /** 0.5~5.0, 반개 단위. 별 5개에 반개까지 */
+  rating: z.number().min(0.5).max(5).refine((v) => v * 2 === Math.round(v * 2), {
+    message: '별점은 반개 단위여야 한다',
+  }),
   /** 별명. 비어 있으면 "가족" 으로 표시한다 */
   nickname: z.string().max(20).default(''),
-  comment: z.string().max(300).default(''),
+  /** 아주 짧은 한 줄. 길게 쓰라고 하면 아무도 쓰지 않는다 */
+  comment: z.string().max(100).default(''),
   createdAt: z.string(),
 })
 export type Review = z.infer<typeof ReviewSchema>
@@ -205,6 +208,9 @@ export const SiteCafeSchema = z.object({
    *   unknown 창이 잘려 비교할 수 없다. 늘었다고 말하지 않는다
    */
   trend: z.enum(['rising', 'steady', 'unknown']),
+  /** 가족 별점 (없으면 0). 카드에 붙이는 우리 집 신호 */
+  ratingAvg: z.number(),
+  ratingCount: z.number().int(),
   /** 주차 C — 도심 모드에서만 노출한다 (스펙 7.3) */
   cityOnly: z.boolean(),
   visitedOn: z.string().nullable(),

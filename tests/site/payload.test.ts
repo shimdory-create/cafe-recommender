@@ -265,3 +265,40 @@ describe('다녀온 곳', () => {
     expect(build([cafe('1')], [buzz('1')]).visited).toEqual([])
   })
 })
+
+describe('가족 별점', () => {
+  const rv = (kakaoPlaceId: string, rating: number) => ({
+    id: `r-${kakaoPlaceId}-${rating}`,
+    kakaoPlaceId,
+    rating,
+    nickname: '',
+    comment: '',
+    createdAt: '2026-08-20T00:00:00.000Z',
+  })
+
+  it('카페별 평균과 개수를 낸다', () => {
+    const p = build([cafe('1')], [buzz('1')], { reviews: [rv('1', 5), rv('1', 4)] })
+    expect(p.cafes[0]!.ratingAvg).toBe(4.5)
+    expect(p.cafes[0]!.ratingCount).toBe(2)
+  })
+
+  it('반개 별점도 평균에 들어간다', () => {
+    const p = build([cafe('1')], [buzz('1')], { reviews: [rv('1', 4.5), rv('1', 3.5)] })
+    expect(p.cafes[0]!.ratingAvg).toBe(4)
+  })
+
+  it('별점이 없으면 0 이다 (0으로 나누지 않는다)', () => {
+    const p = build([cafe('1')], [buzz('1')])
+    expect(p.cafes[0]!.ratingAvg).toBe(0)
+    expect(p.cafes[0]!.ratingCount).toBe(0)
+  })
+
+  it('다른 카페의 별점을 섞지 않는다', () => {
+    const p = build([cafe('1'), cafe('2')], [buzz('1'), buzz('2')], {
+      reviews: [rv('1', 5), rv('2', 1)],
+    })
+    const byId = new Map(p.cafes.map((c) => [c.id, c]))
+    expect(byId.get('1')!.ratingAvg).toBe(5)
+    expect(byId.get('2')!.ratingAvg).toBe(1)
+  })
+})

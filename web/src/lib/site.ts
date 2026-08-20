@@ -26,7 +26,7 @@ export type ListRow = Pick<
   SiteCafe,
   'id' | 'name' | 'sigungu' | 'driveMinutes' | 'scale' | 'parkingGrade'
   | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'hotScore' | 'finalScore'
-  | 'cityOnly' | 'visitedOn'
+  | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -47,6 +47,8 @@ export function toListRow(c: SiteCafe): ListRow {
     naverMapUrl: c.naverMapUrl,
     hotScore: c.hotScore,
     finalScore: c.finalScore,
+    ratingAvg: c.ratingAvg,
+    ratingCount: c.ratingCount,
     cityOnly: c.cityOnly,
     visitedOn: c.visitedOn,
   }

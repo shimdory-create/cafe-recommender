@@ -24,6 +24,8 @@ const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe 
   postsPer30: 60,
   acceleration: 1.5,
   trend: 'steady',
+  ratingAvg: 0,
+  ratingCount: 0,
   cityOnly: false,
   visitedOn: null,
   ...over,

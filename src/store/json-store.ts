@@ -8,6 +8,7 @@ import {
   VisitSchema,
   SuggestionSchema,
   GoldenLabelSchema,
+  ReviewSchema,
   HealthSchema,
   BlacklistEntrySchema,
 } from '../schema.js'
@@ -77,6 +78,7 @@ export function createJsonStore(dataDir: string): Store {
     readSuggestions: () => readArray(dataDir, 'suggestions.json', SuggestionSchema),
     writeSuggestions: (r) => writeArray(dataDir, 'suggestions.json', r),
 
+    readReviews: () => readArray(dataDir, 'reviews.json', ReviewSchema),
     readGolden: () => readArray(dataDir, 'golden.json', GoldenLabelSchema),
     writeGolden: (r) => writeArray(dataDir, 'golden.json', r),
 
