@@ -66,6 +66,9 @@ export function createKakaoLocal(deps: KakaoLocalDeps) {
      * 키워드로 장소 검색. 페이지당 15건, 최대 3페이지(45건)가 카카오 상한이다
      * (실측: pageable_count 45). 이 상한 때문에 도심 전수 수집이 불가능해서
      * 그물 C(블로그 큐레이션)가 필요하다.
+     *
+     * 일일 쿼터 100,000 (2026-08-20 콘솔 확인). 월 1회 전량 스캔에
+     * 약 2,500 건을 쓰므로 여유가 매우 크다.
      */
     async searchKeyword(query: string, page: number) {
       const url =
