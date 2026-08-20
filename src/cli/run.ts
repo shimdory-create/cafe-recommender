@@ -28,6 +28,7 @@ import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
 import { runDriveTimes, driveMinutesOf } from '../jobs/drive-times.js'
 import { runLabel, runLabelReport } from './label.js'
 import { buildSitePayload } from '../site/payload.js'
+import { detectAnomalies, formatWatch } from '../jobs/usage-watch.js'
 import { buildNotifyText, KAKAO_TEXT_LIMIT } from '../site/notify.js'
 import { mondayOf } from '../jobs/weekly-suggest.js'
 import { mkdir, writeFile } from 'node:fs/promises'
@@ -210,6 +211,23 @@ async function main() {
       break
     }
 
+    case 'watch': {
+      // 사용량 이상 감시. **API 키를 요구하지 않는다** — 감시가 키에 의존하면
+      // 키가 문제일 때 감시부터 죽는다.
+      const store = createJsonStore(process.env.DATA_DIR ?? 'data')
+      const now = new Date()
+      const [cafes, buzz, health] = await Promise.all([
+        store.readCafes(), store.readBuzz(), store.readHealth(),
+      ])
+      const input = { cafes, buzz, health, now }
+      const anomalies = detectAnomalies(input)
+      console.log(formatWatch(anomalies, input))
+      // alert 가 하나라도 있으면 실패로 끝낸다 — GitHub Actions 가 실패를
+      // 계정 메일로 알려준다. PC 가 꺼져 있어도 닿는 유일한 경로다.
+      if (anomalies.some((a) => a.level === 'alert')) process.exitCode = 1
+      break
+    }
+
     case 'health': {
       const ctx = createContext()
       const rows = await ctx.store.readHealth()
@@ -351,7 +369,7 @@ async function main() {
     default:
       die(
         '사용법: tsx src/cli/run.ts'
-          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|hide>',
+          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|hide>',
       )
   }
 }
