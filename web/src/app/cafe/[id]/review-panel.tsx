@@ -74,6 +74,8 @@ interface Loaded {
   reviews: Review[]
   summary: RatingSummary
   enabled: boolean
+  /** 읽기가 성공했는가. false 면 빈 목록은 "없음" 이 아니라 "못 읽음" 이다 */
+  ok: boolean
 }
 
 export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initialVisited: boolean }) {
@@ -93,7 +95,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
     fetch(`/api/reviews?cafe=${encodeURIComponent(cafeId)}`)
       .then((r) => r.json())
       .then(setData)
-      .catch(() => setData({ reviews: [], summary: { count: 0, average: 0 }, enabled: false }))
+      .catch(() => setData({ reviews: [], summary: { count: 0, average: 0 }, enabled: false, ok: false }))
 
     // 방문 여부도 실시간으로 읽는다. 빌드 타임 값만 쓰면 다른 가족이 방금
     // 누른 체크가 보이지 않아 두 번 누르게 된다.
@@ -126,6 +128,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
       // 누른 사람에게는 즉시 보인다. 다른 가족에게는 30초 안에.
       setData((prev) => ({
         enabled: true,
+        ok: true,
         summary: body.summary,
         reviews: [body.review, ...(prev?.reviews ?? [])],
       }))
@@ -225,6 +228,12 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
             </p>
           )}
         </div>
+      )}
+
+      {data && data.ok === false && enabled && (
+        <p className="mt-3 text-[13px] text-ink-soft">
+          지금은 남긴 후기를 불러올 수 없어요. 잠시 뒤 새로 고쳐보세요.
+        </p>
       )}
 
       {data && data.reviews.length > 0 && (

@@ -17,11 +17,17 @@ export async function GET(req: Request) {
       reviews: sortByNewest(mine),
       summary: summarize(mine),
       enabled: store.enabled,
+      ok: true,
     })
   } catch (e) {
-    // 읽기 실패가 화면을 깨뜨리지 않게 한다 (스펙 6.6 우아한 저하)
+    // 읽기 실패가 화면을 깨뜨리지 않게 한다 (스펙 6.6 우아한 저하).
+    // 단 `ok: false` 로 알린다 — 빈 목록을 "후기가 없다" 로 읽으면 이미 남긴
+    // 사람이 다시 남겨 중복이 생긴다.
     return NextResponse.json(
-      { reviews: [], summary: { count: 0, average: 0 }, enabled: true, error: (e as Error).message },
+      {
+        reviews: [], summary: { count: 0, average: 0 }, enabled: true, ok: false,
+        error: (e as Error).message,
+      },
       { status: 200 },
     )
   }
