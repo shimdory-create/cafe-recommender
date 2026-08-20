@@ -17,7 +17,9 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run classify -- --limit 200
+      # --redo-stale: 프롬프트를 고치면 낡은 판본을 먼저 갱신한다.
+      # 새 카페를 늘리는 것보다 판정을 일관되게 유지하는 것이 급하다.
+      - run: npm run classify -- --limit 200 --redo-stale
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
