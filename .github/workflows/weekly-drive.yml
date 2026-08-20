@@ -34,11 +34,14 @@ jobs:
       - run: npm run drive -- --limit 2000
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+      # 표시용 페이로드를 함께 갱신한다 — Vercel 은 web/ 만 빌드하므로
+      # 이 파일이 최신이어야 사이트가 최신이 된다
+      - run: npm run site
       - name: 데이터 커밋
         run: |
           git config user.name  "cafe-bot"
           git config user.email "cafe-bot@users.noreply.github.com"
           git pull --rebase origin "$(git rev-parse --abbrev-ref HEAD)"
-          git add data/
+          git add data/ web/src/generated/
           git diff --staged --quiet || git commit -m "data: 실주행 시간 $(date -u +%Y-%m-%d)"
           git push
