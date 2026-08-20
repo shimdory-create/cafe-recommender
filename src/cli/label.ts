@@ -140,7 +140,15 @@ export async function runLabel(
   const print = deps.print ?? ((s: string) => console.log(s))
 
   const rl = deps.ask ? null : createInterface({ input: stdin, output: stdout })
-  const ask = deps.ask ?? (async (p: string) => (await rl!.question(p)).trim().toLowerCase())
+  const ask = deps.ask ?? (async (p: string) => {
+    try {
+      return (await rl!.question(p)).trim().toLowerCase()
+    } catch {
+      // 입력 스트림이 닫혔다 (Ctrl+C, 파이프 EOF). 스택 트레이스를 토하지
+      // 말고 중단으로 취급한다. 여기까지의 라벨은 이미 저장되어 있다.
+      return 'q'
+    }
+  })
 
   try {
     const [cafes, buzz, visits, golden] = await Promise.all([
