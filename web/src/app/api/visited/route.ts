@@ -2,13 +2,23 @@ import { NextResponse } from 'next/server'
 import { writeStore } from '@/lib/store'
 import { addVisit, removeVisit, todayInSeoul, VISITS_PATH, type VisitRow } from '@/lib/reviews'
 
+/**
+ * `ok` 는 **이 빈 배열이 진짜 빈 기록인지** 를 알려준다.
+ *
+ * 토큰이 없거나 GitHub 읽기가 실패해도 200 과 `visits: []` 가 나간다.
+ * 화면이 그것을 실제 기록으로 믿으면 **다녀온 곳 탭이 통째로 비어 보인다** —
+ * 가족에게는 기록이 지워진 것으로 보인다. 그래서 실패는 실패라고 말한다.
+ */
 export async function GET() {
   const store = await writeStore()
+  if (!store.enabled) {
+    return NextResponse.json({ visits: [], enabled: false, ok: false })
+  }
   try {
     const rows = await store.read<VisitRow>(VISITS_PATH, 30)
-    return NextResponse.json({ visits: rows, enabled: store.enabled })
+    return NextResponse.json({ visits: rows, enabled: true, ok: true })
   } catch (e) {
-    return NextResponse.json({ visits: [], enabled: true, error: (e as Error).message })
+    return NextResponse.json({ visits: [], enabled: true, ok: false, error: (e as Error).message })
   }
 }
 

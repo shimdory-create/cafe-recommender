@@ -37,9 +37,15 @@ export interface KnownCafe {
  * 반대로 취소된 기록은 `live` 에 없으므로 빠져야 한다. 그래서 `live` 를
  * 받았을 때는 **`live` 에 있는 것만** 남긴다.
  */
+export interface VisitLite {
+  kakaoPlaceId: string
+  visitedOn: string
+  note?: string
+}
+
 export function mergeVisits(
   built: SiteVisited[],
-  live: { kakaoPlaceId: string; visitedOn: string; note?: string }[],
+  live: VisitLite[],
   known: Map<string, KnownCafe>,
   hasLive = true,
 ): SiteVisited[] {
@@ -88,7 +94,11 @@ export function VisitedList({
     const map = new Map(known.map((c) => [c.id, c]))
     fetch('/api/visited')
       .then((r) => r.json())
-      .then((body) => setRows(mergeVisits(built, body.visits ?? [], map, true)))
+      .then((body: { visits?: VisitLite[]; ok?: boolean }) => {
+        // `ok` 가 아니면 읽기가 실패한 것이다. 빈 배열을 진짜 기록으로 믿으면
+        // 기록이 지워진 것처럼 보인다 — 그때는 빌드 타임 기록을 그대로 쓴다.
+        setRows(mergeVisits(built, body.visits ?? [], map, body.ok === true))
+      })
       .catch(() => {
         // 오프라인이면 빌드 타임 기록만 보여준다 (스펙 6.6 우아한 저하)
       })

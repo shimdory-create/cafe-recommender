@@ -36,13 +36,16 @@ describe('mergeVisits', () => {
     expect(rows[0]!.sigungu).toBe('김포시')
   })
 
-  it('빌드 타임 기록과 실시간 기록을 함께 보여준다', () => {
+  it('실시간 기록에 없는 것은 취소된 것으로 본다', () => {
+    // 빌드 타임 목록과 실시간 기록은 **같은 저장소**에서 나온다. 따라서
+    // 실시간에 없다는 것은 취소되었다는 뜻이다. 합집합으로 두면 취소를 눌러도
+    // 다음 배포까지 카드가 남는다 (실측 버그).
     const rows = mergeVisits(
       [built({ id: 'old' })],
       [{ kakaoPlaceId: 'new', visitedOn: '2026-08-21' }],
       known(['new']),
     )
-    expect(rows.map((r) => r.id)).toEqual(['new', 'old'])
+    expect(rows.map((r) => r.id)).toEqual(['new'])
   })
 
   it('같은 카페면 더 최근 방문만 남긴다', () => {
@@ -55,19 +58,31 @@ describe('mergeVisits', () => {
     expect(rows[0]!.visitedOn).toBe('2026-08-21')
   })
 
-  it('실시간 기록이 더 오래되면 무시한다', () => {
+  it('최근 방문만 취소되면 그 이전 방문 날짜로 돌아간다', () => {
+    // 취소는 가장 최근 1건만 지운다. 작년에 한 번 갔던 기록은 남아야 한다.
     const rows = mergeVisits(
       [built({ id: '1', visitedOn: '2026-08-16' })],
       [{ kakaoPlaceId: '1', visitedOn: '2026-01-01' }],
       known(['1']),
     )
-    expect(rows[0]!.visitedOn).toBe('2026-08-16')
+    expect(rows[0]!.visitedOn).toBe('2026-01-01')
   })
 
   it('게이트에서 빠진 카페도 기록은 남는다', () => {
     // known 에 없어도 빌드 타임 기록에 있으면 이름을 안다
-    const rows = mergeVisits([built({ id: 'gone', name: '없어진카페' })], [], known([]))
+    const rows = mergeVisits(
+      [built({ id: 'gone', name: '없어진카페' })],
+      [{ kakaoPlaceId: 'gone', visitedOn: '2026-05-01' }],
+      known([]),
+    )
     expect(rows[0]!.name).toBe('없어진카페')
+  })
+
+  it('읽기가 실패하면 빌드 타임 기록을 지우지 않는다', () => {
+    // 토큰이 없거나 GitHub 읽기가 실패하면 빈 배열이 온다. 그것을 믿으면
+    // 가족에게는 기록이 통째로 지워진 것으로 보인다.
+    const rows = mergeVisits([built({ id: 'a' }), built({ id: 'b' })], [], known([]), false)
+    expect(rows.map((r) => r.id)).toEqual(['a', 'b'])
   })
 
   it('이름을 모르는 카페는 띄우지 않는다 (빈 카드를 만들지 않는다)', () => {
@@ -82,7 +97,11 @@ describe('mergeVisits', () => {
         built({ id: 'b', visitedOn: '2026-08-01' }),
         built({ id: 'c', visitedOn: '2026-06-01' }),
       ],
-      [],
+      [
+        { kakaoPlaceId: 'a', visitedOn: '2026-03-01' },
+        { kakaoPlaceId: 'b', visitedOn: '2026-08-01' },
+        { kakaoPlaceId: 'c', visitedOn: '2026-06-01' },
+      ],
       known([]),
     )
     expect(rows.map((r) => r.id)).toEqual(['b', 'c', 'a'])

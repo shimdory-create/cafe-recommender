@@ -36,7 +36,9 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
     // 시점이라, 체크하고 홈에 돌아오면 그 카페가 그대로 1위에 남는다.
     fetch('/api/visited')
       .then((r) => r.json())
-      .then((body: { visits?: { kakaoPlaceId: string }[] }) => {
+      .then((body: { visits?: { kakaoPlaceId: string }[]; ok?: boolean }) => {
+        // 읽기 실패의 빈 배열과 진짜 빈 기록을 구분한다 (`ok`).
+        if (body.ok !== true) return
         setVisited(new Set((body.visits ?? []).map((v) => v.kakaoPlaceId)))
       })
       .catch(() => {
