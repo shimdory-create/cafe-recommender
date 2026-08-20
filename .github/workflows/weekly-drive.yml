@@ -45,7 +45,21 @@ jobs:
         run: |
           git config user.name  "cafe-bot"
           git config user.email "cafe-bot@users.noreply.github.com"
-          git pull --rebase origin "$(git rev-parse --abbrev-ref HEAD)"
+          # 순서가 중요하다. 잡이 방금 data/ 를 고쳐놨으므로 먼저 커밋해야 한다 —
+          # 커밋 전에 pull --rebase 를 하면 "cannot pull with rebase: You have
+          # unstaged changes" 로 죽는다 (실측: 다섯 워크플로 전부 이 지점에서 실패).
           git add data/ web/src/generated/
-          git diff --staged --quiet || git commit -m "data: 실주행 시간 $(date -u +%Y-%m-%d)"
-          git push
+          if git diff --staged --quiet; then
+            echo "변경 없음"
+            exit 0
+          fi
+          git commit -m "data: 실주행 시간 $(date -u +%Y-%m-%d)"
+          # 웹앱이 별점·방문을 같은 브랜치에 커밋하므로 그 사이에 원격이 앞서
+          # 있을 수 있다. 세 번까지 다시 붙인다.
+          BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin "$BRANCH" && git push && exit 0
+            echo "재시도 $i"
+            sleep 5
+          done
+          exit 1
