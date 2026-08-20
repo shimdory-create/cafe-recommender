@@ -16,6 +16,7 @@
  */
 import { createContext, flag, numFlag } from './context.js'
 import { createJsonStore } from '../store/json-store.js'
+import { withDataLock, LockBusyError } from '../store/lock.js'
 import { resolveCafe, printCandidates } from './resolve.js'
 import { scanTargets, REGIONS } from '../config/regions.js'
 import { runDiscover } from '../jobs/weekly-discover.js'
@@ -324,4 +325,27 @@ async function main() {
   }
 }
 
-await main()
+/**
+ * data/ 를 고치는 명령은 락을 잡는다.
+ *
+ * 잡들이 각자 cafes.json 전체를 읽고 고쳐서 다시 쓰므로, 두 개가 겹치면
+ * 나중에 쓴 쪽이 앞선 쪽 작업을 통째로 날린다. 실제로 판정(30분)과
+ * 실주행 측정(2분)을 동시에 돌려 실측 298곳을 잃을 뻔했다.
+ */
+const MUTATING = new Set([
+  'discover', 'buzz', 'classify', 'drive', 'suggest', 'visited', 'hide', 'label',
+])
+
+try {
+  if (cmd && MUTATING.has(cmd)) {
+    await withDataLock(process.env.DATA_DIR ?? 'data', cmd, main)
+  } else {
+    await main()
+  }
+} catch (e) {
+  if (e instanceof LockBusyError) {
+    die(`${e.message}
+끝날 때까지 기다리거나, 죽은 작업이면 data/.lock 을 지우세요.`)
+  }
+  throw e
+}

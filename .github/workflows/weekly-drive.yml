@@ -1,9 +1,20 @@
 name: weekly-drive
 on:
   schedule:
-    # 매주 토 20:00 UTC = 일 05:00 KST. 신규 통과분만 재므로 호출이 적다.
-    - cron: '0 20 * * 6'
+    # 매주 토 21:30 UTC = 일 06:30 KST.
+    # daily-classify 가 매일 20:00 UTC 에 도므로 겹치지 않게 90분 뒤로 둔다
+    # (겹치면 data/ 쓰기 락에 걸려 한쪽이 실패한다).
+    - cron: '0 22 * * 6'
   workflow_dispatch:
+
+# data/ 를 쓰는 워크플로는 하나씩 돈다.
+#
+# 각 잡이 cafes.json 전체를 읽고 고쳐 다시 쓰므로 겹치면 나중에 쓴 쪽이
+# 앞선 쪽 작업을 통째로 날린다. 로컬은 data/.lock 이 막지만 Actions 는
+# 러너가 매번 새 머신이라 파일 락이 닿지 않는다. GitHub 이 직렬화해 준다.
+concurrency:
+  group: data-write
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -27,6 +38,7 @@ jobs:
         run: |
           git config user.name  "cafe-bot"
           git config user.email "cafe-bot@users.noreply.github.com"
+          git pull --rebase origin "$(git rev-parse --abbrev-ref HEAD)"
           git add data/
           git diff --staged --quiet || git commit -m "data: 실주행 시간 $(date -u +%Y-%m-%d)"
           git push
