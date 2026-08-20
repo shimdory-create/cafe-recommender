@@ -3,6 +3,7 @@ import { createJsonStore } from '../store/json-store.js'
 import { createRateLimiter } from '../sources/rate-limiter.js'
 import { createKakaoLocal } from '../sources/kakao-local.js'
 import { createKakaoBlog } from '../sources/kakao-blog.js'
+import { createKakaoDirections } from '../sources/kakao-directions.js'
 import { createLlm } from '../llm/index.js'
 import type { Store } from '../store/types.js'
 import type { LlmClient } from '../llm/types.js'
@@ -16,6 +17,7 @@ export interface Context {
   store: Store
   local: ReturnType<typeof createKakaoLocal>
   blog: ReturnType<typeof createKakaoBlog>
+  directions: ReturnType<typeof createKakaoDirections>
   llm: LlmClient
 }
 
@@ -35,6 +37,11 @@ export function createContext(): Context {
       limit: kakaoLimit,
     }),
     blog: createKakaoBlog({
+      apiKey: env.KAKAO_REST_API_KEY,
+      fetcher: fetch,
+      limit: kakaoLimit,
+    }),
+    directions: createKakaoDirections({
       apiKey: env.KAKAO_REST_API_KEY,
       fetcher: fetch,
       limit: kakaoLimit,

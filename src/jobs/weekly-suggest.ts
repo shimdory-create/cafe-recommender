@@ -1,5 +1,6 @@
 import { hotScore, familyFit, finalScore, pickWeekendCandidates } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
+import { driveMinutesOf } from './drive-times.js'
 import type { BuzzSnapshot, Suggestion } from '../schema.js'
 import type { Store } from '../store/types.js'
 
@@ -55,7 +56,7 @@ export async function runWeeklySuggest(
     const hot = hotScore(b, now)
     const fit = familyFit(
       {
-        driveMinutes: c.driveMinutesEst ?? 90,
+        driveMinutes: driveMinutesOf(c) ?? 90,
         parkingGrade: a.parkingGrade,
         menuLevel: a.menuLevel,
         lastVisitedOn: lastVisit.get(c.kakaoPlaceId) ?? null,

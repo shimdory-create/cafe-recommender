@@ -1,4 +1,4 @@
-import { payload, weekPicks } from '@/lib/site'
+import { payload, toListRow, weekPicks } from '@/lib/site'
 import { CafeCard } from './cafe-card'
 
 /**
@@ -26,7 +26,7 @@ export default function Home() {
       ) : (
         <div className="flex flex-col gap-4">
           {picks.map((c, i) => (
-            <CafeCard key={c.id} cafe={c} rank={i + 1} />
+            <CafeCard key={c.id} cafe={toListRow(c)} rank={i + 1} />
           ))}
         </div>
       )}

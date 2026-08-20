@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { ALL_TAGS, type SiteCafe } from '@/lib/site'
+import { ALL_TAGS, type ListRow } from '@/lib/site'
 import { filterAndSort, type Sort } from '@/lib/filter'
 import { CafeCard } from '../cafe-card'
 
@@ -9,7 +9,7 @@ import { CafeCard } from '../cafe-card'
  * 칩 필터 + 정렬. 상태는 URL 에 싣지 않는다 — 가족이 링크를 공유하는
  * 대상은 카페 상세이고, 목록 필터는 그 자리에서 쓰고 버리는 조작이다.
  */
-export function ListClient({ cafes }: { cafes: SiteCafe[] }) {
+export function ListClient({ cafes }: { cafes: ListRow[] }) {
   const [tags, setTags] = useState<string[]>([])
   const [sort, setSort] = useState<Sort>('hot')
   const [city, setCity] = useState(false)

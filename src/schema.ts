@@ -56,7 +56,12 @@ export const CafeSchema = z.object({
   naverMapUrl: z.string().nullable().optional(),
   phone: z.string().nullable().optional(),
   straightKm: z.number().nullable().optional(),
+  /** 직선거리 x 1.35 근사. 강화·파주를 과소, 양평·가평을 과대 추정한다 */
   driveMinutesEst: z.number().int().nullable().optional(),
+  /** 카카오 자동차 길찾기 실측. 있으면 이 값을 쓴다 (카페는 움직이지 않는다) */
+  driveMinutes: z.number().int().nullable().optional(),
+  driveKm: z.number().nullable().optional(),
+  tollWon: z.number().int().nullable().optional(),
   firstSeenAt: z.string(),
   status: z.enum(['active', 'hidden', 'excluded_auto', 'pending_extraction']),
   excludeReason: z.string().nullable().optional(),

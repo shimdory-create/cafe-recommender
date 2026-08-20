@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {
-  driveLabel, MENU_LABEL, PARKING_LABEL, recentlyVisited, type SiteCafe,
+  driveLabel, MENU_LABEL, PARKING_LABEL, recentlyVisited, type ListRow,
 } from '@/lib/site'
 
 /** 주차 등급을 색으로도 구분한다. 차로 가는 가족에게 가장 중요한 정보다 */
@@ -27,7 +27,7 @@ export function Badge({ children }: { children: React.ReactNode }) {
  * 원래 스펙은 `좌석 규모` 였는데 실측에서 `seatsEstimate` 가 100% null 이었다.
  * 블로거는 좌석 수를 쓰지 않는다. `scale` 로 대체했다.
  */
-export function TopThree({ cafe }: { cafe: SiteCafe }) {
+export function TopThree({ cafe }: { cafe: ListRow }) {
   return (
     <div className="flex items-center gap-2 text-[13px]">
       <span className="font-semibold">{cafe.scale ?? '규모 미확인'}</span>
@@ -41,7 +41,7 @@ export function TopThree({ cafe }: { cafe: SiteCafe }) {
   )
 }
 
-export function CafeCard({ cafe, rank }: { cafe: SiteCafe; rank?: number }) {
+export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
   const visited = recentlyVisited(cafe.visitedOn)
   return (
     <article className="overflow-hidden rounded-2xl border border-line bg-card">
@@ -86,7 +86,7 @@ export function CafeCard({ cafe, rank }: { cafe: SiteCafe; rank?: number }) {
 
         {cafe.evidence && (
           <p className="mt-3 border-l-2 border-line pl-2.5 text-[13px] leading-relaxed text-ink-soft">
-            {cafe.evidence.length > 90 ? `${cafe.evidence.slice(0, 90)}…` : cafe.evidence}
+            {cafe.evidence}
           </p>
         )}
       </Link>

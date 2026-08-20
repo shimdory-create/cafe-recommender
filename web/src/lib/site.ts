@@ -44,6 +44,42 @@ export interface SitePayload {
 
 export const payload = raw as SitePayload
 
+/**
+ * 목록 화면이 쓰는 필드만 남긴 투영.
+ *
+ * 전체 리스트는 클라이언트 컴포넌트라 서버가 넘긴 props 가 그대로 브라우저로
+ * 내려간다. 전체 페이로드를 넘기면 판정이 다 끝났을 때 1.5MB 가 모바일로
+ * 간다 — 주차 근거·후기 원문·체류시간 같은 상세 전용 필드는 목록에 필요 없다.
+ * 카드가 근거를 90자에서 자르므로 문자열도 그때 잘라 보낸다.
+ */
+export type ListRow = Pick<
+  SiteCafe,
+  'id' | 'name' | 'sigungu' | 'driveMinutes' | 'scale' | 'parkingGrade'
+  | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'hotScore' | 'cityOnly' | 'visitedOn'
+>
+
+const CARD_EVIDENCE_CHARS = 90
+
+export function toListRow(c: SiteCafe): ListRow {
+  return {
+    id: c.id,
+    name: c.name,
+    sigungu: c.sigungu,
+    driveMinutes: c.driveMinutes,
+    scale: c.scale,
+    parkingGrade: c.parkingGrade,
+    menuLevel: c.menuLevel,
+    tags: c.tags,
+    evidence: c.evidence.length > CARD_EVIDENCE_CHARS
+      ? c.evidence.slice(0, CARD_EVIDENCE_CHARS) + '…'
+      : c.evidence,
+    naverMapUrl: c.naverMapUrl,
+    hotScore: c.hotScore,
+    cityOnly: c.cityOnly,
+    visitedOn: c.visitedOn,
+  }
+}
+
 export const byId = (id: string): SiteCafe | undefined =>
   payload.cafes.find((c) => c.id === id)
 

@@ -2,6 +2,7 @@ import { createInterface } from 'node:readline/promises'
 import { stdin, stdout } from 'node:process'
 import { hotScore, familyFit, finalScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
+import { driveMinutesOf } from '../jobs/drive-times.js'
 import { stratifiedSample, buildReport, type SampleCandidate, type Stratum } from '../pipeline/sample.js'
 import type { BuzzSnapshot, Cafe, GoldenLabel } from '../schema.js'
 import type { Store } from '../store/types.js'
@@ -68,7 +69,7 @@ export function buildCandidates(input: {
       const hot = hotScore(b, now)
       const fit = familyFit(
         {
-          driveMinutes: c.driveMinutesEst ?? 90,
+          driveMinutes: driveMinutesOf(c) ?? 90,
           parkingGrade: a.parkingGrade,
           menuLevel: a.menuLevel,
           lastVisitedOn: lastVisit.get(c.kakaoPlaceId) ?? null,
@@ -104,7 +105,8 @@ function renderCard(s: Scored, stratum: Stratum, i: number, total: number): stri
   L.push('')
   L.push(`[${i}/${total}]  ${STRATUM_LABEL[stratum]}`)
   L.push('')
-  L.push(`  ${c.name}  (${c.sigungu}${c.driveMinutesEst ? ` · 약 ${c.driveMinutesEst}분` : ''})`)
+  const min = driveMinutesOf(c)
+  L.push(`  ${c.name}  (${c.sigungu}${min ? ` · 약 ${min}분` : ''})`)
 
   if (a) {
     const scale = a.scale ?? (a.seatsEstimate ? `${a.seatsEstimate}석` : '규모 미확인')

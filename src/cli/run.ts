@@ -5,6 +5,7 @@
  *   npm run buzz       -- [--limit 200]
  *   npm run classify   -- [--limit 200] [--redo-stale] [--order file]
  *   npm run label      -- [--report] [--redo]
+ *   npm run drive      -- [--limit 500] [--force]
  *   npm run site       -- [--out web/src/generated/site.json]
  *   npm run notify     -- [--url https://...] (문구만 출력. 발송하지 않는다)
  *   npm run suggest    -- [--city]
@@ -21,6 +22,7 @@ import { runDiscover } from '../jobs/weekly-discover.js'
 import { runDailyBuzz } from '../jobs/daily-buzz.js'
 import { runClassify } from '../jobs/classify.js'
 import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
+import { runDriveTimes } from '../jobs/drive-times.js'
 import { runLabel, runLabelReport } from './label.js'
 import { buildSitePayload } from '../site/payload.js'
 import { buildNotifyText, KAKAO_TEXT_LIMIT } from '../site/notify.js'
@@ -226,6 +228,16 @@ async function main() {
       break
     }
 
+    case 'drive': {
+      const ctx = createContext()
+      const limit = numFlag(rest, 'limit')
+      const force = flag(rest, 'force') !== undefined
+      console.log(`실주행 시간 측정 시작${limit ? ` (최대 ${limit}곳)` : ''}${force ? ' · 전량 재측정' : ''}`)
+      const r = await runDriveTimes(ctx, { limit, force })
+      console.log(`  측정 ${r.measured}곳 / 경로없음 ${r.unroutable}곳 / 실패 ${r.failed}곳`)
+      break
+    }
+
     case 'site': {
       // API 키를 요구하지 않는다 — 배포(Vercel) 빌드에서 키 없이 돌아야 한다
       const store = createJsonStore(process.env.DATA_DIR ?? 'data')
@@ -307,7 +319,7 @@ async function main() {
     default:
       die(
         '사용법: tsx src/cli/run.ts'
-          + ' <discover|buzz|classify|label|suggest|site|notify|visited|inspect|health|hide>',
+          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|hide>',
       )
   }
 }

@@ -1,3 +1,4 @@
+import { driveMinutesOf } from '../jobs/drive-times.js'
 import { hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
 import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type Suggestion, type Visit } from '../schema.js'
@@ -50,7 +51,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       id: c.kakaoPlaceId,
       name: c.name,
       sigungu: c.sigungu,
-      driveMinutes: c.driveMinutesEst ?? null,
+      driveMinutes: driveMinutesOf(c),
       scale: a.scale ?? null,
       parkingGrade: a.parkingGrade,
       menuLevel: a.menuLevel,

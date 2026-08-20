@@ -1,4 +1,4 @@
-import { payload } from '@/lib/site'
+import { payload, toListRow } from '@/lib/site'
 import { ListClient } from './list-client'
 
 export const metadata = { title: '전체 리스트 — 우리 가족 카페' }
@@ -8,5 +8,6 @@ export const metadata = { title: '전체 리스트 — 우리 가족 카페' }
  * 전량 렌더 + 칩 필터가 더 빠르고 코드도 없다.
  */
 export default function ListPage() {
-  return <ListClient cafes={payload.cafes} />
+  // 목록에 필요한 필드만 클라이언트로 넘긴다 (site.ts toListRow 주석 참고)
+  return <ListClient cafes={payload.cafes.map(toListRow)} />
 }

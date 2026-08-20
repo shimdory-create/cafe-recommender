@@ -1,4 +1,4 @@
-import type { SiteCafe } from './site'
+import type { ListRow } from './site'
 
 export type Sort = 'hot' | 'near'
 
@@ -15,7 +15,7 @@ export interface FilterState {
  * 칩 여러 개는 AND 다 — "대형카페 + 뷰맛집" 을 찾는 것이 자연스럽고,
  * OR 로 하면 칩을 늘릴수록 결과가 늘어나 필터의 의미가 사라진다.
  */
-export function filterAndSort(cafes: SiteCafe[], s: FilterState): SiteCafe[] {
+export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[] {
   const rows = cafes.filter((c) => {
     if (c.cityOnly && !s.city) return false
     return s.tags.every((t) => c.tags.includes(t))
