@@ -44,55 +44,56 @@ data/*.json (6,216곳, 4.7MB)
 
 ---
 
-## Task 1 — 표시용 페이로드 생성기
+## Task 1 — 표시용 페이로드 생성기 ✅ [완료 2026-08-20]
 
-- [ ] `src/site/payload.ts` — `buildSitePayload({cafes, buzz, visits, suggestions, now})`
+- [x] `src/site/payload.ts` — `buildSitePayload({cafes, buzz, visits, suggestions, now})`
       순수 함수. `Date.now()` 금지, 현재 시각은 인자로 주입
-- [ ] `SitePayloadSchema` (zod) — `src/schema.ts` 에 추가. 웹앱이 이 스키마로 검증
-- [ ] 포함 내용
+- [x] `SitePayloadSchema` (zod) — `src/schema.ts` 에 추가. 웹앱이 이 스키마로 검증
+- [x] 포함 내용
   - `week`: 이번 주 추천 3곳 (rank, 점수, 이유 태그)
   - `cafes`: 게이트 통과분. 일반/도심 모드 구분 플래그 (`cityOnly`)
   - 각 카페: 이름·시군구·이동시간·규모·주차·메뉴레벨·태그·근거 인용·
     네이버/카카오 링크·화제량 지표·방문 여부
   - `generatedAt`, `stats` (전체 발굴 수, 통과 수, 지역 수)
-- [ ] **`evidence` 인용을 반드시 싣는다.** 판단 근거가 없으면 신뢰가 생기지 않는다
-- [ ] 방문한 곳은 `visitedOn` 을 실어 카드에 "다녀옴" 배지
-- [ ] 테스트: 통과분만 포함 / 점수 내림차순 / cityOnly 분리 / 빈 데이터
-- [ ] `npm run site` → `web/src/generated/site.json`
+- [x] **`evidence` 인용을 반드시 싣는다.** 판단 근거가 없으면 신뢰가 생기지 않는다
+- [x] 방문한 곳은 `visitedOn` 을 실어 카드에 "다녀옴" 배지
+- [x] 테스트: 통과분만 포함 / 점수 내림차순 / cityOnly 분리 / 빈 데이터
+- [x] `npm run site` → `web/src/generated/site.json`
 
-## Task 2 — Next.js 골격
+## Task 2 — Next.js 골격 ✅ [완료 2026-08-20]
 
-- [ ] `web/` 에 Next.js (App Router) + TypeScript + Tailwind
-- [ ] `output: 'export'` 는 쓰지 않는다 — 접근 코드 미들웨어가 필요하다
-- [ ] 하단 탭바 레이아웃 (이번 주 / 전체 / 정보)
-- [ ] `max-width: 480px` 센터 정렬, 다크 모드 대응
-- [ ] PWA 매니페스트 + 홈 화면 추가
-- [ ] `robots.txt` 로 색인 차단
-- [ ] 접근 코드 미들웨어 — `ACCESS_CODE` 환경변수, httpOnly 쿠키.
+- [x] `web/` 에 Next.js (App Router) + TypeScript + Tailwind
+- [x] `output: 'export'` 는 쓰지 않는다 — 접근 코드 미들웨어가 필요하다
+- [x] 하단 탭바 레이아웃 (이번 주 / 전체 / 정보)
+- [x] `max-width: 480px` 센터 정렬, 다크 모드 대응
+- [x] PWA 매니페스트 + 홈 화면 추가
+- [x] `robots.txt` 로 색인 차단
+- [x] 접근 코드 미들웨어 — `ACCESS_CODE` 환경변수, httpOnly 쿠키.
       **환경변수가 없으면 게이트를 끈다** (로컬 개발)
 
-## Task 3 — 화면 3개
+## Task 3 — 화면 3개 ✅ [완료 2026-08-20]
 
-- [ ] **이번 주** (`/`) — 추천 3곳 카드. 카톡 링크의 도착지
+- [x] **이번 주** (`/`) — 추천 3곳 카드. 카톡 링크의 도착지
   - 카드 상단 3종: `규모 · 주차 · 메뉴레벨`
   - 태그 배지, 이동시간, 네이버지도 버튼(44px 이상)
   - 추천 근거 한 줄 ("월 62건, 가속도 1.6배")
-- [ ] **전체 리스트** (`/list`) — 태그 칩 8종 + 정렬(핫/거리)
+- [x] **전체 리스트** (`/list`) — 태그 칩 8종 + 정렬(핫/거리)
   - 도심 모드 토글 (주차 C 카페 노출)
   - 무한 스크롤 대신 **전량 렌더 + 칩 필터** (174곳이면 충분하다)
-- [ ] **카페 상세** (`/cafe/[id]`) — 속성 전체 + `evidence` 인용 + 지도 링크 2개
+- [x] **카페 상세** (`/cafe/[id]`) — 속성 전체 + `evidence` 인용 + 지도 링크 2개
 
-## Task 4 — 카카오톡 금요일 정오
+## Task 4 — 카카오톡 금요일 정오 ⏸ 문구 완성, 발송은 사용자 승인 대기
 
-- [ ] Phase 1: 예약 작업으로 커넥터 호출 (코드 0줄)
-- [ ] 발송 문구 생성기 `npm run notify -- --dry-run` (200자 제한 준수)
-- [ ] Phase 2(앱 내장)는 계획 4로 미룬다 — Phase 1 이 도는 것을 보고 결정
+- [ ] Phase 1: 예약 작업으로 커넥터 호출 — **문구 승인 후**
+- [x] 발송 문구 생성기 `npm run notify` (200자 제한 준수)
+- [x] Phase 2(앱 내장)는 계획 4로 미룬다 — Phase 1 이 도는 것을 보고 결정
 
-## Task 5 — 배포
+## Task 5 — 배포 ⏸ Vercel 계정 연결 필요
 
-- [ ] `vercel.json` — 루트 디렉터리 `web`
-- [ ] `data/` 커밋 시 자동 재배포되도록 빌드 스크립트가 `npm run site` 를 먼저 실행
-- [ ] Lighthouse 모바일 확인 (성능·접근성)
+- [x] `vercel.json` — 빌드가 `npm run site` 를 먼저 실행한다
+- [x] `site` 명령이 API 키를 요구하지 않게 했다 (.env 없이 동작 확인)
+- [ ] Vercel 프로젝트 생성 — **사용자 계정 연결 필요**
+- [ ] Lighthouse 모바일 확인 — 배포 후
 
 ---
 
@@ -106,3 +107,15 @@ data/*.json (6,216곳, 4.7MB)
 
 **그 외는 전부 진행한다.** 로컬에서 빌드·실행·검증까지 마쳐 두고, 아침에
 배포만 누르면 되는 상태로 만든다.
+
+---
+
+## 완료 후 추가로 한 것 (계획에 없던 것)
+
+- **목록 payload 43% 감축** — 전체 리스트는 클라이언트 컴포넌트라 서버 props 가
+  그대로 브라우저로 내려간다. 상세 전용 필드를 뺀 투영을 넘긴다 (203KB -> 116KB)
+- **실주행 시간 측정** — 계획 2 Task 5 였으나 웹앱보다 먼저 하는 것이 맞았다.
+  근사값 평균 오차 9.1분을 없애고 추천이 바뀌었다 (더티트렁크 상위 진입)
+- **data/ 쓰기 락** — 판정과 실측을 동시에 돌리다 실측 298곳을 실제로 잃었다.
+  로컬은 파일 락, Actions 는 concurrency group
+- **README.md** · **docs/아침에-할-일.md**
