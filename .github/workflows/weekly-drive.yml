@@ -34,6 +34,9 @@ jobs:
       - run: npm run drive -- --limit 2000
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          # 길찾기에 LLM 은 쓰지 않지만 환경변수 검증이 provider 키를 요구한다.
+          # 없으면 잡이 첫 줄에서 죽는다 (실측).
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       # 표시용 페이로드를 함께 갱신한다 — Vercel 은 web/ 만 빌드하므로
       # 이 파일이 최신이어야 사이트가 최신이 된다
       - run: npm run site
