@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { passesGate } from '../../src/pipeline/gate.js'
+import { passesGate, passesHardGate } from '../../src/pipeline/gate.js'
 
 describe('passesGate', () => {
   it('태그가 있고 주차 A 면 통과한다', () => {
@@ -38,5 +38,25 @@ describe('passesGate', () => {
 
   it('태그 0개와 주차 D 가 겹치면 동네 카페를 먼저 알린다', () => {
     expect(passesGate({ tags: [], parkingGrade: 'D' }).reason).toMatch(/동네/)
+  })
+})
+
+describe('passesHardGate', () => {
+  it('태그 0개는 되돌릴 수 없는 배제다', () => {
+    expect(passesHardGate({ tags: [], parkingGrade: 'A' }).pass).toBe(false)
+  })
+
+  it('주차 D 는 되돌릴 수 없는 배제다', () => {
+    expect(passesHardGate({ tags: ['대형카페'], parkingGrade: 'D' }).pass).toBe(false)
+  })
+
+  it('주차 C 는 여기서 막지 않는다', () => {
+    // 판정 잡이 C 를 excluded_auto 로 굳히면 도심 모드가 영원히 불가능해진다.
+    // 실측: C 로 배제된 50곳 때문에 --city 가 일반 모드와 똑같은 결과를 냈다.
+    expect(passesHardGate({ tags: ['대형카페'], parkingGrade: 'C' }).pass).toBe(true)
+  })
+
+  it('주차 미확인도 막지 않는다', () => {
+    expect(passesHardGate({ tags: ['대형카페'], parkingGrade: '?' }).pass).toBe(true)
   })
 })

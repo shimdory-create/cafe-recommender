@@ -297,4 +297,39 @@ describe('runClassify', () => {
     expect(r.classified).toBe(1)
     expect(r.skipped).toBe(0)
   })
+  it('주차 C 를 excluded_auto 로 굳히지 않는다', async () => {
+    // 굳히면 도심 모드(--city)로 볼 길이 막힌다. 골든셋에서 공원스크립트가
+    // 이 경로로 오탈락됐다 ("주차장은 조금 협소한 편").
+    const h = harness([cafe('1')], [buzz('1')], {
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => ({ ...goodAttrs, parkingGrade: 'C' }) as never,
+      },
+    })
+    const r = await runClassify(h.deps)
+    expect(r.classified).toBe(1)
+    expect(h.saved()[0]!.status).toBe('active')
+    expect(h.saved()[0]!.attributes!.parkingGrade).toBe('C')
+  })
+
+  it('주차 D 와 태그 0개는 여전히 배제한다', async () => {
+    const d = harness([cafe('1')], [buzz('1')], {
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => ({ ...goodAttrs, parkingGrade: 'D' }) as never,
+      },
+    })
+    expect((await runClassify(d.deps)).excluded).toBe(1)
+
+    const t = harness([cafe('2')], [buzz('2')], {
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => ({
+          ...goodAttrs, scale: '중형', menuLevel: 1, viewStrength: 0,
+          viewTypes: [], mealTypes: [], evidence: '작은 카페',
+        }) as never,
+      },
+    })
+    expect((await runClassify(t.deps)).excluded).toBe(1)
+  })
 })

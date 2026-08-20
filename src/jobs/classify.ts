@@ -2,7 +2,7 @@ import { PROMPT_VERSION } from '../llm/prompts.js'
 import { passesLayer2 } from '../pipeline/buzz.js'
 import { extractAttributes } from '../pipeline/extract.js'
 import { assignTags } from '../pipeline/tag.js'
-import { passesGate } from '../pipeline/gate.js'
+import { passesHardGate } from '../pipeline/gate.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import type { BuzzSnapshot, Cafe } from '../schema.js'
 import type { LlmClient } from '../llm/types.js'
@@ -134,8 +134,9 @@ export async function runClassify(
       // --- Layer 4 ---
       c.tags = assignTags(attributes)
 
-      // --- Layer 5 ---
-      const gate = passesGate({ tags: c.tags, parkingGrade: attributes.parkingGrade })
+      // --- Layer 5 (되돌릴 수 없는 배제만) ---
+      // 주차 C 는 여기서 굳히지 않는다. 도심 모드로 볼 길이 막힌다.
+      const gate = passesHardGate({ tags: c.tags, parkingGrade: attributes.parkingGrade })
       if (!gate.pass) {
         c.status = 'excluded_auto'
         c.excludeReason = gate.reason ?? 'Layer 5 탈락'
