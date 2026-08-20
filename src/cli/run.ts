@@ -3,7 +3,7 @@
  *
  *   npm run discover   -- [--region 양평군] [--skip-harvest]
  *   npm run buzz       -- [--limit 200]
- *   npm run classify   -- [--limit 200] [--redo-stale]
+ *   npm run classify   -- [--limit 200] [--redo-stale] [--order file]
  *   npm run label      -- [--report] [--redo]
  *   npm run suggest    -- [--city]
  *   npm run visited    -- <카페 이름> [--date YYYY-MM-DD]
@@ -65,7 +65,8 @@ async function main() {
       const limit = numFlag(rest, 'limit')
       const redoStale = flag(rest, 'redo-stale') !== undefined
       console.log(`판정 시작${limit ? ` (최대 ${limit}곳)` : ''}${redoStale ? ' · 낡은 프롬프트 재추출 포함' : ''}`)
-      const r = await runClassify(ctx, { limit, redoStale })
+      const order = flag(rest, 'order') === 'file' ? 'file' as const : 'hot' as const
+      const r = await runClassify(ctx, { limit, redoStale, order })
       console.log(
         `  통과 ${r.classified}곳 / 배제 ${r.excluded}곳`
         + ` / 보류 ${r.skipped}곳 / 실패 ${r.failed}곳`,

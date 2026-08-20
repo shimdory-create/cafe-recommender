@@ -261,4 +261,40 @@ describe('runClassify', () => {
     // 20곳마다 + 마지막 1회
     expect(writes).toBeGreaterThan(1)
   })
+  it('화제량이 많은 순으로 처리한다', async () => {
+    // 하루 200곳 상한이라 파일 순서로 돌면 며칠 동안 특정 지역만 채워진다
+    const order: string[] = []
+    const h = harness(
+      [cafe('a'), cafe('b'), cafe('c')],
+      [buzz('a', { postsPer30: 10 }), buzz('b', { postsPer30: 90 }), buzz('c', { postsPer30: 50 })],
+      {
+        blog: {
+          search: async (q: string) => {
+            if (q.endsWith('주차')) order.push(q.split(' ')[1]!)
+            return { docs: [], payload: {} }
+          },
+        },
+      },
+    )
+    await runClassify(h.deps)
+    expect(order).toEqual(['카페b', '카페c', '카페a'])
+  })
+
+  it('--order file 이면 파일 순서를 지킨다', async () => {
+    const h = harness(
+      [cafe('a'), cafe('b')],
+      [buzz('a', { postsPer30: 10 }), buzz('b', { postsPer30: 90 })],
+    )
+    const r = await runClassify(h.deps, { limit: 1, order: 'file' })
+    expect(r.classified).toBe(1)
+    expect(h.saved().find((c) => c.kakaoPlaceId === 'a')!.status).toBe('active')
+  })
+
+  it('화제량 스냅샷이 없는 카페는 뒤로 밀린다', async () => {
+    // 정렬 때문에 skipped 가 앞을 차지하면 limit 이 낭비된다
+    const h = harness([cafe('a'), cafe('b')], [buzz('b', { postsPer30: 20 })])
+    const r = await runClassify(h.deps, { limit: 1 })
+    expect(r.classified).toBe(1)
+    expect(r.skipped).toBe(0)
+  })
 })

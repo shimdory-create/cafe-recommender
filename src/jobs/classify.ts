@@ -50,7 +50,7 @@ const FLUSH_EVERY = 20
  */
 export async function runClassify(
   deps: ClassifyDeps,
-  opts: { limit?: number; redoStale?: boolean } = {},
+  opts: { limit?: number; redoStale?: boolean; order?: 'hot' | 'file' } = {},
 ): Promise<ClassifyResult> {
   const { store, blog, llm, now = new Date() } = deps
   const cafes = await store.readCafes()
@@ -65,10 +65,21 @@ export async function runClassify(
   // 재추출 대상을 먼저 처리한다. 프롬프트를 고친 직후에는 낡은 판정을
   // 갱신하는 것이 새 카페를 늘리는 것보다 급하다.
   const stale = opts.redoStale ? cafes.filter(isStaleExtraction) : []
-  const targets: Cafe[] = [
-    ...stale,
-    ...cafes.filter((c) => c.status === 'pending_extraction'),
-  ].slice(0, opts.limit ?? Infinity)
+
+  // 화제량이 많은 순으로 처리한다. 무료 티어 때문에 하루 200곳이 상한이고
+  // 전량은 일주일이 걸리므로, 파일 순서(= 지역 발굴 순서)로 돌면 며칠 동안
+  // 특정 지역만 판정된 목록을 보게 된다. 뜨거운 곳부터 처리하면 첫날부터
+  // 추천 상단이 제대로 채워지고 지역도 자연히 섞인다.
+  const pending = cafes.filter((c) => c.status === 'pending_extraction')
+  if ((opts.order ?? 'hot') === 'hot') {
+    pending.sort(
+      (a, b) =>
+        (latest.get(b.kakaoPlaceId)?.postsPer30 ?? -1)
+        - (latest.get(a.kakaoPlaceId)?.postsPer30 ?? -1),
+    )
+  }
+
+  const targets: Cafe[] = [...stale, ...pending].slice(0, opts.limit ?? Infinity)
 
   let classified = 0
   let excluded = 0
