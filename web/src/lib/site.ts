@@ -28,8 +28,12 @@ export interface SiteCafe {
   naverMapUrl: string
   kakaoPlaceUrl: string | null
   hotScore: number
+  /** 화제도 x 가족 적합도. 홈 피드와 목록의 정렬 기준 */
+  finalScore: number
   postsPer30: number
   acceleration: number
+  /** 'unknown' 은 50건 창이 잘려 비교 불가라는 뜻. 늘었다고 쓰지 않는다 */
+  trend: 'rising' | 'steady' | 'unknown'
   cityOnly: boolean
   visitedOn: string | null
 }
@@ -55,7 +59,8 @@ export const payload = raw as SitePayload
 export type ListRow = Pick<
   SiteCafe,
   'id' | 'name' | 'sigungu' | 'driveMinutes' | 'scale' | 'parkingGrade'
-  | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'hotScore' | 'cityOnly' | 'visitedOn'
+  | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'hotScore' | 'finalScore'
+  | 'cityOnly' | 'visitedOn'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -75,6 +80,7 @@ export function toListRow(c: SiteCafe): ListRow {
       : c.evidence,
     naverMapUrl: c.naverMapUrl,
     hotScore: c.hotScore,
+    finalScore: c.finalScore,
     cityOnly: c.cityOnly,
     visitedOn: c.visitedOn,
   }
@@ -83,14 +89,21 @@ export function toListRow(c: SiteCafe): ListRow {
 export const byId = (id: string): SiteCafe | undefined =>
   payload.cafes.find((c) => c.id === id)
 
-/** 이번 주 추천 3곳. 추천 파일이 비었으면 화제도 상위로 대체한다 */
-export function weekPicks(): SiteCafe[] {
-  const picks = payload.week
+/**
+ * 홈 피드. 이번 주 추천을 앞에 두고 나머지를 종합점수 순으로 잇는다.
+ *
+ * 추천 10곳 안에서 못 고르면 다음 10곳으로 넘어갈 수 있어야 한다 —
+ * 4인 가족이 취향을 맞추려면 폭이 필요하다. 그래서 "3곳 + 끝" 이 아니라
+ * 끊기지 않는 피드로 만든다.
+ */
+export function homeFeed(): SiteCafe[] {
+  const ranked = payload.week
     .map((w) => byId(w.id))
-    .filter((c): c is SiteCafe => Boolean(c) && !c!.cityOnly)
-  if (picks.length > 0) return picks
-  // 우아한 저하 — 금요일 배치가 실패해도 빈 화면을 보여주지 않는다
-  return payload.cafes.filter((c) => !c.cityOnly).slice(0, 3)
+    .filter((c): c is SiteCafe => c !== undefined && !c.cityOnly)
+  const seen = new Set(ranked.map((c) => c.id))
+  const rest = payload.cafes.filter((c) => !c.cityOnly && !seen.has(c.id))
+  // payload.cafes 는 이미 종합점수 내림차순이다
+  return [...ranked, ...rest]
 }
 
 export const MENU_LABEL: Record<number, string> = {

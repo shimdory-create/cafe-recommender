@@ -19,15 +19,24 @@ export function mondayOf(d: Date): string {
   return x.toISOString().slice(0, 10)
 }
 
-/** 최근 12주 x 3곳 */
+/** 최근 12주 보관 */
 const KEEP_WEEKS = 12
+
+/**
+ * 한 주에 보여줄 후보 수.
+ *
+ * 3곳으로 시작했는데 "너무 적다" 는 피드백을 받았다. 4인 가족이 취향을
+ * 맞추려면 고를 수 있는 폭이 필요하다. 10곳을 뽑고, 화면에서 다음 10곳으로
+ * 넘길 수 있게 했다.
+ */
+const DEFAULT_COUNT = 10
 
 export async function runWeeklySuggest(
   deps: SuggestDeps,
   opts: { count?: number; cityMode?: boolean } = {},
 ): Promise<{ picked: Suggestion[] }> {
   const { store, now = new Date() } = deps
-  const count = opts.count ?? 3
+  const count = opts.count ?? DEFAULT_COUNT
   const cafes = await store.readCafes()
   const buzz = await store.readBuzz()
   const visits = await store.readVisits()

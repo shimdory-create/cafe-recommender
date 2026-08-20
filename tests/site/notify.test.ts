@@ -20,8 +20,10 @@ const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe 
   naverMapUrl: 'https://map.naver.com/p/search/x',
   kakaoPlaceUrl: null,
   hotScore: 50,
+  finalScore: 25,
   postsPer30: 60,
   acceleration: 1.5,
+  trend: 'steady',
   cityOnly: false,
   visitedOn: null,
   ...over,
@@ -115,5 +117,24 @@ describe('buildNotifyText', () => {
   it('짧으면 태그까지 담는다', () => {
     const t = buildNotifyText({ payload: payload([cafe({ id: '1', name: '후탄' })]) })
     expect(t).toContain('대형카페')
+  })
+  it('추천이 10곳이면 이름 3곳 + 나머지 개수로 줄인다', () => {
+    // 200자에 10곳이 다 들어가지 않는다. 링크를 살리는 것이 우선이다.
+    const ten = Array.from({ length: 10 }, (_, i) =>
+      cafe({ id: String(i), name: `카페이름${i}`, sigungu: '남양주시' }))
+    const t = buildNotifyText({
+      payload: payload(ten),
+      baseUrl: 'https://cafe.example.com',
+    })
+    expect(t).toContain('카페이름0')
+    expect(t).toContain('카페이름2')
+    expect(t).not.toContain('카페이름3')
+    expect(t).toContain('외 7곳')
+    expect(t.length).toBeLessThanOrEqual(KAKAO_TEXT_LIMIT)
+  })
+
+  it('3곳 이하면 "외 N곳" 을 붙이지 않는다', () => {
+    const t = buildNotifyText({ payload: payload(three) })
+    expect(t).not.toContain('외 ')
   })
 })

@@ -169,8 +169,19 @@ export const SiteCafeSchema = z.object({
   kakaoPlaceUrl: z.string().nullable(),
 
   hotScore: z.number(),
+  /** 화제도 x 가족 적합도. 홈 피드 정렬 기준 */
+  finalScore: z.number(),
   postsPer30: z.number(),
   acceleration: z.number(),
+  /**
+   * 화제 추이. 가속도 숫자를 그대로 보여주지 않는 이유는 그 값이
+   * 17.67 에서 포화되기 때문이다 — 50건 창이 최근 30일 안에 다 들어차면
+   * 이전 기간이 0이 되어 비교가 성립하지 않는다 (발견 E).
+   *   rising  이전 기간과 비교해 실제로 늘었다
+   *   steady  비슷하다
+   *   unknown 창이 잘려 비교할 수 없다. 늘었다고 말하지 않는다
+   */
+  trend: z.enum(['rising', 'steady', 'unknown']),
   /** 주차 C — 도심 모드에서만 노출한다 (스펙 7.3) */
   cityOnly: z.boolean(),
   visitedOn: z.string().nullable(),

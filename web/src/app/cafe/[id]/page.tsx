@@ -107,14 +107,12 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
       <section className="mt-5">
         <h2 className="text-[15px] font-bold">얼마나 화제인가</h2>
         <p className="mt-1 text-[13px] leading-relaxed text-ink-soft">
-          블로그 후기가 <b className="text-ink">월 {Math.round(cafe.postsPer30)}건</b> 올라오고,
-          최근 한 달은 그 전보다{' '}
-          {/* 17.0배 같은 숫자는 감이 안 온다. 신규 오픈이면 이전 기간이 0이라 커진다 */}
-          <b className="text-ink">
-            {cafe.acceleration >= 5 ? '몇 배' : `${cafe.acceleration.toFixed(1)}배`}
-          </b>{' '}
-          늘었어요.
-          {cafe.acceleration >= 1.5 && ' 지금 뜨는 중이에요.'}
+          블로그 후기가 <b className="text-ink">월 {Math.round(cafe.postsPer30)}건</b>{' '}
+          올라와요.
+          {/* 가속도 숫자는 포화되므로 생성기가 판정한 trend 만 쓴다 (발견 E) */}
+          {cafe.trend === 'rising' && ' 최근 한 달이 그 전보다 눈에 띄게 늘었어요.'}
+          {cafe.trend === 'unknown'
+            && ' 최근 글이 몰려 있어서 이전과 비교하기는 어려워요.'}
         </p>
       </section>
 

@@ -1,5 +1,5 @@
 import { driveMinutesOf } from '../jobs/drive-times.js'
-import { hotScore } from '../pipeline/score.js'
+import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
 import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type Suggestion, type Visit } from '../schema.js'
 
@@ -23,6 +23,28 @@ export interface PayloadInput {
  * `cityOnly` 로 표시한다. 화면에서 토글로 켠다. 골든셋에서 이 구분을
  * 상태로 굳혔던 버그가 잡혔다.
  */
+/** 이전 기간(30~90일)을 비교하려면 창이 90일을 덮어야 한다 */
+const COMPARABLE_SPAN_DAYS = 90
+
+/**
+ * 화제 추이를 판정한다.
+ *
+ * `acceleration` 을 그대로 쓰지 않는다. 그 값은 상한 17.67 에 붙고 실측
+ * 중앙값이 4.35, 26% 가 10 이상이었다 — "급증" 이 아니라 **50건 창이
+ * 최근에 몰려 잘렸다는 신호**다 (발견 E).
+ *
+ * 창이 90일을 덮지 못하면 `postsPrev` 자체가 절단된 값이므로 비교가
+ * 성립하지 않는다. 그때는 늘었다고 말하지 않는다. 신뢰는 과장하지 않는
+ * 데서 온다.
+ */
+export function trendOf(
+  b: { posts30d: number; postsPrev: number; spanDays: number },
+): 'rising' | 'steady' | 'unknown' {
+  if (b.spanDays < COMPARABLE_SPAN_DAYS || b.postsPrev === 0) return 'unknown'
+  const baseline = b.postsPrev / 2
+  return b.posts30d >= baseline * 1.5 ? 'rising' : 'steady'
+}
+
 export function buildSitePayload(input: PayloadInput): SitePayload {
   const { cafes, buzz, visits, suggestions, weekOf, now } = input
 
@@ -47,6 +69,19 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
     const b = latestBuzz.get(c.kakaoPlaceId)
     if (!b) continue
 
+    const hot = hotScore(b, now)
+    const fit = familyFit(
+      {
+        driveMinutes: driveMinutesOf(c) ?? 90,
+        parkingGrade: a.parkingGrade,
+        menuLevel: a.menuLevel,
+        lastVisitedOn: lastVisit.get(c.kakaoPlaceId) ?? null,
+        outdoorOnly: Boolean(a.outdoorSeating) && a.menuLevel === 1,
+        teenAppeal: a.teenAppeal ?? 2,
+      },
+      now,
+    )
+
     rows.push({
       id: c.kakaoPlaceId,
       name: c.name,
@@ -67,16 +102,18 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       naverMapUrl: c.naverMapUrl
         ?? `https://map.naver.com/p/search/${encodeURIComponent(`${c.sigungu} ${c.name}`)}`,
       kakaoPlaceUrl: c.kakaoPlaceUrl ?? null,
-      hotScore: Number(hotScore(b, now).toFixed(1)),
+      hotScore: Number(hot.toFixed(1)),
+      finalScore: Number(finalScore(hot, fit).toFixed(3)),
       postsPer30: b.postsPer30,
       acceleration: b.acceleration,
+      trend: trendOf(b),
       cityOnly: a.parkingGrade === 'C',
       visitedOn: lastVisit.get(c.kakaoPlaceId) ?? null,
     })
   }
 
-  // 화제도 내림차순. 동점은 id 로 안정 정렬해 빌드마다 순서가 흔들리지 않게.
-  rows.sort((x, y) => y.hotScore - x.hotScore || x.id.localeCompare(y.id))
+  // 종합점수 내림차순. 동점은 id 로 안정 정렬해 빌드마다 순서가 흔들리지 않게.
+  rows.sort((x, y) => y.finalScore - x.finalScore || x.id.localeCompare(y.id))
 
   const ids = new Set(rows.map((r) => r.id))
   const week = suggestions

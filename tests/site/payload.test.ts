@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildSitePayload } from '../../src/site/payload.js'
+import { buildSitePayload, trendOf } from '../../src/site/payload.js'
 import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type CafeAttributes } from '../../src/schema.js'
 
 const NOW = new Date('2026-08-20T00:00:00Z')
@@ -185,5 +185,30 @@ describe('buildSitePayload', () => {
     expect(p.cafes).toEqual([])
     expect(p.week).toEqual([])
     expect(p.stats.passed).toBe(0)
+  })
+})
+
+describe('trendOf', () => {
+  it('창이 90일을 못 덮으면 비교하지 않는다', () => {
+    // 50건이 최근 20일에 몰려 있으면 postsPrev 자체가 절단된 값이다.
+    // 가속도는 이때 상한 17.67 에 붙는다 — 급증이 아니라 절단 신호다 (발견 E).
+    expect(trendOf({ posts30d: 50, postsPrev: 5, spanDays: 20 })).toBe('unknown')
+  })
+
+  it('이전 기간이 0이어도 비교하지 않는다', () => {
+    expect(trendOf({ posts30d: 50, postsPrev: 0, spanDays: 200 })).toBe('unknown')
+  })
+
+  it('창이 충분하고 1.5배 이상이면 rising', () => {
+    // postsPrev 는 60일치이므로 절반이 기준선이다
+    expect(trendOf({ posts30d: 30, postsPrev: 20, spanDays: 200 })).toBe('rising')
+  })
+
+  it('비슷하면 steady', () => {
+    expect(trendOf({ posts30d: 10, postsPrev: 20, spanDays: 200 })).toBe('steady')
+  })
+
+  it('줄었으면 steady (줄었다고 겁주지 않는다)', () => {
+    expect(trendOf({ posts30d: 2, postsPrev: 40, spanDays: 200 })).toBe('steady')
   })
 })

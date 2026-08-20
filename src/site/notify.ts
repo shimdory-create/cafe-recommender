@@ -11,26 +11,33 @@ export interface NotifyInput {
   accessCode?: string
 }
 
+/** 카톡에 이름을 적는 수. 추천은 10곳이지만 200자에 다 들어가지 않는다 */
+const NAMED_IN_MESSAGE = 3
+
 /**
  * 금요일 정오 카카오톡 문구를 만든다 (스펙 10.2 Phase 1).
  *
  * 200자 제한이 하드 제약이다. 넘치면 잘리므로 **줄여서라도 링크는 살린다** —
- * 이 메시지의 목적은 정보 전달이 아니라 앱을 열게 하는 것이다.
+ * 이 메시지의 목적은 정보 전달이 아니라 앱을 열게 하는 것이다. 그래서
+ * 추천이 10곳이어도 이름은 3곳만 적고 나머지는 개수로 알린다.
  */
 export function buildNotifyText(input: NotifyInput): string {
   const { payload, baseUrl, accessCode } = input
   const byId = new Map(payload.cafes.map((c) => [c.id, c]))
 
-  const picks = payload.week
+  const all = payload.week
     .map((w) => byId.get(w.id))
     .filter((c): c is NonNullable<typeof c> => Boolean(c))
+  const picks = all.slice(0, NAMED_IN_MESSAGE)
+  const more = all.length - picks.length
 
   const link = baseUrl
     ? `${baseUrl.replace(/\/$/, '')}${accessCode ? `/?code=${encodeURIComponent(accessCode)}` : ''}`
     : ''
 
   const head = '[이번 주 추천 카페]'
-  const tail = link ? `\n자세히 → ${link}` : ''
+  const moreLine = more > 0 ? `\n… 외 ${more}곳` : ''
+  const tail = link ? `${moreLine}\n자세히 → ${link}` : moreLine
 
   if (picks.length === 0) {
     return `${head}\n\n이번 주는 새로 추천할 곳이 없어요.${tail}`

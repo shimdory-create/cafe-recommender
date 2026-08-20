@@ -1,12 +1,29 @@
-import { payload, toListRow, weekPicks } from '@/lib/site'
-import { CafeCard } from './cafe-card'
+import { homeFeed, payload, toListRow, type SiteCafe } from '@/lib/site'
+import { HomeFeed, PAGE_SIZE, type FeedRow } from './home-feed'
+
+/**
+ * 왜 이 카페가 올라왔는지 한 줄로. 숫자를 보여주면 목록을 신뢰하게 된다.
+ *
+ * 추이는 생성기가 판정한 `trend` 만 믿는다. 가속도 숫자는 17.67 에서
+ * 포화되므로 그것으로 "급증" 을 말하면 절반이 급증이 된다 (발견 E).
+ */
+function reasonLine(postsPer30: number, trend: SiteCafe['trend']): string {
+  const posts = `블로그 월 ${Math.round(postsPer30)}건`
+  return trend === 'rising' ? `${posts} · 지금 뜨는 중` : posts
+}
 
 /**
  * 이번 주 (홈) — 카카오톡 링크의 도착지.
- * 여기서 스크롤 세 번 안에 결정이 끝나야 한다.
+ *
+ * 10곳을 보여주고 다음 10곳으로 넘어간다. 3곳으로 시작했는데 "너무 적다" 는
+ * 피드백을 받았다 — 4인 가족이 취향을 맞추려면 고를 폭이 필요하다.
  */
 export default function Home() {
-  const picks = weekPicks()
+  const feed: FeedRow[] = homeFeed().map((c) => ({
+    ...toListRow(c),
+    reason: reasonLine(c.postsPer30, c.trend),
+  }))
+
   const week = new Date(payload.weekOf)
   const label = `${week.getMonth() + 1}월 ${week.getDate()}일 주`
 
@@ -19,22 +36,18 @@ export default function Home() {
         </p>
       </div>
 
-      {picks.length === 0 ? (
+      {feed.length === 0 ? (
         <p className="rounded-2xl border border-line bg-card p-5 text-[14px] text-ink-soft">
           아직 추천할 카페가 없어요. 수집이 끝나면 채워집니다.
         </p>
       ) : (
-        <div className="flex flex-col gap-4">
-          {picks.map((c, i) => (
-            <CafeCard key={c.id} cafe={toListRow(c)} rank={i + 1} />
-          ))}
-        </div>
+        <HomeFeed rows={feed} />
       )}
 
       <p className="mt-6 text-center text-[12px] leading-relaxed text-ink-soft">
         {payload.stats.regions}개 시군구에서 고른 {payload.stats.passed}곳 중에서
         <br />
-        주차·메뉴·거리를 함께 보고 추렸어요
+        주차·메뉴·거리를 함께 보고 {Math.min(PAGE_SIZE, feed.length)}곳씩 추렸어요
       </p>
     </div>
   )
