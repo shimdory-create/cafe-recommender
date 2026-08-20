@@ -1,6 +1,6 @@
 # 우리 가족 카페
 
-수도권 대형·베이커리 카페를 자동으로 모아 **매주 3곳을 추천**하는 가족 전용 웹서비스.
+수도권 대형·베이커리 카페를 자동으로 모아 **매주 10곳을 추천**하는 가족 전용 웹서비스.
 
 인천 부평에 사는 4인 가족이 월 2회 주말 나들이를 정하는 데 쓴다. 아내가 인스타에서
 카페를 발견하고, 흩어진 그것들을 주말마다 다시 고민하던 문제를 푼다.
@@ -74,7 +74,7 @@ npm run discover    # 신규 발굴 (65개 시군구)
 npm run buzz        # 화제량 수집
 npm run classify    # Layer 2~5 판정. --limit 200 --redo-stale
 npm run drive       # 실주행 시간 측정 (카카오 길찾기)
-npm run suggest     # 주말 후보 3곳. --city 로 도심 포함
+npm run suggest     # 주말 후보 10곳. --city 로 도심 포함
 npm run site        # 웹앱용 페이로드 생성
 npm run notify      # 카카오톡 문구 (200자). 발송하지 않는다
 
@@ -83,11 +83,12 @@ npm run label                  # 골든셋 O/X. --report 로 측정값
 npm run inspect "카페 이름"    # 판정 근거 전체
 npm run hide "카페 이름"       # 협찬 티가 나는 곳 즉시 제외
 npm run health                 # 소스 상태
+npm run prune-raw -- --days 7   # 원본 스냅샷 정리 (하루 약 50MB 쌓인다)
 ```
 
 ```bash
-npm test              # 파이프라인 406건
-npm run test:web      # 웹 16건
+npm test              # 파이프라인 448건
+npm run test:web      # 웹 62건
 npm run typecheck
 npm run build:web     # site 생성 + Next 빌드
 ```
