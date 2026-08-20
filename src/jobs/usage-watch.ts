@@ -1,4 +1,5 @@
 import type { BuzzSnapshot, Cafe, Health } from '../schema.js'
+import { PENDING_PER_DAY } from './daily-buzz.js'
 
 /**
  * 사용량 이상 감시.
@@ -39,8 +40,10 @@ const WEEKLY_STALE_HOURS = 24 * 9
 /** 쿼터 소진을 가리키는 문구. provider 마다 다르게 말한다 */
 const QUOTA_HINTS = ['429', 'quota', 'RESOURCE_EXHAUSTED', 'rate limit', 'too many requests']
 
-/** 화제량 측정이 오늘 몇 %나 됐는지. 이 밑이면 알린다 */
+/** active 카페 중 오늘 측정된 비율. 이 밑이면 알린다 */
 const BUZZ_TODAY_MIN_RATIO = 0.8
+/** 오늘 측정 총량이 기대치의 이 비율보다 낮으면 수집이 죽은 것으로 본다 */
+const BUZZ_THROUGHPUT_MIN_RATIO = 0.3
 /** 판정 대기가 남아 있는데 오늘 이만큼도 못 했으면 경고 */
 const CLASSIFY_WARN_BELOW = 50
 
@@ -63,15 +66,22 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
   const out: Anomaly[] = []
   const today = dayOf(now.toISOString())
 
-  // 1. 쿼터 소진 — 키가 새어 남이 쓰고 있을 때 가장 먼저 여기 걸린다
+  // 1. 쿼터 소진.
+  //
+  //    **무료 티어에서 이것은 정상이다.** 하루 한도까지 쓰면 429 가 오고 잡은
+  //    거기서 멈춘다 — 매일 일어난다. 그래서 경보로 올리지 않는다. 이걸로
+  //    매일 메일을 보내면 사흘 뒤부터 아무도 열지 않는다.
+  //
+  //    키가 새서 남이 쓰는 경우는 **진행량 0** 으로 드러난다 (아래 5번).
+  //    "429 가 왔다" 가 아니라 "한 곳도 못 했다" 가 신호다.
   for (const h of health) {
     if (h.lastError && isQuotaError(h.lastError)) {
       out.push({
-        level: 'alert',
+        level: 'warn',
         code: 'quota_error',
         message:
-          `${h.source} 가 쿼터 오류를 냈다 (연속 ${h.consecutiveFailures}회).`
-          + ` 남이 우리 키를 쓰고 있을 수 있다 — 키 교체를 검토한다. [${h.lastError.slice(0, 120)}]`,
+          `${h.source} 가 일일 쿼터를 다 썼다 (무료 티어에서는 정상).`
+          + ` 진행량이 0이면 아래 항목이 경보로 알린다.`,
       })
     }
   }
@@ -112,18 +122,41 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
     }
   }
 
-  // 4. 화제량 측정이 급감 — 카카오 쿼터를 남이 쓰면 여기 나타난다.
-  //    buzz.json 은 카페별 최신 1건만 보관하므로 "오늘 날짜 비율" 이 곧 오늘 성공률이다.
-  if (buzz.length >= 100) {
-    const todayCount = buzz.filter((b) => b.capturedAt === today).length
-    const ratio = todayCount / buzz.length
+  // 4. 화제량 측정.
+  //
+  //    전체 비율로 보지 않는다 — 판정 대기 카페는 **돌려가며** 재므로 (하루
+  //    800곳) 전체 대비 오늘 비율은 원래 낮다. 대신 두 가지를 본다.
+  //
+  //    (a) active 카페는 매일 전부 재야 한다. 순위와 대표 이미지가 여기서 나온다.
+  //    (b) 오늘 측정한 총량. 카카오 쿼터가 끊기면 이 숫자가 무너진다.
+  const measuredToday = new Set(
+    buzz.filter((b) => b.capturedAt === today).map((b) => b.kakaoPlaceId),
+  )
+  const activeCafes = cafes.filter((c) => c.status === 'active')
+  if (activeCafes.length >= 20) {
+    const hit = activeCafes.filter((c) => measuredToday.has(c.kakaoPlaceId)).length
+    const ratio = hit / activeCafes.length
     if (ratio < BUZZ_TODAY_MIN_RATIO) {
       out.push({
         level: 'alert',
         code: 'buzz_drop',
         message:
-          `화제량 측정이 오늘 ${todayCount}/${buzz.length}곳`
+          `추천 대상 ${activeCafes.length}곳 중 오늘 측정이 ${hit}곳`
           + ` (${Math.round(ratio * 100)}%) 뿐이다. 카카오 쿼터나 수집 잡을 확인한다.`,
+      })
+    }
+  }
+  const pendingCount = cafes.filter((c) => c.status === 'pending_extraction').length
+  if (pendingCount > 0 && buzz.length >= 100) {
+    // 기대치: active 전부 + 회전분. 그 30% 도 못 했으면 수집이 죽은 것이다.
+    const expected = activeCafes.length + Math.min(pendingCount, PENDING_PER_DAY)
+    if (measuredToday.size < expected * BUZZ_THROUGHPUT_MIN_RATIO) {
+      out.push({
+        level: 'alert',
+        code: 'buzz_throughput',
+        message:
+          `오늘 화제량 측정 ${measuredToday.size}곳 (기대 ${expected}곳).`
+          + ` 수집이 일찍 끊겼다.`,
       })
     }
   }
@@ -160,13 +193,19 @@ export function formatWatch(anomalies: Anomaly[], input: WatchInput): string {
   const active = input.cafes.filter((c) => c.status === 'active').length
   const pending = input.cafes.filter((c) => c.status === 'pending_extraction').length
   const buzzToday = input.buzz.filter((b) => b.capturedAt === today).length
+  const activeMeasured = (() => {
+    const done = new Set(
+      input.buzz.filter((b) => b.capturedAt === today).map((b) => b.kakaoPlaceId),
+    )
+    return input.cafes.filter((c) => c.status === 'active' && done.has(c.kakaoPlaceId)).length
+  })()
   const classifiedToday = input.cafes.filter(
     (c) => c.attributes && dayOf(c.attributes.extractedAt) === today,
   ).length
 
   const lines = [
     `사용량 점검 ${today}`,
-    `  화제량 측정 오늘 ${buzzToday}/${input.buzz.length}곳`,
+    `  화제량 측정 오늘 ${buzzToday}곳 (추천 대상 ${activeMeasured}/${active}곳)`,
     `  판정 오늘 ${classifiedToday}곳 · 대기 ${pending}곳 · 통과 ${active}곳`,
   ]
 
@@ -179,4 +218,33 @@ export function formatWatch(anomalies: Anomaly[], input: WatchInput): string {
     lines.push(`  [${a.level === 'alert' ? '!' : '~'}] ${a.code}: ${a.message}`)
   }
   return lines.join('\n')
+}
+
+/** 이상 코드를 사람 말로. 카톡 한 줄에 들어가야 하므로 짧게 */
+const LABELS: Record<string, string> = {
+  quota_error: '쿼터 오류',
+  source_failing: '수집 실패',
+  source_stale: '수집 멈춤',
+  buzz_drop: '화제량 측정 부족',
+  buzz_throughput: '수집 조기 중단',
+  classify_stalled: '판정 정체',
+  classify_slow: '판정 지연',
+}
+
+/**
+ * 카카오톡 문구 끝에 붙일 한 줄.
+ *
+ * 사용자 요청("이상 없음을 같이 보내줘")의 핵심은 **없으면 이상한 신호**를
+ * 만드는 것이다. 메일 알림은 알림 자체가 죽으면 조용하지만, 매주 오는 이 줄은
+ * 빠지면 눈에 띈다.
+ */
+export function statusLine(anomalies: Anomaly[]): string {
+  if (anomalies.length === 0) return '자동수집 정상'
+  const alerts = anomalies.filter((a) => a.level === 'alert')
+  const shown = (alerts.length > 0 ? alerts : anomalies)
+    .map((a) => LABELS[a.code] ?? a.code)
+  const uniq = [...new Set(shown)]
+  const head = uniq.slice(0, 2).join('·')
+  const rest = uniq.length > 2 ? ` 외 ${uniq.length - 2}건` : ''
+  return `${alerts.length > 0 ? '점검 필요' : '주의'}: ${head}${rest}`
 }

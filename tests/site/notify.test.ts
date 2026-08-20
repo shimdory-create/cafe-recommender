@@ -132,3 +132,48 @@ describe('buildNotifyText', () => {
     expect(t).not.toContain('외 ')
   })
 })
+
+describe('buildNotifyText — 자동수집 상태 줄', () => {
+  const three = [
+    cafe({ id: '1', name: '소올투베이커리' }),
+    cafe({ id: '2', name: '휘우커피' }),
+    cafe({ id: '3', name: '더티트렁크' }),
+  ]
+
+  it('상태를 주면 마지막 줄에 붙는다', () => {
+    const text = buildNotifyText({
+      payload: payload(three),
+      baseUrl: 'https://cafe.example.app',
+      status: '자동수집 정상',
+    })
+    expect(text.endsWith('자동수집 정상')).toBe(true)
+  })
+
+  it('상태를 주지 않으면 줄이 생기지 않는다 (기존 동작 유지)', () => {
+    const text = buildNotifyText({ payload: payload(three), baseUrl: 'https://cafe.example.app' })
+    expect(text).not.toContain('자동수집')
+  })
+
+  it('상태가 길어도 200자를 넘지 않는다 — 설명부터 줄인다', () => {
+    const long = '점검 필요: 화제량 측정 부족·판정 정체 외 2건'
+    const text = buildNotifyText({
+      payload: payload(three),
+      baseUrl: 'https://cafe-recommender-git-master-shim6.vercel.app',
+      status: long,
+    })
+    expect(text.length).toBeLessThanOrEqual(KAKAO_TEXT_LIMIT)
+    // 줄여도 링크와 상태는 남는다 — 이 둘이 메시지의 목적이다
+    expect(text).toContain('https://')
+    expect(text).toContain(long)
+  })
+
+  it('추천이 없을 때도 상태는 전한다', () => {
+    const text = buildNotifyText({
+      payload: payload([]),
+      baseUrl: 'https://cafe.example.app',
+      status: '점검 필요: 수집 멈춤',
+    })
+    expect(text).toContain('점검 필요: 수집 멈춤')
+    expect(text.length).toBeLessThanOrEqual(KAKAO_TEXT_LIMIT)
+  })
+})

@@ -18,6 +18,14 @@ import type { Store } from '../store/types.js'
  * 나중에 추이 그래프가 필요해지면 월 1건 집계 파일을 따로 두면 된다.
  */
 
+/**
+ * 하루에 다시 재는 판정 대기 카페 수.
+ *
+ * 대기 5,100곳 / 800 = 약 6~7일에 한 바퀴. 판정이 하루 최대 200곳(무료 쿼터)
+ * 이므로 이보다 자주 잴 이유가 없다.
+ */
+export const PENDING_PER_DAY = 800
+
 export interface DailyBuzzDeps {
   store: Pick<
     Store,
@@ -48,18 +56,33 @@ export interface DailyBuzzResult {
  */
 export async function runDailyBuzz(
   deps: DailyBuzzDeps,
-  opts: { limit?: number } = {},
+  opts: { limit?: number; pendingPerDay?: number } = {},
 ): Promise<DailyBuzzResult> {
   const { store, blog, now = new Date() } = deps
   const cafes = await store.readCafes()
-  // 화면에 보이는 카페(active)를 먼저 처리한다. limit 으로 잘릴 때 추천에
-  // 뜨는 곳이 뒤로 밀리면 안 된다 — 대표 이미지도 여기서 얻기 때문이다.
-  const targets = cafes
-    .filter((c) => c.status === 'active' || c.status === 'pending_extraction')
-    .sort((a, b) => (a.status === b.status ? 0 : a.status === 'active' ? -1 : 1))
-    .slice(0, opts.limit ?? Infinity)
-
   const rows = await store.readBuzz()
+
+  // 화면에 보이는 카페(active)는 **매일** 다시 잰다. 순위와 대표 이미지가
+  // 여기서 나오므로 하루라도 낡으면 그대로 보인다.
+  const active = cafes.filter((c) => c.status === 'active')
+
+  // 판정 대기는 **돌려가며** 잰다. 화면에 뜨지 않는 5,000곳을 매일 재는 것은
+  // 순수한 낭비였다 — 카카오 호출 5,900회/일, Actions 18분/일. 대기 카페의
+  // 화제량은 "판정 우선순위" 에만 쓰이므로 주 1회면 충분하다.
+  //
+  // 가장 오래된 것부터 고른다. 그러면 전체가 PENDING_PER_DAY 주기로 한 바퀴 돈다.
+  const measuredAt = new Map(rows.map((r) => [r.kakaoPlaceId, r.capturedAt]))
+  const pending = cafes
+    .filter((c) => c.status === 'pending_extraction')
+    .sort((a, b) => {
+      // 한 번도 안 잰 곳이 가장 먼저다 ('' 가 어떤 날짜보다 작다)
+      const x = measuredAt.get(a.kakaoPlaceId) ?? ''
+      const y = measuredAt.get(b.kakaoPlaceId) ?? ''
+      return x === y ? a.kakaoPlaceId.localeCompare(b.kakaoPlaceId) : x.localeCompare(y)
+    })
+    .slice(0, opts.pendingPerDay ?? PENDING_PER_DAY)
+
+  const targets = [...active, ...pending].slice(0, opts.limit ?? Infinity)
   const capturedAt = now.toISOString().slice(0, 10)
   let updated = 0
   let failed = 0

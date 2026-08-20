@@ -7,6 +7,14 @@ export interface NotifyInput {
   payload: SitePayload
   /** 배포된 웹앱 주소. 없으면 링크 줄을 뺀다 */
   baseUrl?: string
+  /**
+   * 자동 수집 상태 한 줄. 사용자 요청이다 — "정상으로 작동되는지는 카카오톡
+   * 메시지로 보낼 때 이상 없음을 같이 보내줘".
+   *
+   * 매주 눈으로 확인하는 것이 메일 알림보다 확실하다: 메일은 안 오면 알 수
+   * 없지만(알림 자체가 죽어도 조용하다), 이 줄은 **없으면 이상하다**.
+   */
+  status?: string
 }
 
 /** 카톡에 이름을 적는 수. 추천은 10곳이지만 200자에 다 들어가지 않는다 */
@@ -33,7 +41,8 @@ export function buildNotifyText(input: NotifyInput): string {
 
   const head = '[이번 주 추천 카페]'
   const moreLine = more > 0 ? `\n… 외 ${more}곳` : ''
-  const tail = link ? `${moreLine}\n자세히 → ${link}` : moreLine
+  const statusLine = input.status ? `\n${input.status}` : ''
+  const tail = (link ? `${moreLine}\n자세히 → ${link}` : moreLine) + statusLine
 
   if (picks.length === 0) {
     return `${head}\n\n이번 주는 새로 추천할 곳이 없어요.${tail}`

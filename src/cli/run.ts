@@ -28,7 +28,7 @@ import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
 import { runDriveTimes, driveMinutesOf } from '../jobs/drive-times.js'
 import { runLabel, runLabelReport } from './label.js'
 import { buildSitePayload } from '../site/payload.js'
-import { detectAnomalies, formatWatch } from '../jobs/usage-watch.js'
+import { detectAnomalies, formatWatch, statusLine } from '../jobs/usage-watch.js'
 import { buildNotifyText, KAKAO_TEXT_LIMIT } from '../site/notify.js'
 import { mondayOf } from '../jobs/weekly-suggest.js'
 import { mkdir, writeFile } from 'node:fs/promises'
@@ -302,16 +302,20 @@ async function main() {
       // 문구만 만들어 보여준다. 실제 발송은 사람이 확인한 뒤 한다.
       const store = createJsonStore(process.env.DATA_DIR ?? 'data')
       const now = new Date()
-      const [cafes, buzz, visits, suggestions] = await Promise.all([
+      const [cafes, buzz, visits, suggestions, health] = await Promise.all([
         store.readCafes(), store.readBuzz(),
-        store.readVisits(), store.readSuggestions(),
+        store.readVisits(), store.readSuggestions(), store.readHealth(),
       ])
       const payload = buildSitePayload({
         cafes, buzz, visits, suggestions, weekOf: mondayOf(now), now,
       })
+      // 자동 수집이 도는지 매주 눈으로 확인한다 (사용자 요청).
+      // 문구가 200자를 넘으면 buildNotifyText 가 카페 설명부터 줄인다 —
+      // 상태 줄과 링크는 마지막까지 지킨다.
       const text = buildNotifyText({
         payload,
         baseUrl: flag(rest, 'url') || process.env.SITE_URL,
+        status: statusLine(detectAnomalies({ cafes, buzz, health, now })),
       })
       console.log('\n' + '-'.repeat(34))
       console.log(text)

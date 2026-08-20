@@ -246,6 +246,69 @@ describe('runDailyBuzz', () => {
   })
 })
 
+describe('runDailyBuzz — 회전 수집', () => {
+  /** 어떤 카페를 실제로 조회했는지만 본다 */
+  function spy(cafes: Cafe[], rows: BuzzSnapshot[]) {
+    const queries: string[] = []
+    const deps: DailyBuzzDeps = {
+      store: {
+        readCafes: async () => cafes,
+        writeCafes: async () => {},
+        readBuzz: async () => rows,
+        writeBuzz: async () => {},
+        appendRaw: async () => 'p',
+        readHealth: async () => [],
+        writeHealth: async () => {},
+      },
+      blog: {
+        search: async (q: string) => {
+          queries.push(q)
+          return { docs: [relDoc('카페1', 1)], payload: {} }
+        },
+      },
+      now: NOW,
+    }
+    return { deps, queries }
+  }
+
+  it('active 는 매일 전부 잰다 — 순위와 대표 이미지가 여기서 나온다', async () => {
+    const h = spy(
+      [cafe('a1'), cafe('a2'), cafe('p1', { status: 'pending_extraction' })],
+      [],
+    )
+    await runDailyBuzz(h.deps, { pendingPerDay: 0 })
+    expect(h.queries).toHaveLength(2)
+    expect(h.queries.join(' ')).not.toContain('카페p1')
+  })
+
+  it('판정 대기는 가장 오래 안 잰 것부터 고른다', async () => {
+    const h = spy(
+      [
+        cafe('p1', { status: 'pending_extraction' }),
+        cafe('p2', { status: 'pending_extraction' }),
+        cafe('p3', { status: 'pending_extraction' }),
+      ],
+      [
+        buzzRow('p1', { capturedAt: '2026-08-19' }),
+        buzzRow('p2', { capturedAt: '2026-08-10' }),
+        // p3 는 한 번도 재지 않았다 -> 가장 먼저
+      ],
+    )
+    await runDailyBuzz(h.deps, { pendingPerDay: 2 })
+    expect(h.queries).toHaveLength(2)
+    expect(h.queries[0]).toContain('카페p3')
+    expect(h.queries[1]).toContain('카페p2')
+  })
+
+  it('회전분 상한을 넘겨 재지 않는다 (Actions 시간·카카오 쿼터 절약)', async () => {
+    const many = Array.from({ length: 50 }, (_, i) =>
+      cafe(`p${i}`, { status: 'pending_extraction' }))
+    const h = spy(many, [])
+    await runDailyBuzz(h.deps, { pendingPerDay: 5 })
+    expect(h.queries).toHaveLength(5)
+  })
+})
+
 describe('mondayOf', () => {
   it('목요일의 월요일을 준다', () => {
     expect(mondayOf(new Date('2026-08-20T00:00:00Z'))).toBe('2026-08-17')
