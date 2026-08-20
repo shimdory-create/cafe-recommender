@@ -288,7 +288,6 @@ async function main() {
       const text = buildNotifyText({
         payload,
         baseUrl: flag(rest, 'url') || process.env.SITE_URL,
-        accessCode: process.env.ACCESS_CODE,
       })
       console.log('\n' + '-'.repeat(34))
       console.log(text)

@@ -7,8 +7,6 @@ export interface NotifyInput {
   payload: SitePayload
   /** 배포된 웹앱 주소. 없으면 링크 줄을 뺀다 */
   baseUrl?: string
-  /** 접근 코드가 있으면 링크에 붙여 한 번에 통과시킨다 */
-  accessCode?: string
 }
 
 /** 카톡에 이름을 적는 수. 추천은 10곳이지만 200자에 다 들어가지 않는다 */
@@ -22,7 +20,7 @@ const NAMED_IN_MESSAGE = 3
  * 추천이 10곳이어도 이름은 3곳만 적고 나머지는 개수로 알린다.
  */
 export function buildNotifyText(input: NotifyInput): string {
-  const { payload, baseUrl, accessCode } = input
+  const { payload, baseUrl } = input
   const byId = new Map(payload.cafes.map((c) => [c.id, c]))
 
   const all = payload.week
@@ -31,9 +29,7 @@ export function buildNotifyText(input: NotifyInput): string {
   const picks = all.slice(0, NAMED_IN_MESSAGE)
   const more = all.length - picks.length
 
-  const link = baseUrl
-    ? `${baseUrl.replace(/\/$/, '')}${accessCode ? `/?code=${encodeURIComponent(accessCode)}` : ''}`
-    : ''
+  const link = baseUrl ? baseUrl.replace(/\/$/, '') : ''
 
   const head = '[이번 주 추천 카페]'
   const moreLine = more > 0 ? `\n… 외 ${more}곳` : ''

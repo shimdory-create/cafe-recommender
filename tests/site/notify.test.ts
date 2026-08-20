@@ -78,19 +78,9 @@ describe('buildNotifyText', () => {
     const t = buildNotifyText({
       payload: payload(long),
       baseUrl: 'https://cafe-recommender-family.vercel.app',
-      accessCode: 'ourfamily2026',
     })
     expect(t.length).toBeLessThanOrEqual(KAKAO_TEXT_LIMIT)
     expect(t).toContain('vercel.app')
-  })
-
-  it('접근 코드를 링크에 붙인다 (한 번 누르면 통과)', () => {
-    const t = buildNotifyText({
-      payload: payload(three),
-      baseUrl: 'https://x.com',
-      accessCode: 'a b',
-    })
-    expect(t).toContain('code=a%20b')
   })
 
   it('주소 끝 슬래시가 겹치지 않는다', () => {

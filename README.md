@@ -104,13 +104,15 @@ GEMINI_API_KEY=...         # aistudio.google.com/apikey
 
 `npm run check-keys` 로 확인한다.
 
-웹앱은 환경변수 세 개를 더 본다. 없으면 **그 기능만 꺼지고 화면은 돈다.**
+웹앱은 환경변수 두 개를 더 본다. 없으면 **그 기능만 꺼지고 화면은 돈다.**
 
 ```
-ACCESS_CODE     가족 접근 코드. 없으면 게이트가 꺼진다 (로컬 개발)
 GITHUB_TOKEN    별점·방문 저장. 없으면 로컬 파일로 폴백한다
 GITHUB_REPO     owner/name
 ```
+
+접근 코드는 두지 않는다 — 내용이 카페 목록이고 개인정보가 없다. `robots.txt`
+로 색인만 차단한다 (스펙 10절).
 
 ## 쓰기 락
 
