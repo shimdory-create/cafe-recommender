@@ -17,6 +17,7 @@
     "notify": "tsx --env-file-if-exists=.env src/cli/run.ts notify",
     "visited": "tsx --env-file=.env src/cli/run.ts visited",
     "inspect": "tsx --env-file=.env src/cli/run.ts inspect",
+    "prune-raw": "tsx --env-file-if-exists=.env src/cli/run.ts prune-raw",
     "health": "tsx --env-file=.env src/cli/run.ts health",
     "hide": "tsx --env-file=.env src/cli/run.ts hide"
   },

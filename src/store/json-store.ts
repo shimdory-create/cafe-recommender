@@ -52,6 +52,17 @@ async function writeArray(dir: string, file: string, rows: unknown): Promise<voi
   await rename(tmp, join(dir, file))
 }
 
+/**
+ * 원본 스냅샷 위치. 기본은 `{DATA_DIR}/raw` 지만 `RAW_DIR` 로 옮길 수 있다.
+ *
+ * 하루 50MB 씩 쌓이는 API 응답이다. 프로젝트가 OneDrive·Dropbox 같은 동기화
+ * 폴더 안에 있으면 이 쓰레기가 전부 클라우드로 올라간다 (실측 2일에 276MB).
+ * 그럴 때 `RAW_DIR` 를 동기화 밖 경로로 두면 된다.
+ */
+export function rawDirOf(dataDir: string): string {
+  return process.env.RAW_DIR || join(dataDir, 'raw')
+}
+
 export function createJsonStore(dataDir: string): Store {
   return {
     readCafes: () => readArray(dataDir, 'cafes.json', CafeSchema),
@@ -76,7 +87,7 @@ export function createJsonStore(dataDir: string): Store {
 
     async appendRaw(source, query, payload, now = new Date()) {
       const day = now.toISOString().slice(0, 10)
-      const dir = join(dataDir, 'raw', day)
+      const dir = join(rawDirOf(dataDir), day)
       await mkdir(dir, { recursive: true })
       const safe = `${source}-${query}`.replace(/[^\w가-힣-]+/g, '_').slice(0, 80)
       const path = join(dir, `${safe}-${now.getTime()}.json`)

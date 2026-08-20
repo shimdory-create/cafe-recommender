@@ -12,10 +12,12 @@
  *   npm run visited    -- <카페 이름> [--date YYYY-MM-DD]
  *   npm run inspect    -- <카페 이름>
  *   npm run health
+ *   npm run prune-raw -- [--days 7]
  *   npm run hide       -- <카페 이름> | --list | --restore <카페 이름>
  */
 import { createContext, flag, numFlag } from './context.js'
-import { createJsonStore } from '../store/json-store.js'
+import { createJsonStore, rawDirOf } from '../store/json-store.js'
+import { pruneRaw } from '../store/prune-raw.js'
 import { withDataLock, LockBusyError } from '../store/lock.js'
 import { resolveCafe, printCandidates } from './resolve.js'
 import { scanTargets, REGIONS } from '../config/regions.js'
@@ -282,6 +284,20 @@ async function main() {
       console.log(text)
       console.log('-'.repeat(34))
       console.log(`${text.length} / ${KAKAO_TEXT_LIMIT}자\n`)
+      break
+    }
+
+    case 'prune-raw': {
+      // 원본 스냅샷은 하루 약 50MB 쌓인다. 동기화 폴더 안이면 클라우드까지 먹는다.
+      const dataDir = process.env.DATA_DIR ?? 'data'
+      const days = numFlag(rest, 'days') ?? 7
+      const r = await pruneRaw(rawDirOf(dataDir), { days })
+      const mb = (r.freedBytes / 1024 / 1024).toFixed(0)
+      console.log(
+        r.removedDays.length === 0
+          ? `지울 것이 없습니다 (${days}일 보관)`
+          : `${r.removedDays.length}일치 삭제 (${mb}MB): ${r.removedDays.join(', ')}`,
+      )
       break
     }
 
