@@ -8,7 +8,7 @@ import {
 const READ_REVALIDATE = 30
 
 export async function GET(req: Request) {
-  const store = writeStore()
+  const store = await writeStore()
   const cafe = new URL(req.url).searchParams.get('cafe')
   try {
     const rows = await store.read<Review>(REVIEWS_PATH, READ_REVALIDATE)
@@ -28,7 +28,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const store = writeStore()
+  const store = await writeStore()
   if (!store.enabled) {
     return NextResponse.json({ error: '아직 후기 저장이 설정되지 않았어요' }, { status: 503 })
   }

@@ -3,7 +3,7 @@ import { writeStore } from '@/lib/store'
 import { todayInSeoul, toggleVisit, VISITS_PATH, type VisitRow } from '@/lib/reviews'
 
 export async function GET() {
-  const store = writeStore()
+  const store = await writeStore()
   try {
     const rows = await store.read<VisitRow>(VISITS_PATH, 30)
     return NextResponse.json({ visits: rows, enabled: store.enabled })
@@ -19,7 +19,7 @@ export async function GET() {
  * 아무 가치가 없고, 그것을 알려면 인증을 붙여야 한다.
  */
 export async function POST(req: Request) {
-  const store = writeStore()
+  const store = await writeStore()
   if (!store.enabled) {
     return NextResponse.json({ error: '아직 기록 저장이 설정되지 않았어요' }, { status: 503 })
   }
