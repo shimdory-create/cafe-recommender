@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   // 가족 전용이다. 색인되면 안 된다 (스펙 10절)
   robots: { index: false, follow: false, nocache: true },
   appleWebApp: { capable: true, title: '심김가족 카페', statusBarStyle: 'default' },
+  // iOS 는 SVG 아이콘을 홈 화면에 쓰지 않는다 — PNG 가 없으면 화면 캡처가
+  // 아이콘이 된다. 그래서 icon.svg 와 같은 그림을 180px PNG 로 함께 둔다.
+  icons: { icon: '/icon.svg', apple: '/apple-touch-icon.png' },
 }
 
 export const viewport: Viewport = {

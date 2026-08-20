@@ -1,8 +1,8 @@
 name: weekly-drive
 on:
   schedule:
-    # 매주 토 21:30 UTC = 일 06:30 KST.
-    # daily-classify 가 매일 20:00 UTC 에 도므로 겹치지 않게 90분 뒤로 둔다
+    # 매주 토 22:00 UTC = 일 07:00 KST.
+    # daily-classify 가 매일 21:00 UTC 에 도므로 겹치지 않게 60분 뒤로 둔다
     # (겹치면 data/ 쓰기 락에 걸려 한쪽이 실패한다).
     - cron: '0 22 * * 6'
   workflow_dispatch:
