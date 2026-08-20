@@ -17,14 +17,14 @@
     "source": "classify",
     "lastSuccessAt": "2026-08-20T13:36:42.799Z",
     "lastError": "gemini HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-a",
-    "consecutiveFailures": 218,
-    "updatedAt": "2026-08-20T14:09:49.617Z"
+    "consecutiveFailures": 235,
+    "updatedAt": "2026-08-20T13:49:56.210Z"
   },
   {
     "source": "kakao-directions",
-    "lastSuccessAt": "2026-08-20T14:06:30.351Z",
+    "lastSuccessAt": "2026-08-20T14:58:03.444Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-08-20T14:06:30.351Z"
+    "updatedAt": "2026-08-20T14:58:03.444Z"
   }
 ]

@@ -25,7 +25,7 @@ import { runDiscover } from '../jobs/weekly-discover.js'
 import { runDailyBuzz } from '../jobs/daily-buzz.js'
 import { runClassify } from '../jobs/classify.js'
 import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
-import { runDriveTimes } from '../jobs/drive-times.js'
+import { runDriveTimes, driveMinutesOf } from '../jobs/drive-times.js'
 import { runLabel, runLabelReport } from './label.js'
 import { buildSitePayload } from '../site/payload.js'
 import { buildNotifyText, KAKAO_TEXT_LIMIT } from '../site/notify.js'
@@ -104,7 +104,8 @@ async function main() {
         const c = cafes.find((x) => x.kakaoPlaceId === s.kakaoPlaceId)
         const reason = s.reason as { hot?: number; tags?: string[] }
         console.log(
-          `  ${s.rank}. ${c?.name ?? s.kakaoPlaceId} (${c?.sigungu} ${c?.driveMinutesEst}분)`,
+          `  ${s.rank}. ${c?.name ?? s.kakaoPlaceId}`
+          + ` (${c?.sigungu} ${c ? driveMinutesOf(c) : '?'}분)`,
         )
         console.log(`     점수 ${s.finalScore} (핫 ${reason.hot}) · ${reason.tags?.join(' · ')}`)
         console.log(`     ${c?.naverMapUrl}`)
