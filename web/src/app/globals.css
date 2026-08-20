@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/*
+ * 모바일 전용 설계에 데스크톱을 얹는다 (스펙 10.1).
+ * 375~430px 에서 완성한 뒤 데스크톱은 max-width 480 센터 정렬만 한다.
+ */
+@theme {
+  --color-ink: #2b2320;
+  --color-ink-soft: #6b5d55;
+  --color-paper: #fbf8f4;
+  --color-card: #ffffff;
+  --color-line: #ece5dd;
+  --color-bean: #8a5a2b;
+  --color-bean-soft: #f3e6d8;
+  --font-sans: system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-ink: #f2ece6;
+    --color-ink-soft: #b3a49a;
+    --color-paper: #17130f;
+    --color-card: #221c17;
+    --color-line: #35291f;
+    --color-bean: #d9a066;
+    --color-bean-soft: #35291f;
+  }
+}
+
+html {
+  /* 79/81년생에게 13px 은 작다 (스펙 10.1) */
+  font-size: 16px;
+  /* 가로 스크롤 금지 */
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+/* 터치 하이라이트가 카드 전체를 덮는 것을 막는다 */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}

@@ -130,3 +130,62 @@ export const BlacklistEntrySchema = z.object({
   note: z.string().optional(),
 })
 export type BlacklistEntry = z.infer<typeof BlacklistEntrySchema>
+
+/**
+ * 웹앱이 읽는 표시용 페이로드 (계획 3 Task 1).
+ *
+ * 웹앱은 `data/*.json` 6,216곳을 직접 읽지 않는다. 파이프라인이 통과분만
+ * 골라 이 모양으로 만들어 주고, 웹앱은 이 스키마로 검증해 쓴다. 점수·게이트
+ * 로직이 두 곳에 생기는 것을 막고, 4.7MB 를 모바일로 내려보내지 않는다.
+ */
+export const SiteCafeSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  sigungu: z.string(),
+  driveMinutes: z.number().int().nullable(),
+
+  // 카드 상단 고정 3종 (스펙 10절 v3.1)
+  scale: z.enum(['대형', '중형', '소형']).nullable(),
+  parkingGrade: z.enum(['A', 'B', 'C', 'D', '?']),
+  menuLevel: z.number().int().min(1).max(3),
+
+  tags: z.array(z.string()),
+  /** 판단 근거 인용. 없으면 신뢰가 생기지 않는다 */
+  evidence: z.string(),
+  parkingEvidence: z.string(),
+  signatureMenu: z.string().nullable(),
+  viewTypes: z.array(z.string()),
+  mealTypes: z.array(z.string()),
+  outdoorSeating: z.boolean().nullable(),
+  teenAppeal: z.number().int().nullable(),
+  stayDuration: z.string().nullable(),
+
+  naverMapUrl: z.string(),
+  kakaoPlaceUrl: z.string().nullable(),
+
+  hotScore: z.number(),
+  postsPer30: z.number(),
+  acceleration: z.number(),
+  /** 주차 C — 도심 모드에서만 노출한다 (스펙 7.3) */
+  cityOnly: z.boolean(),
+  visitedOn: z.string().nullable(),
+})
+export type SiteCafe = z.infer<typeof SiteCafeSchema>
+
+export const SitePayloadSchema = z.object({
+  generatedAt: z.string(),
+  weekOf: z.string(),
+  week: z.array(z.object({
+    rank: z.number().int(),
+    id: z.string(),
+    finalScore: z.number(),
+  })),
+  cafes: z.array(SiteCafeSchema),
+  stats: z.object({
+    discovered: z.number().int(),
+    passed: z.number().int(),
+    regions: z.number().int(),
+    cityOnly: z.number().int(),
+  }),
+})
+export type SitePayload = z.infer<typeof SitePayloadSchema>

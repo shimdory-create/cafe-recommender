@@ -5,6 +5,8 @@
  *   npm run buzz       -- [--limit 200]
  *   npm run classify   -- [--limit 200] [--redo-stale] [--order file]
  *   npm run label      -- [--report] [--redo]
+ *   npm run site       -- [--out web/src/generated/site.json]
+ *   npm run notify     -- [--url https://...] (문구만 출력. 발송하지 않는다)
  *   npm run suggest    -- [--city]
  *   npm run visited    -- <카페 이름> [--date YYYY-MM-DD]
  *   npm run inspect    -- <카페 이름>
@@ -12,6 +14,7 @@
  *   npm run hide       -- <카페 이름> | --list | --restore <카페 이름>
  */
 import { createContext, flag, numFlag } from './context.js'
+import { createJsonStore } from '../store/json-store.js'
 import { resolveCafe, printCandidates } from './resolve.js'
 import { scanTargets, REGIONS } from '../config/regions.js'
 import { runDiscover } from '../jobs/weekly-discover.js'
@@ -19,6 +22,11 @@ import { runDailyBuzz } from '../jobs/daily-buzz.js'
 import { runClassify } from '../jobs/classify.js'
 import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
 import { runLabel, runLabelReport } from './label.js'
+import { buildSitePayload } from '../site/payload.js'
+import { buildNotifyText, KAKAO_TEXT_LIMIT } from '../site/notify.js'
+import { mondayOf } from '../jobs/weekly-suggest.js'
+import { mkdir, writeFile } from 'node:fs/promises'
+import { dirname } from 'node:path'
 
 const argv = process.argv.slice(2)
 const cmd = argv[0]
@@ -218,6 +226,52 @@ async function main() {
       break
     }
 
+    case 'site': {
+      // API 키를 요구하지 않는다 — 배포(Vercel) 빌드에서 키 없이 돌아야 한다
+      const store = createJsonStore(process.env.DATA_DIR ?? 'data')
+      const out = flag(rest, 'out') || 'web/src/generated/site.json'
+      const now = new Date()
+      const [cafes, buzz, visits, suggestions] = await Promise.all([
+        store.readCafes(), store.readBuzz(),
+        store.readVisits(), store.readSuggestions(),
+      ])
+      const payload = buildSitePayload({
+        cafes, buzz, visits, suggestions, weekOf: mondayOf(now), now,
+      })
+      await mkdir(dirname(out), { recursive: true })
+      // 2칸 들여쓰기 + 끝 개행 — git diff 를 깨끗하게 (스펙 9절)
+      await writeFile(out, JSON.stringify(payload, null, 2) + '\n', 'utf8')
+      console.log(
+        `${out}\n  카페 ${payload.cafes.length}곳`
+        + ` (일반 ${payload.stats.passed} / 도심전용 ${payload.stats.cityOnly})`
+        + ` · ${payload.stats.regions}개 시군구 · 이번 주 추천 ${payload.week.length}곳`,
+      )
+      break
+    }
+
+    case 'notify': {
+      // 문구만 만들어 보여준다. 실제 발송은 사람이 확인한 뒤 한다.
+      const store = createJsonStore(process.env.DATA_DIR ?? 'data')
+      const now = new Date()
+      const [cafes, buzz, visits, suggestions] = await Promise.all([
+        store.readCafes(), store.readBuzz(),
+        store.readVisits(), store.readSuggestions(),
+      ])
+      const payload = buildSitePayload({
+        cafes, buzz, visits, suggestions, weekOf: mondayOf(now), now,
+      })
+      const text = buildNotifyText({
+        payload,
+        baseUrl: flag(rest, 'url') || process.env.SITE_URL,
+        accessCode: process.env.ACCESS_CODE,
+      })
+      console.log('\n' + '-'.repeat(34))
+      console.log(text)
+      console.log('-'.repeat(34))
+      console.log(`${text.length} / ${KAKAO_TEXT_LIMIT}자\n`)
+      break
+    }
+
     case 'hide': {
       const ctx = createContext()
       const cafes = await ctx.store.readCafes()
@@ -253,7 +307,7 @@ async function main() {
     default:
       die(
         '사용법: tsx src/cli/run.ts'
-          + ' <discover|buzz|classify|label|suggest|visited|inspect|health|hide>',
+          + ' <discover|buzz|classify|label|suggest|site|notify|visited|inspect|health|hide>',
       )
   }
 }

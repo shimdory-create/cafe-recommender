@@ -1,0 +1,119 @@
+import { describe, it, expect } from 'vitest'
+import { buildNotifyText, KAKAO_TEXT_LIMIT } from '../../src/site/notify.js'
+import type { SiteCafe, SitePayload } from '../../src/schema.js'
+
+const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe => ({
+  sigungu: '양평군',
+  driveMinutes: 80,
+  scale: '대형',
+  parkingGrade: 'A',
+  menuLevel: 3,
+  tags: ['대형카페', '뷰맛집', '브런치카페'],
+  evidence: 'e',
+  parkingEvidence: 'p',
+  signatureMenu: null,
+  viewTypes: [],
+  mealTypes: [],
+  outdoorSeating: null,
+  teenAppeal: null,
+  stayDuration: null,
+  naverMapUrl: 'https://map.naver.com/p/search/x',
+  kakaoPlaceUrl: null,
+  hotScore: 50,
+  postsPer30: 60,
+  acceleration: 1.5,
+  cityOnly: false,
+  visitedOn: null,
+  ...over,
+})
+
+const payload = (cafes: SiteCafe[]): SitePayload => ({
+  generatedAt: '2026-08-20T00:00:00.000Z',
+  weekOf: '2026-08-17',
+  week: cafes.map((c, i) => ({ rank: i + 1, id: c.id, finalScore: 10 - i })),
+  cafes,
+  stats: { discovered: 100, passed: cafes.length, regions: 3, cityOnly: 0 },
+})
+
+const three = [
+  cafe({ id: '1', name: '테라로사 서종점' }),
+  cafe({ id: '2', name: '카페산', sigungu: '가평군', driveMinutes: 90 }),
+  cafe({ id: '3', name: '더그림', sigungu: '파주시', driveMinutes: 60 }),
+]
+
+describe('buildNotifyText', () => {
+  it('추천 3곳과 링크를 담는다', () => {
+    const t = buildNotifyText({
+      payload: payload(three),
+      baseUrl: 'https://cafe.example.com',
+    })
+    expect(t).toContain('이번 주 추천 카페')
+    expect(t).toContain('테라로사 서종점')
+    expect(t).toContain('카페산')
+    expect(t).toContain('더그림')
+    expect(t).toContain('https://cafe.example.com')
+  })
+
+  it('200자를 넘지 않는다', () => {
+    // 넘치면 카카오가 자른다 (스펙 10.2)
+    const t = buildNotifyText({
+      payload: payload(three),
+      baseUrl: 'https://cafe.example.com',
+    })
+    expect(t.length).toBeLessThanOrEqual(KAKAO_TEXT_LIMIT)
+  })
+
+  it('상호가 길어도 200자를 지키고 링크를 살린다', () => {
+    // 정보 전달이 아니라 앱을 열게 하는 것이 목적이다
+    const long = [
+      cafe({ id: '1', name: '쌀베이커리 카페흥만소 고기동유원지점' }),
+      cafe({ id: '2', name: '테이블스 라운지 북한강점', sigungu: '남양주시' }),
+      cafe({ id: '3', name: '마호가니 광화문 케이스퀘어시티점', sigungu: '종로구' }),
+    ]
+    const t = buildNotifyText({
+      payload: payload(long),
+      baseUrl: 'https://cafe-recommender-family.vercel.app',
+      accessCode: 'ourfamily2026',
+    })
+    expect(t.length).toBeLessThanOrEqual(KAKAO_TEXT_LIMIT)
+    expect(t).toContain('vercel.app')
+  })
+
+  it('접근 코드를 링크에 붙인다 (한 번 누르면 통과)', () => {
+    const t = buildNotifyText({
+      payload: payload(three),
+      baseUrl: 'https://x.com',
+      accessCode: 'a b',
+    })
+    expect(t).toContain('code=a%20b')
+  })
+
+  it('주소 끝 슬래시가 겹치지 않는다', () => {
+    const t = buildNotifyText({ payload: payload(three), baseUrl: 'https://x.com/' })
+    expect(t).not.toContain('x.com//')
+  })
+
+  it('주소가 없으면 링크 줄을 뺀다', () => {
+    const t = buildNotifyText({ payload: payload(three) })
+    expect(t).not.toContain('자세히')
+    expect(t).toContain('테라로사 서종점')
+  })
+
+  it('추천이 없으면 그렇다고 말한다 (빈 메시지를 보내지 않는다)', () => {
+    const t = buildNotifyText({ payload: payload([]), baseUrl: 'https://x.com' })
+    expect(t).toContain('없어요')
+    expect(t).toContain('https://x.com')
+  })
+
+  it('목록에 없는 추천은 건너뛴다', () => {
+    const p = payload(three)
+    p.week.push({ rank: 4, id: '없는곳', finalScore: 1 })
+    const t = buildNotifyText({ payload: p })
+    expect(t).not.toContain('없는곳')
+  })
+
+  it('짧으면 태그까지 담는다', () => {
+    const t = buildNotifyText({ payload: payload([cafe({ id: '1', name: '후탄' })]) })
+    expect(t).toContain('대형카페')
+  })
+})
