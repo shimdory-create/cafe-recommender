@@ -36330,8 +36330,8 @@
     "straightKm": 17.6,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-08-20T11:11:35.623Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -38656,8 +38656,8 @@
     "straightKm": 14.89,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-08-20T11:11:35.623Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -82496,8 +82496,8 @@
     "straightKm": 32.34,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-08-20T11:11:35.623Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -132045,8 +132045,8 @@
     "straightKm": 11.42,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-08-20T11:11:35.623Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 22% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []

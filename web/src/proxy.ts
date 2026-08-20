@@ -36,6 +36,12 @@ export default function proxy(req: NextRequest) {
 
   if (req.cookies.get(COOKIE)?.value === code) return NextResponse.next()
 
+  // API 는 HTML 로 리다이렉트하지 않는다 — fetch 하는 쪽이 JSON 을 기대하므로
+  // 로그인 페이지 HTML 을 받으면 파싱 오류로 원인이 흐려진다.
+  if (pathname.startsWith('/api/')) {
+    return NextResponse.json({ error: '접근 코드가 필요합니다' }, { status: 401 })
+  }
+
   const url = req.nextUrl.clone()
   url.pathname = '/gate'
   url.search = pathname === '/' ? '' : `?next=${encodeURIComponent(pathname)}`
