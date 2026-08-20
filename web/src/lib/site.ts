@@ -1,8 +1,8 @@
 import raw from '../generated/site.json'
-// 타입만 가져온다 — 런타임 import 가 아니므로 파이프라인 코드가 번들에
-// 들어가지 않는다. 이렇게 하면 웹에서 타입을 다시 적을 필요가 없고,
-// 생성기가 필드를 바꾸면 여기서 타입 오류로 드러난다.
-import type { SiteCafe, SitePayload, SiteVisited } from '../../../src/schema'
+// 경계를 넘는 import 를 쓰지 않는다 — src/schema.ts 는 web 밖이라 모듈
+// 해석이 위로 올라가고, Vercel 은 web 에서만 설치하므로 zod 를 못 찾는다.
+// 드리프트는 파이프라인 테스트(types-conformance)가 잡는다.
+import type { SiteCafe, SitePayload, SiteVisited } from './site-types'
 
 export type { SiteCafe, SitePayload, SiteVisited }
 
