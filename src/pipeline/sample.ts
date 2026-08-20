@@ -20,7 +20,7 @@ export interface SampledRow {
 }
 
 /** 사람이 판정해도 배울 것이 없는 배제 사유 (스타벅스가 아니냐고 물을 필요는 없다) */
-const UNINFORMATIVE_REASONS = ['franchise', 'category']
+const UNINFORMATIVE_REASONS = ['franchise', 'category', 'out_of_region']
 
 /** 구제 경로로만 통과한 경계 판단 기준 (발견 C) */
 const RESCUE_POSTS_PER_30 = 8

@@ -43,7 +43,10 @@ async function main() {
         regions,
         skipHarvest: flag(rest, 'skip-harvest') !== undefined,
       })
-      console.log(`  신규 ${r.discovered}곳 / 자동배제 ${r.excluded}곳 / 전체 ${r.total}곳`)
+      console.log(
+        `  신규 ${r.discovered}곳 / 자동배제 ${r.excluded}곳`
+        + ` / 타지역 ${r.offRegion}곳 / 전체 ${r.total}곳`,
+      )
       if (r.errors.length) {
         console.log(`  실패 ${r.errors.length}건:`)
         r.errors.slice(0, 10).forEach((e) => console.log(`    ${e}`))

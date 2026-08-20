@@ -5,12 +5,17 @@ import type { Cafe } from '../../src/schema.js'
 
 const region = { sido: '경기', sigungu: '양평군' } as const
 
-const place = (id: string, name: string, category = '음식점 > 카페'): KakaoPlace => ({
+const place = (
+  id: string,
+  name: string,
+  category = '음식점 > 카페',
+  addr = '경기 양평군',
+): KakaoPlace => ({
   id,
   placeName: name,
   categoryName: category,
-  addressName: '경기 양평군',
-  roadAddressName: '경기 양평군 1',
+  addressName: addr,
+  roadAddressName: `${addr} 1`,
   phone: '',
   placeUrl: `http://place/${id}`,
   lat: 37.49,
@@ -200,5 +205,39 @@ describe('runDiscover', () => {
     await runDiscover(h.deps, { regions: [region], skipHarvest: true })
     expect(queries).toHaveLength(6) // 키워드 6종 x is_end 로 1페이지씩
     expect(queries.every((q) => q.startsWith('경기 양평군 '))).toBe(true)
+  })
+  it('동명 시군구의 장소를 저장하지 않는다', async () => {
+    // 실측: "서울 강서구" 검색에 부산 강서구 8곳, "경기 광주시" 에 전남광주 5곳
+    const h = harness({
+      local: {
+        searchKeyword: async () => ({
+          places: [
+            place('1', '흐른', '음식점 > 카페', '부산 강서구'),
+            place('2', '마곡카페', '음식점 > 카페', '서울 강서구'),
+          ],
+          isEnd: true,
+          payload: {},
+        }),
+      },
+    })
+    const r = await runDiscover(h.deps, { regions: [{ sido: '서울', sigungu: '강서구' }] })
+    expect(r.offRegion).toBe(1)
+    expect(h.saved().map((c) => c.name)).toEqual(['마곡카페'])
+  })
+
+  it('타지역은 배제 카운트가 아니라 별도로 센다', async () => {
+    // 프랜차이즈 배제와 섞으면 무엇이 걸러졌는지 알 수 없다
+    const h = harness({
+      local: {
+        searchKeyword: async () => ({
+          places: [place('1', '카페', '음식점 > 카페', '부산 강서구')],
+          isEnd: true, payload: {},
+        }),
+      },
+    })
+    const r = await runDiscover(h.deps, { regions: [{ sido: '서울', sigungu: '강서구' }] })
+    expect(r.offRegion).toBe(1)
+    expect(r.excluded).toBe(0)
+    expect(r.discovered).toBe(0)
   })
 })

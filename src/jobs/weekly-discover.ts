@@ -2,6 +2,7 @@ import { SEARCH_KEYWORDS } from '../config/keywords.js'
 import { regionLabel, type Region } from '../config/regions.js'
 import { HOME, haversineKm, estimateDriveMinutes } from '../pipeline/geo.js'
 import { evaluateExclusion } from '../pipeline/exclude.js'
+import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousName } from '../pipeline/relevance.js'
 import { harvestCurated } from '../pipeline/harvest.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
@@ -34,6 +35,8 @@ export interface DiscoverDeps {
 export interface DiscoverResult {
   discovered: number
   excluded: number
+  /** 동명 시군구 오염으로 버린 수 */
+  offRegion: number
   total: number
   errors: string[]
 }
@@ -85,9 +88,17 @@ export async function runDiscover(
   const blacklist: BlacklistEntry[] = await store.readBlacklist()
   let discovered = 0
   let excluded = 0
+  // 같은 장소가 6개 키워드에 반복 등장하므로 id 로 센다
+  const offRegionIds = new Set<string>()
 
   const add = (p: KakaoPlace, region: Region) => {
     if (!p.id || byId.has(p.id)) return
+    // 카카오는 시도명을 붙여도 동명 시군구를 섞어 준다. 저장하지 않는다 —
+    // 부산 카페가 cafes.json 에 들어가면 그 다음 모든 계산이 오염된다.
+    if (!belongsToRegion(p, region)) {
+      offRegionIds.add(p.id)
+      return
+    }
     const cafe = toCafe(p, region, now)
     const reason = evaluateExclusion(
       { name: p.placeName, categoryName: p.categoryName },
@@ -130,5 +141,5 @@ export async function runDiscover(
   }
 
   await store.writeCafes([...byId.values()])
-  return { discovered, excluded, total: byId.size, errors }
+  return { discovered, excluded, offRegion: offRegionIds.size, total: byId.size, errors }
 }
