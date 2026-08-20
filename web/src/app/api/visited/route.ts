@@ -15,7 +15,10 @@ export async function GET() {
     return NextResponse.json({ visits: [], enabled: false, ok: false })
   }
   try {
-    const rows = await store.read<VisitRow>(VISITS_PATH, 30)
+    // 캐시를 두지 않는다. 30초 캐시를 뒀더니 체크한 직후 "다녀온 곳" 이 비어
+    // 보이고 이번 주 추천에도 그대로 남았다 — 눌린 것이 안 눌린 것처럼 보인다.
+    // 월 몇 번 열리는 페이지라 매번 읽어도 GitHub 한도(5,000/시간)에 닿지 않는다.
+    const rows = await store.read<VisitRow>(VISITS_PATH)
     return NextResponse.json({ visits: rows, enabled: true, ok: true })
   } catch (e) {
     return NextResponse.json({ visits: [], enabled: true, ok: false, error: (e as Error).message })
