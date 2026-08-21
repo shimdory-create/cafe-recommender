@@ -5,14 +5,22 @@ import {
   parseReviewInput, sortByNewest, summarize, REVIEWS_PATH, type Review,
 } from '@/lib/reviews'
 
-/** 별점이 올라오면 30초 안에 다른 가족에게도 보인다 */
-const READ_REVALIDATE = 30
+/**
+ * 후기 읽기에 캐시를 두지 않는다.
+ *
+ * 30초 캐시를 뒀더니 별점을 남기고 "다녀온 곳" 을 열면 **"아직 별점이 없어요"**
+ * 가 떴다 (감사 중 실측). 남긴 사람에게 그 문구는 "저장이 안 됐다" 로 읽히고,
+ * 그러면 다시 남겨 중복이 생긴다.
+ *
+ * 방문 기록과 같은 판단이다 — 월 몇 번 열리는 페이지라 매번 읽어도 GitHub
+ * 한도(5,000/시간)에 닿지 않는다.
+ */
 
 export async function GET(req: Request) {
   const store = await writeStore()
   const cafe = new URL(req.url).searchParams.get('cafe')
   try {
-    const rows = await store.read<Review>(REVIEWS_PATH, READ_REVALIDATE)
+    const rows = await store.read<Review>(REVIEWS_PATH)
     const mine = cafe ? rows.filter((r) => r.kakaoPlaceId === cafe) : rows
     return NextResponse.json({
       reviews: sortByNewest(mine),

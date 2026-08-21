@@ -125,7 +125,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? '저장에 실패했어요')
       localStorage.setItem(NICK_KEY, nickname)
-      // 누른 사람에게는 즉시 보인다. 다른 가족에게는 30초 안에.
+      // 누른 사람에게는 즉시 보인다. 다른 가족은 새로 열면 바로 보인다.
       setData((prev) => ({
         enabled: true,
         ok: true,
@@ -224,7 +224,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
           {error && <p className="mt-2 text-[13px] text-red-600 dark:text-red-400">{error}</p>}
           {done && !error && (
             <p className="mt-2 text-[13px] text-ink-soft">
-              남겼어요. 다른 가족 화면에는 30초 안에 보여요.
+              남겼어요. 다른 가족 화면에도 바로 보여요.
             </p>
           )}
         </div>

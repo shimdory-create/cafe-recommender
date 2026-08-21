@@ -33,7 +33,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="mx-auto min-h-dvh max-w-[480px] pb-24">
           <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
             <div className="flex items-center px-5 py-3.5">
-              <Link href="/" className="text-[17px] font-bold tracking-tight">
+              {/* 터치 타겟 44px 이상 (스펙 10.1). 감사에서 26px 로 측정됐다 */}
+              <Link
+                href="/"
+                className="flex min-h-[44px] items-center text-[17px] font-bold tracking-tight"
+              >
                 심김 빵지순례
               </Link>
             </div>
