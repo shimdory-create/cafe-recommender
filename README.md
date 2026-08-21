@@ -174,6 +174,7 @@ bash scripts/test-commit-data.sh "$PWD/scripts/commit-data.sh" /tmp/ct
 
 | 문서 | 내용 |
 |---|---|
+| `docs/운영-런북.md` | **뭔가 이상할 때 5분 안에 원인 찾기.** 증상 -> 대응 |
 | `docs/superpowers/specs/2026-08-19-cafe-recommender-design.md` | 설계. 필터링 4축, 스코어링, 화면 |
 | `docs/superpowers/specs/2026-08-20-data-source-findings.md` | 데이터 소스 실측 (네이버 API 이관, 카카오 대체) |
 | `docs/superpowers/specs/2026-08-20-full-scan-findings.md` | 전수 실행 결과. 발견 C·D |
