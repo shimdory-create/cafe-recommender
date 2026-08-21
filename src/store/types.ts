@@ -7,6 +7,7 @@ import type {
   Review,
   Health,
   BlacklistEntry,
+  NotifyLog,
 } from '../schema.js'
 
 /**
@@ -38,6 +39,13 @@ export interface Store {
 
   readHealth(): Promise<Health[]>
   writeHealth(rows: Health[]): Promise<void>
+
+  /**
+   * 카카오톡 발송 기록. 발송은 이 PC 에서 나가므로 클라우드가 알 수 없다 —
+   * 한 줄을 커밋해두면 감시가 "지난주에 안 나갔다" 를 잡는다.
+   */
+  readNotifyLog(): Promise<NotifyLog[]>
+  writeNotifyLog(rows: NotifyLog[]): Promise<void>
 
   /**
    * 원본 응답을 data/raw/YYYY-MM-DD/ 에 적재하고 경로를 돌려준다.

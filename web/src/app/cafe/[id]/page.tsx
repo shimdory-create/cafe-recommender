@@ -5,6 +5,7 @@ import {
 } from '@/lib/site'
 import { Badge } from '../../cafe-card'
 import { ReviewPanel } from './review-panel'
+import { BackLink } from './back-link'
 
 export function generateStaticParams() {
   return payload.cafes.map((c) => ({ id: c.id }))
@@ -42,11 +43,9 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
 
   return (
     <div className="py-5">
-      <Link href="/list" className="text-[13px] text-ink-soft">
-        ← 목록
-      </Link>
+      <BackLink />
 
-      <h1 className="mt-2 text-[24px] font-bold leading-tight tracking-tight">{cafe.name}</h1>
+      <h1 className="mt-1 text-[24px] font-bold leading-tight tracking-tight">{cafe.name}</h1>
       <p className="mt-1 text-[14px] text-ink-soft">
         {cafe.sigungu} · {driveLabel(cafe.driveMinutes)}
       </p>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { pageOf, pageCount, PAGE_SIZE } from './home-feed'
+import { pageOf, pageCount, pageFromParam, PAGE_SIZE } from './paging'
 
 const rows = Array.from({ length: 23 }, (_, i) => i + 1)
 
@@ -43,5 +43,24 @@ describe('pageCount', () => {
 
   it('10곳 이하면 1페이지다', () => {
     expect(pageCount(7)).toBe(1)
+  })
+})
+
+describe('pageFromParam', () => {
+  it('URL 의 ?p= 를 페이지 번호로 읽는다', () => {
+    expect(pageFromParam('2')).toBe(2)
+  })
+
+  it('없거나 이상한 값은 1페이지로 본다', () => {
+    expect(pageFromParam(null)).toBe(1)
+    expect(pageFromParam('')).toBe(1)
+    expect(pageFromParam('abc')).toBe(1)
+    expect(pageFromParam('0')).toBe(1)
+    expect(pageFromParam('-3')).toBe(1)
+  })
+
+  it('마지막 페이지를 넘기면 마지막으로 붙인다', () => {
+    // 2페이지를 보다가 방문 체크로 목록이 줄어든 경우
+    expect(pageFromParam('9', 3)).toBe(3)
   })
 })

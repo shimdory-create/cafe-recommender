@@ -1,24 +1,11 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
-import { type ListRow } from '@/lib/site'
-import { CafeCard } from './cafe-card'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { PAGE_SIZE, pageCount, pageFromParam, pageOf } from '@/lib/paging'
+import { FeedCards, type FeedRow } from './feed-cards'
 
-export const PAGE_SIZE = 10
-
-/** 페이지 번호로 잘라낸다. 순수 함수라 테스트가 된다 */
-export function pageOf<T>(rows: T[], page: number, size = PAGE_SIZE): T[] {
-  const start = Math.max(0, page - 1) * size
-  return rows.slice(start, start + size)
-}
-
-export function pageCount(total: number, size = PAGE_SIZE): number {
-  return Math.max(1, Math.ceil(total / size))
-}
-
-export interface FeedRow extends ListRow {
-  reason: string
-}
+export type { FeedRow }
 
 /**
  * 홈 피드. 10곳씩 보여주고 다음 10곳으로 넘어간다.
@@ -26,9 +13,15 @@ export interface FeedRow extends ListRow {
  * 무한 스크롤을 쓰지 않는다 — 어디까지 봤는지 알 수 없고, 되돌아오면
  * 맨 위로 튄다. 페이지 번호가 있으면 "지난주에 3페이지까지 봤다" 가
  * 성립한다. 가족이 대화하면서 보는 목록이므로 위치를 말할 수 있어야 한다.
+ *
+ * **페이지 번호는 URL(`?p=`)에 둔다.** useState 로만 들고 있었더니 2페이지에서
+ * 카페를 눌러 보고 뒤로 오면 1페이지로 돌아갔다 (사용자 보고) — 화면 상태가
+ * 히스토리에 남지 않기 때문이다. URL 에 있으면 뒤로가기가 그 페이지를 복원한다.
  */
 export function HomeFeed({ rows }: { rows: FeedRow[] }) {
-  const [page, setPage] = useState(1)
+  const router = useRouter()
+  const pathname = usePathname()
+  const params = useSearchParams()
   const [visited, setVisited] = useState<Set<string> | null>(null)
 
   useEffect(() => {
@@ -52,25 +45,19 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
   )
 
   const total = pageCount(feed.length)
-  const shown = pageOf(feed, Math.min(page, total))
-  const offset = (Math.min(page, total) - 1) * PAGE_SIZE
+  const page = pageFromParam(params.get('p'), total)
+  const shown = pageOf(feed, page)
+  const offset = (page - 1) * PAGE_SIZE
 
-  const go = (next: number) => {
-    setPage(next)
-    // 페이지를 넘기면 맨 위부터 보게 한다
+  const go = useCallback((next: number) => {
+    // 1페이지는 파라미터를 붙이지 않는다 — 카톡 링크와 같은 주소를 유지한다
+    router.push(next <= 1 ? pathname : `${pathname}?p=${next}`, { scroll: false })
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+  }, [pathname, router])
 
   return (
     <>
-      <div className="flex flex-col gap-4">
-        {shown.map((c, i) => (
-          <div key={c.id}>
-            <CafeCard cafe={c} rank={offset + i + 1} />
-            <p className="mt-1.5 px-1 text-[12px] text-ink-soft">{c.reason}</p>
-          </div>
-        ))}
-      </div>
+      <FeedCards rows={shown} offset={offset} />
 
       {total > 1 && (
         <nav className="mt-6 flex items-center justify-between gap-3">
@@ -82,7 +69,7 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
             ← 이전
           </button>
           <span className="shrink-0 text-[13px] text-ink-soft">
-            {Math.min(page, total)} / {total}
+            {page} / {total}
           </span>
           <button
             onClick={() => go(page + 1)}

@@ -1,5 +1,8 @@
+import { Suspense } from 'react'
 import { homeFeed, payload, toListRow, type SiteCafe } from '@/lib/site'
-import { HomeFeed, PAGE_SIZE, type FeedRow } from './home-feed'
+import { PAGE_SIZE } from '@/lib/paging'
+import { HomeFeed } from './home-feed'
+import { FeedCards, type FeedRow } from './feed-cards'
 
 /**
  * 왜 이 카페가 올라왔는지 한 줄로. 숫자를 보여주면 목록을 신뢰하게 된다.
@@ -41,7 +44,12 @@ export default function Home() {
           아직 추천할 카페가 없어요. 수집이 끝나면 채워집니다.
         </p>
       ) : (
-        <HomeFeed rows={feed} />
+        // HomeFeed 는 URL 의 `?p=` 를 읽으므로 클라이언트에서만 그려진다.
+        // fallback 으로 **1페이지를 서버가 미리 그려** 첫 화면이 비지 않게 한다 —
+        // 이 화면이 카카오톡 링크의 도착지다.
+        <Suspense fallback={<FeedCards rows={feed.slice(0, PAGE_SIZE)} />}>
+          <HomeFeed rows={feed} />
+        </Suspense>
       )}
 
       <p className="mt-6 text-center text-[12px] leading-relaxed text-ink-soft">

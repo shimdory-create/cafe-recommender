@@ -10,6 +10,7 @@ import {
   GoldenLabelSchema,
   ReviewSchema,
   HealthSchema,
+  NotifyLogSchema,
   BlacklistEntrySchema,
 } from '../schema.js'
 import type { Store } from './types.js'
@@ -86,6 +87,9 @@ export function createJsonStore(dataDir: string): Store {
 
     readHealth: () => readArray(dataDir, 'health.json', HealthSchema),
     writeHealth: (r) => writeArray(dataDir, 'health.json', r),
+
+    readNotifyLog: () => readArray(dataDir, 'notify-log.json', NotifyLogSchema),
+    writeNotifyLog: (r) => writeArray(dataDir, 'notify-log.json', r),
 
     async appendRaw(source, query, payload, now = new Date()) {
       const day = now.toISOString().slice(0, 10)

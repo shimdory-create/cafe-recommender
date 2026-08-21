@@ -305,9 +305,10 @@ async function main() {
       // 문구만 만들어 보여준다. 실제 발송은 사람이 확인한 뒤 한다.
       const store = createJsonStore(process.env.DATA_DIR ?? 'data')
       const now = new Date()
-      const [cafes, buzz, visits, suggestions, health] = await Promise.all([
+      const [cafes, buzz, visits, suggestions, health, notifyLog] = await Promise.all([
         store.readCafes(), store.readBuzz(),
         store.readVisits(), store.readSuggestions(), store.readHealth(),
+        store.readNotifyLog(),
       ])
       const payload = buildSitePayload({
         cafes, buzz, visits, suggestions, weekOf: mondayOf(now), now,
@@ -318,12 +319,22 @@ async function main() {
       const text = buildNotifyText({
         payload,
         baseUrl: flag(rest, 'url') || process.env.SITE_URL,
-        status: statusLine(detectAnomalies({ cafes, buzz, health, now })),
+        status: statusLine(detectAnomalies({ cafes, buzz, health, notifyLog, now })),
       })
       console.log('\n' + '-'.repeat(34))
       console.log(text)
       console.log('-'.repeat(34))
       console.log(`${text.length} / ${KAKAO_TEXT_LIMIT}자\n`)
+
+      // 발송은 카카오톡 커넥터(이 PC)가 하므로 클라우드는 그것이 나갔는지
+      // 알 수 없다. 보낸 뒤 한 줄을 남겨 커밋하면 감시가 누락을 잡는다.
+      if (flag(rest, 'sent') !== undefined) {
+        const status = text.split('\n').at(-1) ?? ''
+        const rows = [...notifyLog, { sentAt: now.toISOString(), chars: text.length, status }]
+        // 12주만 보관한다 — 이력이 아니라 "최근에 나갔나" 만 알면 된다
+        await store.writeNotifyLog(rows.slice(-12))
+        console.log('발송 기록을 남겼습니다 (data/notify-log.json)\n')
+      }
       break
     }
 

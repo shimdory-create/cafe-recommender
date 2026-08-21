@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run notify)",
+      "Bash(npm run notify --)",
+      "Bash(npm run watch)",
+      "Bash(git pull:*)",
+      "Bash(bash scripts/commit-data.sh:*)",
+      "mcp__372c7ec8-cc7d-4def-aecb-7152f1d508b2__KakaotalkChat-MemoChat"
+    ]
+  }
+}

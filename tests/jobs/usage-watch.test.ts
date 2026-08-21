@@ -230,6 +230,34 @@ describe('detectAnomalies', () => {
     expect(out.some((a) => a.code.startsWith('classify'))).toBe(false)
   })
 
+  it('금요일 정오(KST)에 거짓 경보를 내지 않는다', () => {
+    // 수집은 04:17 KST = 19:17 UTC 에 돌아 그 날짜를 찍는다. 카톡은 12:04 KST
+    // = 03:04 UTC(다음 UTC 날짜)에 상태를 계산한다. 같은 UTC 날짜만 인정하면
+    // 매주 "화제량 측정 부족" 이 뜬다 (실측).
+    const noon = new Date('2026-08-21T03:04:00Z') // 금 12:04 KST
+    const cafes = [
+      ...Array.from({ length: 60 }, (_, i) => cafe(`c${i}`, {
+        attributes: attrs('2026-08-20T21:30:00.000Z'),
+      })),
+      ...Array.from({ length: 40 }, (_, i) =>
+        cafe(`p${i}`, { status: 'pending_extraction', attributes: undefined })),
+    ]
+    const buzz = [
+      ...Array.from({ length: 60 }, (_, i) => snap(`c${i}`, '2026-08-20')),
+      ...Array.from({ length: 40 }, (_, i) => snap(`p${i}`, '2026-08-20')),
+    ]
+    const out = detectAnomalies({
+      cafes,
+      buzz,
+      health: [
+        health({ lastSuccessAt: '2026-08-20T19:20:00.000Z' }),
+        health({ source: 'classify', lastSuccessAt: '2026-08-20T21:30:00.000Z' }),
+      ],
+      now: noon,
+    })
+    expect(out).toEqual([])
+  })
+
   it('빈 데이터에서도 던지지 않는다', () => {
     expect(detectAnomalies({ cafes: [], buzz: [], health: [], now: NOW })).toEqual([])
   })
@@ -249,6 +277,35 @@ describe('formatWatch', () => {
     const text = formatWatch(detectAnomalies(input), input)
     expect(text).toContain('source_failing')
     expect(text).toContain('[!]')
+  })
+})
+
+describe('detectAnomalies — 카톡 누락', () => {
+  const sent = (iso: string) => ({ sentAt: iso, chars: 190, status: '자동수집 정상' })
+
+  it('기록이 없으면 판단하지 않는다 (첫 주 오탐 방지)', () => {
+    const input = healthy()
+    expect(detectAnomalies(input).some((a) => a.code === 'notify_missing')).toBe(false)
+  })
+
+  it('일주일 안에 나갔으면 조용하다', () => {
+    const input = { ...healthy(), notifyLog: [sent('2026-08-20T03:04:00.000Z')] }
+    expect(detectAnomalies(input).some((a) => a.code === 'notify_missing')).toBe(false)
+  })
+
+  it('8일을 넘기면 경보한다 — 조용한 누락이 실제로 있었다', () => {
+    const input = { ...healthy(), notifyLog: [sent('2026-08-01T03:04:00.000Z')] }
+    const hit = detectAnomalies(input).find((a) => a.code === 'notify_missing')
+    expect(hit?.level).toBe('alert')
+    expect(hit?.message).toContain('20일째')
+  })
+
+  it('가장 최근 기록으로 판단한다', () => {
+    const input = {
+      ...healthy(),
+      notifyLog: [sent('2026-06-01T03:04:00.000Z'), sent('2026-08-20T03:04:00.000Z')],
+    }
+    expect(detectAnomalies(input).some((a) => a.code === 'notify_missing')).toBe(false)
   })
 })
 

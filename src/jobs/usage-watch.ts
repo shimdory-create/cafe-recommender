@@ -1,4 +1,4 @@
-import type { BuzzSnapshot, Cafe, Health } from '../schema.js'
+import type { BuzzSnapshot, Cafe, Health, NotifyLog } from '../schema.js'
 import { PENDING_PER_DAY } from './daily-buzz.js'
 
 /**
@@ -27,6 +27,8 @@ export interface WatchInput {
   cafes: Cafe[]
   buzz: BuzzSnapshot[]
   health: Health[]
+  /** 카카오톡 발송 기록. 없으면(첫 주) 판단하지 않는다 */
+  notifyLog?: NotifyLog[]
   now: Date
 }
 
@@ -34,23 +36,53 @@ export interface WatchInput {
 const DAILY_SOURCES = ['kakao-blog', 'classify'] as const
 const DAILY_STALE_HOURS = 36
 /** 주 1회 도는 소스 */
-const WEEKLY_SOURCES = ['kakao-local', 'kakao-directions'] as const
+const WEEKLY_SOURCES = ['kakao-local', 'kakao-directions', 'harvest'] as const
 const WEEKLY_STALE_HOURS = 24 * 9
 
 /** 쿼터 소진을 가리키는 문구. provider 마다 다르게 말한다 */
 const QUOTA_HINTS = ['429', 'quota', 'RESOURCE_EXHAUSTED', 'rate limit', 'too many requests']
 
-/** active 카페 중 오늘 측정된 비율. 이 밑이면 알린다 */
+/**
+ * "최근" 의 폭 — 오늘과 어제(UTC)까지 인정한다.
+ *
+ * 같은 UTC 날짜만 인정하면 **금요일 정오 카톡이 매주 거짓 경보를 낸다.**
+ * 수집은 04:17 KST = 19:17 UTC 에 돌아 그 날짜(D)를 찍는다. 카톡은 12:04 KST
+ * = 03:04 UTC, 즉 D+1 에 상태를 계산하므로 "오늘 측정 0곳" 이 된다 (실측).
+ *
+ * 하루를 더 인정하면 수집이 완전히 멈춘 경우의 발견이 늦어질 수 있지만,
+ * 그 경우는 `source_stale` 이 36시간 기준으로 먼저 잡는다 — health 는 날짜가
+ * 아니라 시각을 기록하기 때문이다.
+ */
+const FRESH_DAYS = 1
+
+/** active 카페 중 최근 측정된 비율. 이 밑이면 알린다 */
 const BUZZ_TODAY_MIN_RATIO = 0.8
 /** 오늘 측정 총량이 기대치의 이 비율보다 낮으면 수집이 죽은 것으로 본다 */
 const BUZZ_THROUGHPUT_MIN_RATIO = 0.3
 /** 판정 대기가 남아 있는데 오늘 이만큼도 못 했으면 경고 */
 const CLASSIFY_WARN_BELOW = 50
+/**
+ * 카톡이 이 일수보다 오래 안 나갔으면 알린다.
+ *
+ * 주 1회 발송이므로 8일이면 "한 번 건너뛴 것" 이 확실하다. 발송은 이 PC 의
+ * 커넥터로 나가서 클라우드가 알 수 없는데, 실제로 조용히 누락된 적이 있다
+ * (2026-08-21 정오: 예약 세션이 승인 대기로 멈춤 -> 아무 신호도 없었다).
+ */
+const NOTIFY_STALE_DAYS = 8
 
 const hoursBetween = (a: Date, b: Date): number =>
   Math.abs(a.getTime() - b.getTime()) / 3_600_000
 
 const dayOf = (iso: string): string => iso.slice(0, 10)
+
+/** 날짜 문자열(YYYY-MM-DD)이 오늘부터 `days` 일 안인가 */
+function isFresh(day: string, now: Date, days = FRESH_DAYS): boolean {
+  for (let i = 0; i <= days; i++) {
+    const d = new Date(now.getTime() - i * 86_400_000)
+    if (dayOf(d.toISOString()) === day) return true
+  }
+  return false
+}
 
 function isQuotaError(message: string): boolean {
   const lower = message.toLowerCase()
@@ -130,7 +162,7 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
   //    (a) active 카페는 매일 전부 재야 한다. 순위와 대표 이미지가 여기서 나온다.
   //    (b) 오늘 측정한 총량. 카카오 쿼터가 끊기면 이 숫자가 무너진다.
   const measuredToday = new Set(
-    buzz.filter((b) => b.capturedAt === today).map((b) => b.kakaoPlaceId),
+    buzz.filter((b) => isFresh(b.capturedAt, now)).map((b) => b.kakaoPlaceId),
   )
   const activeCafes = cafes.filter((c) => c.status === 'active')
   if (activeCafes.length >= 20) {
@@ -141,7 +173,7 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
         level: 'alert',
         code: 'buzz_drop',
         message:
-          `추천 대상 ${activeCafes.length}곳 중 오늘 측정이 ${hit}곳`
+          `추천 대상 ${activeCafes.length}곳 중 최근 측정이 ${hit}곳`
           + ` (${Math.round(ratio * 100)}%) 뿐이다. 카카오 쿼터나 수집 잡을 확인한다.`,
       })
     }
@@ -155,7 +187,7 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
         level: 'alert',
         code: 'buzz_throughput',
         message:
-          `오늘 화제량 측정 ${measuredToday.size}곳 (기대 ${expected}곳).`
+          `최근 화제량 측정 ${measuredToday.size}곳 (기대 ${expected}곳).`
           + ` 수집이 일찍 끊겼다.`,
       })
     }
@@ -165,21 +197,37 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
   const pending = cafes.filter((c) => c.status === 'pending_extraction').length
   if (pending > 0) {
     const extractedToday = cafes.filter(
-      (c) => c.attributes && dayOf(c.attributes.extractedAt) === today,
+      (c) => c.attributes && isFresh(dayOf(c.attributes.extractedAt), now),
     ).length
     if (extractedToday === 0) {
       out.push({
         level: 'alert',
         code: 'classify_stalled',
-        message: `판정 대기 ${pending}곳이 남았는데 오늘 판정이 0곳이다.`,
+        message: `판정 대기 ${pending}곳이 남았는데 최근 판정이 0곳이다.`,
       })
     } else if (extractedToday < CLASSIFY_WARN_BELOW) {
       out.push({
         level: 'warn',
         code: 'classify_slow',
         message:
-          `오늘 판정 ${extractedToday}곳 (하루 목표 200곳).`
+          `최근 판정 ${extractedToday}곳 (하루 목표 200곳).`
           + ` 쿼터가 일찍 끊겼을 수 있다.`,
+      })
+    }
+  }
+
+  // 6. 카톡이 지난주에 안 나갔다
+  const log = input.notifyLog ?? []
+  const last = log.reduce<string>((a, r) => (r.sentAt > a ? r.sentAt : a), '')
+  if (last) {
+    const days = hoursBetween(now, new Date(last)) / 24
+    if (days > NOTIFY_STALE_DAYS) {
+      out.push({
+        level: 'alert',
+        code: 'notify_missing',
+        message:
+          `카카오톡이 ${Math.floor(days)}일째 안 나갔다 (기준 ${NOTIFY_STALE_DAYS}일).`
+          + ` 예약 작업이 멈췄는지 본다 — 발송은 이 PC 의 Claude Code 가 필요하다.`,
       })
     }
   }
@@ -192,21 +240,21 @@ export function formatWatch(anomalies: Anomaly[], input: WatchInput): string {
   const today = dayOf(input.now.toISOString())
   const active = input.cafes.filter((c) => c.status === 'active').length
   const pending = input.cafes.filter((c) => c.status === 'pending_extraction').length
-  const buzzToday = input.buzz.filter((b) => b.capturedAt === today).length
+  const buzzToday = input.buzz.filter((b) => isFresh(b.capturedAt, input.now)).length
   const activeMeasured = (() => {
     const done = new Set(
-      input.buzz.filter((b) => b.capturedAt === today).map((b) => b.kakaoPlaceId),
+      input.buzz.filter((b) => isFresh(b.capturedAt, input.now)).map((b) => b.kakaoPlaceId),
     )
     return input.cafes.filter((c) => c.status === 'active' && done.has(c.kakaoPlaceId)).length
   })()
   const classifiedToday = input.cafes.filter(
-    (c) => c.attributes && dayOf(c.attributes.extractedAt) === today,
+    (c) => c.attributes && isFresh(dayOf(c.attributes.extractedAt), input.now),
   ).length
 
   const lines = [
     `사용량 점검 ${today}`,
-    `  화제량 측정 오늘 ${buzzToday}곳 (추천 대상 ${activeMeasured}/${active}곳)`,
-    `  판정 오늘 ${classifiedToday}곳 · 대기 ${pending}곳 · 통과 ${active}곳`,
+    `  화제량 측정 최근 ${buzzToday}곳 (추천 대상 ${activeMeasured}/${active}곳)`,
+    `  판정 최근 ${classifiedToday}곳 · 대기 ${pending}곳 · 통과 ${active}곳`,
   ]
 
   if (anomalies.length === 0) {
@@ -227,6 +275,7 @@ const LABELS: Record<string, string> = {
   source_stale: '수집 멈춤',
   buzz_drop: '화제량 측정 부족',
   buzz_throughput: '수집 조기 중단',
+  notify_missing: '카톡 누락',
   classify_stalled: '판정 정체',
   classify_slow: '판정 지연',
 }

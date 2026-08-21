@@ -114,6 +114,9 @@ export async function runDiscover(
     byId.set(p.id, cafe)
   }
 
+  // 그물마다 따로 기록한다. 한 덩어리로 묶었더니 **수확(그물 C)의 LLM 실패가
+  // `kakao-local` 실패로 적혔다** — 실측: kakao-local 에 "gemini HTTP 429" 가
+  // 64건. 어디가 아픈지 모르는 건강 기록은 없는 것보다 나쁘다.
   for (const region of opts.regions) {
     try {
       // --- 그물 A: 키워드 검색 (시도명 포함 — 동명 시군구 때문) ---
@@ -126,17 +129,21 @@ export async function runDiscover(
           if (res.isEnd) break
         }
       }
-
-      // --- 그물 C: 블로그 큐레이션 수확 ---
-      if (!opts.skipHarvest) {
-        const harvested = await harvestCurated({ blog, local, llm, store }, region)
-        harvested.places.forEach((p) => add(p, region))
-      }
-
       await recordSuccess(store, 'kakao-local', now)
     } catch (e) {
       errors.push(`${region.sigungu}: ${(e as Error).message}`)
       await recordFailure(store, 'kakao-local', e, now)
+    }
+
+    // --- 그물 C: 블로그 큐레이션 수확 (블로그 + LLM + 장소 정규화) ---
+    if (opts.skipHarvest) continue
+    try {
+      const harvested = await harvestCurated({ blog, local, llm, store }, region)
+      harvested.places.forEach((p) => add(p, region))
+      await recordSuccess(store, 'harvest', now)
+    } catch (e) {
+      errors.push(`${region.sigungu} 수확: ${(e as Error).message}`)
+      await recordFailure(store, 'harvest', e, now)
     }
   }
 

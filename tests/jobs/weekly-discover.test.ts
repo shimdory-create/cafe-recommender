@@ -24,14 +24,15 @@ const place = (
 
 function harness(over: Partial<DiscoverDeps> = {}) {
   let cafes: Cafe[] = []
+  let health: { source: string; lastError: string | null; consecutiveFailures: number }[] = []
   const deps: DiscoverDeps = {
     store: {
       readCafes: async () => cafes,
       writeCafes: async (c) => { cafes = c },
       readBlacklist: async () => [{ pattern: '스타벅스', matchType: 'contains' as const }],
       appendRaw: async () => 'p',
-      readHealth: async () => [],
-      writeHealth: async () => {},
+      readHealth: async () => health as never,
+      writeHealth: async (h) => { health = h as never },
     },
     local: {
       searchKeyword: async () => ({
@@ -47,7 +48,7 @@ function harness(over: Partial<DiscoverDeps> = {}) {
     now: new Date('2026-08-20T00:00:00Z'),
     ...over,
   }
-  return { deps, saved: () => cafes }
+  return { deps, saved: () => cafes, health: () => health }
 }
 
 describe('naverMapUrl', () => {
@@ -147,14 +148,19 @@ describe('runDiscover', () => {
     expect(h.saved().length).toBeGreaterThan(0)
   })
 
-  it('실패를 health 에 기록한다', async () => {
-    const health: unknown[] = []
+  it('실패를 health 에 기록한다 — 아픈 소스 이름으로', async () => {
+    const health: { source: string; lastError: string | null }[] = []
     const h = harness({
       local: { searchKeyword: async () => { throw new Error('장애') } },
     })
-    h.deps.store.writeHealth = async (rows) => { health.length = 0; health.push(...rows) }
+    h.deps.store.writeHealth = async (rows) => {
+      health.length = 0
+      health.push(...rows)
+    }
     await runDiscover(h.deps, { regions: [region] })
-    expect(health).toHaveLength(1)
+    // 개수를 세지 않는다 — 그물별로 각자 기록하므로 성공 기록도 함께 남는다
+    const local = health.find((x) => x.source === 'kakao-local')
+    expect(local?.lastError).toContain('장애')
   })
 
   it('그물 C 로 찾은 카페도 추가한다', async () => {
@@ -239,5 +245,47 @@ describe('runDiscover', () => {
     expect(r.offRegion).toBe(1)
     expect(r.excluded).toBe(0)
     expect(r.discovered).toBe(0)
+  })
+})
+
+describe('runDiscover — 건강 기록은 아픈 곳에 적는다', () => {
+  it('수확(LLM)이 실패해도 kakao-local 을 실패로 적지 않는다', async () => {
+    // 실측: 한 덩어리 try 로 묶여 있어서 kakao-local 에 "gemini HTTP 429" 가
+    // 64건 적혔다. 어디가 아픈지 모르는 건강 기록은 없는 것보다 나쁘다.
+    const h = harness({
+      llm: {
+        name: 'f',
+        modelVersion: 'v',
+        extract: async () => { throw new Error('gemini HTTP 429: quota') },
+      } as never,
+      blog: {
+        search: async () => ({
+          docs: [{
+            title: '양평 대형카페 추천 5곳', contents: '', url: 'u',
+            blogName: 'b', dateTime: new Date('2026-08-01T00:00:00Z'), thumbnail: '',
+          }],
+          payload: {},
+        }),
+      } as never,
+    })
+    await runDiscover(h.deps, { regions: [region] })
+
+    const local = h.health().find((x) => x.source === 'kakao-local')
+    const harvest = h.health().find((x) => x.source === 'harvest')
+    expect(local?.consecutiveFailures ?? 0).toBe(0)
+    expect(harvest?.consecutiveFailures ?? 0).toBeGreaterThan(0)
+    expect(harvest?.lastError ?? '').toContain('429')
+  })
+
+  it('그물 A 가 실패하면 kakao-local 에 적는다', async () => {
+    const h = harness({
+      local: {
+        searchKeyword: async () => { throw new Error('kakao 500') },
+      } as never,
+    })
+    await runDiscover(h.deps, { regions: [region] })
+    const local = h.health().find((x) => x.source === 'kakao-local')
+    expect(local?.consecutiveFailures ?? 0).toBeGreaterThan(0)
+    expect(local?.lastError ?? '').toContain('kakao 500')
   })
 })

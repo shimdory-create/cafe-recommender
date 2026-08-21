@@ -147,6 +147,22 @@ export const GoldenLabelSchema = z.object({
 })
 export type GoldenLabel = z.infer<typeof GoldenLabelSchema>
 
+/**
+ * 카카오톡 발송 기록.
+ *
+ * 발송은 이 PC 의 커넥터로 나가므로 클라우드는 그것이 나갔는지 알 수 없다.
+ * 한 줄을 남겨 커밋하면 **감시가 "지난주에 안 나갔다" 를 잡을 수 있다** —
+ * 조용한 누락이 실제로 있었다 (2026-08-21 정오, 예약 세션이 승인 대기로 멈춤).
+ */
+export const NotifyLogSchema = z.object({
+  sentAt: z.string(),
+  /** 문구 길이. 200자 제한을 넘겼는지 나중에 볼 수 있다 */
+  chars: z.number().int().nonnegative(),
+  /** 그때의 자동수집 상태 한 줄 */
+  status: z.string(),
+})
+export type NotifyLog = z.infer<typeof NotifyLogSchema>
+
 export const HealthSchema = z.object({
   source: z.string(),
   lastSuccessAt: z.string().nullable(),
