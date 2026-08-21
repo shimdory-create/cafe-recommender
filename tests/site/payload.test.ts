@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { buildSitePayload, trendOf } from '../../src/site/payload.js'
-import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type CafeAttributes } from '../../src/schema.js'
+import { buildSitePayload, trendOf, dedupeListings } from '../../src/site/payload.js'
+import {
+  SitePayloadSchema,
+  type BuzzSnapshot, type Cafe, type CafeAttributes, type SiteCafe,
+} from '../../src/schema.js'
 
 const NOW = new Date('2026-08-20T00:00:00Z')
 
@@ -300,5 +303,105 @@ describe('가족 별점', () => {
     const byId = new Map(p.cafes.map((c) => [c.id, c]))
     expect(byId.get('1')!.ratingAvg).toBe(5)
     expect(byId.get('2')!.ratingAvg).toBe(1)
+  })
+})
+
+describe('dedupeListings — 같은 카페가 두 번 등록된 경우', () => {
+  const row = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe => ({
+    sigungu: '남양주시',
+    zone: 'east',
+    driveMinutes: 55,
+    scale: '대형',
+    parkingGrade: 'A',
+    menuLevel: 2,
+    tags: ['대형카페'],
+    evidence: 'e',
+    parkingEvidence: 'p',
+    signatureMenu: null,
+    viewTypes: [],
+    mealTypes: [],
+    outdoorSeating: null,
+    teenAppeal: null,
+    stayDuration: null,
+    naverMapUrl: 'https://map.naver.com/p/search/x',
+    kakaoPlaceUrl: null,
+    imageUrl: null,
+    hotScore: 50,
+    finalScore: 25,
+    postsPer30: 60,
+    acceleration: 1.5,
+    trend: 'steady',
+    ratingAvg: 0,
+    ratingCount: 0,
+    cityOnly: false,
+    visitedOn: null,
+    ...over,
+  })
+
+  const cafe = (id: string, roadAddress: string | null): Cafe => ({
+    kakaoPlaceId: id,
+    name: '비루개',
+    sigungu: '남양주시',
+    lat: 37.7,
+    lng: 127.1,
+    firstSeenAt: '2026-01-01T00:00:00.000Z',
+    status: 'active',
+    ambiguousName: false,
+    tags: ['대형카페'],
+    ...(roadAddress ? { roadAddress } : {}),
+  } as Cafe)
+
+  it('도로명 주소가 있는 쪽을 남긴다 — 빈 껍데기가 아닌 쪽', () => {
+    const rows = [
+      row({ id: 'empty', name: '비루개', finalScore: 30 }),
+      row({ id: 'full', name: '비루개', finalScore: 20 }),
+    ]
+    const byId = new Map([
+      ['empty', cafe('empty', null)],
+      ['full', cafe('full', '경기 남양주시 별내면 용암비루개길 219-88')],
+    ])
+    const out = dedupeListings(rows, byId)
+    expect(out.map((r) => r.id)).toEqual(['full'])
+  })
+
+  it('둘 다 주소가 있으면 점수가 높은 쪽', () => {
+    const rows = [
+      row({ id: 'a', name: '비루개', finalScore: 10 }),
+      row({ id: 'b', name: '비루개', finalScore: 40 }),
+    ]
+    const byId = new Map([['a', cafe('a', '주소 A')], ['b', cafe('b', '주소 B')]])
+    expect(dedupeListings(rows, byId).map((r) => r.id)).toEqual(['b'])
+  })
+
+  it('이름이 같아도 시군구가 다르면 남긴다 (다른 카페다)', () => {
+    const rows = [
+      row({ id: '1', name: '테라로사', sigungu: '양평군' }),
+      row({ id: '2', name: '테라로사', sigungu: '파주시' }),
+    ]
+    const byId = new Map([['1', cafe('1', 'a')], ['2', cafe('2', 'b')]])
+    expect(dedupeListings(rows, byId)).toHaveLength(2)
+  })
+
+  it('지점명이 다르면 각각 남긴다', () => {
+    const rows = [
+      row({ id: '1', name: '배다골베이커리하우스' }),
+      row({ id: '2', name: '배다골베이커리 포레' }),
+    ]
+    const byId = new Map([['1', cafe('1', 'a')], ['2', cafe('2', 'b')]])
+    expect(dedupeListings(rows, byId)).toHaveLength(2)
+  })
+
+  it('원래 순서(점수 내림차순)를 흔들지 않는다', () => {
+    const rows = [
+      row({ id: 'x', name: '가카페', finalScore: 50 }),
+      row({ id: 'dup1', name: '비루개', finalScore: 40 }),
+      row({ id: 'y', name: '나카페', finalScore: 30 }),
+      row({ id: 'dup2', name: '비루개', finalScore: 20 }),
+    ]
+    const byId = new Map([
+      ['x', cafe('x', 'a')], ['y', cafe('y', 'b')],
+      ['dup1', cafe('dup1', 'c')], ['dup2', cafe('dup2', 'd')],
+    ])
+    expect(dedupeListings(rows, byId).map((r) => r.id)).toEqual(['x', 'dup1', 'y'])
   })
 })

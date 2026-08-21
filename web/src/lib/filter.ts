@@ -8,7 +8,6 @@ export type ZoneId = 'near' | 'seoul' | 'north' | 'east' | 'south' | 'west'
 export interface ZoneMeta {
   id: ZoneId
   label: string
-  hint: string
 }
 
 /**
@@ -18,12 +17,12 @@ export interface ZoneMeta {
  * 여기서는 이름만 안다. 배정 규칙이 두 곳에 생기지 않게 하려는 것이다.
  */
 export const ZONES: ZoneMeta[] = [
-  { id: 'near', label: '가까운 곳', hint: '인천·부천·시흥' },
-  { id: 'seoul', label: '서울', hint: '서울 전역' },
-  { id: 'west', label: '서쪽', hint: '김포·강화' },
-  { id: 'north', label: '북쪽', hint: '고양·파주·양주·의정부' },
-  { id: 'east', label: '동쪽', hint: '남양주·양평·가평·하남·광주' },
-  { id: 'south', label: '남쪽', hint: '광명·안산·수원·용인·평택' },
+  { id: 'near', label: '가까운 곳' },
+  { id: 'seoul', label: '서울' },
+  { id: 'west', label: '서쪽' },
+  { id: 'north', label: '북쪽' },
+  { id: 'east', label: '동쪽' },
+  { id: 'south', label: '남쪽' },
 ]
 
 export interface FilterState {
@@ -107,4 +106,28 @@ export function groupBySigungu<T extends ListRow>(rows: T[]): SigunguGroup<T>[] 
     .sort((a, b) => (a.nearest !== b.nearest
       ? a.nearest - b.nearest
       : a.sigungu.localeCompare(b.sigungu)))
+}
+
+/**
+ * 방향에 어떤 지역이 들어 있는지 한 줄로. **데이터에서 계산한다.**
+ *
+ * 처음에는 고정 문자열이었는데 배정과 어긋났다 — '동쪽' 설명에 이천·여주가
+ * 빠져 있어서 그 지역 카페를 찾는 사람은 동쪽을 눌러볼 이유가 없었다.
+ * 곳수 많은 순으로 몇 개만 보여주고 나머지는 "등" 으로 줄인다.
+ */
+export function zoneHint<T extends ListRow>(
+  cafes: T[],
+  zone: ZoneId,
+  opts: { city: boolean; top?: number },
+): string {
+  const count = new Map<string, number>()
+  for (const c of cafes) {
+    if (c.zone !== zone) continue
+    if (c.cityOnly && !opts.city) continue
+    count.set(c.sigungu, (count.get(c.sigungu) ?? 0) + 1)
+  }
+  const sorted = [...count.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  const top = opts.top ?? 4
+  const head = sorted.slice(0, top).map(([s]) => s).join('·')
+  return sorted.length > top ? `${head} 등 ${sorted.length}개 지역` : head
 }

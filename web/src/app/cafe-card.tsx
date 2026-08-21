@@ -56,7 +56,7 @@ export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
 
           <div className="min-w-0 flex-1">
             <div className="flex items-start justify-between gap-2">
-              <h2 className="text-[17px] font-bold leading-snug">
+              <h3 className="text-[17px] font-bold leading-snug">
                 {rank !== undefined && (
                   // 화면에서는 큰 숫자로, 읽어줄 때는 "1위" 로 들리게
                   <span className="mr-1.5 text-bean">
@@ -65,7 +65,7 @@ export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
                   </span>
                 )}
                 {cafe.name}
-              </h2>
+              </h3>
               <span className="mt-0.5 flex shrink-0 items-center gap-1.5">
                 {/* 우리 가족 별점이 있으면 블로그 화제량보다 먼저 보인다 */}
                 {cafe.ratingCount > 0 && (

@@ -21,7 +21,10 @@ export interface Zone {
   id: ZoneId
   /** 칩에 쓰는 짧은 이름 */
   label: string
-  /** 고르면 보여주는 설명 — 어디가 포함되는지 */
+  /**
+   * 대표 지역 (문서용). 화면에 쓰지 않는다 — 고정 문자열은 배정과 어긋난다.
+   * 웹은 `zoneHint()` 로 데이터에서 계산한다.
+   */
   hint: string
 }
 
@@ -30,9 +33,9 @@ export const ZONES: Zone[] = [
   { id: 'near', label: '가까운 곳', hint: '인천·부천·시흥' },
   { id: 'seoul', label: '서울', hint: '서울 전역' },
   { id: 'west', label: '서쪽', hint: '김포·강화' },
-  { id: 'north', label: '북쪽', hint: '고양·파주·양주·의정부' },
-  { id: 'east', label: '동쪽', hint: '남양주·양평·가평·하남·광주' },
-  { id: 'south', label: '남쪽', hint: '광명·안산·수원·용인·평택' },
+  { id: 'north', label: '북쪽', hint: '고양·파주·양주·의정부·포천·연천' },
+  { id: 'east', label: '동쪽', hint: '양평·남양주·가평·하남·이천·광주·여주·구리' },
+  { id: 'south', label: '남쪽', hint: '용인·평택·수원·안산·광명 등 경기 남부' },
 ]
 
 /**

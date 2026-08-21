@@ -47,6 +47,50 @@ export function trendOf(
   return b.posts30d >= baseline * 1.5 ? 'rising' : 'steady'
 }
 
+/**
+ * 같은 카페가 두 번 등록된 것을 하나로 줄인다.
+ *
+ * 실측: 카카오에 `비루개`(남양주)와 `터프이너프 로스터스`(평택)가 각각 **두 개의
+ * 장소 id** 로 올라와 있었다. 하나는 도로명 주소가 없는 빈 껍데기다.
+ * 그대로 두면 목록에 같은 이름이 두 번 나오고, 더 나쁜 경우 이번 주 추천
+ * 10칸 중 두 칸을 같은 카페가 먹는다.
+ *
+ * 판단 기준은 **이름 + 시군구**다. 우리 데이터의 상호에는 지점명이 붙어 있어
+ * (`경성빵공장 남한산성점`) 서로 다른 지점이 같은 키가 되는 일은 없다.
+ * 좌표 근접으로 묶는 방법도 있지만, 같은 건물의 다른 카페를 잘못 합칠 위험이
+ * 더 크다 — 이름이 같을 때만 손대는 편이 안전하다.
+ *
+ * 남길 것을 고르는 순서:
+ *   1. 도로명 주소가 있는 쪽 (빈 껍데기가 아닌 쪽)
+ *   2. 종합점수가 높은 쪽 (화제량 측정이 제대로 된 쪽)
+ *   3. id 가 작은 쪽 (빌드마다 결과가 흔들리지 않게)
+ */
+export function dedupeListings(
+  rows: SiteCafe[],
+  byId: Map<string, Cafe>,
+): SiteCafe[] {
+  const best = new Map<string, SiteCafe>()
+  for (const r of rows) {
+    const key = `${r.name}|${r.sigungu}`
+    const prev = best.get(key)
+    if (!prev) {
+      best.set(key, r)
+      continue
+    }
+    if (betterListing(r, prev, byId)) best.set(key, r)
+  }
+  // 원래 순서(점수 내림차순)를 지킨다
+  const keep = new Set([...best.values()].map((r) => r.id))
+  return rows.filter((r) => keep.has(r.id))
+}
+
+function betterListing(a: SiteCafe, b: SiteCafe, byId: Map<string, Cafe>): boolean {
+  const addr = (r: SiteCafe) => Boolean(byId.get(r.id)?.roadAddress)
+  if (addr(a) !== addr(b)) return addr(a)
+  if (a.finalScore !== b.finalScore) return a.finalScore > b.finalScore
+  return a.id.localeCompare(b.id) < 0
+}
+
 export function buildSitePayload(input: PayloadInput): SitePayload {
   const { cafes, buzz, visits, suggestions, weekOf, now, reviews = [] } = input
 
@@ -129,11 +173,13 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
   // 종합점수 내림차순. 동점은 id 로 안정 정렬해 빌드마다 순서가 흔들리지 않게.
   rows.sort((x, y) => y.finalScore - x.finalScore || x.id.localeCompare(y.id))
 
+  const byId = new Map(cafes.map((c) => [c.kakaoPlaceId, c]))
+  const deduped = dedupeListings(rows, byId)
+
   // 다녀온 곳은 통과 여부와 무관하게 싣는다. 기록이 사라지면 안 된다.
-  const byPlaceId = new Map(cafes.map((c) => [c.kakaoPlaceId, c]))
   const visited: SiteVisited[] = [...lastVisit.entries()]
     .flatMap(([id, on]) => {
-      const c = byPlaceId.get(id)
+      const c = byId.get(id)
       if (!c) return []
       const note = visits.find((v) => v.kakaoPlaceId === id && v.visitedOn === on)?.note ?? ''
       const r = rated.get(id)
@@ -155,7 +201,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
     // 최근에 다녀온 것부터
     .sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
 
-  const ids = new Set(rows.map((r) => r.id))
+  const ids = new Set(deduped.map((r) => r.id))
   const week = suggestions
     .filter((s) => s.weekOf === weekOf && ids.has(s.kakaoPlaceId))
     .sort((a, b) => a.rank - b.rank)
@@ -165,13 +211,13 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
     generatedAt: now.toISOString(),
     weekOf,
     week,
-    cafes: rows,
+    cafes: deduped,
     visited,
     stats: {
       discovered: cafes.length,
-      passed: rows.filter((r) => !r.cityOnly).length,
-      regions: new Set(rows.map((r) => r.sigungu)).size,
-      cityOnly: rows.filter((r) => r.cityOnly).length,
+      passed: deduped.filter((r) => !r.cityOnly).length,
+      regions: new Set(deduped.map((r) => r.sigungu)).size,
+      cityOnly: deduped.filter((r) => r.cityOnly).length,
     },
   })
 }

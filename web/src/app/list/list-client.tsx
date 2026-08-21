@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { ALL_TAGS, type ListRow } from '@/lib/site'
 import {
-  filterAndSort, groupBySigungu, zoneCounts, ZONES, type Sort, type ZoneId,
+  filterAndSort, groupBySigungu, zoneCounts, zoneHint, ZONES, type Sort, type ZoneId,
 } from '@/lib/filter'
 import { CafeCard } from '../cafe-card'
 
@@ -29,6 +29,10 @@ export function ListClient({ cafes }: { cafes: ListRow[] }) {
   // 방향을 골랐을 때만 묶는다. 안 골랐으면 43개 그룹이 생긴다
   const groups = useMemo(() => (zone ? groupBySigungu(shown) : null), [zone, shown])
   const picked = ZONES.find((z) => z.id === zone)
+  const hint = useMemo(
+    () => (zone ? zoneHint(cafes, zone, { city }) : ''),
+    [cafes, zone, city],
+  )
 
   const toggle = (t: string) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
@@ -68,7 +72,7 @@ export function ListClient({ cafes }: { cafes: ListRow[] }) {
 
       {picked && (
         <p className="mt-2 text-[12px] text-ink-soft">
-          {picked.label} — {picked.hint} · 지역별로 묶어 가까운 곳부터 보여줍니다
+          {picked.label} — {hint} · 가까운 지역부터
         </p>
       )}
 
