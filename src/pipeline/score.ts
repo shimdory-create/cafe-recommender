@@ -79,26 +79,62 @@ export interface Scored {
   id: string
   score: number
   tags: string[]
+  /** 시군구. 한 지역이 목록을 독점하지 않게 하는 데 쓴다 */
+  region?: string
 }
 
 /**
- * 주말 후보 선정. 태그 다양성 제약: 상위 3곳이 전부 "정원·마당형"이면
- * 리스트의 의미가 없으므로 새 태그를 가진 후보를 우선한다 (스펙 8.4).
- * 다양성을 만들 수 없으면 점수 순으로 채운다.
+ * 한 주 추천에 같은 시군구를 몇 곳까지 넣을지.
+ *
+ * 검증에서 10곳 중 고양시가 3곳이었고 그중 둘이 같은 브랜드의 다른 지점
+ * (`배다골베이커리하우스`, `배다골베이커리 포레`)이었다. "또 배다골?" 이 되면
+ * 목록의 의미가 준다.
+ *
+ * 상호에서 브랜드를 추측하는 방법도 생각했지만 `베이커리카페 A` / `베이커리카페 B`
+ * 처럼 흔한 말이 접두인 경우 서로 다른 카페를 같은 브랜드로 합칠 위험이 있다.
+ * 지점은 대개 같은 지역에 모이므로 **지역 상한**이 더 안전하고, 지리적 다양성이
+ * 라는 이득도 함께 온다 — 43개 시군구가 있는데 한 곳에서 3곳을 뽑을 이유가 없다.
+ */
+const MAX_PER_REGION = 2
+
+/**
+ * 주말 후보 선정. 두 가지 다양성 제약이 있다.
+ *
+ *   태그 — 상위가 전부 "정원·마당형" 이면 리스트의 의미가 없다 (스펙 8.4)
+ *   지역 — 같은 시군구는 최대 2곳 (위 MAX_PER_REGION 주석)
+ *
+ * 다양성을 만들 수 없으면 점수 순으로 채운다. 단 **지역 상한은 채울 때도
+ * 지킨다** — 그러지 않으면 제약이 있으나 마나다.
  */
 export function pickWeekendCandidates<T extends Scored>(all: T[], n = 3): T[] {
   const sorted = [...all].sort((a, b) => b.score - a.score)
   const picked: T[] = []
   const used = new Set<string>()
+  const perRegion = new Map<string, number>()
+
+  const regionFull = (c: T) =>
+    c.region !== undefined && (perRegion.get(c.region) ?? 0) >= MAX_PER_REGION
+  const take = (c: T) => {
+    picked.push(c)
+    c.tags.forEach((t) => used.add(t))
+    if (c.region !== undefined) perRegion.set(c.region, (perRegion.get(c.region) ?? 0) + 1)
+  }
 
   for (const c of sorted) {
     if (picked.length >= n) break
+    if (regionFull(c)) continue
     const fresh = c.tags.some((t) => !used.has(t))
     if (picked.length > 0 && !fresh) continue
-    picked.push(c)
-    c.tags.forEach((t) => used.add(t))
+    take(c)
   }
-  // 다양성 제약으로 자리가 남으면 점수 순으로 채운다
+  // 태그 다양성 제약으로 자리가 남으면 점수 순으로 채운다
+  for (const c of sorted) {
+    if (picked.length >= n) break
+    if (picked.includes(c) || regionFull(c)) continue
+    take(c)
+  }
+  // 그래도 자리가 남으면(후보 자체가 적으면) 지역 상한을 풀어 채운다 —
+  // 빈 자리보다는 같은 지역이 낫다
   for (const c of sorted) {
     if (picked.length >= n) break
     if (!picked.includes(c)) picked.push(c)

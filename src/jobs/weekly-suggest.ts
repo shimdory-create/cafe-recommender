@@ -76,7 +76,10 @@ export async function runWeeklySuggest(
       now,
     )
 
-    return [{ id: c.kakaoPlaceId, score: finalScore(hot, fit), tags: c.tags, hot, fit }]
+    return [{
+      id: c.kakaoPlaceId, score: finalScore(hot, fit), tags: c.tags,
+      region: c.sigungu, hot, fit,
+    }]
   })
 
   const picked = pickWeekendCandidates(scored, count)

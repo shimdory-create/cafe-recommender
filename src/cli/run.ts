@@ -21,7 +21,8 @@ import { pruneRaw } from '../store/prune-raw.js'
 import { withDataLock, LockBusyError } from '../store/lock.js'
 import { resolveCafe, printCandidates } from './resolve.js'
 import { scanTargets, REGIONS } from '../config/regions.js'
-import { runDiscover } from '../jobs/weekly-discover.js'
+import { runDiscover, naverMapUrl } from '../jobs/weekly-discover.js'
+import { resolveSigungu } from '../pipeline/district.js'
 import { runDailyBuzz } from '../jobs/daily-buzz.js'
 import { runClassify } from '../jobs/classify.js'
 import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
@@ -231,6 +232,40 @@ async function main() {
       break
     }
 
+    case 'normalize': {
+      // 기존 데이터의 `sigungu` 를 주소 기준으로 맞춘다. 멱등이라 여러 번 돌려도 된다.
+      //
+      // 지금까지 검색한 지역이 저장돼 있었다 — 카드 표기·지도 링크·지역 묶음이
+      // 어긋났다 (실측 20/299). 새로 발굴되는 카페는 toCafe 가 처리하므로
+      // 이 명령은 과거 데이터를 위한 것이다.
+      const store = createJsonStore(process.env.DATA_DIR ?? 'data')
+      const cafes = await store.readCafes()
+      const changed: string[] = []
+      for (const c of cafes) {
+        const next = resolveSigungu({
+          roadAddress: c.roadAddress,
+          address: c.address,
+          scanned: c.sigungu,
+        })
+        if (next === c.sigungu) continue
+        changed.push(`${c.sigungu} -> ${next}  ${c.name}`)
+        c.sigungu = next
+        c.naverMapUrl = naverMapUrl(next, c.name)
+      }
+      console.log(`\n  시군구 정정 ${changed.length}곳 / 전체 ${cafes.length}곳`)
+      changed.slice(0, 20).forEach((l) => console.log(`    ${l}`))
+      if (changed.length > 20) console.log(`    ... 외 ${changed.length - 20}곳`)
+      if (changed.length === 0) {
+        console.log('  고칠 것이 없습니다.\n')
+      } else if (flag(rest, 'dry') === undefined) {
+        await store.writeCafes(cafes)
+        console.log('\n  저장했습니다. npm run site 로 페이로드를 다시 만드세요.\n')
+      } else {
+        console.log('\n  (--dry 이므로 저장하지 않았습니다)\n')
+      }
+      break
+    }
+
     case 'health': {
       const ctx = createContext()
       const rows = await ctx.store.readHealth()
@@ -387,7 +422,7 @@ async function main() {
     default:
       die(
         '사용법: tsx src/cli/run.ts'
-          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|hide>',
+          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|normalize|hide>',
       )
   }
 }

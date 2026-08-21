@@ -3,15 +3,27 @@ import { REGIONS, scanTargets } from '../../src/config/regions.js'
 import { SEARCH_KEYWORDS, curationQueries } from '../../src/config/keywords.js'
 
 describe('REGIONS', () => {
-  it('수도권 66개 시군구를 담는다', () => {
-    expect(REGIONS).toHaveLength(66)
+  it('수도권 70개 시군구를 담는다', () => {
+    // 2026년 인천 개편으로 제물포구·영종구·검단구·서해구가 생겼다. 옛 이름
+    // (중구·동구·서구)도 남겨둔다 — 카카오가 아직 옛 주소를 주는 곳이 있고,
+    // 같은 카페는 장소 id 로 걸러지므로 중복 발굴은 손해가 아니다.
+    expect(REGIONS).toHaveLength(70)
   })
 
   it('시도별 개수가 행정구역과 일치한다', () => {
     const count = (sido: string) => REGIONS.filter((r) => r.sido === sido).length
     expect(count('서울')).toBe(25)
-    expect(count('인천')).toBe(10)
+    expect(count('인천')).toBe(14) // 8구 2군 + 신설 4구
     expect(count('경기')).toBe(31)
+  })
+
+  it('2026년 인천 신설구가 들어 있다', () => {
+    // 실측: 데이터의 주소에 서해구 89곳, 제물포구 44곳, 영종구 23곳,
+    // 검단구 16곳이 있었다. 없으면 그 지역이 방향 묶음에서 조용히
+    // '가까운 곳' 기본값으로 떨어진다.
+    for (const gu of ['제물포구', '영종구', '검단구', '서해구']) {
+      expect(REGIONS.some((r) => r.sido === '인천' && r.sigungu === gu)).toBe(true)
+    }
   })
 
   it('시군구 이름에 중복이 없다', () => {
@@ -30,8 +42,8 @@ describe('REGIONS', () => {
     expect(scanTargets().some((r) => r.sigungu === '옹진군')).toBe(false)
   })
 
-  it('스캔 대상은 65개다', () => {
-    expect(scanTargets()).toHaveLength(65)
+  it('스캔 대상은 69개다 (옹진군 제외)', () => {
+    expect(scanTargets()).toHaveLength(69)
   })
 
   it('부평구가 목록에 있다 (출발지)', () => {

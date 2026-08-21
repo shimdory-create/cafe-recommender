@@ -20,7 +20,8 @@
     "prune-raw": "tsx --env-file-if-exists=.env src/cli/run.ts prune-raw",
     "health": "tsx --env-file-if-exists=.env src/cli/run.ts health",
     "hide": "tsx --env-file-if-exists=.env src/cli/run.ts hide",
-    "watch": "tsx --env-file-if-exists=.env src/cli/run.ts watch"
+    "watch": "tsx --env-file-if-exists=.env src/cli/run.ts watch",
+    "normalize": "tsx --env-file-if-exists=.env src/cli/run.ts normalize"
   },
   "type": "module",
   "private": true,

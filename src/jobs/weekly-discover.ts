@@ -6,6 +6,7 @@ import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousName } from '../pipeline/relevance.js'
 import { harvestCurated } from '../pipeline/harvest.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
+import { resolveSigungu } from '../pipeline/district.js'
 import type { Cafe, BlacklistEntry } from '../schema.js'
 import type { KakaoPlace } from '../sources/kakao-local.js'
 import type { LlmClient } from '../llm/types.js'
@@ -47,17 +48,25 @@ export const naverMapUrl = (sigungu: string, name: string) =>
 
 function toCafe(p: KakaoPlace, region: Region, now: Date): Cafe {
   const straightKm = haversineKm(HOME, { lat: p.lat, lng: p.lng })
+  // 검색한 지역이 아니라 **주소의 행정구역**을 쓴다. 키워드 검색은 경계 너머
+  // 카페도 주므로, 검색 지역을 그대로 저장하면 카드·지도 링크·지역 묶음이
+  // 모두 어긋난다 (실측 20/299). 자세한 이유는 pipeline/district.ts.
+  const sigungu = resolveSigungu({
+    roadAddress: p.roadAddressName,
+    address: p.addressName,
+    scanned: region.sigungu,
+  })
   return {
     kakaoPlaceId: p.id,
     name: p.placeName,
-    sigungu: region.sigungu,
+    sigungu,
     roadAddress: p.roadAddressName || null,
     address: p.addressName || null,
     lat: p.lat,
     lng: p.lng,
     categoryName: p.categoryName || null,
     kakaoPlaceUrl: p.placeUrl || null,
-    naverMapUrl: naverMapUrl(region.sigungu, p.placeName),
+    naverMapUrl: naverMapUrl(sigungu, p.placeName),
     phone: p.phone || null,
     straightKm: Number(straightKm.toFixed(2)),
     driveMinutesEst: estimateDriveMinutes(straightKm),

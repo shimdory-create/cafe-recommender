@@ -181,3 +181,48 @@ describe('pickWeekendCandidates', () => {
     expect(new Set(picked.map((p) => p.id)).size).toBe(picked.length)
   })
 })
+
+describe('pickWeekendCandidates — 지역 상한', () => {
+  const c = (id: string, score: number, region: string, tags = ['대형카페']) =>
+    ({ id, score, region, tags })
+
+  it('같은 시군구는 최대 2곳까지만 넣는다', () => {
+    // 검증에서 10곳 중 고양시가 3곳이었고 둘은 같은 브랜드의 다른 지점이었다
+    const out = pickWeekendCandidates([
+      c('a', 90, '고양시', ['대형카페']),
+      c('b', 80, '고양시', ['뷰맛집']),
+      c('c', 70, '고양시', ['브런치카페']),
+      c('d', 60, '파주시', ['창고형']),
+    ], 3)
+    expect(out.map((x) => x.id)).toEqual(['a', 'b', 'd'])
+  })
+
+  it('점수로 자리를 채울 때도 지역 상한을 지킨다', () => {
+    // 태그가 모두 같아 다양성 제약이 걸리는 상황
+    const out = pickWeekendCandidates([
+      c('a', 90, '고양시'),
+      c('b', 80, '고양시'),
+      c('c', 70, '고양시'),
+      c('d', 10, '김포시'),
+    ], 3)
+    expect(out.map((x) => x.id)).toEqual(['a', 'b', 'd'])
+  })
+
+  it('후보가 모자라면 상한을 풀어 자리를 채운다 — 빈 자리보다 낫다', () => {
+    const out = pickWeekendCandidates([
+      c('a', 90, '고양시'),
+      c('b', 80, '고양시'),
+      c('c', 70, '고양시'),
+    ], 3)
+    expect(out).toHaveLength(3)
+  })
+
+  it('region 이 없으면 상한을 적용하지 않는다 (기존 호출부 호환)', () => {
+    const out = pickWeekendCandidates([
+      { id: 'a', score: 90, tags: ['대형카페'] },
+      { id: 'b', score: 80, tags: ['대형카페'] },
+      { id: 'c', score: 70, tags: ['대형카페'] },
+    ], 3)
+    expect(out).toHaveLength(3)
+  })
+})
