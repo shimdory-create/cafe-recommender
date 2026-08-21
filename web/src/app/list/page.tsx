@@ -1,7 +1,7 @@
 import { payload, toListRow } from '@/lib/site'
 import { ListClient } from './list-client'
 
-export const metadata = { title: '전체 리스트 — 심김가족 카페' }
+export const metadata = { title: '전체 리스트 — 심김 빵지순례' }
 
 /**
  * 전체 리스트. 무한 스크롤을 만들지 않는다 — 통과분이 수백 곳이라

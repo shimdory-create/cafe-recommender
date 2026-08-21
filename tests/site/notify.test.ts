@@ -53,7 +53,7 @@ describe('buildNotifyText', () => {
       payload: payload(three),
       baseUrl: 'https://cafe.example.com',
     })
-    expect(t).toContain('이번 주 추천 카페')
+    expect(t).toContain('심김 빵지순례')
     expect(t).toContain('테라로사 서종점')
     expect(t).toContain('카페산')
     expect(t).toContain('더그림')

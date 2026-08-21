@@ -39,7 +39,9 @@ export function buildNotifyText(input: NotifyInput): string {
 
   const link = baseUrl ? baseUrl.replace(/\/$/, '') : ''
 
-  const head = '[이번 주 추천 카페]'
+  // 이름을 앞에 둔다 — 카톡 목록에서 무엇인지 바로 보인다.
+  // 200자를 넘기면 아래 ladder 가 카페 설명부터 줄인다.
+  const head = '[심김 빵지순례 · 이번 주]'
   const moreLine = more > 0 ? `\n… 외 ${more}곳` : ''
   const statusLine = input.status ? `\n${input.status}` : ''
   const tail = (link ? `${moreLine}\n자세히 → ${link}` : moreLine) + statusLine

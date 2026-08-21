@@ -4,12 +4,12 @@ import './globals.css'
 import { TabBar } from './tab-bar'
 
 export const metadata: Metadata = {
-  title: '심김가족 카페',
+  title: '심김 빵지순례',
   description: '수도권 대형·베이커리 카페 주말 나들이 추천',
   manifest: '/manifest.webmanifest',
   // 가족 전용이다. 색인되면 안 된다 (스펙 10절)
   robots: { index: false, follow: false, nocache: true },
-  appleWebApp: { capable: true, title: '심김가족 카페', statusBarStyle: 'default' },
+  appleWebApp: { capable: true, title: '심김 빵지순례', statusBarStyle: 'default' },
   // iOS 는 SVG 아이콘을 홈 화면에 쓰지 않는다 — PNG 가 없으면 화면 캡처가
   // 아이콘이 된다. 그래서 icon.svg 와 같은 그림을 180px PNG 로 함께 둔다.
   icons: { icon: '/icon.svg', apple: '/apple-touch-icon.png' },
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
             <div className="flex items-center px-5 py-3.5">
               <Link href="/" className="text-[17px] font-bold tracking-tight">
-                심김가족 카페
+                심김 빵지순례
               </Link>
             </div>
           </header>

@@ -109,7 +109,7 @@ async function main() {
         break
       }
       const cafes = await ctx.store.readCafes()
-      console.log('\n  [이번 주 추천 카페]\n')
+      console.log('\n  [심김 빵지순례 · 이번 주]\n')
       for (const s of r.picked) {
         const c = cafes.find((x) => x.kakaoPlaceId === s.kakaoPlaceId)
         const reason = s.reason as { hot?: number; tags?: string[] }

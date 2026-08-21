@@ -35,7 +35,7 @@ export default function Home() {
       <div className="mb-4">
         <h1 className="text-[22px] font-bold tracking-tight">이번 주 추천</h1>
         <p className="mt-1 text-[13px] text-ink-soft">
-          {label} · 블로그 화제량과 우리 집 거리로 골랐어요
+          {label} · 블로그 화제량과 우리집(인천 부평) 거리로 골랐어요
         </p>
       </div>
 

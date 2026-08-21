@@ -13,7 +13,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const cafe = byId((await params).id)
-  return { title: cafe ? `${cafe.name} — 심김가족 카페` : '심김가족 카페' }
+  return { title: cafe ? `${cafe.name} — 심김 빵지순례` : '심김 빵지순례' }
 }
 
 const PARKING_NOTE: Record<string, string> = {

@@ -1,6 +1,6 @@
 import { payload } from '@/lib/site'
 
-export const metadata = { title: '정보 — 심김가족 카페' }
+export const metadata = { title: '정보 — 심김 빵지순례' }
 
 /** 정보 탭 — 이 목록이 어떻게 만들어지는지. 신뢰가 여기서 생긴다 */
 export default function Info() {
