@@ -12,6 +12,9 @@
  *   npm run visited    -- <카페 이름> [--date YYYY-MM-DD] [--note "한 줄 메모"]
  *   npm run inspect    -- <카페 이름>
  *   npm run health
+ *   npm run watch                   (사용량·운영 이상. 키 없이 돈다)
+ *   npm run audit                   (데이터 정합성. 키 없이 돈다)
+ *   npm run normalize -- [--dry]    (시군구를 주소 기준으로 정정)
  *   npm run prune-raw -- [--days 7]
  *   npm run hide       -- <카페 이름> | --list | --restore <카페 이름>
  */
@@ -29,10 +32,12 @@ import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
 import { runDriveTimes, driveMinutesOf } from '../jobs/drive-times.js'
 import { runLabel, runLabelReport } from './label.js'
 import { buildSitePayload } from '../site/payload.js'
+import { SitePayloadSchema } from '../schema.js'
 import { detectAnomalies, formatWatch, statusLine } from '../jobs/usage-watch.js'
+import { auditData, formatAudit, zoneDrift } from '../pipeline/audit.js'
 import { buildNotifyText, KAKAO_TEXT_LIMIT } from '../site/notify.js'
 import { mondayOf } from '../jobs/weekly-suggest.js'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, writeFile, readFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
 
 const argv = process.argv.slice(2)
@@ -232,6 +237,27 @@ async function main() {
       break
     }
 
+    case 'audit': {
+      // 정합성 감사. watch(운영 이상)와 달리 **데이터가 틀렸나**를 본다.
+      // API 키를 요구하지 않는다 — 로컬 파일만 읽는다.
+      const store = createJsonStore(process.env.DATA_DIR ?? 'data')
+      const now = new Date()
+      const [cafes, buzz] = await Promise.all([store.readCafes(), store.readBuzz()])
+      const raw = await readFile(flag(rest, 'site') || 'web/src/generated/site.json', 'utf8')
+      const site = SitePayloadSchema.parse(JSON.parse(raw))
+      const findings = auditData({ cafes, buzz, site, now })
+      console.log('\n' + formatAudit(findings, { cafes, buzz, site, now }))
+      const drift = zoneDrift(cafes, site)
+      if (drift.length > 0) {
+        console.log(`  [!] zone_drift: 페이로드의 방향이 지금 규칙과 다른 카페 ${drift.length}곳`)
+        drift.slice(0, 5).forEach((d) => console.log(`      ${d}`))
+        console.log('      npm run site 로 다시 만드세요')
+      }
+      console.log('')
+      if (findings.some((f) => f.level === 'fail') || drift.length > 0) process.exitCode = 1
+      break
+    }
+
     case 'normalize': {
       // 기존 데이터의 `sigungu` 를 주소 기준으로 맞춘다. 멱등이라 여러 번 돌려도 된다.
       //
@@ -422,7 +448,7 @@ async function main() {
     default:
       die(
         '사용법: tsx src/cli/run.ts'
-          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|normalize|hide>',
+          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|audit|normalize|hide>',
       )
   }
 }
