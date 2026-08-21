@@ -24,7 +24,7 @@ export const payload = raw as unknown as SitePayload
  */
 export type ListRow = Pick<
   SiteCafe,
-  'id' | 'name' | 'sigungu' | 'driveMinutes' | 'scale' | 'parkingGrade'
+  'id' | 'name' | 'sigungu' | 'zone' | 'driveMinutes' | 'scale' | 'parkingGrade'
   | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'imageUrl' | 'hotScore'
   | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn'
 >
@@ -36,6 +36,7 @@ export function toListRow(c: SiteCafe): ListRow {
     id: c.id,
     name: c.name,
     sigungu: c.sigungu,
+    zone: c.zone,
     driveMinutes: c.driveMinutes,
     scale: c.scale,
     parkingGrade: c.parkingGrade,

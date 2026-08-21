@@ -4,6 +4,7 @@ import type { SiteCafe, SitePayload } from '../../src/schema.js'
 
 const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe => ({
   sigungu: '양평군',
+  zone: 'east',
   driveMinutes: 80,
   scale: '대형',
   parkingGrade: 'A',

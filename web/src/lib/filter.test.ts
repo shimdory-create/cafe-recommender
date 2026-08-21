@@ -1,10 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import { filterAndSort } from './filter'
+import { filterAndSort, groupBySigungu, zoneCounts } from './filter'
 import { driveLabel, recentlyVisited, type SiteCafe } from './site'
 
 const cafe = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
   name: `카페${over.id}`,
   sigungu: '양평군',
+  zone: 'east',
   driveMinutes: 70,
   scale: '대형',
   parkingGrade: 'A',
@@ -135,5 +136,56 @@ describe('recentlyVisited', () => {
 
   it('기록이 없으면 띄우지 않는다', () => {
     expect(recentlyVisited(null, now)).toBe(false)
+  })
+})
+
+describe('방향 묶음', () => {
+  const rows = [
+    cafe({ id: '1', sigungu: '양평군', zone: 'east', driveMinutes: 70 }),
+    cafe({ id: '2', sigungu: '가평군', zone: 'east', driveMinutes: 80 }),
+    cafe({ id: '3', sigungu: '남양주시', zone: 'east', driveMinutes: 55 }),
+    cafe({ id: '4', sigungu: '파주시', zone: 'north', driveMinutes: 32 }),
+    cafe({ id: '5', sigungu: '종로구', zone: 'seoul', driveMinutes: 45, cityOnly: true }),
+    cafe({ id: '6', sigungu: '양평군', zone: 'east', driveMinutes: 65 }),
+  ]
+
+  it('고른 방향만 남긴다', () => {
+    const out = filterAndSort(rows, { tags: [], sort: 'near', city: false, zone: 'east' })
+    expect(out.map((r) => r.id)).toEqual(['3', '6', '1', '2'])
+  })
+
+  it('방향을 고르지 않으면 전체를 준다', () => {
+    const out = filterAndSort(rows, { tags: [], sort: 'near', city: false, zone: null })
+    expect(out).toHaveLength(5) // 도심전용 1곳 제외
+  })
+
+  it('방향과 태그는 함께 걸린다 (AND)', () => {
+    const withTag = [...rows, cafe({ id: '7', zone: 'north', tags: ['대형카페', '뷰맛집'] })]
+    const out = filterAndSort(withTag, {
+      tags: ['뷰맛집'], sort: 'hot', city: false, zone: 'north',
+    })
+    expect(out.map((r) => r.id)).toEqual(['7'])
+  })
+
+  it('칩 숫자는 도심 포함 여부를 따른다 — 눌러도 빈 화면이 되지 않게', () => {
+    expect(zoneCounts(rows, { city: false }).seoul).toBe(0)
+    expect(zoneCounts(rows, { city: true }).seoul).toBe(1)
+    expect(zoneCounts(rows, { city: false }).east).toBe(4)
+  })
+
+  it('시군구로 묶고 가까운 지역부터 놓는다', () => {
+    const east = filterAndSort(rows, { tags: [], sort: 'near', city: false, zone: 'east' })
+    const groups = groupBySigungu(east)
+    expect(groups.map((g) => g.sigungu)).toEqual(['남양주시', '양평군', '가평군'])
+    expect(groups[1]!.rows.map((r) => r.id)).toEqual(['6', '1'])
+    expect(groups[0]!.nearest).toBe(55)
+  })
+
+  it('이동시간을 모르는 곳만 있는 지역은 뒤로 간다', () => {
+    const groups = groupBySigungu([
+      cafe({ id: 'a', sigungu: '미상군', driveMinutes: null }),
+      cafe({ id: 'b', sigungu: '김포시', driveMinutes: 25 }),
+    ])
+    expect(groups.map((g) => g.sigungu)).toEqual(['김포시', '미상군'])
   })
 })

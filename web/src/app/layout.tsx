@@ -32,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* 데스크톱은 별도 레이아웃을 만들지 않는다 — 480px 센터 정렬 (스펙 10.1) */}
         <div className="mx-auto min-h-dvh max-w-[480px] pb-24">
           <header className="sticky top-0 z-10 border-b border-line bg-paper/90 backdrop-blur">
-            <div className="flex items-center px-5 py-3.5">
+            {/* 높이를 56px 로 고정한다 — 목록의 지역 헤더가 이 값(+테두리 1px)을
+                기준으로 붙는다. 여기가 바뀌면 그쪽도 같이 바꿔야 한다. */}
+            <div className="flex h-14 items-center px-5">
               {/* 터치 타겟 44px 이상 (스펙 10.1). 감사에서 26px 로 측정됐다 */}
               <Link
                 href="/"

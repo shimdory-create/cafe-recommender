@@ -15,6 +15,8 @@ export interface SiteCafe {
   id: string
   name: string
   sigungu: string
+  /** 방향 구획 (집 기준). 전체 리스트에서 "어느 쪽" 으로 묶는다 */
+  zone: 'near' | 'seoul' | 'north' | 'east' | 'south' | 'west'
   driveMinutes: number | null
   scale: '대형' | '중형' | '소형' | null
   parkingGrade: 'A' | 'B' | 'C' | 'D' | '?'

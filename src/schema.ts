@@ -191,6 +191,8 @@ export const SiteCafeSchema = z.object({
   id: z.string(),
   name: z.string(),
   sigungu: z.string(),
+  /** 방향 구획 (집 기준). 전체 리스트에서 "어느 쪽" 으로 묶는다 */
+  zone: z.enum(['near', 'seoul', 'north', 'east', 'south', 'west']),
   driveMinutes: z.number().int().nullable(),
 
   // 카드 상단 고정 3종 (스펙 10절 v3.1)
