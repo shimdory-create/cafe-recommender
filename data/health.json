@@ -1,10 +1,10 @@
 [
   {
     "source": "kakao-local",
-    "lastSuccessAt": "2026-08-21T12:53:46.098Z",
+    "lastSuccessAt": "2026-08-23T19:59:39.762Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-08-21T12:53:46.098Z"
+    "updatedAt": "2026-08-23T19:59:39.762Z"
   },
   {
     "source": "kakao-blog",
@@ -26,5 +26,12 @@
     "lastError": null,
     "consecutiveFailures": 0,
     "updatedAt": "2026-08-22T22:54:56.414Z"
+  },
+  {
+    "source": "harvest",
+    "lastSuccessAt": "2026-08-23T19:59:39.762Z",
+    "lastError": null,
+    "consecutiveFailures": 0,
+    "updatedAt": "2026-08-23T19:59:39.762Z"
   }
 ]
