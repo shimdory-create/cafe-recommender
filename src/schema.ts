@@ -325,6 +325,8 @@ export const SitePayloadSchema = z.object({
     scannedRegions: z.number().int(),
     /** 실제 길찾기로 이동시간을 잰 카페 수 (나머지는 직선거리 근사) */
     driveMeasured: z.number().int(),
+    /** 다녀온 곳을 추천에서 내리는 기간(일). 웹이 이 값을 그대로 쓴다 */
+    revisitDays: z.number().int(),
     cityOnly: z.number().int(),
   }),
 })

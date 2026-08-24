@@ -1,4 +1,5 @@
 import { passesLayer2 } from '../pipeline/buzz.js'
+import { splitBranch } from '../pipeline/relevance.js'
 import type { BuzzSnapshot, Cafe } from '../schema.js'
 
 /**
@@ -13,11 +14,18 @@ import type { BuzzSnapshot, Cafe } from '../schema.js'
  * 규칙이 바뀌지 않았으므로 손대지 않는다.
  */
 
-/** 화제량 부족으로 배제된 흔적. `월 3.2건 < 8건` */
-const BUZZ_REASON = /^월 [\d.]+건 < [\d.]+건$/
+/**
+ * Layer 2 가 붙이는 배제 사유. 컷이나 판정 규칙이 바뀌면 다시 봐야 한다.
+ *
+ *   `월 3.2건 < 8건`     화제량 컷 (거리별로 바뀜)
+ *   `정밀도 8% < 30%`    관련성 판정 (지점명 처리가 바뀜)
+ *
+ * 프랜차이즈·업종·주차 사유는 규칙이 그대로이므로 건드리지 않는다.
+ */
+const LAYER2_REASON = /^(월 [\d.]+건 < [\d.]+건|정밀도 \d+% < \d+%)$/
 
 export function isBuzzExcluded(c: Cafe): boolean {
-  return c.status === 'excluded_auto' && BUZZ_REASON.test(c.excludeReason ?? '')
+  return c.status === 'excluded_auto' && LAYER2_REASON.test(c.excludeReason ?? '')
 }
 
 const driveOf = (c: Cafe): number =>
@@ -43,6 +51,19 @@ export function requeueTargets(
     if (!isBuzzExcluded(c)) return false
     const b = latest.get(c.kakaoPlaceId)
     if (!b) return false
+    /*
+     * 지점명이 붙은 카페는 **저장된 값으로 판단하면 안 된다.**
+     *
+     * 관련성 규칙이 바뀌면 정밀도도 화제량도 달라진다. 저장된 값은 옛 규칙으로
+     * 잰 것이라, 그걸로 "지금도 탈락" 이라고 판단하면 영원히 못 돌아온다 —
+     * `포레스트아웃팅스 송도점` 이 그랬다 (옛 값 월 2.4건, 다시 재니 통과).
+     *
+     * 그래서 지점 카페는 조건 없이 줄에 세우고 buzz 잡이 다시 재게 한다.
+     * 지점명 없는 카페는 규칙이 그대로이므로 저장된 값으로 판단해도 된다 —
+     * 전부 되돌리면 1,550곳이 되는데 대부분 다시 재도 같은 값이 나온다.
+     */
+    if (splitBranch(c.name).branch !== '') return true
+    if ((c.excludeReason ?? '').startsWith('정밀도')) return false
     return passesLayer2(b, { now, driveMinutes: driveOf(c) }).pass
   })
 }

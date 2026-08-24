@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
-import { isRelevant, isAmbiguousName } from '../../src/pipeline/relevance.js'
+import { isRelevant, isAmbiguousName, splitBranch } from '../../src/pipeline/relevance.js'
 import { parseKakaoBlog } from '../../src/sources/kakao-blog.js'
 import type { BlogDoc } from '../../src/sources/kakao-blog.js'
 
@@ -113,5 +113,56 @@ describe('실제 fixture 로 검증', () => {
     // 정밀도가 검색어에 실제로 반응한다는 확인.
     const rel = terarosa.filter((d) => isRelevant(d, '더티트렁크'))
     expect(rel.length).toBeLessThan(3)
+  })
+})
+
+describe('splitBranch — 지점 접미사', () => {
+  it('지점명을 떼어낸다', () => {
+    expect(splitBranch('포레스트아웃팅스 일산본점')).toEqual({ base: '포레스트아웃팅스', branch: '일산' })
+    expect(splitBranch('포레스트아웃팅스 용인점')).toEqual({ base: '포레스트아웃팅스', branch: '용인' })
+    expect(splitBranch('카페대너리스 북한강지점')).toEqual({ base: '카페대너리스', branch: '북한강' })
+    expect(splitBranch('랑데자뷰 인천부평점')).toEqual({ base: '랑데자뷰', branch: '인천부평' })
+  })
+
+  it('지점이 아닌 상호는 건드리지 않는다', () => {
+    expect(splitBranch('배다골베이커리 포레')).toEqual({ base: '배다골베이커리 포레', branch: '' })
+    expect(splitBranch('테라로사')).toEqual({ base: '테라로사', branch: '' })
+  })
+
+  it('붙여 쓴 이름은 가르지 않는다 — `카페만점` 이 `카페`+`만` 이 되면 안 된다', () => {
+    expect(splitBranch('카페만점')).toEqual({ base: '카페만점', branch: '' })
+  })
+
+  it('지점 힌트가 한 글자면 지점으로 보지 않는다', () => {
+    expect(splitBranch('삼거리 큰점')).toEqual({ base: '삼거리 큰점', branch: '' })
+  })
+})
+
+describe('isRelevant — 지점명이 붙은 카페', () => {
+  const doc = (title: string, contents = '') => ({
+    title, contents, url: 'u', blogName: 'b', dateTime: new Date(), thumbnail: '',
+  })
+
+  it('블로거가 쓰는 표기를 잡는다', () => {
+    // 실측: 상호 전체를 요구하면 50건 중 4건만 통과해 정밀도 8% 로 탈락했다
+    const 이름 = '포레스트아웃팅스 일산본점'
+    expect(isRelevant(doc('일산 포레스트아웃팅스 대형카페 후기'), 이름)).toBe(true)
+    expect(isRelevant(doc('포레스트 아웃팅스 일산본점 카페'), 이름)).toBe(true)
+    expect(isRelevant(doc('고양 일산 식물원 카페 포레스트아웃팅스'), 이름)).toBe(true)
+  })
+
+  it('다른 지점 글은 잡지 않는다', () => {
+    // 기본 상호만 보면 브랜드 전체 글이 모든 지점에 중복으로 잡힌다
+    expect(isRelevant(doc('용인 포레스트아웃팅스 카페 후기'), '포레스트아웃팅스 일산본점')).toBe(false)
+    expect(isRelevant(doc('포레스트아웃팅스 송도점 카페'), '포레스트아웃팅스 용인점')).toBe(false)
+  })
+
+  it('카페 문맥어는 여전히 필요하다', () => {
+    expect(isRelevant(doc('일산 포레스트아웃팅스 채용 공고'), '포레스트아웃팅스 일산본점')).toBe(false)
+  })
+
+  it('지점명 없는 카페는 규칙이 그대로다', () => {
+    expect(isRelevant(doc('테라로사 카페 후기'), '테라로사')).toBe(true)
+    expect(isRelevant(doc('다른 카페 후기'), '테라로사')).toBe(false)
   })
 })

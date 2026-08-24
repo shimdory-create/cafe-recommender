@@ -76,7 +76,7 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
             disabled={page >= total}
             className="min-h-[48px] flex-1 rounded-2xl bg-bean text-[14px] font-bold text-white disabled:opacity-35"
           >
-            다음 10곳 →
+            다음 {PAGE_SIZE}곳 →
           </button>
         </nav>
       )}

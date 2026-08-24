@@ -63,7 +63,7 @@ function input(over: Partial<AuditInput> = {}): AuditInput {
     week: [{ rank: 1, id: '1', finalScore: 25 }],
     cafes: [row({ id: '1' })],
     visited: [],
-    stats: { discovered: 1, passed: 1, regions: 1, scannedRegions: 69, driveMeasured: 1, cityOnly: 0 },
+    stats: { discovered: 1, passed: 1, regions: 1, scannedRegions: 69, revisitDays: 180, driveMeasured: 1, cityOnly: 0 },
   }
   return {
     cafes,

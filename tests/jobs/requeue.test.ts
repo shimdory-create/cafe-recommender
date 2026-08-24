@@ -28,11 +28,16 @@ const buzz = (id: string, rate: number): BuzzSnapshot => ({
 } as unknown as BuzzSnapshot)
 
 describe('isBuzzExcluded', () => {
-  it('화제량 사유만 고른다', () => {
+  it('Layer 2 사유만 고른다 — 규칙이 바뀐 것은 그것뿐이다', () => {
     expect(isBuzzExcluded(cafe({ kakaoPlaceId: '1' }))).toBe(true)
-    expect(isBuzzExcluded(cafe({ kakaoPlaceId: '2', excludeReason: '정밀도 10% < 30%' }))).toBe(false)
+    expect(isBuzzExcluded(cafe({ kakaoPlaceId: '2', excludeReason: '정밀도 10% < 30%' }))).toBe(true)
+  })
+
+  it('규칙이 그대로인 사유는 건드리지 않는다', () => {
     expect(isBuzzExcluded(cafe({ kakaoPlaceId: '3', excludeReason: 'franchise' }))).toBe(false)
-    expect(isBuzzExcluded(cafe({ kakaoPlaceId: '4', excludeReason: '주차 불가 — 차로 갈 수 없다' }))).toBe(false)
+    expect(isBuzzExcluded(cafe({ kakaoPlaceId: '4', excludeReason: 'category' }))).toBe(false)
+    expect(isBuzzExcluded(cafe({ kakaoPlaceId: '5', excludeReason: '주차 불가 — 차로 갈 수 없다' }))).toBe(false)
+    expect(isBuzzExcluded(cafe({ kakaoPlaceId: '6', excludeReason: '동네 카페 (성격 태그 0개)' }))).toBe(false)
   })
 
   it('배제 상태가 아니면 대상이 아니다', () => {
@@ -50,9 +55,24 @@ describe('requeueTargets', () => {
     expect(out.map((c) => c.kakaoPlaceId)).toEqual(['near5'])
   })
 
-  it('규칙이 안 바뀐 사유는 손대지 않는다', () => {
+  it('지점명 없는 카페의 정밀도 사유는 손대지 않는다', () => {
+    // 관련성 규칙이 바뀐 대상은 지점명 카페뿐이다. 나머지는 다시 재도 같은
+    // 값이 나와 쿼터만 쓴다
     const cafes = [cafe({ kakaoPlaceId: 'p', excludeReason: '정밀도 5% < 30%' })]
     expect(requeueTargets(cafes, [buzz('p', 50)], NOW)).toEqual([])
+  })
+
+  it('지점명 카페는 저장된 값으로 판단하지 않는다', () => {
+    // `포레스트아웃팅스 송도점` 이 옛 값(월 2.4건)으로 "지금도 탈락" 판정을
+    // 받아 영원히 못 돌아왔다. 다시 재니 통과했다
+    const 지점 = cafe({
+      kakaoPlaceId: 'b', name: '포레스트아웃팅스 송도점', excludeReason: '월 2.4건 < 4건',
+    })
+    expect(requeueTargets([지점], [buzz('b', 2.4)], NOW)).toHaveLength(1)
+    const 지점정밀도 = cafe({
+      kakaoPlaceId: 'c', name: '포레스트아웃팅스 일산본점', excludeReason: '정밀도 10% < 30%',
+    })
+    expect(requeueTargets([지점정밀도], [buzz('c', 12)], NOW)).toHaveLength(1)
   })
 
   it('화제량 측정이 없으면 되돌리지 않는다', () => {

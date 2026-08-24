@@ -2,7 +2,7 @@ import { driveMinutesOf } from '../jobs/drive-times.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
-import { isRevisitReady } from '../pipeline/revisit.js'
+import { isRevisitReady, REVISIT_DAYS } from '../pipeline/revisit.js'
 import { REGIONS } from '../config/regions.js'
 import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
@@ -281,6 +281,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       // `65개 시군구` 라고 말하는 동안 실제로는 69개였다 (2026-08-25)
       scannedRegions: REGIONS.filter((r) => !r.excluded).length,
       driveMeasured: deduped.filter((r) => byId.get(r.id)?.driveMinutes != null).length,
+      revisitDays: REVISIT_DAYS,
       cityOnly: deduped.filter((r) => r.cityOnly).length,
     },
   })

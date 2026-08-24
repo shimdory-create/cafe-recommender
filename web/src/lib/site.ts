@@ -102,11 +102,20 @@ export const ALL_TAGS = [
   '정원마당형', '창고형', '전시복합문화', '디저트특화',
 ] as const
 
-/** 방문 후 6개월이 지나지 않았는가 (카드 배지용) */
+/**
+ * 다녀온 곳을 추천에서 내리는 기간.
+ *
+ * **파이프라인이 정한 값을 그대로 쓴다** (`src/pipeline/revisit.ts`). 여기에
+ * 숫자를 적어 두면 두 곳이 갈라져 "카톡에는 있는데 눌러보면 없는" 상태가
+ * 된다 — 실제로 한 번 그랬다.
+ */
+export const REVISIT_DAYS = payload.stats.revisitDays
+
+/** 방문 후 재방문 기간이 지나지 않았는가 (카드 배지용) */
 export function recentlyVisited(visitedOn: string | null, now = new Date()): boolean {
   if (!visitedOn) return false
   const days = (now.getTime() - new Date(visitedOn).getTime()) / 86_400_000
-  return days >= 0 && days <= 180
+  return days >= 0 && days <= REVISIT_DAYS
 }
 
 export function driveLabel(min: number | null): string {

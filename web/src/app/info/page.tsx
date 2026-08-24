@@ -1,4 +1,4 @@
-import { payload } from '@/lib/site'
+import { payload, REVISIT_DAYS } from '@/lib/site'
 import { VIEW_ONLY } from '@/lib/view-only'
 
 export const metadata = { title: '정보 — 심김 빵지순례' }
@@ -37,13 +37,18 @@ export default function Info() {
     ['순위를 매긴다',
       '화제량 × (거리·주차·메뉴)로 점수를 내고 높은 순으로 줄을 세워요. 한 지역에서 두 곳까지만 뽑아요.'],
     ['다녀온 곳은 내린다',
-      '별점을 남기면 다녀온 곳으로 자동 기록되고, 6개월간 추천에서 빠져요. 다녀온 곳 탭에서 빼면 다시 올라옵니다.'],
+      `별점을 남기면 다녀온 곳으로 자동 기록되고, ${Math.round(REVISIT_DAYS / 30)}개월간 추천에서 빠져요. 다녀온 곳 탭에서 빼면 다시 올라옵니다.`],
   ]
 
+  /**
+   * `보여주는 카페` 를 통과분 + 도심전용 합계로 적었더니 전체 탭 머리의 숫자와
+   * 어긋났다 (정보 1,035곳 / 전체 664곳). 전체 탭은 기본이 **도심 제외**다.
+   * 화면에 보이는 그대로를 먼저 쓰고, 도심을 켰을 때 수를 따로 적는다.
+   */
   const stats2: [string, string][] = [
     ['찾은 카페', `${stats.discovered.toLocaleString()}곳`],
-    ['보여주는 카페', `${shown.toLocaleString()}곳`],
-    ['  그중 도심 전용 (주차 어려움)', `${stats.cityOnly}곳`],
+    ['전체 탭에 보이는 카페', `${stats.passed.toLocaleString()}곳`],
+    ['「도심 포함」 을 켜면', `${shown.toLocaleString()}곳 (+${stats.cityOnly})`],
     ['운전 시간 실측', `${stats.driveMeasured} / ${shown}곳`],
     ['훑는 지역', `${stats.scannedRegions}개 시군구`],
     ['카페가 있는 지역', `${stats.regions}개 시군구`],

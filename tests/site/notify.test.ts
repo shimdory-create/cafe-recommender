@@ -47,7 +47,7 @@ const payload = (cafes: SiteCafe[]): SitePayload => ({
   visited: [],
   stats: {
     discovered: 100, passed: cafes.length, regions: 3,
-    scannedRegions: 69, driveMeasured: cafes.length, cityOnly: 0,
+    scannedRegions: 69, revisitDays: 180, driveMeasured: cafes.length, cityOnly: 0,
   },
 })
 
