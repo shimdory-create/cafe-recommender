@@ -2,6 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import type { WriteStore } from './store'
+import { VIEW_ONLY } from './view-only'
 
 /**
  * 개발용 파일 저장소. **배포 환경에서는 쓰이지 않는다** (`store.ts` 가
@@ -30,6 +31,7 @@ function repoRoot(): string {
 export function localStore(): WriteStore {
   return {
     enabled: true,
+    writable: !VIEW_ONLY,
     kind: 'local',
     async read<T>(path: string): Promise<T[]> {
       try {

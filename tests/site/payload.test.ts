@@ -127,10 +127,32 @@ describe('buildSitePayload', () => {
     expect(p.week.map((w) => w.id)).toEqual(['1', '2'])
   })
 
-  it('다른 주의 추천은 무시한다', () => {
+  it('이번 주 후보가 아직 없으면 가장 최근 주의 것을 쓴다', () => {
+    // 후보 확정은 목요일 밤에 돈다. 월요일 09시(KST)에 weekOf 가 넘어가면
+    // 목요일까지 사흘 동안 추천이 사라졌다 — 실측 2026-08-24 week: []
     const p = build([cafe('1')], [buzz('1')], {
       suggestions: [
         { weekOf: '2026-08-10', kakaoPlaceId: '1', rank: 1, finalScore: 20, reason: {} },
+      ],
+    })
+    expect(p.week.map((w) => w.id)).toEqual(['1'])
+  })
+
+  it('여러 주가 쌓여 있으면 가장 최근 주만 쓴다', () => {
+    const p = build([cafe('1'), cafe('2')], [buzz('1'), buzz('2')], {
+      suggestions: [
+        { weekOf: '2026-08-10', kakaoPlaceId: '1', rank: 1, finalScore: 20, reason: {} },
+        { weekOf: '2026-08-17', kakaoPlaceId: '2', rank: 1, finalScore: 30, reason: {} },
+      ],
+    })
+    expect(p.week.map((w) => w.id)).toEqual(['2'])
+  })
+
+  it('아직 오지 않은 주의 후보는 쓰지 않는다', () => {
+    // 미래 weekOf 가 파일에 들어오는 경우 (수동 실행 등). 앞당겨 보여주지 않는다
+    const p = build([cafe('1')], [buzz('1')], {
+      suggestions: [
+        { weekOf: '2026-09-07', kakaoPlaceId: '1', rank: 1, finalScore: 20, reason: {} },
       ],
     })
     expect(p.week).toHaveLength(0)

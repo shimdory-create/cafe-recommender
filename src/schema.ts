@@ -122,6 +122,8 @@ export const ReviewSchema = z.object({
   /** 아주 짧은 한 줄. 길게 쓰라고 하면 아무도 쓰지 않는다 */
   comment: z.string().max(100).default(''),
   createdAt: z.string(),
+  /** 고친 적이 있으면 그 시각. 고쳐도 createdAt 은 그대로 둔다 */
+  updatedAt: z.string().optional(),
 })
 export type Review = z.infer<typeof ReviewSchema>
 
@@ -191,8 +193,10 @@ export const SiteCafeSchema = z.object({
   id: z.string(),
   name: z.string(),
   sigungu: z.string(),
-  /** 방향 구획 (집 기준). 전체 리스트에서 "어느 쪽" 으로 묶는다 */
+  /** 방향 구획 (집 기준). 감사 규칙이 시도 정합성을 볼 때 쓴다 */
   zone: z.enum(['near', 'seoul', 'north', 'east', 'south', 'west']),
+  /** 시 단위 묶음 키. 전체 리스트의 지역 칩 (서울·인천은 하나로) */
+  area: z.string(),
   driveMinutes: z.number().int().nullable(),
 
   // 카드 상단 고정 3종 (스펙 10절 v3.1)
@@ -219,7 +223,24 @@ export const SiteCafeSchema = z.object({
   hotScore: z.number(),
   /** 화제도 x 가족 적합도. 홈 피드 정렬 기준 */
   finalScore: z.number(),
+  /**
+   * 화제량 산출용 **추정 발행률** (`글수 x 30 / 관측기간`). 점수에만 쓴다.
+   *
+   * 화면에 그대로 쓰면 안 된다 — 50건 창이 이틀에 다 차면 `월 599건` 이
+   * 나오는데 같은 카페의 90일 실측이 46건이다. 한 줄에 나란히 놓으면 서로를
+   * 부정한다. 화면에는 `posts30`·`posts90` 실측을 쓴다.
+   */
   postsPer30: z.number(),
+  /** 최근 30일 블로그 글 수 (검증 통과분, 실측) */
+  posts30: z.number().int(),
+  /**
+   * 최근 90일 블로그 글 수 (검증 통과분).
+   *
+   * "네이버 리뷰수" 자리에 놓는 값이다. 네이버·카카오 어느 공식 API 도
+   * 리뷰수를 주지 않아 대신 우리가 직접 센 것을 쓴다 — 총합(total_count)이
+   * 아니라 **상호 일치를 검증한 글만** 센 수다.
+   */
+  posts90: z.number().int(),
   acceleration: z.number(),
   /**
    * 화제 추이. 가속도 숫자를 그대로 보여주지 않는 이유는 그 값이
@@ -236,6 +257,10 @@ export const SiteCafeSchema = z.object({
   /** 주차 C — 도심 모드에서만 노출한다 (스펙 7.3) */
   cityOnly: z.boolean(),
   visitedOn: z.string().nullable(),
+  /** 우리 목록에 처음 들어온 시각. NEW 정렬 기준 */
+  firstSeenAt: z.string(),
+  /** 최초 대량 수집 이후 30일 안에 들어온 곳 (src/config/newness.ts) */
+  isNew: z.boolean(),
 })
 export type SiteCafe = z.infer<typeof SiteCafeSchema>
 
@@ -247,6 +272,8 @@ export const SiteVisitedSchema = z.object({
   id: z.string(),
   name: z.string(),
   sigungu: z.string(),
+  /** 시 단위 묶음 키. 다녀온 곳 탭도 같은 지역 칩을 쓴다 */
+  area: z.string(),
   visitedOn: z.string(),
   note: z.string(),
   tags: z.array(z.string()),

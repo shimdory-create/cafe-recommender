@@ -24,9 +24,9 @@ export const payload = raw as unknown as SitePayload
  */
 export type ListRow = Pick<
   SiteCafe,
-  'id' | 'name' | 'sigungu' | 'zone' | 'driveMinutes' | 'scale' | 'parkingGrade'
+  'id' | 'name' | 'sigungu' | 'area' | 'driveMinutes' | 'scale' | 'parkingGrade'
   | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'imageUrl' | 'hotScore'
-  | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn'
+  | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn' | 'isNew'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -36,7 +36,7 @@ export function toListRow(c: SiteCafe): ListRow {
     id: c.id,
     name: c.name,
     sigungu: c.sigungu,
-    zone: c.zone,
+    area: c.area,
     driveMinutes: c.driveMinutes,
     scale: c.scale,
     parkingGrade: c.parkingGrade,
@@ -53,6 +53,7 @@ export function toListRow(c: SiteCafe): ListRow {
     ratingCount: c.ratingCount,
     cityOnly: c.cityOnly,
     visitedOn: c.visitedOn,
+    isNew: c.isNew,
   }
 }
 

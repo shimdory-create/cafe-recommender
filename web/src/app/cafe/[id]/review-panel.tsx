@@ -2,8 +2,36 @@
 
 import { useEffect, useState } from 'react'
 import { MAX_COMMENT, MAX_NICKNAME, type RatingSummary, type Review } from '@/lib/reviews'
+import { VIEW_ONLY, VIEW_ONLY_NOTE } from '@/lib/view-only'
 
 const NICK_KEY = 'cafe-nickname'
+/**
+ * 이 폰에서 남긴 후기 id.
+ *
+ * 인증이 없으니 소유권을 서버가 알 수 없다. 대신 **자기 것에만 표시를 달아**
+ * 남의 후기를 잘못 건드리는 사고를 줄인다. 막는 것이 아니라 알려주는 장치다 —
+ * 4명이 쓰는 화면에서 진짜 권한을 만들려면 로그인을 붙여야 하고, 그러면
+ * 아무도 안 쓴다.
+ */
+const MINE_KEY = 'cafe-my-reviews'
+
+function readMine(): string[] {
+  try {
+    const raw = JSON.parse(localStorage.getItem(MINE_KEY) ?? '[]')
+    return Array.isArray(raw) ? raw.filter((x) => typeof x === 'string') : []
+  } catch {
+    return []
+  }
+}
+
+function rememberMine(id: string) {
+  // 최근 200건만 들고 있는다. 무한히 쌓을 이유가 없다
+  try {
+    localStorage.setItem(MINE_KEY, JSON.stringify([id, ...readMine()].slice(0, 200)))
+  } catch {
+    // 사파리 프라이빗 모드 등. 표시가 안 붙을 뿐 기능은 돈다
+  }
+}
 
 /** 별 하나를 반개까지 그린다. 0=빈 별, 0.5=반쪽, 1=꽉 찬 별 */
 function Star({ fill, size = 30 }: { fill: number; size?: number }) {
@@ -87,10 +115,15 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
   const [error, setError] = useState('')
   const [visited, setVisited] = useState(initialVisited)
   const [done, setDone] = useState(false)
+  const [mine, setMine] = useState<string[]>([])
+  /** 지금 고치고 있는 후기 id */
+  const [editing, setEditing] = useState<string | null>(null)
+  const [draft, setDraft] = useState({ rating: 0, nickname: '', comment: '' })
 
   useEffect(() => {
     // 별명은 각자 폰이 기억한다 — 매번 적게 하면 아무도 안 쓴다
     setNickname(localStorage.getItem(NICK_KEY) ?? '')
+    setMine(readMine())
 
     fetch(`/api/reviews?cafe=${encodeURIComponent(cafeId)}`)
       .then((r) => r.json())
@@ -125,6 +158,10 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
       const body = await res.json()
       if (!res.ok) throw new Error(body.error ?? '저장에 실패했어요')
       localStorage.setItem(NICK_KEY, nickname)
+      rememberMine(body.review.id)
+      setMine((prev) => [body.review.id, ...prev])
+      // 별점을 남겼으면 다녀온 것이다. 서버가 함께 기록한다
+      if (body.visitedOn) setVisited(true)
       // 누른 사람에게는 즉시 보인다. 다른 가족은 새로 열면 바로 보인다.
       setData((prev) => ({
         enabled: true,
@@ -135,6 +172,62 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
       setRating(0)
       setComment('')
       setDone(true)
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const startEdit = (r: Review) => {
+    setEditing(r.id)
+    setDraft({ rating: r.rating, nickname: r.nickname, comment: r.comment })
+    setError('')
+  }
+
+  const saveEdit = async (id: string) => {
+    setBusy(true)
+    setError('')
+    try {
+      const res = await fetch('/api/reviews', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, ...draft }),
+      })
+      const body = await res.json()
+      if (!res.ok) throw new Error(body.error ?? '수정에 실패했어요')
+      setData((prev) => prev && ({
+        ...prev,
+        summary: body.summary,
+        reviews: prev.reviews.map((r) => (r.id === id ? body.review : r)),
+      }))
+      setEditing(null)
+    } catch (e) {
+      setError((e as Error).message)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  const remove = async (r: Review) => {
+    const who = r.nickname || '가족'
+    if (!window.confirm(`${who} 님이 남긴 별점 ${r.rating.toFixed(1)}점을 지울까요?`)) return
+    setBusy(true)
+    setError('')
+    try {
+      const res = await fetch('/api/reviews', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: r.id, kakaoPlaceId: cafeId }),
+      })
+      const body = await res.json()
+      if (!res.ok) throw new Error(body.error ?? '삭제에 실패했어요')
+      setData((prev) => prev && ({
+        ...prev,
+        summary: body.summary,
+        reviews: prev.reviews.filter((x) => x.id !== r.id),
+      }))
+      if (editing === r.id) setEditing(null)
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -165,21 +258,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
 
   return (
     <section className="mt-6">
-      {/* 다녀왔어요 — 유일한 조작 버튼이므로 56px 이상 (스펙 10.1) */}
-      <button
-        onClick={toggleVisited}
-        disabled={busy || !enabled}
-        aria-pressed={visited}
-        className={`flex min-h-[56px] w-full items-center justify-center gap-2 rounded-2xl text-[16px] font-bold disabled:opacity-50 ${
-          visited
-            ? 'bg-bean-soft text-bean'
-            : 'border border-line bg-card text-ink active:bg-bean-soft'
-        }`}
-      >
-        {visited ? '✓ 다녀왔어요 (누르면 취소)' : '다녀왔어요 체크'}
-      </button>
-
-      <h2 className="mt-6 text-[15px] font-bold">
+      <h2 className="text-[15px] font-bold">
         가족 별점
         {data && data.summary.count > 0 && (
           <span className="ml-2 font-normal text-ink-soft">
@@ -188,46 +267,77 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
         )}
       </h2>
 
-      {!enabled ? (
+      {VIEW_ONLY ? (
+        <p className="mt-2 rounded-2xl border border-line bg-card px-4 py-3 text-[13px] leading-relaxed text-ink-soft">
+          {VIEW_ONLY_NOTE}
+        </p>
+      ) : !enabled ? (
         <p className="mt-2 text-[13px] text-ink-soft">
           아직 별점 저장이 설정되지 않았어요.
         </p>
       ) : (
-        <div className="mt-2 rounded-2xl border border-line bg-card p-4">
-          <StarPicker value={rating} onChange={setRating} />
+        <>
+          {/*
+            별점이 먼저다. 예전에는 '다녀왔어요' 버튼이 맨 위에서 가장 크게
+            있었는데, 별점을 남기면서도 체크를 따로 눌러야 했다. 이제 별점을
+            남기면 서버가 함께 기록하므로 버튼은 보조로 내렸다.
+          */}
+          <div className="mt-2 rounded-2xl border border-line bg-card p-4">
+            <StarPicker value={rating} onChange={setRating} />
 
-          <div className="mt-3 flex gap-2">
-            <input
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value.slice(0, MAX_NICKNAME))}
-              placeholder="별명 (선택)"
-              aria-label="별명"
-              className="min-h-[44px] w-24 shrink-0 rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-bean"
-            />
-            <input
-              value={comment}
-              onChange={(e) => setComment(e.target.value.slice(0, MAX_COMMENT))}
-              placeholder="한 줄 (선택)"
-              aria-label="한 줄 후기"
-              className="min-h-[44px] flex-1 rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-bean"
-            />
+            <div className="mt-3 flex gap-2">
+              <input
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value.slice(0, MAX_NICKNAME))}
+                placeholder="별명 (선택)"
+                aria-label="별명"
+                className="min-h-[44px] w-24 shrink-0 rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-bean"
+              />
+              <input
+                value={comment}
+                onChange={(e) => setComment(e.target.value.slice(0, MAX_COMMENT))}
+                placeholder="한 줄 (선택)"
+                aria-label="한 줄 후기"
+                className="min-h-[44px] flex-1 rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-bean"
+              />
+            </div>
+
+            <button
+              onClick={submit}
+              disabled={busy}
+              className="mt-3 flex min-h-[52px] w-full items-center justify-center rounded-xl bg-bean text-[16px] font-bold text-white disabled:opacity-50"
+            >
+              {busy ? '저장 중…' : '남기기'}
+            </button>
+
+            {!visited && (
+              <p className="mt-2 text-center text-[12px] text-ink-soft">
+                별점을 남기면 <b className="text-ink">다녀온 곳</b>에 자동으로 들어가요
+              </p>
+            )}
+
+            {error && <p className="mt-2 text-[13px] text-red-600 dark:text-red-400">{error}</p>}
+            {done && !error && (
+              <p className="mt-2 text-[13px] text-ink-soft">
+                남겼어요. 다른 가족 화면에도 바로 보여요.
+              </p>
+            )}
           </div>
 
+          {/* 별점 없이 다녀온 경우, 그리고 취소. 그래서 버튼은 남는다 */}
           <button
-            onClick={submit}
+            onClick={toggleVisited}
             disabled={busy}
-            className="mt-3 flex min-h-[48px] w-full items-center justify-center rounded-xl bg-bean text-[15px] font-bold text-white disabled:opacity-50"
+            aria-pressed={visited}
+            className={`mt-2 flex min-h-[44px] w-full items-center justify-center rounded-xl border text-[14px] disabled:opacity-50 ${
+              visited
+                ? 'border-line bg-bean-soft font-semibold text-bean'
+                : 'border-line bg-card text-ink-soft active:bg-bean-soft'
+            }`}
           >
-            {busy ? '저장 중…' : '남기기'}
+            {visited ? '✓ 다녀왔어요 — 누르면 취소' : '별점 없이 다녀왔어요만 체크'}
           </button>
-
-          {error && <p className="mt-2 text-[13px] text-red-600 dark:text-red-400">{error}</p>}
-          {done && !error && (
-            <p className="mt-2 text-[13px] text-ink-soft">
-              남겼어요. 다른 가족 화면에도 바로 보여요.
-            </p>
-          )}
-        </div>
+        </>
       )}
 
       {data && data.ok === false && enabled && (
@@ -240,14 +350,86 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
         <ul className="mt-3 flex flex-col gap-2">
           {data.reviews.map((r) => (
             <li key={r.id} className="rounded-2xl border border-line bg-card px-4 py-3">
-              <div className="flex items-center gap-2">
-                <Stars value={r.rating} />
-                <span className="text-[13px] font-semibold">{r.nickname || '가족'}</span>
-                <span className="ml-auto text-[12px] text-ink-soft">
-                  {r.createdAt.slice(5, 10).replace('-', '. ')}
-                </span>
-              </div>
-              {r.comment && <p className="mt-1.5 text-[14px] leading-relaxed">{r.comment}</p>}
+              {editing === r.id ? (
+                <>
+                  <StarPicker
+                    value={draft.rating}
+                    onChange={(v) => setDraft((d) => ({ ...d, rating: v }))}
+                  />
+                  <div className="mt-3 flex gap-2">
+                    <input
+                      value={draft.nickname}
+                      onChange={(e) => setDraft((d) => ({
+                        ...d, nickname: e.target.value.slice(0, MAX_NICKNAME),
+                      }))}
+                      placeholder="별명 (선택)"
+                      aria-label="별명 수정"
+                      className="min-h-[44px] w-24 shrink-0 rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-bean"
+                    />
+                    <input
+                      value={draft.comment}
+                      onChange={(e) => setDraft((d) => ({
+                        ...d, comment: e.target.value.slice(0, MAX_COMMENT),
+                      }))}
+                      placeholder="한 줄 (선택)"
+                      aria-label="한 줄 후기 수정"
+                      className="min-h-[44px] flex-1 rounded-xl border border-line bg-paper px-3 text-[15px] outline-none focus:border-bean"
+                    />
+                  </div>
+                  <div className="mt-3 flex gap-2">
+                    <button
+                      onClick={() => saveEdit(r.id)}
+                      disabled={busy}
+                      className="flex min-h-[44px] flex-1 items-center justify-center rounded-xl bg-bean text-[15px] font-bold text-white disabled:opacity-50"
+                    >
+                      {busy ? '저장 중…' : '고치기'}
+                    </button>
+                    <button
+                      onClick={() => setEditing(null)}
+                      disabled={busy}
+                      className="flex min-h-[44px] w-20 items-center justify-center rounded-xl border border-line text-[15px] text-ink-soft disabled:opacity-50"
+                    >
+                      취소
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center gap-2">
+                    <Stars value={r.rating} />
+                    <span className="text-[13px] font-semibold">{r.nickname || '가족'}</span>
+                    {mine.includes(r.id) && (
+                      <span className="rounded-full bg-bean-soft px-1.5 py-0.5 text-[11px] text-bean">
+                        내가 남김
+                      </span>
+                    )}
+                    <span className="ml-auto text-[12px] text-ink-soft">
+                      {r.createdAt.slice(5, 10).replace('-', '. ')}
+                      {r.updatedAt && ' (수정됨)'}
+                    </span>
+                  </div>
+                  {r.comment && <p className="mt-1.5 text-[14px] leading-relaxed">{r.comment}</p>}
+
+                  {!VIEW_ONLY && enabled && (
+                    <div className="mt-2 flex gap-1">
+                      <button
+                        onClick={() => startEdit(r)}
+                        disabled={busy}
+                        className="min-h-[36px] px-2 text-[13px] text-ink-soft underline disabled:opacity-50"
+                      >
+                        수정
+                      </button>
+                      <button
+                        onClick={() => remove(r)}
+                        disabled={busy}
+                        className="min-h-[36px] px-2 text-[13px] text-ink-soft underline disabled:opacity-50"
+                      >
+                        삭제
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
             </li>
           ))}
         </ul>

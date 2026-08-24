@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
-  parseReviewInput, summarize, sortByNewest, addVisit, removeVisit, todayInSeoul,
+  applyReviewPatch, parseReviewInput, removeReview, summarize, sortByNewest,
+  addVisit, removeVisit, todayInSeoul,
   MAX_COMMENT, MAX_NICKNAME, type Review, type VisitRow,
 } from './reviews'
 
@@ -175,5 +176,75 @@ describe('todayInSeoul', () => {
 
   it('한낮에는 그대로다', () => {
     expect(todayInSeoul(new Date('2026-08-20T03:00:00Z'))).toBe('2026-08-20')
+  })
+})
+
+describe('applyReviewPatch', () => {
+  const NOW = new Date('2026-08-24T12:00:00.000Z')
+  const rows: Review[] = [
+    {
+      id: 'a', kakaoPlaceId: 'c1', rating: 3, nickname: '김', comment: '보통',
+      createdAt: '2026-08-01T00:00:00.000Z',
+    },
+    {
+      id: 'b', kakaoPlaceId: 'c1', rating: 5, nickname: '심', comment: '좋음',
+      createdAt: '2026-08-02T00:00:00.000Z',
+    },
+  ]
+
+  it('한 건만 바꾼다', () => {
+    const out = applyReviewPatch(rows, 'a', { rating: 4.5, comment: '다시 가보니 좋다' }, NOW)
+    expect(out.ok).toBe(true)
+    if (!out.ok) return
+    expect(out.rows).toHaveLength(2)
+    expect(out.rows[0]!.rating).toBe(4.5)
+    expect(out.rows[0]!.comment).toBe('다시 가보니 좋다')
+    expect(out.rows[1]).toEqual(rows[1])
+  })
+
+  it('createdAt 은 그대로 두고 updatedAt 을 남긴다', () => {
+    // 고쳤다고 순서가 튀어 오르면 "새 후기가 올라왔나" 로 읽힌다
+    const out = applyReviewPatch(rows, 'a', { rating: 4 }, NOW)
+    if (!out.ok) throw new Error('실패')
+    expect(out.review.createdAt).toBe('2026-08-01T00:00:00.000Z')
+    expect(out.review.updatedAt).toBe(NOW.toISOString())
+  })
+
+  it('카페는 바꿀 수 없다', () => {
+    const out = applyReviewPatch(rows, 'a', { rating: 4 } as never, NOW)
+    if (!out.ok) throw new Error('실패')
+    expect(out.review.kakaoPlaceId).toBe('c1')
+  })
+
+  it('없는 id 는 거절한다', () => {
+    const out = applyReviewPatch(rows, 'zzz', { rating: 4 }, NOW)
+    expect(out.ok).toBe(false)
+  })
+
+  it('별점 규칙은 새로 남길 때와 같다', () => {
+    expect(applyReviewPatch(rows, 'a', { rating: 4.3 }, NOW).ok).toBe(false)
+    expect(applyReviewPatch(rows, 'a', { rating: 0 }, NOW).ok).toBe(false)
+    expect(applyReviewPatch(rows, 'a', { rating: 5.5 }, NOW).ok).toBe(false)
+  })
+
+  it('원본을 건드리지 않는다 — 충돌 시 다시 불린다', () => {
+    const copy = structuredClone(rows)
+    applyReviewPatch(rows, 'a', { rating: 1 }, NOW)
+    expect(rows).toEqual(copy)
+  })
+})
+
+describe('removeReview', () => {
+  const rows: Review[] = [
+    { id: 'a', kakaoPlaceId: 'c1', rating: 3, nickname: '', comment: '', createdAt: 'x' },
+    { id: 'b', kakaoPlaceId: 'c1', rating: 5, nickname: '', comment: '', createdAt: 'y' },
+  ]
+
+  it('한 건만 지운다', () => {
+    expect(removeReview(rows, 'a').map((r) => r.id)).toEqual(['b'])
+  })
+
+  it('없는 id 는 아무것도 안 한다 — 두 번 눌러도 안전하다', () => {
+    expect(removeReview(rows, 'zzz')).toEqual(rows)
   })
 })

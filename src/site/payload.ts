@@ -1,5 +1,7 @@
 import { driveMinutesOf } from '../jobs/drive-times.js'
 import { zoneOf } from '../config/zones.js'
+import { areaOf } from '../config/area.js'
+import { isNewCafe } from '../config/newness.js'
 import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
 import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type SiteVisited, type Suggestion, type Visit, type Review } from '../schema.js'
@@ -91,6 +93,32 @@ function betterListing(a: SiteCafe, b: SiteCafe, byId: Map<string, Cafe>): boole
   return a.id.localeCompare(b.id) < 0
 }
 
+/**
+ * 이번 주 추천을 고른다. **정확히 일치하지 않으면 가장 최근 것으로 내려온다.**
+ *
+ * 원래는 `s.weekOf === weekOf` 만 봤는데 그러면 **월~목 사흘 동안 추천이
+ * 사라진다.** 후보 확정은 목요일 밤에 돌고 그때 붙는 `weekOf` 는 그 주의
+ * 월요일이다. 월요일 09시(KST)가 지나면 `weekOf` 가 다음 주로 넘어가는데
+ * 새 후보는 아직 없다 — 실측으로 2026-08-24 에 `week: []` 가 나왔다.
+ *
+ * 화면에서는 목록이 통째로 비지는 않고 종합점수 순으로 대체되지만, 그것은
+ * 지역 다양성과 주차 등급을 지키며 고른 열 곳이 아니다. 금요일에 받은
+ * 목록은 다음 목록이 나올 때까지 유효하다고 보는 편이 맞다.
+ */
+export function pickWeek(
+  suggestions: Suggestion[],
+  weekOf: string,
+  ids: Set<string>,
+): { rank: number; id: string; finalScore: number }[] {
+  const usable = suggestions.filter((s) => s.weekOf <= weekOf && ids.has(s.kakaoPlaceId))
+  if (usable.length === 0) return []
+  const latest = usable.reduce((m, s) => (s.weekOf > m ? s.weekOf : m), '')
+  return usable
+    .filter((s) => s.weekOf === latest)
+    .sort((a, b) => a.rank - b.rank)
+    .map((s) => ({ rank: s.rank, id: s.kakaoPlaceId, finalScore: s.finalScore }))
+}
+
 export function buildSitePayload(input: PayloadInput): SitePayload {
   const { cafes, buzz, visits, suggestions, weekOf, now, reviews = [] } = input
 
@@ -140,6 +168,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       name: c.name,
       sigungu: c.sigungu,
       zone: zoneOf(c),
+      area: areaOf({ ...c, zone: zoneOf(c) }),
       driveMinutes: driveMinutesOf(c),
       scale: a.scale ?? null,
       parkingGrade: a.parkingGrade,
@@ -160,6 +189,9 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       hotScore: Number(hot.toFixed(1)),
       finalScore: Number(finalScore(hot, fit).toFixed(3)),
       postsPer30: b.postsPer30,
+      posts30: b.posts30d,
+      // 30일 + 이전 기간(31~90일). 창이 90일을 못 덮으면 그만큼만 센 값이다
+      posts90: b.posts30d + b.postsPrev,
       acceleration: b.acceleration,
       trend: trendOf(b),
       ratingAvg: Number(((rated.get(c.kakaoPlaceId)?.sum ?? 0)
@@ -167,6 +199,8 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       ratingCount: rated.get(c.kakaoPlaceId)?.n ?? 0,
       cityOnly: a.parkingGrade === 'C',
       visitedOn: lastVisit.get(c.kakaoPlaceId) ?? null,
+      firstSeenAt: c.firstSeenAt,
+      isNew: isNewCafe(c.firstSeenAt, now),
     })
   }
 
@@ -187,6 +221,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
         id,
         name: c.name,
         sigungu: c.sigungu,
+        area: areaOf({ ...c, zone: zoneOf(c) }),
         visitedOn: on,
         note,
         tags: c.tags,
@@ -202,10 +237,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
     .sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
 
   const ids = new Set(deduped.map((r) => r.id))
-  const week = suggestions
-    .filter((s) => s.weekOf === weekOf && ids.has(s.kakaoPlaceId))
-    .sort((a, b) => a.rank - b.rank)
-    .map((s) => ({ rank: s.rank, id: s.kakaoPlaceId, finalScore: s.finalScore }))
+  const week = pickWeek(suggestions, weekOf, ids)
 
   return SitePayloadSchema.parse({
     generatedAt: now.toISOString(),

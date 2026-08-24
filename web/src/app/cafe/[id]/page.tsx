@@ -45,7 +45,14 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
     <div className="py-5">
       <BackLink />
 
-      <h1 className="mt-1 text-[24px] font-bold leading-tight tracking-tight">{cafe.name}</h1>
+      <h1 className="mt-1 text-[24px] font-bold leading-tight tracking-tight">
+        {cafe.isNew && (
+          <span className="mr-2 align-middle rounded bg-bean px-1.5 py-0.5 text-[11px] font-extrabold tracking-wide text-white">
+            NEW
+          </span>
+        )}
+        {cafe.name}
+      </h1>
       <p className="mt-1 text-[14px] text-ink-soft">
         {cafe.sigungu} · {driveLabel(cafe.driveMinutes)}
       </p>
@@ -73,6 +80,29 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
       >
         네이버지도로 열기 ↗
       </a>
+
+      {/*
+        영업시간을 우리가 들고 있지 않다.
+
+        카카오 로컬 API 는 상호·주소·전화·좌표만 주고, 네이버 지역검색 API 도
+        영업시간을 주지 않는다. 구글 Places 는 주지만 카드 등록이 필요해
+        "결제 없이 평생" 이 깨진다. 블로그 글에서 LLM 으로 뽑는 방법은 되지만
+        절반쯤 틀리고, **틀린 영업시간은 한 시간 운전해서 닫힌 문 앞에 서게
+        만든다** — 없는 것보다 나쁘다.
+
+        그래서 지어내지 않고 한 번에 갈 수 있는 길을 크게 둔다.
+      */}
+      <a
+        href={cafe.naverMapUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="mt-2 flex min-h-[48px] items-center justify-center gap-1.5 rounded-2xl border border-line bg-card text-[14px] font-semibold text-bean active:bg-bean-soft"
+      >
+        영업시간·휴무일 확인 ↗
+      </a>
+      <p className="mt-1.5 text-center text-[12px] text-ink-soft">
+        영업시간은 자주 바뀌어서 지도에서 바로 확인하는 게 정확해요
+      </p>
 
       {/* 다녀왔어요 · 별점 · 한 줄 — 가족 누구나 (스펙 10절 v3.3) */}
       <ReviewPanel cafeId={cafe.id} initialVisited={cafe.visitedOn !== null} />
@@ -110,8 +140,10 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
       <section className="mt-5">
         <h2 className="text-[15px] font-bold">얼마나 화제인가</h2>
         <p className="mt-1 text-[13px] leading-relaxed text-ink-soft">
-          블로그 후기가 <b className="text-ink">월 {Math.round(cafe.postsPer30)}건</b>{' '}
-          올라와요.
+          블로그 후기가 최근 30일에 <b className="text-ink">{cafe.posts30}건</b>
+          {cafe.posts90 !== cafe.posts30 && (
+            <>, 90일에 <b className="text-ink">{cafe.posts90}건</b></>
+          )}{' '}올라왔어요.
           {/* 가속도 숫자는 포화되므로 생성기가 판정한 trend 만 쓴다 (발견 E) */}
           {cafe.trend === 'rising' && ' 최근 한 달이 그 전보다 눈에 띄게 늘었어요.'}
           {cafe.trend === 'unknown'

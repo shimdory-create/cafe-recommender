@@ -2,8 +2,21 @@ import { NextResponse } from 'next/server'
 import { writeStore } from '@/lib/store'
 import { byId } from '@/lib/site'
 import {
-  parseReviewInput, sortByNewest, summarize, REVIEWS_PATH, type Review,
+  addVisit, applyReviewPatch, parseReviewInput, removeReview, sortByNewest, summarize,
+  todayInSeoul, REVIEWS_PATH, VISITS_PATH, type Review, type VisitRow,
 } from '@/lib/reviews'
+
+/** POST 와 같은 관문. 열람 전용이면 여기서 끝난다 */
+async function writable() {
+  const store = await writeStore()
+  if (!store.enabled) {
+    return { store, deny: NextResponse.json({ error: '아직 후기 저장이 설정되지 않았어요' }, { status: 503 }) }
+  }
+  if (!store.writable) {
+    return { store, deny: NextResponse.json({ error: '열람 전용 페이지예요' }, { status: 403 }) }
+  }
+  return { store, deny: null as null }
+}
 
 /**
  * 후기 읽기에 캐시를 두지 않는다.
@@ -26,6 +39,7 @@ export async function GET(req: Request) {
       reviews: sortByNewest(mine),
       summary: summarize(mine),
       enabled: store.enabled,
+      writable: store.writable,
       ok: true,
     })
   } catch (e) {
@@ -34,8 +48,8 @@ export async function GET(req: Request) {
     // 사람이 다시 남겨 중복이 생긴다.
     return NextResponse.json(
       {
-        reviews: [], summary: { count: 0, average: 0 }, enabled: true, ok: false,
-        error: (e as Error).message,
+        reviews: [], summary: { count: 0, average: 0 }, enabled: true,
+        writable: store.writable, ok: false, error: (e as Error).message,
       },
       { status: 200 },
     )
@@ -43,10 +57,8 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const store = await writeStore()
-  if (!store.enabled) {
-    return NextResponse.json({ error: '아직 후기 저장이 설정되지 않았어요' }, { status: 503 })
-  }
+  const { store, deny } = await writable()
+  if (deny) return deny
 
   let body: unknown
   try {
@@ -71,7 +83,114 @@ export async function POST(req: Request) {
       (prev) => [...prev, parsed.review],
     )
     const mine = rows.filter((r) => r.kakaoPlaceId === parsed.review.kakaoPlaceId)
-    return NextResponse.json({ review: parsed.review, summary: summarize(mine) })
+
+    /*
+     * 별점을 남겼으면 다녀온 것이다 — 체크를 따로 누르게 하지 않는다.
+     *
+     * 화면에서 두 번 호출하지 않고 여기서 처리하는 이유: 첫 요청만 성공하고
+     * 두 번째가 끊기면 **별점은 있는데 다녀온 곳에는 없는** 상태가 남는다.
+     * 서버에서 이어 붙이면 적어도 한 곳에서만 실패한다.
+     *
+     * 방문 기록 쓰기가 실패해도 별점 저장은 되살리지 않는다. 남긴 사람에게는
+     * 별점이 저장된 것이 더 중요하고, 체크는 다시 누를 수 있다.
+     */
+    let visitedOn: string | null = null
+    try {
+      const visits = await store.read<VisitRow>(VISITS_PATH)
+      if (!visits.some((v) => v.kakaoPlaceId === parsed.review.kakaoPlaceId)) {
+        visitedOn = todayInSeoul()
+        await store.update<VisitRow>(
+          VISITS_PATH,
+          `data: 별점과 함께 다녀왔어요 ${visitedOn}`,
+          (prev) => addVisit(prev, parsed.review.kakaoPlaceId, visitedOn!),
+        )
+      } else {
+        visitedOn = visits.find((v) => v.kakaoPlaceId === parsed.review.kakaoPlaceId)!.visitedOn
+      }
+    } catch {
+      // 별점은 이미 저장됐다. 체크는 화면에서 다시 누를 수 있다
+    }
+
+    return NextResponse.json({ review: parsed.review, summary: summarize(mine), visitedOn })
+  } catch (e) {
+    return NextResponse.json({ error: (e as Error).message }, { status: 502 })
+  }
+}
+
+/**
+ * 남긴 별점 고치기.
+ *
+ * 화면이 아니라 저장소 수준에서 통째로 갈아끼우지 않고 `id` 로 한 건만
+ * 바꾼다. 충돌 시 `store.update` 가 순수 함수를 다시 부르므로, 같은 순간
+ * 다른 가족이 남긴 후기가 사라지지 않는다.
+ */
+export async function PATCH(req: Request) {
+  const { store, deny } = await writable()
+  if (deny) return deny
+
+  let body: { id?: unknown } & Record<string, unknown>
+  try {
+    body = (await req.json()) as typeof body
+  } catch {
+    return NextResponse.json({ error: '요청을 읽을 수 없습니다' }, { status: 400 })
+  }
+  const id = typeof body.id === 'string' ? body.id.trim() : ''
+  if (!id) return NextResponse.json({ error: '어떤 후기인지 알 수 없습니다' }, { status: 400 })
+
+  const now = new Date()
+  let updated: Review | null = null
+  let failure = ''
+  try {
+    const rows = await store.update<Review>(
+      REVIEWS_PATH,
+      'data: 후기 수정',
+      (prev) => {
+        const out = applyReviewPatch(prev, id, body as never, now)
+        if (!out.ok) {
+          failure = out.error
+          return prev
+        }
+        updated = out.review
+        return out.rows
+      },
+    )
+    if (failure) return NextResponse.json({ error: failure }, { status: 400 })
+    const mine = rows.filter((r) => r.kakaoPlaceId === updated!.kakaoPlaceId)
+    return NextResponse.json({ review: updated, summary: summarize(mine) })
+  } catch (e) {
+    return NextResponse.json({ error: (e as Error).message }, { status: 502 })
+  }
+}
+
+/**
+ * 남긴 별점 지우기.
+ *
+ * 다녀온 기록은 건드리지 않는다 — 별점을 지우는 것과 안 갔다는 것은 다르다.
+ * 방문 취소는 다녀온 곳 탭에 따로 있다.
+ */
+export async function DELETE(req: Request) {
+  const { store, deny } = await writable()
+  if (deny) return deny
+
+  let id = ''
+  let cafe = ''
+  try {
+    const body = (await req.json()) as { id?: unknown; kakaoPlaceId?: unknown }
+    id = typeof body.id === 'string' ? body.id.trim() : ''
+    cafe = typeof body.kakaoPlaceId === 'string' ? body.kakaoPlaceId.trim() : ''
+  } catch {
+    return NextResponse.json({ error: '요청을 읽을 수 없습니다' }, { status: 400 })
+  }
+  if (!id) return NextResponse.json({ error: '어떤 후기인지 알 수 없습니다' }, { status: 400 })
+
+  try {
+    const rows = await store.update<Review>(
+      REVIEWS_PATH,
+      'data: 후기 삭제',
+      (prev) => removeReview(prev, id),
+    )
+    const mine = cafe ? rows.filter((r) => r.kakaoPlaceId === cafe) : []
+    return NextResponse.json({ deleted: id, summary: summarize(mine) })
   } catch (e) {
     return NextResponse.json({ error: (e as Error).message }, { status: 502 })
   }

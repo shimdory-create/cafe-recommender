@@ -3,39 +3,50 @@
 import { useMemo, useState } from 'react'
 import { ALL_TAGS, type ListRow } from '@/lib/site'
 import {
-  filterAndSort, groupBySigungu, zoneCounts, zoneHint, ZONES, type Sort, type ZoneId,
+  areaCounts, filterAndSort, groupBySigungu, SPLIT_AREAS, type Sort,
 } from '@/lib/filter'
+import { listParamsToQuery, type ListParams } from '@/lib/url-state'
+import { useUrlSync } from '@/lib/use-url-sync'
+import { AreaChips, Chip, SearchBox } from '../filters'
 import { CafeCard } from '../cafe-card'
 
 /**
- * 칩 필터 + 정렬. 상태는 URL 에 싣지 않는다 — 가족이 링크를 공유하는
- * 대상은 카페 상세이고, 목록 필터는 그 자리에서 쓰고 버리는 조작이다.
+ * 칩 필터 + 검색 + 정렬. 상태는 **주소창에 싣는다** (`lib/url-state.ts`).
  *
- * 방향(zone)을 고르면 그 안에서 **시군구별로 묶어** 보여준다. 시군구 칩을
- * 43개 만드는 방법도 있었지만 실측 분포가 그것을 막았다 — 17개 시군구가
- * 1~2곳뿐이어서 칩 절반이 카드 한 장을 위한 칩이 된다.
+ * 지역은 방향 6개에서 **시 단위 32개**로 바꿨다. 처음에 방향으로 묶은 것은
+ * 시군구 칩이 43개나 되어서였는데, 서울과 인천을 각각 하나로 묶으니 32개가
+ * 되어 접이식 칩으로 감당된다. 가족이 실제로 쓰는 말도 "북쪽" 보다 "김포"다.
  */
-export function ListClient({ cafes }: { cafes: ListRow[] }) {
-  const [tags, setTags] = useState<string[]>([])
-  const [sort, setSort] = useState<Sort>('hot')
-  const [city, setCity] = useState(false)
-  const [zone, setZone] = useState<ZoneId | null>(null)
+export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: ListParams }) {
+  const [q, setQ] = useState(initial.q)
+  const [area, setArea] = useState<string | null>(initial.area)
+  const [tags, setTags] = useState<string[]>(initial.tags)
+  const [sort, setSort] = useState<Sort>(initial.sort)
+  const [city, setCity] = useState(initial.city)
+  const [newOnly, setNewOnly] = useState(initial.newOnly)
+  // 고른 지역이 접힌 구간에 있으면 처음부터 펴 둔다
+  const [expanded, setExpanded] = useState(false)
+
+  useUrlSync(listParamsToQuery({ ...initial, q, area, tags, sort, city, newOnly }))
 
   const shown = useMemo(
-    () => filterAndSort(cafes, { tags, sort, city, zone }),
-    [cafes, tags, sort, city, zone],
+    () => filterAndSort(cafes, { tags, sort, city, area, query: q, newOnly }),
+    [cafes, tags, sort, city, area, q, newOnly],
   )
-  const counts = useMemo(() => zoneCounts(cafes, { city }), [cafes, city])
-  // 방향을 골랐을 때만 묶는다. 안 골랐으면 43개 그룹이 생긴다
-  const groups = useMemo(() => (zone ? groupBySigungu(shown) : null), [zone, shown])
-  const picked = ZONES.find((z) => z.id === zone)
-  const hint = useMemo(
-    () => (zone ? zoneHint(cafes, zone, { city }) : ''),
-    [cafes, zone, city],
+  const areas = useMemo(() => areaCounts(cafes, { city }), [cafes, city])
+  const newCount = useMemo(
+    () => cafes.filter((c) => c.isNew && (city || !c.cityOnly)).length,
+    [cafes, city],
+  )
+  // 서울·인천만 안에서 구별로 다시 묶는다. 나머지는 칩 하나가 곧 한 지역이다
+  const groups = useMemo(
+    () => (area && SPLIT_AREAS.has(area) ? groupBySigungu(shown) : null),
+    [area, shown],
   )
 
   const toggle = (t: string) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
+  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly
 
   return (
     <div className="py-5">
@@ -44,60 +55,38 @@ export function ListClient({ cafes }: { cafes: ListRow[] }) {
         <span className="text-[13px] text-ink-soft">{shown.length}곳</span>
       </div>
 
-      {/* 방향 — 차로 나가는 가족의 첫 질문은 "어느 쪽" 이다 */}
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        {ZONES.map((z) => {
-          const on = zone === z.id
-          const n = counts[z.id]
-          return (
-            <button
-              key={z.id}
-              onClick={() => setZone(on ? null : z.id)}
-              aria-pressed={on}
-              disabled={n === 0}
-              className={`min-h-[36px] rounded-full border px-3 text-[13px] disabled:opacity-35 ${
-                on
-                  ? 'border-bean bg-bean text-white font-semibold'
-                  : 'border-line bg-card text-ink-soft'
-              }`}
-            >
-              {z.label}
-              <span className={`ml-1 text-[12px] ${on ? 'text-white/80' : 'text-ink-soft/70'}`}>
-                {n}
-              </span>
-            </button>
-          )
-        })}
+      <div className="mt-3">
+        <SearchBox value={q} onChange={setQ} />
       </div>
 
-      {picked && (
-        <p className="mt-2 text-[12px] text-ink-soft">
-          {picked.label} — {hint} · 가까운 지역부터
-        </p>
-      )}
-
-      {/* 칩은 가로 스크롤 대신 줄바꿈 — body 가 가로로 밀리면 안 된다 (스펙 10.1) */}
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        {ALL_TAGS.map((t) => {
-          const on = tags.includes(t)
-          return (
-            <button
-              key={t}
-              onClick={() => toggle(t)}
-              aria-pressed={on}
-              className={`min-h-[36px] rounded-full border px-3 text-[13px] ${
-                on
-                  ? 'border-bean bg-bean text-white font-semibold'
-                  : 'border-line bg-card text-ink-soft'
-              }`}
+      <div className="mt-3">
+        <AreaChips
+          counts={areas}
+          value={area}
+          onChange={setArea}
+          expanded={expanded}
+          onExpand={setExpanded}
+          leading={newCount > 0 ? (
+            <Chip
+              on={newOnly}
+              count={newCount}
+              tone="new"
+              onClick={() => setNewOnly((v) => !v)}
             >
-              {t}
-            </button>
-          )
-        })}
-        {(tags.length > 0 || zone) && (
+              NEW
+            </Chip>
+          ) : null}
+        />
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {ALL_TAGS.map((t) => (
+          <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{t}</Chip>
+        ))}
+        {dirty && (
           <button
-            onClick={() => { setTags([]); setZone(null) }}
+            type="button"
+            onClick={() => { setTags([]); setArea(null); setQ(''); setNewOnly(false) }}
             className="min-h-[36px] rounded-full px-3 text-[13px] text-ink-soft underline"
           >
             초기화
@@ -110,6 +99,7 @@ export function ListClient({ cafes }: { cafes: ListRow[] }) {
           {([['hot', '화제순'], ['near', '가까운순']] as const).map(([k, label]) => (
             <button
               key={k}
+              type="button"
               onClick={() => setSort(k)}
               className={`min-h-[36px] px-3.5 text-[13px] ${
                 sort === k ? 'bg-bean text-white font-semibold' : 'bg-card text-ink-soft'
@@ -120,6 +110,7 @@ export function ListClient({ cafes }: { cafes: ListRow[] }) {
           ))}
         </div>
         <button
+          type="button"
           onClick={() => setCity((v) => !v)}
           aria-pressed={city}
           className={`min-h-[36px] rounded-full border px-3.5 text-[13px] ${
@@ -167,8 +158,10 @@ export function ListClient({ cafes }: { cafes: ListRow[] }) {
       )}
 
       {shown.length === 0 && (
-        <p className="mt-8 text-center text-[14px] text-ink-soft">
-          조건에 맞는 카페가 없어요. 칩을 줄여보세요.
+        <p className="mt-8 text-center text-[14px] leading-relaxed text-ink-soft">
+          {q
+            ? <>“{q}” 로 찾은 카페가 없어요.<br />이름 일부만 넣어보세요.</>
+            : '조건에 맞는 카페가 없어요. 칩을 줄여보세요.'}
         </p>
       )}
     </div>

@@ -1,4 +1,5 @@
 import { githubConfig, readJsonFile, updateJsonFile } from './github-store'
+import { VIEW_ONLY } from './view-only'
 
 /**
  * 쓰기 저장소. 두 가지 구현이 있고 환경이 고른다.
@@ -15,20 +16,30 @@ import { githubConfig, readJsonFile, updateJsonFile } from './github-store'
 export interface WriteStore {
   read<T>(path: string, revalidate?: number): Promise<T[]>
   update<T>(path: string, message: string, mutate: (rows: T[]) => T[]): Promise<T[]>
-  /** 쓰기가 가능한가. false 면 화면이 입력 UI 를 감춘다 */
+  /** 저장소가 붙어 있는가. false 면 읽기도 안 되므로 "아직 설정 전" 이다 */
   readonly enabled: boolean
+  /**
+   * 쓰기가 허용되는가. 열람 전용 배포에서만 false 다.
+   *
+   * `enabled` 와 나눈 이유: 열람용도 **읽기는 살아 있어야 한다.** 가족이 남긴
+   * 별점과 후기가 보여야 목록이 쓸모 있다. 하나로 묶으면 열람용에서 별점이
+   * 통째로 사라진다.
+   */
+  readonly writable: boolean
   readonly kind: 'github' | 'local'
 }
 
 function githubStore(cfg: NonNullable<ReturnType<typeof githubConfig>>): WriteStore {
   return {
     enabled: true,
+    writable: !VIEW_ONLY,
     kind: 'github',
     async read<T>(path: string, revalidate?: number): Promise<T[]> {
       const { rows } = await readJsonFile<T>(cfg, path, revalidate === undefined ? {} : { revalidate })
       return rows
     },
     async update<T>(path: string, message: string, mutate: (rows: T[]) => T[]): Promise<T[]> {
+      if (VIEW_ONLY) throw new Error('열람 전용 페이지예요')
       return updateJsonFile<T>(cfg, path, message, mutate)
     },
   }
@@ -43,6 +54,7 @@ function githubStore(cfg: NonNullable<ReturnType<typeof githubConfig>>): WriteSt
 function disabledStore(): WriteStore {
   return {
     enabled: false,
+    writable: false,
     kind: 'local',
     async read<T>(): Promise<T[]> {
       return []

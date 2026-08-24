@@ -5,6 +5,8 @@ export interface Review {
   nickname: string
   comment: string
   createdAt: string
+  /** 고친 적이 있으면 그 시각. 없으면 한 번도 안 고친 것 */
+  updatedAt?: string
 }
 
 export interface VisitRow {
@@ -113,6 +115,52 @@ export function removeVisit(rows: VisitRow[], kakaoPlaceId: string): VisitRow[] 
   const target = mine[0]
   if (!target) return rows
   return rows.filter((_, i) => i !== target.i)
+}
+
+export interface ReviewPatch {
+  rating: unknown
+  nickname?: unknown
+  comment?: unknown
+}
+
+/**
+ * 남긴 별점 고치기.
+ *
+ * **누가 남겼는지 확인하지 않는다.** 이 페이지에는 인증이 없고, 4명이 쓰는
+ * 화면에 로그인을 붙이면 아무도 쓰지 않는다 (`schema.ts` ReviewSchema 주석과
+ * 같은 판단이다). 대신 화면이 별명을 보여주고 지울 때 한 번 묻는다.
+ *
+ * `createdAt` 은 그대로 둔다 — 언제 다녀왔는지의 단서이고, 고쳤다고 목록
+ * 순서가 튀어 오르면 "새 후기가 올라왔나" 로 읽힌다.
+ */
+export function applyReviewPatch(
+  rows: Review[],
+  id: string,
+  patch: ReviewPatch,
+  now: Date,
+): { ok: true; rows: Review[]; review: Review } | { ok: false; error: string } {
+  const target = rows.find((r) => r.id === id)
+  if (!target) return { ok: false, error: '없는 후기예요. 새로 고쳐보세요' }
+
+  const parsed = parseReviewInput(
+    { kakaoPlaceId: target.kakaoPlaceId, ...patch },
+    now,
+  )
+  if (!parsed.ok) return parsed
+
+  const review: Review = {
+    ...target,
+    rating: parsed.review.rating,
+    nickname: parsed.review.nickname,
+    comment: parsed.review.comment,
+    updatedAt: now.toISOString(),
+  }
+  return { ok: true, rows: rows.map((r) => (r.id === id ? review : r)), review }
+}
+
+/** 후기 지우기. 없는 id 면 아무것도 하지 않는다 (두 번 눌러도 안전하다) */
+export function removeReview(rows: Review[], id: string): Review[] {
+  return rows.filter((r) => r.id !== id)
 }
 
 export function todayInSeoul(now = new Date()): string {

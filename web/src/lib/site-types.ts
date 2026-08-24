@@ -15,8 +15,10 @@ export interface SiteCafe {
   id: string
   name: string
   sigungu: string
-  /** 방향 구획 (집 기준). 전체 리스트에서 "어느 쪽" 으로 묶는다 */
+  /** 방향 구획 (집 기준). 감사 규칙이 시도 정합성을 볼 때 쓴다 */
   zone: 'near' | 'seoul' | 'north' | 'east' | 'south' | 'west'
+  /** 시 단위 묶음 키. 전체 리스트의 지역 칩 (서울·인천은 하나로) */
+  area: string
   driveMinutes: number | null
   scale: '대형' | '중형' | '소형' | null
   parkingGrade: 'A' | 'B' | 'C' | 'D' | '?'
@@ -37,7 +39,12 @@ export interface SiteCafe {
   hotScore: number
   /** 화제도 x 가족 적합도. 홈 피드와 목록의 정렬 기준 */
   finalScore: number
+  /** 추정 발행률. **점수 전용** — 화면에는 실측(posts30·posts90)을 쓴다 */
   postsPer30: number
+  /** 최근 30일 블로그 글 수 (검증 통과분, 실측) */
+  posts30: number
+  /** 최근 90일 블로그 글 수 (검증 통과분). 네이버 리뷰수를 대신한다 */
+  posts90: number
   acceleration: number
   /** 'unknown' 은 50건 창이 잘려 비교 불가라는 뜻. 늘었다고 쓰지 않는다 */
   trend: 'rising' | 'steady' | 'unknown'
@@ -46,12 +53,18 @@ export interface SiteCafe {
   ratingCount: number
   cityOnly: boolean
   visitedOn: string | null
+  /** 우리 목록에 처음 들어온 시각. NEW 정렬 기준 */
+  firstSeenAt: string
+  /** 최초 대량 수집 이후 30일 안에 들어온 곳 */
+  isNew: boolean
 }
 
 export interface SiteVisited {
   id: string
   name: string
   sigungu: string
+  /** 시 단위 묶음 키. 다녀온 곳 탭도 같은 지역 칩을 쓴다 */
+  area: string
   visitedOn: string
   note: string
   tags: string[]

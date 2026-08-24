@@ -1,9 +1,15 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import type { SiteVisited } from '@/lib/site'
 import type { Review } from '@/lib/reviews'
+import { areaLabel, matchesQuery, type AreaCount } from '@/lib/filter'
+import { listParamsToQuery, type ListParams } from '@/lib/url-state'
+import { useUrlSync } from '@/lib/use-url-sync'
+import { nextSort, SORT_LABEL, sortVisited, type VisitedSort } from '@/lib/visited-sort'
+import { VIEW_ONLY } from '@/lib/view-only'
+import { AreaChips, Chip, SearchBox } from '../filters'
 import { Thumb } from '../thumb'
 import { Stars } from '../cafe/[id]/review-panel'
 
@@ -21,6 +27,7 @@ export interface KnownCafe {
   id: string
   name: string
   sigungu: string
+  area: string
   scale: string | null
   tags: string[]
   naverMapUrl: string
@@ -66,6 +73,7 @@ export function mergeVisits(
       id: v.kakaoPlaceId,
       name: c.name,
       sigungu: c.sigungu,
+      area: c.area,
       visitedOn: v.visitedOn,
       note: v.note ?? '',
       tags: c.tags,
@@ -80,15 +88,66 @@ export function mergeVisits(
   return [...out.values()].sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
 }
 
+/**
+ * 이 수보다 적으면 검색·칩을 띄우지 않는다. 세 곳짜리 목록 위에 조작이
+ * 세 줄 붙으면 기록보다 도구가 커진다.
+ */
+export const MIN_ROWS_FOR_FILTERS = 6
+
+export interface VisitedFilter {
+  q: string
+  area: string | null
+  tags: string[]
+}
+
+/**
+ * 다녀온 곳도 전체 탭과 같은 방식으로 고른다.
+ *
+ * 다른 점은 하나다 — **없는 것은 칩으로 만들지 않는다.** 전체 탭은 32개
+ * 지역이 다 차 있지만 여기는 다녀온 곳만 있어서, 빈 칩 서른 개를 띄우면
+ * 조작이 아니라 장식이 된다.
+ */
+export function filterVisited(rows: SiteVisited[], f: VisitedFilter): SiteVisited[] {
+  return rows.filter((v) => {
+    if (f.area && v.area !== f.area) return false
+    if (f.q && !matchesQuery(v.name, f.q)) return false
+    return f.tags.every((t) => v.tags.includes(t))
+  })
+}
+
+export function visitedAreas(rows: SiteVisited[]): AreaCount[] {
+  const map = new Map<string, number>()
+  for (const v of rows) map.set(v.area, (map.get(v.area) ?? 0) + 1)
+  return [...map.entries()]
+    .map(([area, count]) => ({ area, label: areaLabel(area), count, nearest: 0 }))
+    .sort((a, b) => b.count - a.count || a.area.localeCompare(b.area))
+}
+
+/** 기록에 실제로 붙어 있는 태그만 칩으로 만든다 */
+export function visitedTags(rows: SiteVisited[]): { tag: string; count: number }[] {
+  const map = new Map<string, number>()
+  for (const v of rows) for (const t of v.tags) map.set(t, (map.get(t) ?? 0) + 1)
+  return [...map.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag))
+}
+
 export function VisitedList({
-  built, known,
-}: { built: SiteVisited[]; known: KnownCafe[] }) {
+  built, known, initial,
+}: { built: SiteVisited[]; known: KnownCafe[]; initial: ListParams }) {
   const [rows, setRows] = useState<SiteVisited[]>(
     [...built].sort((a, b) => b.visitedOn.localeCompare(a.visitedOn)),
   )
   const [reviews, setReviews] = useState<Map<string, Review[]>>(new Map())
   const [busy, setBusy] = useState('')
   const [error, setError] = useState('')
+  const [q, setQ] = useState(initial.q)
+  const [area, setArea] = useState<string | null>(initial.area)
+  const [tags, setTags] = useState<string[]>(initial.tags)
+  const [order, setOrder] = useState<VisitedSort>(initial.visitedSort)
+  const [expanded, setExpanded] = useState(false)
+
+  useUrlSync(listParamsToQuery({ ...initial, q, area, tags, visitedSort: order }))
 
   const load = useCallback(() => {
     const map = new Map(known.map((c) => [c.id, c]))
@@ -140,6 +199,16 @@ export function VisitedList({
     }
   }
 
+  const areas = useMemo(() => visitedAreas(rows), [rows])
+  const tagList = useMemo(() => visitedTags(rows), [rows])
+  const shown = useMemo(
+    () => sortVisited(filterVisited(rows, { q, area, tags }), order),
+    [rows, q, area, tags, order],
+  )
+  const toggle = (t: string) =>
+    setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
+  const dirty = q !== '' || area !== null || tags.length > 0
+
   if (rows.length === 0) {
     return (
       <div className="mt-4 rounded-2xl border border-line bg-card p-5">
@@ -148,7 +217,9 @@ export function VisitedList({
           누르면 여기 모입니다.
         </p>
         <p className="mt-3 text-[12px] leading-relaxed text-ink-soft">
-          가족 누구나 누를 수 있어요. 별점과 한 줄 후기도 같은 화면에서 남깁니다.
+          {VIEW_ONLY
+            ? '열람 전용 페이지라 여기서는 기록을 남길 수 없어요.'
+            : '가족 누구나 누를 수 있어요. 별점을 남기면 자동으로 여기 들어옵니다.'}
         </p>
       </div>
     )
@@ -158,13 +229,98 @@ export function VisitedList({
 
   return (
     <>
-      <p className="mt-1 text-[13px] text-ink-soft">{rows.length}곳</p>
+      <p className="mt-1 text-[13px] text-ink-soft">
+        {shown.length}곳{shown.length !== rows.length && ` / ${rows.length}곳`}
+      </p>
       {error && <p className="mt-2 text-[13px] text-red-600 dark:text-red-400">{error}</p>}
 
+      {/* 기록이 몇 개 없을 때는 조작을 띄우지 않는다 — 칩보다 목록이 짧으면 방해다 */}
+      {rows.length >= MIN_ROWS_FOR_FILTERS && (
+        <>
+          <div className="mt-3">
+            <SearchBox value={q} onChange={setQ} />
+          </div>
+
+          {areas.length > 1 && (
+            <div className="mt-3">
+              <AreaChips
+                counts={areas}
+                value={area}
+                onChange={setArea}
+                expanded={expanded}
+                onExpand={setExpanded}
+              />
+            </div>
+          )}
+
+          <div className="mt-3 flex items-center gap-2">
+            <div className="flex overflow-hidden rounded-full border border-line">
+              {(['date', 'rating'] as const).map((by) => {
+                const on = order.by === by
+                return (
+                  <button
+                    key={by}
+                    type="button"
+                    onClick={() => setOrder((cur) => nextSort(cur, by))}
+                    aria-label={`${SORT_LABEL[by]}순 정렬${
+                      on ? (order.desc ? ' (내림차순)' : ' (오름차순)') : ''
+                    }`}
+                    className={`min-h-[36px] px-3.5 text-[13px] ${
+                      on ? 'bg-bean text-white font-semibold' : 'bg-card text-ink-soft'
+                    }`}
+                  >
+                    {SORT_LABEL[by]}순
+                    {on && <span aria-hidden="true" className="ml-1">{order.desc ? '↓' : '↑'}</span>}
+                  </button>
+                )
+              })}
+            </div>
+            <span className="text-[12px] text-ink-soft">
+              {order.by === 'rating'
+                ? (order.desc ? '높은 별점부터' : '낮은 별점부터')
+                : (order.desc ? '최근에 간 곳부터' : '오래전에 간 곳부터')}
+            </span>
+          </div>
+
+          {tagList.length > 1 && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {tagList.map((t) => (
+                <Chip
+                  key={t.tag}
+                  on={tags.includes(t.tag)}
+                  count={t.count}
+                  onClick={() => toggle(t.tag)}
+                >
+                  {t.tag}
+                </Chip>
+              ))}
+              {dirty && (
+                <button
+                  type="button"
+                  onClick={() => { setQ(''); setArea(null); setTags([]) }}
+                  className="min-h-[36px] rounded-full px-3 text-[13px] text-ink-soft underline"
+                >
+                  초기화
+                </button>
+              )}
+            </div>
+          )}
+        </>
+      )}
+
+      {shown.length === 0 && (
+        <p className="mt-8 text-center text-[14px] leading-relaxed text-ink-soft">
+          {q
+            ? <>“{q}” 로 찾은 기록이 없어요.</>
+            : '조건에 맞는 기록이 없어요.'}
+        </p>
+      )}
+
       <div className="mt-3 flex flex-col gap-4">
-        {rows.map((v) => {
+        {shown.map((v) => {
+          // 별점순으로 보면 월 헤더가 오르내리며 반복된다. 날짜순일 때만 붙인다
           const month = monthLabel(v.visitedOn)
-          const showMonth = month !== lastMonth
+          const showMonth = order.by === 'date' && month !== lastMonth
           lastMonth = month
           const mine = reviews.get(v.id) ?? []
           const count = mine.length || v.ratingCount
@@ -247,13 +403,15 @@ export function VisitedList({
                   >
                     지도 ↗
                   </a>
-                  <button
-                    onClick={() => cancel(v.id, v.name)}
-                    disabled={busy === v.id}
-                    className="flex min-h-[44px] flex-1 items-center justify-center border-l border-line text-[13px] text-ink-soft active:bg-bean-soft disabled:opacity-50"
-                  >
-                    {busy === v.id ? '취소 중…' : '다녀온 곳에서 빼기'}
-                  </button>
+                  {!VIEW_ONLY && (
+                    <button
+                      onClick={() => cancel(v.id, v.name)}
+                      disabled={busy === v.id}
+                      className="flex min-h-[44px] flex-1 items-center justify-center border-l border-line text-[13px] text-ink-soft active:bg-bean-soft disabled:opacity-50"
+                    >
+                      {busy === v.id ? '취소 중…' : '다녀온 곳에서 빼기'}
+                    </button>
+                  )}
                 </div>
               </article>
             </div>

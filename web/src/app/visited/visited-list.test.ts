@@ -1,10 +1,13 @@
 import { describe, it, expect } from 'vitest'
-import { mergeVisits, type KnownCafe } from './visited-list'
+import {
+  filterVisited, mergeVisits, visitedAreas, visitedTags, type KnownCafe,
+} from './visited-list'
 import type { SiteVisited } from '@/lib/site'
 
 const built = (over: Partial<SiteVisited> & { id: string }): SiteVisited => ({
   name: `카페${over.id}`,
   sigungu: '양평군',
+  area: '서울',
   visitedOn: '2026-05-01',
   note: '',
   tags: ['대형카페'],
@@ -21,6 +24,7 @@ const known = (ids: string[]): Map<string, KnownCafe> =>
     id,
     name: `카페${id}`,
     sigungu: '김포시',
+    area: '인천',
     scale: '대형',
     tags: ['대형카페', '뷰맛집'],
     naverMapUrl: 'https://map.naver.com/p/search/y',
@@ -118,5 +122,36 @@ describe('mergeVisits', () => {
 
   it('빈 입력에서도 던지지 않는다', () => {
     expect(mergeVisits([], [], new Map())).toEqual([])
+  })
+})
+
+describe('다녀온 곳 필터', () => {
+  const rows: SiteVisited[] = [
+    built({ id: '1', name: '테라로사', area: '김포시', tags: ['대형카페'] }),
+    built({ id: '2', name: '앤트러사이트', area: '서울', tags: ['디저트특화'] }),
+    built({ id: '3', name: '콩', area: '김포시', tags: ['대형카페', '뷰맛집'] }),
+  ]
+
+  it('지역으로 거른다', () => {
+    expect(filterVisited(rows, { q: '', area: '김포시', tags: [] }).map((r) => r.id))
+      .toEqual(['1', '3'])
+  })
+
+  it('한 글자 상호도 검색된다', () => {
+    expect(filterVisited(rows, { q: '콩', area: null, tags: [] }).map((r) => r.id))
+      .toEqual(['3'])
+  })
+
+  it('태그는 AND 로 걸린다', () => {
+    expect(filterVisited(rows, { q: '', area: null, tags: ['대형카페', '뷰맛집'] })
+      .map((r) => r.id)).toEqual(['3'])
+  })
+
+  it('있는 지역만 칩이 된다 — 빈 칩 서른 개는 장식이다', () => {
+    expect(visitedAreas(rows).map((a) => `${a.label}${a.count}`)).toEqual(['김포2', '서울1'])
+  })
+
+  it('기록에 붙어 있는 태그만 칩이 된다', () => {
+    expect(visitedTags(rows).map((t) => t.tag)).toEqual(['대형카페', '디저트특화', '뷰맛집'])
   })
 })

@@ -64,6 +64,13 @@ export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
                     <span className="sr-only">위 </span>
                   </span>
                 )}
+                {cafe.isNew && (
+                  // 이름 앞에 붙인다. "우리 목록에 새로 들어왔다" 는 뜻이지
+                  // 신규 개업이 아니다 — 개업일을 주는 무료 API 가 없다
+                  <span className="mr-1.5 align-[1px] rounded bg-bean px-1.5 py-0.5 text-[10px] font-extrabold tracking-wide text-white">
+                    NEW
+                  </span>
+                )}
                 {cafe.name}
               </h3>
               <span className="mt-0.5 flex shrink-0 items-center gap-1.5">

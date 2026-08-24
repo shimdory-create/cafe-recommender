@@ -1,5 +1,6 @@
 import type { BuzzSnapshot, Cafe, SitePayload } from '../schema.js'
 import { zoneOf } from '../config/zones.js'
+import { areaOf } from '../config/area.js'
 
 /**
  * 정합성 감사 — "돌아가는 것처럼 보이지만 틀린" 것을 찾는다.
@@ -88,6 +89,27 @@ export function auditData(input: AuditInput): Finding[] {
   if (wrongZone.length) {
     fail('zone_mismatch',
       `방향 배정이 시도와 다른 카페 ${wrongZone.length}곳: ${wrongZone.slice(0, 3).map((r) => r.name)}`)
+  }
+
+  // --- 지역 묶음이 주소와 맞는가 (화면의 지역 칩이 여기서 나온다) ---
+  const wrongArea = site.cafes.filter((r) => {
+    const src = byId.get(r.id)
+    if (!src) return false
+    return areaOf({ ...src, zone: r.zone }) !== r.area
+  })
+  if (wrongArea.length) {
+    fail('area_mismatch',
+      `지역 묶음이 주소와 다른 카페 ${wrongArea.length}곳: ${wrongArea.slice(0, 3).map((r) => r.name)}`)
+  }
+
+  // --- NEW 가 범람하지 않는가 ---
+  //
+  // 기준선(src/config/newness.ts SEED_UNTIL)이 어긋나면 전부 NEW 가 된다.
+  // 전부에 붙은 배지는 아무것도 뜻하지 않으므로 조용히 지나가면 안 된다.
+  const newCount = site.cafes.filter((r) => r.isNew).length
+  if (site.cafes.length >= 50 && newCount > site.cafes.length * 0.3) {
+    fail('new_flood',
+      `NEW 가 ${newCount}/${site.cafes.length}곳 — 기준선(SEED_UNTIL)을 확인하라`)
   }
 
   // --- 지역이 수도권인가 ---

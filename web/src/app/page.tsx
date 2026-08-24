@@ -10,8 +10,17 @@ import { FeedCards, type FeedRow } from './feed-cards'
  * 추이는 생성기가 판정한 `trend` 만 믿는다. 가속도 숫자는 17.67 에서
  * 포화되므로 그것으로 "급증" 을 말하면 절반이 급증이 된다 (발견 E).
  */
-function reasonLine(postsPer30: number, trend: SiteCafe['trend']): string {
-  const posts = `블로그 월 ${Math.round(postsPer30)}건`
+function reasonLine(posts30: number, posts90: number, trend: SiteCafe['trend']): string {
+  // 네이버 리뷰수 자리다. 공식 API 가 리뷰수를 주지 않아 우리가 직접 센
+  // 값을 쓴다 — 상호 일치를 확인한 글만 센 **실측**이다.
+  //
+  // 추정 발행률(`postsPer30`)을 쓰지 않는 이유: 50건 창이 이틀에 차는 카페는
+  // `월 599건` 이 나오는데 같은 카페의 90일 실측이 46건이었다 (실측).
+  // 둘이 같으면 50건 창이 최근 30일에 다 들어찼다는 뜻이다. 같은 수를 두 번
+  // 쓰면 읽는 사람이 오타로 본다 — 하나만 쓴다
+  const posts = posts30 === posts90
+    ? `블로그 30일 ${posts30}건`
+    : `블로그 30일 ${posts30}건 · 90일 ${posts90}건`
   return trend === 'rising' ? `${posts} · 지금 뜨는 중` : posts
 }
 
@@ -24,7 +33,7 @@ function reasonLine(postsPer30: number, trend: SiteCafe['trend']): string {
 export default function Home() {
   const feed: FeedRow[] = homeFeed().map((c) => ({
     ...toListRow(c),
-    reason: reasonLine(c.postsPer30, c.trend),
+    reason: reasonLine(c.posts30, c.posts90, c.trend),
   }))
 
   const week = new Date(payload.weekOf)

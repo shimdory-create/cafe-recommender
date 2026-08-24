@@ -2,36 +2,44 @@ import type { ListRow } from './site'
 
 export type Sort = 'hot' | 'near'
 
-/** 방향 구획. 파이프라인의 `src/config/zones.ts` 와 같은 값이다 */
-export type ZoneId = 'near' | 'seoul' | 'north' | 'east' | 'south' | 'west'
-
-export interface ZoneMeta {
-  id: ZoneId
-  label: string
+/**
+ * 지역 묶음의 짧은 이름. 파이프라인 `src/config/area.ts` 와 같은 규칙이다.
+ *
+ * 한 줄짜리 규칙을 옮겨 적는 편이, 웹에서 `src/` 를 import 해 Vercel 빌드를
+ * 깨뜨리는 것보다 낫다 (그 실패는 두 번 겪었다 — `site-types.ts` 주석 참고).
+ */
+export function areaLabel(area: string): string {
+  if (area === '서울' || area === '인천') return area
+  return area.replace(/[시군]$/, '')
 }
 
+/** 서울은 늘 마지막이다 — "거의 안 간다" 는 것이 이 목록의 전제다 */
+export const LAST_AREA = '서울'
+
 /**
- * 화면에 보여줄 방향과 순서. 가까운 쪽부터.
+ * 검색어 정규화. 공백과 대소문자를 무시한다.
  *
- * 파이프라인(`src/config/zones.ts`)이 각 카페에 `zone` 을 붙여 내려보내므로
- * 여기서는 이름만 안다. 배정 규칙이 두 곳에 생기지 않게 하려는 것이다.
+ * `커피 앤 로스터`로 저장된 곳을 `커피앤`으로 찾을 수 있어야 한다. 한 글자
+ * 상호가 실제로 있으므로(`콩`, `숲`) 최소 길이를 두지 않는다.
  */
-export const ZONES: ZoneMeta[] = [
-  { id: 'near', label: '가까운 곳' },
-  { id: 'seoul', label: '서울' },
-  { id: 'west', label: '서쪽' },
-  { id: 'north', label: '북쪽' },
-  { id: 'east', label: '동쪽' },
-  { id: 'south', label: '남쪽' },
-]
+const norm = (s: string) => s.replace(/\s+/g, '').toLowerCase()
+
+export function matchesQuery(name: string, query: string): boolean {
+  const q = norm(query)
+  return q === '' || norm(name).includes(q)
+}
 
 export interface FilterState {
   tags: string[]
   sort: Sort
   /** 주차 C 카페까지 보여줄지 (스펙 7.3 도심 모드) */
   city: boolean
-  /** 고른 방향. null 이면 전체 */
-  zone?: ZoneId | null
+  /** 고른 지역(시 단위). null 이면 전체 */
+  area?: string | null
+  /** 업소명 검색어 */
+  query?: string
+  /** NEW 만 보기 */
+  newOnly?: boolean
 }
 
 /**
@@ -39,16 +47,22 @@ export interface FilterState {
  *
  * 칩 여러 개는 AND 다 — "대형카페 + 뷰맛집" 을 찾는 것이 자연스럽고,
  * OR 로 하면 칩을 늘릴수록 결과가 늘어나 필터의 의미가 사라진다.
- * 방향은 하나만 고른다 (라디오) — "북쪽 아니면 동쪽" 은 실제로 하는 결정이 아니다.
+ * 지역은 하나만 고른다 (라디오) — "김포 아니면 파주" 는 실제로 하는 결정이 아니다.
+ *
+ * **NEW 는 정렬과 무관하게 맨 앞으로 띄운다.** 새로 들어온 곳을 보려고 목록을
+ * 여는데 종합점수 순으로는 300번째에 있을 수 있다. 띄우되 NEW 안에서는
+ * 고른 정렬 기준을 그대로 지킨다.
  */
 export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[] {
   const rows = cafes.filter((c) => {
     if (c.cityOnly && !s.city) return false
-    if (s.zone && c.zone !== s.zone) return false
+    if (s.area && c.area !== s.area) return false
+    if (s.newOnly && !c.isNew) return false
+    if (s.query && !matchesQuery(c.name, s.query)) return false
     return s.tags.every((t) => c.tags.includes(t))
   })
 
-  return [...rows].sort((a, b) => {
+  const rank = (a: T, b: T) => {
     if (s.sort === 'near') {
       // 거리 미확인은 뒤로 보낸다. null 을 0 으로 취급하면 맨 앞에 온다.
       const da = a.driveMinutes ?? Number.POSITIVE_INFINITY
@@ -58,21 +72,56 @@ export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[
     }
     if (b.hotScore !== a.hotScore) return b.hotScore - a.hotScore
     return a.id.localeCompare(b.id)
+  }
+
+  return [...rows].sort((a, b) => {
+    if (a.isNew !== b.isNew) return a.isNew ? -1 : 1
+    return rank(a, b)
   })
 }
 
-/** 방향별 개수. 칩에 숫자를 붙여 "눌러도 빈 화면" 을 막는다 */
-export function zoneCounts<T extends ListRow>(
+export interface AreaCount {
+  area: string
+  label: string
+  count: number
+  /** 그 지역에서 가장 가까운 카페의 이동시간. 칩 순서 기준 */
+  nearest: number
+}
+
+/**
+ * 지역별 개수. 칩에 숫자를 붙여 "눌러도 빈 화면" 을 막는다.
+ *
+ * 순서는 **가까운 지역부터**, 서울은 맨 뒤. 차로 나가는 사람에게는 그게
+ * 순서다 — 이름 순으로 하면 가평(1시간 20분)이 고양(40분) 앞에 온다.
+ */
+export function areaCounts<T extends ListRow>(
   cafes: T[],
   opts: { city: boolean },
-): Record<ZoneId, number> {
-  const out = { near: 0, seoul: 0, north: 0, east: 0, south: 0, west: 0 }
+): AreaCount[] {
+  const map = new Map<string, { count: number; nearest: number }>()
   for (const c of cafes) {
     if (c.cityOnly && !opts.city) continue
-    out[c.zone] += 1
+    const cur = map.get(c.area) ?? { count: 0, nearest: Number.POSITIVE_INFINITY }
+    cur.count += 1
+    cur.nearest = Math.min(cur.nearest, c.driveMinutes ?? Number.POSITIVE_INFINITY)
+    map.set(c.area, cur)
   }
-  return out
+  return [...map.entries()]
+    .map(([area, v]) => ({ area, label: areaLabel(area), count: v.count, nearest: v.nearest }))
+    .sort((a, b) => {
+      if ((a.area === LAST_AREA) !== (b.area === LAST_AREA)) return a.area === LAST_AREA ? 1 : -1
+      if (a.nearest !== b.nearest) return a.nearest - b.nearest
+      return a.area.localeCompare(b.area)
+    })
 }
+
+/**
+ * 서울·인천만 안에서 다시 가른다.
+ *
+ * 나머지 시군은 칩 하나가 곧 한 지역이라 더 쪼갤 것이 없다. 서울 175곳과
+ * 인천 58곳은 한 덩어리로 두면 스크롤이 길어져서 구별로 묶는다.
+ */
+export const SPLIT_AREAS = new Set(['서울', '인천'])
 
 export interface SigunguGroup<T> {
   sigungu: string
@@ -81,15 +130,6 @@ export interface SigunguGroup<T> {
   nearest: number
 }
 
-/**
- * 방향 안에서 **시군구별로** 묶는다. 원래 요청("구 단위로 모아 보기")이 여기서 충족된다.
- *
- * 방향을 고르지 않았을 때는 묶지 않는다 — 표시 대상 210곳이 43개 시군구에
- * 흩어져 있어 그대로 묶으면 1~2곳짜리 그룹이 17개 생긴다 (실측).
- *
- * 그룹 순서는 **가까운 지역부터**다. 차로 나가는 사람에게는 그게 순서다.
- * 이름 순으로 하면 "가평군" 이 "고양시" 앞에 오는데 거리는 두 배 차이다.
- */
 export function groupBySigungu<T extends ListRow>(rows: T[]): SigunguGroup<T>[] {
   const map = new Map<string, T[]>()
   for (const r of rows) {
@@ -108,26 +148,5 @@ export function groupBySigungu<T extends ListRow>(rows: T[]): SigunguGroup<T>[] 
       : a.sigungu.localeCompare(b.sigungu)))
 }
 
-/**
- * 방향에 어떤 지역이 들어 있는지 한 줄로. **데이터에서 계산한다.**
- *
- * 처음에는 고정 문자열이었는데 배정과 어긋났다 — '동쪽' 설명에 이천·여주가
- * 빠져 있어서 그 지역 카페를 찾는 사람은 동쪽을 눌러볼 이유가 없었다.
- * 곳수 많은 순으로 몇 개만 보여주고 나머지는 "등" 으로 줄인다.
- */
-export function zoneHint<T extends ListRow>(
-  cafes: T[],
-  zone: ZoneId,
-  opts: { city: boolean; top?: number },
-): string {
-  const count = new Map<string, number>()
-  for (const c of cafes) {
-    if (c.zone !== zone) continue
-    if (c.cityOnly && !opts.city) continue
-    count.set(c.sigungu, (count.get(c.sigungu) ?? 0) + 1)
-  }
-  const sorted = [...count.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-  const top = opts.top ?? 4
-  const head = sorted.slice(0, top).map(([s]) => s).join('·')
-  return sorted.length > top ? `${head} 등 ${sorted.length}개 지역` : head
-}
+/** 칩을 접었을 때 보여줄 개수. 두 줄에 들어가는 만큼 */
+export const AREA_CHIPS_COLLAPSED = 8

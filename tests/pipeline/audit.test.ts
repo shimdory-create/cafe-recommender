@@ -21,6 +21,7 @@ const row = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
   name: '카페',
   sigungu: '양평군',
   zone: 'east',
+  area: '양평군',
   driveMinutes: 60,
   scale: '대형',
   parkingGrade: 'A',
@@ -40,12 +41,16 @@ const row = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
   hotScore: 50,
   finalScore: 25,
   postsPer30: 60,
+  posts30: 60,
+  posts90: 100,
   acceleration: 1.2,
   trend: 'steady',
   ratingAvg: 0,
   ratingCount: 0,
   cityOnly: false,
   visitedOn: null,
+  firstSeenAt: '2026-01-01T00:00:00.000Z',
+  isNew: false,
   ...over,
 })
 
@@ -76,6 +81,18 @@ function input(over: Partial<AuditInput> = {}): AuditInput {
 describe('auditData', () => {
   it('정상 데이터에서는 아무것도 지적하지 않는다', () => {
     expect(auditData(input())).toEqual([])
+  })
+
+  it('지역 묶음이 주소와 어긋나면 잡는다', () => {
+    // 화면의 지역 칩이 이 값에서 나온다. 서울 카페가 김포 칩에 들어가면
+    // 김포를 눌러 나온 목록으로 운전해 간다
+    const out = auditData(input({
+      site: {
+        ...input().site,
+        cafes: [row({ id: '1', area: '김포시' })],
+      },
+    }))
+    expect(out.map((f) => f.code)).toContain('area_mismatch')
   })
 
   it('목록에 같은 카페가 두 번 있으면 잡는다', () => {
