@@ -2,6 +2,7 @@ import type { BuzzSnapshot, Cafe, SitePayload } from '../schema.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { staleCafes, STALE_DAYS } from '../jobs/liveness.js'
+import { passesLayer2 } from './buzz.js'
 
 /**
  * 정합성 감사 — "돌아가는 것처럼 보이지만 틀린" 것을 찾는다.
@@ -145,6 +146,28 @@ export function auditData(input: AuditInput): Finding[] {
   if (noDrive > 0) warn('drive_missing', `실주행 시간 미측정 ${noDrive}곳 — npm run drive`)
   const noEvidence = site.cafes.filter((r) => !r.evidence).length
   if (noEvidence > 0) fail('evidence_missing', `판단 근거가 빈 카페 ${noEvidence}곳`)
+
+  // --- 통과한 뒤로 식지 않았나 ---
+  //
+  // 한 번 `active` 가 되면 다시 검사하지 않는다. 화제가 식어도, 판정 규칙이
+  // 바뀌어도 목록에 남는다. 경계선에서 오르내리는 것은 정상이므로(측정이
+  // 흔들린다) 개별 카페를 지적하지 않고 **비율이 커질 때만** 알린다.
+  const latestBuzz = new Map<string, BuzzSnapshot>()
+  for (const b of buzz) {
+    const prev = latestBuzz.get(b.kakaoPlaceId)
+    if (!prev || b.capturedAt > prev.capturedAt) latestBuzz.set(b.kakaoPlaceId, b)
+  }
+  const activeCafes = cafes.filter((c) => c.status === 'active')
+  const 식은곳 = activeCafes.filter((c) => {
+    const b = latestBuzz.get(c.kakaoPlaceId)
+    if (!b) return false
+    return !passesLayer2(b, { now, driveMinutes: c.driveMinutes ?? c.driveMinutesEst }).pass
+  })
+  if (activeCafes.length >= 50 && 식은곳.length > activeCafes.length * 0.1) {
+    warn('gone_cold',
+      `통과 상태인데 지금 기준으로는 미달인 카페 ${식은곳.length}/${activeCafes.length}곳`
+      + ' — 재판정을 검토한다')
+  }
 
   // --- 아직 있는 카페인가 ---
   //

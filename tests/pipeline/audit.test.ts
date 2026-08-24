@@ -85,6 +85,25 @@ describe('auditData', () => {
     expect(auditData(input())).toEqual([])
   })
 
+  it('통과 뒤 식은 카페가 많아지면 알린다', () => {
+    // 한 번 active 가 되면 다시 검사하지 않는다. 경계선에서 오르내리는 것은
+    // 정상이므로 개별 지적 대신 비율이 커질 때만 알린다
+    const many = Array.from({ length: 60 }, (_, i) => cafe({ kakaoPlaceId: `c${i}` }))
+    const cold = Array.from({ length: 60 }, (_, i) => ({
+      kakaoPlaceId: `c${i}`, capturedAt: '2026-08-21', receivedCount: 50, relevantCount: 1,
+      precision: 0.02, spanDays: 90, postsPer30: 0.5, posts30d: 0, postsPrev: 0,
+      firstPostDate: '2024-01-01', latestPostDate: '2026-08-20', acceleration: 0,
+      suspectAmbiguous: false,
+    }))
+    const out = auditData(input({ cafes: many, buzz: cold }))
+    expect(out.map((f) => f.code)).toContain('gone_cold')
+  })
+
+  it('몇 곳 어긋난 정도는 알리지 않는다 — 측정은 흔들린다', () => {
+    const out = auditData(input())
+    expect(out.map((f) => f.code)).not.toContain('gone_cold')
+  })
+
   it('오래 안 보이는 카페를 폐업 의심으로 잡는다', () => {
     // 발굴 잡은 새 카페만 넣는다. 폐업해도 목록에 남으므로 여기서 잡아야 한다
     const out = auditData(input({
