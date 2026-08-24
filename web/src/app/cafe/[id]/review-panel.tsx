@@ -465,14 +465,14 @@ export function ReviewPanel({ cafeId, initialVisited, built }: {
                       <button
                         onClick={() => startEdit(r)}
                         disabled={busy}
-                        className="min-h-[36px] px-2 text-[13px] text-ink-soft underline disabled:opacity-50"
+                        className="min-h-[44px] px-3 text-[13px] text-ink-soft underline disabled:opacity-50"
                       >
                         수정
                       </button>
                       <button
                         onClick={() => remove(r)}
                         disabled={busy}
-                        className="min-h-[36px] px-2 text-[13px] text-ink-soft underline disabled:opacity-50"
+                        className="min-h-[44px] px-3 text-[13px] text-ink-soft underline disabled:opacity-50"
                       >
                         삭제
                       </button>

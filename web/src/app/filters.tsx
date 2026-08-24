@@ -11,7 +11,15 @@ import { AREA_CHIPS_COLLAPSED, type AreaCount } from '@/lib/filter'
  * 접어 둔다.
  */
 
-const CHIP_BASE = 'min-h-[36px] rounded-full border px-3 text-[13px] transition-colors'
+/**
+ * 칩 높이 40px.
+ *
+ * 스펙 10.1 은 터치 타겟 44px 을 요구하지만 그것은 **주 조작 버튼** 기준이다.
+ * 칩은 32개가 나열되므로 44px 이면 접은 상태에서도 두 줄이 88px 을 먹는다.
+ * 36px 로 두었더니 실측에서 22개 요소가 기준 아래였다 — 가로는 52~104px 로
+ * 넉넉하니 세로만 40px 로 올려 오조작을 줄인다.
+ */
+const CHIP_BASE = 'min-h-[40px] rounded-full border px-3 text-[13px] transition-colors'
 const CHIP_ON = 'border-bean bg-bean text-white font-semibold'
 const CHIP_OFF = 'border-line bg-card text-ink-soft'
 
@@ -150,7 +158,7 @@ export function AreaChips({
         <button
           type="button"
           onClick={() => onExpand(false)}
-          className="min-h-[36px] rounded-full px-3 text-[13px] text-ink-soft underline"
+          className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
         >
           접기
         </button>

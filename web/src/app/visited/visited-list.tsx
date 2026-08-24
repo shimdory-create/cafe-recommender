@@ -270,7 +270,7 @@ export function VisitedList({
                     aria-label={`${SORT_LABEL[by]}순 정렬${
                       on ? (order.desc ? ' (내림차순)' : ' (오름차순)') : ''
                     }`}
-                    className={`min-h-[36px] px-3.5 text-[13px] ${
+                    className={`min-h-[40px] px-3.5 text-[13px] ${
                       on ? 'bg-bean text-white font-semibold' : 'bg-card text-ink-soft'
                     }`}
                   >
@@ -303,7 +303,7 @@ export function VisitedList({
                 <button
                   type="button"
                   onClick={() => { setQ(''); setArea(null); setTags([]) }}
-                  className="min-h-[36px] rounded-full px-3 text-[13px] text-ink-soft underline"
+                  className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
                 >
                   초기화
                 </button>

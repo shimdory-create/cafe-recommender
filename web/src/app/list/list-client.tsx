@@ -109,7 +109,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
               setTags([]); setArea(null); setQ(''); setNewOnly(false)
               setShownCount(PAGE_CHUNK)
             }}
-            className="min-h-[36px] rounded-full px-3 text-[13px] text-ink-soft underline"
+            className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
           >
             초기화
           </button>
@@ -123,7 +123,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
               key={k}
               type="button"
               onClick={() => { setSort(k); setShownCount(PAGE_CHUNK) }}
-              className={`min-h-[36px] px-3.5 text-[13px] ${
+              className={`min-h-[40px] px-3.5 text-[13px] ${
                 sort === k ? 'bg-bean text-white font-semibold' : 'bg-card text-ink-soft'
               }`}
             >
@@ -135,7 +135,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
           type="button"
           onClick={() => { setCity((v) => !v); setShownCount(PAGE_CHUNK) }}
           aria-pressed={city}
-          className={`min-h-[36px] rounded-full border px-3.5 text-[13px] ${
+          className={`min-h-[40px] rounded-full border px-3.5 text-[13px] ${
             city ? 'border-bean bg-bean text-white font-semibold' : 'border-line bg-card text-ink-soft'
           }`}
         >
