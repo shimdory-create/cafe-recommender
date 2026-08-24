@@ -1,32 +1,77 @@
 import { payload } from '@/lib/site'
+import { VIEW_ONLY } from '@/lib/view-only'
 
 export const metadata = { title: '정보 — 심김 빵지순례' }
 
-/** 정보 탭 — 이 목록이 어떻게 만들어지는지. 신뢰가 여기서 생긴다 */
+/**
+ * 정보 탭 — 이 목록이 어떻게 만들어지는지. 신뢰가 여기서 생긴다.
+ *
+ * 숫자는 **전부 페이로드에서 읽는다.** 손으로 적어 두면 따라가지 못한다 —
+ * `수도권 65개 시군구` 라고 적혀 있는 동안 실제로는 69개였다 (2026 인천
+ * 행정구역 개편으로 구가 늘어난 것을 문구가 못 따라갔다).
+ */
 export default function Info() {
   const at = new Date(payload.generatedAt)
   const stamp = `${at.getFullYear()}. ${at.getMonth() + 1}. ${at.getDate()}.`
+  const { stats } = payload
+  const shown = stats.passed + stats.cityOnly
 
-  const steps: [string, string][] = [
-    ['카페를 찾는다', '수도권 65개 시군구를 카카오 장소 검색으로 훑어요.'],
-    ['화제량을 센다', '블로그 후기가 얼마나 빠르게 늘고 있는지 봐요. 인스타에서 뜨면 1~2주 뒤 블로그가 쏟아져요.'],
+  const steps: [string, React.ReactNode][] = [
+    ['카페를 찾는다',
+      `수도권 ${stats.scannedRegions}개 시군구를 카카오 장소 검색으로 훑어요.`],
+    ['화제량을 센다', (
+      <>
+        블로그 후기가 얼마나 빠르게 늘고 있는지 봐요. 인스타에서 뜨면 1~2주 뒤
+        블로그가 쏟아져요. <b className="text-ink">집에서 가까운 곳은 기준을 낮춰서</b>{' '}
+        봐요 — 블로그 글은 멀리 나들이 간 곳에 많이 쓰이거든요.
+      </>
+    )],
     ['후기를 읽는다', '규모·주차·메뉴·뷰를 후기 원문에서 뽑아요. 근거 인용이 없으면 버려요.'],
     ['걸러낸다', '동네 카페와 주차 안 되는 곳은 빼요. 차로 가니까요.'],
-    ['순위를 매긴다', '화제량 × (거리·주차·메뉴)로 점수를 내고 높은 순으로 줄을 세워요. 10곳씩 보여주고, 마음에 드는 곳이 없으면 다음 10곳으로 넘어갈 수 있어요.'],
-    ['다녀온 곳은 내린다', '별점을 남기면 다녀온 곳으로 자동 기록되고, 6개월간 추천에서 빠져요. 다녀온 곳 탭에서 빼면 다시 올라옵니다.'],
+    ['거리를 잰다', (
+      <>
+        집(인천 부평)에서 <b className="text-ink">카카오 길찾기로 실제 운전 시간</b>을
+        재요. 직선거리로 어림하면 강화는 19분, 검단은 16분씩 실제보다 가깝게 나와요.
+      </>
+    )],
+    ['순위를 매긴다',
+      '화제량 × (거리·주차·메뉴)로 점수를 내고 높은 순으로 줄을 세워요. 한 지역에서 두 곳까지만 뽑아요.'],
+    ['다녀온 곳은 내린다',
+      '별점을 남기면 다녀온 곳으로 자동 기록되고, 6개월간 추천에서 빠져요. 다녀온 곳 탭에서 빼면 다시 올라옵니다.'],
   ]
 
-  const stats: [string, string][] = [
-    ['찾은 카페', `${payload.stats.discovered.toLocaleString()}곳`],
-    ['통과한 카페', `${payload.stats.passed}곳`],
-    ['도심 전용 (주차 어려움)', `${payload.stats.cityOnly}곳`],
-    ['지역', `${payload.stats.regions}개 시군구`],
+  const stats2: [string, string][] = [
+    ['찾은 카페', `${stats.discovered.toLocaleString()}곳`],
+    ['보여주는 카페', `${shown.toLocaleString()}곳`],
+    ['  그중 도심 전용 (주차 어려움)', `${stats.cityOnly}곳`],
+    ['운전 시간 실측', `${stats.driveMeasured} / ${shown}곳`],
+    ['훑는 지역', `${stats.scannedRegions}개 시군구`],
+    ['카페가 있는 지역', `${stats.regions}개 시군구`],
     ['갱신', stamp],
+  ]
+
+  const marks: [string, React.ReactNode][] = [
+    ['NEW', (
+      <>
+        <b className="text-ink">우리 목록에 새로 들어온</b> 곳이에요 (30일 이내).
+        새로 문을 연 곳이라는 뜻은 아니에요 — 개업일을 알려주는 무료 자료가 없어요.
+      </>
+    )],
+    ['지역 칩', '시 단위로 묶었어요. 가까운 곳부터 놓고 서울은 맨 뒤예요. 서울·인천은 눌러야 구별로 나뉩니다.'],
+    ['돋보기', '업소명으로 찾아요. 한 글자만 넣어도 됩니다.'],
+    ['블로그 30일 / 90일', '우리가 직접 센 글 수예요. 상호가 실제로 언급된 글만 셉니다.'],
   ]
 
   return (
     <div className="py-5 text-[14px] leading-relaxed">
       <h1 className="text-[22px] font-bold tracking-tight">이 목록은 어떻게 만들어지나</h1>
+
+      {VIEW_ONLY && (
+        <p className="mt-3 rounded-2xl border border-line bg-card p-4 text-[13px] leading-relaxed text-ink-soft">
+          이 주소는 <b className="text-ink">열람 전용</b>이에요. 목록과 가족 별점은 다
+          보이지만, 별점이나 다녀왔어요는 남길 수 없습니다.
+        </p>
+      )}
 
       <ol className="mt-4 flex flex-col gap-3">
         {steps.map(([title, body], i) => (
@@ -42,22 +87,42 @@ export default function Info() {
 
       <h2 className="mt-7 text-[17px] font-bold">지금 상태</h2>
       <dl className="mt-2 overflow-hidden rounded-2xl border border-line bg-card">
-        {stats.map(([k, v]) => (
-          <div key={k} className="flex justify-between border-b border-line px-4 py-3 last:border-0">
+        {stats2.map(([k, v]) => (
+          <div key={k} className="flex justify-between gap-3 border-b border-line px-4 py-3 last:border-0">
             <dt className="text-[13px] text-ink-soft">{k}</dt>
-            <dd className="text-[13px] font-semibold">{v}</dd>
+            <dd className="shrink-0 text-[13px] font-semibold">{v}</dd>
           </div>
         ))}
       </dl>
 
+      <h2 className="mt-7 text-[17px] font-bold">화면의 표시</h2>
+      <dl className="mt-2 flex flex-col gap-3">
+        {marks.map(([k, v]) => (
+          <div key={k} className="rounded-2xl border border-line bg-card p-4">
+            <dt className="font-semibold">{k}</dt>
+            <dd className="mt-1 text-[13px] text-ink-soft">{v}</dd>
+          </div>
+        ))}
+      </dl>
+
+      {!VIEW_ONLY && (
+        <>
+          <h2 className="mt-7 text-[17px] font-bold">별점과 후기</h2>
+          <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">
+            가족 누구나 남길 수 있어요. 별점을 남기면{' '}
+            <b className="text-ink">다녀온 곳에 자동으로 들어갑니다.</b> 남긴 뒤에도
+            수정하거나 지울 수 있어요 — 다만 누가 남겼는지 확인하지 않으니, 지우기 전에
+            누구 것인지 한 번 보고 눌러주세요. 별점을 지워도 다녀온 기록은 남습니다.
+          </p>
+        </>
+      )}
+
       <h2 className="mt-7 text-[17px] font-bold">없는 정보</h2>
       <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">
         <b className="text-ink">영업시간과 리뷰 수는 싣지 않습니다.</b> 무료로 쓸 수 있는
-        공식 API 가 그 값을 주지 않아서예요. 블로그 글에서 뽑아낼 수는 있지만 절반쯤
+        공식 자료가 그 값을 주지 않아서예요. 블로그 글에서 뽑아낼 수는 있지만 절반쯤
         틀리고, 틀린 영업시간은 한 시간 운전해서 닫힌 문 앞에 서게 만듭니다. 대신 카페
-        화면에 <b className="text-ink">영업시간·휴무일 확인</b> 버튼을 두었어요. 리뷰 수
-        자리에는 우리가 직접 센 <b className="text-ink">블로그 글 수</b>가 들어갑니다 —
-        상호가 실제로 언급된 글만 센 값입니다.
+        화면에 <b className="text-ink">영업시간·휴무일 확인</b> 버튼을 두었어요.
       </p>
 
       <p className="mt-5 text-[12px] leading-relaxed text-ink-soft">

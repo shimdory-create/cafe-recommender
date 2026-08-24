@@ -84,5 +84,14 @@ export interface SitePayload {
   week: { rank: number; id: string; finalScore: number }[]
   cafes: SiteCafe[]
   visited: SiteVisited[]
-  stats: { discovered: number; passed: number; regions: number; cityOnly: number }
+  stats: {
+    discovered: number
+    passed: number
+    regions: number
+    /** 훑고 있는 시군구 수 */
+    scannedRegions: number
+    /** 실제 길찾기로 이동시간을 잰 카페 수 */
+    driveMeasured: number
+    cityOnly: number
+  }
 }

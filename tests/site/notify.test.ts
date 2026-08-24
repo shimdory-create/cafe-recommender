@@ -45,7 +45,10 @@ const payload = (cafes: SiteCafe[]): SitePayload => ({
   week: cafes.map((c, i) => ({ rank: i + 1, id: c.id, finalScore: 10 - i })),
   cafes,
   visited: [],
-  stats: { discovered: 100, passed: cafes.length, regions: 3, cityOnly: 0 },
+  stats: {
+    discovered: 100, passed: cafes.length, regions: 3,
+    scannedRegions: 69, driveMeasured: cafes.length, cityOnly: 0,
+  },
 })
 
 const three = [

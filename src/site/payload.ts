@@ -2,6 +2,8 @@ import { driveMinutesOf } from '../jobs/drive-times.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
+import { isRevisitReady } from '../pipeline/revisit.js'
+import { REGIONS } from '../config/regions.js'
 import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
 import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type SiteReview, type SiteVisited, type Suggestion, type Visit, type Review } from '../schema.js'
@@ -32,6 +34,9 @@ const COMPARABLE_SPAN_DAYS = 90
 
 /** 카페 하나에 실어 보낼 후기 수. 화면도 상세에서 그 이상 보여주지 않는다 */
 const REVIEWS_IN_PAYLOAD = 10
+
+/** 화면에 보여줄 이번 주 카페 수. 후보는 그보다 많이 뽑아 둔다 */
+const WEEK_SIZE = 10
 
 /**
  * 화제 추이를 판정한다.
@@ -112,14 +117,25 @@ export function pickWeek(
   suggestions: Suggestion[],
   weekOf: string,
   ids: Set<string>,
+  opts: {
+    /** 마지막 방문일. 6개월이 안 지났으면 뺀다 */
+    lastVisit?: Map<string, string>
+    now?: Date
+    size?: number
+  } = {},
 ): { rank: number; id: string; finalScore: number }[] {
   const usable = suggestions.filter((s) => s.weekOf <= weekOf && ids.has(s.kakaoPlaceId))
   if (usable.length === 0) return []
   const latest = usable.reduce((m, s) => (s.weekOf > m ? s.weekOf : m), '')
+  const { lastVisit, now = new Date(), size = WEEK_SIZE } = opts
   return usable
     .filter((s) => s.weekOf === latest)
+    // 주중에 다녀온 곳을 뺀다. 후보를 넉넉히 뽑아 두므로 뒤에서 채워진다
+    .filter((s) => isRevisitReady(lastVisit?.get(s.kakaoPlaceId) ?? null, now))
     .sort((a, b) => a.rank - b.rank)
-    .map((s) => ({ rank: s.rank, id: s.kakaoPlaceId, finalScore: s.finalScore }))
+    .slice(0, size)
+    // 화면에 1위부터 나오도록 다시 매긴다 — 4위가 빠졌다고 3·5위로 보이면 안 된다
+    .map((s, i) => ({ rank: i + 1, id: s.kakaoPlaceId, finalScore: s.finalScore }))
 }
 
 export function buildSitePayload(input: PayloadInput): SitePayload {
@@ -249,7 +265,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
     .sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
 
   const ids = new Set(deduped.map((r) => r.id))
-  const week = pickWeek(suggestions, weekOf, ids)
+  const week = pickWeek(suggestions, weekOf, ids, { lastVisit, now })
 
   return SitePayloadSchema.parse({
     generatedAt: now.toISOString(),
@@ -261,6 +277,10 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       discovered: cafes.length,
       passed: deduped.filter((r) => !r.cityOnly).length,
       regions: new Set(deduped.map((r) => r.sigungu)).size,
+      // 화면에 숫자를 손으로 적어 두면 지역 개편을 못 따라간다 — 정보 탭이
+      // `65개 시군구` 라고 말하는 동안 실제로는 69개였다 (2026-08-25)
+      scannedRegions: REGIONS.filter((r) => !r.excluded).length,
+      driveMeasured: deduped.filter((r) => byId.get(r.id)?.driveMinutes != null).length,
       cityOnly: deduped.filter((r) => r.cityOnly).length,
     },
   })

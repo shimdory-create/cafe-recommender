@@ -1,10 +1,8 @@
 import type { SitePayload } from '../schema.js'
+import { isRevisitReady } from '../pipeline/revisit.js'
 
 /** 카카오톡 "나에게 보내기" 텍스트 템플릿 상한 (스펙 10.2) */
 export const KAKAO_TEXT_LIMIT = 200
-
-/** 다녀온 곳은 이 기간 동안 추천에서 내려간다 (스펙 8.2). 화면과 같은 값 */
-const REVISIT_DAYS = 180
 
 /**
  * 이 주 목록은 목요일 밤에 굳는다. 그 뒤 금요일 정오까지 사이에 다녀오면
@@ -12,12 +10,9 @@ const REVISIT_DAYS = 180
  * 걸러내지만 문구는 `payload.week` 를 그대로 썼다.
  *
  * 실측: 2026-08-24 문구 3번이 `더티트렁크` 였는데 08-21 에 다녀온 곳이다.
+ * 페이로드도 지금은 같은 규칙으로 거르지만(11.7) 여기서 한 번 더 본다 —
+ * 목록이 만들어진 뒤 발송까지 사이에도 다녀올 수 있다.
  */
-function stillWorthGoing(visitedOn: string | null, now: Date): boolean {
-  if (!visitedOn) return true
-  const days = (now.getTime() - new Date(visitedOn).getTime()) / 86_400_000
-  return days < 0 || days > REVISIT_DAYS
-}
 
 export interface NotifyInput {
   payload: SitePayload
@@ -53,7 +48,7 @@ export function buildNotifyText(input: NotifyInput): string {
   const all = payload.week
     .map((w) => byId.get(w.id))
     .filter((c): c is NonNullable<typeof c> => Boolean(c))
-    .filter((c) => stillWorthGoing(c.visitedOn, now))
+    .filter((c) => isRevisitReady(c.visitedOn, now))
   const picks = all.slice(0, NAMED_IN_MESSAGE)
   const more = all.length - picks.length
 

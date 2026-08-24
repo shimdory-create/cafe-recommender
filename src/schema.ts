@@ -319,7 +319,12 @@ export const SitePayloadSchema = z.object({
   stats: z.object({
     discovered: z.number().int(),
     passed: z.number().int(),
+    /** 표시 카페가 있는 시군구 수 */
     regions: z.number().int(),
+    /** 훑고 있는 시군구 수. 화면 문구가 지역 개편을 못 따라가는 것을 막는다 */
+    scannedRegions: z.number().int(),
+    /** 실제 길찾기로 이동시간을 잰 카페 수 (나머지는 직선거리 근사) */
+    driveMeasured: z.number().int(),
     cityOnly: z.number().int(),
   }),
 })
