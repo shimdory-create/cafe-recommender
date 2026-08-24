@@ -91,6 +91,36 @@ export interface Layer2Options {
   minPrecision?: number
   minPostsPer30?: number
   newOpeningDays?: number
+  /** 집에서의 이동시간. 가까우면 화제량 컷을 낮춘다 (아래 minPostsFor) */
+  driveMinutes?: number | null
+}
+
+/**
+ * 거리별 화제량 컷.
+ *
+ * 컷을 절대값 하나(월 8건)로 두었더니 **집 근처가 집중적으로 잘려 나갔다.**
+ * 실측: 화제량 부족으로 배제된 179곳 중 **123곳(69%)이 40분 이내**였다.
+ * 가족 의견 "송도와 영종도 카페가 너무 없다" 의 실제 원인이 이것이다.
+ *
+ * 블로그 글은 **멀리 나들이 간 곳**에 쓰인다. 집에서 25분 거리 카페는 글감이
+ * 되지 않아 월 3~7건에 머무는데, 그렇다고 안 갈 곳이 아니다. 오히려 가장
+ * 자주 가는 곳이다.
+ *
+ * 월 8건이라는 기준이 실제로 묻고 있던 것은 **"한 시간 넘게 운전할 만큼
+ * 뜨거운가"** 다. 25분 거리에는 그만한 근거를 요구할 이유가 없다.
+ *
+ * 품질은 뒤쪽 게이트가 지킨다 — 동네 카페 판별은 화제량이 아니라 **성격 태그
+ * 0개**가 한다 (스펙 7절). 여기서 통과해도 태그가 없으면 목록에 못 오른다.
+ * 이 컷의 실질 역할은 LLM 호출 비용 절약이다.
+ *
+ * 경계값은 스펙의 거리 감쇠 기준을 따른다 — 70분이 e^-1 지점이고, 40분은
+ * "가볍게 다녀오는" 거리다.
+ */
+export function minPostsFor(driveMinutes: number | null | undefined, base = 8): number {
+  const m = driveMinutes ?? Number.POSITIVE_INFINITY
+  if (m <= 40) return base * 0.5
+  if (m <= 70) return base * 0.75
+  return base
 }
 
 export type Layer2Input = Pick<BuzzMetrics, 'precision' | 'postsPer30' | 'firstPostDate'>
@@ -104,6 +134,7 @@ export function passesLayer2(
   opts: Layer2Options,
 ): { pass: boolean; reason?: string } {
   const { now, minPrecision = 0.3, minPostsPer30 = 8, newOpeningDays = 180 } = opts
+  const postsCut = minPostsFor(opts.driveMinutes, minPostsPer30)
 
   // 정밀도는 신규 오픈에도 면제하지 않는다. 실존하지 않는 카페를
   // "신규"로 통과시켜서는 안 된다.
@@ -120,8 +151,8 @@ export function passesLayer2(
     return { pass: true }
   }
 
-  if (m.postsPer30 < minPostsPer30) {
-    return { pass: false, reason: `월 ${m.postsPer30.toFixed(1)}건 < ${minPostsPer30}건` }
+  if (m.postsPer30 < postsCut) {
+    return { pass: false, reason: `월 ${m.postsPer30.toFixed(1)}건 < ${postsCut}건` }
   }
   return { pass: true }
 }

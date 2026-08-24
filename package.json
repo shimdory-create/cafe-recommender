@@ -22,7 +22,8 @@
     "hide": "tsx --env-file-if-exists=.env src/cli/run.ts hide",
     "watch": "tsx --env-file-if-exists=.env src/cli/run.ts watch",
     "normalize": "tsx --env-file-if-exists=.env src/cli/run.ts normalize",
-    "audit": "tsx --env-file-if-exists=.env src/cli/run.ts audit"
+    "audit": "tsx --env-file-if-exists=.env src/cli/run.ts audit",
+    "requeue": "tsx --env-file-if-exists=.env src/cli/run.ts requeue"
   },
   "type": "module",
   "private": true,

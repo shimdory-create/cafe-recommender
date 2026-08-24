@@ -90,6 +90,35 @@ describe('runDailyBuzz', () => {
     return { deps, saved: () => saved, cafes: () => cafes }
   }
 
+
+  it('미측정분 중에서는 가까운 곳부터 잰다', async () => {
+    // 한 번도 안 잰 곳이 하루 몫보다 많으면 그 안의 순서가 결과를 가른다.
+    // id 순으로 두었더니 영종구 66곳이 몇 주째 미측정으로 남았고, 화제량이
+    // 없으면 판정 자체가 보류된다 — 순서를 앞당겨도 잴 것이 없어 넘어간다
+    const far = cafe('z-far', { status: 'pending_extraction', driveMinutes: 90 })
+    const near = cafe('a-near', { status: 'pending_extraction', driveMinutes: 20 })
+    const h = harness([far, near], [])
+    await runDailyBuzz(h.deps, { pendingPerDay: 1 })
+    expect(h.saved().map((r) => r.kakaoPlaceId)).toEqual(['a-near'])
+  })
+
+  it('오래된 측정이 미측정보다 먼저일 수는 없다', async () => {
+    // 거리보다 날짜가 우선이다. 안 그러면 먼 곳이 영원히 한 번도 안 잰 채 남는다
+    const 잰가까운곳 = cafe('near', { status: 'pending_extraction', driveMinutes: 10 })
+    const 안잰먼곳 = cafe('far', { status: 'pending_extraction', driveMinutes: 90 })
+    const h = harness([잰가까운곳, 안잰먼곳], [buzzRow('near', { capturedAt: '2026-08-19' })])
+    await runDailyBuzz(h.deps, { pendingPerDay: 1 })
+    expect(h.saved().some((r) => r.kakaoPlaceId === 'far')).toBe(true)
+  })
+
+  it('거리를 모르면 뒤로 보낸다', async () => {
+    const 미상 = cafe('unknown', { status: 'pending_extraction', driveMinutes: null, driveMinutesEst: null })
+    const 아는곳 = cafe('known', { status: 'pending_extraction', driveMinutes: 80 })
+    const h = harness([미상, 아는곳], [])
+    await runDailyBuzz(h.deps, { pendingPerDay: 1 })
+    expect(h.saved().map((r) => r.kakaoPlaceId)).toEqual(['known'])
+  })
+
   it('카페마다 화제량을 갱신한다', async () => {
     const h = harness([cafe('1')], [])
     const r = await runDailyBuzz(h.deps)

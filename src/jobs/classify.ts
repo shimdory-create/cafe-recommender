@@ -171,7 +171,7 @@ export async function runClassify(
       }
 
       // --- Layer 2 (LLM 앞에 둔다) ---
-      const l2 = passesLayer2(b, { now })
+      const l2 = passesLayer2(b, { now, driveMinutes: driveOf(c) })
       if (!l2.pass) {
         c.status = 'excluded_auto'
         c.excludeReason = l2.reason ?? 'Layer 2 탈락'

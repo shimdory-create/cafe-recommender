@@ -75,6 +75,11 @@ export async function runDailyBuzz(
   // 화제량은 "판정 우선순위" 에만 쓰이므로 주 1회면 충분하다.
   //
   // 가장 오래된 것부터 고른다. 그러면 전체가 PENDING_PER_DAY 주기로 한 바퀴 돈다.
+  //
+  // **같은 날짜 안에서는 가까운 곳부터** 잰다. 한 번도 안 잰 곳이 하루 몫보다
+  // 많으면 그 안에서 순서가 결과를 가른다. id 순으로 두었더니 영종구 66곳이
+  // 몇 주째 미측정으로 남았고, 화제량이 없으면 판정 자체가 보류된다 —
+  // 순서를 앞당겨도(11.5) 잴 것이 없어 넘어간다.
   const measuredAt = new Map(rows.map((r) => [r.kakaoPlaceId, r.capturedAt]))
   const pending = cafes
     .filter((c) => c.status === 'pending_extraction')
@@ -82,7 +87,11 @@ export async function runDailyBuzz(
       // 한 번도 안 잰 곳이 가장 먼저다 ('' 가 어떤 날짜보다 작다)
       const x = measuredAt.get(a.kakaoPlaceId) ?? ''
       const y = measuredAt.get(b.kakaoPlaceId) ?? ''
-      return x === y ? a.kakaoPlaceId.localeCompare(b.kakaoPlaceId) : x.localeCompare(y)
+      if (x !== y) return x.localeCompare(y)
+      const da = a.driveMinutes ?? a.driveMinutesEst ?? Number.POSITIVE_INFINITY
+      const db = b.driveMinutes ?? b.driveMinutesEst ?? Number.POSITIVE_INFINITY
+      if (da !== db) return da - db
+      return a.kakaoPlaceId.localeCompare(b.kakaoPlaceId)
     })
     .slice(0, opts.pendingPerDay ?? PENDING_PER_DAY)
 

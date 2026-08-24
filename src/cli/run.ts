@@ -25,6 +25,7 @@ import { withDataLock, LockBusyError } from '../store/lock.js'
 import { resolveCafe, printCandidates } from './resolve.js'
 import { scanTargets, REGIONS } from '../config/regions.js'
 import { runDiscover, naverMapUrl } from '../jobs/weekly-discover.js'
+import { applyRequeue, requeueTargets } from '../jobs/requeue.js'
 import { resolveSigungu } from '../pipeline/district.js'
 import { runDailyBuzz } from '../jobs/daily-buzz.js'
 import { runClassify } from '../jobs/classify.js'
@@ -86,6 +87,28 @@ async function main() {
         + ` -> 갱신 ${r.updated}곳 / 실패 ${r.failed}곳`
         + ` / 정리 ${r.dropped}건 / 대표 이미지 ${r.images}곳`,
       )
+      break
+    }
+
+    case 'requeue': {
+      // 컷이 바뀌었을 때 이미 배제된 카페를 다시 줄에 세운다 (스펙 11.6)
+      const ctx = createContext()
+      const dry = flag(rest, 'dry') !== undefined
+      const cafes = await ctx.store.readCafes()
+      const buzz = await ctx.store.readBuzz()
+      const targets = requeueTargets(cafes, buzz, new Date())
+      console.log(`지금 규칙이면 통과할 배제분 ${targets.length}곳`)
+      for (const c of targets.slice(0, 10)) {
+        console.log(`  ${c.name} (${c.sigungu} ${c.driveMinutes ?? c.driveMinutesEst ?? '?'}분) — ${c.excludeReason}`)
+      }
+      if (targets.length > 10) console.log(`  … 외 ${targets.length - 10}곳`)
+      if (dry) {
+        console.log('  --dry 라 되돌리지 않았습니다')
+        break
+      }
+      applyRequeue(targets)
+      await ctx.store.writeCafes(cafes)
+      console.log(`  ${targets.length}곳을 판정 대기로 되돌렸습니다. npm run classify 로 처리합니다`)
       break
     }
 
