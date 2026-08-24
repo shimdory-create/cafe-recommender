@@ -1,0 +1,36 @@
+name: weekly-liveness
+on:
+  schedule:
+    # 매주 일 22:33 UTC = 월 07:33 KST.
+    # weekly-drive(토 22:13)·weekly-discover(일 19:37) 와 겹치지 않게 둔다.
+    # 정시를 피한다 (스케줄러 혼잡 시 건너뛰어진다)
+    - cron: '33 22 * * 0'
+  workflow_dispatch:
+
+# data/ 를 쓰는 워크플로는 하나씩 돈다 (weekly-drive.yml 주석 참고)
+concurrency:
+  group: data-write
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # 폐업 감지. 발굴 잡은 새 카페만 넣으므로 사라진 카페를 아무도 안 본다.
+      # 통과분만 확인하니 호출이 카페 수만큼이고, 카카오 한도에 견줘 미미하다.
+      - run: npm run liveness
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          # 길찾기와 같은 이유로 provider 키가 있어야 환경변수 검증을 통과한다
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: 데이터 커밋
+        run: bash scripts/commit-data.sh "실존 확인"

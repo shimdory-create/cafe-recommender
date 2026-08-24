@@ -4,6 +4,7 @@ import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
 import { isRevisitReady, REVISIT_DAYS } from '../pipeline/revisit.js'
 import { REGIONS } from '../config/regions.js'
+import { naverMapLink } from '../pipeline/place-query.js'
 import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
 import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type SiteReview, type SiteVisited, type Suggestion, type Visit, type Review } from '../schema.js'
@@ -209,8 +210,9 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       outdoorSeating: a.outdoorSeating ?? null,
       teenAppeal: a.teenAppeal ?? null,
       stayDuration: a.stayDuration ?? null,
-      naverMapUrl: c.naverMapUrl
-        ?? `https://map.naver.com/p/search/${encodeURIComponent(`${c.sigungu} ${c.name}`)}`,
+      // 저장된 값을 쓰지 않는다 — 시도가 빠진 옛 링크가 남아 있고, 그것이
+      // 동명 지역을 연다 (스펙 10.18). 규칙은 한 곳에서만 만든다
+      naverMapUrl: naverMapLink(c),
       kakaoPlaceUrl: c.kakaoPlaceUrl ?? null,
       imageUrl: c.imageUrl ?? null,
       hotScore: Number(hot.toFixed(1)),
@@ -254,8 +256,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
         note,
         tags: c.tags,
         scale: c.attributes?.scale ?? null,
-        naverMapUrl: c.naverMapUrl
-          ?? `https://map.naver.com/p/search/${encodeURIComponent(`${c.sigungu} ${c.name}`)}`,
+        naverMapUrl: naverMapLink(c),
         imageUrl: c.imageUrl ?? null,
         ratingAvg: Number(((r?.sum ?? 0) / (r?.n || 1)).toFixed(1)),
         ratingCount: r?.n ?? 0,

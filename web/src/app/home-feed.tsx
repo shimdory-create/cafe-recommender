@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { PAGE_SIZE, pageCount, pageFromParam, pageOf } from '@/lib/paging'
+import { hiddenByVisit } from '@/lib/site'
+import type { VisitRow } from '@/lib/reviews'
 import { FeedCards, type FeedRow } from './feed-cards'
 
 export type { FeedRow }
@@ -29,10 +31,16 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
     // 시점이라, 체크하고 홈에 돌아오면 그 카페가 그대로 1위에 남는다.
     fetch('/api/visited')
       .then((r) => r.json())
-      .then((body: { visits?: { kakaoPlaceId: string }[]; ok?: boolean }) => {
+      .then((body: { visits?: VisitRow[]; ok?: boolean }) => {
         // 읽기 실패의 빈 배열과 진짜 빈 기록을 구분한다 (`ok`).
         if (body.ok !== true) return
-        setVisited(new Set((body.visits ?? []).map((v) => v.kakaoPlaceId)))
+        /*
+         * **방문 날짜를 봐야 한다.** 있으면 무조건 빼면 재방문 기간이 지난
+         * 곳도 영영 안 올라온다 — 페이로드는 `recentlyVisited` 로 거르는데
+         * 여기만 무조건 걸러서 두 기준이 갈렸다. 지금은 기록이 전부 이번 달
+         * 이라 증상이 없지만, 반년 뒤에 조용히 나타난다.
+         */
+        setVisited(hiddenByVisit(body.visits ?? []))
       })
       .catch(() => {
         // 오프라인이면 빌드 타임 목록을 그대로 쓴다

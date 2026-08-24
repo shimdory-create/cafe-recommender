@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   areaCounts, areaLabel, filterAndSort, groupBySigungu, matchesQuery, NEW_PINNED,
 } from './filter'
-import { driveLabel, recentlyVisited, type SiteCafe } from './site'
+import { driveLabel, hiddenByVisit, recentlyVisited, REVISIT_DAYS, type SiteCafe } from './site'
 
 const cafe = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
   name: `카페${over.id}`,
@@ -300,5 +300,37 @@ describe('areaLabel', () => {
     expect(areaLabel('인천')).toBe('인천')
     expect(areaLabel('남양주시')).toBe('남양주')
     expect(areaLabel('가평군')).toBe('가평')
+  })
+})
+
+describe('hiddenByVisit — 홈 피드에서 내려둘 카페', () => {
+  const now = new Date('2026-08-25T00:00:00Z')
+
+  it('최근에 다녀온 곳만 내린다', () => {
+    const out = hiddenByVisit([
+      { kakaoPlaceId: '최근', visitedOn: '2026-08-20' },
+      { kakaoPlaceId: '오래전', visitedOn: '2026-01-01' },
+    ], now)
+    expect([...out]).toEqual(['최근'])
+  })
+
+  it('재방문 기간이 지나면 다시 올라온다', () => {
+    // 날짜를 안 보고 "기록이 있으면 제외" 로 두면 영영 안 올라온다.
+    // 기록이 전부 이번 달이라 증상이 없었을 뿐이다
+    const 경계 = new Date(now.getTime() - (REVISIT_DAYS + 1) * 86_400_000)
+      .toISOString().slice(0, 10)
+    expect(hiddenByVisit([{ kakaoPlaceId: 'x', visitedOn: 경계 }], now).size).toBe(0)
+  })
+
+  it('기록이 없으면 아무것도 내리지 않는다', () => {
+    expect(hiddenByVisit([], now).size).toBe(0)
+  })
+
+  it('같은 카페가 여러 번 있어도 하나로 센다', () => {
+    const out = hiddenByVisit([
+      { kakaoPlaceId: 'a', visitedOn: '2026-08-20' },
+      { kakaoPlaceId: 'a', visitedOn: '2026-08-22' },
+    ], now)
+    expect(out.size).toBe(1)
   })
 })

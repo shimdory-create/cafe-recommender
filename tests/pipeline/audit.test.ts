@@ -11,6 +11,7 @@ const cafe = (over: Partial<Cafe> & { kakaoPlaceId: string }): Cafe => ({
   lat: 37.5,
   lng: 127.4,
   firstSeenAt: '2026-01-01T00:00:00.000Z',
+  lastSeenAt: '2026-08-21T00:00:00.000Z',
   status: 'active',
   ambiguousName: false,
   tags: ['대형카페'],
@@ -82,6 +83,22 @@ function input(over: Partial<AuditInput> = {}): AuditInput {
 describe('auditData', () => {
   it('정상 데이터에서는 아무것도 지적하지 않는다', () => {
     expect(auditData(input())).toEqual([])
+  })
+
+  it('오래 안 보이는 카페를 폐업 의심으로 잡는다', () => {
+    // 발굴 잡은 새 카페만 넣는다. 폐업해도 목록에 남으므로 여기서 잡아야 한다
+    const out = auditData(input({
+      cafes: [cafe({ kakaoPlaceId: '1', lastSeenAt: '2026-05-01T00:00:00.000Z' })],
+    }))
+    expect(out.map((f) => f.code)).toContain('maybe_closed')
+  })
+
+  it('한 번도 확인 안 한 것은 폐업 의심이 아니다', () => {
+    const out = auditData(input({
+      cafes: [cafe({ kakaoPlaceId: '1', lastSeenAt: undefined })],
+    }))
+    expect(out.map((f) => f.code)).not.toContain('maybe_closed')
+    expect(out.map((f) => f.code)).toContain('liveness_never_run')
   })
 
   it('지역 묶음이 주소와 어긋나면 잡는다', () => {

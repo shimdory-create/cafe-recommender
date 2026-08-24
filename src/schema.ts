@@ -63,6 +63,14 @@ export const CafeSchema = z.object({
   driveKm: z.number().nullable().optional(),
   tollWon: z.number().int().nullable().optional(),
   firstSeenAt: z.string(),
+  /**
+   * 카카오 장소 검색에서 **마지막으로 확인된** 시각.
+   *
+   * 발굴 잡은 새 카페만 넣고 사라진 카페는 보지 않는다. 그래서 폐업해도
+   * 목록에 영원히 남는다 — 한 시간 운전해서 닫힌 문 앞에 서는 경로다.
+   * `npm run liveness` 가 주 1회 다시 찾아보고 이 값을 갱신한다.
+   */
+  lastSeenAt: z.string().optional(),
   status: z.enum(['active', 'hidden', 'excluded_auto', 'pending_extraction']),
   excludeReason: z.string().nullable().optional(),
   /** 일반명사 상호. 골든셋 경계 구간으로 강제 편입된다 (스펙 Layer 2) */

@@ -1,6 +1,7 @@
 import type { BuzzSnapshot, Cafe, SitePayload } from '../schema.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
+import { staleCafes, STALE_DAYS } from '../jobs/liveness.js'
 
 /**
  * 정합성 감사 — "돌아가는 것처럼 보이지만 틀린" 것을 찾는다.
@@ -144,6 +145,21 @@ export function auditData(input: AuditInput): Finding[] {
   if (noDrive > 0) warn('drive_missing', `실주행 시간 미측정 ${noDrive}곳 — npm run drive`)
   const noEvidence = site.cafes.filter((r) => !r.evidence).length
   if (noEvidence > 0) fail('evidence_missing', `판단 근거가 빈 카페 ${noEvidence}곳`)
+
+  // --- 아직 있는 카페인가 ---
+  //
+  // 발굴 잡은 새 카페만 넣는다. 폐업해도 목록에 남으므로 `liveness` 가 주 1회
+  // 다시 찾아보고 `lastSeenAt` 을 남긴다. 오래된 것은 사람이 확인해야 한다.
+  const gone = staleCafes(cafes, now)
+  if (gone.length) {
+    warn('maybe_closed',
+      `${STALE_DAYS}일 넘게 카카오에서 안 보이는 카페 ${gone.length}곳 — 폐업 확인 필요: `
+      + `${gone.slice(0, 3).map((c) => `${c.sigungu} ${c.name}`)}`)
+  }
+  const neverSeen = cafes.filter((c) => c.status === 'active' && !c.lastSeenAt).length
+  if (neverSeen > 0 && neverSeen === cafes.filter((c) => c.status === 'active').length) {
+    warn('liveness_never_run', `실존 확인을 한 번도 안 했다 (${neverSeen}곳) — npm run liveness`)
+  }
 
   // --- 추천 대상 화제량 신선도 ---
   const day = (d: Date) => d.toISOString().slice(0, 10)

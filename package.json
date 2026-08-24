@@ -23,7 +23,8 @@
     "watch": "tsx --env-file-if-exists=.env src/cli/run.ts watch",
     "normalize": "tsx --env-file-if-exists=.env src/cli/run.ts normalize",
     "audit": "tsx --env-file-if-exists=.env src/cli/run.ts audit",
-    "requeue": "tsx --env-file-if-exists=.env src/cli/run.ts requeue"
+    "requeue": "tsx --env-file-if-exists=.env src/cli/run.ts requeue",
+    "liveness": "tsx --env-file-if-exists=.env src/cli/run.ts liveness"
   },
   "type": "module",
   "private": true,

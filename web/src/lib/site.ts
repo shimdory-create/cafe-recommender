@@ -118,6 +118,22 @@ export function recentlyVisited(visitedOn: string | null, now = new Date()): boo
   return days >= 0 && days <= REVISIT_DAYS
 }
 
+/**
+ * 실시간 방문 기록에서 **아직 추천에서 내려가 있어야 할** 카페 id 만 고른다.
+ *
+ * 홈 피드가 이것으로 거른다. 날짜를 안 보고 "기록이 있으면 제외" 로 두었더니
+ * 페이로드(`recentlyVisited` 로 거름)와 기준이 갈렸다 — 재방문 기간이 지난
+ * 곳이 영영 안 올라온다. 기록이 전부 이번 달이라 증상이 없었을 뿐이다.
+ */
+export function hiddenByVisit(
+  visits: { kakaoPlaceId: string; visitedOn: string }[],
+  now = new Date(),
+): Set<string> {
+  return new Set(
+    visits.filter((v) => recentlyVisited(v.visitedOn, now)).map((v) => v.kakaoPlaceId),
+  )
+}
+
 export function driveLabel(min: number | null): string {
   if (min === null) return '거리 미확인'
   if (min < 60) return `차로 ${min}분`

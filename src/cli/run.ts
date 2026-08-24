@@ -26,6 +26,7 @@ import { resolveCafe, printCandidates } from './resolve.js'
 import { scanTargets, REGIONS } from '../config/regions.js'
 import { runDiscover, naverMapUrl } from '../jobs/weekly-discover.js'
 import { applyRequeue, requeueTargets } from '../jobs/requeue.js'
+import { runLiveness, STALE_DAYS } from '../jobs/liveness.js'
 import { resolveSigungu } from '../pipeline/district.js'
 import { runDailyBuzz } from '../jobs/daily-buzz.js'
 import { runClassify } from '../jobs/classify.js'
@@ -87,6 +88,26 @@ async function main() {
         + ` -> 갱신 ${r.updated}곳 / 실패 ${r.failed}곳`
         + ` / 정리 ${r.dropped}건 / 대표 이미지 ${r.images}곳`,
       )
+      break
+    }
+
+    case 'liveness': {
+      // 폐업 감지 — 통과한 카페를 카카오에서 다시 찾아본다 (스펙 11.8)
+      const ctx = createContext()
+      const limit = numFlag(rest, 'limit')
+      console.log(`실존 확인 시작${limit ? ` (최대 ${limit}곳)` : ''}`)
+      const r = await runLiveness(ctx, { limit })
+      console.log(
+        `  확인 ${r.checked}곳 · 있음 ${r.seen} · 못 찾음 ${r.missing} · 실패 ${r.failed}`,
+      )
+      if (r.stale.length) {
+        console.log(`
+  ${STALE_DAYS}일 넘게 안 보이는 카페 ${r.stale.length}곳 — 폐업 의심:`)
+        for (const s of r.stale.slice(0, 20)) {
+          console.log(`    ${s.sigungu} ${s.name} (${s.days}일)`)
+        }
+        console.log('  확인 후 숨기려면: npm run hide -- "카페 이름"')
+      }
       break
     }
 
