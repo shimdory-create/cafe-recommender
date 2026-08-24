@@ -49,7 +49,7 @@ export default function Info() {
     ['찾은 카페', `${stats.discovered.toLocaleString()}곳`],
     ['전체 탭에 보이는 카페', `${stats.passed.toLocaleString()}곳`],
     ['「도심 포함」 을 켜면', `${shown.toLocaleString()}곳 (+${stats.cityOnly})`],
-    ['운전 시간 실측', `${stats.driveMeasured} / ${shown}곳`],
+    ['운전 시간 실측', `${stats.driveMeasured.toLocaleString()} / ${shown.toLocaleString()}곳`],
     ['훑는 지역', `${stats.scannedRegions}개 시군구`],
     ['카페가 있는 지역', `${stats.regions}개 시군구`],
     ['갱신', stamp],
