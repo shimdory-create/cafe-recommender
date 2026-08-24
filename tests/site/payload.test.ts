@@ -355,6 +355,7 @@ describe('dedupeListings — 같은 카페가 두 번 등록된 경우', () => {
   const row = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe => ({
     sigungu: '남양주시',
     zone: 'east',
+    area: '남양주시',
     driveMinutes: 55,
     scale: '대형',
     parkingGrade: 'A',
@@ -374,12 +375,17 @@ describe('dedupeListings — 같은 카페가 두 번 등록된 경우', () => {
     hotScore: 50,
     finalScore: 25,
     postsPer30: 60,
+    posts30: 40,
+    posts90: 100,
     acceleration: 1.5,
     trend: 'steady',
     ratingAvg: 0,
     ratingCount: 0,
+    familyReviews: [],
     cityOnly: false,
     visitedOn: null,
+    firstSeenAt: '2026-01-01T00:00:00.000Z',
+    isNew: false,
     ...over,
   })
 

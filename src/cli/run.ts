@@ -94,7 +94,9 @@ async function main() {
       const limit = numFlag(rest, 'limit')
       const redoStale = flag(rest, 'redo-stale') !== undefined
       console.log(`판정 시작${limit ? ` (최대 ${limit}곳)` : ''}${redoStale ? ' · 낡은 프롬프트 재추출 포함' : ''}`)
-      const order = flag(rest, 'order') === 'file' ? 'file' as const : 'hot' as const
+      // 기본은 mixed — 화제량 70% + 거리 30%. 집 근처가 계속 밀리는 것을 막는다
+      const raw = flag(rest, 'order')
+      const order = raw === 'file' || raw === 'hot' || raw === 'near' ? raw : 'mixed' as const
       const r = await runClassify(ctx, { limit, redoStale, order })
       console.log(
         `  통과 ${r.classified}곳 / 배제 ${r.excluded}곳`

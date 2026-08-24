@@ -61,9 +61,73 @@ const FLUSH_EVERY = 20
  * 비용 설계: Layer 2(화제량 컷)를 LLM 호출 **앞에** 둔다. 탈락할 카페에
  * Gemini 를 쓰지 않는다. 통과율이 약 20% 이므로 LLM 호출이 1/5로 줄어든다.
  */
+/**
+ * 하루 판정 몫 중 **가까운 순**으로 채우는 비율.
+ *
+ * 화제량 순으로만 돌렸더니 집 근처가 몇 주째 판정 대기에 남았다. 실측:
+ *
+ * ```
+ * 송도 75곳 수집 -> 판정 완료 10곳 (대기 59)
+ * 영종 92곳 수집 -> 판정 완료  7곳 (대기 76)
+ * 인천 대기분 화제량 중앙값 1.0 / 그날의 판정 컷 8.1
+ * ```
+ *
+ * 블로그 글은 **멀리 나들이 간 곳**에 많이 쓰인다. 집에서 25분 거리 카페는
+ * 콘텐츠가 안 되니 글이 적고, 화제량 순 줄에서 영원히 뒤로 밀린다. 그런데
+ * 가족이 실제로 가장 자주 가는 곳이 거기다.
+ *
+ * 그래서 하루 몫의 일부를 거리순에 떼어 준다. 화제량 순의 목적(첫날부터
+ * 추천 상단이 채워진다)은 나머지 70% 가 그대로 지킨다.
+ */
+const NEAR_SHARE = 0.3
+
+const driveOf = (c: Cafe): number =>
+  c.driveMinutes ?? c.driveMinutesEst ?? Number.POSITIVE_INFINITY
+
+/**
+ * 오늘 처리할 순서를 정한다.
+ *
+ *   mixed  기본. 화제량 70% + 거리 30%
+ *   hot    화제량만 (예전 동작)
+ *   near   거리만 — 특정 지역을 몰아서 메울 때 손으로 쓴다
+ *   file   손대지 않는다 (발굴 순서)
+ */
+export function orderPending(
+  pending: Cafe[],
+  latest: Map<string, BuzzSnapshot>,
+  opts: { order: 'hot' | 'near' | 'file' | 'mixed'; limit?: number },
+): Cafe[] {
+  const { order, limit } = opts
+  if (order === 'file') return pending
+
+  const rate = (c: Cafe) => latest.get(c.kakaoPlaceId)?.postsPer30 ?? -1
+  const byHot = [...pending].sort((a, b) => rate(b) - rate(a) || a.kakaoPlaceId.localeCompare(b.kakaoPlaceId))
+  if (order === 'hot') return byHot
+
+  const byNear = [...pending].sort((a, b) => driveOf(a) - driveOf(b) || a.kakaoPlaceId.localeCompare(b.kakaoPlaceId))
+  if (order === 'near') return byNear
+
+  // 상한이 없으면 전량을 처리하므로 순서가 결과를 바꾸지 않는다
+  if (!limit || limit >= pending.length) return byHot
+
+  const nearQuota = Math.floor(limit * NEAR_SHARE)
+  const picked = new Set<string>()
+  const out: Cafe[] = []
+  for (const c of byNear) {
+    if (out.length >= nearQuota) break
+    picked.add(c.kakaoPlaceId)
+    out.push(c)
+  }
+  for (const c of byHot) {
+    if (picked.has(c.kakaoPlaceId)) continue
+    out.push(c)
+  }
+  return out
+}
+
 export async function runClassify(
   deps: ClassifyDeps,
-  opts: { limit?: number; redoStale?: boolean; order?: 'hot' | 'file' } = {},
+  opts: { limit?: number; redoStale?: boolean; order?: 'hot' | 'near' | 'file' | 'mixed' } = {},
 ): Promise<ClassifyResult> {
   const { store, blog, llm, now = new Date() } = deps
   const cafes = await store.readCafes()
@@ -79,20 +143,13 @@ export async function runClassify(
   // 갱신하는 것이 새 카페를 늘리는 것보다 급하다.
   const stale = opts.redoStale ? cafes.filter(isStaleExtraction) : []
 
-  // 화제량이 많은 순으로 처리한다. 무료 티어 때문에 하루 200곳이 상한이고
-  // 전량은 일주일이 걸리므로, 파일 순서(= 지역 발굴 순서)로 돌면 며칠 동안
-  // 특정 지역만 판정된 목록을 보게 된다. 뜨거운 곳부터 처리하면 첫날부터
-  // 추천 상단이 제대로 채워지고 지역도 자연히 섞인다.
   const pending = cafes.filter((c) => c.status === 'pending_extraction')
-  if ((opts.order ?? 'hot') === 'hot') {
-    pending.sort(
-      (a, b) =>
-        (latest.get(b.kakaoPlaceId)?.postsPer30 ?? -1)
-        - (latest.get(a.kakaoPlaceId)?.postsPer30 ?? -1),
-    )
-  }
+  const ordered = orderPending(pending, latest, {
+    order: opts.order ?? 'mixed',
+    limit: opts.limit,
+  })
 
-  const targets: Cafe[] = [...stale, ...pending].slice(0, opts.limit ?? Infinity)
+  const targets: Cafe[] = [...stale, ...ordered].slice(0, opts.limit ?? Infinity)
 
   let classified = 0
   let excluded = 0
