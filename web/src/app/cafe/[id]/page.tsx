@@ -105,7 +105,11 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
       </p>
 
       {/* 다녀왔어요 · 별점 · 한 줄 — 가족 누구나 (스펙 10절 v3.3) */}
-      <ReviewPanel cafeId={cafe.id} initialVisited={cafe.visitedOn !== null} />
+      <ReviewPanel
+        cafeId={cafe.id}
+        initialVisited={cafe.visitedOn !== null}
+        built={cafe.familyReviews}
+      />
 
       <dl className="mt-6 overflow-hidden rounded-2xl border border-line bg-card">
         {rows.map(([k, v]) => (

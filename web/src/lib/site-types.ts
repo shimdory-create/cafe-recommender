@@ -51,6 +51,8 @@ export interface SiteCafe {
   /** 가족 별점 (없으면 0) */
   ratingAvg: number
   ratingCount: number
+  /** 빌드 시점 후기 (최대 10건, 최근순). 실시간 읽기가 되면 덮인다 */
+  familyReviews: { nickname: string; rating: number; comment: string; createdAt: string }[]
   cityOnly: boolean
   visitedOn: string | null
   /** 우리 목록에 처음 들어온 시각. NEW 정렬 기준 */

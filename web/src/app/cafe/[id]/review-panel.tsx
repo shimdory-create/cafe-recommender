@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { MAX_COMMENT, MAX_NICKNAME, type RatingSummary, type Review } from '@/lib/reviews'
+import type { SiteCafe } from '@/lib/site'
 import { VIEW_ONLY, VIEW_ONLY_NOTE } from '@/lib/view-only'
 
 const NICK_KEY = 'cafe-nickname'
@@ -104,10 +105,38 @@ interface Loaded {
   enabled: boolean
   /** 읽기가 성공했는가. false 면 빈 목록은 "없음" 이 아니라 "못 읽음" 이다 */
   ok: boolean
+  /** 실시간으로 읽어온 것인가. false 면 빌드 시점 사본이다 */
+  live?: boolean
 }
 
-export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initialVisited: boolean }) {
-  const [data, setData] = useState<Loaded | null>(null)
+/**
+ * 빌드 시점 후기로 먼저 그린다.
+ *
+ * 실시간 읽기가 오기 전 한 박자, 그리고 **열람 전용 배포에 토큰이 없을 때**
+ * 이 값이 화면에 남는다 (스펙 10.15). 없으면 별점이 통째로 빈 화면이 된다 —
+ * 하루 낡은 후기가 아무것도 없는 것보다 낫다.
+ */
+function fromPayload(rows: SiteCafe['familyReviews']): Loaded {
+  return {
+    reviews: rows.map((r, i) => ({ ...r, id: `built-${i}`, kakaoPlaceId: '' })),
+    summary: rows.length === 0
+      ? { count: 0, average: 0 }
+      : {
+        count: rows.length,
+        average: Number((rows.reduce((a, r) => a + r.rating, 0) / rows.length).toFixed(1)),
+      },
+    enabled: true,
+    ok: true,
+    live: false,
+  }
+}
+
+export function ReviewPanel({ cafeId, initialVisited, built }: {
+  cafeId: string
+  initialVisited: boolean
+  built: SiteCafe['familyReviews']
+}) {
+  const [data, setData] = useState<Loaded>(() => fromPayload(built))
   const [rating, setRating] = useState(0)
   const [nickname, setNickname] = useState('')
   const [comment, setComment] = useState('')
@@ -127,8 +156,19 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
 
     fetch(`/api/reviews?cafe=${encodeURIComponent(cafeId)}`)
       .then((r) => r.json())
-      .then(setData)
-      .catch(() => setData({ reviews: [], summary: { count: 0, average: 0 }, enabled: false, ok: false }))
+      .then((body: Loaded) => {
+        // 읽기가 실패했으면 후기는 빌드 시점 사본을 그대로 둔다 — 빈 목록으로
+        // 덮으면 이미 남긴 사람이 저장이 안 된 줄 알고 다시 남겨 중복이 생긴다.
+        // 다만 `enabled` 는 서버 말을 따른다 (입력칸을 띄울지의 판단이다)
+        if (body.ok === false) {
+          setData((prev) => ({ ...prev, enabled: body.enabled }))
+          return
+        }
+        setData({ ...body, live: true })
+      })
+      .catch(() => {
+        // 오프라인. 빌드 시점 사본을 그대로 쓴다
+      })
 
     // 방문 여부도 실시간으로 읽는다. 빌드 타임 값만 쓰면 다른 가족이 방금
     // 누른 체크가 보이지 않아 두 번 누르게 된다.
@@ -260,7 +300,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
     <section className="mt-6">
       <h2 className="text-[15px] font-bold">
         가족 별점
-        {data && data.summary.count > 0 && (
+        {data.summary.count > 0 && (
           <span className="ml-2 font-normal text-ink-soft">
             {data.summary.average.toFixed(1)} · {data.summary.count}명
           </span>
@@ -340,13 +380,13 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
         </>
       )}
 
-      {data && data.ok === false && enabled && (
+      {data.ok === false && enabled && (
         <p className="mt-3 text-[13px] text-ink-soft">
           지금은 남긴 후기를 불러올 수 없어요. 잠시 뒤 새로 고쳐보세요.
         </p>
       )}
 
-      {data && data.reviews.length > 0 && (
+      {data.reviews.length > 0 && (
         <ul className="mt-3 flex flex-col gap-2">
           {data.reviews.map((r) => (
             <li key={r.id} className="rounded-2xl border border-line bg-card px-4 py-3">
@@ -410,7 +450,7 @@ export function ReviewPanel({ cafeId, initialVisited }: { cafeId: string; initia
                   </div>
                   {r.comment && <p className="mt-1.5 text-[14px] leading-relaxed">{r.comment}</p>}
 
-                  {!VIEW_ONLY && enabled && (
+                  {!VIEW_ONLY && enabled && data.live && (
                     <div className="mt-2 flex gap-1">
                       <button
                         onClick={() => startEdit(r)}

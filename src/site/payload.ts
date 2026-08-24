@@ -4,7 +4,7 @@ import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
 import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
 import { passesGate } from '../pipeline/gate.js'
-import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type SiteVisited, type Suggestion, type Visit, type Review } from '../schema.js'
+import { SitePayloadSchema, type BuzzSnapshot, type Cafe, type SiteCafe, type SitePayload, type SiteReview, type SiteVisited, type Suggestion, type Visit, type Review } from '../schema.js'
 
 export interface PayloadInput {
   cafes: Cafe[]
@@ -29,6 +29,9 @@ export interface PayloadInput {
  */
 /** 이전 기간(30~90일)을 비교하려면 창이 90일을 덮어야 한다 */
 const COMPARABLE_SPAN_DAYS = 90
+
+/** 카페 하나에 실어 보낼 후기 수. 화면도 상세에서 그 이상 보여주지 않는다 */
+const REVIEWS_IN_PAYLOAD = 10
 
 /**
  * 화제 추이를 판정한다.
@@ -128,6 +131,14 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
     const cur = rated.get(r.kakaoPlaceId) ?? { sum: 0, n: 0 }
     rated.set(r.kakaoPlaceId, { sum: cur.sum + r.rating, n: cur.n + 1 })
   }
+  // 열람 전용 배포에는 토큰이 없을 수 있다. 그때 쓸 빌드 시점 사본
+  const byCafeReviews = new Map<string, SiteReview[]>()
+  for (const r of [...reviews].sort((a, b) => b.createdAt.localeCompare(a.createdAt))) {
+    const list = byCafeReviews.get(r.kakaoPlaceId) ?? []
+    if (list.length >= REVIEWS_IN_PAYLOAD) continue
+    list.push({ nickname: r.nickname, rating: r.rating, comment: r.comment, createdAt: r.createdAt })
+    byCafeReviews.set(r.kakaoPlaceId, list)
+  }
 
   const latestBuzz = new Map<string, BuzzSnapshot>()
   for (const b of buzz) {
@@ -197,6 +208,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       ratingAvg: Number(((rated.get(c.kakaoPlaceId)?.sum ?? 0)
         / (rated.get(c.kakaoPlaceId)?.n || 1)).toFixed(1)),
       ratingCount: rated.get(c.kakaoPlaceId)?.n ?? 0,
+      familyReviews: byCafeReviews.get(c.kakaoPlaceId) ?? [],
       cityOnly: a.parkingGrade === 'C',
       visitedOn: lastVisit.get(c.kakaoPlaceId) ?? null,
       firstSeenAt: c.firstSeenAt,

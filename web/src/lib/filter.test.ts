@@ -32,6 +32,7 @@ const cafe = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
   trend: 'steady',
   ratingAvg: 0,
   ratingCount: 0,
+  familyReviews: [],
   cityOnly: false,
   visitedOn: null,
   firstSeenAt: '2026-08-20T00:00:00.000Z',

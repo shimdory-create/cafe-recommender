@@ -165,7 +165,9 @@ export function VisitedList({
     // 별점·후기는 실시간으로 읽는다 — 방금 남긴 것이 보여야 한다
     fetch('/api/reviews')
       .then((r) => r.json())
-      .then((body: { reviews?: Review[] }) => {
+      .then((body: { reviews?: Review[]; ok?: boolean }) => {
+        // 못 읽었으면 빌드 시점 별점(payload)을 그대로 쓴다
+        if (body.ok === false) return
         const m = new Map<string, Review[]>()
         for (const r of body.reviews ?? []) {
           m.set(r.kakaoPlaceId, [...(m.get(r.kakaoPlaceId) ?? []), r])

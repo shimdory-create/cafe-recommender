@@ -189,6 +189,24 @@ export type BlacklistEntry = z.infer<typeof BlacklistEntrySchema>
  * 골라 이 모양으로 만들어 주고, 웹앱은 이 스키마로 검증해 쓴다. 점수·게이트
  * 로직이 두 곳에 생기는 것을 막고, 4.7MB 를 모바일로 내려보내지 않는다.
  */
+/**
+ * 빌드 시점의 가족 후기 (카페당 최대 10건, 최근순).
+ *
+ * 화면은 평소 실시간 API 로 읽는다. 이것을 페이로드에도 싣는 이유는
+ * **열람 전용 배포** 때문이다 (스펙 10.15) — 거기에는 GitHub 토큰을 주지
+ * 않을 수 있고, 그러면 별점이 통째로 빈 화면이 된다. 하루 낡은 후기가
+ * 아무것도 없는 것보다 낫다.
+ *
+ * 실시간 읽기가 성공하면 그 값이 이것을 덮는다.
+ */
+export const SiteReviewSchema = z.object({
+  nickname: z.string(),
+  rating: z.number(),
+  comment: z.string(),
+  createdAt: z.string(),
+})
+export type SiteReview = z.infer<typeof SiteReviewSchema>
+
 export const SiteCafeSchema = z.object({
   id: z.string(),
   name: z.string(),
@@ -254,6 +272,8 @@ export const SiteCafeSchema = z.object({
   /** 가족 별점 (없으면 0). 카드에 붙이는 우리 집 신호 */
   ratingAvg: z.number(),
   ratingCount: z.number().int(),
+  /** 빌드 시점 후기. 실시간 읽기가 되면 덮인다 */
+  familyReviews: z.array(SiteReviewSchema),
   /** 주차 C — 도심 모드에서만 노출한다 (스펙 7.3) */
   cityOnly: z.boolean(),
   visitedOn: z.string().nullable(),

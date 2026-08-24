@@ -127,6 +127,29 @@ describe('buildSitePayload', () => {
     expect(p.week.map((w) => w.id)).toEqual(['1', '2'])
   })
 
+  it('빌드 시점 후기를 함께 싣는다 — 열람 전용 배포에는 토큰이 없다', () => {
+    const p = build([cafe('1')], [buzz('1')], {
+      reviews: [
+        {
+          id: 'r1', kakaoPlaceId: '1', rating: 4, nickname: '김', comment: '좋다',
+          createdAt: '2026-08-01T00:00:00.000Z',
+        },
+        {
+          id: 'r2', kakaoPlaceId: '1', rating: 5, nickname: '심', comment: '더 좋다',
+          createdAt: '2026-08-05T00:00:00.000Z',
+        },
+      ],
+    })
+    // 최근 것부터
+    expect(p.cafes[0]!.familyReviews.map((r) => r.nickname)).toEqual(['심', '김'])
+    expect(p.cafes[0]!.ratingCount).toBe(2)
+  })
+
+  it('후기가 없으면 빈 배열이다', () => {
+    const p = build([cafe('1')], [buzz('1')])
+    expect(p.cafes[0]!.familyReviews).toEqual([])
+  })
+
   it('이번 주 후보가 아직 없으면 가장 최근 주의 것을 쓴다', () => {
     // 후보 확정은 목요일 밤에 돈다. 월요일 09시(KST)에 weekOf 가 넘어가면
     // 목요일까지 사흘 동안 추천이 사라졌다 — 실측 2026-08-24 week: []

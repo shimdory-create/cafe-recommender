@@ -32,6 +32,14 @@ async function writable() {
 export async function GET(req: Request) {
   const store = await writeStore()
   const cafe = new URL(req.url).searchParams.get('cafe')
+  // 저장소가 안 붙어 있으면 **못 읽은 것**이다. `ok: true` 로 빈 배열을 주면
+  // 화면이 그것을 "후기 없음" 으로 믿고 빌드 시점 사본을 지운다 — 토큰을 안
+  // 준 열람 전용 배포에서 별점이 통째로 사라진다 (스펙 10.15)
+  if (!store.enabled) {
+    return NextResponse.json({
+      reviews: [], summary: { count: 0, average: 0 }, enabled: false, writable: false, ok: false,
+    })
+  }
   try {
     const rows = await store.read<Review>(REVIEWS_PATH)
     const mine = cafe ? rows.filter((r) => r.kakaoPlaceId === cafe) : rows
