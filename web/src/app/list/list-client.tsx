@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { ALL_TAGS, type ListRow } from '@/lib/site'
 import {
-  areaCounts, filterAndSort, groupBySigungu, SPLIT_AREAS, type Sort,
+  areaCounts, filterAndSort, groupBySigungu, PAGE_CHUNK, SPLIT_AREAS, type Sort,
 } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
@@ -24,15 +24,22 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
   const [sort, setSort] = useState<Sort>(initial.sort)
   const [city, setCity] = useState(initial.city)
   const [newOnly, setNewOnly] = useState(initial.newOnly)
+  const [shownCount, setShownCount] = useState(initial.shown)
   // 고른 지역이 접힌 구간에 있으면 처음부터 펴 둔다
   const [expanded, setExpanded] = useState(false)
 
-  useUrlSync(listParamsToQuery({ ...initial, q, area, tags, sort, city, newOnly }))
+  useUrlSync(listParamsToQuery({
+    ...initial, q, area, tags, sort, city, newOnly, shown: shownCount,
+  }))
 
-  const shown = useMemo(
+  const matched = useMemo(
     () => filterAndSort(cafes, { tags, sort, city, area, query: q, newOnly }),
     [cafes, tags, sort, city, area, q, newOnly],
   )
+  // 한 번에 다 그리면 카드 664개에 DOM 노드 15,000개가 된다 (실측). 검색·칩으로
+  // 좁히면 대개 한 묶음 안에 들어와서 버튼은 잘 보이지 않는다
+  const shown = useMemo(() => matched.slice(0, shownCount), [matched, shownCount])
+  const rest = matched.length - shown.length
   const areas = useMemo(() => areaCounts(cafes, { city }), [cafes, city])
   const newCount = useMemo(
     () => cafes.filter((c) => c.isNew && (city || !c.cityOnly)).length,
@@ -44,26 +51,38 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
     [area, shown],
   )
 
-  const toggle = (t: string) =>
-    setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
+  /**
+   * 조건이 바뀌면 처음부터 다시 센다.
+   *
+   * 300곳까지 펼쳐 둔 채로 지역을 바꾸면 그 지역 300곳이 한꺼번에 그려진다 —
+   * 방금 줄이려던 것이 그대로 돌아온다.
+   */
+  const reset = <T,>(set: (v: T) => void) => (v: T) => {
+    set(v)
+    setShownCount(PAGE_CHUNK)
+  }
+  const toggle = reset<string>((t) =>
+    setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
   const dirty = tags.length > 0 || area !== null || q !== '' || newOnly
 
   return (
     <div className="py-5">
       <div className="flex items-baseline justify-between">
         <h1 className="text-[22px] font-bold tracking-tight">전체 리스트</h1>
-        <span className="text-[13px] text-ink-soft">{shown.length}곳</span>
+        <span className="text-[13px] text-ink-soft">
+          {matched.length}곳
+        </span>
       </div>
 
       <div className="mt-3">
-        <SearchBox value={q} onChange={setQ} />
+        <SearchBox value={q} onChange={reset(setQ)} />
       </div>
 
       <div className="mt-3">
         <AreaChips
           counts={areas}
           value={area}
-          onChange={setArea}
+          onChange={reset(setArea)}
           expanded={expanded}
           onExpand={setExpanded}
           leading={newCount > 0 ? (
@@ -71,7 +90,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
               on={newOnly}
               count={newCount}
               tone="new"
-              onClick={() => setNewOnly((v) => !v)}
+              onClick={() => { setNewOnly((v) => !v); setShownCount(PAGE_CHUNK) }}
             >
               NEW
             </Chip>
@@ -86,7 +105,10 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
         {dirty && (
           <button
             type="button"
-            onClick={() => { setTags([]); setArea(null); setQ(''); setNewOnly(false) }}
+            onClick={() => {
+              setTags([]); setArea(null); setQ(''); setNewOnly(false)
+              setShownCount(PAGE_CHUNK)
+            }}
             className="min-h-[36px] rounded-full px-3 text-[13px] text-ink-soft underline"
           >
             초기화
@@ -100,7 +122,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
             <button
               key={k}
               type="button"
-              onClick={() => setSort(k)}
+              onClick={() => { setSort(k); setShownCount(PAGE_CHUNK) }}
               className={`min-h-[36px] px-3.5 text-[13px] ${
                 sort === k ? 'bg-bean text-white font-semibold' : 'bg-card text-ink-soft'
               }`}
@@ -111,7 +133,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
         </div>
         <button
           type="button"
-          onClick={() => setCity((v) => !v)}
+          onClick={() => { setCity((v) => !v); setShownCount(PAGE_CHUNK) }}
           aria-pressed={city}
           className={`min-h-[36px] rounded-full border px-3.5 text-[13px] ${
             city ? 'border-bean bg-bean text-white font-semibold' : 'border-line bg-card text-ink-soft'
@@ -155,6 +177,17 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
             <CafeCard key={c.id} cafe={c} />
           ))}
         </div>
+      )}
+
+      {rest > 0 && (
+        <button
+          type="button"
+          onClick={() => setShownCount((n) => n + PAGE_CHUNK)}
+          className="mt-5 flex min-h-[52px] w-full items-center justify-center rounded-2xl border border-line bg-card text-[15px] font-semibold text-bean active:bg-bean-soft"
+        >
+          {Math.min(PAGE_CHUNK, rest)}곳 더 보기
+          <span className="ml-1.5 font-normal text-ink-soft">남은 {rest}곳</span>
+        </button>
       )}
 
       {shown.length === 0 && (

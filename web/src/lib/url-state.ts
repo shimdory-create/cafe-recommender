@@ -1,4 +1,4 @@
-import type { Sort } from './filter'
+import { PAGE_CHUNK, type Sort } from './filter'
 import type { VisitedSort } from './visited-sort'
 
 /**
@@ -24,11 +24,19 @@ export interface ListParams {
   newOnly: boolean
   /** 다녀온 곳 정렬. 전체 탭에서는 쓰지 않는다 */
   visitedSort: VisitedSort
+  /**
+   * 전체 리스트에서 지금까지 펼친 카드 수.
+   *
+   * 주소에 싣는 이유는 하나 — 300곳까지 펼쳐 놓고 카페를 열었다 돌아왔을 때
+   * 다시 60곳으로 접히면 보던 자리를 잃는다.
+   */
+  shown: number
 }
 
 export const EMPTY_PARAMS: ListParams = {
   q: '', area: null, tags: [], sort: 'hot', city: false, newOnly: false,
   visitedSort: { by: 'date', desc: true },
+  shown: PAGE_CHUNK,
 }
 
 type Raw = Record<string, string | string[] | undefined>
@@ -50,7 +58,15 @@ export function readListParams(raw: Raw): ListParams {
       by: one(raw.o).startsWith('rating') ? 'rating' : 'date',
       desc: !one(raw.o).endsWith('.asc'),
     },
+    shown: shownFromParam(one(raw.v)),
   }
+}
+
+/** 이상한 값은 기본값으로. 청크 배수로 맞춰 화면과 주소가 어긋나지 않게 한다 */
+function shownFromParam(raw: string): number {
+  const n = Number(raw)
+  if (!Number.isFinite(n) || n < PAGE_CHUNK) return PAGE_CHUNK
+  return Math.ceil(Math.min(n, 100_000) / PAGE_CHUNK) * PAGE_CHUNK
 }
 
 /**
@@ -67,6 +83,7 @@ export function listParamsToQuery(p: ListParams): string {
   if (p.newOnly) sp.set('n', '1')
   const vs = p.visitedSort
   if (vs.by !== 'date' || !vs.desc) sp.set('o', `${vs.by}.${vs.desc ? 'desc' : 'asc'}`)
+  if (p.shown > PAGE_CHUNK) sp.set('v', String(p.shown))
   const s = sp.toString()
   return s ? `?${s}` : ''
 }

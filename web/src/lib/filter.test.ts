@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { areaCounts, areaLabel, filterAndSort, groupBySigungu, matchesQuery } from './filter'
+import {
+  areaCounts, areaLabel, filterAndSort, groupBySigungu, matchesQuery, NEW_PINNED,
+} from './filter'
 import { driveLabel, recentlyVisited, type SiteCafe } from './site'
 
 const cafe = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
@@ -252,13 +254,37 @@ describe('NEW', () => {
       .toEqual(['2', '1', '3'])
   })
 
-  it('NEW 안에서는 고른 정렬을 지킨다', () => {
+  it('띄운 것들끼리는 최근 등록순이다', () => {
     const rows = [
-      cafe({ id: '1', hotScore: 10, driveMinutes: 90, isNew: true }),
-      cafe({ id: '2', hotScore: 80, driveMinutes: 20, isNew: true }),
+      cafe({ id: 'old', isNew: true, firstSeenAt: '2026-08-23T00:00:00.000Z', hotScore: 90 }),
+      cafe({ id: 'new', isNew: true, firstSeenAt: '2026-08-25T00:00:00.000Z', hotScore: 10 }),
     ]
     expect(filterAndSort(rows, { tags: [], sort: 'hot', city: false }).map((r) => r.id))
-      .toEqual(['2', '1'])
+      .toEqual(['new', 'old'])
+  })
+
+  it('맨 앞으로 띄우는 수에 상한이 있다', () => {
+    // 전부 띄웠더니 NEW 54곳이 첫 화면을 통째로 먹었다 — "화제순" 을 눌러도
+    // 첫 다섯 페이지가 전부 NEW 라 정렬의 의미가 사라진다
+    const news = Array.from({ length: NEW_PINNED + 5 }, (_, i) => cafe({
+      id: `n${i}`, isNew: true, hotScore: 1,
+      firstSeenAt: `2026-08-${String(10 + i).padStart(2, '0')}T00:00:00.000Z`,
+    }))
+    const hot = cafe({ id: 'hot', hotScore: 999 })
+    const out = filterAndSort([...news, hot], { tags: [], sort: 'hot', city: false })
+    expect(out.slice(0, NEW_PINNED).every((r) => r.isNew)).toBe(true)
+    // 상한을 넘은 NEW 는 제자리로 — 화제순에서 hot 뒤로 밀린다
+    expect(out[NEW_PINNED]!.id).toBe('hot')
+  })
+
+  it('상한을 넘긴 NEW 는 최근 것부터 띄운다', () => {
+    const news = Array.from({ length: NEW_PINNED + 3 }, (_, i) => cafe({
+      id: `n${i}`, isNew: true,
+      firstSeenAt: `2026-08-${String(10 + i).padStart(2, '0')}T00:00:00.000Z`,
+    }))
+    const out = filterAndSort(news, { tags: [], sort: 'hot', city: false })
+    // n12 가 가장 최근이다
+    expect(out[0]!.id).toBe(`n${NEW_PINNED + 2}`)
   })
 
   it('NEW 만 보기', () => {

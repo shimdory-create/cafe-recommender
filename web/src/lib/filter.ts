@@ -62,6 +62,10 @@ export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[
     return s.tags.every((t) => c.tags.includes(t))
   })
 
+  const pinned = new Set(
+    [...rows].filter((c) => c.isNew).sort(byNewest).slice(0, NEW_PINNED).map((c) => c.id),
+  )
+
   const rank = (a: T, b: T) => {
     if (s.sort === 'near') {
       // 거리 미확인은 뒤로 보낸다. null 을 0 으로 취급하면 맨 앞에 온다.
@@ -75,9 +79,18 @@ export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[
   }
 
   return [...rows].sort((a, b) => {
-    if (a.isNew !== b.isNew) return a.isNew ? -1 : 1
+    const pa = pinned.has(a.id)
+    const pb = pinned.has(b.id)
+    if (pa !== pb) return pa ? -1 : 1
+    // 띄운 것들끼리는 최근 등록순. 나머지는 고른 정렬 기준
+    if (pa && pb) return byNewest(a, b)
     return rank(a, b)
   })
+}
+
+/** 최근에 등록된 것부터. 같으면 순서가 흔들리지 않게 id 로 마무리한다 */
+function byNewest<T extends ListRow>(a: T, b: T): number {
+  return b.firstSeenAt.localeCompare(a.firstSeenAt) || a.id.localeCompare(b.id)
 }
 
 export interface AreaCount {
@@ -150,3 +163,28 @@ export function groupBySigungu<T extends ListRow>(rows: T[]): SigunguGroup<T>[] 
 
 /** 칩을 접었을 때 보여줄 개수. 두 줄에 들어가는 만큼 */
 export const AREA_CHIPS_COLLAPSED = 8
+
+/**
+ * 전체 리스트에서 한 번에 그리는 카드 수.
+ *
+ * 처음에는 전량을 그렸다 — "통과분이 수백 곳이라 전량 렌더가 더 빠르고
+ * 코드도 없다" 는 판단이었다. 그 전제가 깨졌다. 판정이 밀린 것을 따라잡으며
+ * 297 -> 1,035곳이 됐고, 실측으로:
+ *
+ * ```
+ * 카드 664개 · DOM 노드 15,557개 · HTML 2.1MB · 로드 2.5초 (데스크톱 유선)
+ * ```
+ *
+ * 모바일에서는 이보다 훨씬 느리고, 아직 판정 대기가 2,200곳 남아 있어 계속
+ * 커진다. 검색과 칩으로 좁히면 대개 이 수 아래라 버튼은 잘 보이지 않는다.
+ */
+export const PAGE_CHUNK = 60
+
+/**
+ * 맨 앞으로 띄우는 NEW 의 상한.
+ *
+ * 전부 띄웠더니 NEW 54곳이 첫 화면을 통째로 먹었다 — "화제순" 을 눌러도
+ * 첫 다섯 페이지가 전부 NEW 라 정렬의 의미가 사라진다. 눈에 띄게 하는 것이
+ * 목적이므로 앞쪽 몇 곳이면 충분하고, 전부 보려면 NEW 칩을 누르면 된다.
+ */
+export const NEW_PINNED = 10

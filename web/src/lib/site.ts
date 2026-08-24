@@ -27,6 +27,7 @@ export type ListRow = Pick<
   'id' | 'name' | 'sigungu' | 'area' | 'driveMinutes' | 'scale' | 'parkingGrade'
   | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'imageUrl' | 'hotScore'
   | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn' | 'isNew'
+  | 'firstSeenAt'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -54,6 +55,7 @@ export function toListRow(c: SiteCafe): ListRow {
     cityOnly: c.cityOnly,
     visitedOn: c.visitedOn,
     isNew: c.isNew,
+    firstSeenAt: c.firstSeenAt,
   }
 }
 
