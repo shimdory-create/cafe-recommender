@@ -4,6 +4,7 @@ import type { SiteCafe, SitePayload } from '../../src/schema.js'
 
 const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe => ({
   sigungu: '양평군',
+  area: '양평군',
   zone: 'east',
   driveMinutes: 80,
   scale: '대형',
@@ -23,6 +24,8 @@ const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe 
   imageUrl: null,
   hotScore: 50,
   finalScore: 25,
+  posts30: 40,
+  posts90: 100,
   postsPer30: 60,
   acceleration: 1.5,
   trend: 'steady',
@@ -30,6 +33,9 @@ const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe 
   ratingCount: 0,
   cityOnly: false,
   visitedOn: null,
+  firstSeenAt: '2026-01-01T00:00:00.000Z',
+  isNew: false,
+  familyReviews: [],
   ...over,
 })
 
@@ -176,5 +182,40 @@ describe('buildNotifyText — 자동수집 상태 줄', () => {
     })
     expect(text).toContain('점검 필요: 수집 멈춤')
     expect(text.length).toBeLessThanOrEqual(KAKAO_TEXT_LIMIT)
+  })
+})
+
+describe('다녀온 곳은 문구에서 뺀다', () => {
+  // 이 주 목록은 목요일 밤에 굳는다. 금요일 정오까지 사이에 다녀오면 화면에서는
+  // 사라지는데 문구에는 남아 있었다 — 실측 2026-08-24 문구 3번이 08-21 에
+  // 다녀온 `더티트렁크` 였다
+  const now = new Date('2026-08-24T03:00:00Z')
+
+  it('최근에 다녀온 곳은 이름에 안 나온다', () => {
+    const text = buildNotifyText({
+      payload: payload([
+        cafe({ id: '1', name: '다녀온카페', visitedOn: '2026-08-21' }),
+        cafe({ id: '2', name: '새로운카페' }),
+      ]),
+      now,
+    })
+    expect(text).not.toContain('다녀온카페')
+    expect(text).toContain('새로운카페')
+  })
+
+  it('6개월이 지난 곳은 다시 나온다', () => {
+    const text = buildNotifyText({
+      payload: payload([cafe({ id: '1', name: '오래전', visitedOn: '2026-01-01' })]),
+      now,
+    })
+    expect(text).toContain('오래전')
+  })
+
+  it('전부 다녀왔으면 빈 주라고 말한다', () => {
+    const text = buildNotifyText({
+      payload: payload([cafe({ id: '1', name: '다녀온카페', visitedOn: '2026-08-23' })]),
+      now,
+    })
+    expect(text).toContain('새로 추천할 곳이 없어요')
   })
 })

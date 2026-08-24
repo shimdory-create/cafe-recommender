@@ -3,6 +3,22 @@ import type { SitePayload } from '../schema.js'
 /** 카카오톡 "나에게 보내기" 텍스트 템플릿 상한 (스펙 10.2) */
 export const KAKAO_TEXT_LIMIT = 200
 
+/** 다녀온 곳은 이 기간 동안 추천에서 내려간다 (스펙 8.2). 화면과 같은 값 */
+const REVISIT_DAYS = 180
+
+/**
+ * 이 주 목록은 목요일 밤에 굳는다. 그 뒤 금요일 정오까지 사이에 다녀오면
+ * **화면에서는 사라지는데 카톡에는 남아 있었다** — 화면은 `homeFeed` 가
+ * 걸러내지만 문구는 `payload.week` 를 그대로 썼다.
+ *
+ * 실측: 2026-08-24 문구 3번이 `더티트렁크` 였는데 08-21 에 다녀온 곳이다.
+ */
+function stillWorthGoing(visitedOn: string | null, now: Date): boolean {
+  if (!visitedOn) return true
+  const days = (now.getTime() - new Date(visitedOn).getTime()) / 86_400_000
+  return days < 0 || days > REVISIT_DAYS
+}
+
 export interface NotifyInput {
   payload: SitePayload
   /** 배포된 웹앱 주소. 없으면 링크 줄을 뺀다 */
@@ -15,6 +31,8 @@ export interface NotifyInput {
    * 없지만(알림 자체가 죽어도 조용하다), 이 줄은 **없으면 이상하다**.
    */
   status?: string
+  /** 다녀온 곳을 걸러내는 기준 시각 */
+  now?: Date
 }
 
 /** 카톡에 이름을 적는 수. 추천은 10곳이지만 200자에 다 들어가지 않는다 */
@@ -31,9 +49,11 @@ export function buildNotifyText(input: NotifyInput): string {
   const { payload, baseUrl } = input
   const byId = new Map(payload.cafes.map((c) => [c.id, c]))
 
+  const now = input.now ?? new Date()
   const all = payload.week
     .map((w) => byId.get(w.id))
     .filter((c): c is NonNullable<typeof c> => Boolean(c))
+    .filter((c) => stillWorthGoing(c.visitedOn, now))
   const picks = all.slice(0, NAMED_IN_MESSAGE)
   const more = all.length - picks.length
 
