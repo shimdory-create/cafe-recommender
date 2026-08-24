@@ -145,6 +145,8 @@ export function VisitedList({
   const [area, setArea] = useState<string | null>(initial.area)
   const [tags, setTags] = useState<string[]>(initial.tags)
   const [order, setOrder] = useState<VisitedSort>(initial.visitedSort)
+  // 빌드 시점 값이 먼저고, 서버가 host 를 보고 답하면 그것을 따른다
+  const [viewOnly, setViewOnly] = useState(VIEW_ONLY)
   const [expanded, setExpanded] = useState(false)
 
   useUrlSync(listParamsToQuery({ ...initial, q, area, tags, visitedSort: order }))
@@ -153,7 +155,8 @@ export function VisitedList({
     const map = new Map(known.map((c) => [c.id, c]))
     fetch('/api/visited')
       .then((r) => r.json())
-      .then((body: { visits?: VisitLite[]; ok?: boolean }) => {
+      .then((body: { visits?: VisitLite[]; ok?: boolean; writable?: boolean }) => {
+        if (body.writable === false) setViewOnly(true)
         // `ok` 가 아니면 읽기가 실패한 것이다. 빈 배열을 진짜 기록으로 믿으면
         // 기록이 지워진 것처럼 보인다 — 그때는 빌드 타임 기록을 그대로 쓴다.
         setRows(mergeVisits(built, body.visits ?? [], map, body.ok === true))
@@ -219,7 +222,7 @@ export function VisitedList({
           누르면 여기 모입니다.
         </p>
         <p className="mt-3 text-[12px] leading-relaxed text-ink-soft">
-          {VIEW_ONLY
+          {viewOnly
             ? '열람 전용 페이지라 여기서는 기록을 남길 수 없어요.'
             : '가족 누구나 누를 수 있어요. 별점을 남기면 자동으로 여기 들어옵니다.'}
         </p>
@@ -405,7 +408,7 @@ export function VisitedList({
                   >
                     지도 ↗
                   </a>
-                  {!VIEW_ONLY && (
+                  {!viewOnly && (
                     <button
                       onClick={() => cancel(v.id, v.name)}
                       disabled={busy === v.id}

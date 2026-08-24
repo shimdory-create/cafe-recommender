@@ -107,6 +107,8 @@ interface Loaded {
   ok: boolean
   /** 실시간으로 읽어온 것인가. false 면 빌드 시점 사본이다 */
   live?: boolean
+  /** 이 주소에서 써도 되는가. 서버가 host 를 보고 답한다 */
+  writable?: boolean
 }
 
 /**
@@ -161,7 +163,7 @@ export function ReviewPanel({ cafeId, initialVisited, built }: {
         // 덮으면 이미 남긴 사람이 저장이 안 된 줄 알고 다시 남겨 중복이 생긴다.
         // 다만 `enabled` 는 서버 말을 따른다 (입력칸을 띄울지의 판단이다)
         if (body.ok === false) {
-          setData((prev) => ({ ...prev, enabled: body.enabled }))
+          setData((prev) => ({ ...prev, enabled: body.enabled, writable: body.writable }))
           return
         }
         setData({ ...body, live: true })
@@ -294,7 +296,15 @@ export function ReviewPanel({ cafeId, initialVisited, built }: {
     }
   }
 
-  const enabled = data?.enabled ?? true
+  const enabled = data.enabled
+  /**
+   * 빌드 시점 값이 먼저고, 서버 답이 오면 그것을 따른다.
+   *
+   * 열람용 프로젝트 이름을 규칙과 다르게 지으면 `VIEW_ONLY` 가 false 로
+   * 남는데, 그때도 서버는 host 를 보고 막는다. 이 한 줄이 화면을 뒤늦게라도
+   * 바로잡아 "버튼은 있는데 눌러도 안 되는" 상태를 없앤다.
+   */
+  const viewOnly = VIEW_ONLY || data.writable === false
 
   return (
     <section className="mt-6">
@@ -307,7 +317,7 @@ export function ReviewPanel({ cafeId, initialVisited, built }: {
         )}
       </h2>
 
-      {VIEW_ONLY ? (
+      {viewOnly ? (
         <p className="mt-2 rounded-2xl border border-line bg-card px-4 py-3 text-[13px] leading-relaxed text-ink-soft">
           {VIEW_ONLY_NOTE}
         </p>
@@ -450,7 +460,7 @@ export function ReviewPanel({ cafeId, initialVisited, built }: {
                   </div>
                   {r.comment && <p className="mt-1.5 text-[14px] leading-relaxed">{r.comment}</p>}
 
-                  {!VIEW_ONLY && enabled && data.live && (
+                  {!viewOnly && enabled && data.live && (
                     <div className="mt-2 flex gap-1">
                       <button
                         onClick={() => startEdit(r)}

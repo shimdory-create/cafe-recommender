@@ -1,18 +1,24 @@
 import { NextResponse } from 'next/server'
 import { writeStore } from '@/lib/store'
+import { hostCanWrite } from '@/lib/view-only'
 import { byId } from '@/lib/site'
 import {
   addVisit, applyReviewPatch, parseReviewInput, removeReview, sortByNewest, summarize,
   todayInSeoul, REVIEWS_PATH, VISITS_PATH, type Review, type VisitRow,
 } from '@/lib/reviews'
 
-/** POST 와 같은 관문. 열람 전용이면 여기서 끝난다 */
-async function writable() {
+/**
+ * 쓰기 관문. 열람 전용이면 여기서 끝난다.
+ *
+ * **host 를 본다.** 가족용 주소가 아니면 거절한다 — 화면이 버튼을 감추는
+ * 것만으로는 개발자도구로 뚫린다 (스펙 10.15).
+ */
+async function writable(req: Request) {
   const store = await writeStore()
   if (!store.enabled) {
     return { store, deny: NextResponse.json({ error: '아직 후기 저장이 설정되지 않았어요' }, { status: 503 }) }
   }
-  if (!store.writable) {
+  if (!store.writable || !hostCanWrite(req.headers.get('host'))) {
     return { store, deny: NextResponse.json({ error: '열람 전용 페이지예요' }, { status: 403 }) }
   }
   return { store, deny: null as null }
@@ -31,6 +37,7 @@ async function writable() {
 
 export async function GET(req: Request) {
   const store = await writeStore()
+  const writeOk = store.writable && hostCanWrite(req.headers.get('host'))
   const cafe = new URL(req.url).searchParams.get('cafe')
   // 저장소가 안 붙어 있으면 **못 읽은 것**이다. `ok: true` 로 빈 배열을 주면
   // 화면이 그것을 "후기 없음" 으로 믿고 빌드 시점 사본을 지운다 — 토큰을 안
@@ -47,7 +54,7 @@ export async function GET(req: Request) {
       reviews: sortByNewest(mine),
       summary: summarize(mine),
       enabled: store.enabled,
-      writable: store.writable,
+      writable: writeOk,
       ok: true,
     })
   } catch (e) {
@@ -57,7 +64,7 @@ export async function GET(req: Request) {
     return NextResponse.json(
       {
         reviews: [], summary: { count: 0, average: 0 }, enabled: true,
-        writable: store.writable, ok: false, error: (e as Error).message,
+        writable: writeOk, ok: false, error: (e as Error).message,
       },
       { status: 200 },
     )
@@ -65,7 +72,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const { store, deny } = await writable()
+  const { store, deny } = await writable(req)
   if (deny) return deny
 
   let body: unknown
@@ -133,7 +140,7 @@ export async function POST(req: Request) {
  * 다른 가족이 남긴 후기가 사라지지 않는다.
  */
 export async function PATCH(req: Request) {
-  const { store, deny } = await writable()
+  const { store, deny } = await writable(req)
   if (deny) return deny
 
   let body: { id?: unknown } & Record<string, unknown>
@@ -177,7 +184,7 @@ export async function PATCH(req: Request) {
  * 방문 취소는 다녀온 곳 탭에 따로 있다.
  */
 export async function DELETE(req: Request) {
-  const { store, deny } = await writable()
+  const { store, deny } = await writable(req)
   if (deny) return deny
 
   let id = ''

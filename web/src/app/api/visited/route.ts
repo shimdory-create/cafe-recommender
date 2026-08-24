@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { writeStore } from '@/lib/store'
+import { hostCanWrite } from '@/lib/view-only'
 import { byId } from '@/lib/site'
 import { addVisit, removeVisit, todayInSeoul, VISITS_PATH, type VisitRow } from '@/lib/reviews'
 
@@ -10,8 +11,9 @@ import { addVisit, removeVisit, todayInSeoul, VISITS_PATH, type VisitRow } from 
  * 화면이 그것을 실제 기록으로 믿으면 **다녀온 곳 탭이 통째로 비어 보인다** —
  * 가족에게는 기록이 지워진 것으로 보인다. 그래서 실패는 실패라고 말한다.
  */
-export async function GET() {
+export async function GET(req: Request) {
   const store = await writeStore()
+  const writeOk = store.writable && hostCanWrite(req.headers.get('host'))
   if (!store.enabled) {
     return NextResponse.json({ visits: [], enabled: false, writable: false, ok: false })
   }
@@ -20,10 +22,10 @@ export async function GET() {
     // 보이고 이번 주 추천에도 그대로 남았다 — 눌린 것이 안 눌린 것처럼 보인다.
     // 월 몇 번 열리는 페이지라 매번 읽어도 GitHub 한도(5,000/시간)에 닿지 않는다.
     const rows = await store.read<VisitRow>(VISITS_PATH)
-    return NextResponse.json({ visits: rows, enabled: true, writable: store.writable, ok: true })
+    return NextResponse.json({ visits: rows, enabled: true, writable: writeOk, ok: true })
   } catch (e) {
     return NextResponse.json({
-      visits: [], enabled: true, writable: store.writable, ok: false, error: (e as Error).message,
+      visits: [], enabled: true, writable: writeOk, ok: false, error: (e as Error).message,
     })
   }
 }
@@ -43,8 +45,9 @@ export async function POST(req: Request) {
   if (!store.enabled) {
     return NextResponse.json({ error: '아직 기록 저장이 설정되지 않았어요' }, { status: 503 })
   }
-  // 열람 전용 배포. 화면에서 버튼을 감추지만 그것만으로는 못 막는다
-  if (!store.writable) {
+  // 열람 전용 배포. 화면에서 버튼을 감추지만 그것만으로는 못 막는다.
+  // host 를 보는 이유는 `lib/view-only.ts` 에 적었다 — 모르는 주소는 거절한다
+  if (!store.writable || !hostCanWrite(req.headers.get('host'))) {
     return NextResponse.json({ error: '열람 전용 페이지예요' }, { status: 403 })
   }
 

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import Link from 'next/link'
 import './globals.css'
 import { TabBar } from './tab-bar'
+import { VIEW_ONLY } from '@/lib/view-only'
 
 export const metadata: Metadata = {
   title: '심김 빵지순례',
@@ -42,6 +43,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               >
                 심김 빵지순례
               </Link>
+              {/* 열람용 배포가 제대로 떴는지 한눈에 확인하는 표시이기도 하다 */}
+              {VIEW_ONLY && (
+                <span className="ml-2 rounded-full bg-line px-2 py-0.5 text-[11px] text-ink-soft">
+                  열람 전용
+                </span>
+              )}
             </div>
           </header>
           <main className="px-5">{children}</main>
