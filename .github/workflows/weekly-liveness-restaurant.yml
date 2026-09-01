@@ -30,18 +30,8 @@ jobs:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           # 길찾기와 같은 이유로 provider 키가 있어야 환경변수 검증을 통과한다
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      # 카페의 scripts/commit-data.sh 는 마지막에 npm run --silent site 로
-      # web/src/generated/site.json(카페 페이로드)를 다시 만든다 — 식당
-      # 전용 변경에는 무관하고 낭비이므로 여기서는 직접 커밋·푸시한다.
+      # 커밋·푸시 규칙은 scripts/commit-data.sh 한 곳에 있다 — 카페와 공용.
+      # npm run --silent site 가 카페·식당 페이로드를 둘 다 다시 만든다
+      # (2단계 웹 화면이 생긴 뒤로는 이걸 건너뛰면 화면이 절대 안 갱신된다).
       - name: 데이터 커밋
-        run: |
-          git config user.name  "cafe-bot"
-          git config user.email "cafe-bot@users.noreply.github.com"
-          git add data/
-          if git diff --staged --quiet; then
-            echo "변경 없음"
-            exit 0
-          fi
-          git commit -q -m "data: 식당 실존 확인 $(date -u +%Y-%m-%d)"
-          git pull -q --rebase origin "$(git rev-parse --abbrev-ref HEAD)"
-          git push -q
+        run: bash scripts/commit-data.sh "식당 실존 확인"
