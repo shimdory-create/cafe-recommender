@@ -1,9 +1,11 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { ALL_TAGS, isStale, type ListRow } from '@/lib/site'
 import {
-  areaCounts, filterAndSort, groupBySigungu, PAGE_CHUNK, SPLIT_AREAS, type Sort,
+  ALL_TAGS, isStale, recentlyVisited, type ListRow,
+} from '@/lib/site'
+import {
+  areaCounts, countMatching, filterAndSort, groupBySigungu, PAGE_CHUNK, SPLIT_AREAS, type Sort,
 } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
@@ -26,7 +28,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
   const [sort, setSort] = useState<Sort>(initial.sort)
   const [city, setCity] = useState(initial.city)
   const [newOnly, setNewOnly] = useState(initial.newOnly)
-  const [wishOnly, setWishOnly] = useState(false)
+  const [wishOnly, setWishOnly] = useState(initial.wishOnly)
   const [shownCount, setShownCount] = useState(initial.shown)
   // 고른 지역이 접힌 구간에 있으면 처음부터 펴 둔다
   const [expanded, setExpanded] = useState(false)
@@ -34,7 +36,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
   const { dismissed, dismiss } = useDismissed()
 
   useUrlSync(listParamsToQuery({
-    ...initial, q, area, tags, sort, city, newOnly, shown: shownCount,
+    ...initial, q, area, tags, sort, city, newOnly, wishOnly, shown: shownCount,
   }))
 
   // 폐업 의심으로 숨긴 곳은 다른 모든 필터보다 먼저 뺀다 — 지역·태그 숫자에도
@@ -43,30 +45,32 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
     () => cafes.filter((c) => !dismissed.has(c.id)),
     [cafes, dismissed],
   )
-
-  const filtered = useMemo(
-    () => filterAndSort(visible, { tags, sort, city, area, query: q, newOnly }),
-    [visible, tags, sort, city, area, q, newOnly],
+  // 위시리스트도 마찬가지로 먼저 뺀다 — areas·newCount 가 matched 와 다른
+  // 기준으로 세면 "위시리스트만 보기" 를 켰을 때 배지 숫자가 또 어긋난다
+  // (실제로 한 번 그랬다 — 태그·검색어 때와 같은 버그 종류다).
+  const wishFiltered = useMemo(
+    () => (wishOnly ? visible.filter((c) => wished.has(c.id)) : visible),
+    [visible, wishOnly, wished],
   )
-  // 위시리스트는 실시간으로 받아온 클라이언트 상태라 filterAndSort(순수 함수,
-  // 빌드 데이터만 봄) 안에 넣지 않고 마지막에 한 번 더 거른다
+
   const matched = useMemo(
-    () => (wishOnly ? filtered.filter((c) => wished.has(c.id)) : filtered),
-    [filtered, wishOnly, wished],
+    () => filterAndSort(wishFiltered, { tags, sort, city, area, query: q, newOnly }),
+    [wishFiltered, tags, sort, city, area, q, newOnly],
   )
   // 한 번에 다 그리면 카드 664개에 DOM 노드 15,000개가 된다 (실측). 검색·칩으로
   // 좁히면 대개 한 묶음 안에 들어와서 버튼은 잘 보이지 않는다
   const shown = useMemo(() => matched.slice(0, shownCount), [matched, shownCount])
   const rest = matched.length - shown.length
   const areas = useMemo(
-    () => areaCounts(visible, { city, tags, query: q }),
-    [visible, city, tags, q],
+    () => areaCounts(wishFiltered, { city, tags, query: q }),
+    [wishFiltered, city, tags, q],
   )
   // matched 와 같은 필터를 쓰고 newOnly 만 강제한다 — 배지 숫자가
-  // "지금 NEW 를 누르면 나올 개수" 와 구조적으로 어긋날 수 없게 한다
+  // "지금 NEW 를 누르면 나올 개수" 와 구조적으로 어긋날 수 없게 한다.
+  // 정렬은 필요 없어 countMatching 으로 그 비용을 안 낸다.
   const newCount = useMemo(
-    () => filterAndSort(visible, { tags, sort, city, area, query: q, newOnly: true }).length,
-    [visible, tags, sort, city, area, q],
+    () => countMatching(wishFiltered, { tags, sort, city, area, query: q, newOnly: true }),
+    [wishFiltered, tags, sort, city, area, q],
   )
   // 서울·인천만 안에서 구별로 다시 묶는다. 나머지는 칩 하나가 곧 한 지역이다
   const groups = useMemo(
@@ -199,7 +203,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
                     cafe={c}
                     wished={wished.has(c.id)}
                     onToggleWish={() => toggleWish(c.id)}
-                    stale={!c.visitedOn && isStale(c.lastSeenAt)}
+                    stale={!recentlyVisited(c.visitedOn) && isStale(c.lastSeenAt)}
                     onDismiss={() => dismiss(c.id)}
                   />
                 ))}
@@ -215,7 +219,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
               cafe={c}
               wished={wished.has(c.id)}
               onToggleWish={() => toggleWish(c.id)}
-              stale={!c.visitedOn && isStale(c.lastSeenAt)}
+              stale={!recentlyVisited(c.visitedOn) && isStale(c.lastSeenAt)}
               onDismiss={() => dismiss(c.id)}
             />
           ))}

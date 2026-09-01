@@ -22,6 +22,8 @@ export interface ListParams {
   city: boolean
   /** NEW 만 */
   newOnly: boolean
+  /** 위시리스트만 */
+  wishOnly: boolean
   /** 다녀온 곳 정렬. 전체 탭에서는 쓰지 않는다 */
   visitedSort: VisitedSort
   /**
@@ -34,7 +36,7 @@ export interface ListParams {
 }
 
 export const EMPTY_PARAMS: ListParams = {
-  q: '', area: null, tags: [], sort: 'hot', city: false, newOnly: false,
+  q: '', area: null, tags: [], sort: 'hot', city: false, newOnly: false, wishOnly: false,
   visitedSort: { by: 'date', desc: true },
   shown: PAGE_CHUNK,
 }
@@ -54,6 +56,7 @@ export function readListParams(raw: Raw): ListParams {
     sort: one(raw.s) === 'near' || one(raw.s) === 'new' ? one(raw.s) as Sort : 'hot',
     city: one(raw.c) === '1',
     newOnly: one(raw.n) === '1',
+    wishOnly: one(raw.w) === '1',
     visitedSort: {
       by: one(raw.o).startsWith('rating') ? 'rating' : 'date',
       desc: !one(raw.o).endsWith('.asc'),
@@ -81,6 +84,7 @@ export function listParamsToQuery(p: ListParams): string {
   if (p.sort !== 'hot') sp.set('s', p.sort)
   if (p.city) sp.set('c', '1')
   if (p.newOnly) sp.set('n', '1')
+  if (p.wishOnly) sp.set('w', '1')
   const vs = p.visitedSort
   if (vs.by !== 'date' || !vs.desc) sp.set('o', `${vs.by}.${vs.desc ? 'desc' : 'asc'}`)
   if (p.shown > PAGE_CHUNK) sp.set('v', String(p.shown))

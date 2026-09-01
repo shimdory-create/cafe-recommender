@@ -53,14 +53,27 @@ export interface FilterState {
  * 여는데 종합점수 순으로는 300번째에 있을 수 있다. 띄우되 NEW 안에서는
  * 고른 정렬 기준을 그대로 지킨다.
  */
-export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[] {
-  const rows = cafes.filter((c) => {
+/** filterAndSort 의 필터링 부분만. 정렬 없이 개수만 필요할 때 정렬 비용을 안 낸다 */
+function filterRows<T extends ListRow>(cafes: T[], s: FilterState): T[] {
+  return cafes.filter((c) => {
     if (c.cityOnly && !s.city) return false
     if (s.area && c.area !== s.area) return false
     if (s.newOnly && !c.isNew) return false
     if (s.query && !matchesQuery(c.name, s.query)) return false
     return s.tags.every((t) => c.tags.includes(t))
   })
+}
+
+/**
+ * 배지 숫자용. filterAndSort 와 같은 필터 조건을 쓰되 정렬(NEW 띄우기 포함)은
+ * 건너뛴다 — 숫자만 필요한 곳에서 매번 정렬까지 하면 리스트가 클 때 낭비다.
+ */
+export function countMatching<T extends ListRow>(cafes: T[], s: FilterState): number {
+  return filterRows(cafes, s).length
+}
+
+export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[] {
+  const rows = filterRows(cafes, s)
 
   const pinned = new Set(
     [...rows].filter((c) => c.isNew).sort(byNewest).slice(0, NEW_PINNED).map((c) => c.id),

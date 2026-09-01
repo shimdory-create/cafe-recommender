@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import {
-  areaCounts, areaLabel, filterAndSort, groupBySigungu, matchesQuery, NEW_PINNED,
+  areaCounts, areaLabel, countMatching, filterAndSort, groupBySigungu, matchesQuery, NEW_PINNED,
   type FilterState,
 } from './filter'
 import { driveLabel, hiddenByVisit, recentlyVisited, REVISIT_DAYS, type SiteCafe } from './site'
@@ -359,14 +359,22 @@ const badgeCombos: FilterState[] = [
   { tags: [], sort: 'hot', city: true, query: '서울' },
 ]
 
-describe('newCount 는 필터를 다 반영한 filterAndSort(newOnly:true) 와 같다', () => {
+describe('countMatching 은 정렬 없이도 filterAndSort(...).length 와 같다', () => {
+  for (const s of badgeCombos) {
+    it(`tags=${s.tags} area=${s.area ?? '-'} query=${s.query ?? '-'}`, () => {
+      expect(countMatching(badgeCafes, s)).toBe(filterAndSort(badgeCafes, s).length)
+    })
+  }
+})
+
+describe('newCount 는 필터를 다 반영한 countMatching(newOnly:true) 와 같다', () => {
   for (const s of badgeCombos) {
     it(`tags=${s.tags} area=${s.area ?? '-'} query=${s.query ?? '-'}`, () => {
       const expected = filterAndSort(badgeCafes, { ...s, newOnly: true }).length
       // list-client.tsx 의 newCount 계산과 동일한 호출
-      const actual = filterAndSort(badgeCafes, {
+      const actual = countMatching(badgeCafes, {
         tags: s.tags, sort: s.sort, city: s.city, area: s.area, query: s.query, newOnly: true,
-      }).length
+      })
       expect(actual).toBe(expected)
     })
   }

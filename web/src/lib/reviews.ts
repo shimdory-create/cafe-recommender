@@ -130,26 +130,37 @@ export function removeVisit(rows: VisitRow[], kakaoPlaceId: string): VisitRow[] 
   return rows.filter((_, i) => i !== target.i)
 }
 
+/**
+ * `kakaoPlaceId` 하나당 한 건만 남는 목록 추가·제거. 위시리스트와 폐업 숨김이
+ * 같은 모양이라 (다녀온 곳과 달리 날짜별로 여러 건이 쌓이지 않는다) 하나로 뺐다.
+ */
+function addUnique<T extends { kakaoPlaceId: string }>(rows: T[], row: T): T[] {
+  if (rows.some((r) => r.kakaoPlaceId === row.kakaoPlaceId)) return rows
+  return [...rows, row]
+}
+
+function removeByPlaceId<T extends { kakaoPlaceId: string }>(rows: T[], kakaoPlaceId: string): T[] {
+  return rows.filter((r) => r.kakaoPlaceId !== kakaoPlaceId)
+}
+
 /** 위시리스트에 담기. 다녀온 곳과 달리 카페당 한 건만 있으면 된다 — 두 번 눌러도 그대로 */
 export function addWish(rows: WishRow[], kakaoPlaceId: string, addedAt: string): WishRow[] {
-  if (rows.some((w) => w.kakaoPlaceId === kakaoPlaceId)) return rows
-  return [...rows, { kakaoPlaceId, addedAt }]
+  return addUnique(rows, { kakaoPlaceId, addedAt })
 }
 
 /** 위시리스트에서 빼기 */
 export function removeWish(rows: WishRow[], kakaoPlaceId: string): WishRow[] {
-  return rows.filter((w) => w.kakaoPlaceId !== kakaoPlaceId)
+  return removeByPlaceId(rows, kakaoPlaceId)
 }
 
 /** 폐업 의심 카페 숨기기. 두 번 눌러도 한 건 */
 export function addDismiss(rows: DismissRow[], kakaoPlaceId: string, dismissedAt: string): DismissRow[] {
-  if (rows.some((d) => d.kakaoPlaceId === kakaoPlaceId)) return rows
-  return [...rows, { kakaoPlaceId, dismissedAt }]
+  return addUnique(rows, { kakaoPlaceId, dismissedAt })
 }
 
 /** 숨김 취소 (오탐이었을 때) */
 export function removeDismiss(rows: DismissRow[], kakaoPlaceId: string): DismissRow[] {
-  return rows.filter((d) => d.kakaoPlaceId !== kakaoPlaceId)
+  return removeByPlaceId(rows, kakaoPlaceId)
 }
 
 export interface ReviewPatch {
