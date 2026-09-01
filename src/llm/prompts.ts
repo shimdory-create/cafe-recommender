@@ -91,3 +91,69 @@ ${snippets.map((s, n) => `[${n + 1}] ${s}`).join('\n')}
 4. 확실하지 않으면 넣지 마라. 적게 뽑는 편이 낫다.
 5. 같은 카페가 여러 번 나오면 한 번만 넣는다.`
 }
+
+export const RESTAURANT_PROMPT_VERSION = 'r1'
+
+export interface RestaurantExtractPromptInput {
+  name: string
+  sigungu: string
+  categoryName: string
+  snippets: string[]
+  parkingSnippets: string[]
+}
+
+export function buildRestaurantExtractPrompt(i: RestaurantExtractPromptInput): string {
+  const body = i.snippets.length
+    ? i.snippets.map((s, n) => `[${n + 1}] ${s}`).join('\n')
+    : '(후기 없음)'
+  const parking = i.parkingSnippets.length
+    ? i.parkingSnippets.map((s, n) => `[P${n + 1}] ${s}`).join('\n')
+    : '(주차 언급 없음)'
+
+  return `너는 한국 식당 정보를 구조화하는 도구다. 아래 블로그 후기에서만
+근거를 찾아 JSON 으로 답하라.
+
+식당: ${i.name}
+지역: ${i.sigungu}
+카카오 분류: ${i.categoryName}
+
+--- 블로그 후기 ---
+${body}
+
+--- 주차 관련 후기 ---
+${parking}
+
+규칙:
+1. 후기에 없는 것을 추측하지 마라. 모르면 null 을 쓰고, parkingGrade 는 "?" 를 쓴다.
+2. evidence 에는 판단 근거가 된 원문을 그대로 인용하라. 요약하지 마라. 비워두지 마라.
+3. parkingEvidence 에도 주차 판단의 근거 원문을 인용하라. 근거가 없으면 빈 문자열.
+4. cuisineType: 한식/일식/중식/양식/분식/고기구이 중 하나만 고른다.
+   메뉴가 뚜렷하게 안 나오면 null 이다. 추측하지 마라.
+5. hasRoom: 룸·개별공간·단체석이 있다는 언급이 있으면 true, 명시적으로 없다고
+   하면 false, 언급이 없으면 null.
+6. reservable: 예약 가능하다는 언급이 있으면 true, "예약 불가"·"웨이팅 필수"
+   처럼 명시되면 false, 언급이 없으면 null.
+7. viewStrength: 0=뷰 없음, 3=뷰가 방문 이유가 될 만함, 5=뷰가 압도적.
+   후기에 창밖 풍경·전망 언급이 없으면 0 이다.
+8. viewTypes: 바다·강·호수·산·정원·도심 중 해당하는 것. viewStrength 가 0 이면 빈 배열.
+9. parkingGrade — 차로 가는 가족이 헛걸음하지 않는 것이 목적이다. 후하게 주지 마라.
+   A = 전용 주차장이 넉넉하다. B = 협소하거나 공용 주차장. "1시간 무료" 처럼
+   조건부 무료는 최대 B. C = 5대 미만이거나 인근 유료 주차장 의존.
+   D = 주차 불가 명시. ? = 언급 없음.
+10. teenAppeal: 중고생이 좋아할 요소가 많을수록 높게. 0~5.
+11. confidence: 후기 정보가 빈약하면 낮게. 0~1.`
+}
+
+export function buildRestaurantHarvestPrompt(regionLabel: string, snippets: string[]): string {
+  return `아래는 "${regionLabel}" 맛집을 소개하는 블로그 글 조각들이다.
+글에서 실제 식당 상호명만 뽑아 JSON 으로 답하라.
+
+${snippets.map((s, n) => `[${n + 1}] ${s}`).join('\n')}
+
+규칙:
+1. 상호명만 뽑는다. "맛집", "가족외식", "고기집" 같은 일반어는 제외한다.
+2. 지역명("${regionLabel}")을 상호명에 붙이지 마라.
+3. 프랜차이즈(맥도날드·롯데리아·버거킹·교촌치킨·bhc 등)는 제외한다.
+4. 확실하지 않으면 넣지 마라. 적게 뽑는 편이 낫다.
+5. 같은 식당이 여러 번 나오면 한 번만 넣는다.`
+}
