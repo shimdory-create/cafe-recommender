@@ -20,6 +20,13 @@ export const VISITS_PATH = 'data/visits.json'
 export const WISHLIST_PATH = 'data/wishlist.json'
 export const DISMISSED_PATH = 'data/dismissed.json'
 
+// 식당판. 카페 파일은 절대 안 건드린다 — 1단계 파이프라인이 data/restaurants.json
+// 등을 data/cafes.json 과 분리한 것과 같은 원칙이다.
+export const RESTAURANT_REVIEWS_PATH = 'data/restaurant-reviews.json'
+export const RESTAURANT_VISITS_PATH = 'data/restaurant-visits.json'
+export const RESTAURANT_WISHLIST_PATH = 'data/restaurant-wishlist.json'
+export const RESTAURANT_DISMISSED_PATH = 'data/restaurant-dismissed.json'
+
 export interface WishRow {
   kakaoPlaceId: string
   addedAt: string

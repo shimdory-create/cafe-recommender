@@ -11,7 +11,9 @@
  * 회색 자리표시자를 보여준다. 매일 화제량 수집이 새 썸네일로 갱신하므로
  * 깨진 이미지는 자연히 회복된다.
  */
-export function Thumb({ src, alt, size = 60 }: { src: string | null; alt: string; size?: number }) {
+export function Thumb(
+  { src, alt, size = 60, icon = '☕' }: { src: string | null; alt: string; size?: number; icon?: string },
+) {
   return (
     <span
       className="relative block shrink-0 overflow-hidden rounded-xl bg-bean-soft"
@@ -30,7 +32,7 @@ export function Thumb({ src, alt, size = 60 }: { src: string | null; alt: string
         />
       ) : (
         <span className="flex h-full w-full items-center justify-center text-[18px] text-bean/50">
-          ☕
+          {icon}
         </span>
       )}
     </span>

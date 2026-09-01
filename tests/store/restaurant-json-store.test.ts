@@ -42,4 +42,16 @@ describe('createRestaurantJsonStore', () => {
       expect(['contains', 'exact', 'regex']).toContain(e.matchType)
     }
   })
+
+  it('readRestaurantVisits: 파일이 없으면 빈 배열', async () => {
+    dir = await mkdtemp(join(tmpdir(), 'rest-store-'))
+    const store = createRestaurantJsonStore(dir)
+    expect(await store.readRestaurantVisits()).toEqual([])
+  })
+
+  it('readRestaurantReviews: 파일이 없으면 빈 배열', async () => {
+    dir = await mkdtemp(join(tmpdir(), 'rest-store-'))
+    const store = createRestaurantJsonStore(dir)
+    expect(await store.readRestaurantReviews()).toEqual([])
+  })
 })

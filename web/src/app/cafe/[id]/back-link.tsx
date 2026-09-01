@@ -1,6 +1,7 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
+import { domainOf } from '@/lib/domain-switch'
 
 /**
  * "← 목록" — **왔던 곳으로 돌아간다.**
@@ -14,11 +15,12 @@ import { useRouter } from 'next/navigation'
  */
 export function BackLink() {
   const router = useRouter()
+  const pathname = usePathname()
   return (
     <button
       onClick={() => {
         if (typeof window !== 'undefined' && window.history.length > 1) router.back()
-        else router.push('/')
+        else router.push(domainOf(pathname) === 'restaurant' ? '/restaurant' : '/')
       }}
       // 터치 타겟을 44px 로 (스펙 10.1). 글자는 작지만 누르는 영역은 넓다.
       className="-ml-1 flex min-h-[44px] items-center px-1 text-[13px] text-ink-soft active:text-ink"
