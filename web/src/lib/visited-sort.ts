@@ -1,5 +1,3 @@
-import type { SiteVisited } from './site-types'
-
 /**
  * 다녀온 곳 정렬.
  *
@@ -24,8 +22,16 @@ export function nextSort(cur: VisitedSort, by: VisitedSort['by']): VisitedSort {
  *
  * 0점으로 취급하면 "낮은 별점순" 의 맨 앞이 전부 별점 없는 곳이 된다.
  * 그건 낮은 평가가 아니라 아직 평가가 없는 것이다.
+ *
+ * 제네릭으로 둔 이유: 이 함수가 실제로 쓰는 필드(`ratingCount`/`ratingAvg`/
+ * `visitedOn`/`id`)는 SiteVisited 전용이 아니다. 식당의 SiteRestaurantVisited는
+ * `scale` 필드가 없어 SiteVisited 그대로는 대입되지 않는다 — 제네릭 제약을
+ * 실제로 쓰는 필드만으로 좁혀서, 카페 호출부(`sortVisited(rows: SiteVisited[], ...)`)는
+ * 그대로 동작하면서 식당도 같은 함수를 쓸 수 있게 한다.
  */
-export function sortVisited(rows: SiteVisited[], s: VisitedSort): SiteVisited[] {
+export function sortVisited<
+  T extends { id: string; ratingCount: number; ratingAvg: number; visitedOn: string },
+>(rows: T[], s: VisitedSort): T[] {
   const dir = s.desc ? 1 : -1
   return [...rows].sort((a, b) => {
     if (s.by === 'rating') {
