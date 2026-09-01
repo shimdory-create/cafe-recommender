@@ -597,6 +597,7 @@ async function main() {
  */
 const MUTATING = new Set([
   'discover', 'buzz', 'classify', 'drive', 'suggest', 'visited', 'hide', 'label',
+  'restaurant-discover', 'restaurant-buzz', 'restaurant-classify', 'restaurant-drive', 'restaurant-suggest',
 ])
 
 try {
