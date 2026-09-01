@@ -4,6 +4,7 @@ import type { BlogDoc } from '../sources/kakao-blog.js'
  * 식당 문맥어. 상호명만으로는 부족하다 — 관련 없는 글이 잡힐 수 있다.
  */
 const RESTAURANT_CONTEXT = ['맛집', '음식점', '메뉴', '식사', '먹방'] as const
+// '식당' 은 뺀다 — 상호명 대부분이 이 단어를 포함해서(예: 소문난식당), 문맥어가 아니라 상호명 매칭만으로 통과된다.
 
 /** 일반명사 상호. 걸리면 골든셋 경계 구간으로 강제 편입한다. */
 const AMBIGUOUS_NAMES = new Set(['식당', '맛집', '음식점', '가든', '하우스', '식탁'])
