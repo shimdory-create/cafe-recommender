@@ -116,6 +116,22 @@ describe('computeBuzz', () => {
     expect(m.firstPostDate).toMatch(/^\d{4}-\d{2}-\d{2}$/)
     expect(m.latestPostDate! > m.firstPostDate!).toBe(true)
   })
+
+  it('isRelevant 를 주입하면 그 판정을 쓴다 (식당 등 다른 도메인용)', () => {
+    const docs = [
+      { title: '아무개식당 맛집 후기', contents: '', dateTime: new Date(), thumbnail: 't' } as never,
+    ]
+    // 카페 기본 판정으로는 관련 없음(카페 문맥어가 없다) -> relevantCount 0
+    const withoutInjection = computeBuzz({ docs, cafeName: '아무개식당', now: new Date() })
+    expect(withoutInjection.relevantCount).toBe(0)
+
+    // 식당 판정을 주입하면 관련 있음으로 잡힌다
+    const withInjection = computeBuzz({
+      docs, cafeName: '아무개식당', now: new Date(),
+      isRelevant: (d, n) => d.title.includes(n) && d.title.includes('맛집'),
+    })
+    expect(withInjection.relevantCount).toBe(1)
+  })
 })
 
 describe('passesLayer2', () => {

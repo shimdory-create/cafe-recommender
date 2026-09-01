@@ -24,7 +24,13 @@
     "normalize": "tsx --env-file-if-exists=.env src/cli/run.ts normalize",
     "audit": "tsx --env-file-if-exists=.env src/cli/run.ts audit",
     "requeue": "tsx --env-file-if-exists=.env src/cli/run.ts requeue",
-    "liveness": "tsx --env-file-if-exists=.env src/cli/run.ts liveness"
+    "liveness": "tsx --env-file-if-exists=.env src/cli/run.ts liveness",
+    "restaurant-discover": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-discover",
+    "restaurant-buzz": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-buzz",
+    "restaurant-classify": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-classify",
+    "restaurant-suggest": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-suggest",
+    "restaurant-liveness": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-liveness",
+    "restaurant-drive": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-drive"
   },
   "type": "module",
   "private": true,

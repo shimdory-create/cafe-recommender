@@ -32,9 +32,11 @@ export function computeBuzz(input: {
   docs: BlogDoc[]
   cafeName: string
   now: Date
+  /** 관련성 판별기. 안 주면 카페 기본값(관련성.ts) — 기존 호출부는 동작 불변 */
+  isRelevant?: (doc: BlogDoc, name: string) => boolean
 }): BuzzMetrics {
-  const { docs, cafeName, now } = input
-  const relevant = docs.filter((d) => isRelevant(d, cafeName))
+  const { docs, cafeName, now, isRelevant: relevantFn = isRelevant } = input
+  const relevant = docs.filter((d) => relevantFn(d, cafeName))
   const times = relevant.map((d) => d.dateTime.getTime()).sort((a, b) => b - a)
   const t = now.getTime()
 
@@ -77,10 +79,15 @@ export function computeBuzz(input: {
  * 카카오 썸네일은 130x130 정사각이다. 카드 상단의 큰 사진으로 늘리면
  * 뭉개지므로 상호명 옆 작은 정사각으로만 쓴다 (스펙 10.4).
  */
-export function pickThumbnail(input: { docs: BlogDoc[]; cafeName: string }): string {
+export function pickThumbnail(input: {
+  docs: BlogDoc[]
+  cafeName: string
+  isRelevant?: (doc: BlogDoc, name: string) => boolean
+}): string {
+  const relevantFn = input.isRelevant ?? isRelevant
   for (const d of input.docs) {
     if (!d.thumbnail) continue
-    if (!isRelevant(d, input.cafeName)) continue
+    if (!relevantFn(d, input.cafeName)) continue
     return d.thumbnail
   }
   return ''
