@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { HealthSchema, BlacklistEntrySchema } from './schema.js'
+import { HealthSchema, BlacklistEntrySchema, SiteReviewSchema } from './schema.js'
 
 export { HealthSchema, BlacklistEntrySchema }
 export type { Health, BlacklistEntry } from './schema.js'
@@ -57,17 +57,85 @@ export const RestaurantSchema = z.object({
 })
 export type Restaurant = z.infer<typeof RestaurantSchema>
 
-/** 2단계 웹 표시용 간소화된 스키마 — 지금은 타입만 정의해 둔다 */
+/** 2단계 웹 표시용 스키마. SiteCafeSchema(src/schema.ts)와 동등한 필드를 갖는다 —
+ * scale/menuLevel/mealTypes/stayDuration 자리에 cuisineType/hasRoom/reservable을 쓴다. */
 export const SiteRestaurantSchema = z.object({
   id: z.string(),
   name: z.string(),
   sigungu: z.string(),
+  zone: z.enum(['near', 'seoul', 'north', 'east', 'south', 'west']),
+  area: z.string(),
+  driveMinutes: z.number().int().nullable(),
+
   cuisineType: z.enum(CUISINE_TYPES).nullable(),
   hasRoom: z.boolean().nullable(),
   reservable: z.boolean().nullable(),
   parkingGrade: z.enum(['A', 'B', 'C', 'D', '?']),
-  naverMapUrl: z.string().nullable(),
-  imageUrl: z.string().nullable(),
+
   tags: z.array(z.string()),
+  evidence: z.string(),
+  parkingEvidence: z.string(),
+  viewTypes: z.array(z.string()),
+  outdoorSeating: z.boolean().nullable(),
+  teenAppeal: z.number().nullable(),
+
+  naverMapUrl: z.string(),
+  kakaoPlaceUrl: z.string().nullable(),
+  imageUrl: z.string().nullable(),
+
+  hotScore: z.number(),
+  finalScore: z.number(),
+  postsPer30: z.number(),
+  posts30: z.number().int(),
+  posts90: z.number().int(),
+  acceleration: z.number(),
+  trend: z.enum(['rising', 'steady', 'unknown']),
+  ratingAvg: z.number(),
+  ratingCount: z.number().int(),
+  familyReviews: z.array(SiteReviewSchema),
+
+  cityOnly: z.boolean(),
+  visitedOn: z.string().nullable(),
+  firstSeenAt: z.string(),
+  isNew: z.boolean(),
+  lastSeenAt: z.string().nullable(),
 })
 export type SiteRestaurant = z.infer<typeof SiteRestaurantSchema>
+
+export const SiteRestaurantVisitedSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  sigungu: z.string(),
+  area: z.string(),
+  visitedOn: z.string(),
+  note: z.string(),
+  tags: z.array(z.string()),
+  naverMapUrl: z.string(),
+  imageUrl: z.string().nullable(),
+  ratingAvg: z.number(),
+  ratingCount: z.number().int(),
+})
+export type SiteRestaurantVisited = z.infer<typeof SiteRestaurantVisitedSchema>
+
+export const RestaurantSitePayloadSchema = z.object({
+  generatedAt: z.string(),
+  weekOf: z.string(),
+  week: z.array(z.object({
+    rank: z.number().int(),
+    id: z.string(),
+    finalScore: z.number(),
+  })),
+  restaurants: z.array(SiteRestaurantSchema),
+  visited: z.array(SiteRestaurantVisitedSchema),
+  stats: z.object({
+    discovered: z.number().int(),
+    passed: z.number().int(),
+    regions: z.number().int(),
+    scannedRegions: z.number().int(),
+    driveMeasured: z.number().int(),
+    revisitDays: z.number().int(),
+    cityOnly: z.number().int(),
+    staleDays: z.number().int(),
+  }),
+})
+export type RestaurantSitePayload = z.infer<typeof RestaurantSitePayloadSchema>

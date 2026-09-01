@@ -5,9 +5,9 @@ import { z } from 'zod'
 import {
   RestaurantSchema, HealthSchema, BlacklistEntrySchema,
 } from '../restaurant-schema.js'
-import { BuzzSnapshotSchema, SuggestionSchema } from '../schema.js'
+import { BuzzSnapshotSchema, SuggestionSchema, VisitSchema, ReviewSchema } from '../schema.js'
 import type { Restaurant, Health, BlacklistEntry } from '../restaurant-schema.js'
-import type { BuzzSnapshot, Suggestion } from '../schema.js'
+import type { BuzzSnapshot, Suggestion, Visit, Review } from '../schema.js'
 
 async function readArray<S extends z.ZodType>(
   dir: string, file: string, schema: S,
@@ -48,6 +48,8 @@ export interface RestaurantStore {
   writeRestaurantBuzz(rows: BuzzSnapshot[]): Promise<void>
   readRestaurantSuggestions(): Promise<Suggestion[]>
   writeRestaurantSuggestions(rows: Suggestion[]): Promise<void>
+  readRestaurantVisits(): Promise<Visit[]>
+  readRestaurantReviews(): Promise<Review[]>
   readBlacklist(): Promise<BlacklistEntry[]>
   readHealth(): Promise<Health[]>
   writeHealth(rows: Health[]): Promise<void>
@@ -65,6 +67,12 @@ export function createRestaurantJsonStore(dataDir: string): RestaurantStore {
     readRestaurantSuggestions: () =>
       readArray(dataDir, 'restaurant-suggestions.json', SuggestionSchema),
     writeRestaurantSuggestions: (r) => writeArray(dataDir, 'restaurant-suggestions.json', r),
+
+    // 웹앱(github-store)이 쓰는 것과 같은 파일 이름 규칙 — data/restaurant-visits.json,
+    // data/restaurant-reviews.json. 카페의 data/visits.json·data/reviews.json 은
+    // 절대 안 건드린다.
+    readRestaurantVisits: () => readArray(dataDir, 'restaurant-visits.json', VisitSchema),
+    readRestaurantReviews: () => readArray(dataDir, 'restaurant-reviews.json', ReviewSchema),
 
     readBlacklist: () => readArray(dataDir, 'restaurant-blacklist.json', BlacklistEntrySchema),
 
