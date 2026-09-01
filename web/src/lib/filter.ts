@@ -1,4 +1,22 @@
-import type { ListRow } from './site'
+/**
+ * filter.ts 의 함수들이 실제로 쓰는 필드만 요구한다. 원래는 카페의 ListRow
+ * 전체를 요구했는데, 식당의 RestaurantListRow 에는 없는 scale/menuLevel(카페
+ * 전용 개념)까지 강제하고 있었다 — 이 파일 어디도 그 두 필드를 읽지 않는다.
+ * 좁혀도 ListRow 는 이 인터페이스를 구조적으로 만족하므로 카페 쪽은 동작이
+ * 그대로다.
+ */
+export interface FilterableRow {
+  id: string
+  name: string
+  sigungu: string
+  area: string
+  driveMinutes: number | null
+  tags: string[]
+  hotScore: number
+  cityOnly: boolean
+  isNew: boolean
+  firstSeenAt: string
+}
 
 export type Sort = 'hot' | 'near' | 'new'
 
@@ -54,7 +72,7 @@ export interface FilterState {
  * 고른 정렬 기준을 그대로 지킨다.
  */
 /** filterAndSort 의 필터링 부분만. 정렬 없이 개수만 필요할 때 정렬 비용을 안 낸다 */
-function filterRows<T extends ListRow>(cafes: T[], s: FilterState): T[] {
+function filterRows<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
   return cafes.filter((c) => {
     if (c.cityOnly && !s.city) return false
     if (s.area && c.area !== s.area) return false
@@ -68,11 +86,11 @@ function filterRows<T extends ListRow>(cafes: T[], s: FilterState): T[] {
  * 배지 숫자용. filterAndSort 와 같은 필터 조건을 쓰되 정렬(NEW 띄우기 포함)은
  * 건너뛴다 — 숫자만 필요한 곳에서 매번 정렬까지 하면 리스트가 클 때 낭비다.
  */
-export function countMatching<T extends ListRow>(cafes: T[], s: FilterState): number {
+export function countMatching<T extends FilterableRow>(cafes: T[], s: FilterState): number {
   return filterRows(cafes, s).length
 }
 
-export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[] {
+export function filterAndSort<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
   const rows = filterRows(cafes, s)
 
   const pinned = new Set(
@@ -103,7 +121,7 @@ export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[
 }
 
 /** 최근에 등록된 것부터. 같으면 순서가 흔들리지 않게 id 로 마무리한다 */
-function byNewest<T extends ListRow>(a: T, b: T): number {
+function byNewest<T extends FilterableRow>(a: T, b: T): number {
   return b.firstSeenAt.localeCompare(a.firstSeenAt) || a.id.localeCompare(b.id)
 }
 
@@ -125,7 +143,7 @@ export interface AreaCount {
  * 칩 숫자가 실제 눌렀을 때 나오는 결과와 어긋난다 (실측: 지역 미선택 상태에서
  * 태그를 고르면 칩 숫자만 그대로라 클릭하면 배지보다 적게 나왔다).
  */
-export function areaCounts<T extends ListRow>(
+export function areaCounts<T extends FilterableRow>(
   cafes: T[],
   opts: { city: boolean; tags?: string[]; query?: string; newOnly?: boolean },
 ): AreaCount[] {
@@ -164,7 +182,7 @@ export interface SigunguGroup<T> {
   nearest: number
 }
 
-export function groupBySigungu<T extends ListRow>(rows: T[]): SigunguGroup<T>[] {
+export function groupBySigungu<T extends FilterableRow>(rows: T[]): SigunguGroup<T>[] {
   const map = new Map<string, T[]>()
   for (const r of rows) {
     const list = map.get(r.sigungu)
