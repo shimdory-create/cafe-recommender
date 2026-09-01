@@ -69,7 +69,7 @@ export async function runRestaurantLiveness(
   let failed = 0
 
   for (const r of targets) {
-    const query = placeQuery(r as never)
+    const query = placeQuery(r)
     try {
       const res = await local.searchKeyword(query, 1)
       await store.appendRaw(RESTAURANT_LIVENESS_SOURCE, query, res.payload, now)

@@ -587,7 +587,9 @@ async function main() {
     default:
       die(
         '사용법: tsx src/cli/run.ts'
-          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|audit|normalize|hide>',
+          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|audit|normalize|hide'
+          + '|restaurant-discover|restaurant-buzz|restaurant-classify|restaurant-suggest'
+          + '|restaurant-liveness|restaurant-drive>',
       )
   }
 }
@@ -602,6 +604,7 @@ async function main() {
 const MUTATING = new Set([
   'discover', 'buzz', 'classify', 'drive', 'suggest', 'visited', 'hide', 'label',
   'restaurant-discover', 'restaurant-buzz', 'restaurant-classify', 'restaurant-drive', 'restaurant-suggest',
+  'restaurant-liveness',
 ])
 
 try {
