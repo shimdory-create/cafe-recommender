@@ -1,6 +1,8 @@
 import type { KakaoPlace } from '../sources/kakao-local.js'
 import type { Cafe } from '../schema.js'
+import type { Store } from '../store/types.js'
 import { placeQuery } from '../pipeline/place-query.js'
+import { recordFailure, recordSuccess } from '../sources/health.js'
 
 /**
  * 아직 있는 카페인가 — 폐업 감지.
@@ -17,8 +19,11 @@ import { placeQuery } from '../pipeline/place-query.js'
  * 안 보일 수 있다. 멀쩡한 카페를 조용히 지우는 것이 놓치는 것보다 나쁘다.
  */
 
+/** watch 잡이 "이 소스가 조용하다" 를 판단할 때 쓰는 이름. WEEKLY_SOURCES 에도 같은 값이 있다 */
+export const LIVENESS_SOURCE = 'kakao-local-liveness'
+
 export interface LivenessDeps {
-  store: {
+  store: Pick<Store, 'readHealth' | 'writeHealth'> & {
     readCafes(): Promise<Cafe[]>
     writeCafes(cafes: Cafe[]): Promise<void>
     appendRaw(source: string, query: string, payload: unknown, at: Date): Promise<string>
@@ -78,20 +83,24 @@ export async function runLiveness(
     const query = placeQuery(c)
     try {
       const res = await local.searchKeyword(query, 1)
-      await store.appendRaw('kakao-local-liveness', query, res.payload, now)
+      await store.appendRaw(LIVENESS_SOURCE, query, res.payload, now)
       if (res.places.some((p) => p.id === c.kakaoPlaceId)) {
         c.lastSeenAt = now.toISOString()
         seen++
       } else {
         missing++
       }
-    } catch {
+    } catch (e) {
       // 호출 실패는 "없다" 가 아니다. 날짜를 건드리지 않고 넘어간다
       failed++
+      await recordFailure(store, LIVENESS_SOURCE, e, now)
     }
   }
 
   await store.writeCafes(cafes)
+  // watch 잡이 이 소스가 며칠째 조용한지 본다 — 잡 자체가 안 도는 것을
+  // "폐업 의심 0곳" 과 구분해야 한다. 안 그러면 몇 주 밀려도 아무 신호가 없다
+  if (seen > 0) await recordSuccess(store, LIVENESS_SOURCE, now)
 
   return {
     checked: targets.length,

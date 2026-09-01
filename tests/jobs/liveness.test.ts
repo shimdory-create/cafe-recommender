@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { daysUnseen, runLiveness, staleCafes, STALE_DAYS } from '../../src/jobs/liveness.js'
-import type { Cafe } from '../../src/schema.js'
+import {
+  daysUnseen, LIVENESS_SOURCE, runLiveness, staleCafes, STALE_DAYS,
+} from '../../src/jobs/liveness.js'
+import type { Cafe, Health } from '../../src/schema.js'
 
 const NOW = new Date('2026-08-25T00:00:00Z')
 
@@ -19,11 +21,14 @@ const cafe = (over: Partial<Cafe> & { kakaoPlaceId: string }): Cafe => ({
 
 function harness(cafes: Cafe[], 있는id: string[], 던질까 = false) {
   let saved = cafes
+  let health: Health[] = []
   const deps = {
     store: {
       readCafes: async () => saved,
       writeCafes: async (c: Cafe[]) => { saved = c },
       appendRaw: async () => 'p',
+      readHealth: async () => health,
+      writeHealth: async (rows: Health[]) => { health = rows },
     },
     local: {
       searchKeyword: async (q: string) => {
@@ -34,7 +39,7 @@ function harness(cafes: Cafe[], 있는id: string[], 던질까 = false) {
     },
     now: NOW,
   }
-  return { deps, saved: () => saved }
+  return { deps, saved: () => saved, health: () => health }
 }
 
 describe('daysUnseen', () => {
@@ -108,5 +113,25 @@ describe('runLiveness', () => {
     const r = await runLiveness(h.deps, { limit: 1 })
     expect(r.checked).toBe(1)
     expect(h.saved().find((c) => c.kakaoPlaceId === 'old')!.lastSeenAt).toBe(NOW.toISOString())
+  })
+
+  /**
+   * watch 잡이 "몇 주 밀렸는지" 를 보려면 성공 시각이 남아야 한다 — 안 그러면
+   * liveness 가 몇 주 조용히 멈춰도 아무 신호가 없다 (사용자 요청으로 추가).
+   */
+  it('한 곳이라도 확인되면 health 에 성공을 남긴다', async () => {
+    const h = harness([cafe({ kakaoPlaceId: '1' })], ['1'])
+    await runLiveness(h.deps)
+    const row = h.health().find((r) => r.source === LIVENESS_SOURCE)
+    expect(row?.lastSuccessAt).toBe(NOW.toISOString())
+    expect(row?.consecutiveFailures).toBe(0)
+  })
+
+  it('호출이 실패하면 health 에 실패를 남기되 이전 성공 시각은 지우지 않는다', async () => {
+    const h = harness([cafe({ kakaoPlaceId: '1' })], ['1'], true)
+    await runLiveness(h.deps)
+    const row = h.health().find((r) => r.source === LIVENESS_SOURCE)
+    expect(row?.consecutiveFailures).toBe(1)
+    expect(row?.lastError).toContain('네트워크')
   })
 })

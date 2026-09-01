@@ -1,5 +1,6 @@
 import type { BuzzSnapshot, Cafe, Health, NotifyLog } from '../schema.js'
 import { PENDING_PER_DAY } from './daily-buzz.js'
+import { LIVENESS_SOURCE } from './liveness.js'
 
 /**
  * 사용량 이상 감시.
@@ -36,7 +37,7 @@ export interface WatchInput {
 const DAILY_SOURCES = ['kakao-blog', 'classify'] as const
 const DAILY_STALE_HOURS = 36
 /** 주 1회 도는 소스 */
-const WEEKLY_SOURCES = ['kakao-local', 'kakao-directions', 'harvest'] as const
+const WEEKLY_SOURCES = ['kakao-local', 'kakao-directions', 'harvest', LIVENESS_SOURCE] as const
 const WEEKLY_STALE_HOURS = 24 * 9
 
 /** 쿼터 소진을 가리키는 문구. provider 마다 다르게 말한다 */
