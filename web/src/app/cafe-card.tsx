@@ -4,6 +4,13 @@ import {
 } from '@/lib/site'
 import { Thumb } from './thumb'
 import { NaverMapLink } from './naver-map-link'
+// Badge 는 badge.tsx 로 옮겼다 (식당 카드가 이 파일을 통해 @/lib/site 의
+// 카페 payload 를 끌고 들어가지 않도록). 이 파일 안에서도 여전히 쓰므로
+// import 해 오고, 기존에 `./cafe-card` 에서 Badge 를 가져다 쓰던 코드가
+// 그대로 동작하도록 다시 export 한다.
+import { Badge } from './badge'
+
+export { Badge }
 
 /** 주차 등급을 색으로도 구분한다. 차로 가는 가족에게 가장 중요한 정보다 */
 const PARKING_TONE: Record<string, string> = {
@@ -12,14 +19,6 @@ const PARKING_TONE: Record<string, string> = {
   C: 'text-orange-700 dark:text-orange-400',
   D: 'text-red-700 dark:text-red-400',
   '?': 'text-ink-soft',
-}
-
-export function Badge({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded-full bg-bean-soft px-2.5 py-1 text-[12px] font-medium text-bean">
-      {children}
-    </span>
-  )
 }
 
 /**

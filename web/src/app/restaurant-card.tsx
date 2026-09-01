@@ -5,7 +5,7 @@ import {
 } from '@/lib/restaurant-site'
 import { Thumb } from './thumb'
 import { NaverMapLink } from './naver-map-link'
-import { Badge } from './cafe-card'
+import { Badge } from './badge'
 
 const PARKING_TONE: Record<string, string> = {
   A: 'text-emerald-700 dark:text-emerald-400',
@@ -24,7 +24,9 @@ export function RestaurantTopThree({ restaurant }: { restaurant: RestaurantListR
   return (
     <div className="flex flex-wrap items-center gap-x-2 text-[13px]">
       <span className="font-semibold">
-        {restaurant.cuisineType ? CUISINE_LABEL[restaurant.cuisineType] : '음식종류 미확인'}
+        {restaurant.cuisineType
+          ? (CUISINE_LABEL[restaurant.cuisineType] ?? restaurant.cuisineType)
+          : '음식종류 미확인'}
       </span>
       <span className="text-line">·</span>
       <span className={`font-semibold ${PARKING_TONE[restaurant.parkingGrade]}`}>

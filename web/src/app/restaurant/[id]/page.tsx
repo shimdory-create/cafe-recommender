@@ -3,7 +3,7 @@ import {
   restaurantById, CUISINE_LABEL, driveLabel, PARKING_LABEL, restaurantPayload,
   restaurantRecentlyVisited,
 } from '@/lib/restaurant-site'
-import { Badge } from '../../cafe-card'
+import { Badge } from '../../badge'
 import { NaverMapLink } from '../../naver-map-link'
 import { ReviewPanel } from './review-panel'
 import { BackLink } from '../../cafe/[id]/back-link'

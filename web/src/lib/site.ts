@@ -5,6 +5,10 @@ import raw from '../generated/site.json'
 import type { SiteCafe, SitePayload, SiteVisited } from './site-types'
 
 export type { SiteCafe, SitePayload, SiteVisited }
+// driveLabel/addedLabel 은 payload 를 안 쓰는 순수 함수라 labels.ts 로
+// 옮겼다 (식당 쪽이 이 파일 전체를 끌고 들어가지 않도록). 여기서 재수출해서
+// 기존에 `@/lib/site` 에서 가져다 쓰던 카페 코드는 그대로 동작한다.
+export { driveLabel, addedLabel } from './labels'
 
 /**
  * JSON import 는 값에서 타입을 추론하므로(널이 없으면 non-null, 문자열은
@@ -147,18 +151,4 @@ export function hiddenByVisit(
   return new Set(
     visits.filter((v) => recentlyVisited(v.visitedOn, now)).map((v) => v.kakaoPlaceId),
   )
-}
-
-export function driveLabel(min: number | null): string {
-  if (min === null) return '거리 미확인'
-  if (min < 60) return `차로 ${min}분`
-  const h = Math.floor(min / 60)
-  const m = min % 60
-  return m === 0 ? `차로 ${h}시간` : `차로 ${h}시간 ${m}분`
-}
-
-/** 목록에 들어온 날짜. "8/25 추가" 형태 — 최신순 정렬의 기준을 눈으로도 보이게 한다 */
-export function addedLabel(firstSeenAt: string): string {
-  const d = new Date(firstSeenAt)
-  return `${d.getMonth() + 1}/${d.getDate()} 추가`
 }

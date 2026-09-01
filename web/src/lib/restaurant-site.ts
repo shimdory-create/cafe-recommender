@@ -2,7 +2,7 @@ import raw from '../generated/site-restaurant.json'
 // 경계를 넘는 import 를 쓰지 않는다 — src/restaurant-schema.ts 는 web 밖이라
 // 모듈 해석이 위로 올라가고, Vercel 은 web 에서만 설치하므로 zod 를 못 찾는다.
 // 드리프트는 파이프라인 테스트(restaurant-types-conformance)가 잡는다.
-import { driveLabel, addedLabel } from './site'
+import { driveLabel, addedLabel } from './labels'
 import type { RestaurantSitePayload, SiteRestaurant, SiteRestaurantVisited } from './restaurant-site-types'
 
 export type { SiteRestaurant, RestaurantSitePayload, SiteRestaurantVisited }
