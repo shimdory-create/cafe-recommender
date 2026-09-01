@@ -1,0 +1,47 @@
+name: daily-classify-restaurant
+on:
+  schedule:
+    # 21:56 UTC. daily-classify(카페, 21:23 UTC)와 33분 차이 —
+    # concurrency 그룹이 달라 동시에 돌 수 있으므로 npm ci 동시 실행을 피하려면
+    # 시각도 띄워야 한다.
+    - cron: '56 21 * * *'
+  workflow_dispatch:
+
+# data/ 를 쓰는 식당 워크플로는 하나씩 돈다. 카페 쪽(data-write)과는 다른
+# 파일(restaurants.json 등)에 쓰므로 별도 그룹으로 카페와 독립적으로 돈다.
+concurrency:
+  group: restaurant-data-write
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run restaurant-classify -- --limit 200 --redo
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 카페의 scripts/commit-data.sh 는 마지막에 npm run --silent site 로
+      # web/src/generated/site.json(카페 페이로드)를 다시 만든다 — 식당
+      # 전용 변경에는 무관하고 낭비이므로 여기서는 직접 커밋·푸시한다.
+      - name: 데이터 커밋
+        run: |
+          git config user.name  "cafe-bot"
+          git config user.email "cafe-bot@users.noreply.github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "변경 없음"
+            exit 0
+          fi
+          git commit -q -m "data: 식당 판정 갱신 $(date -u +%Y-%m-%d)"
+          git pull -q --rebase origin "$(git rev-parse --abbrev-ref HEAD)"
+          git push -q

@@ -506,7 +506,11 @@ async function main() {
         blog: base.blog,
         llm: base.llm,
       }
-      const regions = REGIONS.filter((r) => !r.excluded)
+      // --pilot: 처음엔 가까운 시군구 5곳만 스캔한다 (파일럿 지역, Task 15).
+      const PILOT_SIGUNGU = ['부평구', '계양구', '서구', '김포시', '검단구']
+      const regions = flag(rest, 'pilot') !== undefined
+        ? REGIONS.filter((r) => !r.excluded && PILOT_SIGUNGU.includes(r.sigungu))
+        : REGIONS.filter((r) => !r.excluded)
       const skipHarvest = flag(rest, 'skip-harvest') !== undefined
       console.log(`식당 발굴 시작 (${regions.length}개 지역)`)
       const r = await runRestaurantDiscover(ctx, { regions, skipHarvest })
