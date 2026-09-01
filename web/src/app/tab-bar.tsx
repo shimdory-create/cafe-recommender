@@ -2,6 +2,7 @@
 
 import Link, { type LinkProps } from 'next/link'
 import { usePathname } from 'next/navigation'
+import { domainOf } from '@/lib/domain-switch'
 
 /**
  * 하단 탭바. 상단 햄버거 메뉴를 만들지 않는다 (스펙 10.1) —
@@ -32,16 +33,24 @@ function Tab({
 
 export function TabBar() {
   const path = usePathname()
+  const domain = domainOf(path)
+  // 카페는 기존 경로 그대로, 식당은 /restaurant 접두어. Next 의 타입 라우트가
+  // href 를 리터럴로 요구해서(원본 주석과 동일 이유) 두 갈래를 그대로 적는다.
+  const home = domain === 'restaurant' ? '/restaurant' : '/'
+  const list = domain === 'restaurant' ? '/restaurant/list' : '/list'
+  const visited = domain === 'restaurant' ? '/restaurant/visited' : '/visited'
+  const info = domain === 'restaurant' ? '/restaurant/info' : '/info'
+
   return (
     <nav
       className="fixed inset-x-0 bottom-0 z-20 border-t border-line bg-card/95 backdrop-blur"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <div className="mx-auto flex max-w-[480px]">
-        <Tab href="/" label="이번 주" icon="☕" active={path === '/'} />
-        <Tab href="/list" label="전체" icon="📋" active={path.startsWith('/list')} />
-        <Tab href="/visited" label="다녀온 곳" icon="★" active={path.startsWith('/visited')} />
-        <Tab href="/info" label="정보" icon="ⓘ" active={path.startsWith('/info')} />
+        <Tab href={home} label="이번 주" icon="☕" active={path === home} />
+        <Tab href={list} label="전체" icon="📋" active={path.startsWith(list)} />
+        <Tab href={visited} label="다녀온 곳" icon="★" active={path.startsWith(visited)} />
+        <Tab href={info} label="정보" icon="ⓘ" active={path.startsWith(info)} />
       </div>
     </nav>
   )
