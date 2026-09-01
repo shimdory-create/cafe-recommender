@@ -31,4 +31,15 @@ describe('createRestaurantJsonStore', () => {
     expect(await store.readRestaurantSuggestions()).toEqual([])
     expect(await store.readHealth()).toEqual([])
   })
+
+  it('실제 data/restaurant-blacklist.json 이 BlacklistEntrySchema 로 파싱된다 (Fix 3)', async () => {
+    const store = createRestaurantJsonStore('data')
+    const rows = await store.readBlacklist()
+    expect(rows.length).toBeGreaterThan(0)
+    expect(rows.some((e) => e.pattern === '맥도날드')).toBe(true)
+    for (const e of rows) {
+      expect(e.pattern.length).toBeGreaterThan(0)
+      expect(['contains', 'exact', 'regex']).toContain(e.matchType)
+    }
+  })
 })
