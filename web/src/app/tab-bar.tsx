@@ -47,7 +47,7 @@ export function TabBar() {
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <div className="mx-auto flex max-w-[480px]">
-        <Tab href={home} label="이번 주" icon="☕" active={path === home} />
+        <Tab href={home} label="이번 주" icon={domain === 'restaurant' ? '🍚' : '☕'} active={path === home} />
         <Tab href={list} label="전체" icon="📋" active={path.startsWith(list)} />
         <Tab href={visited} label="다녀온 곳" icon="★" active={path.startsWith(visited)} />
         <Tab href={info} label="정보" icon="ⓘ" active={path.startsWith(info)} />
