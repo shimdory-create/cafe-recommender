@@ -56,3 +56,18 @@ export const RestaurantSchema = z.object({
   tags: z.array(z.string()).default([]),
 })
 export type Restaurant = z.infer<typeof RestaurantSchema>
+
+/** 2단계 웹 표시용 간소화된 스키마 — 지금은 타입만 정의해 둔다 */
+export const SiteRestaurantSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  sigungu: z.string(),
+  cuisineType: z.enum(CUISINE_TYPES).nullable(),
+  hasRoom: z.boolean().nullable(),
+  reservable: z.boolean().nullable(),
+  parkingGrade: z.enum(['A', 'B', 'C', 'D', '?']),
+  naverMapUrl: z.string().nullable(),
+  imageUrl: z.string().nullable(),
+  tags: z.array(z.string()),
+})
+export type SiteRestaurant = z.infer<typeof SiteRestaurantSchema>
