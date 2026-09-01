@@ -1,4 +1,4 @@
-import { hotScore, pickWeekendCandidates } from '../pipeline/score.js'
+import { hotScore, finalScore, pickWeekendCandidates } from '../pipeline/score.js'
 import { restaurantFamilyFit } from '../pipeline/restaurant-score.js'
 import { passesGate } from '../pipeline/gate.js'
 import { restaurantDriveMinutesOf } from './restaurant-drive-times.js'
@@ -49,14 +49,18 @@ export async function runRestaurantWeeklySuggest(
         hasRoom: a.hasRoom,
         reservable: a.reservable,
         lastVisitedOn: null,
-        outdoorOnly: Boolean(a.outdoorSeating),
+        // 카페는 menuLevel === 1(실내 식사 불가) 일 때만 야외석을 계절 배수로
+        // 다뤘다. 식당은 전부 식사가 되므로 그 신호가 없다 — 테라스가 있어도
+        // 실내 식사가 본업인 식당까지 계절 배수를 주면 안 된다. 그래서
+        // 이 단계에서는 식당에 계절 배수를 아예 주지 않는다.
+        outdoorOnly: false,
         teenAppeal: a.teenAppeal ?? 2,
       },
       now,
     )
 
     return [{
-      id: r.kakaoPlaceId, score: hot * fit, tags: r.tags, region: r.sigungu, hot, fit,
+      id: r.kakaoPlaceId, score: finalScore(hot, fit), tags: r.tags, region: r.sigungu, hot, fit,
     }]
   })
 
