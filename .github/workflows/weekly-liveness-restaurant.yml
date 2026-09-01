@@ -9,7 +9,7 @@ on:
 
 # data/ 를 쓰는 식당 워크플로는 하나씩 돈다 (weekly-drive-restaurant.yml 주석 참고)
 concurrency:
-  group: restaurant-data-write
+  group: data-write
   cancel-in-progress: false
 
 permissions:

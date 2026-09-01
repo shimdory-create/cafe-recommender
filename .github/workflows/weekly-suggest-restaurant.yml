@@ -10,7 +10,7 @@ on:
 # data/ 를 쓰는 식당 워크플로는 하나씩 돈다. 카페 쪽(data-write)과는 다른
 # 파일(restaurants.json 등)에 쓰므로 별도 그룹으로 카페와 독립적으로 돈다.
 concurrency:
-  group: restaurant-data-write
+  group: data-write
   cancel-in-progress: false
 
 permissions:
