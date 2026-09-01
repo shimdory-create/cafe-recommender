@@ -28,7 +28,10 @@ export function RestaurantListClient(
 ) {
   const [q, setQ] = useState(initial.q)
   const [area, setArea] = useState<string | null>(initial.area)
-  const [tags, setTags] = useState<string[]>(initial.tags)
+  // 식당은 카페와 달리 cuisineType 이 하나뿐이다 (restaurant-tag.ts) — 칩을
+  // area 처럼 단일 선택으로 다룬다. filter.ts 의 tags 는 AND 매칭이라
+  // 그대로 여러 개를 밀어넣으면(카페 성격 태그처럼) 항상 빈 결과가 된다.
+  const [cuisine, setCuisine] = useState<string | null>(initial.tags[0] ?? null)
   const [sort, setSort] = useState<Sort>(initial.sort)
   const [city, setCity] = useState(initial.city)
   const [newOnly, setNewOnly] = useState(initial.newOnly)
@@ -39,8 +42,12 @@ export function RestaurantListClient(
   const { wished, toggle: toggleWish } = useRestaurantWishlist()
   const { dismissed, dismiss } = useRestaurantDismissed()
 
+  // filter.ts / url-state 의 tags 슬롯을 그대로 재사용하되, 이 화면에서는
+  // 항상 최대 한 개만 담는다.
+  const cuisineTags = useMemo(() => (cuisine ? [cuisine] : []), [cuisine])
+
   useUrlSync(listParamsToQuery({
-    ...initial, q, area, tags, sort, city, newOnly, wishOnly, shown: shownCount,
+    ...initial, q, area, tags: cuisineTags, sort, city, newOnly, wishOnly, shown: shownCount,
   }))
 
   // 폐업 의심으로 숨긴 곳은 다른 모든 필터보다 먼저 뺀다 — 지역·태그 숫자에도
@@ -57,20 +64,20 @@ export function RestaurantListClient(
   )
 
   const matched = useMemo(
-    () => filterAndSort(wishFiltered, { tags, sort, city, area, query: q, newOnly }),
-    [wishFiltered, tags, sort, city, area, q, newOnly],
+    () => filterAndSort(wishFiltered, { tags: cuisineTags, sort, city, area, query: q, newOnly }),
+    [wishFiltered, cuisineTags, sort, city, area, q, newOnly],
   )
   const shown = useMemo(() => matched.slice(0, shownCount), [matched, shownCount])
   const rest = matched.length - shown.length
   const areas = useMemo(
-    () => areaCounts(wishFiltered, { city, tags, query: q }),
-    [wishFiltered, city, tags, q],
+    () => areaCounts(wishFiltered, { city, tags: cuisineTags, query: q }),
+    [wishFiltered, city, cuisineTags, q],
   )
   // matched 와 같은 필터를 쓰고 newOnly 만 강제한다 — 배지 숫자가
   // "지금 NEW 를 누르면 나올 개수" 와 구조적으로 어긋날 수 없게 한다.
   const newCount = useMemo(
-    () => countMatching(wishFiltered, { tags, sort, city, area, query: q, newOnly: true }),
-    [wishFiltered, tags, sort, city, area, q],
+    () => countMatching(wishFiltered, { tags: cuisineTags, sort, city, area, query: q, newOnly: true }),
+    [wishFiltered, cuisineTags, sort, city, area, q],
   )
   // 서울·인천만 안에서 구별로 다시 묶는다. 나머지는 칩 하나가 곧 한 지역이다
   const groups = useMemo(
@@ -85,9 +92,10 @@ export function RestaurantListClient(
     set(v)
     setShownCount(PAGE_CHUNK)
   }
-  const toggle = reset<string>((t) =>
-    setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly || wishOnly
+  // area 칩과 같은 단일 선택 패턴: 이미 선택된 걸 다시 누르면 해제, 아니면
+  // 기존 선택을 대체한다 (누적 아님 — cuisineType 은 식당당 하나뿐이므로).
+  const selectCuisine = reset<string>((t) => setCuisine((prev) => (prev === t ? null : t)))
+  const dirty = cuisine !== null || area !== null || q !== '' || newOnly || wishOnly
 
   return (
     <div className="py-5">
@@ -128,13 +136,13 @@ export function RestaurantListClient(
           ♥ 위시리스트
         </Chip>
         {CUISINE_CHIPS.map((t) => (
-          <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{CUISINE_LABEL[t]}</Chip>
+          <Chip key={t} on={cuisine === t} onClick={() => selectCuisine(t)}>{CUISINE_LABEL[t]}</Chip>
         ))}
         {dirty && (
           <button
             type="button"
             onClick={() => {
-              setTags([]); setArea(null); setQ(''); setNewOnly(false); setWishOnly(false)
+              setCuisine(null); setArea(null); setQ(''); setNewOnly(false); setWishOnly(false)
               setShownCount(PAGE_CHUNK)
             }}
             className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
