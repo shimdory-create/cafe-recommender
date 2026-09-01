@@ -28,4 +28,16 @@ describe('assignRestaurantTags', () => {
     expect(tags).toEqual([])
     expect(passesHardGate({ tags, parkingGrade: 'A' }).pass).toBe(false)
   })
+
+  it('음식종류를 몰라도 룸·예약 같은 편의 태그만으로 게이트를 통과시키지 않는다', () => {
+    // 회귀 테스트: cuisineType 이 null 이면 hasRoom/reservable 이 true 여도
+    // 태그가 비어야 한다 (Fix 1 — 게이트 누수).
+    const withRoom = assignRestaurantTags({ ...base, cuisineType: null, hasRoom: true })
+    expect(withRoom).toEqual([])
+    expect(passesHardGate({ tags: withRoom, parkingGrade: 'A' }).pass).toBe(false)
+
+    const withReservable = assignRestaurantTags({ ...base, cuisineType: null, reservable: true })
+    expect(withReservable).toEqual([])
+    expect(passesHardGate({ tags: withReservable, parkingGrade: 'A' }).pass).toBe(false)
+  })
 })
