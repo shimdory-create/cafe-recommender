@@ -1,12 +1,14 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { ALL_TAGS, type ListRow } from '@/lib/site'
+import { ALL_TAGS, isStale, type ListRow } from '@/lib/site'
 import {
   areaCounts, filterAndSort, groupBySigungu, PAGE_CHUNK, SPLIT_AREAS, type Sort,
 } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
+import { useWishlist } from '@/lib/use-wishlist'
+import { useDismissed } from '@/lib/use-dismissed'
 import { AreaChips, Chip, SearchBox } from '../filters'
 import { CafeCard } from '../cafe-card'
 
@@ -24,26 +26,47 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
   const [sort, setSort] = useState<Sort>(initial.sort)
   const [city, setCity] = useState(initial.city)
   const [newOnly, setNewOnly] = useState(initial.newOnly)
+  const [wishOnly, setWishOnly] = useState(false)
   const [shownCount, setShownCount] = useState(initial.shown)
   // 고른 지역이 접힌 구간에 있으면 처음부터 펴 둔다
   const [expanded, setExpanded] = useState(false)
+  const { wished, toggle: toggleWish } = useWishlist()
+  const { dismissed, dismiss } = useDismissed()
 
   useUrlSync(listParamsToQuery({
     ...initial, q, area, tags, sort, city, newOnly, shown: shownCount,
   }))
 
+  // 폐업 의심으로 숨긴 곳은 다른 모든 필터보다 먼저 뺀다 — 지역·태그 숫자에도
+  // 안 잡혀야 "숨겼는데 칩 숫자에는 남아 있다" 가 안 생긴다
+  const visible = useMemo(
+    () => cafes.filter((c) => !dismissed.has(c.id)),
+    [cafes, dismissed],
+  )
+
+  const filtered = useMemo(
+    () => filterAndSort(visible, { tags, sort, city, area, query: q, newOnly }),
+    [visible, tags, sort, city, area, q, newOnly],
+  )
+  // 위시리스트는 실시간으로 받아온 클라이언트 상태라 filterAndSort(순수 함수,
+  // 빌드 데이터만 봄) 안에 넣지 않고 마지막에 한 번 더 거른다
   const matched = useMemo(
-    () => filterAndSort(cafes, { tags, sort, city, area, query: q, newOnly }),
-    [cafes, tags, sort, city, area, q, newOnly],
+    () => (wishOnly ? filtered.filter((c) => wished.has(c.id)) : filtered),
+    [filtered, wishOnly, wished],
   )
   // 한 번에 다 그리면 카드 664개에 DOM 노드 15,000개가 된다 (실측). 검색·칩으로
   // 좁히면 대개 한 묶음 안에 들어와서 버튼은 잘 보이지 않는다
   const shown = useMemo(() => matched.slice(0, shownCount), [matched, shownCount])
   const rest = matched.length - shown.length
-  const areas = useMemo(() => areaCounts(cafes, { city }), [cafes, city])
+  const areas = useMemo(
+    () => areaCounts(visible, { city, tags, query: q }),
+    [visible, city, tags, q],
+  )
+  // matched 와 같은 필터를 쓰고 newOnly 만 강제한다 — 배지 숫자가
+  // "지금 NEW 를 누르면 나올 개수" 와 구조적으로 어긋날 수 없게 한다
   const newCount = useMemo(
-    () => cafes.filter((c) => c.isNew && (city || !c.cityOnly)).length,
-    [cafes, city],
+    () => filterAndSort(visible, { tags, sort, city, area, query: q, newOnly: true }).length,
+    [visible, tags, sort, city, area, q],
   )
   // 서울·인천만 안에서 구별로 다시 묶는다. 나머지는 칩 하나가 곧 한 지역이다
   const groups = useMemo(
@@ -63,7 +86,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
   }
   const toggle = reset<string>((t) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly
+  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly || wishOnly
 
   return (
     <div className="py-5">
@@ -99,6 +122,12 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
       </div>
 
       <div className="mt-3 flex flex-wrap gap-1.5">
+        <Chip
+          on={wishOnly}
+          onClick={() => { setWishOnly((v) => !v); setShownCount(PAGE_CHUNK) }}
+        >
+          ♥ 위시리스트
+        </Chip>
         {ALL_TAGS.map((t) => (
           <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{t}</Chip>
         ))}
@@ -106,7 +135,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
           <button
             type="button"
             onClick={() => {
-              setTags([]); setArea(null); setQ(''); setNewOnly(false)
+              setTags([]); setArea(null); setQ(''); setNewOnly(false); setWishOnly(false)
               setShownCount(PAGE_CHUNK)
             }}
             className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
@@ -118,7 +147,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
 
       <div className="mt-3 flex items-center gap-2">
         <div className="flex overflow-hidden rounded-full border border-line">
-          {([['hot', '화제순'], ['near', '가까운순']] as const).map(([k, label]) => (
+          {([['hot', '화제순'], ['near', '가까운순'], ['new', '최신순']] as const).map(([k, label]) => (
             <button
               key={k}
               type="button"
@@ -165,7 +194,14 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
               </div>
               <div className="flex flex-col gap-4">
                 {g.rows.map((c) => (
-                  <CafeCard key={c.id} cafe={c} />
+                  <CafeCard
+                    key={c.id}
+                    cafe={c}
+                    wished={wished.has(c.id)}
+                    onToggleWish={() => toggleWish(c.id)}
+                    stale={!c.visitedOn && isStale(c.lastSeenAt)}
+                    onDismiss={() => dismiss(c.id)}
+                  />
                 ))}
               </div>
             </section>
@@ -174,7 +210,14 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
       ) : (
         <div className="mt-4 flex flex-col gap-4">
           {shown.map((c) => (
-            <CafeCard key={c.id} cafe={c} />
+            <CafeCard
+              key={c.id}
+              cafe={c}
+              wished={wished.has(c.id)}
+              onToggleWish={() => toggleWish(c.id)}
+              stale={!c.visitedOn && isStale(c.lastSeenAt)}
+              onDismiss={() => dismiss(c.id)}
+            />
           ))}
         </div>
       )}
@@ -192,9 +235,11 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
 
       {shown.length === 0 && (
         <p className="mt-8 text-center text-[14px] leading-relaxed text-ink-soft">
-          {q
-            ? <>“{q}” 로 찾은 카페가 없어요.<br />이름 일부만 넣어보세요.</>
-            : '조건에 맞는 카페가 없어요. 칩을 줄여보세요.'}
+          {wishOnly
+            ? <>아직 담은 곳이 없어요.<br />카드의 하트를 눌러 담아보세요.</>
+            : q
+              ? <>“{q}” 로 찾은 카페가 없어요.<br />이름 일부만 넣어보세요.</>
+              : '조건에 맞는 카페가 없어요. 칩을 줄여보세요.'}
         </p>
       )}
     </div>

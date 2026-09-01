@@ -53,6 +53,7 @@ const row = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
   visitedOn: null,
   firstSeenAt: '2026-01-01T00:00:00.000Z',
   isNew: false,
+  lastSeenAt: '2026-08-21T00:00:00.000Z',
   ...over,
 })
 
@@ -64,7 +65,10 @@ function input(over: Partial<AuditInput> = {}): AuditInput {
     week: [{ rank: 1, id: '1', finalScore: 25 }],
     cafes: [row({ id: '1' })],
     visited: [],
-    stats: { discovered: 1, passed: 1, regions: 1, scannedRegions: 69, revisitDays: 180, driveMeasured: 1, cityOnly: 0 },
+    stats: {
+      discovered: 1, passed: 1, regions: 1, scannedRegions: 69, revisitDays: 180,
+      driveMeasured: 1, cityOnly: 0, staleDays: 21,
+    },
   }
   return {
     cafes,

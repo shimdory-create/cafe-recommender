@@ -1,4 +1,5 @@
 import { driveMinutesOf } from '../jobs/drive-times.js'
+import { STALE_DAYS } from '../jobs/liveness.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
@@ -231,6 +232,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       visitedOn: lastVisit.get(c.kakaoPlaceId) ?? null,
       firstSeenAt: c.firstSeenAt,
       isNew: isNewCafe(c.firstSeenAt, now),
+      lastSeenAt: c.lastSeenAt ?? null,
     })
   }
 
@@ -284,6 +286,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       driveMeasured: deduped.filter((r) => byId.get(r.id)?.driveMinutes != null).length,
       revisitDays: REVISIT_DAYS,
       cityOnly: deduped.filter((r) => r.cityOnly).length,
+      staleDays: STALE_DAYS,
     },
   })
 }

@@ -4,8 +4,10 @@ import {
   byId, driveLabel, MENU_LABEL, PARKING_LABEL, payload, recentlyVisited,
 } from '@/lib/site'
 import { Badge } from '../../cafe-card'
+import { NaverMapLink } from '../../naver-map-link'
 import { ReviewPanel } from './review-panel'
 import { BackLink } from './back-link'
+import { WishHeart } from './wish-heart'
 
 export function generateStaticParams() {
   return payload.cafes.map((c) => ({ id: c.id }))
@@ -45,14 +47,17 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
     <div className="py-5">
       <BackLink />
 
-      <h1 className="mt-1 text-[24px] font-bold leading-tight tracking-tight">
-        {cafe.isNew && (
-          <span className="mr-2 align-middle rounded bg-bean px-1.5 py-0.5 text-[11px] font-extrabold tracking-wide text-white">
-            NEW
-          </span>
-        )}
-        {cafe.name}
-      </h1>
+      <div className="mt-1 flex items-start justify-between gap-2">
+        <h1 className="text-[24px] font-bold leading-tight tracking-tight">
+          {cafe.isNew && (
+            <span className="mr-2 align-middle rounded bg-bean px-1.5 py-0.5 text-[11px] font-extrabold tracking-wide text-white">
+              NEW
+            </span>
+          )}
+          {cafe.name}
+        </h1>
+        <WishHeart cafeId={cafe.id} />
+      </div>
       <p className="mt-1 text-[14px] text-ink-soft">
         {cafe.sigungu} · {driveLabel(cafe.driveMinutes)}
       </p>
@@ -72,14 +77,12 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
       )}
 
       {/* 주 버튼. 엄지로 누르는 것이므로 크게 (스펙 10.1) */}
-      <a
+      <NaverMapLink
         href={cafe.naverMapUrl}
-        target="_blank"
-        rel="noreferrer"
         className="mt-5 flex min-h-[56px] items-center justify-center rounded-2xl bg-bean text-[16px] font-bold text-white active:opacity-90"
       >
         네이버지도로 열기 ↗
-      </a>
+      </NaverMapLink>
 
       {/*
         영업시간을 우리가 들고 있지 않다.
@@ -92,14 +95,12 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
 
         그래서 지어내지 않고 한 번에 갈 수 있는 길을 크게 둔다.
       */}
-      <a
+      <NaverMapLink
         href={cafe.naverMapUrl}
-        target="_blank"
-        rel="noreferrer"
         className="mt-2 flex min-h-[48px] items-center justify-center gap-1.5 rounded-2xl border border-line bg-card text-[14px] font-semibold text-bean active:bg-bean-soft"
       >
         영업시간·휴무일 확인 ↗
-      </a>
+      </NaverMapLink>
       <p className="mt-1.5 text-center text-[12px] text-ink-soft">
         영업시간은 자주 바뀌어서 지도에서 바로 확인하는 게 정확해요
       </p>

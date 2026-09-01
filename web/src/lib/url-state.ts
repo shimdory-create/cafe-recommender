@@ -51,7 +51,7 @@ export function readListParams(raw: Raw): ListParams {
     q: one(raw.q),
     area: area || null,
     tags,
-    sort: one(raw.s) === 'near' ? 'near' : 'hot',
+    sort: one(raw.s) === 'near' || one(raw.s) === 'new' ? one(raw.s) as Sort : 'hot',
     city: one(raw.c) === '1',
     newOnly: one(raw.n) === '1',
     visitedSort: {

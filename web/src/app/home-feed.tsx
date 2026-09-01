@@ -5,9 +5,36 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { PAGE_SIZE, pageCount, pageFromParam, pageOf } from '@/lib/paging'
 import { hiddenByVisit } from '@/lib/site'
 import type { VisitRow } from '@/lib/reviews'
+import { useWishlist } from '@/lib/use-wishlist'
+import { useDismissed } from '@/lib/use-dismissed'
 import { FeedCards, type FeedRow } from './feed-cards'
 
 export type { FeedRow }
+
+/**
+ * 우선순위(기본, 큐레이션 순서) / 가까운순 / 최신순.
+ *
+ * "전체" 탭의 화제순·가까운순과 이름이 다른 것은 홈의 기본 정렬이 화제량
+ * 단일 기준이 아니라 이번 주 큐레이션 순서이기 때문이다 — `hot` 이라 부르면
+ * 오해를 부른다.
+ */
+export type HomeSort = 'default' | 'near' | 'new'
+
+const HOME_SORT_LABEL: [HomeSort, string][] = [
+  ['default', '우선순위'], ['near', '가까운순'], ['new', '최신순'],
+]
+
+function sortFeed(rows: FeedRow[], sort: HomeSort): FeedRow[] {
+  if (sort === 'default') return rows
+  if (sort === 'near') {
+    return [...rows].sort((a, b) => {
+      const da = a.driveMinutes ?? Number.POSITIVE_INFINITY
+      const db = b.driveMinutes ?? Number.POSITIVE_INFINITY
+      return da !== db ? da - db : b.hotScore - a.hotScore
+    })
+  }
+  return [...rows].sort((a, b) => b.firstSeenAt.localeCompare(a.firstSeenAt) || a.id.localeCompare(b.id))
+}
 
 /**
  * 홈 피드. 10곳씩 보여주고 다음 10곳으로 넘어간다.
@@ -25,6 +52,10 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
   const pathname = usePathname()
   const params = useSearchParams()
   const [visited, setVisited] = useState<Set<string> | null>(null)
+  const { wished, toggle: toggleWish } = useWishlist()
+  const { dismissed, dismiss } = useDismissed()
+  const sortParam = params.get('s')
+  const sort: HomeSort = sortParam === 'near' || sortParam === 'new' ? sortParam : 'default'
 
   useEffect(() => {
     // 방금 체크한 카페는 즉시 빠져야 한다. 페이로드의 방문 기록은 빌드
@@ -47,25 +78,62 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
       })
   }, [])
 
-  const feed = useMemo(
-    () => (visited ? rows.filter((r) => !visited.has(r.id)) : rows),
-    [rows, visited],
-  )
+  const feed = useMemo(() => {
+    const live = visited ? rows.filter((r) => !visited.has(r.id)) : rows
+    const shown = live.filter((r) => !dismissed.has(r.id))
+    return sortFeed(shown, sort)
+  }, [rows, visited, dismissed, sort])
 
   const total = pageCount(feed.length)
   const page = pageFromParam(params.get('p'), total)
   const shown = pageOf(feed, page)
   const offset = (page - 1) * PAGE_SIZE
 
+  // 1페이지 + 기본 정렬은 파라미터를 붙이지 않는다 — 카톡 링크와 같은 주소를 유지한다
+  const buildQuery = (nextPage: number, nextSort: HomeSort) => {
+    const sp = new URLSearchParams()
+    if (nextPage > 1) sp.set('p', String(nextPage))
+    if (nextSort !== 'default') sp.set('s', nextSort)
+    const s = sp.toString()
+    return s ? `${pathname}?${s}` : pathname
+  }
+
   const go = useCallback((next: number) => {
-    // 1페이지는 파라미터를 붙이지 않는다 — 카톡 링크와 같은 주소를 유지한다
-    router.push(next <= 1 ? pathname : `${pathname}?p=${next}`, { scroll: false })
+    router.push(buildQuery(next, sort), { scroll: false })
     window.scrollTo({ top: 0, behavior: 'smooth' })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, router, sort])
+
+  const changeSort = useCallback((next: HomeSort) => {
+    router.push(buildQuery(1, next), { scroll: false })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, router])
 
   return (
     <>
-      <FeedCards rows={shown} offset={offset} />
+      <div className="mb-4 flex overflow-hidden rounded-full border border-line">
+        {HOME_SORT_LABEL.map(([k, label]) => (
+          <button
+            key={k}
+            type="button"
+            onClick={() => changeSort(k)}
+            className={`min-h-[40px] flex-1 px-3 text-[13px] ${
+              sort === k ? 'bg-bean text-white font-semibold' : 'bg-card text-ink-soft'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+
+      <FeedCards
+        rows={shown}
+        offset={offset}
+        showRank={sort === 'default'}
+        wished={wished}
+        onToggleWish={toggleWish}
+        onDismiss={dismiss}
+      />
 
       {total > 1 && (
         <nav className="mt-6 flex items-center justify-between gap-3">

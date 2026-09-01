@@ -59,6 +59,8 @@ export interface SiteCafe {
   firstSeenAt: string
   /** 최초 대량 수집 이후 30일 안에 들어온 곳 */
   isNew: boolean
+  /** liveness 잡이 카카오에서 마지막으로 확인한 시각. 한 번도 확인 못 했으면 null */
+  lastSeenAt: string | null
 }
 
 export interface SiteVisited {
@@ -95,5 +97,7 @@ export interface SitePayload {
     /** 다녀온 곳을 추천에서 내리는 기간(일) */
     revisitDays: number
     cityOnly: number
+    /** 이 날수를 넘도록 안 보이면 폐업 의심 배지를 띄운다 */
+    staleDays: number
   }
 }

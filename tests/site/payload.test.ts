@@ -422,6 +422,7 @@ describe('dedupeListings — 같은 카페가 두 번 등록된 경우', () => {
     visitedOn: null,
     firstSeenAt: '2026-01-01T00:00:00.000Z',
     isNew: false,
+    lastSeenAt: '2026-08-01T00:00:00.000Z',
     ...over,
   })
 

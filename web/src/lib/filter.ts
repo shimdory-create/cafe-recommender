@@ -1,6 +1,6 @@
 import type { ListRow } from './site'
 
-export type Sort = 'hot' | 'near'
+export type Sort = 'hot' | 'near' | 'new'
 
 /**
  * 지역 묶음의 짧은 이름. 파이프라인 `src/config/area.ts` 와 같은 규칙이다.
@@ -74,6 +74,7 @@ export function filterAndSort<T extends ListRow>(cafes: T[], s: FilterState): T[
       if (da !== db) return da - db
       return b.hotScore - a.hotScore
     }
+    if (s.sort === 'new') return byNewest(a, b)
     if (b.hotScore !== a.hotScore) return b.hotScore - a.hotScore
     return a.id.localeCompare(b.id)
   }
@@ -106,14 +107,21 @@ export interface AreaCount {
  *
  * 순서는 **가까운 지역부터**, 서울은 맨 뒤. 차로 나가는 사람에게는 그게
  * 순서다 — 이름 순으로 하면 가평(1시간 20분)이 고양(40분) 앞에 온다.
+ *
+ * `city` 외의 다른 활성 필터(태그·검색어·NEW)도 함께 받는다 — 안 받으면
+ * 칩 숫자가 실제 눌렀을 때 나오는 결과와 어긋난다 (실측: 지역 미선택 상태에서
+ * 태그를 고르면 칩 숫자만 그대로라 클릭하면 배지보다 적게 나왔다).
  */
 export function areaCounts<T extends ListRow>(
   cafes: T[],
-  opts: { city: boolean },
+  opts: { city: boolean; tags?: string[]; query?: string; newOnly?: boolean },
 ): AreaCount[] {
   const map = new Map<string, { count: number; nearest: number }>()
   for (const c of cafes) {
     if (c.cityOnly && !opts.city) continue
+    if (opts.newOnly && !c.isNew) continue
+    if (opts.query && !matchesQuery(c.name, opts.query)) continue
+    if (opts.tags && !opts.tags.every((t) => c.tags.includes(t))) continue
     const cur = map.get(c.area) ?? { count: 0, nearest: Number.POSITIVE_INFINITY }
     cur.count += 1
     cur.nearest = Math.min(cur.nearest, c.driveMinutes ?? Number.POSITIVE_INFINITY)

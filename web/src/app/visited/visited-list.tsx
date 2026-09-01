@@ -11,6 +11,7 @@ import { nextSort, SORT_LABEL, sortVisited, type VisitedSort } from '@/lib/visit
 import { VIEW_ONLY } from '@/lib/view-only'
 import { AreaChips, Chip, SearchBox } from '../filters'
 import { Thumb } from '../thumb'
+import { NaverMapLink } from '../naver-map-link'
 import { Stars } from '../cafe/[id]/review-panel'
 
 function dateLabel(iso: string): string {
@@ -237,6 +238,10 @@ export function VisitedList({
       <p className="mt-1 text-[13px] text-ink-soft">
         {shown.length}곳{shown.length !== rows.length && ` / ${rows.length}곳`}
       </p>
+      {/* 영구 저장이 맞는지 걱정하는 질문을 받았다 — 지워지지 않는다고 여기서 답한다 */}
+      <p className="mt-0.5 text-[12px] text-ink-soft">
+        기록은 계속 남아요. &ldquo;빼기&rdquo; 를 눌러도 가장 최근 방문 한 건만 지워집니다.
+      </p>
       {error && <p className="mt-2 text-[13px] text-red-600 dark:text-red-400">{error}</p>}
 
       {/* 기록이 몇 개 없을 때는 조작을 띄우지 않는다 — 칩보다 목록이 짧으면 방해다 */}
@@ -400,14 +405,12 @@ export function VisitedList({
                 </Link>
 
                 <div className="flex border-t border-line">
-                  <a
+                  <NaverMapLink
                     href={v.naverMapUrl}
-                    target="_blank"
-                    rel="noreferrer"
                     className="flex min-h-[44px] flex-1 items-center justify-center text-[13px] font-semibold text-bean active:bg-bean-soft"
                   >
                     지도 ↗
-                  </a>
+                  </NaverMapLink>
                   {!viewOnly && (
                     <button
                       onClick={() => cancel(v.id, v.name)}

@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import {
-  driveLabel, MENU_LABEL, PARKING_LABEL, recentlyVisited, type ListRow,
+  addedLabel, driveLabel, MENU_LABEL, PARKING_LABEL, recentlyVisited, type ListRow,
 } from '@/lib/site'
 import { Thumb } from './thumb'
+import { NaverMapLink } from './naver-map-link'
 
 /** 주차 등급을 색으로도 구분한다. 차로 가는 가족에게 가장 중요한 정보다 */
 const PARKING_TONE: Record<string, string> = {
@@ -42,7 +43,18 @@ export function TopThree({ cafe }: { cafe: ListRow }) {
   )
 }
 
-export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
+export function CafeCard({
+  cafe, rank, wished, onToggleWish, stale, onDismiss,
+}: {
+  cafe: ListRow
+  rank?: number
+  /** 위시리스트 상태. 부모가 안 넘기면(서버 렌더 폴백 등) 하트 자체를 그리지 않는다 */
+  wished?: boolean
+  onToggleWish?: () => void
+  /** liveness 잡이 오래 못 본 카페 (폐업 의심) */
+  stale?: boolean
+  onDismiss?: () => void
+}) {
   const visited = recentlyVisited(cafe.visitedOn)
   return (
     <article className="overflow-hidden rounded-2xl border border-line bg-card">
@@ -73,7 +85,21 @@ export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
                 )}
                 {cafe.name}
               </h3>
-              <span className="mt-0.5 flex shrink-0 items-center gap-1.5">
+              <span className="mt-0.5 flex shrink-0 items-center gap-0.5">
+                {onToggleWish && (
+                  // 카드 전체가 Link 라 클릭이 상세 이동으로 먼저 먹는다 — 막아야 한다
+                  <button
+                    type="button"
+                    aria-pressed={wished}
+                    aria-label={wished ? '위시리스트에서 빼기' : '위시리스트에 담기'}
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleWish() }}
+                    className={`flex min-h-[40px] min-w-[40px] items-center justify-center text-[19px] ${
+                      wished ? 'text-bean' : 'text-ink-soft'
+                    }`}
+                  >
+                    {wished ? '♥' : '♡'}
+                  </button>
+                )}
                 {/* 우리 가족 별점이 있으면 블로그 화제량보다 먼저 보인다 */}
                 {cafe.ratingCount > 0 && (
                   <span className="text-[13px] font-bold text-bean">
@@ -89,7 +115,7 @@ export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
             </div>
 
             <p className="mt-0.5 text-[13px] text-ink-soft">
-              {cafe.sigungu} · {driveLabel(cafe.driveMinutes)}
+              {cafe.sigungu} · {driveLabel(cafe.driveMinutes)} · {addedLabel(cafe.firstSeenAt)}
             </p>
 
             <div className="mt-1.5">
@@ -97,6 +123,21 @@ export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
             </div>
           </div>
         </div>
+
+        {stale && (
+          <div className="mt-2.5 flex items-center justify-between gap-2 rounded-lg bg-amber-50 pl-2.5 pr-1 text-[12px] text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+            <span>폐업 의심 · 카카오지도에서 최근 안 보여요</span>
+            {onDismiss && (
+              <button
+                type="button"
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDismiss() }}
+                className="flex min-h-[40px] shrink-0 items-center px-2 underline"
+              >
+                숨기기
+              </button>
+            )}
+          </div>
+        )}
 
         {cafe.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
@@ -114,14 +155,12 @@ export function CafeCard({ cafe, rank }: { cafe: ListRow; rank?: number }) {
       </Link>
 
       {/* 터치 타겟 44px 이상 (스펙 10.1) */}
-      <a
+      <NaverMapLink
         href={cafe.naverMapUrl}
-        target="_blank"
-        rel="noreferrer"
         className="flex min-h-[48px] items-center justify-center gap-1.5 border-t border-line text-[14px] font-semibold text-bean active:bg-bean-soft"
       >
         네이버지도로 열기 ↗
-      </a>
+      </NaverMapLink>
     </article>
   )
 }

@@ -35,6 +35,7 @@ const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe 
   visitedOn: null,
   firstSeenAt: '2026-01-01T00:00:00.000Z',
   isNew: false,
+  lastSeenAt: '2026-08-20T00:00:00.000Z',
   familyReviews: [],
   ...over,
 })
@@ -47,7 +48,7 @@ const payload = (cafes: SiteCafe[]): SitePayload => ({
   visited: [],
   stats: {
     discovered: 100, passed: cafes.length, regions: 3,
-    scannedRegions: 69, revisitDays: 180, driveMeasured: cafes.length, cityOnly: 0,
+    scannedRegions: 69, revisitDays: 180, driveMeasured: cafes.length, cityOnly: 0, staleDays: 21,
   },
 })
 

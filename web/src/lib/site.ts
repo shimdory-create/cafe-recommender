@@ -27,7 +27,7 @@ export type ListRow = Pick<
   'id' | 'name' | 'sigungu' | 'area' | 'driveMinutes' | 'scale' | 'parkingGrade'
   | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'imageUrl' | 'hotScore'
   | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn' | 'isNew'
-  | 'firstSeenAt'
+  | 'firstSeenAt' | 'lastSeenAt'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -56,6 +56,7 @@ export function toListRow(c: SiteCafe): ListRow {
     visitedOn: c.visitedOn,
     isNew: c.isNew,
     firstSeenAt: c.firstSeenAt,
+    lastSeenAt: c.lastSeenAt,
   }
 }
 
@@ -119,6 +120,20 @@ export function recentlyVisited(visitedOn: string | null, now = new Date()): boo
 }
 
 /**
+ * liveness 잡이 기준일보다 오래 못 본 카페인가 (폐업 의심 배지용).
+ *
+ * 파이프라인의 `staleCafes` (`src/jobs/liveness.ts`) 와 같은 규칙이다 —
+ * 값을 여기 새로 적지 않고 `payload.stats.staleDays` 를 그대로 쓴다.
+ */
+export const STALE_DAYS = payload.stats.staleDays
+
+export function isStale(lastSeenAt: string | null, now = new Date()): boolean {
+  if (!lastSeenAt) return false
+  const days = (now.getTime() - new Date(lastSeenAt).getTime()) / 86_400_000
+  return days > STALE_DAYS
+}
+
+/**
  * 실시간 방문 기록에서 **아직 추천에서 내려가 있어야 할** 카페 id 만 고른다.
  *
  * 홈 피드가 이것으로 거른다. 날짜를 안 보고 "기록이 있으면 제외" 로 두었더니
@@ -140,4 +155,10 @@ export function driveLabel(min: number | null): string {
   const h = Math.floor(min / 60)
   const m = min % 60
   return m === 0 ? `차로 ${h}시간` : `차로 ${h}시간 ${m}분`
+}
+
+/** 목록에 들어온 날짜. "8/25 추가" 형태 — 최신순 정렬의 기준을 눈으로도 보이게 한다 */
+export function addedLabel(firstSeenAt: string): string {
+  const d = new Date(firstSeenAt)
+  return `${d.getMonth() + 1}/${d.getDate()} 추가`
 }

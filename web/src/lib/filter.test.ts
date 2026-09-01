@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   areaCounts, areaLabel, filterAndSort, groupBySigungu, matchesQuery, NEW_PINNED,
+  type FilterState,
 } from './filter'
 import { driveLabel, hiddenByVisit, recentlyVisited, REVISIT_DAYS, type SiteCafe } from './site'
 
@@ -39,6 +40,7 @@ const cafe = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
   visitedOn: null,
   firstSeenAt: '2026-08-20T00:00:00.000Z',
   isNew: false,
+  lastSeenAt: null,
   ...over,
 })
 
@@ -333,4 +335,51 @@ describe('hiddenByVisit — 홈 피드에서 내려둘 카페', () => {
     ], now)
     expect(out.size).toBe(1)
   })
+})
+
+/**
+ * 배지 숫자와 실제 리스트가 어긋났던 버그(NEW 배지·지역칩 숫자가 태그·검색어를
+ * 무시함) 의 회귀 테스트. 필터 조합을 여러 개 돌려서 칩 숫자가 항상
+ * filterAndSort 결과 개수와 같은지를 검증한다.
+ */
+const badgeCafes = [
+  cafe({ id: 'a', area: '김포', tags: ['대형카페'], isNew: true }),
+  cafe({ id: 'b', area: '김포', tags: ['뷰맛집'], isNew: false }),
+  cafe({ id: 'c', area: '파주', tags: ['대형카페', '뷰맛집'], isNew: true }),
+  cafe({ id: 'd', area: '파주', tags: [], isNew: false, cityOnly: true }),
+  cafe({ id: 'e', area: '서울', tags: ['대형카페'], isNew: false, name: '서울카페' }),
+]
+
+const badgeCombos: FilterState[] = [
+  { tags: [], sort: 'hot', city: false },
+  { tags: [], sort: 'hot', city: true },
+  { tags: ['대형카페'], sort: 'hot', city: true },
+  { tags: [], sort: 'hot', city: true, area: '김포' },
+  { tags: ['대형카페'], sort: 'hot', city: true, query: '카페' },
+  { tags: [], sort: 'hot', city: true, query: '서울' },
+]
+
+describe('newCount 는 필터를 다 반영한 filterAndSort(newOnly:true) 와 같다', () => {
+  for (const s of badgeCombos) {
+    it(`tags=${s.tags} area=${s.area ?? '-'} query=${s.query ?? '-'}`, () => {
+      const expected = filterAndSort(badgeCafes, { ...s, newOnly: true }).length
+      // list-client.tsx 의 newCount 계산과 동일한 호출
+      const actual = filterAndSort(badgeCafes, {
+        tags: s.tags, sort: s.sort, city: s.city, area: s.area, query: s.query, newOnly: true,
+      }).length
+      expect(actual).toBe(expected)
+    })
+  }
+})
+
+describe('areaCounts 는 태그·검색어가 걸려 있어도 실제 눌렀을 때 나올 개수와 같다', () => {
+  for (const s of badgeCombos) {
+    it(`tags=${s.tags} query=${s.query ?? '-'}`, () => {
+      const counts = areaCounts(badgeCafes, { city: s.city, tags: s.tags, query: s.query })
+      for (const c of counts) {
+        const shown = filterAndSort(badgeCafes, { ...s, area: c.area, newOnly: false }).length
+        expect(c.count).toBe(shown)
+      }
+    })
+  }
 })

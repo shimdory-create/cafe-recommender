@@ -289,6 +289,8 @@ export const SiteCafeSchema = z.object({
   firstSeenAt: z.string(),
   /** 최초 대량 수집 이후 30일 안에 들어온 곳 (src/config/newness.ts) */
   isNew: z.boolean(),
+  /** liveness 잡이 카카오에서 마지막으로 확인한 시각. 한 번도 확인 못 했으면 null */
+  lastSeenAt: z.string().nullable(),
 })
 export type SiteCafe = z.infer<typeof SiteCafeSchema>
 
@@ -336,6 +338,8 @@ export const SitePayloadSchema = z.object({
     /** 다녀온 곳을 추천에서 내리는 기간(일). 웹이 이 값을 그대로 쓴다 */
     revisitDays: z.number().int(),
     cityOnly: z.number().int(),
+    /** 이 날수를 넘도록 안 보이면 폐업 의심 배지를 띄운다 (src/jobs/liveness.ts) */
+    staleDays: z.number().int(),
   }),
 })
 export type SitePayload = z.infer<typeof SitePayloadSchema>

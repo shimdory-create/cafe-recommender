@@ -1,5 +1,5 @@
 import { CafeCard } from './cafe-card'
-import type { ListRow } from '@/lib/site'
+import { isStale, type ListRow } from '@/lib/site'
 
 export interface FeedRow extends ListRow {
   reason: string
@@ -17,12 +17,29 @@ export interface FeedRow extends ListRow {
  * (Suspense fallback), 하이드레이션이 끝나면 클라이언트가 URL 의 페이지를
  * 그린다. 1페이지에서는 두 결과가 같으므로 화면이 튀지 않는다.
  */
-export function FeedCards({ rows, offset = 0 }: { rows: FeedRow[]; offset?: number }) {
+export function FeedCards({
+  rows, offset = 0, showRank = true, wished, onToggleWish, onDismiss,
+}: {
+  rows: FeedRow[]
+  offset?: number
+  showRank?: boolean
+  wished?: Set<string>
+  onToggleWish?: (id: string) => void
+  onDismiss?: (id: string) => void
+}) {
   return (
     <div className="flex flex-col gap-4">
       {rows.map((c, i) => (
         <div key={c.id}>
-          <CafeCard cafe={c} rank={offset + i + 1} />
+          {/* 우선순위가 아닌 정렬(가까운순·최신순)에서는 "N위" 가 오해를 부른다 */}
+          <CafeCard
+            cafe={c}
+            rank={showRank ? offset + i + 1 : undefined}
+            wished={wished?.has(c.id)}
+            onToggleWish={onToggleWish ? () => onToggleWish(c.id) : undefined}
+            stale={!c.visitedOn && isStale(c.lastSeenAt)}
+            onDismiss={onDismiss ? () => onDismiss(c.id) : undefined}
+          />
           <p className="mt-1.5 px-1 text-[12px] text-ink-soft">{c.reason}</p>
         </div>
       ))}

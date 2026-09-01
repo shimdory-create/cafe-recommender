@@ -17,6 +17,19 @@ export interface VisitRow {
 
 export const REVIEWS_PATH = 'data/reviews.json'
 export const VISITS_PATH = 'data/visits.json'
+export const WISHLIST_PATH = 'data/wishlist.json'
+export const DISMISSED_PATH = 'data/dismissed.json'
+
+export interface WishRow {
+  kakaoPlaceId: string
+  addedAt: string
+}
+
+/** 폐업 의심인데 안 가 본 곳을 목록에서 숨긴 기록. 파이프라인이 자동으로 안 내리는 것과 짝이다 */
+export interface DismissRow {
+  kakaoPlaceId: string
+  dismissedAt: string
+}
 
 export const MAX_NICKNAME = 20
 export const MAX_COMMENT = 100
@@ -115,6 +128,28 @@ export function removeVisit(rows: VisitRow[], kakaoPlaceId: string): VisitRow[] 
   const target = mine[0]
   if (!target) return rows
   return rows.filter((_, i) => i !== target.i)
+}
+
+/** 위시리스트에 담기. 다녀온 곳과 달리 카페당 한 건만 있으면 된다 — 두 번 눌러도 그대로 */
+export function addWish(rows: WishRow[], kakaoPlaceId: string, addedAt: string): WishRow[] {
+  if (rows.some((w) => w.kakaoPlaceId === kakaoPlaceId)) return rows
+  return [...rows, { kakaoPlaceId, addedAt }]
+}
+
+/** 위시리스트에서 빼기 */
+export function removeWish(rows: WishRow[], kakaoPlaceId: string): WishRow[] {
+  return rows.filter((w) => w.kakaoPlaceId !== kakaoPlaceId)
+}
+
+/** 폐업 의심 카페 숨기기. 두 번 눌러도 한 건 */
+export function addDismiss(rows: DismissRow[], kakaoPlaceId: string, dismissedAt: string): DismissRow[] {
+  if (rows.some((d) => d.kakaoPlaceId === kakaoPlaceId)) return rows
+  return [...rows, { kakaoPlaceId, dismissedAt }]
+}
+
+/** 숨김 취소 (오탐이었을 때) */
+export function removeDismiss(rows: DismissRow[], kakaoPlaceId: string): DismissRow[] {
+  return rows.filter((d) => d.kakaoPlaceId !== kakaoPlaceId)
 }
 
 export interface ReviewPatch {
