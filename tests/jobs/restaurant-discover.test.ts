@@ -77,8 +77,8 @@ describe('runRestaurantDiscover', () => {
     expect(r.excluded).toBe(1)
     const saved = h.saved() as { status: string; excludeReason: string | null }[]
     expect(saved).toHaveLength(1)
-    expect(saved[0].status).toBe('excluded_auto')
-    expect(saved[0].excludeReason).toBe('franchise')
+    expect(saved[0]!.status).toBe('excluded_auto')
+    expect(saved[0]!.excludeReason).toBe('franchise')
   })
 
   it('지역 밖 장소는 저장하지 않고 offRegion 카운트만 올린다', async () => {
