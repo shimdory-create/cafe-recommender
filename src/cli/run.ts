@@ -41,6 +41,13 @@ import { buildNotifyText, KAKAO_TEXT_LIMIT } from '../site/notify.js'
 import { mondayOf } from '../jobs/weekly-suggest.js'
 import { mkdir, writeFile, readFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
+import { createRestaurantJsonStore } from '../store/restaurant-json-store.js'
+import { runRestaurantDiscover } from '../jobs/restaurant-discover.js'
+import { runRestaurantDailyBuzz } from '../jobs/restaurant-daily-buzz.js'
+import { runRestaurantClassify } from '../jobs/restaurant-classify.js'
+import { runRestaurantWeeklySuggest } from '../jobs/restaurant-suggest.js'
+import { runRestaurantLiveness } from '../jobs/restaurant-liveness.js'
+import { runRestaurantDriveTimes } from '../jobs/restaurant-drive-times.js'
 
 const argv = process.argv.slice(2)
 const cmd = argv[0]
@@ -488,6 +495,88 @@ async function main() {
           ? `복구했습니다: ${found.cafe.sigungu} ${found.cafe.name}`
           : `숨겼습니다: ${found.cafe.sigungu} ${found.cafe.name}`,
       )
+      break
+    }
+
+    case 'restaurant-discover': {
+      const base = createContext()
+      const ctx = {
+        store: createRestaurantJsonStore(base.env.DATA_DIR),
+        local: base.local,
+        blog: base.blog,
+        llm: base.llm,
+      }
+      const regions = REGIONS.filter((r) => !r.excluded)
+      const skipHarvest = flag(rest, 'skip-harvest') !== undefined
+      console.log(`식당 발굴 시작 (${regions.length}개 지역)`)
+      const r = await runRestaurantDiscover(ctx, { regions, skipHarvest })
+      console.log(`  발굴 ${r.discovered}곳 · 제외 ${r.excluded}곳 · 동명지역 ${r.offRegion}곳`)
+      break
+    }
+
+    case 'restaurant-buzz': {
+      const base = createContext()
+      const ctx = {
+        store: createRestaurantJsonStore(base.env.DATA_DIR),
+        blog: base.blog,
+      }
+      const limit = numFlag(rest, 'limit')
+      const r = await runRestaurantDailyBuzz(ctx, { limit })
+      console.log(`  갱신 ${r.updated}곳 · 실패 ${r.failed}곳 · 이미지 ${r.images}곳`)
+      break
+    }
+
+    case 'restaurant-classify': {
+      const base = createContext()
+      const ctx = {
+        store: createRestaurantJsonStore(base.env.DATA_DIR),
+        blog: base.blog,
+        llm: base.llm,
+      }
+      const limit = numFlag(rest, 'limit')
+      const redoStale = flag(rest, 'redo') !== undefined
+      const r = await runRestaurantClassify(ctx, { limit, redoStale })
+      console.log(`  판정 ${r.classified}곳 · 제외 ${r.excluded}곳 · 실패 ${r.failed}곳`)
+      if (r.quotaExhausted) console.log('  쿼터 소진으로 중단')
+      break
+    }
+
+    case 'restaurant-suggest': {
+      const base = createContext()
+      const ctx = {
+        store: createRestaurantJsonStore(base.env.DATA_DIR),
+      }
+      const r = await runRestaurantWeeklySuggest(ctx)
+      console.log(`  후보 ${r.picked.length}곳 선정`)
+      break
+    }
+
+    case 'restaurant-liveness': {
+      const base = createContext()
+      const ctx = {
+        store: createRestaurantJsonStore(base.env.DATA_DIR),
+        local: base.local,
+      }
+      const limit = numFlag(rest, 'limit')
+      const r = await runRestaurantLiveness(ctx, { limit })
+      console.log(`  확인 ${r.checked}곳 · 있음 ${r.seen} · 못 찾음 ${r.missing}`)
+      if (r.stale.length) {
+        console.log(`  폐업 의심 ${r.stale.length}곳:`)
+        for (const s of r.stale.slice(0, 20)) console.log(`    ${s.sigungu} ${s.name} (${s.days}일)`)
+      }
+      break
+    }
+
+    case 'restaurant-drive': {
+      const base = createContext()
+      const ctx = {
+        store: createRestaurantJsonStore(base.env.DATA_DIR),
+        directions: base.directions,
+      }
+      const limit = numFlag(rest, 'limit')
+      const force = flag(rest, 'force') !== undefined
+      const r = await runRestaurantDriveTimes(ctx, { limit, force })
+      console.log(`  측정 ${r.measured}곳 / 경로없음 ${r.unroutable}곳`)
       break
     }
 
