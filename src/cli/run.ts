@@ -416,23 +416,31 @@ async function main() {
 
       // 식당 페이로드도 같은 case 에서 만든다 — 카페 쓰기 로직은 위에서 이미
       // 끝났고 이 아래는 순수 추가다. 실패해도 카페 site.json 은 이미 써졌다.
-      const restStore = createRestaurantJsonStore(process.env.DATA_DIR ?? 'data')
-      const restOut = flag(rest, 'restaurant-out') || 'web/src/generated/site-restaurant.json'
-      const [restaurants, restBuzz, restVisits, restSuggestions, restReviews] = await Promise.all([
-        restStore.readRestaurants(), restStore.readRestaurantBuzz(),
-        restStore.readRestaurantVisits(), restStore.readRestaurantSuggestions(),
-        restStore.readRestaurantReviews(),
-      ])
-      const restPayload = buildRestaurantSitePayload({
-        restaurants, buzz: restBuzz, visits: restVisits, suggestions: restSuggestions,
-        reviews: restReviews, weekOf: mondayOf(now), now,
-      })
-      await mkdir(dirname(restOut), { recursive: true })
-      await writeFile(restOut, JSON.stringify(restPayload, null, 2) + '\n', 'utf8')
-      console.log(
-        `${restOut}\n  식당 ${restPayload.restaurants.length}곳`
-        + ` (일반 ${restPayload.stats.passed} / 도심전용 ${restPayload.stats.cityOnly})`,
-      )
+      // 실패를 여기서 삼키는 이유: 식당 데이터 문제로 카페 배포까지 막히면
+      // 안 된다 — 이전에는 예외가 그대로 위로 던져져서 build:web 전체가
+      // 실패했다. 커밋된 site-restaurant.json 이 마지막으로 성공한 페이로드로
+      // 남아 있으니 next build 는 그것으로 계속 진행한다.
+      try {
+        const restStore = createRestaurantJsonStore(process.env.DATA_DIR ?? 'data')
+        const restOut = flag(rest, 'restaurant-out') || 'web/src/generated/site-restaurant.json'
+        const [restaurants, restBuzz, restVisits, restSuggestions, restReviews] = await Promise.all([
+          restStore.readRestaurants(), restStore.readRestaurantBuzz(),
+          restStore.readRestaurantVisits(), restStore.readRestaurantSuggestions(),
+          restStore.readRestaurantReviews(),
+        ])
+        const restPayload = buildRestaurantSitePayload({
+          restaurants, buzz: restBuzz, visits: restVisits, suggestions: restSuggestions,
+          reviews: restReviews, weekOf: mondayOf(now), now,
+        })
+        await mkdir(dirname(restOut), { recursive: true })
+        await writeFile(restOut, JSON.stringify(restPayload, null, 2) + '\n', 'utf8')
+        console.log(
+          `${restOut}\n  식당 ${restPayload.restaurants.length}곳`
+          + ` (일반 ${restPayload.stats.passed} / 도심전용 ${restPayload.stats.cityOnly})`,
+        )
+      } catch (e) {
+        console.error(`[!] 식당 페이로드 생성 실패 — 카페 빌드는 계속 진행한다: ${(e as Error).message}`)
+      }
       break
     }
 
