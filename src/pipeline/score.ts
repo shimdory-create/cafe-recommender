@@ -41,7 +41,7 @@ export interface FitInput {
   teenAppeal: number
 }
 
-const PARKING_MULT: Record<FitInput['parkingGrade'], number> = {
+export const PARKING_MULT: Record<FitInput['parkingGrade'], number> = {
   A: 1.0,
   B: 0.85,
   C: 0.4,
