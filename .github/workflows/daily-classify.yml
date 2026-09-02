@@ -29,7 +29,12 @@ jobs:
       - run: npm ci
       # --redo-stale: 프롬프트를 고치면 낡은 판본을 먼저 갱신한다.
       # 새 카페를 늘리는 것보다 판정을 일관되게 유지하는 것이 급하다.
-      - run: npm run classify -- --limit 200 --redo-stale
+      #
+      # 333: Gemini 무료 쿼터를 카페·식당·가볼 곳 셋이 나눠 쓴다 (같은
+      # GEMINI_API_KEY). 한 도메인이 먼저 돌면서 하루치를 다 써버리면 뒤에
+      # 도는 도메인은 쿼터가 없어 429 만 받는다 — 순서와 무관하게 세 도메인이
+      # 비슷하게 나눠 받도록 200 에서 333 으로 맞췄다(2026-09-02, 3분할).
+      - run: npm run classify -- --limit 333 --redo-stale
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
