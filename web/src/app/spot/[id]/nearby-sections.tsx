@@ -24,8 +24,8 @@ export function SpotNearbySections(
 
   return (
     <>
-      <NearbySection title="근처 카페" items={filterOut(cafes, cafeHidden)} hrefPrefix="/cafe/" />
-      <NearbySection title="근처 식당" items={filterOut(restaurants, restHidden)} hrefPrefix="/restaurant/" />
+      <NearbySection title="근처 카페" items={filterOut(cafes, cafeHidden)} hrefPrefix="/cafe/" icon="☕" />
+      <NearbySection title="근처 식당" items={filterOut(restaurants, restHidden)} hrefPrefix="/restaurant/" icon="🍚" />
     </>
   )
 }

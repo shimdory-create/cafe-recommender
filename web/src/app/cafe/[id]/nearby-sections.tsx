@@ -28,11 +28,13 @@ export function CafeNearbySections(
         title="근처 식당"
         items={filterOut(restaurants, restHidden)}
         hrefPrefix="/restaurant/"
+        icon="🍚"
       />
       <NearbySection
         title="근처 가볼 곳"
         items={filterOut(spots, spotHidden)}
         hrefPrefix="/spot/"
+        icon="🏞️"
       />
     </>
   )

@@ -3,14 +3,14 @@ import type { NearbyCard as NearbyCardData } from '@/lib/nearby-types'
 import { Thumb } from './thumb'
 import { Badge } from './badge'
 
-function NearbyCard({ item, href }: { item: NearbyCardData; href: string }) {
+function NearbyCard({ item, href, icon }: { item: NearbyCardData; href: string; icon: string }) {
   return (
     <Link
       href={href}
       className="flex shrink-0 flex-col gap-2 rounded-2xl border border-line bg-card p-3 active:bg-bean-soft/40"
       style={{ width: '160px' }}
     >
-      <Thumb src={item.imageUrl} alt={item.name} size={56} />
+      <Thumb src={item.imageUrl} alt={item.name} size={56} icon={icon} />
       <div className="min-w-0">
         <p className="truncate text-[14px] font-bold">{item.name}</p>
         <p className="mt-0.5 text-[12px] text-ink-soft">
@@ -32,7 +32,7 @@ function NearbyCard({ item, href }: { item: NearbyCardData; href: string }) {
 }
 
 export function NearbySection(
-  { title, items, hrefPrefix }: { title: string; items: NearbyCardData[]; hrefPrefix: string },
+  { title, items, hrefPrefix, icon }: { title: string; items: NearbyCardData[]; hrefPrefix: string; icon: string },
 ) {
   if (items.length === 0) return null
   return (
@@ -40,7 +40,7 @@ export function NearbySection(
       <h2 className="text-[15px] font-bold">{title}</h2>
       <div className="mt-2 flex gap-3 overflow-x-auto pb-1">
         {items.map((item) => (
-          <NearbyCard key={item.id} item={item} href={`${hrefPrefix}${item.id}`} />
+          <NearbyCard key={item.id} item={item} href={`${hrefPrefix}${item.id}`} icon={icon} />
         ))}
       </div>
     </section>
