@@ -110,7 +110,7 @@ export function ReviewPanel({ spotId, initialVisited, built }: {
       setMine((prev) => [body.review.id, ...prev])
       if (body.visitedOn) setVisited(true)
       setData((prev) => ({
-        enabled: true, ok: true, summary: body.summary,
+        ...prev, enabled: true, ok: true, summary: body.summary,
         reviews: [body.review, ...(prev?.reviews ?? [])],
       }))
       setRating(0)

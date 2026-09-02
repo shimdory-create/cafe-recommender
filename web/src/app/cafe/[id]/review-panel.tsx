@@ -206,6 +206,7 @@ export function ReviewPanel({ cafeId, initialVisited, built }: {
       if (body.visitedOn) setVisited(true)
       // 누른 사람에게는 즉시 보인다. 다른 가족은 새로 열면 바로 보인다.
       setData((prev) => ({
+        ...prev,
         enabled: true,
         ok: true,
         summary: body.summary,
