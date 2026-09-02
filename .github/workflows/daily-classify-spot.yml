@@ -3,6 +3,9 @@ on:
   schedule:
     # 22:29 UTC. daily-classify-restaurant(21:56 UTC)와 33분 차이.
     - cron: '29 22 * * *'
+    # 하루 2번째 실행 — daily-classify.yml 과 같은 이유로 12시간 띄움
+    # (2026-09-02, 처리량 확대).
+    - cron: '29 10 * * *'
   workflow_dispatch:
 
 concurrency:
