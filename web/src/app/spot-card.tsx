@@ -101,7 +101,7 @@ export function SpotCard({
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleBlacklist() }}
                     className="flex min-h-[40px] min-w-[40px] items-center justify-center text-[19px]"
                   >
-                    {blacklisted ? '🖤' : '🤍'}
+                    {blacklisted ? '💔' : '🤍'}
                   </button>
                 )}
                 {spot.ratingCount > 0 && (
