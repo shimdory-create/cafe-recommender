@@ -26,7 +26,7 @@
 
 **Files:**
 - Create: `src/site/nearby.ts`
-- Test: `src/site/nearby.test.ts`
+- Test: `tests/site/nearby.test.ts`
 
 **Interfaces:**
 - Produces: `GeoPoint { id: string; lat: number; lng: number }`, `NearbyMatch { id: string; distanceKm: number }`, `haversineKm(a: GeoPoint, b: GeoPoint): number`, `nearestByDomain(anchors: GeoPoint[], candidates: GeoPoint[], limit: number): Map<string, NearbyMatch[]>`
@@ -34,9 +34,9 @@
 - [ ] **Step 1: Write the failing test**
 
 ```typescript
-// src/site/nearby.test.ts
+// tests/site/nearby.test.ts
 import { describe, it, expect } from 'vitest'
-import { haversineKm, nearestByDomain, type GeoPoint } from './nearby.js'
+import { haversineKm, nearestByDomain, type GeoPoint } from '../../src/site/nearby.js'
 
 describe('haversineKm', () => {
   it('같은 점은 0km', () => {
@@ -101,7 +101,7 @@ describe('nearestByDomain', () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `npm test -- src/site/nearby.test.ts`
+Run: `npm test -- tests/site/nearby.test.ts`
 Expected: FAIL — `Cannot find module './nearby.js'`
 
 - [ ] **Step 3: Write the implementation**
@@ -159,13 +159,13 @@ export function nearestByDomain(
 
 - [ ] **Step 4: Run test to verify it passes**
 
-Run: `npm test -- src/site/nearby.test.ts`
-Expected: PASS (9 tests)
+Run: `npm test -- tests/site/nearby.test.ts`
+Expected: PASS (8 tests)
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/site/nearby.ts src/site/nearby.test.ts
+git add src/site/nearby.ts tests/site/nearby.test.ts
 git commit -m "feat(nearby): haversine 거리·최근접 도메인 계산 순수 함수"
 ```
 
@@ -175,7 +175,7 @@ git commit -m "feat(nearby): haversine 거리·최근접 도메인 계산 순수
 
 **Files:**
 - Create: `src/site/nearby-payload.ts`
-- Test: `src/site/nearby-payload.test.ts`
+- Test: `tests/site/nearby-payload.test.ts`
 
 **Interfaces:**
 - Consumes: `haversineKm`, `nearestByDomain`, `GeoPoint`, `NearbyMatch` from Task 1 (`./nearby.js`)
@@ -185,12 +185,12 @@ git commit -m "feat(nearby): haversine 거리·최근접 도메인 계산 순수
 - [ ] **Step 1: Write the failing test**
 
 ```typescript
-// src/site/nearby-payload.test.ts
+// tests/site/nearby-payload.test.ts
 import { describe, it, expect } from 'vitest'
-import { buildNearbyPayloads } from './nearby-payload.js'
-import type { Cafe } from '../schema.js'
-import type { Restaurant } from '../restaurant-schema.js'
-import type { Spot } from '../spot-schema.js'
+import { buildNearbyPayloads } from '../../src/site/nearby-payload.js'
+import type { Cafe } from '../../src/schema.js'
+import type { Restaurant } from '../../src/restaurant-schema.js'
+import type { Spot } from '../../src/spot-schema.js'
 
 // 좌표·id·status 만 있으면 되는 최소 필드. 나머지는 any 캐스팅 없이
 // 실제 스키마 필드를 채운다 — 테스트 파일이라도 타입은 정확해야 한다.
@@ -282,7 +282,7 @@ describe('buildNearbyPayloads', () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `npm test -- src/site/nearby-payload.test.ts`
+Run: `npm test -- tests/site/nearby-payload.test.ts`
 Expected: FAIL — `Cannot find module './nearby-payload.js'`
 
 - [ ] **Step 3: Write the implementation**
@@ -412,13 +412,13 @@ export function buildNearbyPayloads(input: BuildNearbyInput): NearbyPayloads {
 
 - [ ] **Step 4: Run test to verify it passes**
 
-Run: `npm test -- src/site/nearby-payload.test.ts`
+Run: `npm test -- tests/site/nearby-payload.test.ts`
 Expected: PASS (4 tests)
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add src/site/nearby-payload.ts src/site/nearby-payload.test.ts
+git add src/site/nearby-payload.ts tests/site/nearby-payload.test.ts
 git commit -m "feat(nearby): 원본 좌표 + 사이트 페이로드 조인해 근처 추천 3파일 빌드"
 ```
 
