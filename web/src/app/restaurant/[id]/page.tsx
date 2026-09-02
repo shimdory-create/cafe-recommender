@@ -9,6 +9,8 @@ import { ReviewPanel } from './review-panel'
 import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
 import { BlacklistHeart } from './blacklist-heart'
+import { RestaurantNearbySections } from './nearby-sections'
+import { nearbyForRestaurant } from '@/lib/restaurant-site'
 
 export function generateStaticParams() {
   return restaurantPayload.restaurants.map((r) => ({ id: r.id }))
@@ -109,6 +111,13 @@ export default async function RestaurantDetail({ params }: { params: Promise<{ i
           </div>
         ))}
       </dl>
+
+      {(() => {
+        const nearby = nearbyForRestaurant(restaurant.id)
+        return nearby ? (
+          <RestaurantNearbySections cafes={nearby.cafes} spots={nearby.spots} />
+        ) : null
+      })()}
 
       <section className="mt-5">
         <h2 className="text-[15px] font-bold">주차</h2>
