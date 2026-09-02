@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import {
   restaurantById, CUISINE_LABEL, driveLabel, PARKING_LABEL, restaurantPayload,
-  restaurantRecentlyVisited,
+  restaurantRecentlyVisited, nearbyForRestaurant,
 } from '@/lib/restaurant-site'
 import { Badge } from '../../badge'
 import { NaverMapLink } from '../../naver-map-link'
@@ -10,7 +10,6 @@ import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
 import { BlacklistHeart } from './blacklist-heart'
 import { RestaurantNearbySections } from './nearby-sections'
-import { nearbyForRestaurant } from '@/lib/restaurant-site'
 
 export function generateStaticParams() {
   return restaurantPayload.restaurants.map((r) => ({ id: r.id }))

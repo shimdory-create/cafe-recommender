@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import {
   spotById, SPOT_TAG_LABEL, driveLabel, PARKING_LABEL, INDOOR_OUTDOOR_LABEL,
-  spotPayload, spotRecentlyVisited,
+  spotPayload, spotRecentlyVisited, nearbyForSpot,
 } from '@/lib/spot-site'
 import { Badge } from '../../badge'
 import { NaverMapLink } from '../../naver-map-link'
@@ -10,7 +10,6 @@ import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
 import { BlacklistHeart } from './blacklist-heart'
 import { SpotNearbySections } from './nearby-sections'
-import { nearbyForSpot } from '@/lib/spot-site'
 
 export function generateStaticParams() {
   return spotPayload.spots.map((s) => ({ id: s.id }))
