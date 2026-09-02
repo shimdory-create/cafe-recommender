@@ -31,4 +31,14 @@ describe('createSpotJsonStore', () => {
     expect(await store.readSpotSuggestions()).toEqual([])
     expect(await store.readHealth()).toEqual([])
   })
+
+  it('readSpotVisits: 파일이 없으면 빈 배열', async () => {
+    const store = createSpotJsonStore(dir)
+    expect(await store.readSpotVisits()).toEqual([])
+  })
+
+  it('readSpotReviews: 파일이 없으면 빈 배열', async () => {
+    const store = createSpotJsonStore(dir)
+    expect(await store.readSpotReviews()).toEqual([])
+  })
 })

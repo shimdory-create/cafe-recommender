@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { SpotSchema, SpotAttributesSchema, SPOT_TAGS } from '../src/spot-schema.js'
+import {
+  SpotSchema, SpotAttributesSchema, SPOT_TAGS, SiteSpotSchema, SpotSitePayloadSchema,
+} from '../src/spot-schema.js'
 
 describe('SPOT_TAGS', () => {
   it('10개다', () => {
@@ -37,5 +39,35 @@ describe('SpotSchema', () => {
       ambiguousName: false, tags: [],
     }
     expect(SpotSchema.safeParse(s).success).toBe(true)
+  })
+})
+
+describe('SiteSpotSchema (2단계 웹 표시용)', () => {
+  it('가볼 곳 표시용 필드를 검증한다', () => {
+    const row = {
+      id: '1', name: '아무개공원', sigungu: '부평구', zone: 'near', area: '인천',
+      driveMinutes: 20, tags: ['자연/공원', '아이와 가기 좋은 곳'],
+      parkingGrade: 'A', evidence: '넓고 좋다', parkingEvidence: '주차장 넓음',
+      stayDuration: '1~2시간', indoorOutdoor: 'outdoor', season: null, teenAppeal: null,
+      naverMapUrl: 'https://map.naver.com/p/search/x', kakaoPlaceUrl: null, imageUrl: null,
+      hotScore: 5, finalScore: 3, postsPer30: 5, posts30: 3, posts90: 8,
+      acceleration: 1, trend: 'steady', ratingAvg: 0, ratingCount: 0,
+      familyReviews: [], cityOnly: false, visitedOn: null,
+      firstSeenAt: '2026-08-01T00:00:00.000Z', isNew: true, lastSeenAt: null,
+    }
+    expect(() => SiteSpotSchema.parse(row)).not.toThrow()
+  })
+
+  it('SpotSitePayloadSchema가 week/stats 구조를 검증한다', () => {
+    const payload = {
+      generatedAt: '2026-09-02T00:00:00.000Z', weekOf: '2026-08-31',
+      week: [{ rank: 1, id: '1', finalScore: 3 }],
+      spots: [], visited: [],
+      stats: {
+        discovered: 0, passed: 0, regions: 0, scannedRegions: 0,
+        driveMeasured: 0, revisitDays: 180, cityOnly: 0, staleDays: 21,
+      },
+    }
+    expect(() => SpotSitePayloadSchema.parse(payload)).not.toThrow()
   })
 })

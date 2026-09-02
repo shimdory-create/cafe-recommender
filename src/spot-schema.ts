@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { HealthSchema } from './schema.js'
+import { HealthSchema, SiteReviewSchema } from './schema.js'
 
 export { HealthSchema }
 export type { Health } from './schema.js'
@@ -56,3 +56,84 @@ export const SpotSchema = z.object({
   tags: z.array(z.string()),
 })
 export type Spot = z.infer<typeof SpotSchema>
+
+/** 2단계 웹 표시용 스키마. SiteRestaurantSchema와 동등한 필드 —
+ * cuisineType(단일값) 자리에 tags(다중값), hasRoom/reservable 자리에
+ * stayDuration/indoorOutdoor/season을 쓴다. */
+export const SiteSpotSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  sigungu: z.string(),
+  zone: z.enum(['near', 'seoul', 'north', 'east', 'south', 'west']),
+  area: z.string(),
+  driveMinutes: z.number().int().nullable(),
+
+  tags: z.array(z.string()),
+  parkingGrade: z.enum(['A', 'B', 'C', 'D', '?']),
+  evidence: z.string(),
+  parkingEvidence: z.string(),
+  stayDuration: z.string().nullable(),
+  indoorOutdoor: z.enum(['indoor', 'outdoor', 'mixed']).nullable(),
+  season: z.string().nullable(),
+  teenAppeal: z.number().nullable(),
+
+  naverMapUrl: z.string(),
+  kakaoPlaceUrl: z.string().nullable(),
+  imageUrl: z.string().nullable(),
+
+  hotScore: z.number(),
+  finalScore: z.number(),
+  postsPer30: z.number(),
+  posts30: z.number().int(),
+  posts90: z.number().int(),
+  acceleration: z.number(),
+  trend: z.enum(['rising', 'steady', 'unknown']),
+  ratingAvg: z.number(),
+  ratingCount: z.number().int(),
+  familyReviews: z.array(SiteReviewSchema),
+
+  cityOnly: z.boolean(),
+  visitedOn: z.string().nullable(),
+  firstSeenAt: z.string(),
+  isNew: z.boolean(),
+  lastSeenAt: z.string().nullable(),
+})
+export type SiteSpot = z.infer<typeof SiteSpotSchema>
+
+export const SiteSpotVisitedSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  sigungu: z.string(),
+  area: z.string(),
+  visitedOn: z.string(),
+  note: z.string(),
+  tags: z.array(z.string()),
+  naverMapUrl: z.string(),
+  imageUrl: z.string().nullable(),
+  ratingAvg: z.number(),
+  ratingCount: z.number().int(),
+})
+export type SiteSpotVisited = z.infer<typeof SiteSpotVisitedSchema>
+
+export const SpotSitePayloadSchema = z.object({
+  generatedAt: z.string(),
+  weekOf: z.string(),
+  week: z.array(z.object({
+    rank: z.number().int(),
+    id: z.string(),
+    finalScore: z.number(),
+  })),
+  spots: z.array(SiteSpotSchema),
+  visited: z.array(SiteSpotVisitedSchema),
+  stats: z.object({
+    discovered: z.number().int(),
+    passed: z.number().int(),
+    regions: z.number().int(),
+    scannedRegions: z.number().int(),
+    driveMeasured: z.number().int(),
+    revisitDays: z.number().int(),
+    cityOnly: z.number().int(),
+    staleDays: z.number().int(),
+  }),
+})
+export type SpotSitePayload = z.infer<typeof SpotSitePayloadSchema>
