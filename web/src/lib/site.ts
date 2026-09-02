@@ -1,8 +1,10 @@
 import raw from '../generated/site.json'
+import nearbyRaw from '../generated/site-cafe-nearby.json'
 // 경계를 넘는 import 를 쓰지 않는다 — src/schema.ts 는 web 밖이라 모듈
 // 해석이 위로 올라가고, Vercel 은 web 에서만 설치하므로 zod 를 못 찾는다.
 // 드리프트는 파이프라인 테스트(types-conformance)가 잡는다.
 import type { SiteCafe, SitePayload, SiteVisited } from './site-types'
+import type { NearbyCard } from './nearby-types'
 
 export type { SiteCafe, SitePayload, SiteVisited }
 // driveLabel/addedLabel 은 payload 를 안 쓰는 순수 함수라 labels.ts 로
@@ -66,6 +68,12 @@ export function toListRow(c: SiteCafe): ListRow {
 
 export const byId = (id: string): SiteCafe | undefined =>
   payload.cafes.find((c) => c.id === id)
+
+export type { NearbyCard }
+
+const cafeNearby = nearbyRaw as unknown as Record<string, { restaurants: NearbyCard[]; spots: NearbyCard[] }>
+
+export const nearbyForCafe = (id: string) => cafeNearby[id]
 
 /**
  * 홈 피드. 이번 주 추천을 앞에 두고 나머지를 종합점수 순으로 잇는다.
