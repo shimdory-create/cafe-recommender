@@ -76,22 +76,24 @@ function toGeoCards<TRaw extends { kakaoPlaceId: string; lat: number; lng: numbe
 /**
  * 두 지점 간 네이버지도 자동차 길찾기 웹 URL.
  *
- * **여전히 완전히 확인된 형식은 아니다 — 2차 시도.** 1차(`p/directions/
- * {lng},{lat}/{lng},{lat}/-/car`, 이름 없이 좌표만)는 실측 결과 데스크톱
- * 브라우저에서는 정상 동작했지만, 폰에서는 네이버지도 앱만 열리고
- * 출발지는 GPS 현재위치로, 도착지는 빈 채로 남았다 — 앱이 그 URL 형식의
- * 좌표를 못 읽은 것으로 보인다. 이번엔 옛 `index.nhn` 쿼리스트링 형식
- * (`slat`/`slng`/`stext`/`elat`/`elng`/`etext`, 장소 이름까지 포함)으로
- * 바꿔본다 — 여러 안내 글이 이 형식을 언급하지만 네이버 공식 문서는 아니다.
- * 이번에도 안 되면 이 함수만 다시 고치면 된다.
+ * **여전히 완전히 확인된 형식은 아니다 — 3차 시도.**
+ * - 1차(`p/directions/{lng},{lat}/{lng},{lat}/-/car`, 이름 없이 좌표만):
+ *   데스크톱은 됐지만 폰은 네이버지도 앱만 열리고 도착지가 빈 채로 남음
+ *   — 앱이 이름 없는 좌표를 못 읽은 것으로 보인다.
+ * - 2차(`index.nhn?slat=...&stext=...&pathType=1`, 옛 쿼리스트링 형식,
+ *   이름 포함): 이번엔 두 지점 다 제대로 잡혔지만 **대중교통이 기본
+ *   탭으로 뜨고 자동차 탭을 한 번 더 눌러야 했다** — `pathType` 값이
+ *   자동차/대중교통을 결정하는 파라미터가 아니었던 것 같다.
+ * - 3차(지금): 네이버지도 앱 스킴(`nmap://route/car` vs `route/public`,
+ *   공식 문서 확인됨)은 자동차/대중교통을 **경로의 일부**로 구분한다.
+ *   1차에서 쓴 `/p/directions/.../-/car` 의 `/-/car` 접미사가 바로 그
+ *   방식과 일치하므로, 1차 형식(데스크톱 확인됨 + 경로 기반 모드 지정)에
+ *   2차에서 배운 것(이름 포함이 중요해 보임)을 더해 좌표 뒤에 이름을
+ *   추가했다. 이번에도 안 되면 이 함수만 다시 고치면 된다.
  */
 function directionsUrl(anchor: GeoCard, dest: GeoCard): string {
-  const params = new URLSearchParams({
-    slat: String(anchor.lat), slng: String(anchor.lng), stext: anchor.name,
-    elat: String(dest.lat), elng: String(dest.lng), etext: dest.name,
-    menu: 'route', pathType: '1',
-  })
-  return `https://map.naver.com/index.nhn?${params.toString()}`
+  const seg = (p: GeoCard) => `${p.lng},${p.lat},${encodeURIComponent(p.name)}`
+  return `https://map.naver.com/p/directions/${seg(anchor)}/${seg(dest)}/-/car`
 }
 
 function toCards(anchor: GeoCard, matches: NearbyMatch[], byId: Map<string, GeoCard>): NearbyCard[] {
