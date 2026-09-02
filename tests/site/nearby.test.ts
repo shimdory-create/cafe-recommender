@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { haversineKm, nearestByDomain, type GeoPoint } from './nearby.js'
+import { haversineKm, nearestByDomain, type GeoPoint } from '../../src/site/nearby.js'
 
 describe('haversineKm', () => {
   it('같은 점은 0km', () => {
