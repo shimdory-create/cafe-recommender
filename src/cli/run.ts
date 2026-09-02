@@ -49,6 +49,13 @@ import { runRestaurantClassify } from '../jobs/restaurant-classify.js'
 import { runRestaurantWeeklySuggest } from '../jobs/restaurant-suggest.js'
 import { runRestaurantLiveness } from '../jobs/restaurant-liveness.js'
 import { runRestaurantDriveTimes } from '../jobs/restaurant-drive-times.js'
+import { createSpotJsonStore } from '../store/spot-json-store.js'
+import { runSpotDiscover } from '../jobs/spot-discover.js'
+import { runSpotDailyBuzz } from '../jobs/spot-daily-buzz.js'
+import { runSpotClassify } from '../jobs/spot-classify.js'
+import { runSpotWeeklySuggest } from '../jobs/spot-suggest.js'
+import { runSpotLiveness } from '../jobs/spot-liveness.js'
+import { runSpotDriveTimes } from '../jobs/spot-drive-times.js'
 
 const argv = process.argv.slice(2)
 const cmd = argv[0]
@@ -613,12 +620,99 @@ async function main() {
       break
     }
 
+    case 'spot-discover': {
+      const base = createContext()
+      const ctx = {
+        store: createSpotJsonStore(base.env.DATA_DIR),
+        local: base.local,
+        blog: base.blog,
+        llm: base.llm,
+      }
+      // --pilot: 처음엔 가까운 시군구 5곳만 스캔한다 (파일럿 지역, 설계 문서 4절).
+      const PILOT_SIGUNGU = ['부평구', '계양구', '서구', '김포시', '검단구']
+      const regions = flag(rest, 'pilot') !== undefined
+        ? REGIONS.filter((r) => !r.excluded && PILOT_SIGUNGU.includes(r.sigungu))
+        : REGIONS.filter((r) => !r.excluded)
+      const skipHarvest = flag(rest, 'skip-harvest') !== undefined
+      console.log(`가볼 곳 발굴 시작 (${regions.length}개 지역)`)
+      const r = await runSpotDiscover(ctx, { regions, skipHarvest })
+      console.log(`  발굴 ${r.discovered}곳 · 동명지역 ${r.offRegion}곳`)
+      break
+    }
+
+    case 'spot-buzz': {
+      const base = createContext()
+      const ctx = {
+        store: createSpotJsonStore(base.env.DATA_DIR),
+        blog: base.blog,
+      }
+      const limit = numFlag(rest, 'limit')
+      const r = await runSpotDailyBuzz(ctx, { limit })
+      console.log(`  갱신 ${r.updated}곳 · 실패 ${r.failed}곳 · 이미지 ${r.images}곳`)
+      break
+    }
+
+    case 'spot-classify': {
+      const base = createContext()
+      const ctx = {
+        store: createSpotJsonStore(base.env.DATA_DIR),
+        blog: base.blog,
+        llm: base.llm,
+      }
+      const limit = numFlag(rest, 'limit')
+      const redoStale = flag(rest, 'redo') !== undefined
+      const r = await runSpotClassify(ctx, { limit, redoStale })
+      console.log(`  판정 ${r.classified}곳 · 제외 ${r.excluded}곳 · 실패 ${r.failed}곳`)
+      if (r.quotaExhausted) console.log('  쿼터 소진으로 중단')
+      break
+    }
+
+    case 'spot-suggest': {
+      const base = createContext()
+      const ctx = {
+        store: createSpotJsonStore(base.env.DATA_DIR),
+      }
+      const r = await runSpotWeeklySuggest(ctx)
+      console.log(`  후보 ${r.picked.length}곳 선정`)
+      break
+    }
+
+    case 'spot-liveness': {
+      const base = createContext()
+      const ctx = {
+        store: createSpotJsonStore(base.env.DATA_DIR),
+        local: base.local,
+      }
+      const limit = numFlag(rest, 'limit')
+      const r = await runSpotLiveness(ctx, { limit })
+      console.log(`  확인 ${r.checked}곳 · 있음 ${r.seen} · 못 찾음 ${r.missing}`)
+      if (r.stale.length) {
+        console.log(`  폐업 의심 ${r.stale.length}곳:`)
+        for (const s of r.stale.slice(0, 20)) console.log(`    ${s.sigungu} ${s.name} (${s.days}일)`)
+      }
+      break
+    }
+
+    case 'spot-drive': {
+      const base = createContext()
+      const ctx = {
+        store: createSpotJsonStore(base.env.DATA_DIR),
+        directions: base.directions,
+      }
+      const limit = numFlag(rest, 'limit')
+      const force = flag(rest, 'force') !== undefined
+      const r = await runSpotDriveTimes(ctx, { limit, force })
+      console.log(`  측정 ${r.measured}곳 / 경로없음 ${r.unroutable}곳`)
+      break
+    }
+
     default:
       die(
         '사용법: tsx src/cli/run.ts'
           + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|audit|normalize|hide'
           + '|restaurant-discover|restaurant-buzz|restaurant-classify|restaurant-suggest'
-          + '|restaurant-liveness|restaurant-drive>',
+          + '|restaurant-liveness|restaurant-drive'
+          + '|spot-discover|spot-buzz|spot-classify|spot-suggest|spot-liveness|spot-drive>',
       )
   }
 }
@@ -634,6 +728,7 @@ const MUTATING = new Set([
   'discover', 'buzz', 'classify', 'drive', 'suggest', 'visited', 'hide', 'label',
   'restaurant-discover', 'restaurant-buzz', 'restaurant-classify', 'restaurant-drive', 'restaurant-suggest',
   'restaurant-liveness',
+  'spot-discover', 'spot-buzz', 'spot-classify', 'spot-drive', 'spot-suggest', 'spot-liveness',
 ])
 
 try {
