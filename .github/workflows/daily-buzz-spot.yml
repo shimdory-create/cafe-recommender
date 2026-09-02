@@ -1,0 +1,37 @@
+name: daily-buzz-spot
+on:
+  schedule:
+    # 20:23 UTC. daily-buzz-restaurant(19:50 UTC)와 33분 차이 — 같은
+    # data-write 그룹이라 실제 동시 실행은 안 되지만, npm ci 대기 시간을
+    # 줄이려고 시각을 띄운다.
+    - cron: '23 20 * * *'
+  workflow_dispatch:
+
+# data/ 를 쓰는 워크플로는 전부 하나씩 돈다 — 카페·식당과 같은 data-write
+# 그룹을 공유한다 (daily-buzz-restaurant.yml 주석 참고. 세 도메인 모두
+# web/src/generated/ 를 재생성으로 처리하므로 동시에 쓰면 서로의 결과를
+# 덮어쓴다).
+concurrency:
+  group: data-write
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run spot-buzz
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 커밋·푸시 규칙은 scripts/commit-data.sh 한 곳에 있다 — 카페·식당과 공용.
+      - name: 데이터 커밋
+        run: bash scripts/commit-data.sh "가볼 곳 화제량 갱신"

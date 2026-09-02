@@ -1,0 +1,31 @@
+name: weekly-liveness-spot
+on:
+  schedule:
+    # 일 23:39 UTC. weekly-liveness-restaurant(일 23:06 UTC)와 33분 차이.
+    - cron: '39 23 * * 0'
+  workflow_dispatch:
+
+concurrency:
+  group: data-write
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run spot-liveness
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          # 길찾기와 같은 이유로 provider 키가 있어야 환경변수 검증을 통과한다
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: 데이터 커밋
+        run: bash scripts/commit-data.sh "가볼 곳 실존 확인"
