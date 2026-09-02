@@ -43,6 +43,7 @@ import { mkdir, writeFile, readFile } from 'node:fs/promises'
 import { dirname } from 'node:path'
 import { createRestaurantJsonStore } from '../store/restaurant-json-store.js'
 import { buildRestaurantSitePayload } from '../site/restaurant-payload.js'
+import { buildSpotSitePayload } from '../site/spot-payload.js'
 import { runRestaurantDiscover } from '../jobs/restaurant-discover.js'
 import { runRestaurantDailyBuzz } from '../jobs/restaurant-daily-buzz.js'
 import { runRestaurantClassify } from '../jobs/restaurant-classify.js'
@@ -447,6 +448,30 @@ async function main() {
         )
       } catch (e) {
         console.error(`[!] 식당 페이로드 생성 실패 — 카페 빌드는 계속 진행한다: ${(e as Error).message}`)
+      }
+
+      // 가볼 곳 페이로드도 같은 case 에서 만든다 — 독립된 try/catch로 감싼다.
+      // 가볼 곳 데이터 문제가 카페·식당 빌드를 막으면 안 된다(식당과 같은 이유).
+      try {
+        const spotStore = createSpotJsonStore(process.env.DATA_DIR ?? 'data')
+        const spotOut = flag(rest, 'spot-out') || 'web/src/generated/site-spot.json'
+        const [spots, spotBuzz, spotVisits, spotSuggestions, spotReviews] = await Promise.all([
+          spotStore.readSpots(), spotStore.readSpotBuzz(),
+          spotStore.readSpotVisits(), spotStore.readSpotSuggestions(),
+          spotStore.readSpotReviews(),
+        ])
+        const spotPayload = buildSpotSitePayload({
+          spots, buzz: spotBuzz, visits: spotVisits, suggestions: spotSuggestions,
+          reviews: spotReviews, weekOf: mondayOf(now), now,
+        })
+        await mkdir(dirname(spotOut), { recursive: true })
+        await writeFile(spotOut, JSON.stringify(spotPayload, null, 2) + '\n', 'utf8')
+        console.log(
+          `${spotOut}\n  가볼 곳 ${spotPayload.spots.length}곳`
+          + ` (일반 ${spotPayload.stats.passed} / 도심전용 ${spotPayload.stats.cityOnly})`,
+        )
+      } catch (e) {
+        console.error(`[!] 가볼 곳 페이로드 생성 실패 — 카페·식당 빌드는 계속 진행한다: ${(e as Error).message}`)
       }
       break
     }
