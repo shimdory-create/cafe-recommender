@@ -6,6 +6,7 @@ import { PAGE_SIZE, pageCount, pageFromParam, pageOf } from '@/lib/paging'
 import { spotHiddenByVisit } from '@/lib/spot-site'
 import type { VisitRow } from '@/lib/reviews'
 import { useSpotWishlist } from '@/lib/use-spot-wishlist'
+import { useSpotBlacklist } from '@/lib/use-spot-blacklist'
 import { useSpotDismissed } from '@/lib/use-spot-dismissed'
 import { SpotFeedCards, type SpotFeedRow } from './spot-feed-cards'
 
@@ -35,6 +36,7 @@ export function SpotHomeFeed({ rows }: { rows: SpotFeedRow[] }) {
   const params = useSearchParams()
   const [visited, setVisited] = useState<Set<string> | null>(null)
   const { wished, toggle: toggleWish } = useSpotWishlist()
+  const { blacklisted, toggle: toggleBlacklist } = useSpotBlacklist()
   const { dismissed, dismiss } = useSpotDismissed()
   const sortParam = params.get('s')
   const sort: HomeSort = sortParam === 'near' || sortParam === 'new' ? sortParam : 'default'
@@ -51,9 +53,9 @@ export function SpotHomeFeed({ rows }: { rows: SpotFeedRow[] }) {
 
   const feed = useMemo(() => {
     const live = visited ? rows.filter((r) => !visited.has(r.id)) : rows
-    const shown = live.filter((r) => !dismissed.has(r.id))
+    const shown = live.filter((r) => !dismissed.has(r.id) && !blacklisted.has(r.id))
     return sortFeed(shown, sort)
-  }, [rows, visited, dismissed, sort])
+  }, [rows, visited, dismissed, blacklisted, sort])
 
   const total = pageCount(feed.length)
   const page = pageFromParam(params.get('p'), total)
@@ -102,6 +104,7 @@ export function SpotHomeFeed({ rows }: { rows: SpotFeedRow[] }) {
         showRank={sort === 'default'}
         wished={wished}
         onToggleWish={toggleWish}
+        onToggleBlacklist={toggleBlacklist}
         onDismiss={dismiss}
       />
 

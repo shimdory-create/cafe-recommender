@@ -43,12 +43,14 @@ export function RestaurantTopThree({ restaurant }: { restaurant: RestaurantListR
 }
 
 export function RestaurantCard({
-  restaurant, rank, wished, onToggleWish, stale, onDismiss,
+  restaurant, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
 }: {
   restaurant: RestaurantListRow
   rank?: number
   wished?: boolean
   onToggleWish?: () => void
+  blacklisted?: boolean
+  onToggleBlacklist?: () => void
   stale?: boolean
   onDismiss?: () => void
 }) {
@@ -91,6 +93,17 @@ export function RestaurantCard({
                     }`}
                   >
                     {wished ? '♥' : '♡'}
+                  </button>
+                )}
+                {onToggleBlacklist && (
+                  <button
+                    type="button"
+                    aria-pressed={blacklisted}
+                    aria-label={blacklisted ? '블랙리스트에서 빼기' : '블랙리스트에 추가'}
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleBlacklist() }}
+                    className="flex min-h-[40px] min-w-[40px] items-center justify-center text-[19px]"
+                  >
+                    {blacklisted ? '🖤' : '🤍'}
                   </button>
                 )}
                 {restaurant.ratingCount > 0 && (

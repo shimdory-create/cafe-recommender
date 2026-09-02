@@ -8,6 +8,7 @@ import { NaverMapLink } from '../../naver-map-link'
 import { ReviewPanel } from './review-panel'
 import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
+import { BlacklistHeart } from './blacklist-heart'
 
 export function generateStaticParams() {
   return restaurantPayload.restaurants.map((r) => ({ id: r.id }))
@@ -54,7 +55,10 @@ export default async function RestaurantDetail({ params }: { params: Promise<{ i
           )}
           {restaurant.name}
         </h1>
-        <WishHeart restaurantId={restaurant.id} />
+        <span className="flex shrink-0 items-center gap-1">
+          <WishHeart restaurantId={restaurant.id} />
+          <BlacklistHeart restaurantId={restaurant.id} />
+        </span>
       </div>
       <p className="mt-1 text-[14px] text-ink-soft">
         {restaurant.sigungu} · {driveLabel(restaurant.driveMinutes)}

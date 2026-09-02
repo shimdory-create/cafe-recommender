@@ -18,13 +18,14 @@ export interface FeedRow extends ListRow {
  * 그린다. 1페이지에서는 두 결과가 같으므로 화면이 튀지 않는다.
  */
 export function FeedCards({
-  rows, offset = 0, showRank = true, wished, onToggleWish, onDismiss,
+  rows, offset = 0, showRank = true, wished, onToggleWish, onToggleBlacklist, onDismiss,
 }: {
   rows: FeedRow[]
   offset?: number
   showRank?: boolean
   wished?: Set<string>
   onToggleWish?: (id: string) => void
+  onToggleBlacklist?: (id: string) => void
   onDismiss?: (id: string) => void
 }) {
   return (
@@ -37,6 +38,7 @@ export function FeedCards({
             rank={showRank ? offset + i + 1 : undefined}
             wished={wished?.has(c.id)}
             onToggleWish={onToggleWish ? () => onToggleWish(c.id) : undefined}
+            onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(c.id) : undefined}
             stale={!c.visitedOn && isStale(c.lastSeenAt)}
             onDismiss={onDismiss ? () => onDismiss(c.id) : undefined}
           />

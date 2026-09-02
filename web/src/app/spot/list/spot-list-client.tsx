@@ -10,6 +10,7 @@ import {
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
 import { useSpotWishlist } from '@/lib/use-spot-wishlist'
+import { useSpotBlacklist } from '@/lib/use-spot-blacklist'
 import { useSpotDismissed } from '@/lib/use-spot-dismissed'
 import { AreaChips, Chip, SearchBox } from '../../filters'
 import { SpotCard } from '../../spot-card'
@@ -26,18 +27,27 @@ export function SpotListClient(
   const [city, setCity] = useState(initial.city)
   const [newOnly, setNewOnly] = useState(initial.newOnly)
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
+  const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
   const [shownCount, setShownCount] = useState(initial.shown)
   const [expanded, setExpanded] = useState(false)
   const { wished, toggle: toggleWish } = useSpotWishlist()
+  const { blacklisted, toggle: toggleBlacklist } = useSpotBlacklist()
   const { dismissed, dismiss } = useSpotDismissed()
 
   useUrlSync(listParamsToQuery({
-    ...initial, q, area, tags, sort, city, newOnly, wishOnly, shown: shownCount,
+    ...initial, q, area, tags, sort, city, newOnly, wishOnly, blacklistOnly, shown: shownCount,
   }))
 
-  const visible = useMemo(
+  const notDismissed = useMemo(
     () => spots.filter((s) => !dismissed.has(s.id)),
     [spots, dismissed],
+  )
+  // 블랙리스트는 기본적으로 숨기고, "블랙리스트" 칩을 켜면 반대로 그것만 보여준다.
+  const visible = useMemo(
+    () => (blacklistOnly
+      ? notDismissed.filter((s) => blacklisted.has(s.id))
+      : notDismissed.filter((s) => !blacklisted.has(s.id))),
+    [notDismissed, blacklisted, blacklistOnly],
   )
   const wishFiltered = useMemo(
     () => (wishOnly ? visible.filter((s) => wished.has(s.id)) : visible),
@@ -69,7 +79,7 @@ export function SpotListClient(
   }
   const toggle = reset<string>((t) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly || wishOnly
+  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly || wishOnly || blacklistOnly
 
   return (
     <div className="py-5">
@@ -109,6 +119,12 @@ export function SpotListClient(
         >
           ♥ 위시리스트
         </Chip>
+        <Chip
+          on={blacklistOnly}
+          onClick={() => { setBlacklistOnly((v) => !v); setShownCount(PAGE_CHUNK) }}
+        >
+          🖤 블랙리스트
+        </Chip>
         {SPOT_TAG_CHIPS.map((t) => (
           <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{SPOT_TAG_LABEL[t]}</Chip>
         ))}
@@ -117,6 +133,7 @@ export function SpotListClient(
             type="button"
             onClick={() => {
               setTags([]); setArea(null); setQ(''); setNewOnly(false); setWishOnly(false)
+              setBlacklistOnly(false)
               setShownCount(PAGE_CHUNK)
             }}
             className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
@@ -179,6 +196,8 @@ export function SpotListClient(
                     spot={s}
                     wished={wished.has(s.id)}
                     onToggleWish={() => toggleWish(s.id)}
+                    blacklisted={blacklisted.has(s.id)}
+                    onToggleBlacklist={() => toggleBlacklist(s.id)}
                     stale={!spotRecentlyVisited(s.visitedOn) && spotIsStale(s.lastSeenAt)}
                     onDismiss={() => dismiss(s.id)}
                   />
@@ -195,6 +214,8 @@ export function SpotListClient(
               spot={s}
               wished={wished.has(s.id)}
               onToggleWish={() => toggleWish(s.id)}
+              blacklisted={blacklisted.has(s.id)}
+              onToggleBlacklist={() => toggleBlacklist(s.id)}
               stale={!spotRecentlyVisited(s.visitedOn) && spotIsStale(s.lastSeenAt)}
               onDismiss={() => dismiss(s.id)}
             />
@@ -215,11 +236,13 @@ export function SpotListClient(
 
       {shown.length === 0 && (
         <p className="mt-8 text-center text-[14px] leading-relaxed text-ink-soft">
-          {wishOnly
-            ? <>아직 담은 곳이 없어요.<br />카드의 하트를 눌러 담아보세요.</>
-            : q
-              ? <>“{q}” 로 찾은 곳이 없어요.<br />이름 일부만 넣어보세요.</>
-              : '조건에 맞는 곳이 없어요. 칩을 줄여보세요.'}
+          {blacklistOnly
+            ? <>블랙리스트에 담은 곳이 없어요.<br />카드의 🤍 를 눌러 담아보세요.</>
+            : wishOnly
+              ? <>아직 담은 곳이 없어요.<br />카드의 하트를 눌러 담아보세요.</>
+              : q
+                ? <>“{q}” 로 찾은 곳이 없어요.<br />이름 일부만 넣어보세요.</>
+                : '조건에 맞는 곳이 없어요. 칩을 줄여보세요.'}
         </p>
       )}
     </div>

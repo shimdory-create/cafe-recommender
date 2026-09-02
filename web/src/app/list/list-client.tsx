@@ -10,6 +10,7 @@ import {
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
 import { useWishlist } from '@/lib/use-wishlist'
+import { useBlacklist } from '@/lib/use-blacklist'
 import { useDismissed } from '@/lib/use-dismissed'
 import { AreaChips, Chip, SearchBox } from '../filters'
 import { CafeCard } from '../cafe-card'
@@ -29,21 +30,31 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
   const [city, setCity] = useState(initial.city)
   const [newOnly, setNewOnly] = useState(initial.newOnly)
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
+  const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
   const [shownCount, setShownCount] = useState(initial.shown)
   // 고른 지역이 접힌 구간에 있으면 처음부터 펴 둔다
   const [expanded, setExpanded] = useState(false)
   const { wished, toggle: toggleWish } = useWishlist()
+  const { blacklisted, toggle: toggleBlacklist } = useBlacklist()
   const { dismissed, dismiss } = useDismissed()
 
   useUrlSync(listParamsToQuery({
-    ...initial, q, area, tags, sort, city, newOnly, wishOnly, shown: shownCount,
+    ...initial, q, area, tags, sort, city, newOnly, wishOnly, blacklistOnly, shown: shownCount,
   }))
 
   // 폐업 의심으로 숨긴 곳은 다른 모든 필터보다 먼저 뺀다 — 지역·태그 숫자에도
   // 안 잡혀야 "숨겼는데 칩 숫자에는 남아 있다" 가 안 생긴다
-  const visible = useMemo(
+  const notDismissed = useMemo(
     () => cafes.filter((c) => !dismissed.has(c.id)),
     [cafes, dismissed],
+  )
+  // 블랙리스트는 기본적으로 숨기고, "블랙리스트" 칩을 켜면 반대로 그것만 보여준다.
+  // dismiss 처럼 다른 모든 필터보다 먼저 적용해야 지역·태그 숫자도 일관된다.
+  const visible = useMemo(
+    () => (blacklistOnly
+      ? notDismissed.filter((c) => blacklisted.has(c.id))
+      : notDismissed.filter((c) => !blacklisted.has(c.id))),
+    [notDismissed, blacklisted, blacklistOnly],
   )
   // 위시리스트도 마찬가지로 먼저 뺀다 — areas·newCount 가 matched 와 다른
   // 기준으로 세면 "위시리스트만 보기" 를 켰을 때 배지 숫자가 또 어긋난다
@@ -90,7 +101,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
   }
   const toggle = reset<string>((t) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly || wishOnly
+  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly || wishOnly || blacklistOnly
 
   return (
     <div className="py-5">
@@ -132,6 +143,12 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
         >
           ♥ 위시리스트
         </Chip>
+        <Chip
+          on={blacklistOnly}
+          onClick={() => { setBlacklistOnly((v) => !v); setShownCount(PAGE_CHUNK) }}
+        >
+          🖤 블랙리스트
+        </Chip>
         {ALL_TAGS.map((t) => (
           <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{t}</Chip>
         ))}
@@ -140,6 +157,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
             type="button"
             onClick={() => {
               setTags([]); setArea(null); setQ(''); setNewOnly(false); setWishOnly(false)
+              setBlacklistOnly(false)
               setShownCount(PAGE_CHUNK)
             }}
             className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
@@ -203,6 +221,8 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
                     cafe={c}
                     wished={wished.has(c.id)}
                     onToggleWish={() => toggleWish(c.id)}
+                    blacklisted={blacklisted.has(c.id)}
+                    onToggleBlacklist={() => toggleBlacklist(c.id)}
                     stale={!recentlyVisited(c.visitedOn) && isStale(c.lastSeenAt)}
                     onDismiss={() => dismiss(c.id)}
                   />
@@ -219,6 +239,8 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
               cafe={c}
               wished={wished.has(c.id)}
               onToggleWish={() => toggleWish(c.id)}
+              blacklisted={blacklisted.has(c.id)}
+              onToggleBlacklist={() => toggleBlacklist(c.id)}
               stale={!recentlyVisited(c.visitedOn) && isStale(c.lastSeenAt)}
               onDismiss={() => dismiss(c.id)}
             />
@@ -239,11 +261,13 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
 
       {shown.length === 0 && (
         <p className="mt-8 text-center text-[14px] leading-relaxed text-ink-soft">
-          {wishOnly
-            ? <>아직 담은 곳이 없어요.<br />카드의 하트를 눌러 담아보세요.</>
-            : q
-              ? <>“{q}” 로 찾은 카페가 없어요.<br />이름 일부만 넣어보세요.</>
-              : '조건에 맞는 카페가 없어요. 칩을 줄여보세요.'}
+          {blacklistOnly
+            ? <>블랙리스트에 담은 곳이 없어요.<br />카드의 🤍 를 눌러 담아보세요.</>
+            : wishOnly
+              ? <>아직 담은 곳이 없어요.<br />카드의 하트를 눌러 담아보세요.</>
+              : q
+                ? <>“{q}” 로 찾은 카페가 없어요.<br />이름 일부만 넣어보세요.</>
+                : '조건에 맞는 카페가 없어요. 칩을 줄여보세요.'}
         </p>
       )}
     </div>

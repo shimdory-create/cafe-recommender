@@ -8,6 +8,7 @@ import { NaverMapLink } from '../../naver-map-link'
 import { ReviewPanel } from './review-panel'
 import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
+import { BlacklistHeart } from './blacklist-heart'
 
 export function generateStaticParams() {
   return spotPayload.spots.map((s) => ({ id: s.id }))
@@ -55,7 +56,10 @@ export default async function SpotDetail({ params }: { params: Promise<{ id: str
           )}
           {spot.name}
         </h1>
-        <WishHeart spotId={spot.id} />
+        <span className="flex shrink-0 items-center gap-1">
+          <WishHeart spotId={spot.id} />
+          <BlacklistHeart spotId={spot.id} />
+        </span>
       </div>
       <p className="mt-1 text-[14px] text-ink-soft">
         {spot.sigungu} · {driveLabel(spot.driveMinutes)}

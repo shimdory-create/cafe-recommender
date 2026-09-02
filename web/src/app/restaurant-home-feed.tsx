@@ -6,6 +6,7 @@ import { PAGE_SIZE, pageCount, pageFromParam, pageOf } from '@/lib/paging'
 import { restaurantHiddenByVisit } from '@/lib/restaurant-site'
 import type { VisitRow } from '@/lib/reviews'
 import { useRestaurantWishlist } from '@/lib/use-restaurant-wishlist'
+import { useRestaurantBlacklist } from '@/lib/use-restaurant-blacklist'
 import { useRestaurantDismissed } from '@/lib/use-restaurant-dismissed'
 import { RestaurantFeedCards, type RestaurantFeedRow } from './restaurant-feed-cards'
 
@@ -53,6 +54,7 @@ export function RestaurantHomeFeed({ rows }: { rows: RestaurantFeedRow[] }) {
   const params = useSearchParams()
   const [visited, setVisited] = useState<Set<string> | null>(null)
   const { wished, toggle: toggleWish } = useRestaurantWishlist()
+  const { blacklisted, toggle: toggleBlacklist } = useRestaurantBlacklist()
   const { dismissed, dismiss } = useRestaurantDismissed()
   const sortParam = params.get('s')
   const sort: HomeSort = sortParam === 'near' || sortParam === 'new' ? sortParam : 'default'
@@ -80,9 +82,9 @@ export function RestaurantHomeFeed({ rows }: { rows: RestaurantFeedRow[] }) {
 
   const feed = useMemo(() => {
     const live = visited ? rows.filter((r) => !visited.has(r.id)) : rows
-    const shown = live.filter((r) => !dismissed.has(r.id))
+    const shown = live.filter((r) => !dismissed.has(r.id) && !blacklisted.has(r.id))
     return sortFeed(shown, sort)
-  }, [rows, visited, dismissed, sort])
+  }, [rows, visited, dismissed, blacklisted, sort])
 
   const total = pageCount(feed.length)
   const page = pageFromParam(params.get('p'), total)
@@ -132,6 +134,7 @@ export function RestaurantHomeFeed({ rows }: { rows: RestaurantFeedRow[] }) {
         showRank={sort === 'default'}
         wished={wished}
         onToggleWish={toggleWish}
+        onToggleBlacklist={toggleBlacklist}
         onDismiss={dismiss}
       />
 

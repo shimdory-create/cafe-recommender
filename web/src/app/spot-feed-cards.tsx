@@ -6,13 +6,14 @@ export interface SpotFeedRow extends SpotListRow {
 }
 
 export function SpotFeedCards({
-  rows, offset = 0, showRank = true, wished, onToggleWish, onDismiss,
+  rows, offset = 0, showRank = true, wished, onToggleWish, onToggleBlacklist, onDismiss,
 }: {
   rows: SpotFeedRow[]
   offset?: number
   showRank?: boolean
   wished?: Set<string>
   onToggleWish?: (id: string) => void
+  onToggleBlacklist?: (id: string) => void
   onDismiss?: (id: string) => void
 }) {
   return (
@@ -24,6 +25,7 @@ export function SpotFeedCards({
             rank={showRank ? offset + i + 1 : undefined}
             wished={wished?.has(r.id)}
             onToggleWish={onToggleWish ? () => onToggleWish(r.id) : undefined}
+            onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(r.id) : undefined}
             stale={!r.visitedOn && spotIsStale(r.lastSeenAt)}
             onDismiss={onDismiss ? () => onDismiss(r.id) : undefined}
           />

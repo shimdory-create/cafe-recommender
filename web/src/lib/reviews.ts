@@ -19,6 +19,10 @@ export const REVIEWS_PATH = 'data/reviews.json'
 export const VISITS_PATH = 'data/visits.json'
 export const WISHLIST_PATH = 'data/wishlist.json'
 export const DISMISSED_PATH = 'data/dismissed.json'
+// `data/blacklist.json` 는 이미 파이프라인의 프랜차이즈 제외 목록(`src/pipeline/exclude.ts`)이
+// 쓰는 이름이라 겹치면 안 된다 — 스키마가 완전히 다르다({pattern,matchType} vs
+// {kakaoPlaceId,blacklistedAt}). 그래서 사용자 블랙리스트는 `user-` 를 붙인다.
+export const BLACKLIST_PATH = 'data/user-blacklist.json'
 
 // 식당판. 카페 파일은 절대 안 건드린다 — 1단계 파이프라인이 data/restaurants.json
 // 등을 data/cafes.json 과 분리한 것과 같은 원칙이다.
@@ -26,12 +30,17 @@ export const RESTAURANT_REVIEWS_PATH = 'data/restaurant-reviews.json'
 export const RESTAURANT_VISITS_PATH = 'data/restaurant-visits.json'
 export const RESTAURANT_WISHLIST_PATH = 'data/restaurant-wishlist.json'
 export const RESTAURANT_DISMISSED_PATH = 'data/restaurant-dismissed.json'
+// 같은 이유로 `restaurant-` 접두사만으로는 파이프라인의 프랜차이즈 제외 목록과 겹친다.
+export const RESTAURANT_BLACKLIST_PATH = 'data/restaurant-user-blacklist.json'
 
 // 가볼 곳판. 카페·식당 파일은 절대 안 건드린다.
 export const SPOT_REVIEWS_PATH = 'data/spot-reviews.json'
 export const SPOT_VISITS_PATH = 'data/spot-visits.json'
 export const SPOT_WISHLIST_PATH = 'data/spot-wishlist.json'
 export const SPOT_DISMISSED_PATH = 'data/spot-dismissed.json'
+// 가볼 곳판은 아직 프랜차이즈 제외 목록이 없지만, 나중에 생기더라도 겹치지
+// 않도록 처음부터 같은 접두사를 쓴다.
+export const SPOT_BLACKLIST_PATH = 'data/spot-user-blacklist.json'
 
 export interface WishRow {
   kakaoPlaceId: string
@@ -173,6 +182,27 @@ export function addDismiss(rows: DismissRow[], kakaoPlaceId: string, dismissedAt
 
 /** 숨김 취소 (오탐이었을 때) */
 export function removeDismiss(rows: DismissRow[], kakaoPlaceId: string): DismissRow[] {
+  return removeByPlaceId(rows, kakaoPlaceId)
+}
+
+/**
+ * 아예 안 갈 것 같은 곳 숨기기. `DismissRow`(폐업 의심)와 모양은 같지만
+ * 뜻이 다르다 — 저건 파이프라인이 잘못 판단했을 가능성(폐업)이고, 이건
+ * 순수 취향이다. 같은 저장소를 쓰면 폐업 감지 자동 로직과 사람이 누른
+ * 것이 뒤섞여 헷갈리므로 파일을 분리했다.
+ */
+export interface BlacklistRow {
+  kakaoPlaceId: string
+  blacklistedAt: string
+}
+
+/** 블랙리스트에 담기. 두 번 눌러도 한 건 */
+export function addBlacklist(rows: BlacklistRow[], kakaoPlaceId: string, blacklistedAt: string): BlacklistRow[] {
+  return addUnique(rows, { kakaoPlaceId, blacklistedAt })
+}
+
+/** 블랙리스트에서 빼기 */
+export function removeBlacklist(rows: BlacklistRow[], kakaoPlaceId: string): BlacklistRow[] {
   return removeByPlaceId(rows, kakaoPlaceId)
 }
 

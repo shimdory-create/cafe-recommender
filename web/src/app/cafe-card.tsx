@@ -43,13 +43,16 @@ export function TopThree({ cafe }: { cafe: ListRow }) {
 }
 
 export function CafeCard({
-  cafe, rank, wished, onToggleWish, stale, onDismiss,
+  cafe, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
 }: {
   cafe: ListRow
   rank?: number
   /** 위시리스트 상태. 부모가 안 넘기면(서버 렌더 폴백 등) 하트 자체를 그리지 않는다 */
   wished?: boolean
   onToggleWish?: () => void
+  /** 블랙리스트 상태. 리스트에서는 블랙리스트인 카드가 애초에 안 넘어오므로 늘 false다 */
+  blacklisted?: boolean
+  onToggleBlacklist?: () => void
   /** liveness 잡이 오래 못 본 카페 (폐업 의심) */
   stale?: boolean
   onDismiss?: () => void
@@ -97,6 +100,17 @@ export function CafeCard({
                     }`}
                   >
                     {wished ? '♥' : '♡'}
+                  </button>
+                )}
+                {onToggleBlacklist && (
+                  <button
+                    type="button"
+                    aria-pressed={blacklisted}
+                    aria-label={blacklisted ? '블랙리스트에서 빼기' : '블랙리스트에 추가'}
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleBlacklist() }}
+                    className="flex min-h-[40px] min-w-[40px] items-center justify-center text-[19px]"
+                  >
+                    {blacklisted ? '🖤' : '🤍'}
                   </button>
                 )}
                 {/* 우리 가족 별점이 있으면 블로그 화제량보다 먼저 보인다 */}

@@ -10,6 +10,7 @@ import {
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
 import { useRestaurantWishlist } from '@/lib/use-restaurant-wishlist'
+import { useRestaurantBlacklist } from '@/lib/use-restaurant-blacklist'
 import { useRestaurantDismissed } from '@/lib/use-restaurant-dismissed'
 import { AreaChips, Chip, SearchBox } from '../../filters'
 import { RestaurantCard } from '../../restaurant-card'
@@ -36,10 +37,12 @@ export function RestaurantListClient(
   const [city, setCity] = useState(initial.city)
   const [newOnly, setNewOnly] = useState(initial.newOnly)
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
+  const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
   const [shownCount, setShownCount] = useState(initial.shown)
   // 고른 지역이 접힌 구간에 있으면 처음부터 펴 둔다
   const [expanded, setExpanded] = useState(false)
   const { wished, toggle: toggleWish } = useRestaurantWishlist()
+  const { blacklisted, toggle: toggleBlacklist } = useRestaurantBlacklist()
   const { dismissed, dismiss } = useRestaurantDismissed()
 
   // filter.ts / url-state 의 tags 슬롯을 그대로 재사용하되, 이 화면에서는
@@ -47,14 +50,21 @@ export function RestaurantListClient(
   const cuisineTags = useMemo(() => (cuisine ? [cuisine] : []), [cuisine])
 
   useUrlSync(listParamsToQuery({
-    ...initial, q, area, tags: cuisineTags, sort, city, newOnly, wishOnly, shown: shownCount,
+    ...initial, q, area, tags: cuisineTags, sort, city, newOnly, wishOnly, blacklistOnly, shown: shownCount,
   }))
 
   // 폐업 의심으로 숨긴 곳은 다른 모든 필터보다 먼저 뺀다 — 지역·태그 숫자에도
-  // 안 잡혀야 "숨겼는데 칩 숫자에는 남아 있다" 가 안 생긴다
-  const visible = useMemo(
+  // 안 잡혀야 "숨겼는데 칩 숫자에도 남아 있다" 가 안 생긴다
+  const notDismissed = useMemo(
     () => restaurants.filter((r) => !dismissed.has(r.id)),
     [restaurants, dismissed],
+  )
+  // 블랙리스트는 기본적으로 숨기고, "블랙리스트" 칩을 켜면 반대로 그것만 보여준다.
+  const visible = useMemo(
+    () => (blacklistOnly
+      ? notDismissed.filter((r) => blacklisted.has(r.id))
+      : notDismissed.filter((r) => !blacklisted.has(r.id))),
+    [notDismissed, blacklisted, blacklistOnly],
   )
   // 위시리스트도 마찬가지로 먼저 뺀다 — areas·newCount 가 matched 와 다른
   // 기준으로 세면 "위시리스트만 보기" 를 켰을 때 배지 숫자가 또 어긋난다
@@ -95,7 +105,7 @@ export function RestaurantListClient(
   // area 칩과 같은 단일 선택 패턴: 이미 선택된 걸 다시 누르면 해제, 아니면
   // 기존 선택을 대체한다 (누적 아님 — cuisineType 은 식당당 하나뿐이므로).
   const selectCuisine = reset<string>((t) => setCuisine((prev) => (prev === t ? null : t)))
-  const dirty = cuisine !== null || area !== null || q !== '' || newOnly || wishOnly
+  const dirty = cuisine !== null || area !== null || q !== '' || newOnly || wishOnly || blacklistOnly
 
   return (
     <div className="py-5">
@@ -135,6 +145,12 @@ export function RestaurantListClient(
         >
           ♥ 위시리스트
         </Chip>
+        <Chip
+          on={blacklistOnly}
+          onClick={() => { setBlacklistOnly((v) => !v); setShownCount(PAGE_CHUNK) }}
+        >
+          🖤 블랙리스트
+        </Chip>
         {CUISINE_CHIPS.map((t) => (
           <Chip key={t} on={cuisine === t} onClick={() => selectCuisine(t)}>{CUISINE_LABEL[t]}</Chip>
         ))}
@@ -143,6 +159,7 @@ export function RestaurantListClient(
             type="button"
             onClick={() => {
               setCuisine(null); setArea(null); setQ(''); setNewOnly(false); setWishOnly(false)
+              setBlacklistOnly(false)
               setShownCount(PAGE_CHUNK)
             }}
             className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
@@ -205,6 +222,8 @@ export function RestaurantListClient(
                     restaurant={r}
                     wished={wished.has(r.id)}
                     onToggleWish={() => toggleWish(r.id)}
+                    blacklisted={blacklisted.has(r.id)}
+                    onToggleBlacklist={() => toggleBlacklist(r.id)}
                     stale={!restaurantRecentlyVisited(r.visitedOn) && restaurantIsStale(r.lastSeenAt)}
                     onDismiss={() => dismiss(r.id)}
                   />
@@ -221,6 +240,8 @@ export function RestaurantListClient(
               restaurant={r}
               wished={wished.has(r.id)}
               onToggleWish={() => toggleWish(r.id)}
+              blacklisted={blacklisted.has(r.id)}
+              onToggleBlacklist={() => toggleBlacklist(r.id)}
               stale={!restaurantRecentlyVisited(r.visitedOn) && restaurantIsStale(r.lastSeenAt)}
               onDismiss={() => dismiss(r.id)}
             />
@@ -241,11 +262,13 @@ export function RestaurantListClient(
 
       {shown.length === 0 && (
         <p className="mt-8 text-center text-[14px] leading-relaxed text-ink-soft">
-          {wishOnly
-            ? <>아직 담은 곳이 없어요.<br />카드의 하트를 눌러 담아보세요.</>
-            : q
-              ? <>“{q}” 로 찾은 식당이 없어요.<br />이름 일부만 넣어보세요.</>
-              : '조건에 맞는 식당이 없어요. 칩을 줄여보세요.'}
+          {blacklistOnly
+            ? <>블랙리스트에 담은 곳이 없어요.<br />카드의 🤍 를 눌러 담아보세요.</>
+            : wishOnly
+              ? <>아직 담은 곳이 없어요.<br />카드의 하트를 눌러 담아보세요.</>
+              : q
+                ? <>“{q}” 로 찾은 식당이 없어요.<br />이름 일부만 넣어보세요.</>
+                : '조건에 맞는 식당이 없어요. 칩을 줄여보세요.'}
         </p>
       )}
     </div>

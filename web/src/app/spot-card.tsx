@@ -41,12 +41,14 @@ export function SpotTopThree({ spot }: { spot: SpotListRow }) {
 }
 
 export function SpotCard({
-  spot, rank, wished, onToggleWish, stale, onDismiss,
+  spot, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
 }: {
   spot: SpotListRow
   rank?: number
   wished?: boolean
   onToggleWish?: () => void
+  blacklisted?: boolean
+  onToggleBlacklist?: () => void
   stale?: boolean
   onDismiss?: () => void
 }) {
@@ -89,6 +91,17 @@ export function SpotCard({
                     }`}
                   >
                     {wished ? '♥' : '♡'}
+                  </button>
+                )}
+                {onToggleBlacklist && (
+                  <button
+                    type="button"
+                    aria-pressed={blacklisted}
+                    aria-label={blacklisted ? '블랙리스트에서 빼기' : '블랙리스트에 추가'}
+                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleBlacklist() }}
+                    className="flex min-h-[40px] min-w-[40px] items-center justify-center text-[19px]"
+                  >
+                    {blacklisted ? '🖤' : '🤍'}
                   </button>
                 )}
                 {spot.ratingCount > 0 && (

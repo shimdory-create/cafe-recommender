@@ -18,13 +18,14 @@ export interface RestaurantFeedRow extends RestaurantListRow {
  * 그린다. 1페이지에서는 두 결과가 같으므로 화면이 튀지 않는다.
  */
 export function RestaurantFeedCards({
-  rows, offset = 0, showRank = true, wished, onToggleWish, onDismiss,
+  rows, offset = 0, showRank = true, wished, onToggleWish, onToggleBlacklist, onDismiss,
 }: {
   rows: RestaurantFeedRow[]
   offset?: number
   showRank?: boolean
   wished?: Set<string>
   onToggleWish?: (id: string) => void
+  onToggleBlacklist?: (id: string) => void
   onDismiss?: (id: string) => void
 }) {
   return (
@@ -36,6 +37,7 @@ export function RestaurantFeedCards({
             rank={showRank ? offset + i + 1 : undefined}
             wished={wished?.has(r.id)}
             onToggleWish={onToggleWish ? () => onToggleWish(r.id) : undefined}
+            onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(r.id) : undefined}
             stale={!r.visitedOn && restaurantIsStale(r.lastSeenAt)}
             onDismiss={onDismiss ? () => onDismiss(r.id) : undefined}
           />
