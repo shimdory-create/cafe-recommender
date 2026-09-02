@@ -1,8 +1,9 @@
 name: weekly-liveness-spot
 on:
   schedule:
-    # 일 23:39 UTC. weekly-liveness-restaurant(일 23:06 UTC)와 33분 차이.
-    - cron: '39 23 * * 0'
+    # 월 23:39 UTC. 카페·식당의 일요일 data-write 혼잡(동시 대기 2건 초과 시
+    # 3번째가 조용히 취소됨)을 피해 월요일로 옮김.
+    - cron: '39 23 * * 1'
   workflow_dispatch:
 
 concurrency:

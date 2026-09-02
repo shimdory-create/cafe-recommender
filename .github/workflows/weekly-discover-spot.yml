@@ -1,8 +1,9 @@
 name: weekly-discover-spot
 on:
   schedule:
-    # 일 20:43 UTC. weekly-discover-restaurant(일 20:10 UTC)와 33분 차이.
-    - cron: '43 20 * * 0'
+    # 월 20:43 UTC. 카페·식당의 일요일 data-write 혼잡(동시 대기 2건 초과 시
+    # 3번째가 조용히 취소됨)을 피해 월요일로 옮김.
+    - cron: '43 20 * * 1'
   workflow_dispatch:
 
 concurrency:

@@ -1,4 +1,4 @@
-import { hotScore, pickWeekendCandidates } from '../pipeline/score.js'
+import { hotScore, pickWeekendCandidates, finalScore } from '../pipeline/score.js'
 import { spotFamilyFit } from '../pipeline/spot-score.js'
 import { passesGate } from '../pipeline/gate.js'
 import { spotDriveMinutesOf } from './spot-drive-times.js'
@@ -53,7 +53,7 @@ export async function runSpotWeeklySuggest(
     )
 
     return [{
-      id: s.kakaoPlaceId, score: hot * fit, tags: s.tags, region: s.sigungu, hot, fit,
+      id: s.kakaoPlaceId, score: finalScore(hot, fit), tags: s.tags, region: s.sigungu, hot, fit,
     }]
   })
 
