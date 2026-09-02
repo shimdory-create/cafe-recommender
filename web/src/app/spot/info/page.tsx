@@ -1,6 +1,7 @@
 // web/src/app/spot/info/page.tsx
 import { spotPayload, SPOT_REVISIT_DAYS } from '@/lib/spot-site'
 import { VIEW_ONLY } from '@/lib/view-only'
+import { CHANGELOG } from '@/lib/changelog'
 
 export const metadata = { title: '가볼 곳 정보 — 심김 빵지순례' }
 
@@ -112,6 +113,22 @@ export default function SpotInfo() {
         실내외·계절 정보는 저장만 해 두고 있어요 — 자동 추천 로직에는 아직 안
         씁니다.
       </p>
+
+      <h2 className="mt-7 text-[17px] font-bold">업데이트 기록</h2>
+      <div className="mt-2 flex flex-col gap-2">
+        {CHANGELOG.map((entry) => (
+          <details key={entry.date} className="group rounded-2xl border border-line bg-card p-4">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-2 font-semibold">
+              <span>{entry.title}</span>
+              <span className="flex shrink-0 items-center gap-1.5 text-[12px] font-normal text-ink-soft">
+                {entry.date}
+                <span className="transition-transform group-open:rotate-180">⌄</span>
+              </span>
+            </summary>
+            <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">{entry.body}</p>
+          </details>
+        ))}
+      </div>
     </div>
   )
 }

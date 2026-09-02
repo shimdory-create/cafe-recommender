@@ -1,5 +1,6 @@
 import { restaurantPayload, RESTAURANT_REVISIT_DAYS } from '@/lib/restaurant-site'
 import { VIEW_ONLY } from '@/lib/view-only'
+import { CHANGELOG } from '@/lib/changelog'
 
 export const metadata = { title: '식당 정보 — 심김 빵지순례' }
 
@@ -110,6 +111,22 @@ export default function RestaurantInfo() {
         영업시간은 절반쯤 틀려서 없느니만 못해요. 대신 상세 화면에{' '}
         <b className="text-ink">영업시간·휴무일 확인</b> 버튼을 두었어요.
       </p>
+
+      <h2 className="mt-7 text-[17px] font-bold">업데이트 기록</h2>
+      <div className="mt-2 flex flex-col gap-2">
+        {CHANGELOG.map((entry) => (
+          <details key={entry.date} className="group rounded-2xl border border-line bg-card p-4">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-2 font-semibold">
+              <span>{entry.title}</span>
+              <span className="flex shrink-0 items-center gap-1.5 text-[12px] font-normal text-ink-soft">
+                {entry.date}
+                <span className="transition-transform group-open:rotate-180">⌄</span>
+              </span>
+            </summary>
+            <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">{entry.body}</p>
+          </details>
+        ))}
+      </div>
     </div>
   )
 }
