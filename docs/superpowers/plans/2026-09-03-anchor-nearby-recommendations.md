@@ -430,28 +430,45 @@ git commit -m "feat(nearby): 원본 좌표 + 사이트 페이로드 조인해 �
 - Modify: `src/cli/run.ts` (`case 'site':` 블록 끝, 가볼 곳 페이로드 try/catch 다음)
 
 **Interfaces:**
-- Consumes: `buildNearbyPayloads` from `../site/nearby-payload.js` (Task 2). `case 'site':` 블록은 이미 `cafes`, `restaurants`, `spots`(원본 배열), `payload`, `restPayload`, `spotPayload`(최종 페이로드, 각각 `.cafes`/`.restaurants`/`.spots` 프로퍼티) 를 스코프 안에 갖고 있다 — 단, `restaurants`/`restPayload`/`spots`/`spotPayload`는 각자의 try 블록 **안에서** 선언되므로, 근처 추천 계산도 그 두 try 블록이 끝난 뒤 이어지는 자기 자신의 try/catch 안에서 그 변수들을 다시 선언해 읽어야 한다(식당/가볼 곳 로드를 중복하지 않도록 try 블록 바깥의 `let`로 끌어올린다).
+- Consumes: `buildNearbyPayloads` from `../site/nearby-payload.js` (Task 2). `case 'site':` 블록은 이미 `cafes`(원본 배열), `payload`(카페 최종 페이로드, `.cafes` 프로퍼티) 를 바로 쓸 수 있는 스코프에 갖고 있다. `restaurants`/`spots`(원본 배열)와 `restPayload`/`spotPayload`(최종 페이로드)는 각자의 try 블록 **안에서만** 선언돼 바깥에서 안 보인다 — 아래처럼 try 블록 밖에 별도 이름의 변수를 만들어 그 안에서 값을 옮겨 담는다(기존 `const restaurants = ...` 선언 자체는 건드리지 않는다 — 이름이 겹치면 안쪽 `const`가 바깥 `let`을 가려버려 절대 안 바뀐다. 그래서 바깥 변수는 일부러 다른 이름을 쓴다).
 
-먼저 기존 코드를 읽어 정확한 위치를 확인한다:
+**정확한 현재 위치**(이 계획 작성 시점 기준 — 실제 줄 번호는 파일 상태에 따라 달라질 수 있으니 `grep -n "case 'site':" -A 5 src/cli/run.ts`로 직접 확인 후 진행):
+- 408번 줄: `const now = new Date()` (카페 블록 맨 위)
+- 434번 줄: `const [restaurants, restBuzz, restVisits, restSuggestions, restReviews] = await Promise.all([`
+- 439번 줄: `const restPayload = buildRestaurantSitePayload({`
+- 449번 줄: `} catch (e) {` (식당 catch 시작)
+- 458번 줄: `const [spots, spotBuzz, spotVisits, spotSuggestions, spotReviews] = await Promise.all([`
+- 463번 줄: `const spotPayload = buildSpotSitePayload({`
+- 476번 줄: `break` (가볼 곳 catch 블록이 끝나고 `case 'site':` 자체가 끝나는 지점)
 
-- [ ] **Step 1: 기존 변수 선언을 try 블록 바깥으로 끌어올리기 위해 현재 구조 확인**
-
-Run: `grep -n "case 'site':" -A 5 src/cli/run.ts` 로 시작 줄을 확인하고, 식당·가볼 곳 try 블록 안의 `restaurants`/`restPayload`/`spots`/`spotPayload` 선언 줄 번호를 적어둔다(이 계획 작성 시점 기준 각각 434번·441번, 493번·500번 부근 — 실제 줄 번호는 파일 상태에 따라 달라질 수 있으니 직접 확인).
-
-- [ ] **Step 2: `restaurants`/`restPayload`/`spots`/`spotPayload`를 try 블록 바깥에서 선언하도록 수정**
-
-`case 'site':` 블록 맨 위, `const now = new Date()` 다음 줄에 추가:
+- [ ] **Step 1: `case 'site':` 블록 맨 위, 408번 줄(`const now = new Date()`) 바로 다음 줄에 바깥 변수 선언 추가**
 
 ```typescript
-      let restaurants: Awaited<ReturnType<typeof createRestaurantJsonStore>['readRestaurants']> = []
-      let restPayload: ReturnType<typeof buildRestaurantSitePayload> | null = null
-      let spots: Awaited<ReturnType<typeof createSpotJsonStore>['readSpots']> = []
-      let spotPayload: ReturnType<typeof buildSpotSitePayload> | null = null
+      let outerRestaurants: Awaited<ReturnType<typeof createRestaurantJsonStore>['readRestaurants']> = []
+      let outerRestPayload: ReturnType<typeof buildRestaurantSitePayload> | null = null
+      let outerSpots: Awaited<ReturnType<typeof createSpotJsonStore>['readSpots']> = []
+      let outerSpotPayload: ReturnType<typeof buildSpotSitePayload> | null = null
 ```
 
-식당 try 블록 안에서 기존에 `const restaurants = ...`, `const restPayload = ...`로 선언하던 줄을 `restaurants = ...`, `restPayload = ...`(재할당)로 바꾼다. 가볼 곳 try 블록도 동일하게 `spots`/`spotPayload`를 재할당으로 바꾼다.
+- [ ] **Step 2: 식당 try 블록 안, `restPayload` 선언(439번 줄) 다음 줄에 두 줄 추가**
 
-- [ ] **Step 3: 가볼 곳 try/catch 블록이 끝난 직후, 새 try/catch로 근처 추천 3파일 생성**
+기존 `const restPayload = buildRestaurantSitePayload({ ... })` 블록은 그대로 두고, 그 다음 줄에 추가:
+
+```typescript
+        outerRestaurants = restaurants
+        outerRestPayload = restPayload
+```
+
+(`await mkdir(dirname(restOut), ...)` 줄보다 앞이든 뒤든 상관없다 — 같은 try 블록 안이면 된다.)
+
+- [ ] **Step 3: 가볼 곳 try 블록 안, `spotPayload` 선언(463번 줄) 다음에 동일하게 두 줄 추가**
+
+```typescript
+        outerSpots = spots
+        outerSpotPayload = spotPayload
+```
+
+- [ ] **Step 4: 가볼 곳 try/catch 블록이 끝난 직후(476번 줄 `break` 바로 앞), 새 try/catch로 근처 추천 3파일 생성**
 
 ```typescript
       // 근처 추천 3파일 — 카페·식당·가볼 곳 페이로드가 전부 준비된 뒤에만
@@ -462,10 +479,10 @@ Run: `grep -n "case 'site':" -A 5 src/cli/run.ts` 로 시작 줄을 확인하고
         const restNearbyOut = flag(rest, 'restaurant-nearby-out') || 'web/src/generated/site-restaurant-nearby.json'
         const spotNearbyOut = flag(rest, 'spot-nearby-out') || 'web/src/generated/site-spot-nearby.json'
         const nearby = buildNearbyPayloads({
-          cafes, restaurants, spots,
+          cafes, restaurants: outerRestaurants, spots: outerSpots,
           cafeSite: payload.cafes,
-          restaurantSite: restPayload?.restaurants ?? [],
-          spotSite: spotPayload?.spots ?? [],
+          restaurantSite: outerRestPayload?.restaurants ?? [],
+          spotSite: outerSpotPayload?.spots ?? [],
           limit: 5,
         })
         await writeFile(cafeNearbyOut, JSON.stringify(nearby.cafe, null, 2) + '\n', 'utf8')
@@ -481,7 +498,7 @@ Run: `grep -n "case 'site':" -A 5 src/cli/run.ts` 로 시작 줄을 확인하고
       }
 ```
 
-- [ ] **Step 4: import 추가**
+- [ ] **Step 5: import 추가**
 
 `src/cli/run.ts` 상단 import 목록에 추가:
 
@@ -489,7 +506,7 @@ Run: `grep -n "case 'site':" -A 5 src/cli/run.ts` 로 시작 줄을 확인하고
 import { buildNearbyPayloads } from '../site/nearby-payload.js'
 ```
 
-- [ ] **Step 5: 타입 검사와 기존 CLI 테스트 확인**
+- [ ] **Step 6: 타입 검사와 기존 CLI 테스트 확인**
 
 Run: `npm run typecheck` (또는 `npx tsc --noEmit`)
 Expected: 에러 없음
@@ -497,7 +514,7 @@ Expected: 에러 없음
 Run: `npm test -- tests/cli` (CLI 관련 기존 테스트가 있으면 전부 통과 확인. 없으면 `npm test`로 전체 스위트 확인)
 Expected: 기존 테스트 전부 PASS (이 태스크는 새 유닛 테스트를 추가하지 않는다 — CLI 배선은 Task 9의 실측 빌드로 검증한다)
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 git add src/cli/run.ts
