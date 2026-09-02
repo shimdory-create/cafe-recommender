@@ -34,8 +34,8 @@ describe('nearestByDomain', () => {
     const result = nearestByDomain([anchor], [far, near, mid], 2)
     const matches = result.get('anchor')
     expect(matches).toHaveLength(2)
-    expect(matches?.[0].id).toBe('near')
-    expect(matches?.[1].id).toBe('mid')
+    expect(matches?.[0]?.id).toBe('near')
+    expect(matches?.[1]?.id).toBe('mid')
   })
 
   it('candidates가 limit보다 적으면 있는 만큼만 반환한다', () => {
@@ -51,8 +51,8 @@ describe('nearestByDomain', () => {
   it('anchor가 여러 개면 각각 독립적으로 계산한다', () => {
     const anchor2: GeoPoint = { id: 'anchor2', lat: 38.4, lng: 127.8 }
     const result = nearestByDomain([anchor, anchor2], [near, far], 1)
-    expect(result.get('anchor')?.[0].id).toBe('near')
-    expect(result.get('anchor2')?.[0].id).toBe('far')
+    expect(result.get('anchor')?.[0]?.id).toBe('near')
+    expect(result.get('anchor2')?.[0]?.id).toBe('far')
   })
 
   it('anchors가 비어있으면 빈 Map을 반환한다', () => {

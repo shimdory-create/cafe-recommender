@@ -43,11 +43,11 @@ describe('buildNearbyPayloads', () => {
       spotSite: [{ id: 's1', name: '가볼곳', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never],
       limit: 5,
     })
-    expect(result.cafe.c1.restaurants).toHaveLength(1)
-    expect(result.cafe.c1.restaurants[0].id).toBe('r1')
-    expect(result.cafe.c1.spots).toHaveLength(1)
-    expect(result.restaurant.r1.cafes[0].id).toBe('c1')
-    expect(result.spot.s1.cafes[0].id).toBe('c1')
+    expect(result.cafe.c1!.restaurants).toHaveLength(1)
+    expect(result.cafe.c1!.restaurants[0]!.id).toBe('r1')
+    expect(result.cafe.c1!.spots).toHaveLength(1)
+    expect(result.restaurant.r1!.cafes[0]!.id).toBe('c1')
+    expect(result.spot.s1!.cafes[0]!.id).toBe('c1')
   })
 
   it('cityOnly 후보는 제외한다', () => {
@@ -60,7 +60,7 @@ describe('buildNearbyPayloads', () => {
       spotSite: [],
       limit: 5,
     })
-    expect(result.cafe.c1.restaurants).toEqual([])
+    expect(result.cafe.c1!.restaurants).toEqual([])
   })
 
   it('출력 카드에 driveMinutes 필드가 없다', () => {
@@ -73,8 +73,8 @@ describe('buildNearbyPayloads', () => {
       spotSite: [],
       limit: 5,
     })
-    expect(result.cafe.c1.restaurants[0]).not.toHaveProperty('driveMinutes')
-    expect(result.cafe.c1.restaurants[0]).toHaveProperty('distanceKm')
+    expect(result.cafe.c1!.restaurants[0]).not.toHaveProperty('driveMinutes')
+    expect(result.cafe.c1!.restaurants[0]).toHaveProperty('distanceKm')
   })
 
   it('원본 배열이 비어있으면 그 도메인 관련 결과가 빈 배열이다', () => {
@@ -87,7 +87,7 @@ describe('buildNearbyPayloads', () => {
       spotSite: [],
       limit: 5,
     })
-    expect(result.cafe.c1.restaurants).toEqual([])
-    expect(result.cafe.c1.spots).toEqual([])
+    expect(result.cafe.c1!.restaurants).toEqual([])
+    expect(result.cafe.c1!.spots).toEqual([])
   })
 })
