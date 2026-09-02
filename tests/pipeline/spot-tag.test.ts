@@ -15,7 +15,7 @@ describe('assignSpotTags', () => {
   })
 
   it('여러 태그를 동시에 가질 수 있다 (다중 선택)', () => {
-    const multi = { ...base, tags: ['자연/공원', '아이와 가기 좋은 곳'] as const }
+    const multi = { ...base, tags: ['자연/공원', '아이와 가기 좋은 곳'] }
     const tags = assignSpotTags(multi as SpotAttributes)
     expect(tags).toContain('자연/공원')
     expect(tags).toContain('아이와 가기 좋은 곳')
