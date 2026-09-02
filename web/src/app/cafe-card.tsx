@@ -108,9 +108,11 @@ export function CafeCard({
                     aria-pressed={blacklisted}
                     aria-label={blacklisted ? '블랙리스트에서 빼기' : '블랙리스트에 추가'}
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); onToggleBlacklist() }}
-                    className="flex min-h-[40px] min-w-[40px] items-center justify-center text-[19px]"
+                    className={`flex min-h-[40px] min-w-[40px] items-center justify-center text-[19px] ${
+                      blacklisted ? 'text-red-600 dark:text-red-400' : 'text-ink-soft'
+                    }`}
                   >
-                    {blacklisted ? '🚫' : '🤍'}
+                    ⊘
                   </button>
                 )}
                 {/* 우리 가족 별점이 있으면 블로그 화제량보다 먼저 보인다 */}

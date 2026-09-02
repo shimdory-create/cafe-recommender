@@ -147,7 +147,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
           on={blacklistOnly}
           onClick={() => { setBlacklistOnly((v) => !v); setShownCount(PAGE_CHUNK) }}
         >
-          🚫 블랙리스트
+          ⊘ 블랙리스트
         </Chip>
         {ALL_TAGS.map((t) => (
           <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{t}</Chip>
@@ -262,7 +262,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
       {shown.length === 0 && (
         <p className="mt-8 text-center text-[14px] leading-relaxed text-ink-soft">
           {blacklistOnly
-            ? <>블랙리스트에 담은 곳이 없어요.<br />카드의 🤍 를 눌러 담아보세요.</>
+            ? <>블랙리스트에 담은 곳이 없어요.<br />카드의 ⊘ 를 눌러 담아보세요.</>
             : wishOnly
               ? <>아직 담은 곳이 없어요.<br />카드의 하트를 눌러 담아보세요.</>
               : q
