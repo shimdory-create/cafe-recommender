@@ -1,0 +1,34 @@
+name: weekly-discover-spot
+on:
+  schedule:
+    # 월 20:43 UTC. 카페·식당의 일요일 data-write 혼잡(동시 대기 2건 초과 시
+    # 3번째가 조용히 취소됨)을 피해 월요일로 옮김.
+    - cron: '43 20 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: data-write
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # 새로운 LLM 분류 작업(10개 다중 태그)이라 파일럿 지역(부평구·계양구·
+      # 서구·김포시·검단구)부터 검증한다 — 식당 1단계 때와 같은 이유
+      # (설계 문서 4절). 분류 정확도가 검증되면 --pilot 을 지운다.
+      - run: npm run spot-discover -- --pilot
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: 데이터 커밋
+        run: bash scripts/commit-data.sh "가볼 곳 신규 발굴"

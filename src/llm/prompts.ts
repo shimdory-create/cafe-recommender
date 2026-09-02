@@ -157,3 +157,75 @@ ${snippets.map((s, n) => `[${n + 1}] ${s}`).join('\n')}
 4. 확실하지 않으면 넣지 마라. 적게 뽑는 편이 낫다.
 5. 같은 식당이 여러 번 나오면 한 번만 넣는다.`
 }
+
+export const SPOT_PROMPT_VERSION = 's1'
+
+export interface SpotExtractPromptInput {
+  name: string
+  sigungu: string
+  categoryName: string
+  snippets: string[]
+  parkingSnippets: string[]
+}
+
+export function buildSpotExtractPrompt(i: SpotExtractPromptInput): string {
+  const body = i.snippets.length
+    ? i.snippets.map((s, n) => `[${n + 1}] ${s}`).join('\n')
+    : '(후기 없음)'
+  const parking = i.parkingSnippets.length
+    ? i.parkingSnippets.map((s, n) => `[P${n + 1}] ${s}`).join('\n')
+    : '(주차 언급 없음)'
+
+  return `너는 한국의 가볼 곳(공원·관광지·시장·전시관 등)을 구조화하는
+도구다. 아래 블로그 후기에서만 근거를 찾아 JSON 으로 답하라.
+
+장소: ${i.name}
+지역: ${i.sigungu}
+카카오 분류: ${i.categoryName}
+
+--- 블로그 후기 ---
+${body}
+
+--- 주차 관련 후기 ---
+${parking}
+
+규칙:
+1. 후기에 없는 것을 추측하지 마라. 모르면 null 을 쓰거나 빈 배열을 쓰고,
+   parkingGrade 는 "?" 를 쓴다.
+2. evidence 에는 판단 근거가 된 원문을 그대로 인용하라. 요약하지 마라.
+   비워두지 마라.
+3. parkingEvidence 에도 주차 판단의 근거 원문을 인용하라. 근거가 없으면
+   빈 문자열.
+4. tags: 다음 10개 중 후기 내용과 실제로 맞는 것만 여러 개 골라라(하나도
+   없으면 빈 배열). 후기에 근거가 없는 태그는 넣지 마라.
+   자연/공원, 관광지/명소, 시장/전통거리, 쇼핑/아울렛, 전시/박물관,
+   소품샵/편집숍, 드라이브, 체험, 계절명소, 아이와 가기 좋은 곳
+5. stayDuration: 후기에 체류시간을 가늠할 언급이 있으면 "1~2시간" 처럼
+   짧은 문구로. 없으면 null.
+6. indoorOutdoor: 실내 시설이면 "indoor", 야외면 "outdoor", 둘 다 섞여
+   있으면 "mixed". 언급이 불충분하면 null.
+7. season: 특정 계절에만 좋다는 언급이 뚜렷하면 그 계절, 사계절 다 좋다는
+   언급이면 "사계절". 판단할 근거가 없으면 null. 추측하지 마라.
+8. parkingGrade — 차로 가는 가족이 헛걸음하지 않는 것이 목적이다. 후하게
+   주지 마라. A = 전용 주차장이 넉넉하다. B = 협소하거나 공용 주차장.
+   "1시간 무료" 처럼 조건부 무료는 최대 B. C = 5대 미만이거나 인근 유료
+   주차장 의존. D = 주차 불가 명시. ? = 언급 없음.
+9. teenAppeal: 중고생이 좋아할 요소가 많을수록 높게. 0~5. 판단 근거가
+   없으면 null.
+10. confidence: 후기 정보가 빈약하면 낮게. 0~1.`
+}
+
+export function buildSpotHarvestPrompt(regionLabel: string, snippets: string[]): string {
+  return `아래는 "${regionLabel}" 가볼 곳(공원·관광지·시장·전시관 등)을
+소개하는 블로그 글 조각들이다. 글에서 실제 장소 이름만 뽑아 JSON 으로
+답하라.
+
+${snippets.map((s, n) => `[${n + 1}] ${s}`).join('\n')}
+
+규칙:
+1. 장소 이름만 뽑는다. "나들이", "가볼만한곳", "명소" 같은 일반어는
+   제외한다.
+2. 지역명("${regionLabel}")을 이름에 붙이지 마라.
+3. 확실하지 않으면 넣지 마라. 적게 뽑는 편이 낫다.
+4. 같은 장소가 여러 번 나오면 한 번만 넣는다.`
+}

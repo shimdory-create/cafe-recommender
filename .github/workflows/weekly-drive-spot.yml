@@ -1,0 +1,31 @@
+name: weekly-drive-spot
+on:
+  schedule:
+    # 토 23:19 UTC. weekly-drive-restaurant(토 22:46 UTC)와 33분 차이.
+    - cron: '19 23 * * 6'
+  workflow_dispatch:
+
+concurrency:
+  group: data-write
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run spot-drive -- --limit 2000
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          # 길찾기에 LLM 은 쓰지 않지만 환경변수 검증이 provider 키를 요구한다.
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: 데이터 커밋
+        run: bash scripts/commit-data.sh "가볼 곳 실주행 시간"
