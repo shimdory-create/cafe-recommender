@@ -74,16 +74,24 @@ function toGeoCards<TRaw extends { kakaoPlaceId: string; lat: number; lng: numbe
 }
 
 /**
- * 두 좌표 간 네이버지도 자동차 길찾기 웹 URL.
+ * 두 지점 간 네이버지도 자동차 길찾기 웹 URL.
  *
- * **확인되지 않은 형식이다.** 네이버지도 앱 전용 스킴(`nmap://route/car?...`)은
- * 공식 문서가 있지만 `appname`(네이버에 등록된 앱 식별자)이 필요해 이
- * 프로젝트엔 안 맞고, 일반 웹 URL(`map.naver.com/p/...`)의 두 지점 길찾기
- * 정확한 파라미터 형식은 공식 문서를 못 찾았다 — 가장 그럴듯한 형식으로
- * 채워뒀다. 배포 후 실제 폰에서 눌러보고 안 되면 이 함수만 고치면 된다.
+ * **여전히 완전히 확인된 형식은 아니다 — 2차 시도.** 1차(`p/directions/
+ * {lng},{lat}/{lng},{lat}/-/car`, 이름 없이 좌표만)는 실측 결과 데스크톱
+ * 브라우저에서는 정상 동작했지만, 폰에서는 네이버지도 앱만 열리고
+ * 출발지는 GPS 현재위치로, 도착지는 빈 채로 남았다 — 앱이 그 URL 형식의
+ * 좌표를 못 읽은 것으로 보인다. 이번엔 옛 `index.nhn` 쿼리스트링 형식
+ * (`slat`/`slng`/`stext`/`elat`/`elng`/`etext`, 장소 이름까지 포함)으로
+ * 바꿔본다 — 여러 안내 글이 이 형식을 언급하지만 네이버 공식 문서는 아니다.
+ * 이번에도 안 되면 이 함수만 다시 고치면 된다.
  */
-function directionsUrl(anchor: GeoPoint, dest: GeoPoint): string {
-  return `https://map.naver.com/p/directions/${anchor.lng},${anchor.lat}/${dest.lng},${dest.lat}/-/car`
+function directionsUrl(anchor: GeoCard, dest: GeoCard): string {
+  const params = new URLSearchParams({
+    slat: String(anchor.lat), slng: String(anchor.lng), stext: anchor.name,
+    elat: String(dest.lat), elng: String(dest.lng), etext: dest.name,
+    menu: 'route', pathType: '1',
+  })
+  return `https://map.naver.com/index.nhn?${params.toString()}`
 }
 
 function toCards(anchor: GeoCard, matches: NearbyMatch[], byId: Map<string, GeoCard>): NearbyCard[] {

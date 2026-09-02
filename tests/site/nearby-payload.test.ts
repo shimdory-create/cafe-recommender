@@ -91,7 +91,7 @@ describe('buildNearbyPayloads', () => {
     expect(result.cafe.c1!.spots).toEqual([])
   })
 
-  it('길찾기 링크에 앵커와 대상의 좌표가 순서대로 들어간다', () => {
+  it('길찾기 링크에 앵커는 출발지로, 대상은 도착지로 좌표·이름이 들어간다', () => {
     const result = buildNearbyPayloads({
       cafes: [cafe({ kakaoPlaceId: 'c1', lat: 37.5, lng: 126.9 })],
       restaurants: [{ kakaoPlaceId: 'r1', lat: 37.501, lng: 126.901 } as Restaurant],
@@ -102,10 +102,14 @@ describe('buildNearbyPayloads', () => {
       limit: 5,
     })
     const url = result.cafe.c1!.restaurants[0]!.directionsUrl
-    expect(url).toContain('map.naver.com')
-    expect(url).toContain('126.9,37.5') // 앵커(c1) 좌표가 먼저
-    expect(url).toContain('126.901,37.501') // 대상(r1) 좌표가 나중
-    expect(url.indexOf('126.9,37.5')).toBeLessThan(url.indexOf('126.901,37.501'))
+    expect(url.startsWith('https://map.naver.com/index.nhn?')).toBe(true)
+    const params = new URLSearchParams(url.split('?')[1])
+    expect(params.get('slat')).toBe('37.5')
+    expect(params.get('slng')).toBe('126.9')
+    expect(params.get('stext')).toBe('카페') // 앵커(c1) 이름
+    expect(params.get('elat')).toBe('37.501')
+    expect(params.get('elng')).toBe('126.901')
+    expect(params.get('etext')).toBe('식당') // 대상(r1) 이름
   })
 
   it('cityOnly 앵커도 자기 키는 갖지만, 다른 곳의 후보에는 안 낀다', () => {
