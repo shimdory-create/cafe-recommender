@@ -43,16 +43,24 @@ interface GeoCard extends GeoPoint {
 /**
  * 원본 배열(좌표)과 최종 사이트 페이로드(카드 필드)를 id 로 조인해
  * GeoCard 목록을 만든다. 사이트 페이로드는 이미 판정 통과분만 담고
- * 있으므로 별도 status 필터가 필요 없다 — cityOnly 만 여기서 뺀다.
+ * 있으므로 별도 status 필터가 필요 없다.
+ *
+ * `opts.excludeCityOnly`: 후보(다른 곳에 추천되는 쪽)를 만들 때는 true —
+ * 도심 모드를 한 번도 안 켠 사용자에게 주차 어려운 곳이 섞여 들어가면
+ * 안 된다. 앵커(자기 자신의 상세 페이지)를 만들 때는 false — cityOnly
+ * 인 곳도 자기 페이지에서는 근처 추천을 정상적으로 받아야 한다. 스펙은
+ * "후보에서 cityOnly 제외"라고만 했지 "cityOnly 인 곳은 근처 추천 자체를
+ * 못 받는다"는 아니다.
  */
 function toGeoCards<TRaw extends { kakaoPlaceId: string; lat: number; lng: number }>(
   raw: TRaw[],
   site: { id: string; name: string; imageUrl: string | null; tags: string[]; sigungu: string; ratingAvg: number; ratingCount: number; cityOnly: boolean }[],
+  opts: { excludeCityOnly: boolean },
 ): GeoCard[] {
   const coordById = new Map(raw.map((r) => [r.kakaoPlaceId, r]))
   const cards: GeoCard[] = []
   for (const s of site) {
-    if (s.cityOnly) continue
+    if (opts.excludeCityOnly && s.cityOnly) continue
     const coord = coordById.get(s.id)
     if (!coord) continue
     cards.push({
@@ -92,27 +100,30 @@ function nearbyMap(
 export function buildNearbyPayloads(input: BuildNearbyInput): NearbyPayloads {
   const { cafes, restaurants, spots, cafeSite, restaurantSite, spotSite, limit } = input
 
-  const cafeGeo = toGeoCards(cafes, cafeSite)
-  const restGeo = toGeoCards(restaurants, restaurantSite)
-  const spotGeo = toGeoCards(spots, spotSite)
+  const cafeAnchors = toGeoCards(cafes, cafeSite, { excludeCityOnly: false })
+  const cafeCands = toGeoCards(cafes, cafeSite, { excludeCityOnly: true })
+  const restAnchors = toGeoCards(restaurants, restaurantSite, { excludeCityOnly: false })
+  const restCands = toGeoCards(restaurants, restaurantSite, { excludeCityOnly: true })
+  const spotAnchors = toGeoCards(spots, spotSite, { excludeCityOnly: false })
+  const spotCands = toGeoCards(spots, spotSite, { excludeCityOnly: true })
 
-  const cafeToRest = nearbyMap(cafeGeo, restGeo, limit)
-  const cafeToSpot = nearbyMap(cafeGeo, spotGeo, limit)
-  const restToCafe = nearbyMap(restGeo, cafeGeo, limit)
-  const restToSpot = nearbyMap(restGeo, spotGeo, limit)
-  const spotToCafe = nearbyMap(spotGeo, cafeGeo, limit)
-  const spotToRest = nearbyMap(spotGeo, restGeo, limit)
+  const cafeToRest = nearbyMap(cafeAnchors, restCands, limit)
+  const cafeToSpot = nearbyMap(cafeAnchors, spotCands, limit)
+  const restToCafe = nearbyMap(restAnchors, cafeCands, limit)
+  const restToSpot = nearbyMap(restAnchors, spotCands, limit)
+  const spotToCafe = nearbyMap(spotAnchors, cafeCands, limit)
+  const spotToRest = nearbyMap(spotAnchors, restCands, limit)
 
   const cafe: NearbyPayloads['cafe'] = {}
-  for (const c of cafeGeo) {
+  for (const c of cafeAnchors) {
     cafe[c.id] = { restaurants: cafeToRest.get(c.id) ?? [], spots: cafeToSpot.get(c.id) ?? [] }
   }
   const restaurant: NearbyPayloads['restaurant'] = {}
-  for (const r of restGeo) {
+  for (const r of restAnchors) {
     restaurant[r.id] = { cafes: restToCafe.get(r.id) ?? [], spots: restToSpot.get(r.id) ?? [] }
   }
   const spot: NearbyPayloads['spot'] = {}
-  for (const s of spotGeo) {
+  for (const s of spotAnchors) {
     spot[s.id] = { cafes: spotToCafe.get(s.id) ?? [], restaurants: spotToRest.get(s.id) ?? [] }
   }
 

@@ -90,4 +90,21 @@ describe('buildNearbyPayloads', () => {
     expect(result.cafe.c1!.restaurants).toEqual([])
     expect(result.cafe.c1!.spots).toEqual([])
   })
+
+  it('cityOnly 앵커도 자기 키는 갖지만, 다른 곳의 후보에는 안 낀다', () => {
+    const result = buildNearbyPayloads({
+      cafes: [cafe({ kakaoPlaceId: 'c1', lat: 37.5, lng: 126.9 })],
+      restaurants: [{ kakaoPlaceId: 'r1', lat: 37.501, lng: 126.901 } as Restaurant],
+      spots: [],
+      cafeSite: [siteCafe({ id: 'c1', cityOnly: true }) as never],
+      restaurantSite: [{ id: 'r1', name: '식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never],
+      spotSite: [],
+      limit: 5,
+    })
+    // cityOnly인 c1도 자기 키(근처 식당 목록)는 갖는다
+    expect(result.cafe.c1).toBeDefined()
+    expect(result.cafe.c1!.restaurants).toHaveLength(1)
+    // 하지만 식당 쪽에서 볼 때 c1(cityOnly)은 후보에서 빠진다
+    expect(result.restaurant.r1!.cafes).toEqual([])
+  })
 })
