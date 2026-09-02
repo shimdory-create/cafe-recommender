@@ -91,6 +91,23 @@ describe('buildNearbyPayloads', () => {
     expect(result.cafe.c1!.spots).toEqual([])
   })
 
+  it('길찾기 링크에 앵커와 대상의 좌표가 순서대로 들어간다', () => {
+    const result = buildNearbyPayloads({
+      cafes: [cafe({ kakaoPlaceId: 'c1', lat: 37.5, lng: 126.9 })],
+      restaurants: [{ kakaoPlaceId: 'r1', lat: 37.501, lng: 126.901 } as Restaurant],
+      spots: [],
+      cafeSite: [siteCafe({ id: 'c1' }) as never],
+      restaurantSite: [{ id: 'r1', name: '식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never],
+      spotSite: [],
+      limit: 5,
+    })
+    const url = result.cafe.c1!.restaurants[0]!.directionsUrl
+    expect(url).toContain('map.naver.com')
+    expect(url).toContain('126.9,37.5') // 앵커(c1) 좌표가 먼저
+    expect(url).toContain('126.901,37.501') // 대상(r1) 좌표가 나중
+    expect(url.indexOf('126.9,37.5')).toBeLessThan(url.indexOf('126.901,37.501'))
+  })
+
   it('cityOnly 앵커도 자기 키는 갖지만, 다른 곳의 후보에는 안 낀다', () => {
     const result = buildNearbyPayloads({
       cafes: [cafe({ kakaoPlaceId: 'c1', lat: 37.5, lng: 126.9 })],

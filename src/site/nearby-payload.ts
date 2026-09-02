@@ -13,6 +13,8 @@ export interface NearbyCard {
   ratingAvg: number
   ratingCount: number
   distanceKm: number
+  /** 앵커(지금 보는 곳)에서 이 카드로의 차량 길찾기 링크 */
+  directionsUrl: string
 }
 
 export interface BuildNearbyInput {
@@ -71,7 +73,20 @@ function toGeoCards<TRaw extends { kakaoPlaceId: string; lat: number; lng: numbe
   return cards
 }
 
-function toCards(matches: NearbyMatch[], byId: Map<string, GeoCard>): NearbyCard[] {
+/**
+ * 두 좌표 간 네이버지도 자동차 길찾기 웹 URL.
+ *
+ * **확인되지 않은 형식이다.** 네이버지도 앱 전용 스킴(`nmap://route/car?...`)은
+ * 공식 문서가 있지만 `appname`(네이버에 등록된 앱 식별자)이 필요해 이
+ * 프로젝트엔 안 맞고, 일반 웹 URL(`map.naver.com/p/...`)의 두 지점 길찾기
+ * 정확한 파라미터 형식은 공식 문서를 못 찾았다 — 가장 그럴듯한 형식으로
+ * 채워뒀다. 배포 후 실제 폰에서 눌러보고 안 되면 이 함수만 고치면 된다.
+ */
+function directionsUrl(anchor: GeoPoint, dest: GeoPoint): string {
+  return `https://map.naver.com/p/directions/${anchor.lng},${anchor.lat}/${dest.lng},${dest.lat}/-/car`
+}
+
+function toCards(anchor: GeoCard, matches: NearbyMatch[], byId: Map<string, GeoCard>): NearbyCard[] {
   const out: NearbyCard[] = []
   for (const m of matches) {
     const c = byId.get(m.id)
@@ -79,6 +94,7 @@ function toCards(matches: NearbyMatch[], byId: Map<string, GeoCard>): NearbyCard
     out.push({
       id: c.id, name: c.name, imageUrl: c.imageUrl, tags: c.tags, sigungu: c.sigungu,
       ratingAvg: c.ratingAvg, ratingCount: c.ratingCount, distanceKm: m.distanceKm,
+      directionsUrl: directionsUrl(anchor, c),
     })
   }
   return out
@@ -92,8 +108,13 @@ function nearbyMap(
 ): Map<string, NearbyCard[]> {
   const matches = nearestByDomain(anchors, candidates, limit)
   const candidateById = new Map(candidates.map((c) => [c.id, c]))
+  const anchorById = new Map(anchors.map((a) => [a.id, a]))
   const result = new Map<string, NearbyCard[]>()
-  for (const [anchorId, m] of matches) result.set(anchorId, toCards(m, candidateById))
+  for (const [anchorId, m] of matches) {
+    const anchor = anchorById.get(anchorId)
+    if (!anchor) continue
+    result.set(anchorId, toCards(anchor, m, candidateById))
+  }
   return result
 }
 
