@@ -10,7 +10,9 @@ import { domainOf, switchDomainPath, type Domain } from '@/lib/domain-switch'
  * 새 줄을 추가하지 않고 버튼 자체 높이를 36px 로 좁게 잡는다 — filters.tsx
  * 의 칩(40px) 판단과 같은 이유로, 헤더 안에서는 그보다도 더 좁혀야 한다.
  */
-const OPTIONS: [Domain, string][] = [['cafe', '☕ 카페'], ['restaurant', '🍚 식당']]
+const OPTIONS: [Domain, string][] = [
+  ['cafe', '☕ 카페'], ['restaurant', '🍚 식당'], ['spot', '🏞️ 가볼곳'],
+]
 
 export function DomainSwitch() {
   const pathname = usePathname()

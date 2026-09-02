@@ -20,7 +20,11 @@ export function BackLink() {
     <button
       onClick={() => {
         if (typeof window !== 'undefined' && window.history.length > 1) router.back()
-        else router.push(domainOf(pathname) === 'restaurant' ? '/restaurant' : '/')
+        else router.push(
+          domainOf(pathname) === 'restaurant' ? '/restaurant'
+            : domainOf(pathname) === 'spot' ? '/spot'
+              : '/',
+        )
       }}
       // 터치 타겟을 44px 로 (스펙 10.1). 글자는 작지만 누르는 영역은 넓다.
       className="-ml-1 flex min-h-[44px] items-center px-1 text-[13px] text-ink-soft active:text-ink"

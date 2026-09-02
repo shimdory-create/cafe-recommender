@@ -3,9 +3,9 @@ import { existsSync } from 'node:fs'
 import { join } from 'node:path'
 import { z } from 'zod'
 import { SpotSchema, HealthSchema } from '../spot-schema.js'
-import { BuzzSnapshotSchema, SuggestionSchema } from '../schema.js'
+import { BuzzSnapshotSchema, SuggestionSchema, VisitSchema, ReviewSchema } from '../schema.js'
 import type { Spot, Health } from '../spot-schema.js'
-import type { BuzzSnapshot, Suggestion } from '../schema.js'
+import type { BuzzSnapshot, Suggestion, Visit, Review } from '../schema.js'
 
 async function readArray<S extends z.ZodType>(
   dir: string, file: string, schema: S,
@@ -46,6 +46,8 @@ export interface SpotStore {
   writeSpotBuzz(rows: BuzzSnapshot[]): Promise<void>
   readSpotSuggestions(): Promise<Suggestion[]>
   writeSpotSuggestions(rows: Suggestion[]): Promise<void>
+  readSpotVisits(): Promise<Visit[]>
+  readSpotReviews(): Promise<Review[]>
   readHealth(): Promise<Health[]>
   writeHealth(rows: Health[]): Promise<void>
   appendRaw(source: string, query: string, payload: unknown, now?: Date): Promise<string>
@@ -61,6 +63,11 @@ export function createSpotJsonStore(dataDir: string): SpotStore {
 
     readSpotSuggestions: () => readArray(dataDir, 'spot-suggestions.json', SuggestionSchema),
     writeSpotSuggestions: (r) => writeArray(dataDir, 'spot-suggestions.json', r),
+
+    // 웹앱(github-store)이 쓰는 것과 같은 파일 이름 규칙 — data/spot-visits.json,
+    // data/spot-reviews.json. 카페·식당 파일은 절대 안 건드린다.
+    readSpotVisits: () => readArray(dataDir, 'spot-visits.json', VisitSchema),
+    readSpotReviews: () => readArray(dataDir, 'spot-reviews.json', ReviewSchema),
 
     // health·raw 는 카페·식당과 같은 data/ 를 가리킨다 — 파일도 그대로 공유한다
     readHealth: () => readArray(dataDir, 'health.json', HealthSchema),

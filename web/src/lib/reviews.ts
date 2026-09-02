@@ -27,6 +27,12 @@ export const RESTAURANT_VISITS_PATH = 'data/restaurant-visits.json'
 export const RESTAURANT_WISHLIST_PATH = 'data/restaurant-wishlist.json'
 export const RESTAURANT_DISMISSED_PATH = 'data/restaurant-dismissed.json'
 
+// 가볼 곳판. 카페·식당 파일은 절대 안 건드린다.
+export const SPOT_REVIEWS_PATH = 'data/spot-reviews.json'
+export const SPOT_VISITS_PATH = 'data/spot-visits.json'
+export const SPOT_WISHLIST_PATH = 'data/spot-wishlist.json'
+export const SPOT_DISMISSED_PATH = 'data/spot-dismissed.json'
+
 export interface WishRow {
   kakaoPlaceId: string
   addedAt: string

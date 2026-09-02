@@ -36,3 +36,25 @@ describe('switchDomainPath', () => {
     expect(switchDomainPath('/list', 'cafe')).toBe('/list')
   })
 })
+
+describe('domainOf — spot', () => {
+  it('/spot 로 시작하면 spot', () => {
+    expect(domainOf('/spot')).toBe('spot')
+    expect(domainOf('/spot/list')).toBe('spot')
+  })
+})
+
+describe('switchDomainPath — spot', () => {
+  it('홈: / <-> /spot', () => {
+    expect(switchDomainPath('/', 'spot')).toBe('/spot')
+    expect(switchDomainPath('/spot', 'cafe')).toBe('/')
+  })
+  it('식당 <-> 가볼 곳도 서로 오간다', () => {
+    expect(switchDomainPath('/restaurant/list', 'spot')).toBe('/spot/list')
+    expect(switchDomainPath('/spot/visited', 'restaurant')).toBe('/restaurant/visited')
+  })
+  it('가볼 곳 상세는 대응하는 곳이 없으므로 각 홈으로 보낸다', () => {
+    expect(switchDomainPath('/spot/789', 'cafe')).toBe('/')
+    expect(switchDomainPath('/cafe/123', 'spot')).toBe('/spot')
+  })
+})
