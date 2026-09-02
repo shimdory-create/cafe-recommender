@@ -26,9 +26,9 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      # 파일럿 지역만 스캔한다 (부평구·계양구·서구·김포시·검단구) — 전체
-      # 수도권으로 확장하기 전에 소규모로 먼저 돌려본다.
-      - run: npm run restaurant-discover -- --pilot
+      # 파일럿 지역(부평구·계양구·서구·김포시·검단구)에서 118곳 판정까지
+      # 검증 완료(2026-09-02) — 카페처럼 수도권 전체(66개 시군구)로 확장한다.
+      - run: npm run restaurant-discover
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
