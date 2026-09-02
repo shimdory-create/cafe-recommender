@@ -4,12 +4,9 @@ import { useBlacklist } from '@/lib/use-blacklist'
 import { useDismissed } from '@/lib/use-dismissed'
 import { useSpotBlacklist } from '@/lib/use-spot-blacklist'
 import { useSpotDismissed } from '@/lib/use-spot-dismissed'
+import { filterOutHidden } from '@/lib/nearby-filter'
 import type { NearbyCard } from '@/lib/nearby-types'
 import { NearbySection } from '../../nearby-card'
-
-function filterOut(items: NearbyCard[], hidden: Set<string>): NearbyCard[] {
-  return items.filter((i) => !hidden.has(i.id))
-}
 
 export function RestaurantNearbySections(
   { cafes, spots }: { cafes: NearbyCard[]; spots: NearbyCard[] },
@@ -24,8 +21,8 @@ export function RestaurantNearbySections(
 
   return (
     <>
-      <NearbySection title="근처 카페" items={filterOut(cafes, cafeHidden)} hrefPrefix="/cafe/" icon="☕" />
-      <NearbySection title="근처 가볼 곳" items={filterOut(spots, spotHidden)} hrefPrefix="/spot/" icon="🏞️" />
+      <NearbySection title="근처 카페" items={filterOutHidden(cafes, cafeHidden)} hrefPrefix="/cafe/" icon="☕" />
+      <NearbySection title="근처 가볼 곳" items={filterOutHidden(spots, spotHidden)} hrefPrefix="/spot/" icon="🏞️" />
     </>
   )
 }
