@@ -123,7 +123,7 @@ export function SpotListClient(
           on={blacklistOnly}
           onClick={() => { setBlacklistOnly((v) => !v); setShownCount(PAGE_CHUNK) }}
         >
-          💔 블랙리스트
+          🚫 블랙리스트
         </Chip>
         {SPOT_TAG_CHIPS.map((t) => (
           <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{SPOT_TAG_LABEL[t]}</Chip>

@@ -149,7 +149,7 @@ export function RestaurantListClient(
           on={blacklistOnly}
           onClick={() => { setBlacklistOnly((v) => !v); setShownCount(PAGE_CHUNK) }}
         >
-          💔 블랙리스트
+          🚫 블랙리스트
         </Chip>
         {CUISINE_CHIPS.map((t) => (
           <Chip key={t} on={cuisine === t} onClick={() => selectCuisine(t)}>{CUISINE_LABEL[t]}</Chip>

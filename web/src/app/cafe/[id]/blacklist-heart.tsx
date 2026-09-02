@@ -15,7 +15,7 @@ export function BlacklistHeart({ cafeId }: { cafeId: string }) {
         on ? 'border-ink bg-line text-ink' : 'border-line text-ink-soft'
       }`}
     >
-      {on ? '💔' : '🤍'}
+      {on ? '🚫' : '🤍'}
     </button>
   )
 }
