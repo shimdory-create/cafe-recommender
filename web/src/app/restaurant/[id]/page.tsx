@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import {
   restaurantById, CUISINE_LABEL, driveLabel, PARKING_LABEL, restaurantPayload,
-  restaurantRecentlyVisited,
+  restaurantRecentlyVisited, nearbyForRestaurant,
 } from '@/lib/restaurant-site'
 import { Badge } from '../../badge'
 import { NaverMapLink } from '../../naver-map-link'
@@ -9,6 +9,7 @@ import { ReviewPanel } from './review-panel'
 import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
 import { BlacklistHeart } from './blacklist-heart'
+import { RestaurantNearbySections } from './nearby-sections'
 
 export function generateStaticParams() {
   return restaurantPayload.restaurants.map((r) => ({ id: r.id }))
@@ -109,6 +110,13 @@ export default async function RestaurantDetail({ params }: { params: Promise<{ i
           </div>
         ))}
       </dl>
+
+      {(() => {
+        const nearby = nearbyForRestaurant(restaurant.id)
+        return nearby ? (
+          <RestaurantNearbySections cafes={nearby.cafes} spots={nearby.spots} />
+        ) : null
+      })()}
 
       <section className="mt-5">
         <h2 className="text-[15px] font-bold">주차</h2>

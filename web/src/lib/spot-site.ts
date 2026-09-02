@@ -1,6 +1,8 @@
 import raw from '../generated/site-spot.json'
+import nearbyRaw from '../generated/site-spot-nearby.json'
 import { driveLabel, addedLabel } from './labels'
 import type { SpotSitePayload, SiteSpot, SiteSpotVisited } from './spot-site-types'
+import type { NearbyCard } from './nearby-types'
 
 export type { SiteSpot, SpotSitePayload, SiteSpotVisited }
 export { driveLabel, addedLabel }
@@ -33,6 +35,12 @@ export function toSpotListRow(s: SiteSpot): SpotListRow {
 
 export const spotById = (id: string): SiteSpot | undefined =>
   spotPayload.spots.find((s) => s.id === id)
+
+export type { NearbyCard }
+
+const spotNearby = nearbyRaw as unknown as Record<string, { cafes: NearbyCard[]; restaurants: NearbyCard[] }>
+
+export const nearbyForSpot = (id: string) => spotNearby[id]
 
 export const SPOT_REVISIT_DAYS = spotPayload.stats.revisitDays
 

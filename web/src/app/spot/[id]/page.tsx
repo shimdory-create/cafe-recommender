@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import {
   spotById, SPOT_TAG_LABEL, driveLabel, PARKING_LABEL, INDOOR_OUTDOOR_LABEL,
-  spotPayload, spotRecentlyVisited,
+  spotPayload, spotRecentlyVisited, nearbyForSpot,
 } from '@/lib/spot-site'
 import { Badge } from '../../badge'
 import { NaverMapLink } from '../../naver-map-link'
@@ -9,6 +9,7 @@ import { ReviewPanel } from './review-panel'
 import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
 import { BlacklistHeart } from './blacklist-heart'
+import { SpotNearbySections } from './nearby-sections'
 
 export function generateStaticParams() {
   return spotPayload.spots.map((s) => ({ id: s.id }))
@@ -110,6 +111,13 @@ export default async function SpotDetail({ params }: { params: Promise<{ id: str
           </div>
         ))}
       </dl>
+
+      {(() => {
+        const nearby = nearbyForSpot(spot.id)
+        return nearby ? (
+          <SpotNearbySections cafes={nearby.cafes} restaurants={nearby.restaurants} />
+        ) : null
+      })()}
 
       <section className="mt-5">
         <h2 className="text-[15px] font-bold">주차</h2>
