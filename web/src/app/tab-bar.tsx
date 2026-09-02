@@ -34,12 +34,12 @@ function Tab({
 export function TabBar() {
   const path = usePathname()
   const domain = domainOf(path)
-  // 카페는 기존 경로 그대로, 식당은 /restaurant 접두어. Next 의 타입 라우트가
-  // href 를 리터럴로 요구해서(원본 주석과 동일 이유) 두 갈래를 그대로 적는다.
-  const home = domain === 'restaurant' ? '/restaurant' : '/'
-  const list = domain === 'restaurant' ? '/restaurant/list' : '/list'
-  const visited = domain === 'restaurant' ? '/restaurant/visited' : '/visited'
-  const info = domain === 'restaurant' ? '/restaurant/info' : '/info'
+  const prefix = domain === 'cafe' ? '' : `/${domain}`
+  const home = prefix || '/'
+  const list = `${prefix}/list`
+  const visited = `${prefix}/visited`
+  const info = `${prefix}/info`
+  const homeIcon = domain === 'restaurant' ? '🍚' : domain === 'spot' ? '🏞️' : '☕'
 
   return (
     <nav
@@ -47,7 +47,7 @@ export function TabBar() {
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <div className="mx-auto flex max-w-[480px]">
-        <Tab href={home} label="이번 주" icon={domain === 'restaurant' ? '🍚' : '☕'} active={path === home} />
+        <Tab href={home} label="이번 주" icon={homeIcon} active={path === home} />
         <Tab href={list} label="전체" icon="📋" active={path.startsWith(list)} />
         <Tab href={visited} label="다녀온 곳" icon="★" active={path.startsWith(visited)} />
         <Tab href={info} label="정보" icon="ⓘ" active={path.startsWith(info)} />
