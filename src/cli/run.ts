@@ -44,6 +44,7 @@ import { dirname } from 'node:path'
 import { createRestaurantJsonStore } from '../store/restaurant-json-store.js'
 import { buildRestaurantSitePayload } from '../site/restaurant-payload.js'
 import { buildSpotSitePayload } from '../site/spot-payload.js'
+import { buildNearbyPayloads } from '../site/nearby-payload.js'
 import { runRestaurantDiscover } from '../jobs/restaurant-discover.js'
 import { runRestaurantDailyBuzz } from '../jobs/restaurant-daily-buzz.js'
 import { runRestaurantClassify } from '../jobs/restaurant-classify.js'
@@ -406,6 +407,10 @@ async function main() {
       const store = createJsonStore(process.env.DATA_DIR ?? 'data')
       const out = flag(rest, 'out') || 'web/src/generated/site.json'
       const now = new Date()
+      let outerRestaurants: Awaited<ReturnType<ReturnType<typeof createRestaurantJsonStore>['readRestaurants']>> = []
+      let outerRestPayload: ReturnType<typeof buildRestaurantSitePayload> | null = null
+      let outerSpots: Awaited<ReturnType<ReturnType<typeof createSpotJsonStore>['readSpots']>> = []
+      let outerSpotPayload: ReturnType<typeof buildSpotSitePayload> | null = null
       const [cafes, buzz, visits, suggestions, reviews] = await Promise.all([
         store.readCafes(), store.readBuzz(),
         store.readVisits(), store.readSuggestions(), store.readReviews(),
@@ -440,6 +445,8 @@ async function main() {
           restaurants, buzz: restBuzz, visits: restVisits, suggestions: restSuggestions,
           reviews: restReviews, weekOf: mondayOf(now), now,
         })
+        outerRestaurants = restaurants
+        outerRestPayload = restPayload
         await mkdir(dirname(restOut), { recursive: true })
         await writeFile(restOut, JSON.stringify(restPayload, null, 2) + '\n', 'utf8')
         console.log(
@@ -464,6 +471,8 @@ async function main() {
           spots, buzz: spotBuzz, visits: spotVisits, suggestions: spotSuggestions,
           reviews: spotReviews, weekOf: mondayOf(now), now,
         })
+        outerSpots = spots
+        outerSpotPayload = spotPayload
         await mkdir(dirname(spotOut), { recursive: true })
         await writeFile(spotOut, JSON.stringify(spotPayload, null, 2) + '\n', 'utf8')
         console.log(
@@ -472,6 +481,32 @@ async function main() {
         )
       } catch (e) {
         console.error(`[!] 가볼 곳 페이로드 생성 실패 — 카페·식당 빌드는 계속 진행한다: ${(e as Error).message}`)
+      }
+
+      // 근처 추천 3파일 — 카페·식당·가볼 곳 페이로드가 전부 준비된 뒤에만
+      // 계산 가능하다. 실패해도 위에서 이미 써진 세 페이로드는 그대로 —
+      // 식당·가볼 곳 페이로드 실패 처리와 같은 이유(독립 try/catch).
+      try {
+        const cafeNearbyOut = flag(rest, 'cafe-nearby-out') || 'web/src/generated/site-cafe-nearby.json'
+        const restNearbyOut = flag(rest, 'restaurant-nearby-out') || 'web/src/generated/site-restaurant-nearby.json'
+        const spotNearbyOut = flag(rest, 'spot-nearby-out') || 'web/src/generated/site-spot-nearby.json'
+        const nearby = buildNearbyPayloads({
+          cafes, restaurants: outerRestaurants, spots: outerSpots,
+          cafeSite: payload.cafes,
+          restaurantSite: outerRestPayload?.restaurants ?? [],
+          spotSite: outerSpotPayload?.spots ?? [],
+          limit: 5,
+        })
+        await writeFile(cafeNearbyOut, JSON.stringify(nearby.cafe, null, 2) + '\n', 'utf8')
+        await writeFile(restNearbyOut, JSON.stringify(nearby.restaurant, null, 2) + '\n', 'utf8')
+        await writeFile(spotNearbyOut, JSON.stringify(nearby.spot, null, 2) + '\n', 'utf8')
+        console.log(
+          `근처 추천 3파일 생성 완료 (카페 ${Object.keys(nearby.cafe).length}곳 `
+          + `· 식당 ${Object.keys(nearby.restaurant).length}곳 `
+          + `· 가볼 곳 ${Object.keys(nearby.spot).length}곳)`,
+        )
+      } catch (e) {
+        console.error(`[!] 근처 추천 계산 실패 — 다른 페이로드는 이미 써졌다: ${(e as Error).message}`)
       }
       break
     }
