@@ -22,7 +22,7 @@ export function CourseSection(
         <button
           type="button"
           onClick={onNext}
-          className="text-[12px] font-semibold text-bean"
+          className="flex min-h-[36px] items-center text-[12px] font-semibold text-bean"
         >
           다음 {label} 보기 →
         </button>

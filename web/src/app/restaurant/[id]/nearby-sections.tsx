@@ -31,7 +31,7 @@ export function RestaurantNearbySections(
       {filteredCafes.length > 0 && filteredSpots.length > 0 && (
         <section className="mt-5">
           <h2 className="text-[15px] font-bold">오늘 코스</h2>
-          <div className="mt-2 flex gap-3">
+          <div className="mt-2 flex gap-3 overflow-x-auto pb-1">
             <CourseSection
               items={filteredCafes} hrefPrefix="/cafe/" icon="☕" label="카페"
               index={cafeIdx} onNext={() => setCafeIdx((i) => i + 1)}
