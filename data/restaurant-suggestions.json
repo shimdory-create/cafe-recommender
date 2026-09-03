@@ -3,9 +3,9 @@
     "weekOf": "2026-08-31",
     "kakaoPlaceId": "286499308",
     "rank": 1,
-    "finalScore": 90.942,
+    "finalScore": 90.306,
     "reason": {
-      "hot": 82,
+      "hot": 81.4,
       "fit": 1.109,
       "tags": [
         "고기구이",
@@ -16,14 +16,16 @@
   },
   {
     "weekOf": "2026-08-31",
-    "kakaoPlaceId": "22675607",
+    "kakaoPlaceId": "1857322630",
     "rank": 2,
-    "finalScore": 74.065,
+    "finalScore": 74.998,
     "reason": {
-      "hot": 78.7,
-      "fit": 0.941,
+      "hot": 87,
+      "fit": 0.862,
       "tags": [
-        "한식"
+        "한식",
+        "룸있음",
+        "예약가능"
       ]
     }
   },
@@ -31,9 +33,9 @@
     "weekOf": "2026-08-31",
     "kakaoPlaceId": "924729634",
     "rank": 3,
-    "finalScore": 73.869,
+    "finalScore": 73.251,
     "reason": {
-      "hot": 84.4,
+      "hot": 83.7,
       "fit": 0.875,
       "tags": [
         "중식",
@@ -43,11 +45,25 @@
   },
   {
     "weekOf": "2026-08-31",
-    "kakaoPlaceId": "1083248979",
+    "kakaoPlaceId": "1297744371",
     "rank": 4,
-    "finalScore": 50.306,
+    "finalScore": 64.695,
     "reason": {
-      "hot": 83.8,
+      "hot": 83.2,
+      "fit": 0.777,
+      "tags": [
+        "일식",
+        "예약가능"
+      ]
+    }
+  },
+  {
+    "weekOf": "2026-08-31",
+    "kakaoPlaceId": "1083248979",
+    "rank": 5,
+    "finalScore": 49.855,
+    "reason": {
+      "hot": 83.1,
       "fit": 0.6,
       "tags": [
         "양식",
@@ -57,25 +73,11 @@
   },
   {
     "weekOf": "2026-08-31",
-    "kakaoPlaceId": "1097019957",
-    "rank": 5,
-    "finalScore": 48.724,
-    "reason": {
-      "hot": 88.3,
-      "fit": 0.552,
-      "tags": [
-        "일식",
-        "예약가능"
-      ]
-    }
-  },
-  {
-    "weekOf": "2026-08-31",
     "kakaoPlaceId": "776933867",
     "rank": 6,
-    "finalScore": 42.148,
+    "finalScore": 43.305,
     "reason": {
-      "hot": 62.3,
+      "hot": 64,
       "fit": 0.677,
       "tags": [
         "분식",
@@ -87,9 +89,9 @@
     "weekOf": "2026-08-31",
     "kakaoPlaceId": "20837729",
     "rank": 7,
-    "finalScore": 69.822,
+    "finalScore": 69.342,
     "reason": {
-      "hot": 76.3,
+      "hot": 75.8,
       "fit": 0.915,
       "tags": [
         "한식",
@@ -102,9 +104,9 @@
     "weekOf": "2026-08-31",
     "kakaoPlaceId": "22984610",
     "rank": 8,
-    "finalScore": 68.481,
+    "finalScore": 68.034,
     "reason": {
-      "hot": 83.8,
+      "hot": 83.3,
       "fit": 0.817,
       "tags": [
         "한식",
@@ -117,9 +119,9 @@
     "weekOf": "2026-08-31",
     "kakaoPlaceId": "151560977",
     "rank": 9,
-    "finalScore": 66.535,
+    "finalScore": 65.864,
     "reason": {
-      "hot": 77.5,
+      "hot": 76.7,
       "fit": 0.859,
       "tags": [
         "한식",
@@ -130,11 +132,84 @@
   },
   {
     "weekOf": "2026-08-31",
-    "kakaoPlaceId": "1948786338",
+    "kakaoPlaceId": "22675607",
     "rank": 10,
-    "finalScore": 58.473,
+    "finalScore": 64.86,
     "reason": {
-      "hot": 72.5,
+      "hot": 68.9,
+      "fit": 0.941,
+      "tags": [
+        "한식"
+      ]
+    }
+  },
+  {
+    "weekOf": "2026-08-31",
+    "kakaoPlaceId": "8494566",
+    "rank": 11,
+    "finalScore": 58.656,
+    "reason": {
+      "hot": 64.8,
+      "fit": 0.906,
+      "tags": [
+        "중식",
+        "룸있음",
+        "예약가능"
+      ]
+    }
+  },
+  {
+    "weekOf": "2026-08-31",
+    "kakaoPlaceId": "47980980",
+    "rank": 12,
+    "finalScore": 56.775,
+    "reason": {
+      "hot": 66.6,
+      "fit": 0.853,
+      "tags": [
+        "중식",
+        "룸있음",
+        "예약가능"
+      ]
+    }
+  },
+  {
+    "weekOf": "2026-08-31",
+    "kakaoPlaceId": "431242212",
+    "rank": 13,
+    "finalScore": 56.469,
+    "reason": {
+      "hot": 56.8,
+      "fit": 0.995,
+      "tags": [
+        "한식",
+        "룸있음",
+        "예약가능"
+      ]
+    }
+  },
+  {
+    "weekOf": "2026-08-31",
+    "kakaoPlaceId": "579373160",
+    "rank": 14,
+    "finalScore": 56.446,
+    "reason": {
+      "hot": 63.2,
+      "fit": 0.893,
+      "tags": [
+        "고기구이",
+        "룸있음",
+        "예약가능"
+      ]
+    }
+  },
+  {
+    "weekOf": "2026-08-31",
+    "kakaoPlaceId": "1948786338",
+    "rank": 15,
+    "finalScore": 54.441,
+    "reason": {
+      "hot": 67.5,
       "fit": 0.807,
       "tags": [
         "고기구이",
@@ -145,43 +220,14 @@
   },
   {
     "weekOf": "2026-08-31",
-    "kakaoPlaceId": "441894441",
-    "rank": 11,
-    "finalScore": 53.857,
-    "reason": {
-      "hot": 72.2,
-      "fit": 0.746,
-      "tags": [
-        "한식",
-        "룸있음"
-      ]
-    }
-  },
-  {
-    "weekOf": "2026-08-31",
-    "kakaoPlaceId": "828858958",
-    "rank": 12,
-    "finalScore": 51.817,
-    "reason": {
-      "hot": 60.3,
-      "fit": 0.86,
-      "tags": [
-        "한식",
-        "룸있음",
-        "예약가능"
-      ]
-    }
-  },
-  {
-    "weekOf": "2026-08-31",
-    "kakaoPlaceId": "428211557",
-    "rank": 13,
-    "finalScore": 46.425,
+    "kakaoPlaceId": "1036209672",
+    "rank": 16,
+    "finalScore": 53.624,
     "reason": {
       "hot": 59.2,
-      "fit": 0.784,
+      "fit": 0.906,
       "tags": [
-        "고기구이",
+        "중식",
         "룸있음",
         "예약가능"
       ]
@@ -189,54 +235,40 @@
   },
   {
     "weekOf": "2026-08-31",
-    "kakaoPlaceId": "1708160214",
-    "rank": 14,
-    "finalScore": 37.065,
-    "reason": {
-      "hot": 48.9,
-      "fit": 0.758,
-      "tags": [
-        "한식",
-        "룸있음"
-      ]
-    }
-  },
-  {
-    "weekOf": "2026-08-31",
-    "kakaoPlaceId": "1496770414",
-    "rank": 15,
-    "finalScore": 34.822,
-    "reason": {
-      "hot": 62.3,
-      "fit": 0.559,
-      "tags": [
-        "한식",
-        "룸있음",
-        "예약가능"
-      ]
-    }
-  },
-  {
-    "weekOf": "2026-08-31",
-    "kakaoPlaceId": "8149598",
-    "rank": 16,
-    "finalScore": 29.3,
-    "reason": {
-      "hot": 62.5,
-      "fit": 0.469,
-      "tags": [
-        "한식"
-      ]
-    }
-  },
-  {
-    "weekOf": "2026-08-31",
-    "kakaoPlaceId": "13132052",
+    "kakaoPlaceId": "1160280277",
     "rank": 17,
-    "finalScore": 69.943,
+    "finalScore": 49.761,
     "reason": {
-      "hot": 67.4,
-      "fit": 1.038,
+      "hot": 84.1,
+      "fit": 0.592,
+      "tags": [
+        "양식",
+        "예약가능"
+      ]
+    }
+  },
+  {
+    "weekOf": "2026-08-31",
+    "kakaoPlaceId": "1097019957",
+    "rank": 18,
+    "finalScore": 47.409,
+    "reason": {
+      "hot": 86,
+      "fit": 0.552,
+      "tags": [
+        "일식",
+        "예약가능"
+      ]
+    }
+  },
+  {
+    "weekOf": "2026-08-31",
+    "kakaoPlaceId": "25049372",
+    "rank": 19,
+    "finalScore": 47.129,
+    "reason": {
+      "hot": 56.3,
+      "fit": 0.838,
       "tags": [
         "한식",
         "룸있음",
@@ -246,43 +278,16 @@
   },
   {
     "weekOf": "2026-08-31",
-    "kakaoPlaceId": "1655218559",
-    "rank": 18,
-    "finalScore": 68.441,
+    "kakaoPlaceId": "1625223624",
+    "rank": 20,
+    "finalScore": 44.774,
     "reason": {
-      "hot": 74.6,
-      "fit": 0.917,
+      "hot": 42.6,
+      "fit": 1.05,
       "tags": [
-        "고기구이",
+        "한식",
         "룸있음",
         "예약가능"
-      ]
-    }
-  },
-  {
-    "weekOf": "2026-08-31",
-    "kakaoPlaceId": "915943921",
-    "rank": 19,
-    "finalScore": 64.355,
-    "reason": {
-      "hot": 84.6,
-      "fit": 0.761,
-      "tags": [
-        "중식"
-      ]
-    }
-  },
-  {
-    "weekOf": "2026-08-31",
-    "kakaoPlaceId": "2026708287",
-    "rank": 20,
-    "finalScore": 63.885,
-    "reason": {
-      "hot": 83.6,
-      "fit": 0.764,
-      "tags": [
-        "고기구이",
-        "룸있음"
       ]
     }
   }
