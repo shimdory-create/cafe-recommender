@@ -2,7 +2,7 @@ import { payload, REVISIT_DAYS } from '@/lib/site'
 import { readListParams } from '@/lib/url-state'
 import { VisitedList, type KnownCafe } from './visited-list'
 
-export const metadata = { title: '다녀온 곳 — 심김 빵지순례' }
+export const metadata = { title: '다녀온 카페 — 심김 빵지순례' }
 
 /**
  * 다녀온 곳 — 우리 가족의 기록.
@@ -31,7 +31,7 @@ export default async function VisitedPage(
 
   return (
     <div className="py-5">
-      <h1 className="text-[22px] font-bold tracking-tight">다녀온 곳</h1>
+      <h1 className="text-[22px] font-bold tracking-tight">다녀온 카페</h1>
       <VisitedList built={payload.visited} known={known} initial={initial} />
 
       <p className="mt-6 text-center text-[12px] leading-relaxed text-ink-soft">

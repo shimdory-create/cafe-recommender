@@ -2,7 +2,7 @@ import { spotPayload, SPOT_REVISIT_DAYS } from '@/lib/spot-site'
 import { readListParams } from '@/lib/url-state'
 import { SpotVisitedList, type KnownSpot } from './spot-visited-list'
 
-export const metadata = { title: '다녀온 곳 (가볼 곳) — 심김 빵지순례' }
+export const metadata = { title: '다녀온 가볼 곳 — 심김 빵지순례' }
 
 export default async function SpotVisitedPage(
   { searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> },
@@ -15,7 +15,7 @@ export default async function SpotVisitedPage(
 
   return (
     <div className="py-5">
-      <h1 className="text-[22px] font-bold tracking-tight">다녀온 곳</h1>
+      <h1 className="text-[22px] font-bold tracking-tight">다녀온 가볼 곳</h1>
       <SpotVisitedList built={spotPayload.visited} known={known} initial={initial} />
 
       <p className="mt-6 text-center text-[12px] leading-relaxed text-ink-soft">

@@ -106,7 +106,7 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
   return (
     <div className="py-5">
       <div className="flex items-baseline justify-between">
-        <h1 className="text-[22px] font-bold tracking-tight">전체 리스트</h1>
+        <h1 className="text-[22px] font-bold tracking-tight">카페 전체 리스트</h1>
         <span className="text-[13px] text-ink-soft">
           {matched.length}곳
         </span>
