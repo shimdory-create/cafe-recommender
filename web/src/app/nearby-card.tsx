@@ -4,7 +4,7 @@ import { Thumb } from './thumb'
 import { Badge } from './badge'
 import { NaverMapLink } from './naver-map-link'
 
-function NearbyCard({ item, href, icon }: { item: NearbyCardData; href: string; icon: string }) {
+export function NearbyCard({ item, href, icon }: { item: NearbyCardData; href: string; icon: string }) {
   return (
     <div
       className="flex shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-card"
