@@ -1,4 +1,4 @@
-import type { BuzzSnapshot, Cafe, Health, NotifyLog } from '../schema.js'
+import type { BuzzSnapshot, Cafe, Health } from '../schema.js'
 import { PENDING_PER_DAY } from './daily-buzz.js'
 import { LIVENESS_SOURCE } from './liveness.js'
 import { RESTAURANT_LIVENESS_SOURCE } from './restaurant-liveness.js'
@@ -30,8 +30,6 @@ export interface WatchInput {
   cafes: Cafe[]
   buzz: BuzzSnapshot[]
   health: Health[]
-  /** 카카오톡 발송 기록. 없으면(첫 주) 판단하지 않는다 */
-  notifyLog?: NotifyLog[]
   now: Date
 }
 
@@ -73,14 +71,6 @@ const BUZZ_TODAY_MIN_RATIO = 0.8
 const BUZZ_THROUGHPUT_MIN_RATIO = 0.3
 /** 판정 대기가 남아 있는데 오늘 이만큼도 못 했으면 경고 */
 const CLASSIFY_WARN_BELOW = 50
-/**
- * 카톡이 이 일수보다 오래 안 나갔으면 알린다.
- *
- * 주 1회 발송이므로 8일이면 "한 번 건너뛴 것" 이 확실하다. 발송은 이 PC 의
- * 커넥터로 나가서 클라우드가 알 수 없는데, 실제로 조용히 누락된 적이 있다
- * (2026-08-21 정오: 예약 세션이 승인 대기로 멈춤 -> 아무 신호도 없었다).
- */
-const NOTIFY_STALE_DAYS = 8
 
 const hoursBetween = (a: Date, b: Date): number =>
   Math.abs(a.getTime() - b.getTime()) / 3_600_000
@@ -228,22 +218,6 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
     }
   }
 
-  // 6. 카톡이 지난주에 안 나갔다
-  const log = input.notifyLog ?? []
-  const last = log.reduce<string>((a, r) => (r.sentAt > a ? r.sentAt : a), '')
-  if (last) {
-    const days = hoursBetween(now, new Date(last)) / 24
-    if (days > NOTIFY_STALE_DAYS) {
-      out.push({
-        level: 'alert',
-        code: 'notify_missing',
-        message:
-          `카카오톡이 ${Math.floor(days)}일째 안 나갔다 (기준 ${NOTIFY_STALE_DAYS}일).`
-          + ` 예약 작업이 멈췄는지 본다 — 발송은 이 PC 의 Claude Code 가 필요하다.`,
-      })
-    }
-  }
-
   return out
 }
 
@@ -287,7 +261,6 @@ const LABELS: Record<string, string> = {
   source_stale: '수집 멈춤',
   buzz_drop: '화제량 측정 부족',
   buzz_throughput: '수집 조기 중단',
-  notify_missing: '카톡 누락',
   classify_stalled: '판정 정체',
   classify_slow: '판정 지연',
 }

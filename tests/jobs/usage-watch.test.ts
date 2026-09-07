@@ -280,34 +280,6 @@ describe('formatWatch', () => {
   })
 })
 
-describe('detectAnomalies — 카톡 누락', () => {
-  const sent = (iso: string) => ({ sentAt: iso, chars: 190, status: '자동수집 정상' })
-
-  it('기록이 없으면 판단하지 않는다 (첫 주 오탐 방지)', () => {
-    const input = healthy()
-    expect(detectAnomalies(input).some((a) => a.code === 'notify_missing')).toBe(false)
-  })
-
-  it('일주일 안에 나갔으면 조용하다', () => {
-    const input = { ...healthy(), notifyLog: [sent('2026-08-20T03:04:00.000Z')] }
-    expect(detectAnomalies(input).some((a) => a.code === 'notify_missing')).toBe(false)
-  })
-
-  it('8일을 넘기면 경보한다 — 조용한 누락이 실제로 있었다', () => {
-    const input = { ...healthy(), notifyLog: [sent('2026-08-01T03:04:00.000Z')] }
-    const hit = detectAnomalies(input).find((a) => a.code === 'notify_missing')
-    expect(hit?.level).toBe('alert')
-    expect(hit?.message).toContain('20일째')
-  })
-
-  it('가장 최근 기록으로 판단한다', () => {
-    const input = {
-      ...healthy(),
-      notifyLog: [sent('2026-06-01T03:04:00.000Z'), sent('2026-08-20T03:04:00.000Z')],
-    }
-    expect(detectAnomalies(input).some((a) => a.code === 'notify_missing')).toBe(false)
-  })
-})
 
 describe('statusLine — 카톡 한 줄', () => {
   it('이상이 없으면 정상이라고 말한다', () => {

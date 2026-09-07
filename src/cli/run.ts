@@ -529,7 +529,7 @@ async function main() {
       const text = buildNotifyText({
         payload,
         baseUrl: flag(rest, 'url') || process.env.SITE_URL,
-        status: statusLine(detectAnomalies({ cafes, buzz, health, notifyLog, now })),
+        status: statusLine(detectAnomalies({ cafes, buzz, health, now })),
       })
       console.log('\n' + '-'.repeat(34))
       console.log(text)
