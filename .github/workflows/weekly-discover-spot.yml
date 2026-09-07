@@ -1,9 +1,13 @@
 name: weekly-discover-spot
 on:
   schedule:
-    # 월 20:43 UTC. 카페·식당의 일요일 data-write 혼잡(동시 대기 2건 초과 시
+    # 월 20:05 UTC. 카페·식당의 일요일 data-write 혼잡(동시 대기 2건 초과 시
     # 3번째가 조용히 취소됨)을 피해 월요일로 옮김.
-    - cron: '43 20 * * 1'
+    #
+    # **반드시 그날 daily-buzz-spot(20:23 UTC) 보다 앞서야 한다** — 뒤에
+    # 두면 그날 발굴된 곳이 화제량을 놓쳐 판정이 최소 하루 밀린다
+    # (weekly-discover.yml 주석 참고).
+    - cron: '5 20 * * 1'
   workflow_dispatch:
 
 concurrency:

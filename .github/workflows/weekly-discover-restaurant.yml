@@ -1,10 +1,11 @@
 name: weekly-discover-restaurant
 on:
   schedule:
-    # 일 20:10 UTC. weekly-discover(카페, 일 19:37 UTC)와 33분 차이 —
-    # concurrency 그룹이 달라 동시에 돌 수 있으므로 npm ci 동시 실행을 피하려면
-    # 시각도 띄워야 한다.
-    - cron: '10 20 * * 0'
+    # 일 19:35 UTC. **반드시 그날 daily-buzz-restaurant(19:50 UTC) 보다
+    # 앞서야 한다** — 뒤에 두면 그날 발굴된 식당이 화제량을 놓쳐 판정이
+    # 최소 하루 밀린다(weekly-discover.yml 주석 참고, 카페에서 실측된
+    # 문제를 식당도 똑같이 겪는다).
+    - cron: '35 19 * * 0'
   workflow_dispatch:
 
 # data/ 를 쓰는 워크플로는 전부 하나씩 돈다 — 카페와 같은 data-write 그룹을

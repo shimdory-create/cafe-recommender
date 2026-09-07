@@ -1,10 +1,17 @@
 name: weekly-discover
 on:
   schedule:
-    # 일 19:30 UTC = 월 04:30 KST. 주 초에 새 카페를 넣어두면 daily-classify 가
-    # 금요일 추천 확정(금 11:30 KST)까지 나흘에 걸쳐 판정한다.
-    # daily-buzz(19:00 UTC)와 30분 차이지만 data-write 그룹이 직렬화한다.
-    - cron: '37 19 * * 0'
+    # 일 18:58 UTC. 정시(19:00 UTC)는 스케줄러가 가장 붐비는 시각이라
+    # 피한다(daily-buzz.yml 참고). 주 초에 새 카페를 넣어두면 daily-classify
+    # 가 금요일 추천 확정까지 나흘에 걸쳐 판정한다.
+    #
+    # **반드시 그날 daily-buzz(19:17 UTC) 보다 앞서야 한다.** classify 는
+    # 화제량이 없는 pending 카페를 탈락시키지 않고 다음 회차로 미룬다 —
+    # discover 가 buzz 뒤에 돌면 그날 막 발굴된 카페는 화제량을 놓쳐
+    # 최소 하루를 그냥 흘려보낸다(실측: 일요일 발굴분이 월요일 낮까지도
+    # 판정 대기로 남아 있었다, 2026-09-07). 앞에 두면 같은 날 buzz 가
+    # 새로 들어온 카페까지 측정해 그날 밤 classify 로 바로 이어진다.
+    - cron: '58 18 * * 0'
   workflow_dispatch:
 
 # data/ 를 쓰는 워크플로는 하나씩 돈다.
