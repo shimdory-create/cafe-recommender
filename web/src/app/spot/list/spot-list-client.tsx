@@ -21,7 +21,7 @@ export function SpotListClient(
   { spots, initial }: { spots: SpotListRow[]; initial: ListParams },
 ) {
   const [q, setQ] = useState(initial.q)
-  const [area, setArea] = useState<string | null>(initial.area)
+  const [area, setArea] = useState<string[]>(initial.area)
   const [tags, setTags] = useState<string[]>(initial.tags)
   const [sort, setSort] = useState<Sort>(initial.sort)
   const [city, setCity] = useState(initial.city)
@@ -68,8 +68,10 @@ export function SpotListClient(
     () => countMatching(wishFiltered, { tags, sort, city, area, query: q, newOnly: true }),
     [wishFiltered, tags, sort, city, area, q],
   )
+  // 복수 지역을 고르면 묶어서 보여줄 기준이 애매해지므로 딱 하나만 고르고
+  // 그게 서울·인천일 때만 묶는다.
   const groups = useMemo(
-    () => (area && SPLIT_AREAS.has(area) ? groupBySigungu(shown) : null),
+    () => (area.length === 1 && SPLIT_AREAS.has(area[0]!) ? groupBySigungu(shown) : null),
     [area, shown],
   )
 
@@ -79,7 +81,9 @@ export function SpotListClient(
   }
   const toggle = reset<string>((t) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const dirty = tags.length > 0 || area !== null || q !== '' || newOnly || wishOnly || blacklistOnly
+  const toggleArea = reset<string>((a) =>
+    setArea((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a])))
+  const dirty = tags.length > 0 || area.length > 0 || q !== '' || newOnly || wishOnly || blacklistOnly
 
   return (
     <div className="py-5">
@@ -96,7 +100,8 @@ export function SpotListClient(
         <AreaChips
           counts={areas}
           value={area}
-          onChange={reset(setArea)}
+          onToggle={toggleArea}
+          onClear={() => { setArea([]); setShownCount(PAGE_CHUNK) }}
           expanded={expanded}
           onExpand={setExpanded}
           leading={newCount > 0 ? (
@@ -132,7 +137,7 @@ export function SpotListClient(
           <button
             type="button"
             onClick={() => {
-              setTags([]); setArea(null); setQ(''); setNewOnly(false); setWishOnly(false)
+              setTags([]); setArea([]); setQ(''); setNewOnly(false); setWishOnly(false)
               setBlacklistOnly(false)
               setShownCount(PAGE_CHUNK)
             }}

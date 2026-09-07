@@ -14,8 +14,8 @@ import type { VisitedSort } from './visited-sort'
 export interface ListParams {
   /** 업소명 검색어 */
   q: string
-  /** 고른 지역(시 단위). null 이면 전체 */
-  area: string | null
+  /** 고른 지역(시 단위) 목록. 비어 있으면 전체 — OR 로 걸린다 */
+  area: string[]
   tags: string[]
   sort: Sort
   /** 도심(주차 C) 포함 */
@@ -38,7 +38,7 @@ export interface ListParams {
 }
 
 export const EMPTY_PARAMS: ListParams = {
-  q: '', area: null, tags: [], sort: 'hot', city: false, newOnly: false, wishOnly: false,
+  q: '', area: [], tags: [], sort: 'hot', city: false, newOnly: false, wishOnly: false,
   blacklistOnly: false,
   visitedSort: { by: 'date', desc: true },
   shown: PAGE_CHUNK,
@@ -50,11 +50,11 @@ const one = (v: string | string[] | undefined): string =>
   (Array.isArray(v) ? v[0] : v) ?? ''
 
 export function readListParams(raw: Raw): ListParams {
-  const area = one(raw.a).trim()
+  const area = one(raw.a).split(',').map((s) => s.trim()).filter(Boolean)
   const tags = one(raw.t).split(',').map((s) => s.trim()).filter(Boolean)
   return {
     q: one(raw.q),
-    area: area || null,
+    area,
     tags,
     sort: one(raw.s) === 'near' || one(raw.s) === 'new' ? one(raw.s) as Sort : 'hot',
     city: one(raw.c) === '1',
@@ -83,7 +83,7 @@ function shownFromParam(raw: string): number {
 export function listParamsToQuery(p: ListParams): string {
   const sp = new URLSearchParams()
   if (p.q) sp.set('q', p.q)
-  if (p.area) sp.set('a', p.area)
+  if (p.area.length) sp.set('a', p.area.join(','))
   if (p.tags.length) sp.set('t', p.tags.join(','))
   if (p.sort !== 'hot') sp.set('s', p.sort)
   if (p.city) sp.set('c', '1')

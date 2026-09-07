@@ -138,17 +138,22 @@ describe('다녀온 곳 필터', () => {
   ]
 
   it('지역으로 거른다', () => {
-    expect(filterRestaurantVisited(rows, { q: '', area: '김포시', tags: [] }).map((r) => r.id))
+    expect(filterRestaurantVisited(rows, { q: '', area: ['김포시'], tags: [] }).map((r) => r.id))
       .toEqual(['1', '3'])
   })
 
+  it('지역을 여러 개 고르면 OR 로 걸린다', () => {
+    expect(filterRestaurantVisited(rows, { q: '', area: ['김포시', '서울'], tags: [] })
+      .map((r) => r.id)).toEqual(['1', '2', '3'])
+  })
+
   it('한 글자 상호도 검색된다', () => {
-    expect(filterRestaurantVisited(rows, { q: '몽', area: null, tags: [] }).map((r) => r.id))
+    expect(filterRestaurantVisited(rows, { q: '몽', area: [], tags: [] }).map((r) => r.id))
       .toEqual(['1'])
   })
 
   it('태그는 AND 로 걸린다', () => {
-    expect(filterRestaurantVisited(rows, { q: '', area: null, tags: ['한식', '분식'] })
+    expect(filterRestaurantVisited(rows, { q: '', area: [], tags: ['한식', '분식'] })
       .map((r) => r.id)).toEqual(['3'])
   })
 

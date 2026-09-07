@@ -28,7 +28,7 @@ export function RestaurantListClient(
   { restaurants, initial }: { restaurants: RestaurantListRow[]; initial: ListParams },
 ) {
   const [q, setQ] = useState(initial.q)
-  const [area, setArea] = useState<string | null>(initial.area)
+  const [area, setArea] = useState<string[]>(initial.area)
   // 식당은 카페와 달리 cuisineType 이 하나뿐이다 (restaurant-tag.ts) — 칩을
   // area 처럼 단일 선택으로 다룬다. filter.ts 의 tags 는 AND 매칭이라
   // 그대로 여러 개를 밀어넣으면(카페 성격 태그처럼) 항상 빈 결과가 된다.
@@ -89,9 +89,11 @@ export function RestaurantListClient(
     () => countMatching(wishFiltered, { tags: cuisineTags, sort, city, area, query: q, newOnly: true }),
     [wishFiltered, cuisineTags, sort, city, area, q],
   )
-  // 서울·인천만 안에서 구별로 다시 묶는다. 나머지는 칩 하나가 곧 한 지역이다
+  // 서울·인천만 안에서 구별로 다시 묶는다. 나머지는 칩 하나가 곧 한 지역이다.
+  // 복수 지역을 고르면 묶어서 보여줄 기준이 애매해지므로 딱 하나만 고르고
+  // 그게 서울·인천일 때만 묶는다.
   const groups = useMemo(
-    () => (area && SPLIT_AREAS.has(area) ? groupBySigungu(shown) : null),
+    () => (area.length === 1 && SPLIT_AREAS.has(area[0]!) ? groupBySigungu(shown) : null),
     [area, shown],
   )
 
@@ -102,10 +104,12 @@ export function RestaurantListClient(
     set(v)
     setShownCount(PAGE_CHUNK)
   }
-  // area 칩과 같은 단일 선택 패턴: 이미 선택된 걸 다시 누르면 해제, 아니면
-  // 기존 선택을 대체한다 (누적 아님 — cuisineType 은 식당당 하나뿐이므로).
+  // 이미 선택된 걸 다시 누르면 해제, 아니면 기존 선택을 대체한다 (누적
+  // 아님 — cuisineType 은 식당당 하나뿐이므로).
   const selectCuisine = reset<string>((t) => setCuisine((prev) => (prev === t ? null : t)))
-  const dirty = cuisine !== null || area !== null || q !== '' || newOnly || wishOnly || blacklistOnly
+  const toggleArea = reset<string>((a) =>
+    setArea((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a])))
+  const dirty = cuisine !== null || area.length > 0 || q !== '' || newOnly || wishOnly || blacklistOnly
 
   return (
     <div className="py-5">
@@ -122,7 +126,8 @@ export function RestaurantListClient(
         <AreaChips
           counts={areas}
           value={area}
-          onChange={reset(setArea)}
+          onToggle={toggleArea}
+          onClear={() => { setArea([]); setShownCount(PAGE_CHUNK) }}
           expanded={expanded}
           onExpand={setExpanded}
           leading={newCount > 0 ? (
@@ -158,7 +163,7 @@ export function RestaurantListClient(
           <button
             type="button"
             onClick={() => {
-              setCuisine(null); setArea(null); setQ(''); setNewOnly(false); setWishOnly(false)
+              setCuisine(null); setArea([]); setQ(''); setNewOnly(false); setWishOnly(false)
               setBlacklistOnly(false)
               setShownCount(PAGE_CHUNK)
             }}

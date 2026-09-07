@@ -109,38 +109,45 @@ export function SearchBox({
  * 32개를 다 펴면 모바일에서 일곱 줄을 먹는다. 가까운 여덟 곳만 두고 나머지는
  * 접는다 — 우리가 실제로 가는 곳은 앞쪽에 몰려 있고, 먼 곳을 찾을 때는
  * 대개 이름을 알고 있어 검색이 더 빠르다.
+ *
+ * 복수 선택이 가능하다(2026-09-08) — "인천 또는 부천" 처럼 OR 로 걸린다.
+ * 태그 칩(AND)과 섞여도 헷갈리지 않는다 — 지역은 한 카페가 하나만 갖는
+ * 값이라 AND 는 애초에 의미가 없어서, 이 칩만 OR 로 동작한다는 것이
+ * 자연스럽게 드러난다.
  */
 export function AreaChips({
-  counts, value, onChange, expanded, onExpand, leading,
+  counts, value, onToggle, onClear, expanded, onExpand, leading,
 }: {
   counts: AreaCount[]
-  value: string | null
-  onChange: (area: string | null) => void
+  /** 고른 지역들. 비어 있으면 전체 */
+  value: string[]
+  /** 칩 하나를 눌렀을 때 — 이미 골랐으면 빼고, 아니면 더한다 */
+  onToggle: (area: string) => void
+  /** "전체" 칩을 눌렀을 때 — 전부 지운다 */
+  onClear: () => void
   expanded: boolean
   onExpand: (v: boolean) => void
   /** NEW 칩처럼 앞에 붙일 것 */
   leading?: React.ReactNode
 }) {
-  // 고른 지역이 접힌 구간에 있으면 그것만 끌어올린다 — 고른 칩이 안 보이면
+  // 고른 지역이 접힌 구간에 있으면 그것들만 끌어올린다 — 고른 칩이 안 보이면
   // 무엇으로 걸러진 목록인지 알 수 없다
   const head = counts.slice(0, AREA_CHIPS_COLLAPSED)
   const tail = counts.slice(AREA_CHIPS_COLLAPSED)
-  const pinned = !expanded && value && tail.some((a) => a.area === value)
-    ? tail.filter((a) => a.area === value)
-    : []
+  const pinned = !expanded ? tail.filter((a) => value.includes(a.area)) : []
   const shown = expanded ? counts : [...head, ...pinned]
   const hiddenCount = counts.length - shown.length
 
   return (
     <div className="flex flex-wrap gap-1.5">
-      <Chip on={value === null} onClick={() => onChange(null)}>전체</Chip>
+      <Chip on={value.length === 0} onClick={onClear}>전체</Chip>
       {leading}
       {shown.map((a) => (
         <Chip
           key={a.area}
-          on={value === a.area}
+          on={value.includes(a.area)}
           count={a.count}
-          onClick={() => onChange(value === a.area ? null : a.area)}
+          onClick={() => onToggle(a.area)}
         >
           {a.label}
         </Chip>

@@ -97,7 +97,8 @@ export const MIN_ROWS_FOR_FILTERS = 6
 
 export interface VisitedFilter {
   q: string
-  area: string | null
+  /** 고른 지역 목록. 비어 있으면 전체 — OR 로 걸린다(filter.ts 의 area 와 같은 규칙) */
+  area: string[]
   tags: string[]
 }
 
@@ -110,7 +111,7 @@ export interface VisitedFilter {
  */
 export function filterVisited(rows: SiteVisited[], f: VisitedFilter): SiteVisited[] {
   return rows.filter((v) => {
-    if (f.area && v.area !== f.area) return false
+    if (f.area.length > 0 && !f.area.includes(v.area)) return false
     if (f.q && !matchesQuery(v.name, f.q)) return false
     return f.tags.every((t) => v.tags.includes(t))
   })
@@ -143,7 +144,7 @@ export function VisitedList({
   const [busy, setBusy] = useState('')
   const [error, setError] = useState('')
   const [q, setQ] = useState(initial.q)
-  const [area, setArea] = useState<string | null>(initial.area)
+  const [area, setArea] = useState<string[]>(initial.area)
   const [tags, setTags] = useState<string[]>(initial.tags)
   const [order, setOrder] = useState<VisitedSort>(initial.visitedSort)
   // 빌드 시점 값이 먼저고, 서버가 host 를 보고 답하면 그것을 따른다
@@ -213,7 +214,9 @@ export function VisitedList({
   )
   const toggle = (t: string) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
-  const dirty = q !== '' || area !== null || tags.length > 0
+  const toggleArea = (a: string) =>
+    setArea((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]))
+  const dirty = q !== '' || area.length > 0 || tags.length > 0
 
   if (rows.length === 0) {
     return (
@@ -256,7 +259,8 @@ export function VisitedList({
               <AreaChips
                 counts={areas}
                 value={area}
-                onChange={setArea}
+                onToggle={toggleArea}
+                onClear={() => setArea([])}
                 expanded={expanded}
                 onExpand={setExpanded}
               />
@@ -307,7 +311,7 @@ export function VisitedList({
               {dirty && (
                 <button
                   type="button"
-                  onClick={() => { setQ(''); setArea(null); setTags([]) }}
+                  onClick={() => { setQ(''); setArea([]); setTags([]) }}
                   className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
                 >
                   초기화

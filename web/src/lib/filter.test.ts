@@ -160,19 +160,24 @@ describe('지역 묶음 (시 단위)', () => {
   ]
 
   it('고른 지역만 남긴다', () => {
-    const out = filterAndSort(rows, { tags: [], sort: 'near', city: false, area: '양평군' })
+    const out = filterAndSort(rows, { tags: [], sort: 'near', city: false, area: ['양평군'] })
     expect(out.map((r) => r.id)).toEqual(['6', '1'])
   })
 
+  it('지역을 여러 개 고르면 OR 로 걸린다 — 한 카페는 지역을 하나만 가지므로 AND 는 늘 0곳이 된다', () => {
+    const out = filterAndSort(rows, { tags: [], sort: 'near', city: false, area: ['양평군', '파주시'] })
+    expect(out.map((r) => r.id)).toEqual(['4', '6', '1'])
+  })
+
   it('지역을 고르지 않으면 전체를 준다', () => {
-    const out = filterAndSort(rows, { tags: [], sort: 'near', city: false, area: null })
+    const out = filterAndSort(rows, { tags: [], sort: 'near', city: false, area: [] })
     expect(out).toHaveLength(5) // 도심전용 1곳 제외
   })
 
   it('지역과 태그는 함께 걸린다 (AND)', () => {
     const withTag = [...rows, cafe({ id: '7', area: '파주시', tags: ['대형카페', '뷰맛집'] })]
     const out = filterAndSort(withTag, {
-      tags: ['뷰맛집'], sort: 'hot', city: false, area: '파주시',
+      tags: ['뷰맛집'], sort: 'hot', city: false, area: ['파주시'],
     })
     expect(out.map((r) => r.id)).toEqual(['7'])
   })
@@ -201,7 +206,7 @@ describe('지역 묶음 (시 단위)', () => {
   it('서울·인천 안에서는 구별로 묶고 가까운 지역부터 놓는다', () => {
     const east = filterAndSort(
       [...rows, cafe({ id: '8', sigungu: '가평군', area: '가평군', driveMinutes: 90 })],
-      { tags: [], sort: 'near', city: false, area: null },
+      { tags: [], sort: 'near', city: false, area: [] },
     )
     const groups = groupBySigungu(east)
     expect(groups.map((g) => g.sigungu)).toEqual(['파주시', '남양주시', '양평군', '가평군'])
@@ -334,7 +339,7 @@ const badgeCombos: FilterState[] = [
   { tags: [], sort: 'hot', city: false },
   { tags: [], sort: 'hot', city: true },
   { tags: ['대형카페'], sort: 'hot', city: true },
-  { tags: [], sort: 'hot', city: true, area: '김포' },
+  { tags: [], sort: 'hot', city: true, area: ['김포'] },
   { tags: ['대형카페'], sort: 'hot', city: true, query: '카페' },
   { tags: [], sort: 'hot', city: true, query: '서울' },
 ]
@@ -365,7 +370,7 @@ describe('areaCounts 는 태그·검색어가 걸려 있어도 실제 눌렀을 
     it(`tags=${s.tags} query=${s.query ?? '-'}`, () => {
       const counts = areaCounts(badgeCafes, { city: s.city, tags: s.tags, query: s.query })
       for (const c of counts) {
-        const shown = filterAndSort(badgeCafes, { ...s, area: c.area, newOnly: false }).length
+        const shown = filterAndSort(badgeCafes, { ...s, area: [c.area], newOnly: false }).length
         expect(c.count).toBe(shown)
       }
     })

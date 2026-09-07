@@ -52,8 +52,8 @@ export interface FilterState {
   sort: Sort
   /** 주차 C 카페까지 보여줄지 (스펙 7.3 도심 모드) */
   city: boolean
-  /** 고른 지역(시 단위). null 이면 전체 */
-  area?: string | null
+  /** 고른 지역(시 단위) 목록. OR 로 걸린다 — 비어 있으면 전체. */
+  area?: string[]
   /** 업소명 검색어 */
   query?: string
   /** NEW 만 보기 */
@@ -65,7 +65,10 @@ export interface FilterState {
  *
  * 칩 여러 개는 AND 다 — "대형카페 + 뷰맛집" 을 찾는 것이 자연스럽고,
  * OR 로 하면 칩을 늘릴수록 결과가 늘어나 필터의 의미가 사라진다.
- * 지역은 하나만 고른다 (라디오) — "김포 아니면 파주" 는 실제로 하는 결정이 아니다.
+ *
+ * 지역은 다르다 — 한 카페는 지역을 하나만 가지므로 지역끼리 AND 하면
+ * 결과가 항상 0곳이다(2026-09-08, 복수 선택 요청으로 확인). 그래서 지역은
+ * **OR**: "인천 또는 부천" 을 동시에 고르면 둘 중 하나에 속하는 곳이 나온다.
  *
  * NEW 를 정렬과 무관하게 맨 앞으로 띄우던 로직은 뺐다(2026-09-08) — 최신순
  * 정렬 버튼이 생긴 뒤로는 필요 없어졌고, 오히려 칩을 여러 개 걸었을 때
@@ -77,7 +80,7 @@ export interface FilterState {
 function filterRows<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
   return cafes.filter((c) => {
     if (c.cityOnly && !s.city) return false
-    if (s.area && c.area !== s.area) return false
+    if (s.area && s.area.length > 0 && !s.area.includes(c.area)) return false
     if (s.newOnly && !c.isNew) return false
     if (s.query && !matchesQuery(c.name, s.query)) return false
     return s.tags.every((t) => c.tags.includes(t))

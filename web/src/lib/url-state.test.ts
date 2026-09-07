@@ -8,7 +8,7 @@ describe('목록 상태를 주소에 싣기', () => {
 
   it('왕복해도 같은 값이다', () => {
     const p = {
-      q: '테라', area: '김포시', tags: ['대형카페', '뷰맛집'],
+      q: '테라', area: ['김포시', '파주시'], tags: ['대형카페', '뷰맛집'],
       sort: 'near' as const, city: true, newOnly: true, wishOnly: true, blacklistOnly: true,
       visitedSort: { by: 'rating' as const, desc: false },
       shown: 180,
@@ -29,7 +29,7 @@ describe('목록 상태를 주소에 싣기', () => {
     expect(p.newOnly).toBe(false)
     expect(p.wishOnly).toBe(false)
     expect(p.blacklistOnly).toBe(false)
-    expect(p.area).toBeNull()
+    expect(p.area).toEqual([])
     expect(p.tags).toEqual([])
   })
 
@@ -43,7 +43,16 @@ describe('목록 상태를 주소에 싣기', () => {
   })
 
   it('같은 키가 두 번 와도 첫 값을 쓴다', () => {
-    expect(readListParams({ a: ['김포시', '파주시'] }).area).toBe('김포시')
+    // Next 의 searchParams 가 중복 키를 배열로 줄 때의 얘기다. 지역
+    // 복수 선택은 한 값 안에서 쉼표로 하지, 같은 키를 반복하는 방식이
+    // 아니다 — 그래서 배열이 오면 첫 값만 보고, 그 안에서 쉼표로 쪼갠다.
+    expect(readListParams({ a: ['김포시', '파주시'] }).area).toEqual(['김포시'])
+  })
+
+  it('지역을 여러 개 고르면 쉼표로 묶여 왕복한다', () => {
+    const qs = listParamsToQuery({ ...EMPTY_PARAMS, area: ['김포시', '파주시'] })
+    expect(new URLSearchParams(qs.slice(1)).get('a')).toBe('김포시,파주시')
+    expect(readListParams({ a: '김포시,파주시' }).area).toEqual(['김포시', '파주시'])
   })
 
   it('펼친 카드 수는 기본값일 때 주소에 안 쓴다', () => {
@@ -61,7 +70,7 @@ describe('목록 상태를 주소에 싣기', () => {
   })
 
   it('한글 지역명이 주소에 안전하게 실린다', () => {
-    const qs = listParamsToQuery({ ...EMPTY_PARAMS, area: '남양주시' })
+    const qs = listParamsToQuery({ ...EMPTY_PARAMS, area: ['남양주시'] })
     expect(new URLSearchParams(qs.slice(1)).get('a')).toBe('남양주시')
   })
 })
