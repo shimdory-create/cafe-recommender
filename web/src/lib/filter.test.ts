@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import {
-  areaCounts, areaLabel, countMatching, filterAndSort, groupBySigungu, matchesQuery, NEW_PINNED,
+  areaCounts, areaLabel, countMatching, filterAndSort, groupBySigungu, matchesQuery,
   type FilterState,
 } from './filter'
 import { driveLabel, hiddenByVisit, recentlyVisited, REVISIT_DAYS, type SiteCafe } from './site'
@@ -244,55 +244,35 @@ describe('업소명 검색', () => {
 })
 
 describe('NEW', () => {
-  it('정렬과 무관하게 맨 앞으로 띄운다', () => {
+  it('더 이상 정렬을 무시하고 맨 앞으로 띄우지 않는다 — 최신순 버튼이 그 역할이다', () => {
+    // 예전에는 NEW 최대 10곳을 정렬과 무관하게 맨 앞에 꽂았다. 그러면
+    // "가까운순" 을 골라도 방금 등록된 먼 카페가 가장 가까운 카페보다
+    // 위에 뜨는 착시가 생겼다 — 이제는 고른 정렬 기준을 그대로 따른다.
     const rows = [
       cafe({ id: '1', hotScore: 90, driveMinutes: 20 }),
       cafe({ id: '2', hotScore: 10, driveMinutes: 99, isNew: true }),
       cafe({ id: '3', hotScore: 50, driveMinutes: 30 }),
     ]
     expect(filterAndSort(rows, { tags: [], sort: 'hot', city: false }).map((r) => r.id))
-      .toEqual(['2', '1', '3'])
+      .toEqual(['1', '3', '2'])
     expect(filterAndSort(rows, { tags: [], sort: 'near', city: false }).map((r) => r.id))
-      .toEqual(['2', '1', '3'])
-  })
-
-  it('띄운 것들끼리는 최근 등록순이다', () => {
-    const rows = [
-      cafe({ id: 'old', isNew: true, firstSeenAt: '2026-08-23T00:00:00.000Z', hotScore: 90 }),
-      cafe({ id: 'new', isNew: true, firstSeenAt: '2026-08-25T00:00:00.000Z', hotScore: 10 }),
-    ]
-    expect(filterAndSort(rows, { tags: [], sort: 'hot', city: false }).map((r) => r.id))
-      .toEqual(['new', 'old'])
-  })
-
-  it('맨 앞으로 띄우는 수에 상한이 있다', () => {
-    // 전부 띄웠더니 NEW 54곳이 첫 화면을 통째로 먹었다 — "화제순" 을 눌러도
-    // 첫 다섯 페이지가 전부 NEW 라 정렬의 의미가 사라진다
-    const news = Array.from({ length: NEW_PINNED + 5 }, (_, i) => cafe({
-      id: `n${i}`, isNew: true, hotScore: 1,
-      firstSeenAt: `2026-08-${String(10 + i).padStart(2, '0')}T00:00:00.000Z`,
-    }))
-    const hot = cafe({ id: 'hot', hotScore: 999 })
-    const out = filterAndSort([...news, hot], { tags: [], sort: 'hot', city: false })
-    expect(out.slice(0, NEW_PINNED).every((r) => r.isNew)).toBe(true)
-    // 상한을 넘은 NEW 는 제자리로 — 화제순에서 hot 뒤로 밀린다
-    expect(out[NEW_PINNED]!.id).toBe('hot')
-  })
-
-  it('상한을 넘긴 NEW 는 최근 것부터 띄운다', () => {
-    const news = Array.from({ length: NEW_PINNED + 3 }, (_, i) => cafe({
-      id: `n${i}`, isNew: true,
-      firstSeenAt: `2026-08-${String(10 + i).padStart(2, '0')}T00:00:00.000Z`,
-    }))
-    const out = filterAndSort(news, { tags: [], sort: 'hot', city: false })
-    // n12 가 가장 최근이다
-    expect(out[0]!.id).toBe(`n${NEW_PINNED + 2}`)
+      .toEqual(['1', '3', '2'])
   })
 
   it('NEW 만 보기', () => {
     const rows = [cafe({ id: '1' }), cafe({ id: '2', isNew: true })]
     const out = filterAndSort(rows, { tags: [], sort: 'hot', city: false, newOnly: true })
     expect(out.map((r) => r.id)).toEqual(['2'])
+  })
+
+  it('NEW 만 보기도 고른 정렬 기준을 그대로 따른다', () => {
+    const rows = [
+      cafe({ id: 'far', isNew: true, driveMinutes: 90 }),
+      cafe({ id: 'near', isNew: true, driveMinutes: 20 }),
+      cafe({ id: 'not-new', isNew: false, driveMinutes: 1 }),
+    ]
+    const out = filterAndSort(rows, { tags: [], sort: 'near', city: false, newOnly: true })
+    expect(out.map((r) => r.id)).toEqual(['near', 'far'])
   })
 })
 

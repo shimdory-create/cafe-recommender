@@ -67,9 +67,11 @@ export interface FilterState {
  * OR 로 하면 칩을 늘릴수록 결과가 늘어나 필터의 의미가 사라진다.
  * 지역은 하나만 고른다 (라디오) — "김포 아니면 파주" 는 실제로 하는 결정이 아니다.
  *
- * **NEW 는 정렬과 무관하게 맨 앞으로 띄운다.** 새로 들어온 곳을 보려고 목록을
- * 여는데 종합점수 순으로는 300번째에 있을 수 있다. 띄우되 NEW 안에서는
- * 고른 정렬 기준을 그대로 지킨다.
+ * NEW 를 정렬과 무관하게 맨 앞으로 띄우던 로직은 뺐다(2026-09-08) — 최신순
+ * 정렬 버튼이 생긴 뒤로는 필요 없어졌고, 오히려 칩을 여러 개 걸었을 때
+ * "가까운순을 골랐는데 순서가 이상하다" 는 착시를 만들었다 — NEW 최대 10곳이
+ * 실제 거리와 무관하게 맨 위를 차지했기 때문이다. NEW 만 보고 싶으면
+ * NEW 칩을 누르면 된다(그 안에서도 고른 정렬 기준을 그대로 따른다).
  */
 /** filterAndSort 의 필터링 부분만. 정렬 없이 개수만 필요할 때 정렬 비용을 안 낸다 */
 function filterRows<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
@@ -83,8 +85,8 @@ function filterRows<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
 }
 
 /**
- * 배지 숫자용. filterAndSort 와 같은 필터 조건을 쓰되 정렬(NEW 띄우기 포함)은
- * 건너뛴다 — 숫자만 필요한 곳에서 매번 정렬까지 하면 리스트가 클 때 낭비다.
+ * 배지 숫자용. filterAndSort 와 같은 필터 조건을 쓰되 정렬은 건너뛴다 —
+ * 숫자만 필요한 곳에서 매번 정렬까지 하면 리스트가 클 때 낭비다.
  */
 export function countMatching<T extends FilterableRow>(cafes: T[], s: FilterState): number {
   return filterRows(cafes, s).length
@@ -92,10 +94,6 @@ export function countMatching<T extends FilterableRow>(cafes: T[], s: FilterStat
 
 export function filterAndSort<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
   const rows = filterRows(cafes, s)
-
-  const pinned = new Set(
-    [...rows].filter((c) => c.isNew).sort(byNewest).slice(0, NEW_PINNED).map((c) => c.id),
-  )
 
   const rank = (a: T, b: T) => {
     if (s.sort === 'near') {
@@ -110,14 +108,7 @@ export function filterAndSort<T extends FilterableRow>(cafes: T[], s: FilterStat
     return a.id.localeCompare(b.id)
   }
 
-  return [...rows].sort((a, b) => {
-    const pa = pinned.has(a.id)
-    const pb = pinned.has(b.id)
-    if (pa !== pb) return pa ? -1 : 1
-    // 띄운 것들끼리는 최근 등록순. 나머지는 고른 정렬 기준
-    if (pa && pb) return byNewest(a, b)
-    return rank(a, b)
-  })
+  return [...rows].sort(rank)
 }
 
 /** 최근에 등록된 것부터. 같으면 순서가 흔들리지 않게 id 로 마무리한다 */
@@ -218,12 +209,3 @@ export const AREA_CHIPS_COLLAPSED = 8
  * 커진다. 검색과 칩으로 좁히면 대개 이 수 아래라 버튼은 잘 보이지 않는다.
  */
 export const PAGE_CHUNK = 60
-
-/**
- * 맨 앞으로 띄우는 NEW 의 상한.
- *
- * 전부 띄웠더니 NEW 54곳이 첫 화면을 통째로 먹었다 — "화제순" 을 눌러도
- * 첫 다섯 페이지가 전부 NEW 라 정렬의 의미가 사라진다. 눈에 띄게 하는 것이
- * 목적이므로 앞쪽 몇 곳이면 충분하고, 전부 보려면 NEW 칩을 누르면 된다.
- */
-export const NEW_PINNED = 10
