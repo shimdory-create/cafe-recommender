@@ -26,6 +26,12 @@ export function addedLabel(firstSeenAt: string): string {
  * 두 값이 같으면 하나만 쓴다 — 90일 창이 아직 30일 분량도 못 채운 신규
  * 카페라 두 수가 같을 때, 같은 수를 두 번 쓰면 오타로 보인다(reasonLine 과 동일 규칙).
  */
+/**
+ * "블로그량 1개월 N건 · 3개월 M건" — 전체 리스트·다녀온 곳·홈이 다 같은
+ * 문구를 쓴다(2026-09-08). 전체 리스트·다녀온 곳 카드에서는 "OO구 · 차로
+ * 20분 · 8/31 추가" 줄과 한 줄에 같이 넣으려 했더니 카드 폭에서 거의 항상
+ * 잘려 3개월 쪽이 안 보였다 — 그래서 별도 줄로 뺐다(cafe-card.tsx 등).
+ */
 export function postsLabel(posts30: number, posts90: number): string {
   return posts30 === posts90
     ? `블로그량 1개월 ${posts30}건`

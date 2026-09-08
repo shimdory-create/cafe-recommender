@@ -327,8 +327,9 @@ export function SpotVisitedList({
                           {dateLabel(v.visitedOn)}
                         </span>
                       </div>
+                      <p className="mt-0.5 truncate text-[13px] text-ink-soft">{v.sigungu}</p>
                       <p className="mt-0.5 truncate text-[13px] text-ink-soft">
-                        {v.sigungu} · {postsLabel(v.posts30, v.posts90)}
+                        {postsLabel(v.posts30, v.posts90)}
                       </p>
                       {count > 0 ? (
                         <div className="mt-1.5 flex items-center gap-1.5">

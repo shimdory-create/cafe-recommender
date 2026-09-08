@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import {
-  addedLabel, driveLabel, postsLabel, CUISINE_LABEL, PARKING_LABEL, restaurantRecentlyVisited,
-  type RestaurantListRow,
+  addedLabel, driveLabel, postsLabel, CUISINE_LABEL, PARKING_LABEL,
+  restaurantRecentlyVisited, type RestaurantListRow,
 } from '@/lib/restaurant-site'
 import { Thumb } from './thumb'
 import { NaverMapLink } from './naver-map-link'
@@ -44,6 +44,7 @@ export function RestaurantTopThree({ restaurant }: { restaurant: RestaurantListR
 
 export function RestaurantCard({
   restaurant, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
+  hidePosts,
 }: {
   restaurant: RestaurantListRow
   rank?: number
@@ -53,6 +54,8 @@ export function RestaurantCard({
   onToggleBlacklist?: () => void
   stale?: boolean
   onDismiss?: () => void
+  /** 홈은 카드 밑에 블로그량+트렌드를 이미 따로 보여준다 — 메타줄 중복 방지 */
+  hidePosts?: boolean
 }) {
   const visited = restaurantRecentlyVisited(restaurant.visitedOn)
   return (
@@ -123,8 +126,12 @@ export function RestaurantCard({
 
             <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {restaurant.sigungu} · {driveLabel(restaurant.driveMinutes)} · {addedLabel(restaurant.firstSeenAt)}
-              {' · '}{postsLabel(restaurant.posts30, restaurant.posts90)}
             </p>
+            {!hidePosts && (
+              <p className="mt-0.5 truncate text-[13px] text-ink-soft">
+                {postsLabel(restaurant.posts30, restaurant.posts90)}
+              </p>
+            )}
 
             <div className="mt-1.5">
               <RestaurantTopThree restaurant={restaurant} />

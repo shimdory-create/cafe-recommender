@@ -388,7 +388,9 @@ export function VisitedList({
                       <p className="mt-0.5 truncate text-[13px] text-ink-soft">
                         {v.sigungu}
                         {v.scale ? ` · ${v.scale}` : ''}
-                        {' · '}{postsLabel(v.posts30, v.posts90)}
+                      </p>
+                      <p className="mt-0.5 truncate text-[13px] text-ink-soft">
+                        {postsLabel(v.posts30, v.posts90)}
                       </p>
 
                       {count > 0 ? (

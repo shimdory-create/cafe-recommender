@@ -41,6 +41,7 @@ export function FeedCards({
             onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(c.id) : undefined}
             stale={!c.visitedOn && isStale(c.lastSeenAt)}
             onDismiss={onDismiss ? () => onDismiss(c.id) : undefined}
+            hidePosts
           />
           <p className="mt-1.5 px-1 text-[12px] text-ink-soft">{c.reason}</p>
         </div>

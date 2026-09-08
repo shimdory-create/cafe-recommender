@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import {
-  addedLabel, driveLabel, MENU_LABEL, PARKING_LABEL, postsLabel, recentlyVisited, type ListRow,
+  addedLabel, driveLabel, MENU_LABEL, PARKING_LABEL, postsLabel, recentlyVisited,
+  type ListRow,
 } from '@/lib/site'
 import { Thumb } from './thumb'
 import { NaverMapLink } from './naver-map-link'
@@ -43,7 +44,7 @@ export function TopThree({ cafe }: { cafe: ListRow }) {
 }
 
 export function CafeCard({
-  cafe, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
+  cafe, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss, hidePosts,
 }: {
   cafe: ListRow
   rank?: number
@@ -56,6 +57,9 @@ export function CafeCard({
   /** liveness 잡이 오래 못 본 카페 (폐업 의심) */
   stale?: boolean
   onDismiss?: () => void
+  /** 홈("이번 주 추천")은 카드 밑에 블로그량+트렌드를 이미 따로 보여준다 —
+   * 메타줄에 또 넣으면 중복이라 그 화면에서만 끈다(feed-cards.tsx) */
+  hidePosts?: boolean
 }) {
   const visited = recentlyVisited(cafe.visitedOn)
   return (
@@ -131,8 +135,12 @@ export function CafeCard({
 
             <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {cafe.sigungu} · {driveLabel(cafe.driveMinutes)} · {addedLabel(cafe.firstSeenAt)}
-              {' · '}{postsLabel(cafe.posts30, cafe.posts90)}
             </p>
+            {!hidePosts && (
+              <p className="mt-0.5 truncate text-[13px] text-ink-soft">
+                {postsLabel(cafe.posts30, cafe.posts90)}
+              </p>
+            )}
 
             <div className="mt-1.5">
               <TopThree cafe={cafe} />

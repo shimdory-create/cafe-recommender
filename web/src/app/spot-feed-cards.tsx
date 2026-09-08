@@ -28,6 +28,7 @@ export function SpotFeedCards({
             onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(r.id) : undefined}
             stale={!r.visitedOn && spotIsStale(r.lastSeenAt)}
             onDismiss={onDismiss ? () => onDismiss(r.id) : undefined}
+            hidePosts
           />
           <p className="mt-1.5 px-1 text-[12px] text-ink-soft">{r.reason}</p>
         </div>

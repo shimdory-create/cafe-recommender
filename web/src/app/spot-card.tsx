@@ -41,7 +41,7 @@ export function SpotTopThree({ spot }: { spot: SpotListRow }) {
 }
 
 export function SpotCard({
-  spot, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
+  spot, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss, hidePosts,
 }: {
   spot: SpotListRow
   rank?: number
@@ -51,6 +51,8 @@ export function SpotCard({
   onToggleBlacklist?: () => void
   stale?: boolean
   onDismiss?: () => void
+  /** 홈은 카드 밑에 블로그량+트렌드를 이미 따로 보여준다 — 메타줄 중복 방지 */
+  hidePosts?: boolean
 }) {
   const visited = spotRecentlyVisited(spot.visitedOn)
   return (
@@ -121,8 +123,12 @@ export function SpotCard({
 
             <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {spot.sigungu} · {driveLabel(spot.driveMinutes)} · {addedLabel(spot.firstSeenAt)}
-              {' · '}{postsLabel(spot.posts30, spot.posts90)}
             </p>
+            {!hidePosts && (
+              <p className="mt-0.5 truncate text-[13px] text-ink-soft">
+                {postsLabel(spot.posts30, spot.posts90)}
+              </p>
+            )}
 
             <div className="mt-1.5">
               <SpotTopThree spot={spot} />
