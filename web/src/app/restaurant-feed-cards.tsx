@@ -40,9 +40,8 @@ export function RestaurantFeedCards({
             onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(r.id) : undefined}
             stale={!r.visitedOn && restaurantIsStale(r.lastSeenAt)}
             onDismiss={onDismiss ? () => onDismiss(r.id) : undefined}
-            hidePosts
+            postsOverride={r.reason}
           />
-          <p className="mt-1.5 px-1 text-[12px] text-ink-soft">{r.reason}</p>
         </div>
       ))}
     </div>

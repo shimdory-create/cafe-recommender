@@ -44,7 +44,8 @@ export function TopThree({ cafe }: { cafe: ListRow }) {
 }
 
 export function CafeCard({
-  cafe, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss, hidePosts,
+  cafe, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
+  postsOverride,
 }: {
   cafe: ListRow
   rank?: number
@@ -57,9 +58,9 @@ export function CafeCard({
   /** liveness 잡이 오래 못 본 카페 (폐업 의심) */
   stale?: boolean
   onDismiss?: () => void
-  /** 홈("이번 주 추천")은 카드 밑에 블로그량+트렌드를 이미 따로 보여준다 —
-   * 메타줄에 또 넣으면 중복이라 그 화면에서만 끈다(feed-cards.tsx) */
-  hidePosts?: boolean
+  /** 홈("이번 주 추천")은 postsLabel 대신 트렌드까지 붙인 문구(reason)를
+   * 그대로 보여준다(2026-09-08, feed-cards.tsx) */
+  postsOverride?: string
 }) {
   const visited = recentlyVisited(cafe.visitedOn)
   return (
@@ -136,11 +137,9 @@ export function CafeCard({
             <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {cafe.sigungu} · {driveLabel(cafe.driveMinutes)} · {addedLabel(cafe.firstSeenAt)}
             </p>
-            {!hidePosts && (
-              <p className="mt-0.5 truncate text-[13px] text-ink-soft">
-                {postsLabel(cafe.posts30, cafe.posts90)}
-              </p>
-            )}
+            <p className="mt-0.5 truncate text-[13px] text-ink-soft">
+              {postsOverride ?? postsLabel(cafe.posts30, cafe.posts90)}
+            </p>
 
             <div className="mt-1.5">
               <TopThree cafe={cafe} />
