@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {
-  addedLabel, driveLabel, MENU_LABEL, PARKING_LABEL, recentlyVisited, type ListRow,
+  addedLabel, driveLabel, MENU_LABEL, PARKING_LABEL, postsLabel, recentlyVisited, type ListRow,
 } from '@/lib/site'
 import { Thumb } from './thumb'
 import { NaverMapLink } from './naver-map-link'
@@ -129,8 +129,9 @@ export function CafeCard({
               </span>
             </div>
 
-            <p className="mt-0.5 text-[13px] text-ink-soft">
+            <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {cafe.sigungu} · {driveLabel(cafe.driveMinutes)} · {addedLabel(cafe.firstSeenAt)}
+              {' · '}{postsLabel(cafe.posts30, cafe.posts90)}
             </p>
 
             <div className="mt-1.5">

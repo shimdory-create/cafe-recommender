@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import type { SiteVisited } from '@/lib/site'
+import { postsLabel } from '@/lib/labels'
 import type { Review } from '@/lib/reviews'
 import { areaLabel, matchesQuery, type AreaCount } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
@@ -33,6 +34,8 @@ export interface KnownCafe {
   tags: string[]
   naverMapUrl: string
   imageUrl: string | null
+  posts30: number
+  posts90: number
 }
 
 /**
@@ -51,18 +54,32 @@ export interface VisitLite {
   note?: string
 }
 
+/**
+ * 다녀온 곳 화면에 쓰는 병합 결과. `SiteVisited`(빌드 타임 생성 타입, 루트
+ * 스키마)는 posts30·posts90 을 안 담는다 — 방문 기록이지 화제량 통계가
+ * 아니기 때문이다. 이 화면에서만 `known`(현재 활성 카페, `SiteCafe`에서
+ * 옮겨온 실측값)으로 보강해서 붙인다. `known` 에 없는 카페(게이트에서 빠진
+ * 곳)는 0으로 둔다 — 최신 화제량을 잴 방법이 없다는 뜻이라 0이 오답은 아니다.
+ */
+export interface VisitedRow extends SiteVisited {
+  posts30: number
+  posts90: number
+}
+
 export function mergeVisits(
   built: SiteVisited[],
   live: VisitLite[],
   known: Map<string, KnownCafe>,
   hasLive = true,
-): SiteVisited[] {
+): VisitedRow[] {
   const byId = new Map(built.map((v) => [v.id, v]))
   if (!hasLive) {
-    return [...built].sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
+    return [...built]
+      .map((v) => ({ ...v, posts30: 0, posts90: 0 }))
+      .sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
   }
 
-  const out = new Map<string, SiteVisited>()
+  const out = new Map<string, VisitedRow>()
   for (const v of live) {
     const prev = out.get(v.kakaoPlaceId)
     // 같은 카페면 더 최근 방문만 남긴다
@@ -83,6 +100,8 @@ export function mergeVisits(
       imageUrl: c.imageUrl ?? null,
       ratingAvg: b?.ratingAvg ?? 0,
       ratingCount: b?.ratingCount ?? 0,
+      posts30: 'posts30' in c ? c.posts30 : 0,
+      posts90: 'posts90' in c ? c.posts90 : 0,
     })
   }
 
@@ -109,7 +128,7 @@ export interface VisitedFilter {
  * 지역이 다 차 있지만 여기는 다녀온 곳만 있어서, 빈 칩 서른 개를 띄우면
  * 조작이 아니라 장식이 된다.
  */
-export function filterVisited(rows: SiteVisited[], f: VisitedFilter): SiteVisited[] {
+export function filterVisited<T extends SiteVisited>(rows: T[], f: VisitedFilter): T[] {
   return rows.filter((v) => {
     if (f.area.length > 0 && !f.area.includes(v.area)) return false
     if (f.q && !matchesQuery(v.name, f.q)) return false
@@ -137,8 +156,10 @@ export function visitedTags(rows: SiteVisited[]): { tag: string; count: number }
 export function VisitedList({
   built, known, initial,
 }: { built: SiteVisited[]; known: KnownCafe[]; initial: ListParams }) {
-  const [rows, setRows] = useState<SiteVisited[]>(
-    [...built].sort((a, b) => b.visitedOn.localeCompare(a.visitedOn)),
+  const [rows, setRows] = useState<VisitedRow[]>(
+    [...built]
+      .map((v) => ({ ...v, posts30: 0, posts90: 0 }))
+      .sort((a, b) => b.visitedOn.localeCompare(a.visitedOn)),
   )
   const [reviews, setReviews] = useState<Map<string, Review[]>>(new Map())
   const [busy, setBusy] = useState('')
@@ -364,9 +385,10 @@ export function VisitedList({
                         </span>
                       </div>
 
-                      <p className="mt-0.5 text-[13px] text-ink-soft">
+                      <p className="mt-0.5 truncate text-[13px] text-ink-soft">
                         {v.sigungu}
                         {v.scale ? ` · ${v.scale}` : ''}
+                        {' · '}{postsLabel(v.posts30, v.posts90)}
                       </p>
 
                       {count > 0 ? (

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import type { SiteSpotVisited } from '@/lib/spot-site'
+import { postsLabel } from '@/lib/labels'
 import type { Review } from '@/lib/reviews'
 import { areaLabel, matchesQuery, type AreaCount } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
@@ -32,6 +33,8 @@ export interface KnownSpot {
   tags: string[]
   naverMapUrl: string
   imageUrl: string | null
+  posts30: number
+  posts90: number
 }
 
 export interface VisitLite {
@@ -40,18 +43,27 @@ export interface VisitLite {
   note?: string
 }
 
+/** SiteSpotVisited(빌드 타임 생성 타입)엔 없는 posts30·posts90 을 known(현재
+ * 활성 가볼 곳)에서 보강한다 — visited-list.tsx 의 VisitedRow 와 같은 이유. */
+export interface VisitedRow extends SiteSpotVisited {
+  posts30: number
+  posts90: number
+}
+
 export function mergeSpotVisits(
   built: SiteSpotVisited[],
   live: VisitLite[],
   known: Map<string, KnownSpot>,
   hasLive = true,
-): SiteSpotVisited[] {
+): VisitedRow[] {
   const byId = new Map(built.map((v) => [v.id, v]))
   if (!hasLive) {
-    return [...built].sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
+    return [...built]
+      .map((v) => ({ ...v, posts30: 0, posts90: 0 }))
+      .sort((a, b) => b.visitedOn.localeCompare(a.visitedOn))
   }
 
-  const out = new Map<string, SiteSpotVisited>()
+  const out = new Map<string, VisitedRow>()
   for (const v of live) {
     const prev = out.get(v.kakaoPlaceId)
     if (prev && prev.visitedOn >= v.visitedOn) continue
@@ -63,6 +75,8 @@ export function mergeSpotVisits(
       visitedOn: v.visitedOn, note: v.note ?? '', tags: s.tags,
       naverMapUrl: s.naverMapUrl, imageUrl: s.imageUrl ?? null,
       ratingAvg: b?.ratingAvg ?? 0, ratingCount: b?.ratingCount ?? 0,
+      posts30: 'posts30' in s ? s.posts30 : 0,
+      posts90: 'posts90' in s ? s.posts90 : 0,
     })
   }
 
@@ -78,9 +92,9 @@ export interface VisitedFilter {
   tags: string[]
 }
 
-export function filterSpotVisited(
-  rows: SiteSpotVisited[], f: VisitedFilter,
-): SiteSpotVisited[] {
+export function filterSpotVisited<T extends SiteSpotVisited>(
+  rows: T[], f: VisitedFilter,
+): T[] {
   return rows.filter((v) => {
     if (f.area.length > 0 && !f.area.includes(v.area)) return false
     if (f.q && !matchesQuery(v.name, f.q)) return false
@@ -107,8 +121,10 @@ export function spotVisitedTags(rows: SiteSpotVisited[]): { tag: string; count: 
 export function SpotVisitedList({
   built, known, initial,
 }: { built: SiteSpotVisited[]; known: KnownSpot[]; initial: ListParams }) {
-  const [rows, setRows] = useState<SiteSpotVisited[]>(
-    [...built].sort((a, b) => b.visitedOn.localeCompare(a.visitedOn)),
+  const [rows, setRows] = useState<VisitedRow[]>(
+    [...built]
+      .map((v) => ({ ...v, posts30: 0, posts90: 0 }))
+      .sort((a, b) => b.visitedOn.localeCompare(a.visitedOn)),
   )
   const [reviews, setReviews] = useState<Map<string, Review[]>>(new Map())
   const [busy, setBusy] = useState('')
@@ -311,7 +327,9 @@ export function SpotVisitedList({
                           {dateLabel(v.visitedOn)}
                         </span>
                       </div>
-                      <p className="mt-0.5 text-[13px] text-ink-soft">{v.sigungu}</p>
+                      <p className="mt-0.5 truncate text-[13px] text-ink-soft">
+                        {v.sigungu} · {postsLabel(v.posts30, v.posts90)}
+                      </p>
                       {count > 0 ? (
                         <div className="mt-1.5 flex items-center gap-1.5">
                           <Stars value={avg} />

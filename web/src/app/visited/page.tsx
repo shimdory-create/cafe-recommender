@@ -27,6 +27,8 @@ export default async function VisitedPage(
     tags: c.tags,
     naverMapUrl: c.naverMapUrl,
     imageUrl: c.imageUrl,
+    posts30: c.posts30,
+    posts90: c.posts90,
   }))
 
   return (

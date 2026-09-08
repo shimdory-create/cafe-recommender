@@ -11,6 +11,7 @@ export default async function SpotVisitedPage(
   const known: KnownSpot[] = spotPayload.spots.map((s) => ({
     id: s.id, name: s.name, sigungu: s.sigungu, area: s.area, tags: s.tags,
     naverMapUrl: s.naverMapUrl, imageUrl: s.imageUrl,
+    posts30: s.posts30, posts90: s.posts90,
   }))
 
   return (

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import {
   spotRecentlyVisited, PARKING_LABEL, INDOOR_OUTDOOR_LABEL, type SpotListRow,
 } from '@/lib/spot-site'
-import { driveLabel, addedLabel } from '@/lib/labels'
+import { driveLabel, addedLabel, postsLabel } from '@/lib/labels'
 import { Badge } from './badge'
 import { Thumb } from './thumb'
 import { NaverMapLink } from './naver-map-link'
@@ -119,8 +119,9 @@ export function SpotCard({
               </span>
             </div>
 
-            <p className="mt-0.5 text-[13px] text-ink-soft">
+            <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {spot.sigungu} · {driveLabel(spot.driveMinutes)} · {addedLabel(spot.firstSeenAt)}
+              {' · '}{postsLabel(spot.posts30, spot.posts90)}
             </p>
 
             <div className="mt-1.5">

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {
-  addedLabel, driveLabel, CUISINE_LABEL, PARKING_LABEL, restaurantRecentlyVisited,
+  addedLabel, driveLabel, postsLabel, CUISINE_LABEL, PARKING_LABEL, restaurantRecentlyVisited,
   type RestaurantListRow,
 } from '@/lib/restaurant-site'
 import { Thumb } from './thumb'
@@ -121,8 +121,9 @@ export function RestaurantCard({
               </span>
             </div>
 
-            <p className="mt-0.5 text-[13px] text-ink-soft">
+            <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {restaurant.sigungu} · {driveLabel(restaurant.driveMinutes)} · {addedLabel(restaurant.firstSeenAt)}
+              {' · '}{postsLabel(restaurant.posts30, restaurant.posts90)}
             </p>
 
             <div className="mt-1.5">

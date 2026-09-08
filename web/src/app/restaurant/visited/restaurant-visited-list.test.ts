@@ -28,6 +28,8 @@ const known = (ids: string[]): Map<string, KnownRestaurant> =>
     tags: ['한식', '고기구이'],
     naverMapUrl: 'https://map.naver.com/p/search/y',
     imageUrl: null,
+    posts30: 3,
+    posts90: 12,
   }]))
 
 describe('mergeRestaurantVisits', () => {
@@ -81,6 +83,26 @@ describe('mergeRestaurantVisits', () => {
       known([]),
     )
     expect(rows[0]!.name).toBe('없어진식당')
+  })
+
+  it('활성 식당이면 블로그량을 known 에서 가져온다', () => {
+    const rows = mergeRestaurantVisits(
+      [],
+      [{ kakaoPlaceId: '1', visitedOn: '2026-08-21' }],
+      known(['1']),
+    )
+    expect(rows[0]!.posts30).toBe(3)
+    expect(rows[0]!.posts90).toBe(12)
+  })
+
+  it('게이트에서 빠진 식당은 블로그량을 0으로 둔다', () => {
+    const rows = mergeRestaurantVisits(
+      [built({ id: 'gone', name: '없어진식당' })],
+      [{ kakaoPlaceId: 'gone', visitedOn: '2026-05-01' }],
+      known([]),
+    )
+    expect(rows[0]!.posts30).toBe(0)
+    expect(rows[0]!.posts90).toBe(0)
   })
 
   it('읽기가 실패하면 빌드 타임 기록을 지우지 않는다', () => {

@@ -1,13 +1,12 @@
 import { Suspense } from 'react'
 import { restaurantHomeFeed, restaurantPayload, toRestaurantListRow, type SiteRestaurant } from '@/lib/restaurant-site'
+import { postsLabel } from '@/lib/labels'
 import { PAGE_SIZE } from '@/lib/paging'
 import { RestaurantHomeFeed } from '../restaurant-home-feed'
 import { RestaurantFeedCards, type RestaurantFeedRow } from '../restaurant-feed-cards'
 
 function reasonLine(posts30: number, posts90: number, trend: SiteRestaurant['trend']): string {
-  const posts = posts30 === posts90
-    ? `블로그 30일 ${posts30}건`
-    : `블로그 30일 ${posts30}건 · 90일 ${posts90}건`
+  const posts = postsLabel(posts30, posts90)
   return trend === 'rising' ? `${posts} · 지금 뜨는 중` : posts
 }
 

@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { homeFeed, payload, toListRow, type SiteCafe } from '@/lib/site'
+import { postsLabel } from '@/lib/labels'
 import { PAGE_SIZE } from '@/lib/paging'
 import { HomeFeed } from './home-feed'
 import { FeedCards, type FeedRow } from './feed-cards'
@@ -18,9 +19,7 @@ function reasonLine(posts30: number, posts90: number, trend: SiteCafe['trend']):
   // `월 599건` 이 나오는데 같은 카페의 90일 실측이 46건이었다 (실측).
   // 둘이 같으면 50건 창이 최근 30일에 다 들어찼다는 뜻이다. 같은 수를 두 번
   // 쓰면 읽는 사람이 오타로 본다 — 하나만 쓴다
-  const posts = posts30 === posts90
-    ? `블로그 30일 ${posts30}건`
-    : `블로그 30일 ${posts30}건 · 90일 ${posts90}건`
+  const posts = postsLabel(posts30, posts90)
   return trend === 'rising' ? `${posts} · 지금 뜨는 중` : posts
 }
 

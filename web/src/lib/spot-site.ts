@@ -14,7 +14,7 @@ export type SpotListRow = Pick<
   'id' | 'name' | 'sigungu' | 'area' | 'driveMinutes' | 'tags' | 'parkingGrade'
   | 'stayDuration' | 'indoorOutdoor' | 'season' | 'evidence' | 'naverMapUrl' | 'imageUrl'
   | 'hotScore' | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn'
-  | 'isNew' | 'firstSeenAt' | 'lastSeenAt'
+  | 'isNew' | 'firstSeenAt' | 'lastSeenAt' | 'posts30' | 'posts90'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -30,6 +30,7 @@ export function toSpotListRow(s: SiteSpot): SpotListRow {
     naverMapUrl: s.naverMapUrl, imageUrl: s.imageUrl, hotScore: s.hotScore, finalScore: s.finalScore,
     ratingAvg: s.ratingAvg, ratingCount: s.ratingCount, cityOnly: s.cityOnly, visitedOn: s.visitedOn,
     isNew: s.isNew, firstSeenAt: s.firstSeenAt, lastSeenAt: s.lastSeenAt,
+    posts30: s.posts30, posts90: s.posts90,
   }
 }
 

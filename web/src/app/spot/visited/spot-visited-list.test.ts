@@ -28,6 +28,8 @@ const known = (ids: string[]): Map<string, KnownSpot> =>
     tags: ['자연', '공원'],
     naverMapUrl: 'https://map.naver.com/p/search/y',
     imageUrl: null,
+    posts30: 3,
+    posts90: 12,
   }]))
 
 describe('mergeSpotVisits', () => {
@@ -119,6 +121,26 @@ describe('mergeSpotVisits', () => {
     )
     expect(rows[0]!.ratingAvg).toBe(4.5)
     expect(rows[0]!.ratingCount).toBe(3)
+  })
+
+  it('활성 장소면 블로그량을 known 에서 가져온다', () => {
+    const rows = mergeSpotVisits(
+      [],
+      [{ kakaoPlaceId: '1', visitedOn: '2026-08-21' }],
+      known(['1']),
+    )
+    expect(rows[0]!.posts30).toBe(3)
+    expect(rows[0]!.posts90).toBe(12)
+  })
+
+  it('게이트에서 빠진 장소는 블로그량을 0으로 둔다', () => {
+    const rows = mergeSpotVisits(
+      [built({ id: 'gone' })],
+      [{ kakaoPlaceId: 'gone', visitedOn: '2026-05-01' }],
+      known([]),
+    )
+    expect(rows[0]!.posts30).toBe(0)
+    expect(rows[0]!.posts90).toBe(0)
   })
 
   it('읽기가 실패하면 빌드 타임 기록을 지우지 않는다', () => {

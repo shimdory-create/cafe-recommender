@@ -1,13 +1,12 @@
 import { Suspense } from 'react'
 import { spotHomeFeed, spotPayload, toSpotListRow, type SiteSpot } from '@/lib/spot-site'
+import { postsLabel } from '@/lib/labels'
 import { PAGE_SIZE } from '@/lib/paging'
 import { SpotHomeFeed } from '../spot-home-feed'
 import { SpotFeedCards, type SpotFeedRow } from '../spot-feed-cards'
 
 function reasonLine(posts30: number, posts90: number, trend: SiteSpot['trend']): string {
-  const posts = posts30 === posts90
-    ? `블로그 30일 ${posts30}건`
-    : `블로그 30일 ${posts30}건 · 90일 ${posts90}건`
+  const posts = postsLabel(posts30, posts90)
   return trend === 'rising' ? `${posts} · 지금 뜨는 중` : posts
 }
 

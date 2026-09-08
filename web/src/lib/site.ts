@@ -10,7 +10,7 @@ export type { SiteCafe, SitePayload, SiteVisited }
 // driveLabel/addedLabel 은 payload 를 안 쓰는 순수 함수라 labels.ts 로
 // 옮겼다 (식당 쪽이 이 파일 전체를 끌고 들어가지 않도록). 여기서 재수출해서
 // 기존에 `@/lib/site` 에서 가져다 쓰던 카페 코드는 그대로 동작한다.
-export { driveLabel, addedLabel } from './labels'
+export { driveLabel, addedLabel, postsLabel } from './labels'
 
 /**
  * JSON import 는 값에서 타입을 추론하므로(널이 없으면 non-null, 문자열은
@@ -33,7 +33,7 @@ export type ListRow = Pick<
   'id' | 'name' | 'sigungu' | 'area' | 'driveMinutes' | 'scale' | 'parkingGrade'
   | 'menuLevel' | 'tags' | 'evidence' | 'naverMapUrl' | 'imageUrl' | 'hotScore'
   | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn' | 'isNew'
-  | 'firstSeenAt' | 'lastSeenAt'
+  | 'firstSeenAt' | 'lastSeenAt' | 'posts30' | 'posts90'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -63,6 +63,8 @@ export function toListRow(c: SiteCafe): ListRow {
     isNew: c.isNew,
     firstSeenAt: c.firstSeenAt,
     lastSeenAt: c.lastSeenAt,
+    posts30: c.posts30,
+    posts90: c.posts90,
   }
 }
 

@@ -3,12 +3,12 @@ import nearbyRaw from '../generated/site-restaurant-nearby.json'
 // 경계를 넘는 import 를 쓰지 않는다 — src/restaurant-schema.ts 는 web 밖이라
 // 모듈 해석이 위로 올라가고, Vercel 은 web 에서만 설치하므로 zod 를 못 찾는다.
 // 드리프트는 파이프라인 테스트(restaurant-types-conformance)가 잡는다.
-import { driveLabel, addedLabel } from './labels'
+import { driveLabel, addedLabel, postsLabel } from './labels'
 import type { RestaurantSitePayload, SiteRestaurant, SiteRestaurantVisited } from './restaurant-site-types'
 import type { NearbyCard } from './nearby-types'
 
 export type { SiteRestaurant, RestaurantSitePayload, SiteRestaurantVisited }
-export { driveLabel, addedLabel }
+export { driveLabel, addedLabel, postsLabel }
 
 /**
  * JSON import 는 값에서 타입을 추론하므로(널이 없으면 non-null, 문자열은
@@ -27,7 +27,7 @@ export type RestaurantListRow = Pick<
   'id' | 'name' | 'sigungu' | 'area' | 'driveMinutes' | 'cuisineType' | 'parkingGrade'
   | 'hasRoom' | 'reservable' | 'tags' | 'evidence' | 'naverMapUrl' | 'imageUrl' | 'hotScore'
   | 'finalScore' | 'ratingAvg' | 'ratingCount' | 'cityOnly' | 'visitedOn' | 'isNew'
-  | 'firstSeenAt' | 'lastSeenAt'
+  | 'firstSeenAt' | 'lastSeenAt' | 'posts30' | 'posts90'
 >
 
 const CARD_EVIDENCE_CHARS = 90
@@ -58,6 +58,8 @@ export function toRestaurantListRow(r: SiteRestaurant): RestaurantListRow {
     isNew: r.isNew,
     firstSeenAt: r.firstSeenAt,
     lastSeenAt: r.lastSeenAt,
+    posts30: r.posts30,
+    posts90: r.posts90,
   }
 }
 

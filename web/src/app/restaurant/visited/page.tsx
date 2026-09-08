@@ -11,6 +11,7 @@ export default async function RestaurantVisitedPage(
   const known: KnownRestaurant[] = restaurantPayload.restaurants.map((r) => ({
     id: r.id, name: r.name, sigungu: r.sigungu, area: r.area, tags: r.tags,
     naverMapUrl: r.naverMapUrl, imageUrl: r.imageUrl,
+    posts30: r.posts30, posts90: r.posts90,
   }))
 
   return (
