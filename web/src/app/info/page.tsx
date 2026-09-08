@@ -65,7 +65,7 @@ export default function Info() {
     )],
     ['지역 칩', '시 단위로 묶었어요. 가까운 곳부터 놓고 서울은 맨 뒤예요. 서울·인천은 눌러야 구별로 나뉩니다.'],
     ['돋보기', '업소명으로 찾아요. 한 글자만 넣어도 됩니다.'],
-    ['블로그 30일 / 90일', '우리가 직접 센 글 수예요. 상호가 실제로 언급된 글만 셉니다.'],
+    ['블로그량 1개월 / 3개월', '우리가 직접 센 글 수예요. 상호가 실제로 언급된 글만 셉니다.'],
   ]
 
   return (
@@ -127,8 +127,9 @@ export default function Info() {
       <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">
         <b className="text-ink">영업시간과 리뷰 수는 싣지 않습니다.</b> 무료로 쓸 수 있는
         공식 자료가 그 값을 주지 않아서예요. 블로그 글에서 뽑아낼 수는 있지만 절반쯤
-        틀리고, 틀린 영업시간은 한 시간 운전해서 닫힌 문 앞에 서게 만듭니다. 대신 카페
-        화면에 <b className="text-ink">영업시간·휴무일 확인</b> 버튼을 두었어요.
+        틀리고, 틀린 영업시간은 한 시간 운전해서 닫힌 문 앞에 서게 만듭니다.
+        <b className="text-ink">네이버지도로 열기</b> 버튼을 누르면 그 자리에서 바로
+        확인할 수 있어요.
       </p>
 
       <p className="mt-5 text-[12px] leading-relaxed text-ink-soft">

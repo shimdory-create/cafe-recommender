@@ -89,27 +89,6 @@ export default async function CafeDetail({ params }: { params: Promise<{ id: str
         네이버지도로 열기 ↗
       </NaverMapLink>
 
-      {/*
-        영업시간을 우리가 들고 있지 않다.
-
-        카카오 로컬 API 는 상호·주소·전화·좌표만 주고, 네이버 지역검색 API 도
-        영업시간을 주지 않는다. 구글 Places 는 주지만 카드 등록이 필요해
-        "결제 없이 평생" 이 깨진다. 블로그 글에서 LLM 으로 뽑는 방법은 되지만
-        절반쯤 틀리고, **틀린 영업시간은 한 시간 운전해서 닫힌 문 앞에 서게
-        만든다** — 없는 것보다 나쁘다.
-
-        그래서 지어내지 않고 한 번에 갈 수 있는 길을 크게 둔다.
-      */}
-      <NaverMapLink
-        href={cafe.naverMapUrl}
-        className="mt-2 flex min-h-[48px] items-center justify-center gap-1.5 rounded-2xl border border-line bg-card text-[14px] font-semibold text-bean active:bg-bean-soft"
-      >
-        영업시간·휴무일 확인 ↗
-      </NaverMapLink>
-      <p className="mt-1.5 text-center text-[12px] text-ink-soft">
-        영업시간은 자주 바뀌어서 지도에서 바로 확인하는 게 정확해요
-      </p>
-
       {/* 다녀왔어요 · 별점 · 한 줄 — 가족 누구나 (스펙 10절 v3.3) */}
       <ReviewPanel
         cafeId={cafe.id}
