@@ -50,3 +50,9 @@ body {
 a, button {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* 버튼은 브라우저 기본값이 cursor: default 라 — 도메인 전환·정렬·칩처럼
+   눌러야 하는 것들이 마우스로는 링크와 달리 손모양이 안 떠서 헛갈렸다 */
+button:not(:disabled) {
+  cursor: pointer;
+}
