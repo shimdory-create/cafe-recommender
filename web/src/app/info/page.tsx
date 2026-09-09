@@ -1,6 +1,7 @@
 import { payload, REVISIT_DAYS } from '@/lib/site'
 import { VIEW_ONLY } from '@/lib/view-only'
 import { CHANGELOG } from '@/lib/changelog'
+import { UPDATE_SCHEDULE } from '@/lib/update-schedule'
 
 export const metadata = { title: '카페 정보 — 심김 빵지순례' }
 
@@ -100,6 +101,21 @@ export default function Info() {
           </div>
         ))}
       </dl>
+
+      <h2 className="mt-7 text-[17px] font-bold">언제 업데이트되나요</h2>
+      <dl className="mt-2 overflow-hidden rounded-2xl border border-line bg-card">
+        {UPDATE_SCHEDULE.map(([k, v]) => (
+          <div key={k} className="flex flex-col gap-1 border-b border-line px-4 py-3 last:border-0">
+            <dt className="text-[13px] font-semibold">{k}</dt>
+            <dd className="text-[13px] text-ink-soft">{v}</dd>
+          </div>
+        ))}
+      </dl>
+      <p className="mt-2 text-[12px] leading-relaxed text-ink-soft">
+        시각이 도메인마다 30분~1시간씩 어긋나 있는 건 의도예요 — 한꺼번에 몰리면
+        스케줄이 밀리는 걸 피하려고 일부러 나눠뒀어요. 그래서 같은 순간에 봐도
+        카페는 방금 갱신됐는데 가볼 곳은 아직 순서 전일 수 있어요 — 정상입니다.
+      </p>
 
       <h2 className="mt-7 text-[17px] font-bold">화면의 표시</h2>
       <dl className="mt-2 flex flex-col gap-3">
