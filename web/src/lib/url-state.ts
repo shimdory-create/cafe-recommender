@@ -38,7 +38,7 @@ export interface ListParams {
 }
 
 export const EMPTY_PARAMS: ListParams = {
-  q: '', area: [], tags: [], sort: 'hot', city: false, newOnly: false, wishOnly: false,
+  q: '', area: [], tags: [], sort: 'new', city: false, newOnly: false, wishOnly: false,
   blacklistOnly: false,
   visitedSort: { by: 'date', desc: true },
   shown: PAGE_CHUNK,
@@ -56,7 +56,7 @@ export function readListParams(raw: Raw): ListParams {
     q: one(raw.q),
     area,
     tags,
-    sort: one(raw.s) === 'near' || one(raw.s) === 'new' ? one(raw.s) as Sort : 'hot',
+    sort: one(raw.s) === 'near' || one(raw.s) === 'hot' ? one(raw.s) as Sort : 'new',
     city: one(raw.c) === '1',
     newOnly: one(raw.n) === '1',
     wishOnly: one(raw.w) === '1',
@@ -85,7 +85,7 @@ export function listParamsToQuery(p: ListParams): string {
   if (p.q) sp.set('q', p.q)
   if (p.area.length) sp.set('a', p.area.join(','))
   if (p.tags.length) sp.set('t', p.tags.join(','))
-  if (p.sort !== 'hot') sp.set('s', p.sort)
+  if (p.sort !== 'new') sp.set('s', p.sort)
   if (p.city) sp.set('c', '1')
   if (p.newOnly) sp.set('n', '1')
   if (p.wishOnly) sp.set('w', '1')

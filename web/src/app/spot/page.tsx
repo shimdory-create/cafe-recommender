@@ -17,7 +17,7 @@ export default function SpotHome() {
   }))
 
   const week = new Date(spotPayload.weekOf)
-  const label = `${week.getMonth() + 1}월 ${week.getDate()}일 주`
+  const label = `${week.getFullYear()}년 ${week.getMonth() + 1}월 ${week.getDate()}일 주`
 
   return (
     <div className="py-5">

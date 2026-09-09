@@ -12,10 +12,13 @@ export function driveLabel(min: number | null): string {
   return m === 0 ? `차로 ${h}시간` : `차로 ${h}시간 ${m}분`
 }
 
-/** 목록에 들어온 날짜. "8/25 추가" 형태 — 최신순 정렬의 기준을 눈으로도 보이게 한다 */
+/**
+ * 목록에 들어온 날짜. "2026/8/25 추가" 형태 — 최신순 정렬의 기준을 눈으로도
+ * 보이게 한다. 계속 운영할 서비스라 연도가 없으면 해가 바뀐 뒤 헷갈린다.
+ */
 export function addedLabel(firstSeenAt: string): string {
   const d = new Date(firstSeenAt)
-  return `${d.getMonth() + 1}/${d.getDate()} 추가`
+  return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} 추가`
 }
 
 /**

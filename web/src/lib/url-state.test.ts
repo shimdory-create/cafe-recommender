@@ -24,7 +24,7 @@ describe('목록 상태를 주소에 싣기', () => {
 
   it('이상한 값은 기본값으로 떨어진다', () => {
     const p = readListParams({ s: '아무거나', c: 'yes', n: '0', w: '0', b: '0', a: '  ', t: ' , ,' })
-    expect(p.sort).toBe('hot')
+    expect(p.sort).toBe('new')
     expect(p.city).toBe(false)
     expect(p.newOnly).toBe(false)
     expect(p.wishOnly).toBe(false)
