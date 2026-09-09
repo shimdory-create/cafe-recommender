@@ -7,7 +7,7 @@ export const metadata = { title: '식당 정보 — 심김 빵지순례' }
 
 export default function RestaurantInfo() {
   const at = new Date(restaurantPayload.generatedAt)
-  const stamp = `${at.getFullYear()}. ${at.getMonth() + 1}. ${at.getDate()}.`
+  const stamp = `${at.getFullYear() % 100}. ${at.getMonth() + 1}. ${at.getDate()}.`
   const { stats } = restaurantPayload
   const shown = stats.passed + stats.cityOnly
 

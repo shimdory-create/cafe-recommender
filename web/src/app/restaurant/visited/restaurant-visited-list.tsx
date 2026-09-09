@@ -17,12 +17,12 @@ import { Stars } from '../../cafe/[id]/review-panel'
 
 function dateLabel(iso: string): string {
   const d = new Date(iso)
-  return `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}.`
+  return `${d.getFullYear() % 100}. ${d.getMonth() + 1}. ${d.getDate()}.`
 }
 
 function monthLabel(iso: string): string {
   const d = new Date(iso)
-  return `${d.getFullYear()}년 ${d.getMonth() + 1}월`
+  return `${d.getFullYear() % 100}년 ${d.getMonth() + 1}월`
 }
 
 export interface KnownRestaurant {

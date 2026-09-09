@@ -333,7 +333,7 @@ export function ReviewPanel({ spotId, initialVisited, built }: {
                       </span>
                     )}
                     <span className="ml-auto text-[12px] text-ink-soft">
-                      {r.createdAt.slice(0, 10).replace(/-/g, '. ')}
+                      {r.createdAt.slice(2, 10).replace(/-/g, '. ')}
                       {r.updatedAt && ' (수정됨)'}
                     </span>
                   </div>

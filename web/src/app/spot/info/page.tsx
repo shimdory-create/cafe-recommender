@@ -8,7 +8,7 @@ export const metadata = { title: '가볼 곳 정보 — 심김 빵지순례' }
 
 export default function SpotInfo() {
   const at = new Date(spotPayload.generatedAt)
-  const stamp = `${at.getFullYear()}. ${at.getMonth() + 1}. ${at.getDate()}.`
+  const stamp = `${at.getFullYear() % 100}. ${at.getMonth() + 1}. ${at.getDate()}.`
   const { stats } = spotPayload
   const shown = stats.passed + stats.cityOnly
 

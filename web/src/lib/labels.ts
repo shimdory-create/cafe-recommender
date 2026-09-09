@@ -13,12 +13,28 @@ export function driveLabel(min: number | null): string {
 }
 
 /**
- * 목록에 들어온 날짜. "2026/8/25 추가" 형태 — 최신순 정렬의 기준을 눈으로도
+ * 목록에 들어온 날짜. "26/8/25 추가" 형태 — 최신순 정렬의 기준을 눈으로도
  * 보이게 한다. 계속 운영할 서비스라 연도가 없으면 해가 바뀐 뒤 헷갈린다.
+ * 두 자리만 쓰는 건 카드 폭이 좁아 네 자리는 다른 줄바꿈 문제를 새로 만들기
+ * 때문(2026-09-09) — 이 서비스가 22세기까지 갈 일은 없다.
  */
 export function addedLabel(firstSeenAt: string): string {
   const d = new Date(firstSeenAt)
-  return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} 추가`
+  return `${d.getFullYear() % 100}/${d.getMonth() + 1}/${d.getDate()} 추가`
+}
+
+/**
+ * "26년 9월 2주차" — 홈 화면 상단 한 줄 요약에 쓴다. 그 달 1일이 속한
+ * 일~토 구간을 1주차로 놓고 다음 일요일부터 2주차로 센다(네이버 캘린더와
+ * 같은 방식) — 월요일 기준으로 세면 매달 첫 월요일이 항상 1주차가 되어
+ * "이번 주" 감각과 어긋난다(2026-09-09, 실측: 9/7 월요일이 그 달 첫
+ * 월요일인데도 가족들은 이걸 "9월 둘째 주"로 인식했다).
+ */
+export function weekLabel(weekOf: string): string {
+  const d = new Date(weekOf)
+  const firstWeekday = new Date(d.getFullYear(), d.getMonth(), 1).getDay()
+  const weekNo = Math.ceil((d.getDate() + firstWeekday) / 7)
+  return `${d.getFullYear() % 100}년 ${d.getMonth() + 1}월 ${weekNo}주차`
 }
 
 /**

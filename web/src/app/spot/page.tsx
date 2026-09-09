@@ -1,6 +1,6 @@
 import { Suspense } from 'react'
 import { spotHomeFeed, spotPayload, toSpotListRow, type SiteSpot } from '@/lib/spot-site'
-import { postsLabel } from '@/lib/labels'
+import { postsLabel, weekLabel } from '@/lib/labels'
 import { PAGE_SIZE } from '@/lib/paging'
 import { SpotHomeFeed } from '../spot-home-feed'
 import { SpotFeedCards, type SpotFeedRow } from '../spot-feed-cards'
@@ -16,15 +16,14 @@ export default function SpotHome() {
     reason: reasonLine(s.posts30, s.posts90, s.trend),
   }))
 
-  const week = new Date(spotPayload.weekOf)
-  const label = `${week.getFullYear()}년 ${week.getMonth() + 1}월 ${week.getDate()}일 주`
+  const label = weekLabel(spotPayload.weekOf)
 
   return (
     <div className="py-5">
       <div className="mb-4">
         <h1 className="text-[22px] font-bold tracking-tight">이번 주 추천 가볼 곳</h1>
         <p className="mt-1 text-[13px] text-ink-soft">
-          {label} · 블로그 화제량과 우리집(인천 부평) 거리로 골랐어요
+          {label} · 블로그 화제량과 우리집(부평) 거리로 골랐어요
         </p>
       </div>
 
