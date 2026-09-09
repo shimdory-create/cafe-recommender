@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { runRestaurantDiscover } from '../../src/jobs/restaurant-discover.js'
+import { SourceError } from '../../src/sources/rate-limiter.js'
 import type { Region } from '../../src/config/regions.js'
 import type { KakaoPlace } from '../../src/sources/kakao-local.js'
 import type { BlacklistEntry } from '../../src/restaurant-schema.js'
@@ -17,6 +18,12 @@ function harness(opts?: {
     places: KakaoPlace[]; isEnd: boolean; payload: unknown
   }>
   blacklist?: BlacklistEntry[]
+  blog?: {
+    search: (q: string, o?: object) => Promise<{
+      docs: { title: string; contents: string }[]; payload: unknown
+    }>
+  }
+  llm?: { modelVersion: string; extract: (...a: never[]) => Promise<unknown> }
 }) {
   let saved: unknown[] = []
   let health: unknown[] = []
@@ -35,11 +42,12 @@ function harness(opts?: {
         isEnd: true, payload: {},
       })),
     },
-    blog: { search: async () => ({ docs: [], payload: {} }) },
-    llm: { modelVersion: 'fake-1', extract: async () => ({ names: [] }) } as never,
+    blog: opts?.blog ?? { search: async () => ({ docs: [], payload: {} }) },
+    llm: (opts?.llm
+      ?? { modelVersion: 'fake-1', extract: async () => ({ names: [] }) }) as never,
     now: new Date('2026-09-01'),
   }
-  return { deps, saved: () => saved }
+  return { deps, saved: () => saved, health: () => health }
 }
 
 describe('runRestaurantDiscover', () => {
@@ -96,5 +104,42 @@ describe('runRestaurantDiscover', () => {
     expect(r.offRegion).toBe(1)
     expect(r.total).toBe(0)
     expect(h.saved()).toHaveLength(0)
+  })
+
+  it('하베스트 LLM 쿼터가 소진되면 일찍 멈춘다', async () => {
+    let llmCalls = 0
+    const regions: Region[] = Array.from({ length: 5 }, (_, i) => (
+      { sido: '인천', sigungu: `지역${i}`, excluded: false } as unknown as Region
+    ))
+    const h = harness({
+      blog: { search: async () => ({ docs: [{ title: '지역 맛집 5곳', contents: '' }], payload: {} }) },
+      llm: {
+        modelVersion: 'fake-1',
+        extract: async () => {
+          llmCalls++
+          throw new SourceError('gemini HTTP 429: quota exceeded', 429)
+        },
+      },
+    })
+    const r = await runRestaurantDiscover(h.deps, { regions })
+    expect(r.quotaExhausted).toBe(true)
+    expect(llmCalls).toBe(3)
+  })
+
+  it('쿼터가 아닌 하베스트 오류는 지역을 계속 돈다', async () => {
+    let llmCalls = 0
+    const regions: Region[] = Array.from({ length: 5 }, (_, i) => (
+      { sido: '인천', sigungu: `지역${i}`, excluded: false } as unknown as Region
+    ))
+    const h = harness({
+      blog: { search: async () => ({ docs: [{ title: '지역 맛집 5곳', contents: '' }], payload: {} }) },
+      llm: {
+        modelVersion: 'fake-1',
+        extract: async () => { llmCalls++; throw new Error('이상한 응답') },
+      },
+    })
+    const r = await runRestaurantDiscover(h.deps, { regions })
+    expect(r.quotaExhausted).toBe(false)
+    expect(llmCalls).toBe(5)
   })
 })

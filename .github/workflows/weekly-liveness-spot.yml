@@ -1,9 +1,10 @@
 name: weekly-liveness-spot
 on:
   schedule:
-    # 월 23:39 UTC. 카페·식당의 일요일 data-write 혼잡(동시 대기 2건 초과 시
-    # 3번째가 조용히 취소됨)을 피해 월요일로 옮김.
-    - cron: '39 23 * * 1'
+    # 화 23:39 UTC(한국시간 수요일 아침). weekly-discover-spot.yml 과 같은
+    # 이유로 화요일로 옮겼다(2026-09-10) — 가볼 곳의 발굴+실존확인이 같은
+    # 날(수요일)에 모이게.
+    - cron: '39 23 * * 2'
   workflow_dispatch:
 
 concurrency:

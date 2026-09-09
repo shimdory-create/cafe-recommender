@@ -1,7 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import { runDiscover, naverMapUrl, type DiscoverDeps } from '../../src/jobs/weekly-discover.js'
+import { SourceError } from '../../src/sources/rate-limiter.js'
 import type { KakaoPlace } from '../../src/sources/kakao-local.js'
 import type { Cafe } from '../../src/schema.js'
+import type { Region } from '../../src/config/regions.js'
 
 const region = { sido: '경기', sigungu: '양평군' } as const
 
@@ -287,5 +289,54 @@ describe('runDiscover — 건강 기록은 아픈 곳에 적는다', () => {
     const local = h.health().find((x) => x.source === 'kakao-local')
     expect(local?.consecutiveFailures ?? 0).toBeGreaterThan(0)
     expect(local?.lastError ?? '').toContain('kakao 500')
+  })
+
+  it('하베스트 LLM 쿼터가 소진되면 일찍 멈춘다', async () => {
+    // 지역 하나에 여러 블로그 호출이 딸린 38분짜리 잡이다. 쿼터가 소진된
+    // 채로 69개 지역을 다 돌면 헛되이 실패만 쌓인다(classify.ts 와 같은 이유).
+    let llmCalls = 0
+    const regions: Region[] = Array.from({ length: 5 }, (_, i) => ({
+      sido: '경기', sigungu: `지역${i}`,
+    }))
+    const h = harness({
+      blog: {
+        search: async () => ({
+          docs: [{ title: '지역 대형카페 추천 5곳', contents: '' }],
+          payload: {},
+        }),
+      } as never,
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => {
+          llmCalls++
+          throw new SourceError('gemini HTTP 429: quota exceeded', 429)
+        },
+      } as never,
+    })
+    const r = await runDiscover(h.deps, { regions })
+    expect(r.quotaExhausted).toBe(true)
+    expect(llmCalls).toBe(3)
+  })
+
+  it('쿼터가 아닌 하베스트 오류는 지역을 계속 돈다', async () => {
+    let llmCalls = 0
+    const regions: Region[] = Array.from({ length: 5 }, (_, i) => ({
+      sido: '경기', sigungu: `지역${i}`,
+    }))
+    const h = harness({
+      blog: {
+        search: async () => ({
+          docs: [{ title: '지역 대형카페 추천 5곳', contents: '' }],
+          payload: {},
+        }),
+      } as never,
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => { llmCalls++; throw new Error('이상한 응답') },
+      } as never,
+    })
+    const r = await runDiscover(h.deps, { regions })
+    expect(r.quotaExhausted).toBe(false)
+    expect(llmCalls).toBe(5)
   })
 })

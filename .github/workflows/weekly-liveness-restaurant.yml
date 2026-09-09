@@ -1,10 +1,11 @@
 name: weekly-liveness-restaurant
 on:
   schedule:
-    # 일 23:06 UTC. weekly-liveness(카페, 일 22:33 UTC)와 33분 차이 —
-    # concurrency 그룹이 달라 동시에 돌 수 있으므로 npm ci 동시 실행을 피하려면
-    # 시각도 띄워야 한다.
-    - cron: '6 23 * * 0'
+    # 월 23:06 UTC(한국시간 화요일 아침). 원래 일요일(카페 실존확인과 같은
+    # 날)이었는데, weekly-discover-restaurant.yml 과 같은 이유로 화요일로
+    # 옮겼다(2026-09-10) — 식당의 발굴+실존확인이 같은 날에 모이고, 월요일
+    # (카페 몫)엔 더 안 얹힌다.
+    - cron: '6 23 * * 1'
   workflow_dispatch:
 
 # data/ 를 쓰는 식당 워크플로는 하나씩 돈다 (weekly-drive-restaurant.yml 주석 참고)

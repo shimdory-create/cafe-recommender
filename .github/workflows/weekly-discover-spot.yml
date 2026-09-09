@@ -1,13 +1,16 @@
 name: weekly-discover-spot
 on:
   schedule:
-    # 월 20:05 UTC. 카페·식당의 일요일 data-write 혼잡(동시 대기 2건 초과 시
-    # 3번째가 조용히 취소됨)을 피해 월요일로 옮김.
+    # 화 20:05 UTC(한국시간 수요일 새벽). 원래 카페·식당의 일요일 data-write
+    # 혼잡(동시 대기 2건 초과 시 3번째가 조용히 취소됨)을 피해 월요일로
+    # 옮겼었는데, 식당 발굴도 화요일로 옮기면서(weekly-discover-restaurant.yml
+    # 참고) 월요일이 다시 카페+가볼 곳 둘로 붐빌 뻔했다 — 화요일로 한 칸 더
+    # 밀어 카페(월)·식당(화)·가볼 곳(수)이 하루씩 나뉘게 했다(2026-09-10).
     #
     # **반드시 그날 daily-buzz-spot(20:23 UTC) 보다 앞서야 한다** — 뒤에
     # 두면 그날 발굴된 곳이 화제량을 놓쳐 판정이 최소 하루 밀린다
     # (weekly-discover.yml 주석 참고).
-    - cron: '5 20 * * 1'
+    - cron: '5 20 * * 2'
   workflow_dispatch:
 
 concurrency:

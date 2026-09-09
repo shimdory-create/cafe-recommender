@@ -1,10 +1,18 @@
 import { describe, it, expect } from 'vitest'
 import { runSpotDiscover } from '../../src/jobs/spot-discover.js'
+import { SourceError } from '../../src/sources/rate-limiter.js'
 import type { Region } from '../../src/config/regions.js'
 
 const region: Region = { sido: '인천', sigungu: '부평구', excluded: false } as unknown as Region
 
-function harness() {
+function harness(opts?: {
+  blog?: {
+    search: (q: string, o?: object) => Promise<{
+      docs: { title: string; contents: string }[]; payload: unknown
+    }>
+  }
+  llm?: { modelVersion: string; extract: (...a: never[]) => Promise<unknown> }
+}) {
   let saved: unknown[] = []
   let health: unknown[] = []
   const deps = {
@@ -25,11 +33,12 @@ function harness() {
         isEnd: true, payload: {},
       }),
     },
-    blog: { search: async () => ({ docs: [], payload: {} }) },
-    llm: { modelVersion: 'fake-1', extract: async () => ({ names: [] }) } as never,
+    blog: opts?.blog ?? { search: async () => ({ docs: [], payload: {} }) },
+    llm: (opts?.llm
+      ?? { modelVersion: 'fake-1', extract: async () => ({ names: [] }) }) as never,
     now: new Date('2026-09-02'),
   }
-  return { deps, saved: () => saved }
+  return { deps, saved: () => saved, health: () => health }
 }
 
 describe('runSpotDiscover', () => {
@@ -38,5 +47,42 @@ describe('runSpotDiscover', () => {
     const r = await runSpotDiscover(h.deps, { regions: [region], skipHarvest: true })
     expect(r.discovered).toBe(1)
     expect((h.saved()[0] as { status: string }).status).toBe('pending_extraction')
+  })
+
+  it('하베스트 LLM 쿼터가 소진되면 일찍 멈춘다', async () => {
+    let llmCalls = 0
+    const regions: Region[] = Array.from({ length: 5 }, (_, i) => (
+      { sido: '인천', sigungu: `지역${i}`, excluded: false } as unknown as Region
+    ))
+    const h = harness({
+      blog: { search: async () => ({ docs: [{ title: '지역 가볼 곳 5곳', contents: '' }], payload: {} }) },
+      llm: {
+        modelVersion: 'fake-1',
+        extract: async () => {
+          llmCalls++
+          throw new SourceError('gemini HTTP 429: quota exceeded', 429)
+        },
+      },
+    })
+    const r = await runSpotDiscover(h.deps, { regions })
+    expect(r.quotaExhausted).toBe(true)
+    expect(llmCalls).toBe(3)
+  })
+
+  it('쿼터가 아닌 하베스트 오류는 지역을 계속 돈다', async () => {
+    let llmCalls = 0
+    const regions: Region[] = Array.from({ length: 5 }, (_, i) => (
+      { sido: '인천', sigungu: `지역${i}`, excluded: false } as unknown as Region
+    ))
+    const h = harness({
+      blog: { search: async () => ({ docs: [{ title: '지역 가볼 곳 5곳', contents: '' }], payload: {} }) },
+      llm: {
+        modelVersion: 'fake-1',
+        extract: async () => { llmCalls++; throw new Error('이상한 응답') },
+      },
+    })
+    const r = await runSpotDiscover(h.deps, { regions })
+    expect(r.quotaExhausted).toBe(false)
+    expect(llmCalls).toBe(5)
   })
 })

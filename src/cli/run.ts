@@ -90,6 +90,9 @@ async function main() {
         console.log(`  실패 ${r.errors.length}건:`)
         r.errors.slice(0, 10).forEach((e) => console.log(`    ${e}`))
       }
+      if (r.quotaExhausted) {
+        console.log('  LLM 일일 쿼터가 소진되어 하베스트를 중단했습니다. 다음 회차에 이어서 처리됩니다.')
+      }
       break
     }
 
@@ -611,6 +614,9 @@ async function main() {
       console.log(`식당 발굴 시작 (${regions.length}개 지역)`)
       const r = await runRestaurantDiscover(ctx, { regions, skipHarvest })
       console.log(`  발굴 ${r.discovered}곳 · 제외 ${r.excluded}곳 · 동명지역 ${r.offRegion}곳`)
+      if (r.quotaExhausted) {
+        console.log('  LLM 일일 쿼터가 소진되어 하베스트를 중단했습니다. 다음 회차에 이어서 처리됩니다.')
+      }
       break
     }
 
@@ -697,6 +703,9 @@ async function main() {
       console.log(`가볼 곳 발굴 시작 (${regions.length}개 지역)`)
       const r = await runSpotDiscover(ctx, { regions, skipHarvest })
       console.log(`  발굴 ${r.discovered}곳 · 동명지역 ${r.offRegion}곳`)
+      if (r.quotaExhausted) {
+        console.log('  LLM 일일 쿼터가 소진되어 하베스트를 중단했습니다. 다음 회차에 이어서 처리됩니다.')
+      }
       break
     }
 

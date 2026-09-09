@@ -6,6 +6,7 @@ import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousName } from '../pipeline/relevance.js'
 import { harvestCurated } from '../pipeline/harvest.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
+import { SourceError } from '../sources/rate-limiter.js'
 import { resolveSigungu } from '../pipeline/district.js'
 import type { Cafe, BlacklistEntry } from '../schema.js'
 import type { KakaoPlace } from '../sources/kakao-local.js'
@@ -40,7 +41,19 @@ export interface DiscoverResult {
   offRegion: number
   total: number
   errors: string[]
+  /** 하베스트(그물 C) LLM 쿼터가 소진돼 중단했는가 */
+  quotaExhausted: boolean
 }
+
+/**
+ * 하베스트(그물 C) 쿼터 오류가 이만큼 연속되면 그 회차는 포기한다.
+ *
+ * classify.ts 와 같은 이유 — 무료 티어 일일 한도를 넘기면 남은 지역 전부가
+ * 같은 오류로 실패한다. 발굴은 지역 하나에도 여러 블로그 호출이 딸린
+ * 38분짜리 잡이라, 계속 돌면 나머지 지역 전부가 그물 C 만 헛되이 실패하고
+ * 그 시간만큼 러너를 붙잡아 둔다. 일찍 멈추는 것이 쿼터도 시간도 아낀다.
+ */
+const QUOTA_GIVE_UP = 3
 
 /** 네이버지도 링크는 place ID 없이 검색 URL 로 만든다 (스펙 10절) */
 export const naverMapUrl = (sigungu: string, name: string) =>
@@ -99,6 +112,8 @@ export async function runDiscover(
   let excluded = 0
   // 같은 장소가 6개 키워드에 반복 등장하므로 id 로 센다
   const offRegionIds = new Set<string>()
+  let quotaErrors = 0
+  let quotaExhausted = false
 
   const add = (p: KakaoPlace, region: Region) => {
     if (!p.id || byId.has(p.id)) return
@@ -150,12 +165,26 @@ export async function runDiscover(
       const harvested = await harvestCurated({ blog, local, llm, store }, region)
       harvested.places.forEach((p) => add(p, region))
       await recordSuccess(store, 'harvest', now)
+      quotaErrors = 0
     } catch (e) {
       errors.push(`${region.sigungu} 수확: ${(e as Error).message}`)
       await recordFailure(store, 'harvest', e, now)
+
+      // 쿼터 소진은 지역 문제가 아니라 그날의 한도 문제다. 계속 시도해도
+      // 전부 같은 오류이므로 멈춘다.
+      if (e instanceof SourceError && e.status === 429) {
+        if (++quotaErrors >= QUOTA_GIVE_UP) {
+          quotaExhausted = true
+          break
+        }
+      } else {
+        quotaErrors = 0
+      }
     }
   }
 
   await store.writeCafes([...byId.values()])
-  return { discovered, excluded, offRegion: offRegionIds.size, total: byId.size, errors }
+  return {
+    discovered, excluded, offRegion: offRegionIds.size, total: byId.size, errors, quotaExhausted,
+  }
 }
