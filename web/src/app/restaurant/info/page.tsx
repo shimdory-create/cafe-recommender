@@ -129,21 +129,28 @@ export default function RestaurantInfo() {
         확인할 수 있어요.
       </p>
 
-      <h2 className="mt-7 text-[17px] font-bold">업데이트 기록</h2>
-      <div className="mt-2 flex flex-col gap-2">
-        {CHANGELOG.map((entry) => (
-          <details key={entry.date} className="group rounded-2xl border border-line bg-card p-4">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-2 font-semibold">
-              <span>{entry.title}</span>
-              <span className="flex shrink-0 items-center gap-1.5 text-[12px] font-normal text-ink-soft">
-                {entry.date}
-                <span className="transition-transform group-open:rotate-180">⌄</span>
-              </span>
-            </summary>
-            <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">{entry.body}</p>
-          </details>
-        ))}
-      </div>
+      <details className="group/updates mt-7">
+        <summary className="flex cursor-pointer list-none items-center gap-2">
+          <span className="text-[17px] font-bold">업데이트 기록</span>
+          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-line text-[13px] leading-none text-ink-soft transition-transform group-open/updates:rotate-45">
+            +
+          </span>
+        </summary>
+        <div className="mt-2 flex flex-col gap-2">
+          {CHANGELOG.map((entry) => (
+            <details key={entry.date} className="group/entry rounded-2xl border border-line bg-card p-4">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-2 font-semibold">
+                <span>{entry.title}</span>
+                <span className="flex shrink-0 items-center gap-1.5 text-[12px] font-normal text-ink-soft">
+                  {entry.date}
+                  <span className="transition-transform group-open/entry:rotate-180">⌄</span>
+                </span>
+              </summary>
+              <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">{entry.body}</p>
+            </details>
+          ))}
+        </div>
+      </details>
     </div>
   )
 }
