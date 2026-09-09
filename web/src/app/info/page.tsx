@@ -157,8 +157,9 @@ export default function Info() {
       <details className="group/updates mt-7">
         <summary className="flex cursor-pointer list-none items-center gap-2">
           <span className="text-[17px] font-bold">업데이트 기록</span>
-          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-line text-[13px] leading-none text-ink-soft transition-transform group-open/updates:rotate-45">
-            +
+          <span className="flex h-5 w-5 items-center justify-center rounded-full border border-line text-[13px] leading-none text-ink-soft">
+            <span className="group-open/updates:hidden">+</span>
+            <span className="hidden group-open/updates:inline">−</span>
           </span>
         </summary>
         <div className="mt-2 flex flex-col gap-2">
@@ -168,7 +169,8 @@ export default function Info() {
                 <span>{entry.title}</span>
                 <span className="flex shrink-0 items-center gap-1.5 text-[12px] font-normal text-ink-soft">
                   {entry.date}
-                  <span className="transition-transform group-open/entry:rotate-180">⌄</span>
+                  <span className="group-open/entry:hidden">⌄</span>
+                  <span className="hidden group-open/entry:inline">⌃</span>
                 </span>
               </summary>
               <p className="mt-2 text-[13px] leading-relaxed text-ink-soft">{entry.body}</p>
