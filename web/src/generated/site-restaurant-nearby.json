@@ -4737,9 +4737,9 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.9269500559961,37.52059128119736,%EC%A7%84%EC%A3%BC%EC%A7%91/126.924340630756,37.52480632993,%EB%A1%9C%EC%99%80%EC%9D%B4%EB%93%9C%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
       },
       {
-        "id": "1230484797",
-        "name": "수수커피 여의도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
+        "id": "735590501",
+        "name": "테디뵈르하우스 더현대점",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LSY4LObVh6d",
         "tags": [
           "디저트특화"
         ],
@@ -4747,7 +4747,7 @@
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 0.5,
-        "directionsUrl": "https://map.naver.com/p/directions/126.9269500559961,37.52059128119736,%EC%A7%84%EC%A3%BC%EC%A7%91/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.9269500559961,37.52059128119736,%EC%A7%84%EC%A3%BC%EC%A7%91/126.92869784667478,37.52526584889195,%ED%85%8C%EB%94%94%EB%B5%88%EB%A5%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EB%8D%94%ED%98%84%EB%8C%80%EC%A0%90/-/car"
       }
     ],
     "spots": [
@@ -7188,6 +7188,20 @@
   "8366106": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.725362382618,37.5277115983633,%EB%B3%84%EB%AF%B8%EB%BC%88%EB%8B%A4%EA%B7%80/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -7201,20 +7215,6 @@
         "ratingCount": 0,
         "distanceKm": 0.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.725362382618,37.5277115983633,%EB%B3%84%EB%AF%B8%EB%BC%88%EB%8B%A4%EA%B7%80/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.725362382618,37.5277115983633,%EB%B3%84%EB%AF%B8%EB%BC%88%EB%8B%A4%EA%B7%80/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "892819537",
@@ -14334,19 +14334,18 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.7201237748191,37.49910692583406,%EB%85%B8%EC%B2%9C%EA%B3%A8%20%EB%B6%80%ED%8F%89%EB%B3%B8%EC%A0%90/126.70423366788071,37.51949121345317,%EA%B7%B8%EB%9E%91%ED%8C%A1/-/car"
       },
       {
-        "id": "1344053317",
-        "name": "카페아나지로306",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
         "tags": [
           "대형카페",
-          "대형베이커리",
           "브런치카페"
         ],
         "sigungu": "계양구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.7201237748191,37.49910692583406,%EB%85%B8%EC%B2%9C%EA%B3%A8%20%EB%B6%80%ED%8F%89%EB%B3%B8%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.7201237748191,37.49910692583406,%EB%85%B8%EC%B2%9C%EA%B3%A8%20%EB%B6%80%ED%8F%89%EB%B3%B8%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -17876,7 +17875,7 @@
       {
         "id": "10385100",
         "name": "갤러리카페봄",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gW2uOEPG9B",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5U8fczhSv3e",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -19539,6 +19538,19 @@
   "10546066": {
     "cafes": [
       {
+        "id": "892801179",
+        "name": "멜라",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
+        "tags": [
+          "브런치카페"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.1,
+        "directionsUrl": "https://map.naver.com/p/directions/126.90469880525211,37.51825083573122,%EC%86%A1%EC%A3%BD%EC%9E%A5/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
+      },
+      {
         "id": "1770196217",
         "name": "37.5 시그니처 타임스퀘어점",
         "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8D0Lnet961K",
@@ -19551,19 +19563,6 @@
         "ratingCount": 0,
         "distanceKm": 0.1,
         "directionsUrl": "https://map.naver.com/p/directions/126.90469880525211,37.51825083573122,%EC%86%A1%EC%A3%BD%EC%9E%A5/126.90546858622479,37.51778743775501,37.5%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%EC%A0%90/-/car"
-      },
-      {
-        "id": "892801179",
-        "name": "멜라",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
-        "tags": [
-          "브런치카페"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.1,
-        "directionsUrl": "https://map.naver.com/p/directions/126.90469880525211,37.51825083573122,%EC%86%A1%EC%A3%BD%EC%9E%A5/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
       },
       {
         "id": "1702812863",
@@ -29836,7 +29835,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -32790,6 +32789,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.704629812843,37.5122580711926,%EB%AF%B8%EB%8B%B4/126.693724342479,37.521299765272,%EB%9E%91%EB%8D%B0%EC%9E%90%EB%B7%B0%20%EC%9D%B8%EC%B2%9C%EB%B6%80%ED%8F%89%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.704629812843,37.5122580711926,%EB%AF%B8%EB%8B%B4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -32803,20 +32816,6 @@
         "ratingCount": 0,
         "distanceKm": 2.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.704629812843,37.5122580711926,%EB%AF%B8%EB%8B%B4/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.704629812843,37.5122580711926,%EB%AF%B8%EB%8B%B4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1227861021",
@@ -33563,6 +33562,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.73779819782213,37.534372115329184,%EA%B2%BD%EB%B3%B5%EA%B6%81%20%EA%B3%84%EC%82%B0%EC%A0%90/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.5,
+        "directionsUrl": "https://map.naver.com/p/directions/126.73779819782213,37.534372115329184,%EA%B2%BD%EB%B3%B5%EA%B6%81%20%EA%B3%84%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -33576,20 +33589,6 @@
         "ratingCount": 0,
         "distanceKm": 1.5,
         "directionsUrl": "https://map.naver.com/p/directions/126.73779819782213,37.534372115329184,%EA%B2%BD%EB%B3%B5%EA%B6%81%20%EA%B3%84%EC%82%B0%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.5,
-        "directionsUrl": "https://map.naver.com/p/directions/126.73779819782213,37.534372115329184,%EA%B2%BD%EB%B3%B5%EA%B6%81%20%EA%B3%84%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1880935285",
@@ -34161,6 +34160,20 @@
   "13132052": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.1,
+        "directionsUrl": "https://map.naver.com/p/directions/126.73263034677076,37.516815361926824,%EB%B3%B4%EB%A6%BF%EA%B3%A8%EC%A0%95%EC%B0%AC/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -34174,20 +34187,6 @@
         "ratingCount": 0,
         "distanceKm": 1.1,
         "directionsUrl": "https://map.naver.com/p/directions/126.73263034677076,37.516815361926824,%EB%B3%B4%EB%A6%BF%EA%B3%A8%EC%A0%95%EC%B0%AC/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.1,
-        "directionsUrl": "https://map.naver.com/p/directions/126.73263034677076,37.516815361926824,%EB%B3%B4%EB%A6%BF%EA%B3%A8%EC%A0%95%EC%B0%AC/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1880935285",
@@ -34519,6 +34518,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.897338523726,37.5254995389967,%EB%8C%80%EB%B0%95%EA%B3%B1%EC%B0%BD%EA%B5%AC%EC%9D%B4/126.888257653814,37.5240370793761,%EB%8D%B0%EC%9D%B4%ED%8B%B0%ED%81%AC%EC%BB%A4%ED%94%BC/-/car"
       },
       {
+        "id": "892801179",
+        "name": "멜라",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
+        "tags": [
+          "브런치카페"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.1,
+        "directionsUrl": "https://map.naver.com/p/directions/126.897338523726,37.5254995389967,%EB%8C%80%EB%B0%95%EA%B3%B1%EC%B0%BD%EA%B5%AC%EC%9D%B4/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
+      },
+      {
         "id": "1770196217",
         "name": "37.5 시그니처 타임스퀘어점",
         "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8D0Lnet961K",
@@ -34531,19 +34543,6 @@
         "ratingCount": 0,
         "distanceKm": 1.1,
         "directionsUrl": "https://map.naver.com/p/directions/126.897338523726,37.5254995389967,%EB%8C%80%EB%B0%95%EA%B3%B1%EC%B0%BD%EA%B5%AC%EC%9D%B4/126.90546858622479,37.51778743775501,37.5%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%EC%A0%90/-/car"
-      },
-      {
-        "id": "892801179",
-        "name": "멜라",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
-        "tags": [
-          "브런치카페"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.1,
-        "directionsUrl": "https://map.naver.com/p/directions/126.897338523726,37.5254995389967,%EB%8C%80%EB%B0%95%EA%B3%B1%EC%B0%BD%EA%B5%AC%EC%9D%B4/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
       }
     ],
     "spots": [
@@ -34841,17 +34840,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.723545273557,37.4891300529512,%EB%AA%A8%EB%85%80%EB%96%A1%EB%B3%B6%EC%9D%B4/126.75224913221784,37.50375937075445,%EC%98%A4%EC%84%A0%EB%8D%B0%EC%9D%B4/-/car"
       },
       {
-        "id": "1734382908",
-        "name": "브런치빈 구월점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/ALzyvRXzzzO",
+        "id": "1723604279",
+        "name": "어여쁘리",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Lt3qGjYHVXA",
         "tags": [
-          "브런치카페"
+          "대형카페",
+          "뷰맛집",
+          "디저트특화"
         ],
-        "sigungu": "남동구",
+        "sigungu": "부천시",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 3.7,
-        "directionsUrl": "https://map.naver.com/p/directions/126.723545273557,37.4891300529512,%EB%AA%A8%EB%85%80%EB%96%A1%EB%B3%B6%EC%9D%B4/126.71543407174752,37.45645738628052,%EB%B8%8C%EB%9F%B0%EC%B9%98%EB%B9%88%20%EA%B5%AC%EC%9B%94%EC%A0%90/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.723545273557,37.4891300529512,%EB%AA%A8%EB%85%80%EB%96%A1%EB%B3%B6%EC%9D%B4/126.761379794696,37.503246575614,%EC%96%B4%EC%97%AC%EC%81%98%EB%A6%AC/-/car"
       }
     ],
     "spots": [
@@ -37189,6 +37190,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.72224425871516,37.50610551554451,%EB%AC%B4%EA%B5%90%EB%8F%99%EB%82%99%EC%A7%80%EC%A0%84%EB%AC%B8%EC%A0%90/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.1,
+        "directionsUrl": "https://map.naver.com/p/directions/126.72224425871516,37.50610551554451,%EB%AC%B4%EA%B5%90%EB%8F%99%EB%82%99%EC%A7%80%EC%A0%84%EB%AC%B8%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -37202,20 +37217,6 @@
         "ratingCount": 0,
         "distanceKm": 2.1,
         "directionsUrl": "https://map.naver.com/p/directions/126.72224425871516,37.50610551554451,%EB%AC%B4%EA%B5%90%EB%8F%99%EB%82%99%EC%A7%80%EC%A0%84%EB%AC%B8%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.1,
-        "directionsUrl": "https://map.naver.com/p/directions/126.72224425871516,37.50610551554451,%EB%AC%B4%EA%B5%90%EB%8F%99%EB%82%99%EC%A7%80%EC%A0%84%EB%AC%B8%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -37642,6 +37643,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.727580103789,37.5101904715972,%EB%A9%B4%EB%B0%95%EC%82%AC%EA%B0%80%EC%95%BC%EB%B0%80%EB%A9%B4/126.735888221111,37.5071369224391,%EB%B8%8C%EB%9F%B0%EC%B9%98%EB%B9%88%20%EC%82%BC%EC%82%B0%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.7,
+        "directionsUrl": "https://map.naver.com/p/directions/126.727580103789,37.5101904715972,%EB%A9%B4%EB%B0%95%EC%82%AC%EA%B0%80%EC%95%BC%EB%B0%80%EB%A9%B4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -37655,20 +37670,6 @@
         "ratingCount": 0,
         "distanceKm": 1.7,
         "directionsUrl": "https://map.naver.com/p/directions/126.727580103789,37.5101904715972,%EB%A9%B4%EB%B0%95%EC%82%AC%EA%B0%80%EC%95%BC%EB%B0%80%EB%A9%B4/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.7,
-        "directionsUrl": "https://map.naver.com/p/directions/126.727580103789,37.5101904715972,%EB%A9%B4%EB%B0%95%EC%82%AC%EA%B0%80%EC%95%BC%EB%B0%80%EB%A9%B4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1227861021",
@@ -37781,7 +37782,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -39655,6 +39656,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.7282365493787,37.53751390275154,%EC%9D%B4%ED%95%99%EA%B0%88%EB%B9%84%20%EA%B3%84%EC%82%B0%EB%B3%B8%EC%A0%90/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.4,
+        "directionsUrl": "https://map.naver.com/p/directions/126.7282365493787,37.53751390275154,%EC%9D%B4%ED%95%99%EA%B0%88%EB%B9%84%20%EA%B3%84%EC%82%B0%EB%B3%B8%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -39668,20 +39683,6 @@
         "ratingCount": 0,
         "distanceKm": 1.4,
         "directionsUrl": "https://map.naver.com/p/directions/126.7282365493787,37.53751390275154,%EC%9D%B4%ED%95%99%EA%B0%88%EB%B9%84%20%EA%B3%84%EC%82%B0%EB%B3%B8%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.7282365493787,37.53751390275154,%EC%9D%B4%ED%95%99%EA%B0%88%EB%B9%84%20%EA%B3%84%EC%82%B0%EB%B3%B8%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -40641,7 +40642,7 @@
       {
         "id": "679726610",
         "name": "메타포레스트",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6JCtMpZaGL8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -42146,7 +42147,7 @@
       {
         "id": "922718762",
         "name": "아매네",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/BluLuLCSzVS",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -42324,7 +42325,7 @@
       {
         "id": "10385100",
         "name": "갤러리카페봄",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gW2uOEPG9B",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5U8fczhSv3e",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -54568,6 +54569,20 @@
   "18694282": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.8,
+        "directionsUrl": "https://map.naver.com/p/directions/126.724073873507,37.5323036889524,%EC%B0%90%EB%A7%8C%EC%9D%B4%EB%84%A4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -54581,20 +54596,6 @@
         "ratingCount": 0,
         "distanceKm": 0.8,
         "directionsUrl": "https://map.naver.com/p/directions/126.724073873507,37.5323036889524,%EC%B0%90%EB%A7%8C%EC%9D%B4%EB%84%A4/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.8,
-        "directionsUrl": "https://map.naver.com/p/directions/126.724073873507,37.5323036889524,%EC%B0%90%EB%A7%8C%EC%9D%B4%EB%84%A4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "892819537",
@@ -56556,7 +56557,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -56926,19 +56927,18 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.735761276908,37.5072141247558,%EC%A0%84%EC%A3%BC%ED%98%84%EB%8C%80%EC%98%A5%20%EB%B6%80%ED%8F%89%EC%82%BC%EC%82%B0%EC%A0%90/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
-        "id": "1344053317",
-        "name": "카페아나지로306",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
         "tags": [
           "대형카페",
-          "대형베이커리",
           "브런치카페"
         ],
         "sigungu": "계양구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2.2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.735761276908,37.5072141247558,%EC%A0%84%EC%A3%BC%ED%98%84%EB%8C%80%EC%98%A5%20%EB%B6%80%ED%8F%89%EC%82%BC%EC%82%B0%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.735761276908,37.5072141247558,%EC%A0%84%EC%A3%BC%ED%98%84%EB%8C%80%EC%98%A5%20%EB%B6%80%ED%8F%89%EC%82%BC%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -60128,6 +60128,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.71639950725175,37.54431022013645,%EB%88%84%EB%A3%A9%EA%B3%A8%20%EA%B3%84%EC%96%91%EC%A0%90/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.71639950725175,37.54431022013645,%EB%88%84%EB%A3%A9%EA%B3%A8%20%EA%B3%84%EC%96%91%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -60141,20 +60155,6 @@
         "ratingCount": 0,
         "distanceKm": 2.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.71639950725175,37.54431022013645,%EB%88%84%EB%A3%A9%EA%B3%A8%20%EA%B3%84%EC%96%91%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.71639950725175,37.54431022013645,%EB%88%84%EB%A3%A9%EA%B3%A8%20%EA%B3%84%EC%96%91%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1568148864",
@@ -64938,7 +64938,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -65573,6 +65573,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.72418054187,37.5082472300519,%EB%B3%84%EB%AF%B8%EC%B9%A1%EB%83%89%EB%A9%B4%EC%9B%90%EC%A1%B0/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.72418054187,37.5082472300519,%EB%B3%84%EB%AF%B8%EC%B9%A1%EB%83%89%EB%A9%B4%EC%9B%90%EC%A1%B0/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -65586,20 +65600,6 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.72418054187,37.5082472300519,%EB%B3%84%EB%AF%B8%EC%B9%A1%EB%83%89%EB%A9%B4%EC%9B%90%EC%A1%B0/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.72418054187,37.5082472300519,%EB%B3%84%EB%AF%B8%EC%B9%A1%EB%83%89%EB%A9%B4%EC%9B%90%EC%A1%B0/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -66639,6 +66639,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.722913786124,37.5449545813453,%EC%A6%89%EC%84%9D%EB%96%A1%EB%B3%B6%EC%9D%B4/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.2,
+        "directionsUrl": "https://map.naver.com/p/directions/126.722913786124,37.5449545813453,%EC%A6%89%EC%84%9D%EB%96%A1%EB%B3%B6%EC%9D%B4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -66652,20 +66666,6 @@
         "ratingCount": 0,
         "distanceKm": 2.2,
         "directionsUrl": "https://map.naver.com/p/directions/126.722913786124,37.5449545813453,%EC%A6%89%EC%84%9D%EB%96%A1%EB%B3%B6%EC%9D%B4/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.722913786124,37.5449545813453,%EC%A6%89%EC%84%9D%EB%96%A1%EB%B3%B6%EC%9D%B4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1568148864",
@@ -69459,7 +69459,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -69472,7 +69472,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -74852,7 +74852,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -74905,7 +74905,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -78925,7 +78925,7 @@
       {
         "id": "2062977336",
         "name": "나울",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KTGwyFeLv6u",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/7Il7qpvK2cy",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -83024,6 +83024,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.722945854747,37.5081434283407,%EB%B6%81%EC%83%88%ED%86%B5/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.722945854747,37.5081434283407,%EB%B6%81%EC%83%88%ED%86%B5/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -83037,20 +83051,6 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.722945854747,37.5081434283407,%EB%B6%81%EC%83%88%ED%86%B5/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.722945854747,37.5081434283407,%EB%B6%81%EC%83%88%ED%86%B5/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -83353,7 +83353,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -83366,7 +83366,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -87871,7 +87871,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -87884,7 +87884,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -88345,7 +88345,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -89454,20 +89454,17 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.67119075795142,37.6440449718763,%EC%A0%95%EA%B0%80%EB%84%A4%ED%99%94%EB%8D%95%EA%B5%AC%EC%9D%B4%EC%A1%B1%EB%B0%9C/126.69160701583795,37.651854843203864,%EC%B9%B4%ED%8E%98%20%EC%A0%80%EC%8A%A4%ED%8B%B4/-/car"
       },
       {
-        "id": "2004272980",
-        "name": "55갤런 비스트로카페",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7DIOoZmE5Jn",
+        "id": "1409348971",
+        "name": "카페샌디즈",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3YEqD7CadPM",
         "tags": [
-          "대형카페",
-          "대형베이커리",
-          "브런치카페",
-          "뷰맛집"
+          "대형카페"
         ],
         "sigungu": "김포시",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.67119075795142,37.6440449718763,%EC%A0%95%EA%B0%80%EB%84%A4%ED%99%94%EB%8D%95%EA%B5%AC%EC%9D%B4%EC%A1%B1%EB%B0%9C/126.657690440328,37.6625099694311,55%EA%B0%A4%EB%9F%B0%20%EB%B9%84%EC%8A%A4%ED%8A%B8%EB%A1%9C%EC%B9%B4%ED%8E%98/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.67119075795142,37.6440449718763,%EC%A0%95%EA%B0%80%EB%84%A4%ED%99%94%EB%8D%95%EA%B5%AC%EC%9D%B4%EC%A1%B1%EB%B0%9C/126.645044026108,37.6488029551091,%EC%B9%B4%ED%8E%98%EC%83%8C%EB%94%94%EC%A6%88/-/car"
       }
     ],
     "spots": [
@@ -90646,6 +90643,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.76677629643966,37.49354362466459,%EC%99%95%EC%96%B8%EB%8B%88%EC%9C%A1%EC%B9%BC%EB%B0%A5/126.76744852779744,37.50285142490351,%ED%8F%AC%EB%A0%88%EC%8A%A4%ED%8A%B8365/-/car"
       },
       {
+        "id": "1315128837",
+        "name": "데이아",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8aSiI14feXd",
+        "tags": [
+          "디저트특화"
+        ],
+        "sigungu": "부천시",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.2,
+        "directionsUrl": "https://map.naver.com/p/directions/126.76677629643966,37.49354362466459,%EC%99%95%EC%96%B8%EB%8B%88%EC%9C%A1%EC%B9%BC%EB%B0%A5/126.7729317042438,37.50309455094376,%EB%8D%B0%EC%9D%B4%EC%95%84/-/car"
+      },
+      {
         "id": "843018701",
         "name": "띵크프룻 부천점",
         "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/22BhKAakJAw",
@@ -90658,19 +90668,6 @@
         "ratingCount": 0,
         "distanceKm": 1.2,
         "directionsUrl": "https://map.naver.com/p/directions/126.76677629643966,37.49354362466459,%EC%99%95%EC%96%B8%EB%8B%88%EC%9C%A1%EC%B9%BC%EB%B0%A5/126.77852206825145,37.49922363847177,%EB%9D%B5%ED%81%AC%ED%94%84%EB%A3%BB%20%EB%B6%80%EC%B2%9C%EC%A0%90/-/car"
-      },
-      {
-        "id": "1315128837",
-        "name": "데이아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8aSiI14feXd",
-        "tags": [
-          "디저트특화"
-        ],
-        "sigungu": "부천시",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.76677629643966,37.49354362466459,%EC%99%95%EC%96%B8%EB%8B%88%EC%9C%A1%EC%B9%BC%EB%B0%A5/126.7729317042438,37.50309455094376,%EB%8D%B0%EC%9D%B4%EC%95%84/-/car"
       },
       {
         "id": "1723604279",
@@ -90831,7 +90828,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -91118,7 +91115,7 @@
       {
         "id": "679726610",
         "name": "메타포레스트",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6JCtMpZaGL8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -91861,7 +91858,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -94728,7 +94725,7 @@
       {
         "id": "131718454",
         "name": "오디디",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/C51L9P9559t",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/46xbKd7BOS8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -95198,7 +95195,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -99622,7 +99619,7 @@
       {
         "id": "10385100",
         "name": "갤러리카페봄",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gW2uOEPG9B",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5U8fczhSv3e",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -99974,7 +99971,7 @@
       {
         "id": "10385100",
         "name": "갤러리카페봄",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gW2uOEPG9B",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5U8fczhSv3e",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -101393,6 +101390,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.722727139741,37.5048957025977,%EB%AA%AC%EC%8A%A4%ED%84%B0%EC%8A%A4%EC%8B%9C%26%EC%82%AC%EC%8B%9C%EB%AF%B8%20%EB%B6%80%ED%8F%89%EC%A0%90/126.70423366788071,37.51949121345317,%EA%B7%B8%EB%9E%91%ED%8C%A1/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.722727139741,37.5048957025977,%EB%AA%AC%EC%8A%A4%ED%84%B0%EC%8A%A4%EC%8B%9C%26%EC%82%AC%EC%8B%9C%EB%AF%B8%20%EB%B6%80%ED%8F%89%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -101406,20 +101417,6 @@
         "ratingCount": 0,
         "distanceKm": 2.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.722727139741,37.5048957025977,%EB%AA%AC%EC%8A%A4%ED%84%B0%EC%8A%A4%EC%8B%9C%26%EC%82%AC%EC%8B%9C%EB%AF%B8%20%EB%B6%80%ED%8F%89%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.722727139741,37.5048957025977,%EB%AA%AC%EC%8A%A4%ED%84%B0%EC%8A%A4%EC%8B%9C%26%EC%82%AC%EC%8B%9C%EB%AF%B8%20%EB%B6%80%ED%8F%89%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -104926,7 +104923,7 @@
       {
         "id": "922718762",
         "name": "아매네",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/BluLuLCSzVS",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -106342,7 +106339,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -113492,7 +113489,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -113505,7 +113502,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -114544,7 +114541,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -117048,20 +117045,17 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.670655706176,37.6448696782688,%EB%B0%95%EB%A7%8C%EB%B0%B0%EC%95%84%EB%A6%AC%EB%9E%91%EB%B3%B4%EC%8C%88%20%EC%9E%A5%EA%B8%B0%EC%A0%90/126.69160701583795,37.651854843203864,%EC%B9%B4%ED%8E%98%20%EC%A0%80%EC%8A%A4%ED%8B%B4/-/car"
       },
       {
-        "id": "2004272980",
-        "name": "55갤런 비스트로카페",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7DIOoZmE5Jn",
+        "id": "1409348971",
+        "name": "카페샌디즈",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3YEqD7CadPM",
         "tags": [
-          "대형카페",
-          "대형베이커리",
-          "브런치카페",
-          "뷰맛집"
+          "대형카페"
         ],
         "sigungu": "김포시",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.670655706176,37.6448696782688,%EB%B0%95%EB%A7%8C%EB%B0%B0%EC%95%84%EB%A6%AC%EB%9E%91%EB%B3%B4%EC%8C%88%20%EC%9E%A5%EA%B8%B0%EC%A0%90/126.657690440328,37.6625099694311,55%EA%B0%A4%EB%9F%B0%20%EB%B9%84%EC%8A%A4%ED%8A%B8%EB%A1%9C%EC%B9%B4%ED%8E%98/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.670655706176,37.6448696782688,%EB%B0%95%EB%A7%8C%EB%B0%B0%EC%95%84%EB%A6%AC%EB%9E%91%EB%B3%B4%EC%8C%88%20%EC%9E%A5%EA%B8%B0%EC%A0%90/126.645044026108,37.6488029551091,%EC%B9%B4%ED%8E%98%EC%83%8C%EB%94%94%EC%A6%88/-/car"
       }
     ],
     "spots": [
@@ -118701,6 +118695,20 @@
   "286499308": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.1,
+        "directionsUrl": "https://map.naver.com/p/directions/126.732610770702,37.5165954733648,%EA%B0%80%EB%93%A0%ED%8C%8C%ED%8B%B0%20%EC%82%BC%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -118714,20 +118722,6 @@
         "ratingCount": 0,
         "distanceKm": 1.1,
         "directionsUrl": "https://map.naver.com/p/directions/126.732610770702,37.5165954733648,%EA%B0%80%EB%93%A0%ED%8C%8C%ED%8B%B0%20%EC%82%BC%EC%82%B0%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.1,
-        "directionsUrl": "https://map.naver.com/p/directions/126.732610770702,37.5165954733648,%EA%B0%80%EB%93%A0%ED%8C%8C%ED%8B%B0%20%EC%82%BC%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1880935285",
@@ -119323,7 +119317,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -119815,7 +119809,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -121030,7 +121024,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -121182,7 +121176,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -124518,7 +124512,7 @@
       {
         "id": "679726610",
         "name": "메타포레스트",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6JCtMpZaGL8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -124789,19 +124783,6 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.92497069531525,37.521470320037814,%EC%9D%B4%EC%9E%90%EC%99%80%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/126.92273562827656,37.521253539424684,%EB%A3%A8%EC%95%84%EB%B2%A0%EC%9D%B4%EC%BB%A4%EB%A6%AC%20%EC%97%AC%EC%9D%98%EB%8F%84TP%ED%83%80%EC%9B%8C%EC%A0%90/-/car"
       },
       {
-        "id": "1230484797",
-        "name": "수수커피 여의도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
-        "tags": [
-          "디저트특화"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.92497069531525,37.521470320037814,%EC%9D%B4%EC%9E%90%EC%99%80%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
-      },
-      {
         "id": "645966224",
         "name": "카페꼼마 여의도신영증권점",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JqgjEiKkw3R",
@@ -124815,6 +124796,19 @@
         "ratingCount": 0,
         "distanceKm": 0.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.92497069531525,37.521470320037814,%EC%9D%B4%EC%9E%90%EC%99%80%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/126.92889733444014,37.521286241627685,%EC%B9%B4%ED%8E%98%EA%BC%BC%EB%A7%88%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%8B%A0%EC%98%81%EC%A6%9D%EA%B6%8C%EC%A0%90/-/car"
+      },
+      {
+        "id": "1230484797",
+        "name": "수수커피 여의도점",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
+        "tags": [
+          "디저트특화"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.92497069531525,37.521470320037814,%EC%9D%B4%EC%9E%90%EC%99%80%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
       },
       {
         "id": "259982607",
@@ -126676,6 +126670,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.72698918081866,37.543857650171,%EA%BD%83%EB%B6%80%EB%A6%AC%EC%8B%9D%ED%83%81/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.1,
+        "directionsUrl": "https://map.naver.com/p/directions/126.72698918081866,37.543857650171,%EA%BD%83%EB%B6%80%EB%A6%AC%EC%8B%9D%ED%83%81/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -126689,20 +126697,6 @@
         "ratingCount": 0,
         "distanceKm": 2.1,
         "directionsUrl": "https://map.naver.com/p/directions/126.72698918081866,37.543857650171,%EA%BD%83%EB%B6%80%EB%A6%AC%EC%8B%9D%ED%83%81/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.1,
-        "directionsUrl": "https://map.naver.com/p/directions/126.72698918081866,37.543857650171,%EA%BD%83%EB%B6%80%EB%A6%AC%EC%8B%9D%ED%83%81/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1568148864",
@@ -126816,6 +126810,20 @@
   "375613832": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.5,
+        "directionsUrl": "https://map.naver.com/p/directions/126.73011778578548,37.52757209410673,%EC%95%84%EC%98%A4%EB%A6%AC%EC%9D%98%ED%96%89%EB%B0%A9%EB%B6%88%EB%AA%85%20%EC%9D%B8%EC%B2%9C%EC%9E%91%EC%A0%84%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -126829,20 +126837,6 @@
         "ratingCount": 0,
         "distanceKm": 0.5,
         "directionsUrl": "https://map.naver.com/p/directions/126.73011778578548,37.52757209410673,%EC%95%84%EC%98%A4%EB%A6%AC%EC%9D%98%ED%96%89%EB%B0%A9%EB%B6%88%EB%AA%85%20%EC%9D%B8%EC%B2%9C%EC%9E%91%EC%A0%84%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.5,
-        "directionsUrl": "https://map.naver.com/p/directions/126.73011778578548,37.52757209410673,%EC%95%84%EC%98%A4%EB%A6%AC%EC%9D%98%ED%96%89%EB%B0%A9%EB%B6%88%EB%AA%85%20%EC%9D%B8%EC%B2%9C%EC%9E%91%EC%A0%84%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "892819537",
@@ -127132,6 +127126,20 @@
   "379026200": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.735882649895,37.5254074110845,%EB%AF%B8%EB%AF%B8%EB%B0%98%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -127145,20 +127153,6 @@
         "ratingCount": 0,
         "distanceKm": 0.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.735882649895,37.5254074110845,%EB%AF%B8%EB%AF%B8%EB%B0%98%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.735882649895,37.5254074110845,%EB%AF%B8%EB%AF%B8%EB%B0%98%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "892819537",
@@ -132057,7 +132051,7 @@
       {
         "id": "2062977336",
         "name": "나울",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KTGwyFeLv6u",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/7Il7qpvK2cy",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -134829,7 +134823,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -136061,6 +136055,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.737141275148,37.5387630205211,%EB%B0%94%EC%8A%A4%EB%B2%84%EA%B1%B0%20%EC%9D%B8%EC%B2%9C%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.8,
+        "directionsUrl": "https://map.naver.com/p/directions/126.737141275148,37.5387630205211,%EB%B0%94%EC%8A%A4%EB%B2%84%EA%B1%B0%20%EC%9D%B8%EC%B2%9C%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -136074,20 +136082,6 @@
         "ratingCount": 0,
         "distanceKm": 1.8,
         "directionsUrl": "https://map.naver.com/p/directions/126.737141275148,37.5387630205211,%EB%B0%94%EC%8A%A4%EB%B2%84%EA%B1%B0%20%EC%9D%B8%EC%B2%9C%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.8,
-        "directionsUrl": "https://map.naver.com/p/directions/126.737141275148,37.5387630205211,%EB%B0%94%EC%8A%A4%EB%B2%84%EA%B1%B0%20%EC%9D%B8%EC%B2%9C%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1568148864",
@@ -137470,6 +137464,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.724143357475,37.5079020593912,%EC%87%BC%EC%BF%A0%EB%AF%B8/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.724143357475,37.5079020593912,%EC%87%BC%EC%BF%A0%EB%AF%B8/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -137483,20 +137491,6 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.724143357475,37.5079020593912,%EC%87%BC%EC%BF%A0%EB%AF%B8/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.724143357475,37.5079020593912,%EC%87%BC%EC%BF%A0%EB%AF%B8/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -137913,7 +137907,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -138234,7 +138228,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -139363,19 +139357,18 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.733544058012,37.5079786001855,%EC%98%A4%EB%B4%89%EC%A7%91%20%EC%82%BC%EC%82%B0%EC%A0%90/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
-        "id": "1344053317",
-        "name": "카페아나지로306",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
         "tags": [
           "대형카페",
-          "대형베이커리",
           "브런치카페"
         ],
         "sigungu": "계양구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.733544058012,37.5079786001855,%EC%98%A4%EB%B4%89%EC%A7%91%20%EC%82%BC%EC%82%B0%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.733544058012,37.5079786001855,%EC%98%A4%EB%B4%89%EC%A7%91%20%EC%82%BC%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -140087,7 +140080,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -143806,7 +143799,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -143986,7 +143979,7 @@
       {
         "id": "10385100",
         "name": "갤러리카페봄",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gW2uOEPG9B",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5U8fczhSv3e",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -148318,7 +148311,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -148371,7 +148364,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -153825,6 +153818,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.723295967688,37.5082793993207,%EC%B4%88%EC%9D%B4%EB%8B%A4%EC%9D%B4%EB%8B%9D%20%EB%B6%80%ED%8F%89%EA%B5%AC%EC%B2%AD%EC%A0%90/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.723295967688,37.5082793993207,%EC%B4%88%EC%9D%B4%EB%8B%A4%EC%9D%B4%EB%8B%9D%20%EB%B6%80%ED%8F%89%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -153838,20 +153845,6 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.723295967688,37.5082793993207,%EC%B4%88%EC%9D%B4%EB%8B%A4%EC%9D%B4%EB%8B%9D%20%EB%B6%80%ED%8F%89%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.723295967688,37.5082793993207,%EC%B4%88%EC%9D%B4%EB%8B%A4%EC%9D%B4%EB%8B%9D%20%EB%B6%80%ED%8F%89%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -158336,7 +158329,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -158349,7 +158342,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -158659,7 +158652,7 @@
       {
         "id": "679726610",
         "name": "메타포레스트",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6JCtMpZaGL8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -162070,7 +162063,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -165740,7 +165733,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -169454,7 +169447,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -171006,7 +170999,7 @@
       {
         "id": "10385100",
         "name": "갤러리카페봄",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gW2uOEPG9B",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5U8fczhSv3e",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -171810,7 +171803,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -172128,19 +172121,18 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.732870552672,37.5084510062251,%EB%8D%94%EA%BD%83%EA%B2%8C%20%EB%B6%80%ED%8F%89%EC%82%BC%EC%82%B0%EC%A0%90/126.75224913221784,37.50375937075445,%EC%98%A4%EC%84%A0%EB%8D%B0%EC%9D%B4/-/car"
       },
       {
-        "id": "1344053317",
-        "name": "카페아나지로306",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
         "tags": [
           "대형카페",
-          "대형베이커리",
           "브런치카페"
         ],
         "sigungu": "계양구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.732870552672,37.5084510062251,%EB%8D%94%EA%BD%83%EA%B2%8C%20%EB%B6%80%ED%8F%89%EC%82%BC%EC%82%B0%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.732870552672,37.5084510062251,%EB%8D%94%EA%BD%83%EA%B2%8C%20%EB%B6%80%ED%8F%89%EC%82%BC%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -174387,7 +174379,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -175026,7 +175018,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -176014,7 +176006,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -176139,7 +176131,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -176777,7 +176769,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -177284,6 +177276,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.723324908335,37.5084056074058,%EC%BF%84%EC%9A%B0%EC%99%80/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.723324908335,37.5084056074058,%EC%BF%84%EC%9A%B0%EC%99%80/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -177297,20 +177303,6 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.723324908335,37.5084056074058,%EC%BF%84%EC%9A%B0%EC%99%80/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.723324908335,37.5084056074058,%EC%BF%84%EC%9A%B0%EC%99%80/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -181622,6 +181614,20 @@
   "922829436": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.722102766763,37.5326738824595,%EB%8F%BC%EC%A7%80%EB%84%A4%ED%9A%8C%ED%8F%AC%EC%9E%A5%EB%A7%88%EC%B0%A8/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -181635,20 +181641,6 @@
         "ratingCount": 0,
         "distanceKm": 0.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.722102766763,37.5326738824595,%EB%8F%BC%EC%A7%80%EB%84%A4%ED%9A%8C%ED%8F%AC%EC%9E%A5%EB%A7%88%EC%B0%A8/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.722102766763,37.5326738824595,%EB%8F%BC%EC%A7%80%EB%84%A4%ED%9A%8C%ED%8F%AC%EC%9E%A5%EB%A7%88%EC%B0%A8/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "892819537",
@@ -182096,6 +182088,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.734158887655,37.5390284455879,%EC%A7%AC%EB%BD%95%EA%B4%80%20%EC%9D%B8%EC%B2%9C%EA%B3%84%EC%82%B0%EC%A0%90/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.7,
+        "directionsUrl": "https://map.naver.com/p/directions/126.734158887655,37.5390284455879,%EC%A7%AC%EB%BD%95%EA%B4%80%20%EC%9D%B8%EC%B2%9C%EA%B3%84%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -182109,20 +182115,6 @@
         "ratingCount": 0,
         "distanceKm": 1.7,
         "directionsUrl": "https://map.naver.com/p/directions/126.734158887655,37.5390284455879,%EC%A7%AC%EB%BD%95%EA%B4%80%20%EC%9D%B8%EC%B2%9C%EA%B3%84%EC%82%B0%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.7,
-        "directionsUrl": "https://map.naver.com/p/directions/126.734158887655,37.5390284455879,%EC%A7%AC%EB%BD%95%EA%B4%80%20%EC%9D%B8%EC%B2%9C%EA%B3%84%EC%82%B0%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1568148864",
@@ -183047,7 +183039,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -183638,7 +183630,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -185231,7 +185223,7 @@
       {
         "id": "679726610",
         "name": "메타포레스트",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6JCtMpZaGL8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -185329,6 +185321,20 @@
   "946910621": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.5,
+        "directionsUrl": "https://map.naver.com/p/directions/126.723615192183,37.5290590210462,%ED%86%A0%EB%B0%95%EC%9D%B4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -185342,20 +185348,6 @@
         "ratingCount": 0,
         "distanceKm": 0.5,
         "directionsUrl": "https://map.naver.com/p/directions/126.723615192183,37.5290590210462,%ED%86%A0%EB%B0%95%EC%9D%B4/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.5,
-        "directionsUrl": "https://map.naver.com/p/directions/126.723615192183,37.5290590210462,%ED%86%A0%EB%B0%95%EC%9D%B4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "892819537",
@@ -185837,6 +185829,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.72285375361005,37.50491041576657,%EC%B0%A8%EC%B0%A8%EC%8B%9D%EB%8B%B9/126.70423366788071,37.51949121345317,%EA%B7%B8%EB%9E%91%ED%8C%A1/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.72285375361005,37.50491041576657,%EC%B0%A8%EC%B0%A8%EC%8B%9D%EB%8B%B9/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -185850,20 +185856,6 @@
         "ratingCount": 0,
         "distanceKm": 2.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.72285375361005,37.50491041576657,%EC%B0%A8%EC%B0%A8%EC%8B%9D%EB%8B%B9/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.72285375361005,37.50491041576657,%EC%B0%A8%EC%B0%A8%EC%8B%9D%EB%8B%B9/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -186011,7 +186003,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -187989,7 +187981,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -190393,18 +190385,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.70668935077181,37.450110914872866,%EC%84%A4%EB%86%8D%EA%B0%80/126.7276149807793,37.41738932945406,%EC%8A%A4%EB%84%88%EA%B7%B8%EC%83%8C%EB%93%9C/-/car"
       },
       {
-        "id": "616961636",
-        "name": "오크레페 인천도화엘리웨이점",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5HIelZ4TBtN",
+        "id": "1322408537",
+        "name": "마크로스터스",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/FLbklw9O6Lg",
         "tags": [
-          "브런치카페",
+          "대형카페",
+          "대형베이커리",
           "디저트특화"
         ],
-        "sigungu": "미추홀구",
+        "sigungu": "남동구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 4.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.70668935077181,37.450110914872866,%EC%84%A4%EB%86%8D%EA%B0%80/126.664588539395,37.4695282850558,%EC%98%A4%ED%81%AC%EB%A0%88%ED%8E%98%20%EC%9D%B8%EC%B2%9C%EB%8F%84%ED%99%94%EC%97%98%EB%A6%AC%EC%9B%A8%EC%9D%B4%EC%A0%90/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.70668935077181,37.450110914872866,%EC%84%A4%EB%86%8D%EA%B0%80/126.7291309845937,37.415503381570254,%EB%A7%88%ED%81%AC%EB%A1%9C%EC%8A%A4%ED%84%B0%EC%8A%A4/-/car"
       }
     ],
     "spots": [
@@ -193362,7 +193355,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -194594,19 +194587,6 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.92992150007053,37.52447189740668,%EC%8B%A0%ED%99%8D%EB%9F%AC%EC%9A%B0%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/126.92869784667478,37.52526584889195,%ED%85%8C%EB%94%94%EB%B5%88%EB%A5%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EB%8D%94%ED%98%84%EB%8C%80%EC%A0%90/-/car"
       },
       {
-        "id": "1230484797",
-        "name": "수수커피 여의도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
-        "tags": [
-          "디저트특화"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.92992150007053,37.52447189740668,%EC%8B%A0%ED%99%8D%EB%9F%AC%EC%9A%B0%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
-      },
-      {
         "id": "645966224",
         "name": "카페꼼마 여의도신영증권점",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JqgjEiKkw3R",
@@ -194620,6 +194600,19 @@
         "ratingCount": 0,
         "distanceKm": 0.4,
         "directionsUrl": "https://map.naver.com/p/directions/126.92992150007053,37.52447189740668,%EC%8B%A0%ED%99%8D%EB%9F%AC%EC%9A%B0%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/126.92889733444014,37.521286241627685,%EC%B9%B4%ED%8E%98%EA%BC%BC%EB%A7%88%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%8B%A0%EC%98%81%EC%A6%9D%EA%B6%8C%EC%A0%90/-/car"
+      },
+      {
+        "id": "1230484797",
+        "name": "수수커피 여의도점",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
+        "tags": [
+          "디저트특화"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.4,
+        "directionsUrl": "https://map.naver.com/p/directions/126.92992150007053,37.52447189740668,%EC%8B%A0%ED%99%8D%EB%9F%AC%EC%9A%B0%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
       },
       {
         "id": "758322129",
@@ -196003,6 +195996,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.730844317549,37.5082968402225,%ED%99%94%EC%96%91%EC%8B%9D%20%EB%B6%80%ED%8F%89%EC%A0%90/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.730844317549,37.5082968402225,%ED%99%94%EC%96%91%EC%8B%9D%20%EB%B6%80%ED%8F%89%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -196016,20 +196023,6 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.730844317549,37.5082968402225,%ED%99%94%EC%96%91%EC%8B%9D%20%EB%B6%80%ED%8F%89%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.730844317549,37.5082968402225,%ED%99%94%EC%96%91%EC%8B%9D%20%EB%B6%80%ED%8F%89%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -197397,7 +197390,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -199889,7 +199882,7 @@
       {
         "id": "10385100",
         "name": "갤러리카페봄",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gW2uOEPG9B",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5U8fczhSv3e",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -200074,18 +200067,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.70310134537873,37.446916882614445,%EB%AC%B8%ED%95%99%EC%82%B0%ED%98%B8%EB%9E%AD%EC%9D%B4/126.7276149807793,37.41738932945406,%EC%8A%A4%EB%84%88%EA%B7%B8%EC%83%8C%EB%93%9C/-/car"
       },
       {
-        "id": "616961636",
-        "name": "오크레페 인천도화엘리웨이점",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5HIelZ4TBtN",
+        "id": "1322408537",
+        "name": "마크로스터스",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/FLbklw9O6Lg",
         "tags": [
-          "브런치카페",
+          "대형카페",
+          "대형베이커리",
           "디저트특화"
         ],
-        "sigungu": "미추홀구",
+        "sigungu": "남동구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 4.2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.70310134537873,37.446916882614445,%EB%AC%B8%ED%95%99%EC%82%B0%ED%98%B8%EB%9E%AD%EC%9D%B4/126.664588539395,37.4695282850558,%EC%98%A4%ED%81%AC%EB%A0%88%ED%8E%98%20%EC%9D%B8%EC%B2%9C%EB%8F%84%ED%99%94%EC%97%98%EB%A6%AC%EC%9B%A8%EC%9D%B4%EC%A0%90/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.70310134537873,37.446916882614445,%EB%AC%B8%ED%95%99%EC%82%B0%ED%98%B8%EB%9E%AD%EC%9D%B4/126.7291309845937,37.415503381570254,%EB%A7%88%ED%81%AC%EB%A1%9C%EC%8A%A4%ED%84%B0%EC%8A%A4/-/car"
       }
     ],
     "spots": [
@@ -201614,7 +201608,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -202969,6 +202963,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.660510707711,37.6504558249609,%ED%86%B5%EC%98%81%ED%95%B4%EB%AC%BC%EB%9A%9D%EB%B0%B0%EA%B8%B0%20%EC%9E%A5%EA%B8%B0%EC%A0%90/126.652445604146,37.647854638574,%EC%BB%A4%EC%8A%A4%ED%85%80%EC%BB%A4%ED%94%BC%20%EB%8D%94%ED%95%98%EC%9A%B0%EC%8A%A4%EA%B9%80%ED%8F%AC/-/car"
       },
       {
+        "id": "1409348971",
+        "name": "카페샌디즈",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3YEqD7CadPM",
+        "tags": [
+          "대형카페"
+        ],
+        "sigungu": "김포시",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.4,
+        "directionsUrl": "https://map.naver.com/p/directions/126.660510707711,37.6504558249609,%ED%86%B5%EC%98%81%ED%95%B4%EB%AC%BC%EB%9A%9D%EB%B0%B0%EA%B8%B0%20%EC%9E%A5%EA%B8%B0%EC%A0%90/126.645044026108,37.6488029551091,%EC%B9%B4%ED%8E%98%EC%83%8C%EB%94%94%EC%A6%88/-/car"
+      },
+      {
         "id": "2004272980",
         "name": "55갤런 비스트로카페",
         "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7DIOoZmE5Jn",
@@ -202985,22 +202992,9 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.660510707711,37.6504558249609,%ED%86%B5%EC%98%81%ED%95%B4%EB%AC%BC%EB%9A%9D%EB%B0%B0%EA%B8%B0%20%EC%9E%A5%EA%B8%B0%EC%A0%90/126.657690440328,37.6625099694311,55%EA%B0%A4%EB%9F%B0%20%EB%B9%84%EC%8A%A4%ED%8A%B8%EB%A1%9C%EC%B9%B4%ED%8E%98/-/car"
       },
       {
-        "id": "1409348971",
-        "name": "카페샌디즈",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3YEqD7CadPM",
-        "tags": [
-          "대형카페"
-        ],
-        "sigungu": "김포시",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.660510707711,37.6504558249609,%ED%86%B5%EC%98%81%ED%95%B4%EB%AC%BC%EB%9A%9D%EB%B0%B0%EA%B8%B0%20%EC%9E%A5%EA%B8%B0%EC%A0%90/126.645044026108,37.6488029551091,%EC%B9%B4%ED%8E%98%EC%83%8C%EB%94%94%EC%A6%88/-/car"
-      },
-      {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -203423,7 +203417,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -203462,7 +203456,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -206377,6 +206371,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.70405948540495,37.51203860136511,%EC%B0%B8%EB%82%98%EB%AC%B4%EA%B3%A8%ED%95%9C%EC%9A%B0%EA%B3%B1%EC%B0%BD/126.693724342479,37.521299765272,%EB%9E%91%EB%8D%B0%EC%9E%90%EB%B7%B0%20%EC%9D%B8%EC%B2%9C%EB%B6%80%ED%8F%89%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.4,
+        "directionsUrl": "https://map.naver.com/p/directions/126.70405948540495,37.51203860136511,%EC%B0%B8%EB%82%98%EB%AC%B4%EA%B3%A8%ED%95%9C%EC%9A%B0%EA%B3%B1%EC%B0%BD/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -206390,20 +206398,6 @@
         "ratingCount": 0,
         "distanceKm": 2.4,
         "directionsUrl": "https://map.naver.com/p/directions/126.70405948540495,37.51203860136511,%EC%B0%B8%EB%82%98%EB%AC%B4%EA%B3%A8%ED%95%9C%EC%9A%B0%EA%B3%B1%EC%B0%BD/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.70405948540495,37.51203860136511,%EC%B0%B8%EB%82%98%EB%AC%B4%EA%B3%A8%ED%95%9C%EC%9A%B0%EA%B3%B1%EC%B0%BD/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1227861021",
@@ -208214,6 +208208,19 @@
   "1187073355": {
     "cafes": [
       {
+        "id": "892801179",
+        "name": "멜라",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
+        "tags": [
+          "브런치카페"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.5,
+        "directionsUrl": "https://map.naver.com/p/directions/126.907846465213,37.5139681615577,%EC%9A%B0%EB%A6%BC%EC%96%91%EA%BC%AC%EC%B9%98/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
+      },
+      {
         "id": "1770196217",
         "name": "37.5 시그니처 타임스퀘어점",
         "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8D0Lnet961K",
@@ -208226,19 +208233,6 @@
         "ratingCount": 0,
         "distanceKm": 0.5,
         "directionsUrl": "https://map.naver.com/p/directions/126.907846465213,37.5139681615577,%EC%9A%B0%EB%A6%BC%EC%96%91%EA%BC%AC%EC%B9%98/126.90546858622479,37.51778743775501,37.5%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%EC%A0%90/-/car"
-      },
-      {
-        "id": "892801179",
-        "name": "멜라",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
-        "tags": [
-          "브런치카페"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.5,
-        "directionsUrl": "https://map.naver.com/p/directions/126.907846465213,37.5139681615577,%EC%9A%B0%EB%A6%BC%EC%96%91%EA%BC%AC%EC%B9%98/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
       },
       {
         "id": "1702812863",
@@ -208865,7 +208859,7 @@
       {
         "id": "10385100",
         "name": "갤러리카페봄",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gW2uOEPG9B",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5U8fczhSv3e",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -215243,19 +215237,6 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.924972958655,37.5214694204797,%EC%95%84%EB%A3%A8%ED%9E%88%20%EB%8B%88%EC%99%80/126.92273562827656,37.521253539424684,%EB%A3%A8%EC%95%84%EB%B2%A0%EC%9D%B4%EC%BB%A4%EB%A6%AC%20%EC%97%AC%EC%9D%98%EB%8F%84TP%ED%83%80%EC%9B%8C%EC%A0%90/-/car"
       },
       {
-        "id": "1230484797",
-        "name": "수수커피 여의도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
-        "tags": [
-          "디저트특화"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.924972958655,37.5214694204797,%EC%95%84%EB%A3%A8%ED%9E%88%20%EB%8B%88%EC%99%80/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
-      },
-      {
         "id": "645966224",
         "name": "카페꼼마 여의도신영증권점",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JqgjEiKkw3R",
@@ -215269,6 +215250,19 @@
         "ratingCount": 0,
         "distanceKm": 0.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.924972958655,37.5214694204797,%EC%95%84%EB%A3%A8%ED%9E%88%20%EB%8B%88%EC%99%80/126.92889733444014,37.521286241627685,%EC%B9%B4%ED%8E%98%EA%BC%BC%EB%A7%88%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%8B%A0%EC%98%81%EC%A6%9D%EA%B6%8C%EC%A0%90/-/car"
+      },
+      {
+        "id": "1230484797",
+        "name": "수수커피 여의도점",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
+        "tags": [
+          "디저트특화"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.924972958655,37.5214694204797,%EC%95%84%EB%A3%A8%ED%9E%88%20%EB%8B%88%EC%99%80/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
       },
       {
         "id": "259982607",
@@ -215732,7 +215726,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -215745,7 +215739,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -216143,7 +216137,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -217571,6 +217565,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.7280737316,37.5075606828256,%EB%94%94%EA%B8%B0%ED%8B%B0/126.75017362446425,37.50518128761871,%EB%AA%85%EC%9D%B8%EB%B9%B5%EC%A7%80%EC%88%9C%EB%A1%801984%20%EC%83%81%EB%8F%99%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2,
+        "directionsUrl": "https://map.naver.com/p/directions/126.7280737316,37.5075606828256,%EB%94%94%EA%B8%B0%ED%8B%B0/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -217584,20 +217592,6 @@
         "ratingCount": 0,
         "distanceKm": 2,
         "directionsUrl": "https://map.naver.com/p/directions/126.7280737316,37.5075606828256,%EB%94%94%EA%B8%B0%ED%8B%B0/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.7280737316,37.5075606828256,%EB%94%94%EA%B8%B0%ED%8B%B0/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -218336,7 +218330,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -220869,20 +220863,17 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.670655706176,37.6448696782688,%EC%BF%A0%EC%9E%90%EC%BF%A0/126.69160701583795,37.651854843203864,%EC%B9%B4%ED%8E%98%20%EC%A0%80%EC%8A%A4%ED%8B%B4/-/car"
       },
       {
-        "id": "2004272980",
-        "name": "55갤런 비스트로카페",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7DIOoZmE5Jn",
+        "id": "1409348971",
+        "name": "카페샌디즈",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3YEqD7CadPM",
         "tags": [
-          "대형카페",
-          "대형베이커리",
-          "브런치카페",
-          "뷰맛집"
+          "대형카페"
         ],
         "sigungu": "김포시",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.670655706176,37.6448696782688,%EC%BF%A0%EC%9E%90%EC%BF%A0/126.657690440328,37.6625099694311,55%EA%B0%A4%EB%9F%B0%20%EB%B9%84%EC%8A%A4%ED%8A%B8%EB%A1%9C%EC%B9%B4%ED%8E%98/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.670655706176,37.6448696782688,%EC%BF%A0%EC%9E%90%EC%BF%A0/126.645044026108,37.6488029551091,%EC%B9%B4%ED%8E%98%EC%83%8C%EB%94%94%EC%A6%88/-/car"
       }
     ],
     "spots": [
@@ -221954,7 +221945,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -222534,7 +222525,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -222846,7 +222837,7 @@
       {
         "id": "922718762",
         "name": "아매네",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/BluLuLCSzVS",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -230051,7 +230042,7 @@
       {
         "id": "922718762",
         "name": "아매네",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/BluLuLCSzVS",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -231000,6 +230991,20 @@
   "1388198896": {
     "cafes": [
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.4,
+        "directionsUrl": "https://map.naver.com/p/directions/126.71308066100653,37.544304004642946,%EB%B3%B4%EC%96%91%EC%8B%9D%ED%95%98%EC%88%9C%EC%98%A5%ED%99%A9%EA%B8%88%EC%95%88%EB%8F%99%EA%B5%AD%EC%8B%9C/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "892819537",
         "name": "빵백화점 계양구청점",
         "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/KIWqxjMWCuC",
@@ -231029,20 +231034,6 @@
         "ratingCount": 0,
         "distanceKm": 2.4,
         "directionsUrl": "https://map.naver.com/p/directions/126.71308066100653,37.544304004642946,%EB%B3%B4%EC%96%91%EC%8B%9D%ED%95%98%EC%88%9C%EC%98%A5%ED%99%A9%EA%B8%88%EC%95%88%EB%8F%99%EA%B5%AD%EC%8B%9C/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.71308066100653,37.544304004642946,%EB%B3%B4%EC%96%91%EC%8B%9D%ED%95%98%EC%88%9C%EC%98%A5%ED%99%A9%EA%B8%88%EC%95%88%EB%8F%99%EA%B5%AD%EC%8B%9C/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1568148864",
@@ -231156,7 +231147,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -231352,7 +231343,7 @@
       {
         "id": "679726610",
         "name": "메타포레스트",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6JCtMpZaGL8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -232292,6 +232283,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.89979969267928,37.52756314460959,%EB%8B%B9%EC%82%B0%EC%98%A4%EB%8F%8C%20%EC%98%81%EB%93%B1%ED%8F%AC%EB%B3%B8%EC%A0%90/126.888257653814,37.5240370793761,%EB%8D%B0%EC%9D%B4%ED%8B%B0%ED%81%AC%EC%BB%A4%ED%94%BC/-/car"
       },
       {
+        "id": "892801179",
+        "name": "멜라",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
+        "tags": [
+          "브런치카페"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.2,
+        "directionsUrl": "https://map.naver.com/p/directions/126.89979969267928,37.52756314460959,%EB%8B%B9%EC%82%B0%EC%98%A4%EB%8F%8C%20%EC%98%81%EB%93%B1%ED%8F%AC%EB%B3%B8%EC%A0%90/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
+      },
+      {
         "id": "1770196217",
         "name": "37.5 시그니처 타임스퀘어점",
         "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8D0Lnet961K",
@@ -232304,19 +232308,6 @@
         "ratingCount": 0,
         "distanceKm": 1.2,
         "directionsUrl": "https://map.naver.com/p/directions/126.89979969267928,37.52756314460959,%EB%8B%B9%EC%82%B0%EC%98%A4%EB%8F%8C%20%EC%98%81%EB%93%B1%ED%8F%AC%EB%B3%B8%EC%A0%90/126.90546858622479,37.51778743775501,37.5%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%EC%A0%90/-/car"
-      },
-      {
-        "id": "892801179",
-        "name": "멜라",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
-        "tags": [
-          "브런치카페"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.89979969267928,37.52756314460959,%EB%8B%B9%EC%82%B0%EC%98%A4%EB%8F%8C%20%EC%98%81%EB%93%B1%ED%8F%AC%EB%B3%B8%EC%A0%90/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
       }
     ],
     "spots": [
@@ -236268,6 +236259,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.72877156615955,37.53724663543668,%EA%B3%84%EC%82%B0%EB%8F%99%EC%88%98%EC%A0%9C%EB%8F%88%EA%B9%8C%EC%8A%A4/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.4,
+        "directionsUrl": "https://map.naver.com/p/directions/126.72877156615955,37.53724663543668,%EA%B3%84%EC%82%B0%EB%8F%99%EC%88%98%EC%A0%9C%EB%8F%88%EA%B9%8C%EC%8A%A4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -236281,20 +236286,6 @@
         "ratingCount": 0,
         "distanceKm": 1.4,
         "directionsUrl": "https://map.naver.com/p/directions/126.72877156615955,37.53724663543668,%EA%B3%84%EC%82%B0%EB%8F%99%EC%88%98%EC%A0%9C%EB%8F%88%EA%B9%8C%EC%8A%A4/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.72877156615955,37.53724663543668,%EA%B3%84%EC%82%B0%EB%8F%99%EC%88%98%EC%A0%9C%EB%8F%88%EA%B9%8C%EC%8A%A4/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -236437,19 +236428,6 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.93049396035263,37.51955095956025,%EC%86%8C%EC%9A%B8%ED%95%9C%EC%9A%B0%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%83%9B%EA%B0%95%EC%97%AD%EC%A0%90/126.93021268829882,37.523985528605046,%EB%A6%AC%EC%8A%A4%EC%B9%B4%ED%8E%98%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
       },
       {
-        "id": "1230484797",
-        "name": "수수커피 여의도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
-        "tags": [
-          "디저트특화"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.7,
-        "directionsUrl": "https://map.naver.com/p/directions/126.93049396035263,37.51955095956025,%EC%86%8C%EC%9A%B8%ED%95%9C%EC%9A%B0%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%83%9B%EA%B0%95%EC%97%AD%EC%A0%90/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
-      },
-      {
         "id": "735590501",
         "name": "테디뵈르하우스 더현대점",
         "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LSY4LObVh6d",
@@ -236461,6 +236439,19 @@
         "ratingCount": 0,
         "distanceKm": 0.7,
         "directionsUrl": "https://map.naver.com/p/directions/126.93049396035263,37.51955095956025,%EC%86%8C%EC%9A%B8%ED%95%9C%EC%9A%B0%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%83%9B%EA%B0%95%EC%97%AD%EC%A0%90/126.92869784667478,37.52526584889195,%ED%85%8C%EB%94%94%EB%B5%88%EB%A5%B4%ED%95%98%EC%9A%B0%EC%8A%A4%20%EB%8D%94%ED%98%84%EB%8C%80%EC%A0%90/-/car"
+      },
+      {
+        "id": "1230484797",
+        "name": "수수커피 여의도점",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
+        "tags": [
+          "디저트특화"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.7,
+        "directionsUrl": "https://map.naver.com/p/directions/126.93049396035263,37.51955095956025,%EC%86%8C%EC%9A%B8%ED%95%9C%EC%9A%B0%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%83%9B%EA%B0%95%EC%97%AD%EC%A0%90/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
       },
       {
         "id": "7932458",
@@ -236763,7 +236754,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -238912,7 +238903,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -240791,7 +240782,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -244163,7 +244154,7 @@
       {
         "id": "131718454",
         "name": "오디디",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/C51L9P9559t",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/46xbKd7BOS8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -246407,7 +246398,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -247970,7 +247961,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -254846,6 +254837,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.899016510738,37.5219213041605,%EB%B3%B6%EB%8B%A4/126.89524595341472,37.52204956647853,%ED%85%8C%EC%9D%B4%EB%B8%94%EC%8A%A4%20%EC%98%81%EB%93%B1%ED%8F%AC%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "892801179",
+        "name": "멜라",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
+        "tags": [
+          "브런치카페"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.7,
+        "directionsUrl": "https://map.naver.com/p/directions/126.899016510738,37.5219213041605,%EB%B3%B6%EB%8B%A4/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
+      },
+      {
         "id": "1770196217",
         "name": "37.5 시그니처 타임스퀘어점",
         "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8D0Lnet961K",
@@ -254858,19 +254862,6 @@
         "ratingCount": 0,
         "distanceKm": 0.7,
         "directionsUrl": "https://map.naver.com/p/directions/126.899016510738,37.5219213041605,%EB%B3%B6%EB%8B%A4/126.90546858622479,37.51778743775501,37.5%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%EC%A0%90/-/car"
-      },
-      {
-        "id": "892801179",
-        "name": "멜라",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
-        "tags": [
-          "브런치카페"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.7,
-        "directionsUrl": "https://map.naver.com/p/directions/126.899016510738,37.5219213041605,%EB%B3%B6%EB%8B%A4/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
       },
       {
         "id": "341954198",
@@ -255009,6 +255000,19 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.917243595733,37.5099638492248,%ED%8C%9C%EC%8A%A4%ED%94%84%EB%A7%81%EC%8A%A4/126.93266609419597,37.512981199483534,%EC%A0%88%EA%B8%B0%EB%B0%94%EC%9D%B4%EC%96%91/-/car"
       },
       {
+        "id": "892801179",
+        "name": "멜라",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
+        "tags": [
+          "브런치카페"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.4,
+        "directionsUrl": "https://map.naver.com/p/directions/126.917243595733,37.5099638492248,%ED%8C%9C%EC%8A%A4%ED%94%84%EB%A7%81%EC%8A%A4/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
+      },
+      {
         "id": "1770196217",
         "name": "37.5 시그니처 타임스퀘어점",
         "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8D0Lnet961K",
@@ -255021,19 +255025,6 @@
         "ratingCount": 0,
         "distanceKm": 1.4,
         "directionsUrl": "https://map.naver.com/p/directions/126.917243595733,37.5099638492248,%ED%8C%9C%EC%8A%A4%ED%94%84%EB%A7%81%EC%8A%A4/126.90546858622479,37.51778743775501,37.5%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%EC%A0%90/-/car"
-      },
-      {
-        "id": "892801179",
-        "name": "멜라",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
-        "tags": [
-          "브런치카페"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.917243595733,37.5099638492248,%ED%8C%9C%EC%8A%A4%ED%94%84%EB%A7%81%EC%8A%A4/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
       },
       {
         "id": "237233206",
@@ -259868,7 +259859,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -260198,20 +260189,17 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.670929873094,37.6446217728057,%EC%9E%A5%EA%B8%B0%EC%96%91%EA%BC%AC%EC%B9%98/126.69160701583795,37.651854843203864,%EC%B9%B4%ED%8E%98%20%EC%A0%80%EC%8A%A4%ED%8B%B4/-/car"
       },
       {
-        "id": "2004272980",
-        "name": "55갤런 비스트로카페",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7DIOoZmE5Jn",
+        "id": "1409348971",
+        "name": "카페샌디즈",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3YEqD7CadPM",
         "tags": [
-          "대형카페",
-          "대형베이커리",
-          "브런치카페",
-          "뷰맛집"
+          "대형카페"
         ],
         "sigungu": "김포시",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.670929873094,37.6446217728057,%EC%9E%A5%EA%B8%B0%EC%96%91%EA%BC%AC%EC%B9%98/126.657690440328,37.6625099694311,55%EA%B0%A4%EB%9F%B0%20%EB%B9%84%EC%8A%A4%ED%8A%B8%EB%A1%9C%EC%B9%B4%ED%8E%98/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.670929873094,37.6446217728057,%EC%9E%A5%EA%B8%B0%EC%96%91%EA%BC%AC%EC%B9%98/126.645044026108,37.6488029551091,%EC%B9%B4%ED%8E%98%EC%83%8C%EB%94%94%EC%A6%88/-/car"
       }
     ],
     "spots": [
@@ -260493,7 +260481,7 @@
       {
         "id": "679726610",
         "name": "메타포레스트",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6JCtMpZaGL8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -264521,7 +264509,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -265670,20 +265658,17 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.67111650914687,37.64520883131804,%EA%B5%90%EB%8B%A4%EC%9D%B4/126.69160701583795,37.651854843203864,%EC%B9%B4%ED%8E%98%20%EC%A0%80%EC%8A%A4%ED%8B%B4/-/car"
       },
       {
-        "id": "2004272980",
-        "name": "55갤런 비스트로카페",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7DIOoZmE5Jn",
+        "id": "1409348971",
+        "name": "카페샌디즈",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3YEqD7CadPM",
         "tags": [
-          "대형카페",
-          "대형베이커리",
-          "브런치카페",
-          "뷰맛집"
+          "대형카페"
         ],
         "sigungu": "김포시",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.67111650914687,37.64520883131804,%EA%B5%90%EB%8B%A4%EC%9D%B4/126.657690440328,37.6625099694311,55%EA%B0%A4%EB%9F%B0%20%EB%B9%84%EC%8A%A4%ED%8A%B8%EB%A1%9C%EC%B9%B4%ED%8E%98/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.67111650914687,37.64520883131804,%EA%B5%90%EB%8B%A4%EC%9D%B4/126.645044026108,37.6488029551091,%EC%B9%B4%ED%8E%98%EC%83%8C%EB%94%94%EC%A6%88/-/car"
       }
     ],
     "spots": [
@@ -267171,6 +267156,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.738064365135,37.5381722150925,%EC%A4%80%EC%8A%A4%EC%9D%B4%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.8,
+        "directionsUrl": "https://map.naver.com/p/directions/126.738064365135,37.5381722150925,%EC%A4%80%EC%8A%A4%EC%9D%B4%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -267184,20 +267183,6 @@
         "ratingCount": 0,
         "distanceKm": 1.8,
         "directionsUrl": "https://map.naver.com/p/directions/126.738064365135,37.5381722150925,%EC%A4%80%EC%8A%A4%EC%9D%B4%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.8,
-        "directionsUrl": "https://map.naver.com/p/directions/126.738064365135,37.5381722150925,%EC%A4%80%EC%8A%A4%EC%9D%B4%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1568148864",
@@ -272123,7 +272108,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -272136,7 +272121,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -272576,7 +272561,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -272589,7 +272574,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -272684,6 +272669,19 @@
   "1808171777": {
     "cafes": [
       {
+        "id": "892801179",
+        "name": "멜라",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
+        "tags": [
+          "브런치카페"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.90405189254321,37.519926177339606,3%EC%9D%BC%ED%95%9C%EC%9A%B0%EA%B5%AD%EB%B0%A5/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
+      },
+      {
         "id": "1770196217",
         "name": "37.5 시그니처 타임스퀘어점",
         "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8D0Lnet961K",
@@ -272696,19 +272694,6 @@
         "ratingCount": 0,
         "distanceKm": 0.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.90405189254321,37.519926177339606,3%EC%9D%BC%ED%95%9C%EC%9A%B0%EA%B5%AD%EB%B0%A5/126.90546858622479,37.51778743775501,37.5%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%EC%A0%90/-/car"
-      },
-      {
-        "id": "892801179",
-        "name": "멜라",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
-        "tags": [
-          "브런치카페"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.90405189254321,37.519926177339606,3%EC%9D%BC%ED%95%9C%EC%9A%B0%EA%B5%AD%EB%B0%A5/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
       },
       {
         "id": "1702812863",
@@ -274550,7 +274535,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -275038,6 +275023,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.724396118987,37.508061225786,%ED%82%A4%EC%B9%98%ED%82%A4%EC%B9%98%EB%8B%A4%EC%9D%B4%EB%8B%9D/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.724396118987,37.508061225786,%ED%82%A4%EC%B9%98%ED%82%A4%EC%B9%98%EB%8B%A4%EC%9D%B4%EB%8B%9D/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -275051,20 +275050,6 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.724396118987,37.508061225786,%ED%82%A4%EC%B9%98%ED%82%A4%EC%B9%98%EB%8B%A4%EC%9D%B4%EB%8B%9D/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.724396118987,37.508061225786,%ED%82%A4%EC%B9%98%ED%82%A4%EC%B9%98%EB%8B%A4%EC%9D%B4%EB%8B%9D/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "587381044",
@@ -275210,7 +275195,7 @@
       {
         "id": "679726610",
         "name": "메타포레스트",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A07T5XnkjdB",
+        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6JCtMpZaGL8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -279078,19 +279063,6 @@
   "1863813515": {
     "cafes": [
       {
-        "id": "1230484797",
-        "name": "수수커피 여의도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
-        "tags": [
-          "디저트특화"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.9257067545357,37.52183839440251,%EC%9D%84%EC%A7%80%EB%8B%A4%EB%9D%BD%20%EC%97%AC%EC%9D%98%EB%8F%84/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
-      },
-      {
         "id": "645966224",
         "name": "카페꼼마 여의도신영증권점",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JqgjEiKkw3R",
@@ -279104,6 +279076,19 @@
         "ratingCount": 0,
         "distanceKm": 0.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.9257067545357,37.52183839440251,%EC%9D%84%EC%A7%80%EB%8B%A4%EB%9D%BD%20%EC%97%AC%EC%9D%98%EB%8F%84/126.92889733444014,37.521286241627685,%EC%B9%B4%ED%8E%98%EA%BC%BC%EB%A7%88%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%8B%A0%EC%98%81%EC%A6%9D%EA%B6%8C%EC%A0%90/-/car"
+      },
+      {
+        "id": "1230484797",
+        "name": "수수커피 여의도점",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
+        "tags": [
+          "디저트특화"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.9257067545357,37.52183839440251,%EC%9D%84%EC%A7%80%EB%8B%A4%EB%9D%BD%20%EC%97%AC%EC%9D%98%EB%8F%84/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
       },
       {
         "id": "7932458",
@@ -281396,7 +281381,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -281743,6 +281728,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.72377008113442,37.50484408587519,%EA%B5%90%EB%A0%88%EC%B8%A0%EB%9D%BC%EB%A9%98/126.75017362446425,37.50518128761871,%EB%AA%85%EC%9D%B8%EB%B9%B5%EC%A7%80%EC%88%9C%EB%A1%801984%20%EC%83%81%EB%8F%99%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.72377008113442,37.50484408587519,%EA%B5%90%EB%A0%88%EC%B8%A0%EB%9D%BC%EB%A9%98/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -281756,20 +281755,6 @@
         "ratingCount": 0,
         "distanceKm": 2.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.72377008113442,37.50484408587519,%EA%B5%90%EB%A0%88%EC%B8%A0%EB%9D%BC%EB%A9%98/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.72377008113442,37.50484408587519,%EA%B5%90%EB%A0%88%EC%B8%A0%EB%9D%BC%EB%A9%98/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -281880,6 +281865,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.72654190137891,37.50799323163933,%EA%B0%93%EB%8C%90%EB%B2%84%EA%B1%B0/126.72415626614152,37.493633801614116,%EB%B8%8C%EB%9D%BC%EC%9A%B4%EC%BA%A3/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/126.72654190137891,37.50799323163933,%EA%B0%93%EB%8C%90%EB%B2%84%EA%B1%B0/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -281893,20 +281892,6 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/126.72654190137891,37.50799323163933,%EA%B0%93%EB%8C%90%EB%B2%84%EA%B1%B0/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/126.72654190137891,37.50799323163933,%EA%B0%93%EB%8C%90%EB%B2%84%EA%B1%B0/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1821606272",
@@ -282615,7 +282600,7 @@
       {
         "id": "2062977336",
         "name": "나울",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KTGwyFeLv6u",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/7Il7qpvK2cy",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -284188,7 +284173,7 @@
       {
         "id": "131718454",
         "name": "오디디",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/C51L9P9559t",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/46xbKd7BOS8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -284506,7 +284491,7 @@
       {
         "id": "131718454",
         "name": "오디디",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/C51L9P9559t",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/46xbKd7BOS8",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -287652,18 +287637,17 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.89870379899997,37.52897948500172,%EC%9C%A0%EB%AF%B8%EB%B6%84%EA%B9%80%EB%B0%A5%20%EB%8B%B9%EC%82%B0%EB%B3%B8%EC%A0%90/126.891805740655,37.5393826255952,%EB%A7%90%EB%A1%A0%ED%95%98%EC%9A%B0%EC%8A%A4/-/car"
       },
       {
-        "id": "1770196217",
-        "name": "37.5 시그니처 타임스퀘어점",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8D0Lnet961K",
+        "id": "892801179",
+        "name": "멜라",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4b7SUrfqd1M",
         "tags": [
-          "브런치카페",
-          "디저트특화"
+          "브런치카페"
         ],
         "sigungu": "영등포구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 1.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.89870379899997,37.52897948500172,%EC%9C%A0%EB%AF%B8%EB%B6%84%EA%B9%80%EB%B0%A5%20%EB%8B%B9%EC%82%B0%EB%B3%B8%EC%A0%90/126.90546858622479,37.51778743775501,37.5%20%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98%20%ED%83%80%EC%9E%84%EC%8A%A4%ED%80%98%EC%96%B4%EC%A0%90/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.89870379899997,37.52897948500172,%EC%9C%A0%EB%AF%B8%EB%B6%84%EA%B9%80%EB%B0%A5%20%EB%8B%B9%EC%82%B0%EB%B3%B8%EC%A0%90/126.9037159932,37.5172337071695,%EB%A9%9C%EB%9D%BC/-/car"
       }
     ],
     "spots": [
@@ -289006,7 +288990,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -295900,19 +295884,6 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.924970695315,37.5214703200378,%EB%A5%B4%EB%B5%88%ED%94%84/126.92273562827656,37.521253539424684,%EB%A3%A8%EC%95%84%EB%B2%A0%EC%9D%B4%EC%BB%A4%EB%A6%AC%20%EC%97%AC%EC%9D%98%EB%8F%84TP%ED%83%80%EC%9B%8C%EC%A0%90/-/car"
       },
       {
-        "id": "1230484797",
-        "name": "수수커피 여의도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
-        "tags": [
-          "디저트특화"
-        ],
-        "sigungu": "영등포구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.3,
-        "directionsUrl": "https://map.naver.com/p/directions/126.924970695315,37.5214703200378,%EB%A5%B4%EB%B5%88%ED%94%84/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
-      },
-      {
         "id": "645966224",
         "name": "카페꼼마 여의도신영증권점",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JqgjEiKkw3R",
@@ -295926,6 +295897,19 @@
         "ratingCount": 0,
         "distanceKm": 0.3,
         "directionsUrl": "https://map.naver.com/p/directions/126.924970695315,37.5214703200378,%EB%A5%B4%EB%B5%88%ED%94%84/126.92889733444014,37.521286241627685,%EC%B9%B4%ED%8E%98%EA%BC%BC%EB%A7%88%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%8B%A0%EC%98%81%EC%A6%9D%EA%B6%8C%EC%A0%90/-/car"
+      },
+      {
+        "id": "1230484797",
+        "name": "수수커피 여의도점",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kws1i5oVdJ7",
+        "tags": [
+          "디저트특화"
+        ],
+        "sigungu": "영등포구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.3,
+        "directionsUrl": "https://map.naver.com/p/directions/126.924970695315,37.5214703200378,%EB%A5%B4%EB%B5%88%ED%94%84/126.924840024111,37.524304790588,%EC%88%98%EC%88%98%EC%BB%A4%ED%94%BC%20%EC%97%AC%EC%9D%98%EB%8F%84%EC%A0%90/-/car"
       },
       {
         "id": "259982607",
@@ -297942,7 +297926,7 @@
       {
         "id": "1259296023",
         "name": "해월커피 송도점",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9zYLt9QoEzY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -297955,7 +297939,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -298587,18 +298571,18 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.68458392353035,37.49339512040057,%EA%B3%A0%EB%A0%A4%EC%99%95%EC%A1%B1%EB%B0%9C/126.66621766894913,37.501256360403865,%EC%97%90%EC%8A%A4%EC%A0%9C%EC%9D%B4%EC%BB%A4%ED%94%BC/-/car"
       },
       {
-        "id": "616961636",
-        "name": "오크레페 인천도화엘리웨이점",
-        "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5HIelZ4TBtN",
+        "id": "1934272137",
+        "name": "랑데자뷰 인천부평점",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Kc84EMBQwfb",
         "tags": [
-          "브런치카페",
+          "대형카페",
           "디저트특화"
         ],
-        "sigungu": "미추홀구",
+        "sigungu": "부평구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 3.2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.68458392353035,37.49339512040057,%EA%B3%A0%EB%A0%A4%EC%99%95%EC%A1%B1%EB%B0%9C/126.664588539395,37.4695282850558,%EC%98%A4%ED%81%AC%EB%A0%88%ED%8E%98%20%EC%9D%B8%EC%B2%9C%EB%8F%84%ED%99%94%EC%97%98%EB%A6%AC%EC%9B%A8%EC%9D%B4%EC%A0%90/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.68458392353035,37.49339512040057,%EA%B3%A0%EB%A0%A4%EC%99%95%EC%A1%B1%EB%B0%9C/126.693724342479,37.521299765272,%EB%9E%91%EB%8D%B0%EC%9E%90%EB%B7%B0%20%EC%9D%B8%EC%B2%9C%EB%B6%80%ED%8F%89%EC%A0%90/-/car"
       }
     ],
     "spots": [
@@ -298685,7 +298669,7 @@
       {
         "id": "1680214126",
         "name": "라데아",
-        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JOWNFkIx7aj",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/mm8qygRiRv",
         "tags": [
           "대형카페",
           "대형베이커리",
@@ -299698,6 +299682,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.71458593739,37.5038401596642,%EB%A7%9B%EC%9E%87%EC%8F%98%EB%96%A1%EB%B3%B6%EC%9D%B4%26%EC%86%8C%EB%B3%B4%EB%A1%9C%ED%83%95%EC%88%98%EC%9C%A1/126.70423366788071,37.51949121345317,%EA%B7%B8%EB%9E%91%ED%8C%A1/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.6,
+        "directionsUrl": "https://map.naver.com/p/directions/126.71458593739,37.5038401596642,%EB%A7%9B%EC%9E%87%EC%8F%98%EB%96%A1%EB%B3%B6%EC%9D%B4%26%EC%86%8C%EB%B3%B4%EB%A1%9C%ED%83%95%EC%88%98%EC%9C%A1/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -299711,20 +299709,6 @@
         "ratingCount": 0,
         "distanceKm": 2.6,
         "directionsUrl": "https://map.naver.com/p/directions/126.71458593739,37.5038401596642,%EB%A7%9B%EC%9E%87%EC%8F%98%EB%96%A1%EB%B3%B6%EC%9D%B4%26%EC%86%8C%EB%B3%B4%EB%A1%9C%ED%83%95%EC%88%98%EC%9C%A1/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.6,
-        "directionsUrl": "https://map.naver.com/p/directions/126.71458593739,37.5038401596642,%EB%A7%9B%EC%9E%87%EC%8F%98%EB%96%A1%EB%B3%B6%EC%9D%B4%26%EC%86%8C%EB%B3%B4%EB%A1%9C%ED%83%95%EC%88%98%EC%9C%A1/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       }
     ],
     "spots": [
@@ -300970,7 +300954,7 @@
       {
         "id": "799177371",
         "name": "젠젠 본점",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3y5aou8IYtY",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페",
           "디저트특화"
@@ -301890,7 +301874,7 @@
       {
         "id": "1009753713",
         "name": "베이커리율교P3120",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/D3eT31wEVFh",
+        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CZzlH9s2QVj",
         "tags": [
           "브런치카페"
         ],
@@ -302488,6 +302472,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.735313058095,37.5393319714132,%EC%96%B4%EB%A6%AC%EB%B2%84%EB%A6%AC%EC%86%8C%EB%A8%B8%EB%A6%AC%EA%B5%AD%EB%B0%A5%20%EB%B3%B8%EC%A0%90/126.73839678396841,37.53532399608952,%EB%B9%B5%EB%B0%B1%ED%99%94%EC%A0%90%20%EA%B3%84%EC%96%91%EA%B5%AC%EC%B2%AD%EC%A0%90/-/car"
       },
       {
+        "id": "1469922121",
+        "name": "키위스파랜드",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
+        "tags": [
+          "대형카페",
+          "브런치카페"
+        ],
+        "sigungu": "계양구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.8,
+        "directionsUrl": "https://map.naver.com/p/directions/126.735313058095,37.5393319714132,%EC%96%B4%EB%A6%AC%EB%B2%84%EB%A6%AC%EC%86%8C%EB%A8%B8%EB%A6%AC%EA%B5%AD%EB%B0%A5%20%EB%B3%B8%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
+      },
+      {
         "id": "1344053317",
         "name": "카페아나지로306",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AX0XvmuLzh7",
@@ -302501,20 +302499,6 @@
         "ratingCount": 0,
         "distanceKm": 1.8,
         "directionsUrl": "https://map.naver.com/p/directions/126.735313058095,37.5393319714132,%EC%96%B4%EB%A6%AC%EB%B2%84%EB%A6%AC%EC%86%8C%EB%A8%B8%EB%A6%AC%EA%B5%AD%EB%B0%A5%20%EB%B3%B8%EC%A0%90/126.725620350647,37.5252326476539,%EC%B9%B4%ED%8E%98%EC%95%84%EB%82%98%EC%A7%80%EB%A1%9C306/-/car"
-      },
-      {
-        "id": "1469922121",
-        "name": "키위스파랜드",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BeyuXWcuMXH",
-        "tags": [
-          "대형카페",
-          "브런치카페"
-        ],
-        "sigungu": "계양구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.8,
-        "directionsUrl": "https://map.naver.com/p/directions/126.735313058095,37.5393319714132,%EC%96%B4%EB%A6%AC%EB%B2%84%EB%A6%AC%EC%86%8C%EB%A8%B8%EB%A6%AC%EA%B5%AD%EB%B0%A5%20%EB%B3%B8%EC%A0%90/126.725639163586,37.5250380754471,%ED%82%A4%EC%9C%84%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C/-/car"
       },
       {
         "id": "1568148864",
