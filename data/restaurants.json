@@ -416182,11 +416182,31 @@
     "straightKm": 49.3,
     "driveMinutesEst": 67,
     "firstSeenAt": "2026-09-01T23:12:32.836Z",
-    "status": "pending_extraction",
+    "lastSeenAt": "2026-09-12T04:52:52.888Z",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": []
+    "attributes": {
+      "cuisineType": "한식",
+      "evidence": "가족모임·돌잔치 자리로 자주 찾는 한옥 한정식집. 산채정식·산채특정식이 대표 메뉴이고, 탁 트인 전망과 고즈넉한 한옥 분위기가 후기에서 반복적으로 언급된다.",
+      "parkingGrade": "A",
+      "parkingEvidence": "제3주차장까지 갖출 만큼 주차 공간이 넉넉해 편하게 댈 수 있다는 후기.",
+      "hasRoom": true,
+      "reservable": null,
+      "viewStrength": 2,
+      "viewTypes": [
+        "산"
+      ],
+      "outdoorSeating": null,
+      "teenAppeal": 1,
+      "confidence": 0.7,
+      "extractedAt": "2026-09-12T04:52:52.888Z",
+      "modelVersion": "manual-review+family-request"
+    },
+    "tags": [
+      "한식",
+      "룸있음"
+    ]
   },
   {
     "kakaoPlaceId": "947061519",
