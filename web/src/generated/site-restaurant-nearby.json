@@ -62613,19 +62613,6 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.85310300627945,37.47941865723065,%EC%96%91%ED%8F%89%ED%95%B4%EC%9E%A5%EA%B5%AD/126.86045177376585,37.497672960426364,%EB%A5%B4%EB%94%94%ED%88%AC%EC%96%B4%20%EA%B3%A0%EC%B2%99%EC%A0%90/-/car"
       },
       {
-        "id": "195605913",
-        "name": "아로케",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8IScxoO395v",
-        "tags": [
-          "디저트특화"
-        ],
-        "sigungu": "금천구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 2.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.85310300627945,37.47941865723065,%EC%96%91%ED%8F%89%ED%95%B4%EC%9E%A5%EA%B5%AD/126.880098704892,37.47613972977,%EC%95%84%EB%A1%9C%EC%BC%80/-/car"
-      },
-      {
         "id": "500561873",
         "name": "9로평상",
         "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/dmcVzAPAfd",
@@ -62641,6 +62628,19 @@
         "ratingCount": 0,
         "distanceKm": 2.4,
         "directionsUrl": "https://map.naver.com/p/directions/126.85310300627945,37.47941865723065,%EC%96%91%ED%8F%89%ED%95%B4%EC%9E%A5%EA%B5%AD/126.82607570314381,37.48214805867979,9%EB%A1%9C%ED%8F%89%EC%83%81/-/car"
+      },
+      {
+        "id": "195605913",
+        "name": "아로케",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8IScxoO395v",
+        "tags": [
+          "디저트특화"
+        ],
+        "sigungu": "금천구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 2.4,
+        "directionsUrl": "https://map.naver.com/p/directions/126.85310300627945,37.47941865723065,%EC%96%91%ED%8F%89%ED%95%B4%EC%9E%A5%EA%B5%AD/126.880098704892,37.47613972977,%EC%95%84%EB%A1%9C%EC%BC%80/-/car"
       },
       {
         "id": "1790031933",
@@ -82521,21 +82521,6 @@
   "20747449": {
     "cafes": [
       {
-        "id": "1641825044",
-        "name": "디키디키",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8a3OUIO7Gdb",
-        "tags": [
-          "대형카페",
-          "브런치카페",
-          "디저트특화"
-        ],
-        "sigungu": "중구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 0.8,
-        "directionsUrl": "https://map.naver.com/p/directions/126.99987775835788,37.56427090773028,%EC%98%A4%EC%9E%A5%EB%8F%99%ED%95%A8%ED%9D%A5%EB%83%89%EB%A9%B4/127.00894198566033,37.566244651710775,%EB%94%94%ED%82%A4%EB%94%94%ED%82%A4/-/car"
-      },
-      {
         "id": "9496658",
         "name": "테라스",
         "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/AAFUhBfsN7Z",
@@ -82550,6 +82535,21 @@
         "ratingCount": 0,
         "distanceKm": 0.8,
         "directionsUrl": "https://map.naver.com/p/directions/126.99987775835788,37.56427090773028,%EC%98%A4%EC%9E%A5%EB%8F%99%ED%95%A8%ED%9D%A5%EB%83%89%EB%A9%B4/127.00398110872831,37.57051474168478,%ED%85%8C%EB%9D%BC%EC%8A%A4/-/car"
+      },
+      {
+        "id": "1641825044",
+        "name": "디키디키",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8a3OUIO7Gdb",
+        "tags": [
+          "대형카페",
+          "브런치카페",
+          "디저트특화"
+        ],
+        "sigungu": "중구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.8,
+        "directionsUrl": "https://map.naver.com/p/directions/126.99987775835788,37.56427090773028,%EC%98%A4%EC%9E%A5%EB%8F%99%ED%95%A8%ED%9D%A5%EB%83%89%EB%A9%B4/127.00894198566033,37.566244651710775,%EB%94%94%ED%82%A4%EB%94%94%ED%82%A4/-/car"
       },
       {
         "id": "65633748",
@@ -223227,19 +223227,20 @@
         "directionsUrl": "https://map.naver.com/p/directions/126.995185292675,37.5603064245891,%ED%9D%AC%ED%9D%AC%EC%B9%B4%EC%B8%A0/126.97969808296419,37.55869109163398,%EB%84%AC%EB%B3%B4%EC%8A%A4%EC%BD%94%20%EB%82%A8%EC%B4%8C%EB%B9%B5%EC%A7%91/-/car"
       },
       {
-        "id": "1641825044",
-        "name": "디키디키",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8a3OUIO7Gdb",
+        "id": "9496658",
+        "name": "테라스",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/AAFUhBfsN7Z",
         "tags": [
           "대형카페",
+          "대형베이커리",
           "브런치카페",
-          "디저트특화"
+          "뷰맛집"
         ],
-        "sigungu": "중구",
+        "sigungu": "종로구",
         "ratingAvg": 0,
         "ratingCount": 0,
         "distanceKm": 1.4,
-        "directionsUrl": "https://map.naver.com/p/directions/126.995185292675,37.5603064245891,%ED%9D%AC%ED%9D%AC%EC%B9%B4%EC%B8%A0/127.00894198566033,37.566244651710775,%EB%94%94%ED%82%A4%EB%94%94%ED%82%A4/-/car"
+        "directionsUrl": "https://map.naver.com/p/directions/126.995185292675,37.5603064245891,%ED%9D%AC%ED%9D%AC%EC%B9%B4%EC%B8%A0/127.00398110872831,37.57051474168478,%ED%85%8C%EB%9D%BC%EC%8A%A4/-/car"
       }
     ],
     "spots": [
@@ -253570,21 +253571,6 @@
         "directionsUrl": "https://map.naver.com/p/directions/127.022814009956,37.5794351543483,%EC%84%9D%ED%98%B8%EA%B0%88%EB%B9%84/127.02297849499588,37.56577513722767,%EB%B3%B4%EB%A9%94%20%EB%B2%A0%EC%9D%B4%EC%BB%A4%EB%A6%AC/-/car"
       },
       {
-        "id": "1641825044",
-        "name": "디키디키",
-        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8a3OUIO7Gdb",
-        "tags": [
-          "대형카페",
-          "브런치카페",
-          "디저트특화"
-        ],
-        "sigungu": "중구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.9,
-        "directionsUrl": "https://map.naver.com/p/directions/127.022814009956,37.5794351543483,%EC%84%9D%ED%98%B8%EA%B0%88%EB%B9%84/127.00894198566033,37.566244651710775,%EB%94%94%ED%82%A4%EB%94%94%ED%82%A4/-/car"
-      },
-      {
         "id": "9496658",
         "name": "테라스",
         "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/AAFUhBfsN7Z",
@@ -253599,6 +253585,21 @@
         "ratingCount": 0,
         "distanceKm": 1.9,
         "directionsUrl": "https://map.naver.com/p/directions/127.022814009956,37.5794351543483,%EC%84%9D%ED%98%B8%EA%B0%88%EB%B9%84/127.00398110872831,37.57051474168478,%ED%85%8C%EB%9D%BC%EC%8A%A4/-/car"
+      },
+      {
+        "id": "1641825044",
+        "name": "디키디키",
+        "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8a3OUIO7Gdb",
+        "tags": [
+          "대형카페",
+          "브런치카페",
+          "디저트특화"
+        ],
+        "sigungu": "중구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 1.9,
+        "directionsUrl": "https://map.naver.com/p/directions/127.022814009956,37.5794351543483,%EC%84%9D%ED%98%B8%EA%B0%88%EB%B9%84/127.00894198566033,37.566244651710775,%EB%94%94%ED%82%A4%EB%94%94%ED%82%A4/-/car"
       },
       {
         "id": "368428431",
