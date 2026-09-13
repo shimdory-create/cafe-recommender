@@ -240,6 +240,11 @@ export async function runClassify(
   }
 
   await store.writeCafes(cafes)
-  if (classified + excluded > 0) await recordSuccess(store, 'classify', now)
+  // targets 가 0곳이면 판정 대기 큐가 실제로 비어 있는 정상 상태다 — 통과 0곳과
+  // 구분 못 하면(2026-09) 큐가 빈 채로 며칠만 지나도 daily-watch 의 36시간
+  // source_stale 경보가 오탐으로 울린다.
+  if (targets.length === 0 || classified + excluded > 0) {
+    await recordSuccess(store, 'classify', now)
+  }
   return { classified, excluded, skipped, failed, quotaExhausted }
 }

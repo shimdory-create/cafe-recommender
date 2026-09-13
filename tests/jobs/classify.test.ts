@@ -59,21 +59,22 @@ const goodAttrs = {
 
 function harness(cafes: Cafe[], buzzRows: BuzzSnapshot[], over: Partial<ClassifyDeps> = {}) {
   let saved = cafes
+  let health: { source: string; lastSuccessAt: string | null }[] = []
   const deps: ClassifyDeps = {
     store: {
       readCafes: async () => saved,
       writeCafes: async (c) => { saved = c },
       readBuzz: async () => buzzRows,
       appendRaw: async () => 'p',
-      readHealth: async () => [],
-      writeHealth: async () => {},
+      readHealth: async () => health as never,
+      writeHealth: async (h) => { health = h as never },
     },
     blog: { search: async () => ({ docs: [], payload: {} }) },
     llm: { name: 'f', modelVersion: 'gemini-3.1-flash-lite', extract: async () => goodAttrs as never },
     now: NOW,
     ...over,
   }
-  return { deps, saved: () => saved }
+  return { deps, saved: () => saved, health: () => health }
 }
 
 describe('runClassify', () => {
@@ -388,5 +389,25 @@ describe('runClassify', () => {
     const r = await runClassify(h.deps)
     expect(r.quotaExhausted).toBe(false)
     expect(calls).toBe(6)
+  })
+
+  it('판정 대기가 0곳이면(정상적으로 빈 큐) 그래도 성공을 기록한다', async () => {
+    const h = harness([], [])
+    const r = await runClassify(h.deps)
+    expect(r.classified).toBe(0)
+    expect(r.excluded).toBe(0)
+    const classifyHealth = h.health().find((x) => x.source === 'classify')
+    expect(classifyHealth?.lastSuccessAt).toBe(NOW.toISOString())
+  })
+
+  it('대기 중인 카페가 있는데 전부 실패하면 성공을 기록하지 않는다', async () => {
+    const h = harness([cafe('1')], [buzz('1')], {
+      llm: { name: 'f', modelVersion: 'v', extract: async () => { throw new Error('이상한 응답') } },
+    })
+    const r = await runClassify(h.deps)
+    expect(r.classified + r.excluded).toBe(0)
+    expect(r.failed).toBe(1)
+    const classifyHealth = h.health().find((x) => x.source === 'classify')
+    expect(classifyHealth?.lastSuccessAt).toBeFalsy()
   })
 })

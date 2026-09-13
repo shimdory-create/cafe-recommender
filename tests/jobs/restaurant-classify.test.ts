@@ -197,6 +197,31 @@ describe('runRestaurantClassify', () => {
     expect(r.classified).toBe(2)
     expect(h.saved().filter((x) => x.status === 'pending_extraction')).toHaveLength(1)
   })
+
+  it('판정 대기가 0곳이면(정상적으로 빈 큐) 그래도 성공을 기록한다', async () => {
+    const h = harness([], [])
+    const r = await runRestaurantClassify(h.deps)
+    expect(r.classified + r.excluded).toBe(0)
+    const health = h.health().find(
+      (x): x is { source: string; lastSuccessAt: string | null } =>
+        (x as { source?: string }).source === 'classify-restaurant',
+    )
+    expect(health?.lastSuccessAt).toBe(NOW.toISOString())
+  })
+
+  it('대기 중인 식당이 있는데 전부 실패하면 성공을 기록하지 않는다', async () => {
+    const h = harness([restaurant('1')], [buzz('1')], {
+      llm: { modelVersion: 'v', extract: async () => { throw new Error('이상한 응답') } } as never,
+    })
+    const r = await runRestaurantClassify(h.deps)
+    expect(r.classified + r.excluded).toBe(0)
+    expect(r.failed).toBe(1)
+    const health = h.health().find(
+      (x): x is { source: string; lastSuccessAt: string | null } =>
+        (x as { source?: string }).source === 'classify-restaurant',
+    )
+    expect(health?.lastSuccessAt).toBeFalsy()
+  })
 })
 
 describe('orderPendingRestaurants', () => {

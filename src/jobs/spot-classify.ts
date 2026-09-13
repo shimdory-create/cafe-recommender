@@ -166,6 +166,10 @@ export async function runSpotClassify(
   }
 
   await store.writeSpots(spots)
-  if (classified + excluded > 0) await recordSuccess(store, 'classify-spot', now)
+  // targets 가 0곳이면 판정 대기 큐가 실제로 비어 있는 정상 상태다 — 카페와
+  // 같은 이유로 구분한다 (jobs/classify.ts 참고, daily-watch 오탐 방지)
+  if (targets.length === 0 || classified + excluded > 0) {
+    await recordSuccess(store, 'classify-spot', now)
+  }
   return { classified, excluded, skipped, failed, quotaExhausted }
 }
