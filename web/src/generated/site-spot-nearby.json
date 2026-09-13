@@ -51352,6 +51352,19 @@
     ],
     "restaurants": [
       {
+        "id": "18090279",
+        "name": "빠끔살이",
+        "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/28sHkoM9Cie",
+        "tags": [
+          "한식"
+        ],
+        "sigungu": "영종구",
+        "ratingAvg": 0,
+        "ratingCount": 0,
+        "distanceKm": 0.5,
+        "directionsUrl": "https://map.naver.com/p/directions/126.549650971799,37.4962716841596,%ED%95%98%EB%8A%98%EC%A0%95%EC%9B%90/126.55371678183168,37.49942259135093,%EB%B9%A0%EB%81%94%EC%82%B4%EC%9D%B4/-/car"
+      },
+      {
         "id": "896302505",
         "name": "이화원",
         "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/Cmy6ZIxeqFS",
@@ -51407,19 +51420,6 @@
         "ratingCount": 0,
         "distanceKm": 1.2,
         "directionsUrl": "https://map.naver.com/p/directions/126.549650971799,37.4962716841596,%ED%95%98%EB%8A%98%EC%A0%95%EC%9B%90/126.5588638433831,37.48877498467147,%EC%98%81%EC%A2%85%EA%B8%B8%EC%83%81/-/car"
-      },
-      {
-        "id": "628592063",
-        "name": "자강",
-        "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/15oihI6OTAk",
-        "tags": [
-          "중식"
-        ],
-        "sigungu": "영종구",
-        "ratingAvg": 0,
-        "ratingCount": 0,
-        "distanceKm": 1.2,
-        "directionsUrl": "https://map.naver.com/p/directions/126.549650971799,37.4962716841596,%ED%95%98%EB%8A%98%EC%A0%95%EC%9B%90/126.559567084485,37.4884009900453,%EC%9E%90%EA%B0%95/-/car"
       }
     ]
   },
