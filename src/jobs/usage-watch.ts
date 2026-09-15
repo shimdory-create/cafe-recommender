@@ -46,6 +46,7 @@ const WEEKLY_SOURCES = [
   RESTAURANT_LIVENESS_SOURCE,
   'kakao-local-spot', 'kakao-directions-spot', 'harvest-spot',
   SPOT_LIVENESS_SOURCE,
+  'kakao-directions-nearby',
 ] as const
 const WEEKLY_STALE_HOURS = 24 * 9
 
