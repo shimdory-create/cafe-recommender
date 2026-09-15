@@ -31,6 +31,7 @@
     "restaurant-suggest": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-suggest",
     "restaurant-liveness": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-liveness",
     "restaurant-drive": "tsx --env-file-if-exists=.env src/cli/run.ts restaurant-drive",
+    "nearby-drive": "tsx --env-file-if-exists=.env src/cli/run.ts nearby-drive",
     "spot-discover": "tsx --env-file-if-exists=.env src/cli/run.ts spot-discover",
     "spot-buzz": "tsx --env-file-if-exists=.env src/cli/run.ts spot-buzz",
     "spot-classify": "tsx --env-file-if-exists=.env src/cli/run.ts spot-classify",

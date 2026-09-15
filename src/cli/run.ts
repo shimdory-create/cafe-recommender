@@ -58,6 +58,7 @@ import { runSpotClassify } from '../jobs/spot-classify.js'
 import { runSpotWeeklySuggest } from '../jobs/spot-suggest.js'
 import { runSpotLiveness } from '../jobs/spot-liveness.js'
 import { runSpotDriveTimes } from '../jobs/spot-drive-times.js'
+import { runNearbyDriveTimes } from '../jobs/nearby-drive-times.js'
 
 const argv = process.argv.slice(2)
 const cmd = argv[0]
@@ -402,6 +403,35 @@ async function main() {
       console.log(`실주행 시간 측정 시작${limit ? ` (최대 ${limit}곳)` : ''}${force ? ' · 전량 재측정' : ''}`)
       const r = await runDriveTimes(ctx, { limit, force })
       console.log(`  측정 ${r.measured}곳 / 경로없음 ${r.unroutable}곳 / 실패 ${r.failed}곳`)
+      break
+    }
+
+    case 'nearby-drive': {
+      const base = createContext()
+      const restaurantStore = createRestaurantJsonStore(base.env.DATA_DIR)
+      const spotStore = createSpotJsonStore(base.env.DATA_DIR)
+      const ctx = {
+        store: {
+          readCafes: base.store.readCafes,
+          readRestaurants: restaurantStore.readRestaurants,
+          readSpots: spotStore.readSpots,
+          readNearbyDriveCache: base.store.readNearbyDriveCache,
+          writeNearbyDriveCache: base.store.writeNearbyDriveCache,
+          appendRaw: base.store.appendRaw,
+          readHealth: base.store.readHealth,
+          writeHealth: base.store.writeHealth,
+        },
+        directions: base.directions,
+      }
+      const budget = numFlag(rest, 'budget')
+      const preLimit = numFlag(rest, 'pre-limit')
+      console.log(`근처 이동시간 캐시 채우기 시작${budget ? ` (예산 ${budget}건)` : ''}`)
+      const r = await runNearbyDriveTimes(ctx, { budget, preLimit })
+      console.log(
+        `  측정 ${r.measured}건 / 경로없음 ${r.unroutable}건 / 실패 ${r.failed}건`
+        + `${r.budgetExhausted ? ' · 예산 소진(내일 이어서)' : ''}`
+        + `${r.quotaExhausted ? ' · 쿼터 소진' : ''}`,
+      )
       break
     }
 
@@ -798,6 +828,7 @@ const MUTATING = new Set([
   'restaurant-discover', 'restaurant-buzz', 'restaurant-classify', 'restaurant-drive', 'restaurant-suggest',
   'restaurant-liveness',
   'spot-discover', 'spot-buzz', 'spot-classify', 'spot-drive', 'spot-suggest', 'spot-liveness',
+  'nearby-drive',
 ])
 
 try {
