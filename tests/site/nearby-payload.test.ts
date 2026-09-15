@@ -41,6 +41,8 @@ describe('buildNearbyPayloads', () => {
       cafeSite: [siteCafe({ id: 'c1' }) as never],
       restaurantSite: [{ id: 'r1', name: '식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never],
       spotSite: [{ id: 's1', name: '가볼곳', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never],
+      driveCache: [],
+      preLimit: 10,
       limit: 5,
     })
     expect(result.cafe.c1!.restaurants).toHaveLength(1)
@@ -58,12 +60,14 @@ describe('buildNearbyPayloads', () => {
       cafeSite: [siteCafe({ id: 'c1' }) as never],
       restaurantSite: [{ id: 'r1', name: '식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: true } as never],
       spotSite: [],
+      driveCache: [],
+      preLimit: 10,
       limit: 5,
     })
     expect(result.cafe.c1!.restaurants).toEqual([])
   })
 
-  it('출력 카드에 driveMinutes 필드가 없다', () => {
+  it('캐시에 실측이 있으면 driveMinutes를 채우고, 없으면 null이다', () => {
     const result = buildNearbyPayloads({
       cafes: [cafe({ kakaoPlaceId: 'c1', lat: 37.5, lng: 126.9 })],
       restaurants: [{ kakaoPlaceId: 'r1', lat: 37.501, lng: 126.901 } as Restaurant],
@@ -71,9 +75,11 @@ describe('buildNearbyPayloads', () => {
       cafeSite: [siteCafe({ id: 'c1' }) as never],
       restaurantSite: [{ id: 'r1', name: '식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never],
       spotSite: [],
+      driveCache: [],
+      preLimit: 10,
       limit: 5,
     })
-    expect(result.cafe.c1!.restaurants[0]).not.toHaveProperty('driveMinutes')
+    expect(result.cafe.c1!.restaurants[0]).toHaveProperty('driveMinutes', null)
     expect(result.cafe.c1!.restaurants[0]).toHaveProperty('distanceKm')
   })
 
@@ -85,6 +91,8 @@ describe('buildNearbyPayloads', () => {
       cafeSite: [siteCafe({ id: 'c1' }) as never],
       restaurantSite: [],
       spotSite: [],
+      driveCache: [],
+      preLimit: 10,
       limit: 5,
     })
     expect(result.cafe.c1!.restaurants).toEqual([])
@@ -99,6 +107,8 @@ describe('buildNearbyPayloads', () => {
       cafeSite: [siteCafe({ id: 'c1' }) as never],
       restaurantSite: [{ id: 'r1', name: '식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never],
       spotSite: [],
+      driveCache: [],
+      preLimit: 10,
       limit: 5,
     })
     const url = result.cafe.c1!.restaurants[0]!.directionsUrl
@@ -115,6 +125,8 @@ describe('buildNearbyPayloads', () => {
       cafeSite: [siteCafe({ id: 'c1', cityOnly: true }) as never],
       restaurantSite: [{ id: 'r1', name: '식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never],
       spotSite: [],
+      driveCache: [],
+      preLimit: 10,
       limit: 5,
     })
     // cityOnly인 c1도 자기 키(근처 식당 목록)는 갖는다
@@ -122,5 +134,54 @@ describe('buildNearbyPayloads', () => {
     expect(result.cafe.c1!.restaurants).toHaveLength(1)
     // 하지만 식당 쪽에서 볼 때 c1(cityOnly)은 후보에서 빠진다
     expect(result.restaurant.r1!.cafes).toEqual([])
+  })
+
+  it('실측 페어가 있으면 그 값 기준으로 재정렬한다(직선거리 순서와 달라도)', () => {
+    const near: Restaurant = { kakaoPlaceId: 'near', lat: 37.501, lng: 126.901 } as Restaurant
+    const far: Restaurant = { kakaoPlaceId: 'far', lat: 37.502, lng: 126.902 } as Restaurant
+    const result = buildNearbyPayloads({
+      cafes: [cafe({ kakaoPlaceId: 'c1', lat: 37.5, lng: 126.9 })],
+      restaurants: [near, far],
+      spots: [],
+      cafeSite: [siteCafe({ id: 'c1' }) as never],
+      restaurantSite: [
+        { id: 'near', name: '가까운식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never,
+        { id: 'far', name: '먼식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never,
+      ],
+      spotSite: [],
+      // 직선거리로는 near가 더 가깝지만, 실측으로는 far가 더 빠르다고 캐시해둔다
+      driveCache: [
+        { pairKey: 'c1:far', minutes: 3, km: 1, tollWon: 0, measuredAt: '2026-09-15T00:00:00.000Z' },
+        { pairKey: 'c1:near', minutes: 30, km: 1, tollWon: 0, measuredAt: '2026-09-15T00:00:00.000Z' },
+      ],
+      preLimit: 10,
+      limit: 5,
+    })
+    const ids = result.cafe.c1!.restaurants.map((r) => r.id)
+    expect(ids[0]).toBe('far')
+    expect(ids[1]).toBe('near')
+  })
+
+  it('preLimit으로 직선거리 1차 후보를 좁힌 뒤에만 재정렬한다', () => {
+    // preLimit=1이면 far는 애초에 1차 후보에도 못 들어간다(near가 더 가까움)
+    const near: Restaurant = { kakaoPlaceId: 'near', lat: 37.501, lng: 126.901 } as Restaurant
+    const far: Restaurant = { kakaoPlaceId: 'far', lat: 38.5, lng: 127.9 } as Restaurant
+    const result = buildNearbyPayloads({
+      cafes: [cafe({ kakaoPlaceId: 'c1', lat: 37.5, lng: 126.9 })],
+      restaurants: [near, far],
+      spots: [],
+      cafeSite: [siteCafe({ id: 'c1' }) as never],
+      restaurantSite: [
+        { id: 'near', name: '가까운식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never,
+        { id: 'far', name: '먼식당', sigungu: '부평구', imageUrl: null, tags: [], ratingAvg: 0, ratingCount: 0, cityOnly: false } as never,
+      ],
+      spotSite: [],
+      driveCache: [
+        { pairKey: 'c1:far', minutes: 1, km: 1, tollWon: 0, measuredAt: '2026-09-15T00:00:00.000Z' },
+      ],
+      preLimit: 1,
+      limit: 5,
+    })
+    expect(result.cafe.c1!.restaurants.map((r) => r.id)).toEqual(['near'])
   })
 })

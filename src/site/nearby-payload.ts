@@ -1,6 +1,8 @@
 // src/site/nearby-payload.ts
 import { nearestByDomain, type GeoPoint, type NearbyMatch } from './nearby.js'
-import type { Cafe, SiteCafe } from '../schema.js'
+import { buildPairIndex, lookupPair } from './nearby-drive-cache.js'
+import { estimateDriveMinutes } from '../pipeline/geo.js'
+import type { Cafe, SiteCafe, NearbyDrivePair } from '../schema.js'
 import type { Restaurant, SiteRestaurant } from '../restaurant-schema.js'
 import type { Spot, SiteSpot } from '../spot-schema.js'
 
@@ -13,6 +15,8 @@ export interface NearbyCard {
   ratingAvg: number
   ratingCount: number
   distanceKm: number
+  /** 실측 있으면 분 단위, 없으면 null(카드는 이때 distanceKm으로 폴백 표시) */
+  driveMinutes: number | null
   /** 앵커(지금 보는 곳)에서 이 카드로의 차량 길찾기 링크 */
   directionsUrl: string
 }
@@ -24,6 +28,9 @@ export interface BuildNearbyInput {
   cafeSite: SiteCafe[]
   restaurantSite: SiteRestaurant[]
   spotSite: SiteSpot[]
+  driveCache: NearbyDrivePair[]
+  /** 직선거리 1차 필터 개수(2단계 K). 그 안에서만 실측 기준 재정렬한다 */
+  preLimit: number
   limit: number
 }
 
@@ -96,40 +103,58 @@ function directionsUrl(anchor: GeoCard, dest: GeoCard): string {
   return `https://map.naver.com/p/directions/${seg(anchor)}/${seg(dest)}/-/car`
 }
 
-function toCards(anchor: GeoCard, matches: NearbyMatch[], byId: Map<string, GeoCard>): NearbyCard[] {
-  const out: NearbyCard[] = []
-  for (const m of matches) {
+function toCards(
+  anchor: GeoCard,
+  matches: NearbyMatch[],
+  byId: Map<string, GeoCard>,
+  driveIndex: Map<string, NearbyDrivePair>,
+  finalLimit: number,
+): NearbyCard[] {
+  const withRank = matches.flatMap((m) => {
     const c = byId.get(m.id)
-    if (!c) continue
-    out.push({
-      id: c.id, name: c.name, imageUrl: c.imageUrl, tags: c.tags, sigungu: c.sigungu,
-      ratingAvg: c.ratingAvg, ratingCount: c.ratingCount, distanceKm: m.distanceKm,
-      directionsUrl: directionsUrl(anchor, c),
-    })
-  }
-  return out
+    if (!c) return []
+    const hit = lookupPair(driveIndex, anchor.id, c.id)
+    const rankMinutes = hit ? hit.minutes : estimateDriveMinutes(m.distanceKm)
+    return [{
+      card: {
+        id: c.id, name: c.name, imageUrl: c.imageUrl, tags: c.tags, sigungu: c.sigungu,
+        ratingAvg: c.ratingAvg, ratingCount: c.ratingCount, distanceKm: m.distanceKm,
+        driveMinutes: hit ? hit.minutes : null,
+        directionsUrl: directionsUrl(anchor, c),
+      },
+      rankMinutes,
+    }]
+  })
+  withRank.sort((a, b) => a.rankMinutes - b.rankMinutes)
+  return withRank.slice(0, finalLimit).map((x) => x.card)
 }
 
 /** anchors 각 항목에 대해 candidates 중 가까운 순 카드 목록을 만든다 */
 function nearbyMap(
   anchors: GeoCard[],
   candidates: GeoCard[],
-  limit: number,
+  driveIndex: Map<string, NearbyDrivePair>,
+  preLimit: number,
+  finalLimit: number,
 ): Map<string, NearbyCard[]> {
-  const matches = nearestByDomain(anchors, candidates, limit)
+  const matches = nearestByDomain(anchors, candidates, preLimit)
   const candidateById = new Map(candidates.map((c) => [c.id, c]))
   const anchorById = new Map(anchors.map((a) => [a.id, a]))
   const result = new Map<string, NearbyCard[]>()
   for (const [anchorId, m] of matches) {
     const anchor = anchorById.get(anchorId)
     if (!anchor) continue
-    result.set(anchorId, toCards(anchor, m, candidateById))
+    result.set(anchorId, toCards(anchor, m, candidateById, driveIndex, finalLimit))
   }
   return result
 }
 
 export function buildNearbyPayloads(input: BuildNearbyInput): NearbyPayloads {
-  const { cafes, restaurants, spots, cafeSite, restaurantSite, spotSite, limit } = input
+  const {
+    cafes, restaurants, spots, cafeSite, restaurantSite, spotSite,
+    driveCache, preLimit, limit,
+  } = input
+  const driveIndex = buildPairIndex(driveCache)
 
   const cafeAnchors = toGeoCards(cafes, cafeSite, { excludeCityOnly: false })
   const cafeCands = toGeoCards(cafes, cafeSite, { excludeCityOnly: true })
@@ -138,12 +163,12 @@ export function buildNearbyPayloads(input: BuildNearbyInput): NearbyPayloads {
   const spotAnchors = toGeoCards(spots, spotSite, { excludeCityOnly: false })
   const spotCands = toGeoCards(spots, spotSite, { excludeCityOnly: true })
 
-  const cafeToRest = nearbyMap(cafeAnchors, restCands, limit)
-  const cafeToSpot = nearbyMap(cafeAnchors, spotCands, limit)
-  const restToCafe = nearbyMap(restAnchors, cafeCands, limit)
-  const restToSpot = nearbyMap(restAnchors, spotCands, limit)
-  const spotToCafe = nearbyMap(spotAnchors, cafeCands, limit)
-  const spotToRest = nearbyMap(spotAnchors, restCands, limit)
+  const cafeToRest = nearbyMap(cafeAnchors, restCands, driveIndex, preLimit, limit)
+  const cafeToSpot = nearbyMap(cafeAnchors, spotCands, driveIndex, preLimit, limit)
+  const restToCafe = nearbyMap(restAnchors, cafeCands, driveIndex, preLimit, limit)
+  const restToSpot = nearbyMap(restAnchors, spotCands, driveIndex, preLimit, limit)
+  const spotToCafe = nearbyMap(spotAnchors, cafeCands, driveIndex, preLimit, limit)
+  const spotToRest = nearbyMap(spotAnchors, restCands, driveIndex, preLimit, limit)
 
   const cafe: NearbyPayloads['cafe'] = {}
   for (const c of cafeAnchors) {

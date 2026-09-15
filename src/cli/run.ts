@@ -523,11 +523,14 @@ async function main() {
         const cafeNearbyOut = flag(rest, 'cafe-nearby-out') || 'web/src/generated/site-cafe-nearby.json'
         const restNearbyOut = flag(rest, 'restaurant-nearby-out') || 'web/src/generated/site-restaurant-nearby.json'
         const spotNearbyOut = flag(rest, 'spot-nearby-out') || 'web/src/generated/site-spot-nearby.json'
+        const driveCache = await store.readNearbyDriveCache()
         const nearby = buildNearbyPayloads({
           cafes, restaurants: outerRestaurants, spots: outerSpots,
           cafeSite: payload.cafes,
           restaurantSite: outerRestPayload?.restaurants ?? [],
           spotSite: outerSpotPayload?.spots ?? [],
+          driveCache,
+          preLimit: 10,
           limit: 5,
         })
         await writeFile(cafeNearbyOut, JSON.stringify(nearby.cafe, null, 2) + '\n', 'utf8')
