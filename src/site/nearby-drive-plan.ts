@@ -59,11 +59,11 @@ export function planNearbyDriveFetches(input: PlanInput): PlannedFetch[] {
     const matches = nearestByDomain(anchors, candidates, preLimit)
     for (const [anchorId, list] of matches) {
       for (const m of list) {
+        if (out.length >= budget) return out
         const key = pairKeyOf(anchorId, m.id)
         if (seen.has(key)) continue
         seen.add(key)
         out.push({ anchorId, candidateId: m.id })
-        if (out.length >= budget) return out
       }
     }
   }

@@ -93,6 +93,20 @@ describe('planNearbyDriveFetches', () => {
     expect(out).toHaveLength(2)
   })
 
+  it('예산이 0이면 아무것도 계획하지 않는다', () => {
+    const restaurants = Array.from({ length: 5 }, (_, i) =>
+      restaurant(`r${i}`, 37.5 + i * 0.001, 126.9 + i * 0.001))
+    const out = planNearbyDriveFetches({
+      cafes: [cafe('c1', 37.5, 126.9)],
+      restaurants,
+      spots: [],
+      cacheIndex: buildPairIndex([]),
+      preLimit: 10,
+      budget: 0,
+    })
+    expect(out).toHaveLength(0)
+  })
+
   it('parkingGrade C(cityOnly) 후보는 제외하지만 앵커로는 쓴다', () => {
     const cityOnlyCafe = cafe('c1', 37.5, 126.9, {
       attributes: { parkingGrade: 'C' } as never,
