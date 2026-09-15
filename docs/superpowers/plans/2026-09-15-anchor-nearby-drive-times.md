@@ -1208,7 +1208,10 @@ git commit -m "feat(nearby-drive): site 빌드가 캐시를 읽어 실측 우선
 
 - [ ] **Step 1: 타입에 필드 추가**
 
-`web/src/lib/nearby-types.ts`의 `NearbyCard` 인터페이스에 추가(`src/site/nearby-payload.ts`의 `NearbyCard`와 필드를 맞춘다):
+**현재 `web/src/lib/nearby-types.ts`는 이미 `directionsUrl` 필드를 갖고
+있다**(1단계 스펙 문서 작성 이후 추가된 필드 — "차로 길찾기" 버튼에
+쓰인다, `web/src/app/nearby-card.tsx` 참고). 그 필드를 그대로 두고
+`driveMinutes`만 추가한다 — 지우면 안 된다:
 
 ```typescript
 export interface NearbyCard {
@@ -1221,6 +1224,8 @@ export interface NearbyCard {
   ratingCount: number
   distanceKm: number
   driveMinutes: number | null
+  /** 앵커(지금 보는 곳)에서 이 카드로의 차량 길찾기 링크 */
+  directionsUrl: string
 }
 ```
 
