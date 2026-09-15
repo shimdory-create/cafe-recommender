@@ -73,17 +73,24 @@ export function pairKeyOf(idA: string, idB: string): string {
   return [idA, idB].sort().join(':')
 }
 
-/** 캐시에서 두 지점 간 실측 페어를 찾는다. 없으면 null */
+/** 캐시 배열을 pairKey -> 항목 Map으로 색인한다. 호출자가 한 번만 만들어 재사용한다 */
+export function buildPairIndex(cache: NearbyDrivePair[]): Map<string, NearbyDrivePair>
+
+/** 색인에서 두 지점 간 실측 페어를 찾는다. 없으면 null */
 export function lookupPair(
-  cache: NearbyDrivePair[],
+  index: Map<string, NearbyDrivePair>,
   idA: string,
   idB: string,
 ): NearbyDrivePair | null
 ```
 
-`lookupPair`는 매 호출마다 배열을 순회하지 않도록 `Map<string, NearbyDrivePair>`
-로 인덱싱하는 내부 헬퍼를 두되, 공개 인터페이스는 배열을 받는 순수 함수로
-유지한다(테스트하기 쉽고, 잡·빌드 양쪽에서 동일하게 재사용).
+**설계 시 잡았던 초안(매 호출마다 배열을 받아 내부에서 Map을 새로 만드는
+안)은 계획 작성 중 성능 문제로 정정했다.** site 빌드는 앵커×후보 조합마다
+(하루 여러 번, 앵커 수천 개) 이 조회를 반복 호출하는데, 매번 캐시 배열
+전체(수만 건까지 자람)로 Map을 다시 만들면 안 된다. 그래서 색인은
+`buildPairIndex`로 **호출자가 한 번만** 만들고, `lookupPair`는 그 색인을
+받아 O(1)로 찾는다 — 잡·빌드 양쪽에서 이 순서(먼저 색인, 그다음 반복 조회)
+로 재사용한다.
 
 ## 잡 파이프라인
 
