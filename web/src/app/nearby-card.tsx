@@ -15,7 +15,7 @@ export function NearbyCard({ item, href, icon }: { item: NearbyCardData; href: s
         <div className="min-w-0">
           <p className="truncate text-[14px] font-bold">{item.name}</p>
           <p className="mt-0.5 text-[12px] text-ink-soft">
-            {item.sigungu} · 직선거리 {item.distanceKm}km
+            {item.sigungu} · {item.driveMinutes != null ? `차로 ${item.driveMinutes}분` : `직선거리 ${item.distanceKm}km`}
           </p>
           {item.ratingCount > 0 && (
             <p className="mt-0.5 text-[12px] font-bold text-bean">★ {item.ratingAvg.toFixed(1)}</p>

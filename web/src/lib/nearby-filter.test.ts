@@ -5,7 +5,7 @@ import type { NearbyCard } from './nearby-types'
 function card(id: string): NearbyCard {
   return {
     id, name: id, imageUrl: null, tags: [], sigungu: '', ratingAvg: 0,
-    ratingCount: 0, distanceKm: 1, directionsUrl: 'https://map.naver.com/p/directions/x',
+    ratingCount: 0, distanceKm: 1, driveMinutes: null, directionsUrl: 'https://map.naver.com/p/directions/x',
   }
 }
 
