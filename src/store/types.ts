@@ -8,6 +8,7 @@ import type {
   Health,
   BlacklistEntry,
   NotifyLog,
+  NearbyDrivePair,
 } from '../schema.js'
 
 /**
@@ -46,6 +47,13 @@ export interface Store {
    */
   readNotifyLog(): Promise<NotifyLog[]>
   writeNotifyLog(rows: NotifyLog[]): Promise<void>
+
+  /**
+   * 근처 추천 2단계 페어 캐시. 카페·식당·가볼 곳 어느 도메인 것도 아니라서
+   * (셋을 가로지르는 데이터) health·notifyLog와 같은 자리(base Store)에만 둔다.
+   */
+  readNearbyDriveCache(): Promise<NearbyDrivePair[]>
+  writeNearbyDriveCache(rows: NearbyDrivePair[]): Promise<void>
 
   /**
    * 원본 응답을 data/raw/YYYY-MM-DD/ 에 적재하고 경로를 돌려준다.

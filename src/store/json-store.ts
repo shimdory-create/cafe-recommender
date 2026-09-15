@@ -12,6 +12,7 @@ import {
   HealthSchema,
   NotifyLogSchema,
   BlacklistEntrySchema,
+  NearbyDrivePairSchema,
 } from '../schema.js'
 import type { Store } from './types.js'
 
@@ -90,6 +91,9 @@ export function createJsonStore(dataDir: string): Store {
 
     readNotifyLog: () => readArray(dataDir, 'notify-log.json', NotifyLogSchema),
     writeNotifyLog: (r) => writeArray(dataDir, 'notify-log.json', r),
+
+    readNearbyDriveCache: () => readArray(dataDir, 'nearby-drive-cache.json', NearbyDrivePairSchema),
+    writeNearbyDriveCache: (r) => writeArray(dataDir, 'nearby-drive-cache.json', r),
 
     async appendRaw(source, query, payload, now = new Date()) {
       const day = now.toISOString().slice(0, 10)

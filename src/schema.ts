@@ -182,6 +182,20 @@ export const HealthSchema = z.object({
 })
 export type Health = z.infer<typeof HealthSchema>
 
+/**
+ * 근처 추천 2단계 — 앵커↔후보 페어의 실제 이동시간 영구 캐시.
+ * 좌표가 안 바뀌므로 한 번 잰 페어는 끝까지 유효하다(append-only).
+ * A→B/B→A는 대칭으로 근사해 pairKey 하나로 합친다(방향 무관).
+ */
+export const NearbyDrivePairSchema = z.object({
+  pairKey: z.string().min(1),
+  minutes: z.number().int().nonnegative(),
+  km: z.number().nonnegative(),
+  tollWon: z.number().int().nullable(),
+  measuredAt: z.string(),
+})
+export type NearbyDrivePair = z.infer<typeof NearbyDrivePairSchema>
+
 /** 코드가 아니라 데이터다. 신규 프랜차이즈가 생겨도 배포가 필요 없다. */
 export const BlacklistEntrySchema = z.object({
   pattern: z.string().min(1),
