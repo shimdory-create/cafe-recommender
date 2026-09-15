@@ -135,4 +135,18 @@ describe('runNearbyDriveTimes', () => {
     expect(r.unroutable).toBe(1)
     expect(h.cache()).toHaveLength(0)
   })
+
+  it('미스가 있어도 전부 unroutable(정상적으로 경로 없음)이면 health 성공을 기록한다', async () => {
+    const h = harness({
+      cafes: [cafe('c1', 37.5, 126.9)],
+      restaurants: [restaurant('r1', 37.501, 126.901)],
+      route: async () => ({ route: null, payload: {} }),
+    })
+    const r = await runNearbyDriveTimes(h.deps)
+    expect(r.measured).toBe(0)
+    expect(r.unroutable).toBe(1)
+    expect(r.failed).toBe(0)
+    const entry = h.health().find((x) => x.source === 'kakao-directions-nearby')
+    expect(entry?.lastSuccessAt).toBe(NOW.toISOString())
+  })
 })

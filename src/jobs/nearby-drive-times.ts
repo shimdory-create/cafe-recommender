@@ -118,9 +118,13 @@ export async function runNearbyDriveTimes(
   }
 
   await store.writeNearbyDriveCache([...cache, ...additions])
-  // targets 가 0곳(=오늘 처리할 미스가 없는 정상 상태)이어도 성공으로
-  // 기록한다 — classify.ts 에서 고친 것과 같은 원칙(daily-watch 오탐 방지).
-  if (targets.length === 0 || measured > 0) {
+  // targets 가 0곳(=오늘 처리할 미스가 없는 정상 상태)이거나, 처리한 것들이
+  // 정상적인 결과(measured: 경로 찾음, unroutable: API는 성공했지만 경로가
+  // 없는 정상 케이스 — 섬/오지 등)였다면 성공으로 기록한다 — classify.ts 의
+  // classified + excluded 와 같은 원칙(daily-watch 오탐 방지). unroutable 을
+  // 빼먹으면, 남은 미스가 전부 unroutable 인 날(백필 후반부에 흔함) measured
+  // 가 0으로 남아 정상 상태인데도 성공이 기록되지 않는 버그가 재발한다.
+  if (targets.length === 0 || measured + unroutable > 0) {
     await recordSuccess(store, NEARBY_DRIVE_SOURCE, now)
   }
 
