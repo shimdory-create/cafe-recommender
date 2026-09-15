@@ -1,0 +1,39 @@
+# .github/workflows/daily-nearby-drive.yml
+name: daily-nearby-drive
+on:
+  schedule:
+    # 11:05 UTC = 20:05 KST. 그날의 카페·식당·가볼 곳 저녁 판정
+    # (18:23·18:56·19:29 KST)이 전부 끝난 뒤라, 오늘 새로 active 가 된
+    # 곳도 당일부터 근처 추천 후보에 반영된다. 기존 어느 시각과도 안 겹친다.
+    - cron: '5 11 * * *'
+  workflow_dispatch:
+
+# data/ 를 쓰는 워크플로는 전부 하나씩 돈다 — 다른 모든 잡과 같은
+# data-write 그룹을 공유한다(daily-buzz-restaurant.yml 주석 참고).
+concurrency:
+  group: data-write
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run nearby-drive
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          # 길찾기에 LLM 은 쓰지 않지만 환경변수 검증이 provider 키를 요구한다.
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 커밋·푸시 규칙은 scripts/commit-data.sh 한 곳에 있다 — 전 워크플로 공용.
+      # npm run --silent site 가 세 페이로드 + 근처 추천 3파일을 전부
+      # 다시 만든다 — 이걸 건너뛰면 오늘 채운 캐시가 화면에 절대 안 반영된다.
+      - name: 데이터 커밋
+        run: bash scripts/commit-data.sh "근처 이동시간 캐시 채우기"
