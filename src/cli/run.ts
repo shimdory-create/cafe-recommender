@@ -440,9 +440,7 @@ async function main() {
       const store = createJsonStore(process.env.DATA_DIR ?? 'data')
       const out = flag(rest, 'out') || 'web/src/generated/site.json'
       const now = new Date()
-      let outerRestaurants: Awaited<ReturnType<ReturnType<typeof createRestaurantJsonStore>['readRestaurants']>> = []
       let outerRestPayload: ReturnType<typeof buildRestaurantSitePayload> | null = null
-      let outerSpots: Awaited<ReturnType<ReturnType<typeof createSpotJsonStore>['readSpots']>> = []
       let outerSpotPayload: ReturnType<typeof buildSpotSitePayload> | null = null
       const [cafes, buzz, visits, suggestions, reviews] = await Promise.all([
         store.readCafes(), store.readBuzz(),
@@ -478,7 +476,6 @@ async function main() {
           restaurants, buzz: restBuzz, visits: restVisits, suggestions: restSuggestions,
           reviews: restReviews, weekOf: mondayOf(now), now,
         })
-        outerRestaurants = restaurants
         outerRestPayload = restPayload
         await mkdir(dirname(restOut), { recursive: true })
         await writeFile(restOut, JSON.stringify(restPayload, null, 2) + '\n', 'utf8')
@@ -504,7 +501,6 @@ async function main() {
           spots, buzz: spotBuzz, visits: spotVisits, suggestions: spotSuggestions,
           reviews: spotReviews, weekOf: mondayOf(now), now,
         })
-        outerSpots = spots
         outerSpotPayload = spotPayload
         await mkdir(dirname(spotOut), { recursive: true })
         await writeFile(spotOut, JSON.stringify(spotPayload, null, 2) + '\n', 'utf8')
@@ -525,7 +521,6 @@ async function main() {
         const spotNearbyOut = flag(rest, 'spot-nearby-out') || 'web/src/generated/site-spot-nearby.json'
         const driveCache = await store.readNearbyDriveCache()
         const nearby = buildNearbyPayloads({
-          cafes, restaurants: outerRestaurants, spots: outerSpots,
           cafeSite: payload.cafes,
           restaurantSite: outerRestPayload?.restaurants ?? [],
           spotSite: outerSpotPayload?.spots ?? [],
