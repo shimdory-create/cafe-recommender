@@ -1,5 +1,6 @@
 import raw from '../generated/site-restaurant.json'
 import nearbyRaw from '../generated/site-restaurant-nearby.json'
+import { resolveNearbyCards, type NearbyRelation } from './nearby-resolve'
 // 경계를 넘는 import 를 쓰지 않는다 — src/restaurant-schema.ts 는 web 밖이라
 // 모듈 해석이 위로 올라가고, Vercel 은 web 에서만 설치하므로 zod 를 못 찾는다.
 // 드리프트는 파이프라인 테스트(restaurant-types-conformance)가 잡는다.
@@ -68,9 +69,16 @@ export const restaurantById = (id: string): SiteRestaurant | undefined =>
 
 export type { NearbyCard }
 
-const restaurantNearby = nearbyRaw as unknown as Record<string, { cafes: NearbyCard[]; spots: NearbyCard[] }>
+const restaurantNearby = nearbyRaw as unknown as Record<string, { cafes: NearbyRelation[]; spots: NearbyRelation[] }>
 
-export const nearbyForRestaurant = (id: string) => restaurantNearby[id]
+export function nearbyForRestaurant(id: string) {
+  const raw = restaurantNearby[id]
+  if (!raw) return undefined
+  return {
+    cafes: resolveNearbyCards('restaurant', id, 'cafe', raw.cafes),
+    spots: resolveNearbyCards('restaurant', id, 'spot', raw.spots),
+  }
+}
 
 /**
  * 다녀온 곳을 추천에서 내리는 기간.

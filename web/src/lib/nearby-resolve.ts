@@ -29,17 +29,40 @@ interface ResolvedPoint {
  * `nearby-drive-cache.ts`의 `buildPairIndex`와 같은 이유로 선형 탐색을
  * 피한다(기존 `byId`/`restaurantById`/`spotById`는 `.find()`라서 여기선
  * 안 쓴다).
+ *
+ * 순환 import 를 회피하려고 lazy 초기화를 쓴다 — site/restaurant-site/spot-site 에서
+ * nearby-resolve 를 import 하면, 이 모듈이 로드할 때 아직 payload 가 정의되지
+ * 않기 때문이다.
  */
-const cafeIndex = new Map<string, ResolvedPoint>(cafePayload.cafes.map((c) => [c.id, c]))
-const restaurantIndex = new Map<string, ResolvedPoint>(
-  restaurantPayload.restaurants.map((r) => [r.id, r]),
-)
-const spotIndex = new Map<string, ResolvedPoint>(spotPayload.spots.map((s) => [s.id, s]))
+let cafeIndex: Map<string, ResolvedPoint> | undefined
+let restaurantIndex: Map<string, ResolvedPoint> | undefined
+let spotIndex: Map<string, ResolvedPoint> | undefined
+
+function getCafeIndex(): Map<string, ResolvedPoint> {
+  if (!cafeIndex) {
+    cafeIndex = new Map(cafePayload.cafes.map((c) => [c.id, c]))
+  }
+  return cafeIndex
+}
+
+function getRestaurantIndex(): Map<string, ResolvedPoint> {
+  if (!restaurantIndex) {
+    restaurantIndex = new Map(restaurantPayload.restaurants.map((r) => [r.id, r]))
+  }
+  return restaurantIndex
+}
+
+function getSpotIndex(): Map<string, ResolvedPoint> {
+  if (!spotIndex) {
+    spotIndex = new Map(spotPayload.spots.map((s) => [s.id, s]))
+  }
+  return spotIndex
+}
 
 function indexOf(domain: Domain): Map<string, ResolvedPoint> {
-  if (domain === 'cafe') return cafeIndex
-  if (domain === 'restaurant') return restaurantIndex
-  return spotIndex
+  if (domain === 'cafe') return getCafeIndex()
+  if (domain === 'restaurant') return getRestaurantIndex()
+  return getSpotIndex()
 }
 
 /**

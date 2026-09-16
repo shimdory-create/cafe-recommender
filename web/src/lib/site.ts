@@ -1,5 +1,6 @@
 import raw from '../generated/site.json'
 import nearbyRaw from '../generated/site-cafe-nearby.json'
+import { resolveNearbyCards, type NearbyRelation } from './nearby-resolve'
 // 경계를 넘는 import 를 쓰지 않는다 — src/schema.ts 는 web 밖이라 모듈
 // 해석이 위로 올라가고, Vercel 은 web 에서만 설치하므로 zod 를 못 찾는다.
 // 드리프트는 파이프라인 테스트(types-conformance)가 잡는다.
@@ -73,9 +74,16 @@ export const byId = (id: string): SiteCafe | undefined =>
 
 export type { NearbyCard }
 
-const cafeNearby = nearbyRaw as unknown as Record<string, { restaurants: NearbyCard[]; spots: NearbyCard[] }>
+const cafeNearby = nearbyRaw as unknown as Record<string, { restaurants: NearbyRelation[]; spots: NearbyRelation[] }>
 
-export const nearbyForCafe = (id: string) => cafeNearby[id]
+export function nearbyForCafe(id: string) {
+  const raw = cafeNearby[id]
+  if (!raw) return undefined
+  return {
+    restaurants: resolveNearbyCards('cafe', id, 'restaurant', raw.restaurants),
+    spots: resolveNearbyCards('cafe', id, 'spot', raw.spots),
+  }
+}
 
 /**
  * 홈 피드. 이번 주 추천을 앞에 두고 나머지를 종합점수 순으로 잇는다.

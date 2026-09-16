@@ -1,5 +1,6 @@
 import raw from '../generated/site-spot.json'
 import nearbyRaw from '../generated/site-spot-nearby.json'
+import { resolveNearbyCards, type NearbyRelation } from './nearby-resolve'
 import { driveLabel, addedLabel } from './labels'
 import type { SpotSitePayload, SiteSpot, SiteSpotVisited } from './spot-site-types'
 import type { NearbyCard } from './nearby-types'
@@ -39,9 +40,16 @@ export const spotById = (id: string): SiteSpot | undefined =>
 
 export type { NearbyCard }
 
-const spotNearby = nearbyRaw as unknown as Record<string, { cafes: NearbyCard[]; restaurants: NearbyCard[] }>
+const spotNearby = nearbyRaw as unknown as Record<string, { cafes: NearbyRelation[]; restaurants: NearbyRelation[] }>
 
-export const nearbyForSpot = (id: string) => spotNearby[id]
+export function nearbyForSpot(id: string) {
+  const raw = spotNearby[id]
+  if (!raw) return undefined
+  return {
+    cafes: resolveNearbyCards('spot', id, 'cafe', raw.cafes),
+    restaurants: resolveNearbyCards('spot', id, 'restaurant', raw.restaurants),
+  }
+}
 
 export const SPOT_REVISIT_DAYS = spotPayload.stats.revisitDays
 
