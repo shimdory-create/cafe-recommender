@@ -393,6 +393,8 @@ describe('dedupeListings — 같은 카페가 두 번 등록된 경우', () => {
     zone: 'east',
     area: '남양주시',
     driveMinutes: 55,
+    lat: 37.5,
+    lng: 127.0,
     scale: '대형',
     parkingGrade: 'A',
     menuLevel: 2,

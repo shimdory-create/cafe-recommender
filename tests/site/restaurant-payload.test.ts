@@ -390,6 +390,8 @@ describe('dedupeRestaurantListings', () => {
     zone: 'east',
     area: '남양주시',
     driveMinutes: 55,
+    lat: 37.5,
+    lng: 127.0,
     cuisineType: '한식',
     hasRoom: true,
     reservable: true,

@@ -135,6 +135,8 @@ export function buildRestaurantSitePayload(input: RestaurantPayloadInput): Resta
 
     rows.push({
       id: r.kakaoPlaceId,
+      lat: r.lat,
+      lng: r.lng,
       name: r.name,
       sigungu: r.sigungu,
       zone: zoneOf(r),

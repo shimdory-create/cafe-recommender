@@ -132,6 +132,8 @@ export function buildSpotSitePayload(input: SpotPayloadInput): SpotSitePayload {
 
     rows.push({
       id: s.kakaoPlaceId,
+      lat: s.lat,
+      lng: s.lng,
       name: s.name,
       sigungu: s.sigungu,
       zone: zoneOf(s),

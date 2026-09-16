@@ -61,6 +61,8 @@ export type Restaurant = z.infer<typeof RestaurantSchema>
  * scale/menuLevel/mealTypes/stayDuration 자리에 cuisineType/hasRoom/reservable을 쓴다. */
 export const SiteRestaurantSchema = z.object({
   id: z.string(),
+  lat: z.number(),
+  lng: z.number(),
   name: z.string(),
   sigungu: z.string(),
   zone: z.enum(['near', 'seoul', 'north', 'east', 'south', 'west']),

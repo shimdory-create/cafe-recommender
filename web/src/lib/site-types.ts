@@ -13,6 +13,8 @@
  */
 export interface SiteCafe {
   id: string
+  lat: number
+  lng: number
   name: string
   sigungu: string
   /** 방향 구획 (집 기준). 감사 규칙이 시도 정합성을 볼 때 쓴다 */

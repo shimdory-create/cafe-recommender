@@ -5,6 +5,8 @@
  */
 export interface SiteRestaurant {
   id: string
+  lat: number
+  lng: number
   name: string
   sigungu: string
   zone: 'near' | 'seoul' | 'north' | 'east' | 'south' | 'west'

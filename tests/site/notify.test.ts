@@ -7,6 +7,8 @@ const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe 
   area: '양평군',
   zone: 'east',
   driveMinutes: 80,
+  lat: 37.5,
+  lng: 127.0,
   scale: '대형',
   parkingGrade: 'A',
   menuLevel: 3,

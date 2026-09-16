@@ -62,6 +62,8 @@ export type Spot = z.infer<typeof SpotSchema>
  * stayDuration/indoorOutdoor/season을 쓴다. */
 export const SiteSpotSchema = z.object({
   id: z.string(),
+  lat: z.number(),
+  lng: z.number(),
   name: z.string(),
   sigungu: z.string(),
   zone: z.enum(['near', 'seoul', 'north', 'east', 'south', 'west']),

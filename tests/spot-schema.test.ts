@@ -46,7 +46,7 @@ describe('SiteSpotSchema (2단계 웹 표시용)', () => {
   it('가볼 곳 표시용 필드를 검증한다', () => {
     const row = {
       id: '1', name: '아무개공원', sigungu: '부평구', zone: 'near', area: '인천',
-      driveMinutes: 20, tags: ['자연/공원', '아이와 가기 좋은 곳'],
+      driveMinutes: 20, lat: 37.5, lng: 127.0, tags: ['자연/공원', '아이와 가기 좋은 곳'],
       parkingGrade: 'A', evidence: '넓고 좋다', parkingEvidence: '주차장 넓음',
       stayDuration: '1~2시간', indoorOutdoor: 'outdoor', season: null, teenAppeal: null,
       naverMapUrl: 'https://map.naver.com/p/search/x', kakaoPlaceUrl: null, imageUrl: null,

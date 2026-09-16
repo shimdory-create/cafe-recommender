@@ -40,7 +40,7 @@ describe('SiteRestaurantSchema (2단계 웹 표시용)', () => {
   it('카페 SiteCafe와 동등한 필드를 검증한다', () => {
     const row = {
       id: '1', name: '식당', sigungu: '부평구', zone: 'near', area: '인천',
-      driveMinutes: 20, cuisineType: '한식', hasRoom: true, reservable: false,
+      driveMinutes: 20, lat: 37.5, lng: 127.0, cuisineType: '한식', hasRoom: true, reservable: false,
       parkingGrade: 'A', tags: ['한식', '룸있음'],
       evidence: '룸이 넓다', parkingEvidence: '주차장 넓음',
       viewTypes: [], outdoorSeating: null, teenAppeal: null,

@@ -194,6 +194,8 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
 
     rows.push({
       id: c.kakaoPlaceId,
+      lat: c.lat,
+      lng: c.lng,
       name: c.name,
       sigungu: c.sigungu,
       zone: zoneOf(c),
