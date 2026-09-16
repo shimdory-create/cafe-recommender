@@ -18,6 +18,8 @@ export interface PayloadInput {
   suggestions: Suggestion[]
   weekOf: string
   now: Date
+  /** usage-watch.ts에서 미리 계산한 한 줄. 식당/가볼곳 페이로드도 같은 값을 받는다 */
+  pipelineStatus: string
 }
 
 /**
@@ -141,7 +143,7 @@ export function pickWeek(
 }
 
 export function buildSitePayload(input: PayloadInput): SitePayload {
-  const { cafes, buzz, visits, suggestions, weekOf, now, reviews = [] } = input
+  const { cafes, buzz, visits, suggestions, weekOf, now, reviews = [], pipelineStatus } = input
 
   // 카페별 별점 요약
   const rated = new Map<string, { sum: number; n: number }>()
@@ -275,6 +277,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
   return SitePayloadSchema.parse({
     generatedAt: now.toISOString(),
     weekOf,
+    pipelineStatus,
     week,
     cafes: deduped,
     visited,

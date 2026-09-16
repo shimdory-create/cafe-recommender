@@ -85,6 +85,8 @@ export interface SiteVisited {
 export interface SitePayload {
   generatedAt: string
   weekOf: string
+  /** usage-watch.ts의 statusLine() 한 줄. 카페/식당/가볼곳 페이로드가 같은 값을 공유한다 */
+  pipelineStatus: string
   week: { rank: number; id: string; finalScore: number }[]
   cafes: SiteCafe[]
   visited: SiteVisited[]

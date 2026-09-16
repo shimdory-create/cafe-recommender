@@ -2,6 +2,7 @@ import { payload, REVISIT_DAYS } from '@/lib/site'
 import { VIEW_ONLY } from '@/lib/view-only'
 import { CHANGELOG } from '@/lib/changelog'
 import { UPDATE_SCHEDULE } from '@/lib/update-schedule'
+import { PipelineStatus } from '../pipeline-status'
 
 export const metadata = { title: '카페 정보 — 심김 빵지순례' }
 
@@ -72,6 +73,8 @@ export default function Info() {
   return (
     <div className="py-5 text-[14px] leading-relaxed">
       <h1 className="text-[22px] font-bold tracking-tight">카페 목록은 어떻게 만들어지나</h1>
+
+      <PipelineStatus status={payload.pipelineStatus} />
 
       {VIEW_ONLY && (
         <p className="mt-3 rounded-2xl border border-line bg-card p-4 text-[13px] leading-relaxed text-ink-soft">

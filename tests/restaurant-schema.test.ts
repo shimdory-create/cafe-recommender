@@ -57,6 +57,7 @@ describe('SiteRestaurantSchema (2단계 웹 표시용)', () => {
   it('RestaurantSitePayloadSchema가 week/stats 구조를 검증한다', () => {
     const payload = {
       generatedAt: '2026-09-01T00:00:00.000Z', weekOf: '2026-08-31',
+      pipelineStatus: '자동수집 정상',
       week: [{ rank: 1, id: '1', finalScore: 3 }],
       restaurants: [], visited: [],
       stats: {

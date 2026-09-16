@@ -442,12 +442,16 @@ async function main() {
       const now = new Date()
       let outerRestPayload: ReturnType<typeof buildRestaurantSitePayload> | null = null
       let outerSpotPayload: ReturnType<typeof buildSpotSitePayload> | null = null
-      const [cafes, buzz, visits, suggestions, reviews] = await Promise.all([
+      const [cafes, buzz, visits, suggestions, reviews, health] = await Promise.all([
         store.readCafes(), store.readBuzz(),
         store.readVisits(), store.readSuggestions(), store.readReviews(),
+        store.readHealth(),
       ])
+      // health.json은 세 도메인 스토어가 공유하는 한 파일이라 여기서 한 번만
+      // 계산해 세 페이로드에 그대로 나눠 싣는다 (notify 케이스와 같은 계산).
+      const pipelineStatus = statusLine(detectAnomalies({ cafes, buzz, health, now }))
       const payload = buildSitePayload({
-        cafes, buzz, visits, suggestions, reviews, weekOf: mondayOf(now), now,
+        cafes, buzz, visits, suggestions, reviews, weekOf: mondayOf(now), now, pipelineStatus,
       })
       await mkdir(dirname(out), { recursive: true })
       // 2칸 들여쓰기 + 끝 개행 — git diff 를 깨끗하게 (스펙 9절)
@@ -474,7 +478,7 @@ async function main() {
         ])
         const restPayload = buildRestaurantSitePayload({
           restaurants, buzz: restBuzz, visits: restVisits, suggestions: restSuggestions,
-          reviews: restReviews, weekOf: mondayOf(now), now,
+          reviews: restReviews, weekOf: mondayOf(now), now, pipelineStatus,
         })
         outerRestPayload = restPayload
         await mkdir(dirname(restOut), { recursive: true })
@@ -499,7 +503,7 @@ async function main() {
         ])
         const spotPayload = buildSpotSitePayload({
           spots, buzz: spotBuzz, visits: spotVisits, suggestions: spotSuggestions,
-          reviews: spotReviews, weekOf: mondayOf(now), now,
+          reviews: spotReviews, weekOf: mondayOf(now), now, pipelineStatus,
         })
         outerSpotPayload = spotPayload
         await mkdir(dirname(spotOut), { recursive: true })
@@ -551,8 +555,9 @@ async function main() {
         store.readVisits(), store.readSuggestions(), store.readHealth(),
         store.readNotifyLog(),
       ])
+      const pipelineStatus = statusLine(detectAnomalies({ cafes, buzz, health, now }))
       const payload = buildSitePayload({
-        cafes, buzz, visits, suggestions, weekOf: mondayOf(now), now,
+        cafes, buzz, visits, suggestions, weekOf: mondayOf(now), now, pipelineStatus,
       })
       // 자동 수집이 도는지 매주 눈으로 확인한다 (사용자 요청).
       // 문구가 200자를 넘으면 buildNotifyText 가 카페 설명부터 줄인다 —
@@ -560,7 +565,7 @@ async function main() {
       const text = buildNotifyText({
         payload,
         baseUrl: flag(rest, 'url') || process.env.SITE_URL,
-        status: statusLine(detectAnomalies({ cafes, buzz, health, now })),
+        status: pipelineStatus,
       })
       console.log('\n' + '-'.repeat(34))
       console.log(text)

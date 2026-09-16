@@ -23,6 +23,8 @@ export interface RestaurantPayloadInput {
   suggestions: Suggestion[]
   weekOf: string
   now: Date
+  /** usage-watch.ts에서 미리 계산한 한 줄. 카페/가볼곳 페이로드도 같은 값을 받는다 */
+  pipelineStatus: string
 }
 
 const COMPARABLE_SPAN_DAYS = 90
@@ -84,7 +86,7 @@ function pickRestaurantWeek(
 }
 
 export function buildRestaurantSitePayload(input: RestaurantPayloadInput): RestaurantSitePayload {
-  const { restaurants, buzz, visits, suggestions, weekOf, now, reviews = [] } = input
+  const { restaurants, buzz, visits, suggestions, weekOf, now, reviews = [], pipelineStatus } = input
 
   const rated = new Map<string, { sum: number; n: number }>()
   for (const r of reviews) {
@@ -201,6 +203,7 @@ export function buildRestaurantSitePayload(input: RestaurantPayloadInput): Resta
   return RestaurantSitePayloadSchema.parse({
     generatedAt: now.toISOString(),
     weekOf,
+    pipelineStatus,
     week,
     restaurants: deduped,
     visited,

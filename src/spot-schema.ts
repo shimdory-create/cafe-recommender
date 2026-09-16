@@ -120,6 +120,8 @@ export type SiteSpotVisited = z.infer<typeof SiteSpotVisitedSchema>
 export const SpotSitePayloadSchema = z.object({
   generatedAt: z.string(),
   weekOf: z.string(),
+  /** usage-watch.ts의 statusLine() 한 줄. 세 도메인 페이로드가 같은 값을 공유한다(health.json이 공용) */
+  pipelineStatus: z.string(),
   week: z.array(z.object({
     rank: z.number().int(),
     id: z.string(),

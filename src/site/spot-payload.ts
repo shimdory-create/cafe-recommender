@@ -23,6 +23,8 @@ export interface SpotPayloadInput {
   suggestions: Suggestion[]
   weekOf: string
   now: Date
+  /** usage-watch.ts에서 미리 계산한 한 줄. 카페/식당 페이로드도 같은 값을 받는다 */
+  pipelineStatus: string
 }
 
 const COMPARABLE_SPAN_DAYS = 90
@@ -82,7 +84,7 @@ function pickSpotWeek(
 }
 
 export function buildSpotSitePayload(input: SpotPayloadInput): SpotSitePayload {
-  const { spots, buzz, visits, suggestions, weekOf, now, reviews = [] } = input
+  const { spots, buzz, visits, suggestions, weekOf, now, reviews = [], pipelineStatus } = input
 
   const rated = new Map<string, { sum: number; n: number }>()
   for (const r of reviews) {
@@ -196,6 +198,7 @@ export function buildSpotSitePayload(input: SpotPayloadInput): SpotSitePayload {
   return SpotSitePayloadSchema.parse({
     generatedAt: now.toISOString(),
     weekOf,
+    pipelineStatus,
     week,
     spots: deduped,
     visited,

@@ -45,7 +45,7 @@ const buzz = (id: string, over: Partial<BuzzSnapshot> = {}): BuzzSnapshot => ({
 const build = (cafes: Cafe[], buzzRows: BuzzSnapshot[], over: Partial<Parameters<typeof buildSitePayload>[0]> = {}) =>
   buildSitePayload({
     cafes, buzz: buzzRows, visits: [], suggestions: [],
-    weekOf: '2026-08-17', now: NOW, ...over,
+    weekOf: '2026-08-17', now: NOW, pipelineStatus: '자동수집 정상', ...over,
   })
 
 describe('buildSitePayload', () => {

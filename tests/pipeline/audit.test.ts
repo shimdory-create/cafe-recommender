@@ -64,6 +64,7 @@ function input(over: Partial<AuditInput> = {}): AuditInput {
   const site: SitePayload = {
     generatedAt: NOW.toISOString(),
     weekOf: '2026-08-17',
+    pipelineStatus: '자동수집 정상',
     week: [{ rank: 1, id: '1', finalScore: 25 }],
     cafes: [row({ id: '1' })],
     visited: [],

@@ -37,7 +37,7 @@ const build = (
   over: Partial<Parameters<typeof buildRestaurantSitePayload>[0]> = {},
 ) => buildRestaurantSitePayload({
   restaurants, buzz: buzzRows, visits: [], suggestions: [], reviews: [],
-  weekOf: '2026-08-17', now: NOW, ...over,
+  weekOf: '2026-08-17', now: NOW, pipelineStatus: '자동수집 정상', ...over,
 })
 
 describe('buildRestaurantSitePayload', () => {

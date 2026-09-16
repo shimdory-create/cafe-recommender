@@ -45,6 +45,7 @@ const cafe = (over: Partial<SiteCafe> & { id: string; name: string }): SiteCafe 
 const payload = (cafes: SiteCafe[]): SitePayload => ({
   generatedAt: '2026-08-20T00:00:00.000Z',
   weekOf: '2026-08-17',
+  pipelineStatus: '자동수집 정상',
   week: cafes.map((c, i) => ({ rank: i + 1, id: c.id, finalScore: 10 - i })),
   cafes,
   visited: [],
