@@ -39,6 +39,11 @@ export interface NearbyPayloads {
  * `opts.excludeCityOnly`: 후보(다른 곳에 추천되는 쪽)를 만들 때는 true —
  * 도심 모드를 한 번도 안 켠 사용자에게 주차 어려운 곳이 섞여 들어가면
  * 안 된다. 앵커(자기 자신의 상세 페이지)를 만들 때는 false.
+ *
+ * 예전 `toGeoCards`는 원본 배열과 join하면서 매칭 안 되는 id를 걸러냈지만,
+ * 그 join 자체가 없어졌으므로(site 페이로드가 위경도를 직접 가짐) 이제는
+ * 걸러낼 대상이 없다 — site의 모든 행은 이미 원본 레코드에서 파생된
+ * 것이라, 그 가드는 애초에 죽은 코드나 마찬가지였다.
  */
 function toGeoPoints(
   site: { id: string; lat: number; lng: number; cityOnly: boolean }[],

@@ -59,7 +59,7 @@ function getSpotIndex(): Map<string, ResolvedPoint> {
   return spotIndex
 }
 
-function indexOf(domain: Domain): Map<string, ResolvedPoint> {
+function indexFor(domain: Domain): Map<string, ResolvedPoint> {
   if (domain === 'cafe') return getCafeIndex()
   if (domain === 'restaurant') return getRestaurantIndex()
   return getSpotIndex()
@@ -68,11 +68,11 @@ function indexOf(domain: Domain): Map<string, ResolvedPoint> {
 /**
  * 두 지점 간 네이버지도 자동차 길찾기 웹 URL.
  *
- * `src/site/nearby-payload.ts`에 있던 것과 **동일한 공식**이다 — build
- * 시점 계산을 여기(read 시점)로 옮기면서 그대로 복사했다. 웹은 `src/`를
- * import할 수 없어서(zod 의존성 때문에 Vercel 배포가 실패한 전례가
- * 있다) 공유하지 않고 각자 갖는다. 형식 자체를 다시 바꿔야 하면 두 곳
- * 다 고쳐야 한다는 뜻이다.
+ * 예전엔 `src/site/nearby-payload.ts`에 build 시점 버전이 있었지만, 계산이
+ * read 시점(여기)으로 옮겨오면서 그 사본은 완전히 삭제됐다 — 지금은 이
+ * 구현이 유일하다. `src/`와 공유하지 않는 이유는 여전한데, 웹은 `src/`를
+ * import할 수 없기 때문이다(zod 의존성 때문에 Vercel 배포가 실패한 전례가
+ * 있다).
  */
 function directionsUrl(anchor: ResolvedPoint, dest: ResolvedPoint): string {
   const seg = (p: ResolvedPoint) => `${p.lng},${p.lat},${encodeURIComponent(p.name)}`
@@ -85,9 +85,9 @@ export function resolveNearbyCards(
   candidateDomain: Domain,
   relations: NearbyRelation[],
 ): NearbyCard[] {
-  const anchor = indexOf(anchorDomain).get(anchorId)
+  const anchor = indexFor(anchorDomain).get(anchorId)
   if (!anchor) return []
-  const candIndex = indexOf(candidateDomain)
+  const candIndex = indexFor(candidateDomain)
   return relations.flatMap((rel) => {
     const c = candIndex.get(rel.id)
     if (!c) return []
