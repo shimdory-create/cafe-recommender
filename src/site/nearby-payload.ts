@@ -2,29 +2,21 @@
 import { nearestByDomain, type GeoPoint, type NearbyMatch } from './nearby.js'
 import { buildPairIndex, lookupPair } from './nearby-drive-cache.js'
 import { estimateDriveMinutes } from '../pipeline/geo.js'
-import type { Cafe, SiteCafe, NearbyDrivePair } from '../schema.js'
-import type { Restaurant, SiteRestaurant } from '../restaurant-schema.js'
-import type { Spot, SiteSpot } from '../spot-schema.js'
+import type { SiteCafe, NearbyDrivePair } from '../schema.js'
+import type { SiteRestaurant } from '../restaurant-schema.js'
+import type { SiteSpot } from '../spot-schema.js'
 
-export interface NearbyCard {
+/** 근처 추천 파일에 실제로 저장하는 것 — 관계 정보뿐이다. 표시 필드(이름·
+ * 이미지·태그·평점)와 directionsUrl 은 read 시점(웹)에서 리스트 페이로드를
+ * id 로 조회해 조립한다(용량 축소 스펙 참고). */
+export interface NearbyRelation {
   id: string
-  name: string
-  imageUrl: string | null
-  tags: string[]
-  sigungu: string
-  ratingAvg: number
-  ratingCount: number
   distanceKm: number
-  /** 실측 있으면 분 단위, 없으면 null(카드는 이때 distanceKm으로 폴백 표시) */
+  /** 실측 있으면 분 단위, 없으면 null */
   driveMinutes: number | null
-  /** 앵커(지금 보는 곳)에서 이 카드로의 차량 길찾기 링크 */
-  directionsUrl: string
 }
 
 export interface BuildNearbyInput {
-  cafes: Cafe[]
-  restaurants: Restaurant[]
-  spots: Spot[]
   cafeSite: SiteCafe[]
   restaurantSite: SiteRestaurant[]
   spotSite: SiteSpot[]
@@ -35,133 +27,82 @@ export interface BuildNearbyInput {
 }
 
 export interface NearbyPayloads {
-  cafe: Record<string, { restaurants: NearbyCard[]; spots: NearbyCard[] }>
-  restaurant: Record<string, { cafes: NearbyCard[]; spots: NearbyCard[] }>
-  spot: Record<string, { cafes: NearbyCard[]; restaurants: NearbyCard[] }>
-}
-
-interface GeoCard extends GeoPoint {
-  name: string
-  imageUrl: string | null
-  tags: string[]
-  sigungu: string
-  ratingAvg: number
-  ratingCount: number
+  cafe: Record<string, { restaurants: NearbyRelation[]; spots: NearbyRelation[] }>
+  restaurant: Record<string, { cafes: NearbyRelation[]; spots: NearbyRelation[] }>
+  spot: Record<string, { cafes: NearbyRelation[]; restaurants: NearbyRelation[] }>
 }
 
 /**
- * 원본 배열(좌표)과 최종 사이트 페이로드(카드 필드)를 id 로 조인해
- * GeoCard 목록을 만든다. 사이트 페이로드는 이미 판정 통과분만 담고
- * 있으므로 별도 status 필터가 필요 없다.
+ * site 페이로드에서 좌표만 뽑는다. 이제 site 페이로드 자체에 위경도가
+ * 있으므로(용량 축소 스펙) 원본 배열과의 join이 필요 없다.
  *
  * `opts.excludeCityOnly`: 후보(다른 곳에 추천되는 쪽)를 만들 때는 true —
  * 도심 모드를 한 번도 안 켠 사용자에게 주차 어려운 곳이 섞여 들어가면
- * 안 된다. 앵커(자기 자신의 상세 페이지)를 만들 때는 false — cityOnly
- * 인 곳도 자기 페이지에서는 근처 추천을 정상적으로 받아야 한다. 스펙은
- * "후보에서 cityOnly 제외"라고만 했지 "cityOnly 인 곳은 근처 추천 자체를
- * 못 받는다"는 아니다.
+ * 안 된다. 앵커(자기 자신의 상세 페이지)를 만들 때는 false.
  */
-function toGeoCards<TRaw extends { kakaoPlaceId: string; lat: number; lng: number }>(
-  raw: TRaw[],
-  site: { id: string; name: string; imageUrl: string | null; tags: string[]; sigungu: string; ratingAvg: number; ratingCount: number; cityOnly: boolean }[],
+function toGeoPoints(
+  site: { id: string; lat: number; lng: number; cityOnly: boolean }[],
   opts: { excludeCityOnly: boolean },
-): GeoCard[] {
-  const coordById = new Map(raw.map((r) => [r.kakaoPlaceId, r]))
-  const cards: GeoCard[] = []
+): GeoPoint[] {
+  const points: GeoPoint[] = []
   for (const s of site) {
     if (opts.excludeCityOnly && s.cityOnly) continue
-    const coord = coordById.get(s.id)
-    if (!coord) continue
-    cards.push({
-      id: s.id, lat: coord.lat, lng: coord.lng, name: s.name, imageUrl: s.imageUrl,
-      tags: s.tags, sigungu: s.sigungu, ratingAvg: s.ratingAvg, ratingCount: s.ratingCount,
-    })
+    points.push({ id: s.id, lat: s.lat, lng: s.lng })
   }
-  return cards
+  return points
 }
 
 /**
- * 두 지점 간 네이버지도 자동차 길찾기 웹 URL.
- *
- * **여전히 완전히 확인된 형식은 아니다 — 3차 시도.**
- * - 1차(`p/directions/{lng},{lat}/{lng},{lat}/-/car`, 이름 없이 좌표만):
- *   데스크톱은 됐지만 폰은 네이버지도 앱만 열리고 도착지가 빈 채로 남음
- *   — 앱이 이름 없는 좌표를 못 읽은 것으로 보인다.
- * - 2차(`index.nhn?slat=...&stext=...&pathType=1`, 옛 쿼리스트링 형식,
- *   이름 포함): 이번엔 두 지점 다 제대로 잡혔지만 **대중교통이 기본
- *   탭으로 뜨고 자동차 탭을 한 번 더 눌러야 했다** — `pathType` 값이
- *   자동차/대중교통을 결정하는 파라미터가 아니었던 것 같다.
- * - 3차(지금): 네이버지도 앱 스킴(`nmap://route/car` vs `route/public`,
- *   공식 문서 확인됨)은 자동차/대중교통을 **경로의 일부**로 구분한다.
- *   1차에서 쓴 `/p/directions/.../-/car` 의 `/-/car` 접미사가 바로 그
- *   방식과 일치하므로, 1차 형식(데스크톱 확인됨 + 경로 기반 모드 지정)에
- *   2차에서 배운 것(이름 포함이 중요해 보임)을 더해 좌표 뒤에 이름을
- *   추가했다. 이번에도 안 되면 이 함수만 다시 고치면 된다.
+ * `directionsUrl`은 이제 여기서 계산하지 않는다 — 위경도가 있어야
+ * 계산할 수 있는데, 그 위경도를 쓸 대상(앵커의 이름 등 표시 필드)이
+ * read 시점 조립으로 옮겨갔기 때문이다. 캐시 조회는 id 문자열 두 개만
+ * 있으면 되므로(`lookupPair`), 앵커도 `GeoCard` 객체가 아니라 id
+ * 문자열로만 받는다.
  */
-function directionsUrl(anchor: GeoCard, dest: GeoCard): string {
-  const seg = (p: GeoCard) => `${p.lng},${p.lat},${encodeURIComponent(p.name)}`
-  return `https://map.naver.com/p/directions/${seg(anchor)}/${seg(dest)}/-/car`
-}
-
 function toCards(
-  anchor: GeoCard,
+  anchorId: string,
   matches: NearbyMatch[],
-  byId: Map<string, GeoCard>,
   driveIndex: Map<string, NearbyDrivePair>,
   finalLimit: number,
-): NearbyCard[] {
-  const withRank = matches.flatMap((m) => {
-    const c = byId.get(m.id)
-    if (!c) return []
-    const hit = lookupPair(driveIndex, anchor.id, c.id)
+): NearbyRelation[] {
+  const withRank = matches.map((m) => {
+    const hit = lookupPair(driveIndex, anchorId, m.id)
     const rankMinutes = hit ? hit.minutes : estimateDriveMinutes(m.distanceKm)
-    return [{
-      card: {
-        id: c.id, name: c.name, imageUrl: c.imageUrl, tags: c.tags, sigungu: c.sigungu,
-        ratingAvg: c.ratingAvg, ratingCount: c.ratingCount, distanceKm: m.distanceKm,
-        driveMinutes: hit ? hit.minutes : null,
-        directionsUrl: directionsUrl(anchor, c),
-      },
+    return {
+      relation: { id: m.id, distanceKm: m.distanceKm, driveMinutes: hit ? hit.minutes : null },
       rankMinutes,
-    }]
+    }
   })
   withRank.sort((a, b) => a.rankMinutes - b.rankMinutes)
-  return withRank.slice(0, finalLimit).map((x) => x.card)
+  return withRank.slice(0, finalLimit).map((x) => x.relation)
 }
 
-/** anchors 각 항목에 대해 candidates 중 가까운 순 카드 목록을 만든다 */
+/** anchors 각 항목에 대해 candidates 중 가까운 순 관계 목록을 만든다 */
 function nearbyMap(
-  anchors: GeoCard[],
-  candidates: GeoCard[],
+  anchors: GeoPoint[],
+  candidates: GeoPoint[],
   driveIndex: Map<string, NearbyDrivePair>,
   preLimit: number,
   finalLimit: number,
-): Map<string, NearbyCard[]> {
+): Map<string, NearbyRelation[]> {
   const matches = nearestByDomain(anchors, candidates, preLimit)
-  const candidateById = new Map(candidates.map((c) => [c.id, c]))
-  const anchorById = new Map(anchors.map((a) => [a.id, a]))
-  const result = new Map<string, NearbyCard[]>()
+  const result = new Map<string, NearbyRelation[]>()
   for (const [anchorId, m] of matches) {
-    const anchor = anchorById.get(anchorId)
-    if (!anchor) continue
-    result.set(anchorId, toCards(anchor, m, candidateById, driveIndex, finalLimit))
+    result.set(anchorId, toCards(anchorId, m, driveIndex, finalLimit))
   }
   return result
 }
 
 export function buildNearbyPayloads(input: BuildNearbyInput): NearbyPayloads {
-  const {
-    cafes, restaurants, spots, cafeSite, restaurantSite, spotSite,
-    driveCache, preLimit, limit,
-  } = input
+  const { cafeSite, restaurantSite, spotSite, driveCache, preLimit, limit } = input
   const driveIndex = buildPairIndex(driveCache)
 
-  const cafeAnchors = toGeoCards(cafes, cafeSite, { excludeCityOnly: false })
-  const cafeCands = toGeoCards(cafes, cafeSite, { excludeCityOnly: true })
-  const restAnchors = toGeoCards(restaurants, restaurantSite, { excludeCityOnly: false })
-  const restCands = toGeoCards(restaurants, restaurantSite, { excludeCityOnly: true })
-  const spotAnchors = toGeoCards(spots, spotSite, { excludeCityOnly: false })
-  const spotCands = toGeoCards(spots, spotSite, { excludeCityOnly: true })
+  const cafeAnchors = toGeoPoints(cafeSite, { excludeCityOnly: false })
+  const cafeCands = toGeoPoints(cafeSite, { excludeCityOnly: true })
+  const restAnchors = toGeoPoints(restaurantSite, { excludeCityOnly: false })
+  const restCands = toGeoPoints(restaurantSite, { excludeCityOnly: true })
+  const spotAnchors = toGeoPoints(spotSite, { excludeCityOnly: false })
+  const spotCands = toGeoPoints(spotSite, { excludeCityOnly: true })
 
   const cafeToRest = nearbyMap(cafeAnchors, restCands, driveIndex, preLimit, limit)
   const cafeToSpot = nearbyMap(cafeAnchors, spotCands, driveIndex, preLimit, limit)
