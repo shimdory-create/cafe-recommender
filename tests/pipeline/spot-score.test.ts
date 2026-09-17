@@ -25,4 +25,27 @@ describe('spotFamilyFit', () => {
     const indoor = spotFamilyFit({ ...base, outdoorOnly: false }, summer)
     expect(outdoor).toBeLessThan(indoor)
   })
+
+  it('teenAppeal이 평균(2.5)보다 높으면 기준점보다 점수가 오른다', () => {
+    const now = new Date('2026-09-02')
+    const highTeen = spotFamilyFit({ ...base, hasKidsTag: false, teenAppeal: 5 }, now)
+    const neutral = spotFamilyFit({ ...base, hasKidsTag: false, teenAppeal: 2.5 }, now)
+    expect(highTeen).toBeGreaterThan(neutral)
+  })
+
+  it('teenAppeal이 평균보다 낮으면 기준점보다 점수가 낮아진다', () => {
+    const now = new Date('2026-09-02')
+    const lowTeen = spotFamilyFit({ ...base, hasKidsTag: false, teenAppeal: 0 }, now)
+    const neutral = spotFamilyFit({ ...base, hasKidsTag: false, teenAppeal: 2.5 }, now)
+    expect(lowTeen).toBeLessThan(neutral)
+  })
+
+  it('아이 태그 보너스와 최고 teenAppeal 보너스가 비슷한 크기다 (한쪽만 유리하지 않게)', () => {
+    const now = new Date('2026-09-02')
+    const kidsBoost = spotFamilyFit({ ...base, hasKidsTag: true, teenAppeal: 2.5 }, now)
+      / spotFamilyFit({ ...base, hasKidsTag: false, teenAppeal: 2.5 }, now)
+    const teenBoost = spotFamilyFit({ ...base, hasKidsTag: false, teenAppeal: 5 }, now)
+      / spotFamilyFit({ ...base, hasKidsTag: false, teenAppeal: 2.5 }, now)
+    expect(Math.abs(kidsBoost - teenBoost)).toBeLessThan(0.06)
+  })
 })
