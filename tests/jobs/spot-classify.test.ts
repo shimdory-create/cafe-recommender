@@ -15,6 +15,8 @@ function harness(opts?: {
     ambiguousName: boolean
     attributes: null
     tags: string[]
+    categoryName?: string
+    excludeReason?: string | null
   }[]
   buzz?: unknown[]
   llm?: { modelVersion: string; extract: (...a: never[]) => Promise<unknown> }
@@ -60,6 +62,24 @@ describe('runSpotClassify', () => {
     expect(r.classified).toBe(1)
     expect(h.spots()[0]!.status).toBe('active')
     expect(h.spots()[0]!.tags).toContain('자연/공원')
+  })
+
+  it('카카오 분류가 음식점이면 LLM을 호출하지 않고 바로 배제한다', async () => {
+    let llmCalls = 0
+    const h = harness({
+      spots: [{
+        kakaoPlaceId: '1', name: '어떤카페', sigungu: '부평구', lat: 37.5, lng: 126.7,
+        firstSeenAt: '2026-09-02T00:00:00.000Z', status: 'pending_extraction' as const,
+        ambiguousName: false, attributes: null, tags: [],
+        categoryName: '음식점 > 카페 > 커피전문점',
+      }],
+      llm: { modelVersion: 'v', extract: async () => { llmCalls++; return {} } },
+    })
+    const r = await runSpotClassify(h.deps)
+    expect(r.excluded).toBe(1)
+    expect(h.spots()[0]!.status).toBe('excluded_auto')
+    expect(h.spots()[0]!.excludeReason).toBe('음식점으로 분류됨 (가볼 곳 아님)')
+    expect(llmCalls).toBe(0)
   })
 
   it('판정 대기가 0곳이면(정상적으로 빈 큐) 그래도 성공을 기록한다', async () => {

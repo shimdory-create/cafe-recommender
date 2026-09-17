@@ -2,7 +2,7 @@ import { SPOT_SEARCH_KEYWORDS } from '../config/spot-keywords.js'
 import { regionLabel, type Region } from '../config/regions.js'
 import { HOME, haversineKm, estimateDriveMinutes } from '../pipeline/geo.js'
 import { belongsToRegion } from '../pipeline/region-match.js'
-import { isAmbiguousSpotName } from '../pipeline/spot-relevance.js'
+import { isAmbiguousSpotName, isFoodCategory } from '../pipeline/spot-relevance.js'
 import { harvestCuratedSpots } from '../pipeline/spot-harvest.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
@@ -31,6 +31,8 @@ export interface SpotDiscoverDeps {
 export interface SpotDiscoverResult {
   discovered: number
   offRegion: number
+  /** 카카오 분류가 음식점(카페 포함)이라 저장 자체를 안 한 곳 수 */
+  foodCategory: number
   total: number
   errors: string[]
   /** 하베스트(그물 C) LLM 쿼터가 소진돼 중단했는가 */
@@ -70,6 +72,7 @@ export async function runSpotDiscover(
   const byId = new Map<string, Spot>(existing.map((s) => [s.kakaoPlaceId, s]))
   let discovered = 0
   const offRegionIds = new Set<string>()
+  const foodCategoryIds = new Set<string>()
   let quotaErrors = 0
   let quotaExhausted = false
 
@@ -77,6 +80,10 @@ export async function runSpotDiscover(
     if (!p.id || byId.has(p.id)) return
     if (!belongsToRegion(p, region)) {
       offRegionIds.add(p.id)
+      return
+    }
+    if (isFoodCategory(p.categoryName)) {
+      foodCategoryIds.add(p.id)
       return
     }
     byId.set(p.id, toSpot(p, region, now))
@@ -122,5 +129,8 @@ export async function runSpotDiscover(
   }
 
   await store.writeSpots([...byId.values()])
-  return { discovered, offRegion: offRegionIds.size, total: byId.size, errors, quotaExhausted }
+  return {
+    discovered, offRegion: offRegionIds.size, foodCategory: foodCategoryIds.size,
+    total: byId.size, errors, quotaExhausted,
+  }
 }

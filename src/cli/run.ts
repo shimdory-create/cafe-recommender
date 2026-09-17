@@ -55,6 +55,7 @@ import { createSpotJsonStore } from '../store/spot-json-store.js'
 import { runSpotDiscover } from '../jobs/spot-discover.js'
 import { runSpotDailyBuzz } from '../jobs/spot-daily-buzz.js'
 import { runSpotClassify } from '../jobs/spot-classify.js'
+import { isFoodCategory } from '../pipeline/spot-relevance.js'
 import { runSpotWeeklySuggest } from '../jobs/spot-suggest.js'
 import { runSpotLiveness } from '../jobs/spot-liveness.js'
 import { runSpotDriveTimes } from '../jobs/spot-drive-times.js'
@@ -735,7 +736,7 @@ async function main() {
       const skipHarvest = flag(rest, 'skip-harvest') !== undefined
       console.log(`가볼 곳 발굴 시작 (${regions.length}개 지역)`)
       const r = await runSpotDiscover(ctx, { regions, skipHarvest })
-      console.log(`  발굴 ${r.discovered}곳 · 동명지역 ${r.offRegion}곳`)
+      console.log(`  발굴 ${r.discovered}곳 · 동명지역 ${r.offRegion}곳 · 음식점 제외 ${r.foodCategory}곳`)
       if (r.quotaExhausted) {
         console.log('  LLM 일일 쿼터가 소진되어 하베스트를 중단했습니다. 다음 회차에 이어서 처리됩니다.')
       }
@@ -766,6 +767,34 @@ async function main() {
       const r = await runSpotClassify(ctx, { limit, redoStale })
       console.log(`  판정 ${r.classified}곳 · 제외 ${r.excluded}곳 · 실패 ${r.failed}곳`)
       if (r.quotaExhausted) console.log('  쿼터 소진으로 중단')
+      break
+    }
+
+    case 'spot-declassify-food': {
+      // 카카오 분류가 음식점(카페 포함)인데 이미 active/pending_extraction으로
+      // 저장된 기존 데이터를 정리한다 — discover/classify에 넣은 필터는
+      // 새로 들어오는 것만 막는다. 멱등이라 여러 번 돌려도 된다.
+      const store = createSpotJsonStore(process.env.DATA_DIR ?? 'data')
+      const spots = await store.readSpots()
+      const changed: string[] = []
+      for (const s of spots) {
+        if (s.status !== 'active' && s.status !== 'pending_extraction') continue
+        if (!isFoodCategory(s.categoryName)) continue
+        changed.push(`${s.status} -> excluded_auto  ${s.name} (${s.categoryName})`)
+        s.status = 'excluded_auto'
+        s.excludeReason = '음식점으로 분류됨 (가볼 곳 아님)'
+      }
+      console.log(`\n  음식점 분류 정리 ${changed.length}곳 / 전체 ${spots.length}곳`)
+      changed.slice(0, 30).forEach((l) => console.log(`    ${l}`))
+      if (changed.length > 30) console.log(`    ... 외 ${changed.length - 30}곳`)
+      if (changed.length === 0) {
+        console.log('  고칠 것이 없습니다.\n')
+      } else if (flag(rest, 'dry') === undefined) {
+        await store.writeSpots(spots)
+        console.log('\n  저장했습니다. npm run site 로 페이로드를 다시 만드세요.\n')
+      } else {
+        console.log('\n  (--dry 이므로 저장하지 않았습니다)\n')
+      }
       break
     }
 
@@ -814,7 +843,8 @@ async function main() {
           + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|audit|normalize|hide'
           + '|restaurant-discover|restaurant-buzz|restaurant-classify|restaurant-suggest'
           + '|restaurant-liveness|restaurant-drive'
-          + '|spot-discover|spot-buzz|spot-classify|spot-suggest|spot-liveness|spot-drive>',
+          + '|spot-discover|spot-buzz|spot-classify|spot-suggest|spot-liveness|spot-drive'
+          + '|spot-declassify-food>',
       )
   }
 }
@@ -831,6 +861,7 @@ const MUTATING = new Set([
   'restaurant-discover', 'restaurant-buzz', 'restaurant-classify', 'restaurant-drive', 'restaurant-suggest',
   'restaurant-liveness',
   'spot-discover', 'spot-buzz', 'spot-classify', 'spot-drive', 'spot-suggest', 'spot-liveness',
+  'spot-declassify-food',
   'nearby-drive',
 ])
 

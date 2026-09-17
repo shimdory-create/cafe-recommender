@@ -53,3 +53,19 @@ export function isAmbiguousSpotName(name: string): boolean {
   const n = squeeze(name)
   return n.length <= 2 || AMBIGUOUS_NAMES.has(n)
 }
+
+/**
+ * 카카오 분류가 `음식점`(카페·식당·베이커리 전부 이 아래 있다)이면 배제한다.
+ *
+ * 블로그 "나들이 추천" 글은 카페·식당을 코스에 자연스럽게 끼워 넣는다 —
+ * 그 결과 성격 태그(자연/공원, 아이와 가기 좋은 곳 등)를 후기에서 얻어
+ * Layer 5 게이트를 통과해버린다. 카카오 자체 분류는 후기 문장과 달리
+ * 흔들리지 않는 사실이라 여기서 먼저 걸러낸다.
+ *
+ * 키즈카페(`가정,생활 > 유아 > 놀이시설 > 키즈카페`)는 이름에 "카페"가
+ * 들어가지만 분류상 음식점이 아니라 여기 안 걸린다 — 실측으로 확인한
+ * 정당한 가볼 곳이다.
+ */
+export function isFoodCategory(categoryName: string | null | undefined): boolean {
+  return (categoryName ?? '').startsWith('음식점')
+}

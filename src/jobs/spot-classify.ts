@@ -3,6 +3,7 @@ import { passesLayer2 } from '../pipeline/buzz.js'
 import { extractSpotAttributes } from '../pipeline/spot-extract.js'
 import { assignSpotTags } from '../pipeline/spot-tag.js'
 import { passesHardGate } from '../pipeline/gate.js'
+import { isFoodCategory } from '../pipeline/spot-relevance.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
 import type { BuzzSnapshot } from '../schema.js'
@@ -120,6 +121,15 @@ export async function runSpotClassify(
       if (!l2.pass) {
         s.status = 'excluded_auto'
         s.excludeReason = l2.reason ?? 'Layer 2 탈락'
+        excluded++
+        continue
+      }
+
+      // discover 단계에서 걸러지지만, 그 전에 들어온 기존 데이터를 위한
+      // 안전망 — 여기서 걸러야 블로그 검색·LLM 호출을 아낀다.
+      if (isFoodCategory(s.categoryName)) {
+        s.status = 'excluded_auto'
+        s.excludeReason = '음식점으로 분류됨 (가볼 곳 아님)'
         excluded++
         continue
       }

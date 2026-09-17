@@ -49,6 +49,23 @@ describe('runSpotDiscover', () => {
     expect((h.saved()[0] as { status: string }).status).toBe('pending_extraction')
   })
 
+  it('카카오 분류가 음식점이면 저장하지 않는다 (카페·식당은 가볼 곳이 아니다)', async () => {
+    const h = harness()
+    h.deps.local.searchKeyword = async () => ({
+      places: [{
+        id: '1', placeName: '어떤카페', roadAddressName: '인천 부평구 1',
+        addressName: '인천 부평구 1', lat: 37.5, lng: 126.7,
+        categoryName: '음식점 > 카페 > 커피전문점',
+        placeUrl: '', phone: '',
+      }],
+      isEnd: true, payload: {},
+    })
+    const r = await runSpotDiscover(h.deps, { regions: [region], skipHarvest: true })
+    expect(r.discovered).toBe(0)
+    expect(r.foodCategory).toBe(1)
+    expect(h.saved()).toEqual([])
+  })
+
   it('하베스트 LLM 쿼터가 소진되면 일찍 멈춘다', async () => {
     let llmCalls = 0
     const regions: Region[] = Array.from({ length: 5 }, (_, i) => (
