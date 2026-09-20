@@ -48,6 +48,7 @@ import { buildNearbyPayloads } from '../site/nearby-payload.js'
 import { runRestaurantDiscover } from '../jobs/restaurant-discover.js'
 import { runRestaurantDailyBuzz } from '../jobs/restaurant-daily-buzz.js'
 import { runRestaurantClassify } from '../jobs/restaurant-classify.js'
+import { evaluateRestaurantExclusion } from '../pipeline/restaurant-exclude.js'
 import { runRestaurantWeeklySuggest } from '../jobs/restaurant-suggest.js'
 import { runRestaurantLiveness } from '../jobs/restaurant-liveness.js'
 import { runRestaurantDriveTimes } from '../jobs/restaurant-drive-times.js'
@@ -681,6 +682,38 @@ async function main() {
       break
     }
 
+    case 'restaurant-declassify-cafe': {
+      // 카카오 분류가 카페인데 이미 active/pending_extraction으로 저장된
+      // 기존 데이터를 정리한다 — evaluateRestaurantExclusion에 '카페' 키워드를
+      // 추가한 것은 새로 들어오는 것만 막는다. 멱등이라 여러 번 돌려도 된다.
+      const store = createRestaurantJsonStore(process.env.DATA_DIR ?? 'data')
+      const blacklist = await store.readBlacklist()
+      const restaurants = await store.readRestaurants()
+      const changed: string[] = []
+      for (const r2 of restaurants) {
+        if (r2.status !== 'active' && r2.status !== 'pending_extraction') continue
+        const reason = evaluateRestaurantExclusion(
+          { name: r2.name, categoryName: r2.categoryName ?? '' }, blacklist,
+        )
+        if (reason !== 'category' || !(r2.categoryName ?? '').includes('카페')) continue
+        changed.push(`${r2.status} -> excluded_auto  ${r2.name} (${r2.categoryName})`)
+        r2.status = 'excluded_auto'
+        r2.excludeReason = '카페로 분류됨 (식당 아니다)'
+      }
+      console.log(`\n  카페 분류 정리 ${changed.length}곳 / 전체 ${restaurants.length}곳`)
+      changed.slice(0, 30).forEach((l) => console.log(`    ${l}`))
+      if (changed.length > 30) console.log(`    ... 외 ${changed.length - 30}곳`)
+      if (changed.length === 0) {
+        console.log('  고칠 것이 없습니다.\n')
+      } else if (flag(rest, 'dry') === undefined) {
+        await store.writeRestaurants(restaurants)
+        console.log('\n  저장했습니다. npm run site 로 페이로드를 다시 만드세요.\n')
+      } else {
+        console.log('\n  (--dry 이므로 저장하지 않았습니다)\n')
+      }
+      break
+    }
+
     case 'restaurant-suggest': {
       const base = createContext()
       const ctx = {
@@ -842,7 +875,7 @@ async function main() {
         '사용법: tsx src/cli/run.ts'
           + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|audit|normalize|hide'
           + '|restaurant-discover|restaurant-buzz|restaurant-classify|restaurant-suggest'
-          + '|restaurant-liveness|restaurant-drive'
+          + '|restaurant-liveness|restaurant-drive|restaurant-declassify-cafe'
           + '|spot-discover|spot-buzz|spot-classify|spot-suggest|spot-liveness|spot-drive'
           + '|spot-declassify-food>',
       )
@@ -859,7 +892,7 @@ async function main() {
 const MUTATING = new Set([
   'discover', 'buzz', 'classify', 'drive', 'suggest', 'visited', 'hide', 'label',
   'restaurant-discover', 'restaurant-buzz', 'restaurant-classify', 'restaurant-drive', 'restaurant-suggest',
-  'restaurant-liveness',
+  'restaurant-liveness', 'restaurant-declassify-cafe',
   'spot-discover', 'spot-buzz', 'spot-classify', 'spot-drive', 'spot-suggest', 'spot-liveness',
   'spot-declassify-food',
   'nearby-drive',

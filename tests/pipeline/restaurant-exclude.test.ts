@@ -23,6 +23,14 @@ describe('evaluateRestaurantExclusion', () => {
     expect(r).toBe('franchise')
   })
 
+  it('카페(디저트카페 포함)는 카테고리로 배제한다 — 식당이 아니다', () => {
+    const r = evaluateRestaurantExclusion(
+      { name: '아무개카페', categoryName: '음식점 > 카페 > 테마카페 > 디저트카페' },
+      [],
+    )
+    expect(r).toBe('category')
+  })
+
   it('둘 다 아니면 배제하지 않는다', () => {
     const r = evaluateRestaurantExclusion(
       { name: '소문난식당', categoryName: '음식점 > 한식' },
