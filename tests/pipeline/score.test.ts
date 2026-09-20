@@ -121,6 +121,13 @@ describe('familyFit', () => {
     expect(fit({ teenAppeal: 5 })).toBeGreaterThan(fit({ teenAppeal: 0 }))
   })
 
+  it('10대 적합도가 평균(2.5)보다 높으면 다른 요인과 무관하게 실제로 오른다', () => {
+    // teenAppeal 외 조건을 고정하면 비율이 곧 teen 가중치 자체의 비율이다.
+    // 예전 공식(0.85~1.0, 상한이 곧 무보너스 지점)은 이 비율이 1을 못 넘었다.
+    const ratio = fit({ teenAppeal: 5 }) / fit({ teenAppeal: 2.5 })
+    expect(ratio).toBeGreaterThan(1.1)
+  })
+
   it('0 이상 값을 준다', () => {
     expect(fit({ driveMinutes: 999 })).toBeGreaterThanOrEqual(0)
   })

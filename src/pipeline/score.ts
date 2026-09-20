@@ -68,7 +68,10 @@ export function familyFit(i: FitInput, now: Date): number {
   const harsh = (month >= 7 && month <= 8) || month === 12 || month <= 2
   const season = i.outdoorOnly ? (harsh ? 0.5 : 1.2) : 1.0
 
-  const teen = 0.85 + 0.03 * clamp(i.teenAppeal, 0, 5)
+  // 중간값(2.5) 기준 대칭 이동 — teenAppeal 이 높은 곳도 실제로 순위가
+  // 오르게 한다. 예전 0.85~1.0 공식은 상한이 곧 "보너스 없음" 지점이라
+  // 10대 취향이 아무리 높아도 절대 못 올라갔다(spot-score.ts 참고).
+  const teen = 1.0 + 0.06 * (clamp(i.teenAppeal, 0, 5) - 2.5)
 
   return distance * parking * menu * unvisited * season * teen
 }
