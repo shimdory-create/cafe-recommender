@@ -28,8 +28,9 @@ export default function SpotInfo() {
     ['순위를 매긴다', (
       <>
         화제량 × (거리·주차·태그)로 점수를 내고 높은 순으로 줄을 세워요.{' '}
-        아이와 함께 갈 때를 위해{' '}
-        <b className="text-ink">&ldquo;아이와 가기 좋은 곳&rdquo; 태그가 있는 곳</b>에 가산점을 줘요.
+        <b className="text-ink">&ldquo;아이와 가기 좋은 곳&rdquo; 태그</b>와{' '}
+        <b className="text-ink">중고생이 좋아할 만한 정도(10대 취향)</b>를 같이 봐서,
+        자녀 나이와 상관없이 잘 맞는 곳이 위로 올라오게 해요.
       </>
     )],
     ['다녀온 곳은 내린다',
