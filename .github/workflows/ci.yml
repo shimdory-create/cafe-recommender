@@ -1,0 +1,47 @@
+name: ci
+on:
+  push:
+    branches: [master]
+    # data/, web/src/generated/ 만 바뀌는 자동 커밋(하루 수십 건)에는 안 돈다 —
+    # 코드가 안 바뀌었으면 검증할 것도 없다. 코드 관련 경로만 건드린다.
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'web/src/**'
+      - '!web/src/generated/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'web/package.json'
+      - 'web/package-lock.json'
+      - 'tsconfig*.json'
+      - 'web/tsconfig*.json'
+      - '.github/workflows/ci.yml'
+  workflow_dispatch:
+
+# 읽기만 한다 — data/ 를 고치지 않으므로 쓰기 락도, 커밋도 없다.
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+      - run: npm ci --prefix web
+      - run: npm run typecheck --prefix web
+      - run: npm test --prefix web
+      # 실제 Next.js 빌드까지 통과해야 한다 — tsc/vitest 는 못 잡는 정적 생성
+      # 단계의 문제(예: 순환 import)가 있다. API 키 없이도 돈다(배포와 같은 이유).
+      - run: npm run build --prefix web
