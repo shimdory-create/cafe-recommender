@@ -61,6 +61,7 @@ import { runSpotWeeklySuggest } from '../jobs/spot-suggest.js'
 import { runSpotLiveness } from '../jobs/spot-liveness.js'
 import { runSpotDriveTimes } from '../jobs/spot-drive-times.js'
 import { runNearbyDriveTimes } from '../jobs/nearby-drive-times.js'
+import { familyActivityIds } from '../pipeline/family-activity.js'
 
 const argv = process.argv.slice(2)
 const cmd = argv[0]
@@ -69,6 +70,18 @@ const rest = argv.slice(1)
 function die(msg: string): never {
   console.error(msg)
   process.exit(1)
+}
+
+/**
+ * 위시리스트·리뷰류 JSON을 읽는다. 파일이 아직 없으면(가족이 그 도메인에서
+ * 아직 아무것도 안 남겼으면) 빈 배열로 본다 — 에러가 아니다.
+ */
+async function readIdsOrEmpty(path: string): Promise<{ kakaoPlaceId: string }[]> {
+  try {
+    return JSON.parse(await readFile(path, 'utf8'))
+  } catch {
+    return []
+  }
 }
 
 async function main() {
@@ -687,15 +700,29 @@ async function main() {
       // 기존 데이터를 정리한다 — evaluateRestaurantExclusion에 '카페' 키워드를
       // 추가한 것은 새로 들어오는 것만 막는다. 멱등이라 여러 번 돌려도 된다.
       const store = createRestaurantJsonStore(process.env.DATA_DIR ?? 'data')
+      const dataDir = process.env.DATA_DIR ?? 'data'
       const blacklist = await store.readBlacklist()
       const restaurants = await store.readRestaurants()
+      // 분류만 보고 자동 배제하기 전에, 가족이 이미 남긴 기록이 있으면
+      // 건너뛰고 사람이 보게 한다 — 카테고리가 맞아도 조용히 지우지 않는다.
+      const activeIds = familyActivityIds([
+        await readIdsOrEmpty(`${dataDir}/restaurant-wishlist.json`),
+        await store.readRestaurantReviews(),
+        await store.readRestaurantVisits(),
+        await readIdsOrEmpty(`${dataDir}/restaurant-user-blacklist.json`),
+      ])
       const changed: string[] = []
+      const skippedWithActivity: string[] = []
       for (const r2 of restaurants) {
         if (r2.status !== 'active' && r2.status !== 'pending_extraction') continue
         const reason = evaluateRestaurantExclusion(
           { name: r2.name, categoryName: r2.categoryName ?? '' }, blacklist,
         )
         if (reason !== 'category' || !(r2.categoryName ?? '').includes('카페')) continue
+        if (activeIds.has(r2.kakaoPlaceId)) {
+          skippedWithActivity.push(`${r2.name} (${r2.categoryName}) — ${r2.kakaoPlaceId}`)
+          continue
+        }
         changed.push(`${r2.status} -> excluded_auto  ${r2.name} (${r2.categoryName})`)
         r2.status = 'excluded_auto'
         r2.excludeReason = '카페로 분류됨 (식당 아니다)'
@@ -703,8 +730,12 @@ async function main() {
       console.log(`\n  카페 분류 정리 ${changed.length}곳 / 전체 ${restaurants.length}곳`)
       changed.slice(0, 30).forEach((l) => console.log(`    ${l}`))
       if (changed.length > 30) console.log(`    ... 외 ${changed.length - 30}곳`)
+      if (skippedWithActivity.length > 0) {
+        console.log(`\n  [!] 가족 기록이 있어 건너뛴 곳 ${skippedWithActivity.length}곳 — 직접 확인하세요:`)
+        skippedWithActivity.forEach((l) => console.log(`    ${l}`))
+      }
       if (changed.length === 0) {
-        console.log('  고칠 것이 없습니다.\n')
+        console.log(skippedWithActivity.length > 0 ? '' : '  고칠 것이 없습니다.\n')
       } else if (flag(rest, 'dry') === undefined) {
         await store.writeRestaurants(restaurants)
         console.log('\n  저장했습니다. npm run site 로 페이로드를 다시 만드세요.\n')
@@ -808,11 +839,25 @@ async function main() {
       // 저장된 기존 데이터를 정리한다 — discover/classify에 넣은 필터는
       // 새로 들어오는 것만 막는다. 멱등이라 여러 번 돌려도 된다.
       const store = createSpotJsonStore(process.env.DATA_DIR ?? 'data')
+      const dataDir = process.env.DATA_DIR ?? 'data'
       const spots = await store.readSpots()
+      // 분류만 보고 자동 배제하기 전에, 가족이 이미 남긴 기록이 있으면
+      // 건너뛰고 사람이 보게 한다 — 카테고리가 맞아도 조용히 지우지 않는다.
+      const activeIds = familyActivityIds([
+        await readIdsOrEmpty(`${dataDir}/spot-wishlist.json`),
+        await store.readSpotReviews(),
+        await store.readSpotVisits(),
+        await readIdsOrEmpty(`${dataDir}/spot-user-blacklist.json`),
+      ])
       const changed: string[] = []
+      const skippedWithActivity: string[] = []
       for (const s of spots) {
         if (s.status !== 'active' && s.status !== 'pending_extraction') continue
         if (!isFoodCategory(s.categoryName)) continue
+        if (activeIds.has(s.kakaoPlaceId)) {
+          skippedWithActivity.push(`${s.name} (${s.categoryName}) — ${s.kakaoPlaceId}`)
+          continue
+        }
         changed.push(`${s.status} -> excluded_auto  ${s.name} (${s.categoryName})`)
         s.status = 'excluded_auto'
         s.excludeReason = '음식점으로 분류됨 (가볼 곳 아님)'
@@ -820,8 +865,12 @@ async function main() {
       console.log(`\n  음식점 분류 정리 ${changed.length}곳 / 전체 ${spots.length}곳`)
       changed.slice(0, 30).forEach((l) => console.log(`    ${l}`))
       if (changed.length > 30) console.log(`    ... 외 ${changed.length - 30}곳`)
+      if (skippedWithActivity.length > 0) {
+        console.log(`\n  [!] 가족 기록이 있어 건너뛴 곳 ${skippedWithActivity.length}곳 — 직접 확인하세요:`)
+        skippedWithActivity.forEach((l) => console.log(`    ${l}`))
+      }
       if (changed.length === 0) {
-        console.log('  고칠 것이 없습니다.\n')
+        console.log(skippedWithActivity.length > 0 ? '' : '  고칠 것이 없습니다.\n')
       } else if (flag(rest, 'dry') === undefined) {
         await store.writeSpots(spots)
         console.log('\n  저장했습니다. npm run site 로 페이로드를 다시 만드세요.\n')
