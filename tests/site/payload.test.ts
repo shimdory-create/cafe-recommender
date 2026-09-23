@@ -55,6 +55,12 @@ describe('buildSitePayload', () => {
     expect(p.cafes).toHaveLength(1)
   })
 
+  it('finalScore는 소수 1자리로 반올림한다 — 미세한 잡음으로 매번 전체 파일이 다시 써지는 것을 막는다', () => {
+    const p = build([cafe('1')], [buzz('1')])
+    const score = p.cafes[0]!.finalScore
+    expect(score).toBe(Number(score.toFixed(1)))
+  })
+
   it('판정 전·숨김 카페는 싣지 않는다', () => {
     const p = build(
       [

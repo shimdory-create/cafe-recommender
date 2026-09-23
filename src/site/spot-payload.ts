@@ -153,7 +153,8 @@ export function buildSpotSitePayload(input: SpotPayloadInput): SpotSitePayload {
       kakaoPlaceUrl: s.kakaoPlaceUrl ?? null,
       imageUrl: s.imageUrl ?? null,
       hotScore: Number(hot.toFixed(1)),
-      finalScore: Number(finalScore(hot, fit).toFixed(3)),
+      // 소수 1자리 — 이유는 src/site/payload.ts의 같은 줄 참고 (git 커밋 용량).
+      finalScore: Number(finalScore(hot, fit).toFixed(1)),
       postsPer30: b.postsPer30,
       posts30: b.posts30d,
       posts90: b.posts30d + b.postsPrev,

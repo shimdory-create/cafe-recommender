@@ -221,7 +221,12 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       kakaoPlaceUrl: c.kakaoPlaceUrl ?? null,
       imageUrl: c.imageUrl ?? null,
       hotScore: Number(hot.toFixed(1)),
-      finalScore: Number(finalScore(hot, fit).toFixed(3)),
+      // 소수 1자리 — hotScore와 같은 정밀도. 3자리로 두면 미세한 계산 잡음
+      // (예: 방문 후 경과일이 몇 시간 차이나는 것)만으로도 대부분의 행이
+      // 매 빌드마다 달라져 보여서, git에 거의 전체 파일이 다시 커밋된다
+      // (실측: site-restaurant.json 한 커밋에 15,550줄 변경, 절반이 finalScore
+      // 소수점 셋째 자리 흔들림 때문이었다).
+      finalScore: Number(finalScore(hot, fit).toFixed(1)),
       postsPer30: b.postsPer30,
       posts30: b.posts30d,
       // 30일 + 이전 기간(31~90일). 창이 90일을 못 덮으면 그만큼만 센 값이다

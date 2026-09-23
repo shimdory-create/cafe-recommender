@@ -47,6 +47,12 @@ describe('buildRestaurantSitePayload', () => {
     expect(p.restaurants).toHaveLength(1)
   })
 
+  it('finalScore는 소수 1자리로 반올림한다 (git 커밋 용량 — payload.test.ts 참고)', () => {
+    const p = build([restaurant('1')], [buzz('1')])
+    const score = p.restaurants[0]!.finalScore
+    expect(score).toBe(Number(score.toFixed(1)))
+  })
+
   it('판정 전·숨김·태그 0개(음식종류 미분류)는 싣지 않는다', () => {
     const p = build(
       [

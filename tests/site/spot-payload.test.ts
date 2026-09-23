@@ -46,6 +46,12 @@ describe('buildSpotSitePayload', () => {
     expect(p.spots).toHaveLength(1)
   })
 
+  it('finalScore는 소수 1자리로 반올림한다 (git 커밋 용량 — payload.test.ts 참고)', () => {
+    const p = build([spot('1')], [buzz('1')])
+    const score = p.spots[0]!.finalScore
+    expect(score).toBe(Number(score.toFixed(1)))
+  })
+
   it('판정 전·숨김·태그 0개는 싣지 않는다', () => {
     const p = build(
       [
