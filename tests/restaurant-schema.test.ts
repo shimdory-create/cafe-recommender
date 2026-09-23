@@ -59,7 +59,7 @@ describe('SiteRestaurantSchema (2단계 웹 표시용)', () => {
       generatedAt: '2026-09-01T00:00:00.000Z', weekOf: '2026-08-31',
       pipelineStatus: '자동수집 정상',
       week: [{ rank: 1, id: '1', finalScore: 3 }],
-      restaurants: [], visited: [],
+      restaurants: [], visited: [], maybeClosed: [],
       stats: {
         discovered: 0, passed: 0, regions: 0, scannedRegions: 0,
         driveMeasured: 0, revisitDays: 180, cityOnly: 0, staleDays: 21,

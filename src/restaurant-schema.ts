@@ -1,8 +1,8 @@
 import { z } from 'zod'
-import { HealthSchema, BlacklistEntrySchema, SiteReviewSchema } from './schema.js'
+import { HealthSchema, BlacklistEntrySchema, SiteReviewSchema, MaybeClosedSchema } from './schema.js'
 
-export { HealthSchema, BlacklistEntrySchema }
-export type { Health, BlacklistEntry } from './schema.js'
+export { HealthSchema, BlacklistEntrySchema, MaybeClosedSchema }
+export type { Health, BlacklistEntry, MaybeClosed } from './schema.js'
 
 /** 음식 종류. 여기서 늘리지 않는다 — 카페 성격 태그와 같은 이유(스펙 참고) */
 export const CUISINE_TYPES = ['한식', '일식', '중식', '양식', '분식', '고기구이'] as const
@@ -131,6 +131,7 @@ export const RestaurantSitePayloadSchema = z.object({
   })),
   restaurants: z.array(SiteRestaurantSchema),
   visited: z.array(SiteRestaurantVisitedSchema),
+  maybeClosed: z.array(MaybeClosedSchema),
   stats: z.object({
     discovered: z.number().int(),
     passed: z.number().int(),

@@ -1,8 +1,8 @@
 import { z } from 'zod'
-import { HealthSchema, SiteReviewSchema } from './schema.js'
+import { HealthSchema, SiteReviewSchema, MaybeClosedSchema } from './schema.js'
 
-export { HealthSchema }
-export type { Health } from './schema.js'
+export { HealthSchema, MaybeClosedSchema }
+export type { Health, MaybeClosed } from './schema.js'
 
 /** 가볼 곳 성격 태그. 카페 성격 태그와 같은 이유로 여기서 늘리지 않는다(스펙 참고) */
 export const SPOT_TAGS = [
@@ -129,6 +129,7 @@ export const SpotSitePayloadSchema = z.object({
   })),
   spots: z.array(SiteSpotSchema),
   visited: z.array(SiteSpotVisitedSchema),
+  maybeClosed: z.array(MaybeClosedSchema),
   stats: z.object({
     discovered: z.number().int(),
     passed: z.number().int(),

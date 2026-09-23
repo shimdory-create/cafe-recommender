@@ -1,5 +1,6 @@
 import { spotDriveMinutesOf } from '../jobs/spot-drive-times.js'
-import { STALE_DAYS } from '../jobs/spot-liveness.js'
+import { STALE_DAYS, staleSpots, daysUnseen } from '../jobs/spot-liveness.js'
+import { excludeVisited } from '../pipeline/maybe-closed.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
@@ -196,6 +197,14 @@ export function buildSpotSitePayload(input: SpotPayloadInput): SpotSitePayload {
   const ids = new Set(deduped.map((r) => r.id))
   const week = pickSpotWeek(suggestions, weekOf, ids, { lastVisit, now })
 
+  const maybeClosed = excludeVisited(staleSpots(spots, now), visits).map((s) => ({
+    id: s.kakaoPlaceId,
+    name: s.name,
+    sigungu: s.sigungu,
+    days: daysUnseen(s, now) ?? 0,
+    naverMapUrl: naverMapLink(s),
+  }))
+
   return SpotSitePayloadSchema.parse({
     generatedAt: now.toISOString(),
     weekOf,
@@ -203,6 +212,7 @@ export function buildSpotSitePayload(input: SpotPayloadInput): SpotSitePayload {
     week,
     spots: deduped,
     visited,
+    maybeClosed,
     stats: {
       discovered: spots.length,
       passed: deduped.filter((r) => !r.cityOnly).length,

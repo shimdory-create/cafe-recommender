@@ -56,6 +56,15 @@ export interface SiteRestaurantVisited {
   ratingCount: number
 }
 
+/** 폐업 의심 후보. 방문 기록 있는 곳은 절대 안 들어있다(백엔드에서 뺌) */
+export interface MaybeClosed {
+  id: string
+  name: string
+  sigungu: string
+  days: number
+  naverMapUrl: string
+}
+
 export interface RestaurantSitePayload {
   generatedAt: string
   weekOf: string
@@ -64,6 +73,7 @@ export interface RestaurantSitePayload {
   week: { rank: number; id: string; finalScore: number }[]
   restaurants: SiteRestaurant[]
   visited: SiteRestaurantVisited[]
+  maybeClosed: MaybeClosed[]
   stats: {
     discovered: number
     passed: number

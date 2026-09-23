@@ -332,6 +332,20 @@ export const SiteVisitedSchema = z.object({
 })
 export type SiteVisited = z.infer<typeof SiteVisitedSchema>
 
+/**
+ * 폐업 의심 후보 — 정보 탭 "폐업 의심" 링크가 읽는다.
+ * 방문 기록이 있는 곳은 절대 여기 안 들어간다 (src/pipeline/maybe-closed.ts).
+ */
+export const MaybeClosedSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  sigungu: z.string(),
+  /** 카카오 검색에서 안 보인 지 며칠째인가 */
+  days: z.number().int(),
+  naverMapUrl: z.string(),
+})
+export type MaybeClosed = z.infer<typeof MaybeClosedSchema>
+
 export const SitePayloadSchema = z.object({
   generatedAt: z.string(),
   weekOf: z.string(),
@@ -344,6 +358,7 @@ export const SitePayloadSchema = z.object({
   })),
   cafes: z.array(SiteCafeSchema),
   visited: z.array(SiteVisitedSchema),
+  maybeClosed: z.array(MaybeClosedSchema),
   stats: z.object({
     discovered: z.number().int(),
     passed: z.number().int(),

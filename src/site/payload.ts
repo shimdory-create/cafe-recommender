@@ -1,5 +1,6 @@
 import { driveMinutesOf } from '../jobs/drive-times.js'
-import { STALE_DAYS } from '../jobs/liveness.js'
+import { STALE_DAYS, staleCafes, daysUnseen } from '../jobs/liveness.js'
+import { excludeVisited } from '../pipeline/maybe-closed.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
@@ -279,6 +280,14 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
   const ids = new Set(deduped.map((r) => r.id))
   const week = pickWeek(suggestions, weekOf, ids, { lastVisit, now })
 
+  const maybeClosed = excludeVisited(staleCafes(cafes, now), visits).map((c) => ({
+    id: c.kakaoPlaceId,
+    name: c.name,
+    sigungu: c.sigungu,
+    days: daysUnseen(c, now) ?? 0,
+    naverMapUrl: naverMapLink(c),
+  }))
+
   return SitePayloadSchema.parse({
     generatedAt: now.toISOString(),
     weekOf,
@@ -286,6 +295,7 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
     week,
     cafes: deduped,
     visited,
+    maybeClosed,
     stats: {
       discovered: cafes.length,
       passed: deduped.filter((r) => !r.cityOnly).length,

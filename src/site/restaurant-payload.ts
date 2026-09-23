@@ -1,5 +1,6 @@
 import { restaurantDriveMinutesOf } from '../jobs/restaurant-drive-times.js'
-import { STALE_DAYS } from '../jobs/restaurant-liveness.js'
+import { STALE_DAYS, staleRestaurants, daysUnseen } from '../jobs/restaurant-liveness.js'
+import { excludeVisited } from '../pipeline/maybe-closed.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
@@ -201,6 +202,14 @@ export function buildRestaurantSitePayload(input: RestaurantPayloadInput): Resta
   const ids = new Set(deduped.map((r) => r.id))
   const week = pickRestaurantWeek(suggestions, weekOf, ids, { lastVisit, now })
 
+  const maybeClosed = excludeVisited(staleRestaurants(restaurants, now), visits).map((r) => ({
+    id: r.kakaoPlaceId,
+    name: r.name,
+    sigungu: r.sigungu,
+    days: daysUnseen(r, now) ?? 0,
+    naverMapUrl: naverMapLink(r),
+  }))
+
   return RestaurantSitePayloadSchema.parse({
     generatedAt: now.toISOString(),
     weekOf,
@@ -208,6 +217,7 @@ export function buildRestaurantSitePayload(input: RestaurantPayloadInput): Resta
     week,
     restaurants: deduped,
     visited,
+    maybeClosed,
     stats: {
       discovered: restaurants.length,
       passed: deduped.filter((r) => !r.cityOnly).length,

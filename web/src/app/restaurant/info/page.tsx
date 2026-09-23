@@ -3,6 +3,7 @@ import { VIEW_ONLY } from '@/lib/view-only'
 import { CHANGELOG } from '@/lib/changelog'
 import { UPDATE_SCHEDULE } from '@/lib/update-schedule'
 import { PipelineStatus } from '../../pipeline-status'
+import { RestaurantMaybeClosedLink } from '../../restaurant-maybe-closed-link'
 
 export const metadata = { title: '식당 정보 — 심김 빵지순례' }
 
@@ -58,6 +59,7 @@ export default function RestaurantInfo() {
       <h1 className="text-[22px] font-bold tracking-tight">식당 목록은 어떻게 만들어지나</h1>
 
       <PipelineStatus status={restaurantPayload.pipelineStatus} />
+      <RestaurantMaybeClosedLink items={restaurantPayload.maybeClosed} />
 
       {VIEW_ONLY && (
         <p className="mt-3 rounded-2xl border border-line bg-card p-4 text-[13px] leading-relaxed text-ink-soft">

@@ -52,6 +52,24 @@ describe('buildSpotSitePayload', () => {
     expect(score).toBe(Number(score.toFixed(1)))
   })
 
+  it('21일 넘게 안 보이는 활성 가볼 곳을 폐업 의심으로 올린다', () => {
+    const p = build(
+      [spot('1', { lastSeenAt: '2026-08-01T00:00:00.000Z' })],
+      [buzz('1')],
+    )
+    expect(p.maybeClosed).toHaveLength(1)
+    expect(p.maybeClosed[0]!.id).toBe('1')
+  })
+
+  it('방문 기록이 있는 곳은 아무리 오래 안 보여도 폐업 의심에 절대 안 올린다', () => {
+    const p = build(
+      [spot('1', { lastSeenAt: '2026-08-01T00:00:00.000Z' })],
+      [buzz('1')],
+      { visits: [{ kakaoPlaceId: '1', visitedOn: '2026-08-05' }] },
+    )
+    expect(p.maybeClosed).toHaveLength(0)
+  })
+
   it('판정 전·숨김·태그 0개는 싣지 않는다', () => {
     const p = build(
       [
