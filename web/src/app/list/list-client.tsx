@@ -12,6 +12,7 @@ import { useUrlSync } from '@/lib/use-url-sync'
 import { useWishlist } from '@/lib/use-wishlist'
 import { useBlacklist } from '@/lib/use-blacklist'
 import { useDismissed } from '@/lib/use-dismissed'
+import { useAliveConfirmed } from '@/lib/use-alive'
 import { AreaChips, Chip, SearchBox } from '../filters'
 import { CafeCard } from '../cafe-card'
 import { MaybeClosedLink } from '../maybe-closed-link'
@@ -41,6 +42,7 @@ export function ListClient(
   const { wished, toggle: toggleWish } = useWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useBlacklist()
   const { dismissed, dismiss } = useDismissed()
+  const { aliveIds, confirm } = useAliveConfirmed('/api/alive')
 
   useUrlSync(listParamsToQuery({
     ...initial, q, area, tags, sort, city, newOnly, wishOnly, blacklistOnly, shown: shownCount,
@@ -234,8 +236,9 @@ export function ListClient(
                     onToggleWish={() => toggleWish(c.id)}
                     blacklisted={blacklisted.has(c.id)}
                     onToggleBlacklist={() => toggleBlacklist(c.id)}
-                    stale={!recentlyVisited(c.visitedOn) && isStale(c.lastSeenAt)}
+                    stale={!recentlyVisited(c.visitedOn) && isStale(c.lastSeenAt) && !aliveIds.has(c.id)}
                     onDismiss={() => dismiss(c.id)}
+                    onAlive={() => confirm(c.id)}
                   />
                 ))}
               </div>
@@ -252,8 +255,9 @@ export function ListClient(
               onToggleWish={() => toggleWish(c.id)}
               blacklisted={blacklisted.has(c.id)}
               onToggleBlacklist={() => toggleBlacklist(c.id)}
-              stale={!recentlyVisited(c.visitedOn) && isStale(c.lastSeenAt)}
+              stale={!recentlyVisited(c.visitedOn) && isStale(c.lastSeenAt) && !aliveIds.has(c.id)}
               onDismiss={() => dismiss(c.id)}
+              onAlive={() => confirm(c.id)}
             />
           ))}
         </div>

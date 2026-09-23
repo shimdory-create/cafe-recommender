@@ -44,7 +44,7 @@ export function TopThree({ cafe }: { cafe: ListRow }) {
 }
 
 export function CafeCard({
-  cafe, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
+  cafe, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss, onAlive,
   postsOverride,
 }: {
   cafe: ListRow
@@ -55,9 +55,12 @@ export function CafeCard({
   /** 블랙리스트 상태. 리스트에서는 블랙리스트인 카드가 애초에 안 넘어오므로 늘 false다 */
   blacklisted?: boolean
   onToggleBlacklist?: () => void
-  /** liveness 잡이 오래 못 본 카페 (폐업 의심) */
+  /** liveness 잡이 오래 못 본 카페 (폐업 의심). 부모가 이미 "있어요" 확인·숨김을
+   * 반영해서 넘기므로 여기선 그대로 믿는다 */
   stale?: boolean
   onDismiss?: () => void
+  /** "있어요" 확인 — 있으면 90일 동안 이 배너가 다시 안 뜬다 */
+  onAlive?: () => void
   /** 홈("이번 주 추천")은 postsLabel 대신 트렌드까지 붙인 문구(reason)를
    * 그대로 보여준다(2026-09-08, feed-cards.tsx) */
   postsOverride?: string
@@ -148,17 +151,28 @@ export function CafeCard({
         </div>
 
         {stale && (
-          <div className="mt-2.5 flex items-center justify-between gap-2 rounded-lg bg-amber-50 pl-2.5 pr-1 text-[12px] text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+          <div className="mt-2.5 flex items-center justify-between gap-1 rounded-lg bg-amber-50 pl-2.5 pr-1 text-[12px] text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
             <span>폐업 의심 · 카카오지도에서 최근 안 보여요</span>
-            {onDismiss && (
-              <button
-                type="button"
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDismiss() }}
-                className="flex min-h-[40px] shrink-0 items-center px-2 underline"
-              >
-                숨기기
-              </button>
-            )}
+            <span className="flex shrink-0 items-center">
+              {onAlive && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); onAlive() }}
+                  className="flex min-h-[40px] shrink-0 items-center px-2 underline"
+                >
+                  있어요
+                </button>
+              )}
+              {onDismiss && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDismiss() }}
+                  className="flex min-h-[40px] shrink-0 items-center px-2 underline"
+                >
+                  숨기기
+                </button>
+              )}
+            </span>
           </div>
         )}
 

@@ -19,6 +19,7 @@ export interface FeedRow extends ListRow {
  */
 export function FeedCards({
   rows, offset = 0, showRank = true, wished, onToggleWish, onToggleBlacklist, onDismiss,
+  aliveIds, onAlive,
 }: {
   rows: FeedRow[]
   offset?: number
@@ -27,6 +28,9 @@ export function FeedCards({
   onToggleWish?: (id: string) => void
   onToggleBlacklist?: (id: string) => void
   onDismiss?: (id: string) => void
+  /** "있어요" 확인된 id들 — 부모(서버 폴백 등)가 안 넘기면 아무도 확인 안 한 것으로 본다 */
+  aliveIds?: Set<string>
+  onAlive?: (id: string) => void
 }) {
   return (
     <div className="flex flex-col gap-4">
@@ -39,8 +43,9 @@ export function FeedCards({
             wished={wished?.has(c.id)}
             onToggleWish={onToggleWish ? () => onToggleWish(c.id) : undefined}
             onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(c.id) : undefined}
-            stale={!c.visitedOn && isStale(c.lastSeenAt)}
+            stale={!c.visitedOn && isStale(c.lastSeenAt) && !aliveIds?.has(c.id)}
             onDismiss={onDismiss ? () => onDismiss(c.id) : undefined}
+            onAlive={onAlive ? () => onAlive(c.id) : undefined}
             postsOverride={c.reason}
           />
         </div>

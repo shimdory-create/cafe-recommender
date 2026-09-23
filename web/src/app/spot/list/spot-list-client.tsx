@@ -12,6 +12,7 @@ import { useUrlSync } from '@/lib/use-url-sync'
 import { useSpotWishlist } from '@/lib/use-spot-wishlist'
 import { useSpotBlacklist } from '@/lib/use-spot-blacklist'
 import { useSpotDismissed } from '@/lib/use-spot-dismissed'
+import { useAliveConfirmed } from '@/lib/use-alive'
 import { AreaChips, Chip, SearchBox } from '../../filters'
 import { SpotCard } from '../../spot-card'
 import { SpotMaybeClosedLink } from '../../spot-maybe-closed-link'
@@ -35,6 +36,7 @@ export function SpotListClient(
   const { wished, toggle: toggleWish } = useSpotWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useSpotBlacklist()
   const { dismissed, dismiss } = useSpotDismissed()
+  const { aliveIds, confirm } = useAliveConfirmed('/api/spot/alive')
 
   useUrlSync(listParamsToQuery({
     ...initial, q, area, tags, sort, city, newOnly, wishOnly, blacklistOnly, shown: shownCount,
@@ -207,8 +209,11 @@ export function SpotListClient(
                     onToggleWish={() => toggleWish(s.id)}
                     blacklisted={blacklisted.has(s.id)}
                     onToggleBlacklist={() => toggleBlacklist(s.id)}
-                    stale={!spotRecentlyVisited(s.visitedOn) && spotIsStale(s.lastSeenAt)}
+                    stale={
+                      !spotRecentlyVisited(s.visitedOn) && spotIsStale(s.lastSeenAt) && !aliveIds.has(s.id)
+                    }
                     onDismiss={() => dismiss(s.id)}
+                    onAlive={() => confirm(s.id)}
                   />
                 ))}
               </div>
@@ -225,8 +230,11 @@ export function SpotListClient(
               onToggleWish={() => toggleWish(s.id)}
               blacklisted={blacklisted.has(s.id)}
               onToggleBlacklist={() => toggleBlacklist(s.id)}
-              stale={!spotRecentlyVisited(s.visitedOn) && spotIsStale(s.lastSeenAt)}
+              stale={
+                !spotRecentlyVisited(s.visitedOn) && spotIsStale(s.lastSeenAt) && !aliveIds.has(s.id)
+              }
               onDismiss={() => dismiss(s.id)}
+              onAlive={() => confirm(s.id)}
             />
           ))}
         </div>

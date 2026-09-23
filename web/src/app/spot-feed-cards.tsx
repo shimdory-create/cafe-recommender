@@ -7,6 +7,7 @@ export interface SpotFeedRow extends SpotListRow {
 
 export function SpotFeedCards({
   rows, offset = 0, showRank = true, wished, onToggleWish, onToggleBlacklist, onDismiss,
+  aliveIds, onAlive,
 }: {
   rows: SpotFeedRow[]
   offset?: number
@@ -15,6 +16,8 @@ export function SpotFeedCards({
   onToggleWish?: (id: string) => void
   onToggleBlacklist?: (id: string) => void
   onDismiss?: (id: string) => void
+  aliveIds?: Set<string>
+  onAlive?: (id: string) => void
 }) {
   return (
     <div className="flex flex-col gap-4">
@@ -26,8 +29,9 @@ export function SpotFeedCards({
             wished={wished?.has(r.id)}
             onToggleWish={onToggleWish ? () => onToggleWish(r.id) : undefined}
             onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(r.id) : undefined}
-            stale={!r.visitedOn && spotIsStale(r.lastSeenAt)}
+            stale={!r.visitedOn && spotIsStale(r.lastSeenAt) && !aliveIds?.has(r.id)}
             onDismiss={onDismiss ? () => onDismiss(r.id) : undefined}
+            onAlive={onAlive ? () => onAlive(r.id) : undefined}
             postsOverride={r.reason}
           />
         </div>

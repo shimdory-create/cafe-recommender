@@ -8,6 +8,7 @@ import type { VisitRow } from '@/lib/reviews'
 import { useSpotWishlist } from '@/lib/use-spot-wishlist'
 import { useSpotBlacklist } from '@/lib/use-spot-blacklist'
 import { useSpotDismissed } from '@/lib/use-spot-dismissed'
+import { useAliveConfirmed } from '@/lib/use-alive'
 import { SpotFeedCards, type SpotFeedRow } from './spot-feed-cards'
 
 export type { SpotFeedRow }
@@ -38,6 +39,7 @@ export function SpotHomeFeed({ rows }: { rows: SpotFeedRow[] }) {
   const { wished, toggle: toggleWish } = useSpotWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useSpotBlacklist()
   const { dismissed, dismiss } = useSpotDismissed()
+  const { aliveIds, confirm } = useAliveConfirmed('/api/spot/alive')
   const sortParam = params.get('s')
   const sort: HomeSort = sortParam === 'near' || sortParam === 'new' ? sortParam : 'default'
 
@@ -106,6 +108,8 @@ export function SpotHomeFeed({ rows }: { rows: SpotFeedRow[] }) {
         onToggleWish={toggleWish}
         onToggleBlacklist={toggleBlacklist}
         onDismiss={dismiss}
+        aliveIds={aliveIds}
+        onAlive={confirm}
       />
 
       {total > 1 && (

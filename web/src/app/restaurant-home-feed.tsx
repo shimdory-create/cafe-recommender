@@ -8,6 +8,7 @@ import type { VisitRow } from '@/lib/reviews'
 import { useRestaurantWishlist } from '@/lib/use-restaurant-wishlist'
 import { useRestaurantBlacklist } from '@/lib/use-restaurant-blacklist'
 import { useRestaurantDismissed } from '@/lib/use-restaurant-dismissed'
+import { useAliveConfirmed } from '@/lib/use-alive'
 import { RestaurantFeedCards, type RestaurantFeedRow } from './restaurant-feed-cards'
 
 export type { RestaurantFeedRow }
@@ -56,6 +57,7 @@ export function RestaurantHomeFeed({ rows }: { rows: RestaurantFeedRow[] }) {
   const { wished, toggle: toggleWish } = useRestaurantWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useRestaurantBlacklist()
   const { dismissed, dismiss } = useRestaurantDismissed()
+  const { aliveIds, confirm } = useAliveConfirmed('/api/restaurant/alive')
   const sortParam = params.get('s')
   const sort: HomeSort = sortParam === 'near' || sortParam === 'new' ? sortParam : 'default'
 
@@ -136,6 +138,8 @@ export function RestaurantHomeFeed({ rows }: { rows: RestaurantFeedRow[] }) {
         onToggleWish={toggleWish}
         onToggleBlacklist={toggleBlacklist}
         onDismiss={dismiss}
+        aliveIds={aliveIds}
+        onAlive={confirm}
       />
 
       {total > 1 && (

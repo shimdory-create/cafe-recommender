@@ -19,6 +19,7 @@ export interface RestaurantFeedRow extends RestaurantListRow {
  */
 export function RestaurantFeedCards({
   rows, offset = 0, showRank = true, wished, onToggleWish, onToggleBlacklist, onDismiss,
+  aliveIds, onAlive,
 }: {
   rows: RestaurantFeedRow[]
   offset?: number
@@ -27,6 +28,8 @@ export function RestaurantFeedCards({
   onToggleWish?: (id: string) => void
   onToggleBlacklist?: (id: string) => void
   onDismiss?: (id: string) => void
+  aliveIds?: Set<string>
+  onAlive?: (id: string) => void
 }) {
   return (
     <div className="flex flex-col gap-4">
@@ -38,8 +41,9 @@ export function RestaurantFeedCards({
             wished={wished?.has(r.id)}
             onToggleWish={onToggleWish ? () => onToggleWish(r.id) : undefined}
             onToggleBlacklist={onToggleBlacklist ? () => onToggleBlacklist(r.id) : undefined}
-            stale={!r.visitedOn && restaurantIsStale(r.lastSeenAt)}
+            stale={!r.visitedOn && restaurantIsStale(r.lastSeenAt) && !aliveIds?.has(r.id)}
             onDismiss={onDismiss ? () => onDismiss(r.id) : undefined}
+            onAlive={onAlive ? () => onAlive(r.id) : undefined}
             postsOverride={r.reason}
           />
         </div>

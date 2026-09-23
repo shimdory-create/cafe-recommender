@@ -8,6 +8,7 @@ import type { VisitRow } from '@/lib/reviews'
 import { useWishlist } from '@/lib/use-wishlist'
 import { useBlacklist } from '@/lib/use-blacklist'
 import { useDismissed } from '@/lib/use-dismissed'
+import { useAliveConfirmed } from '@/lib/use-alive'
 import { FeedCards, type FeedRow } from './feed-cards'
 
 export type { FeedRow }
@@ -56,6 +57,7 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
   const { wished, toggle: toggleWish } = useWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useBlacklist()
   const { dismissed, dismiss } = useDismissed()
+  const { aliveIds, confirm } = useAliveConfirmed('/api/alive')
   const sortParam = params.get('s')
   const sort: HomeSort = sortParam === 'near' || sortParam === 'new' ? sortParam : 'default'
 
@@ -136,6 +138,8 @@ export function HomeFeed({ rows }: { rows: FeedRow[] }) {
         onToggleWish={toggleWish}
         onToggleBlacklist={toggleBlacklist}
         onDismiss={dismiss}
+        aliveIds={aliveIds}
+        onAlive={confirm}
       />
 
       {total > 1 && (

@@ -12,6 +12,7 @@ import { useUrlSync } from '@/lib/use-url-sync'
 import { useRestaurantWishlist } from '@/lib/use-restaurant-wishlist'
 import { useRestaurantBlacklist } from '@/lib/use-restaurant-blacklist'
 import { useRestaurantDismissed } from '@/lib/use-restaurant-dismissed'
+import { useAliveConfirmed } from '@/lib/use-alive'
 import { AreaChips, Chip, SearchBox } from '../../filters'
 import { RestaurantCard } from '../../restaurant-card'
 import { RestaurantMaybeClosedLink } from '../../restaurant-maybe-closed-link'
@@ -48,6 +49,7 @@ export function RestaurantListClient(
   const { wished, toggle: toggleWish } = useRestaurantWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useRestaurantBlacklist()
   const { dismissed, dismiss } = useRestaurantDismissed()
+  const { aliveIds, confirm } = useAliveConfirmed('/api/restaurant/alive')
 
   // filter.ts / url-state 의 tags 슬롯을 그대로 재사용하되, 이 화면에서는
   // 항상 최대 한 개만 담는다.
@@ -235,8 +237,12 @@ export function RestaurantListClient(
                     onToggleWish={() => toggleWish(r.id)}
                     blacklisted={blacklisted.has(r.id)}
                     onToggleBlacklist={() => toggleBlacklist(r.id)}
-                    stale={!restaurantRecentlyVisited(r.visitedOn) && restaurantIsStale(r.lastSeenAt)}
+                    stale={
+                      !restaurantRecentlyVisited(r.visitedOn) && restaurantIsStale(r.lastSeenAt)
+                      && !aliveIds.has(r.id)
+                    }
                     onDismiss={() => dismiss(r.id)}
+                    onAlive={() => confirm(r.id)}
                   />
                 ))}
               </div>
@@ -253,8 +259,12 @@ export function RestaurantListClient(
               onToggleWish={() => toggleWish(r.id)}
               blacklisted={blacklisted.has(r.id)}
               onToggleBlacklist={() => toggleBlacklist(r.id)}
-              stale={!restaurantRecentlyVisited(r.visitedOn) && restaurantIsStale(r.lastSeenAt)}
+              stale={
+                !restaurantRecentlyVisited(r.visitedOn) && restaurantIsStale(r.lastSeenAt)
+                && !aliveIds.has(r.id)
+              }
               onDismiss={() => dismiss(r.id)}
+              onAlive={() => confirm(r.id)}
             />
           ))}
         </div>

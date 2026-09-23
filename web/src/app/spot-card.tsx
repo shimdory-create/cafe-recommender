@@ -41,7 +41,7 @@ export function SpotTopThree({ spot }: { spot: SpotListRow }) {
 }
 
 export function SpotCard({
-  spot, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
+  spot, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss, onAlive,
   postsOverride,
 }: {
   spot: SpotListRow
@@ -52,6 +52,8 @@ export function SpotCard({
   onToggleBlacklist?: () => void
   stale?: boolean
   onDismiss?: () => void
+  /** "있어요" 확인 — 있으면 90일 동안 이 배너가 다시 안 뜬다 */
+  onAlive?: () => void
   /** 홈("이번 주 추천")은 postsLabel 대신 트렌드까지 붙인 문구(reason)를
    * 그대로 보여준다 */
   postsOverride?: string
@@ -137,17 +139,28 @@ export function SpotCard({
         </div>
 
         {stale && (
-          <div className="mt-2.5 flex items-center justify-between gap-2 rounded-lg bg-amber-50 pl-2.5 pr-1 text-[12px] text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
+          <div className="mt-2.5 flex items-center justify-between gap-1 rounded-lg bg-amber-50 pl-2.5 pr-1 text-[12px] text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
             <span>폐업 의심 · 카카오지도에서 최근 안 보여요</span>
-            {onDismiss && (
-              <button
-                type="button"
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDismiss() }}
-                className="flex min-h-[40px] shrink-0 items-center px-2 underline"
-              >
-                숨기기
-              </button>
-            )}
+            <span className="flex shrink-0 items-center">
+              {onAlive && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); onAlive() }}
+                  className="flex min-h-[40px] shrink-0 items-center px-2 underline"
+                >
+                  있어요
+                </button>
+              )}
+              {onDismiss && (
+                <button
+                  type="button"
+                  onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDismiss() }}
+                  className="flex min-h-[40px] shrink-0 items-center px-2 underline"
+                >
+                  숨기기
+                </button>
+              )}
+            </span>
           </div>
         )}
 
