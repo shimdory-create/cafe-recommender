@@ -27,7 +27,13 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run nearby-drive
+      # --budget 1500 (기본 5000): 이 잡 하나가 GitHub Actions 무료 월 2,000분
+      # 중 하루 20분 이상, 즉 월 600분 이상을 혼자 쓰고 있었다(2026-09-23
+      # 실측, 8일 전 대비 전체 사용량이 550분 -> 1885분으로 3배 이상 늘어난
+      # 상태에서 확인). 근처 추천은 캐시가 못 채워진 페어도 직선거리 추정치로
+      # 이미 표시되므로(우아한 폴백) 하루치 처리량을 줄여도 화면이 깨지지
+      # 않는다 — 캐시가 조금 더 천천히 채워질 뿐이다.
+      - run: npm run nearby-drive -- --budget 1500
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           # 길찾기에 LLM 은 쓰지 않지만 환경변수 검증이 provider 키를 요구한다.
