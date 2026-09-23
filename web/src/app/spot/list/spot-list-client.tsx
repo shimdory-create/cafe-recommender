@@ -14,11 +14,13 @@ import { useSpotBlacklist } from '@/lib/use-spot-blacklist'
 import { useSpotDismissed } from '@/lib/use-spot-dismissed'
 import { AreaChips, Chip, SearchBox } from '../../filters'
 import { SpotCard } from '../../spot-card'
+import { SpotMaybeClosedLink } from '../../spot-maybe-closed-link'
+import type { MaybeClosed } from '@/lib/spot-site-types'
 
 const SPOT_TAG_CHIPS = Object.keys(SPOT_TAG_LABEL)
 
 export function SpotListClient(
-  { spots, initial }: { spots: SpotListRow[]; initial: ListParams },
+  { spots, initial, maybeClosed }: { spots: SpotListRow[]; initial: ListParams; maybeClosed: MaybeClosed[] },
 ) {
   const [q, setQ] = useState(initial.q)
   const [area, setArea] = useState<string[]>(initial.area)
@@ -91,6 +93,8 @@ export function SpotListClient(
         <h1 className="text-[22px] font-bold tracking-tight">가볼 곳 전체 리스트</h1>
         <span className="text-[13px] text-ink-soft">{matched.length}곳</span>
       </div>
+
+      <SpotMaybeClosedLink items={maybeClosed} />
 
       <div className="mt-3">
         <SearchBox value={q} onChange={reset(setQ)} placeholder="장소명 검색" />

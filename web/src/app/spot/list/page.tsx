@@ -12,6 +12,7 @@ export default async function SpotListPage(
     <SpotListClient
       spots={spotPayload.spots.map(toSpotListRow)}
       initial={initial}
+      maybeClosed={spotPayload.maybeClosed}
     />
   )
 }

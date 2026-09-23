@@ -19,6 +19,7 @@ export const REVIEWS_PATH = 'data/reviews.json'
 export const VISITS_PATH = 'data/visits.json'
 export const WISHLIST_PATH = 'data/wishlist.json'
 export const DISMISSED_PATH = 'data/dismissed.json'
+export const ALIVE_PATH = 'data/alive-confirmed.json'
 // `data/blacklist.json` 는 이미 파이프라인의 프랜차이즈 제외 목록(`src/pipeline/exclude.ts`)이
 // 쓰는 이름이라 겹치면 안 된다 — 스키마가 완전히 다르다({pattern,matchType} vs
 // {kakaoPlaceId,blacklistedAt}). 그래서 사용자 블랙리스트는 `user-` 를 붙인다.
@@ -30,6 +31,7 @@ export const RESTAURANT_REVIEWS_PATH = 'data/restaurant-reviews.json'
 export const RESTAURANT_VISITS_PATH = 'data/restaurant-visits.json'
 export const RESTAURANT_WISHLIST_PATH = 'data/restaurant-wishlist.json'
 export const RESTAURANT_DISMISSED_PATH = 'data/restaurant-dismissed.json'
+export const RESTAURANT_ALIVE_PATH = 'data/restaurant-alive-confirmed.json'
 // 같은 이유로 `restaurant-` 접두사만으로는 파이프라인의 프랜차이즈 제외 목록과 겹친다.
 export const RESTAURANT_BLACKLIST_PATH = 'data/restaurant-user-blacklist.json'
 
@@ -38,6 +40,7 @@ export const SPOT_REVIEWS_PATH = 'data/spot-reviews.json'
 export const SPOT_VISITS_PATH = 'data/spot-visits.json'
 export const SPOT_WISHLIST_PATH = 'data/spot-wishlist.json'
 export const SPOT_DISMISSED_PATH = 'data/spot-dismissed.json'
+export const SPOT_ALIVE_PATH = 'data/spot-alive-confirmed.json'
 // 가볼 곳판은 아직 프랜차이즈 제외 목록이 없지만, 나중에 생기더라도 겹치지
 // 않도록 처음부터 같은 접두사를 쓴다.
 export const SPOT_BLACKLIST_PATH = 'data/spot-user-blacklist.json'
@@ -51,6 +54,26 @@ export interface WishRow {
 export interface DismissRow {
   kakaoPlaceId: string
   dismissedAt: string
+}
+
+/**
+ * 직접 확인해서 아직 있는 곳. `DismissRow`(숨기기)와 반대 방향이다 — 지우는
+ * 게 아니라 목록엔 그대로 두고, "폐업 의심" 재노출만 한동안 막는다.
+ */
+export interface AliveRow {
+  kakaoPlaceId: string
+  confirmedAt: string
+}
+
+/** 확인 후 다시 폐업 의심으로 뜨기까지 걸리는 기간(일) — 대략 3개월 */
+export const ALIVE_GRACE_DAYS = 90
+
+/** 확인한 지 유예 기간이 안 지났으면 폐업 의심에서 뺀다 */
+export function isConfirmedAlive(rows: AliveRow[], kakaoPlaceId: string, now: Date): boolean {
+  const row = rows.find((r) => r.kakaoPlaceId === kakaoPlaceId)
+  if (!row) return false
+  const days = (now.getTime() - new Date(row.confirmedAt).getTime()) / 86_400_000
+  return days < ALIVE_GRACE_DAYS
 }
 
 export const MAX_NICKNAME = 20
@@ -182,6 +205,15 @@ export function addDismiss(rows: DismissRow[], kakaoPlaceId: string, dismissedAt
 
 /** 숨김 취소 (오탐이었을 때) */
 export function removeDismiss(rows: DismissRow[], kakaoPlaceId: string): DismissRow[] {
+  return removeByPlaceId(rows, kakaoPlaceId)
+}
+
+/** "확인함, 아직 있어요" — 같은 곳을 또 확인하면 확인 시각만 최신으로 미룬다 */
+export function addAlive(rows: AliveRow[], kakaoPlaceId: string, confirmedAt: string): AliveRow[] {
+  return [...removeByPlaceId(rows, kakaoPlaceId), { kakaoPlaceId, confirmedAt }]
+}
+
+export function removeAlive(rows: AliveRow[], kakaoPlaceId: string): AliveRow[] {
   return removeByPlaceId(rows, kakaoPlaceId)
 }
 

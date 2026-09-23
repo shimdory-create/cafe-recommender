@@ -14,6 +14,8 @@ import { useBlacklist } from '@/lib/use-blacklist'
 import { useDismissed } from '@/lib/use-dismissed'
 import { AreaChips, Chip, SearchBox } from '../filters'
 import { CafeCard } from '../cafe-card'
+import { MaybeClosedLink } from '../maybe-closed-link'
+import type { MaybeClosed } from '@/lib/site-types'
 
 /**
  * 칩 필터 + 검색 + 정렬. 상태는 **주소창에 싣는다** (`lib/url-state.ts`).
@@ -22,7 +24,9 @@ import { CafeCard } from '../cafe-card'
  * 시군구 칩이 43개나 되어서였는데, 서울과 인천을 각각 하나로 묶으니 32개가
  * 되어 접이식 칩으로 감당된다. 가족이 실제로 쓰는 말도 "북쪽" 보다 "김포"다.
  */
-export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: ListParams }) {
+export function ListClient(
+  { cafes, initial, maybeClosed }: { cafes: ListRow[]; initial: ListParams; maybeClosed: MaybeClosed[] },
+) {
   const [q, setQ] = useState(initial.q)
   const [area, setArea] = useState<string[]>(initial.area)
   const [tags, setTags] = useState<string[]>(initial.tags)
@@ -115,6 +119,8 @@ export function ListClient({ cafes, initial }: { cafes: ListRow[]; initial: List
           {matched.length}곳
         </span>
       </div>
+
+      <MaybeClosedLink items={maybeClosed} />
 
       <div className="mt-3">
         <SearchBox value={q} onChange={reset(setQ)} />

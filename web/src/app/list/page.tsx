@@ -17,5 +17,11 @@ export default async function ListPage(
 ) {
   const initial = readListParams(await searchParams)
   // 목록에 필요한 필드만 클라이언트로 넘긴다 (site.ts toListRow 주석 참고)
-  return <ListClient cafes={payload.cafes.map(toListRow)} initial={initial} />
+  return (
+    <ListClient
+      cafes={payload.cafes.map(toListRow)}
+      initial={initial}
+      maybeClosed={payload.maybeClosed}
+    />
+  )
 }

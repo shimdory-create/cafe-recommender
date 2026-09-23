@@ -2,13 +2,18 @@
 
 import Link from 'next/link'
 import { useRestaurantDismissed } from '@/lib/use-restaurant-dismissed'
+import { useAliveConfirmed } from '@/lib/use-alive'
 import type { MaybeClosed } from '@/lib/restaurant-site-types'
 
-/** 정보 탭 상단 링크. 이미 숨긴 곳을 빼고 세므로, 다 처리하면 조용히 사라진다 */
+/**
+ * 정보 탭·전체 탭 상단에 쓰는 링크. 숨긴 곳·"있어요" 확인한 곳을 빼고
+ * 세므로, 다 처리하면 조용히 사라진다.
+ */
 export function RestaurantMaybeClosedLink({ items }: { items: MaybeClosed[] }) {
-  const { dismissed, ready } = useRestaurantDismissed()
-  if (!ready) return null
-  const count = items.filter((m) => !dismissed.has(m.id)).length
+  const { dismissed, ready: dismissedReady } = useRestaurantDismissed()
+  const { aliveIds, ready: aliveReady } = useAliveConfirmed('/api/restaurant/alive')
+  if (!dismissedReady || !aliveReady) return null
+  const count = items.filter((m) => !dismissed.has(m.id) && !aliveIds.has(m.id)).length
   if (count === 0) return null
 
   return (

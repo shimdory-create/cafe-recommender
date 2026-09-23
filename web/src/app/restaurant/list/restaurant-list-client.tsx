@@ -14,6 +14,8 @@ import { useRestaurantBlacklist } from '@/lib/use-restaurant-blacklist'
 import { useRestaurantDismissed } from '@/lib/use-restaurant-dismissed'
 import { AreaChips, Chip, SearchBox } from '../../filters'
 import { RestaurantCard } from '../../restaurant-card'
+import { RestaurantMaybeClosedLink } from '../../restaurant-maybe-closed-link'
+import type { MaybeClosed } from '@/lib/restaurant-site-types'
 
 /** 식당은 카페의 ALL_TAGS(성격 태그) 대신 음식종류를 칩으로 쓴다 */
 const CUISINE_CHIPS = Object.keys(CUISINE_LABEL)
@@ -25,7 +27,9 @@ const CUISINE_CHIPS = Object.keys(CUISINE_LABEL)
  * 음식종류(`CUISINE_LABEL`)를 쓴다.
  */
 export function RestaurantListClient(
-  { restaurants, initial }: { restaurants: RestaurantListRow[]; initial: ListParams },
+  { restaurants, initial, maybeClosed }: {
+    restaurants: RestaurantListRow[]; initial: ListParams; maybeClosed: MaybeClosed[]
+  },
 ) {
   const [q, setQ] = useState(initial.q)
   const [area, setArea] = useState<string[]>(initial.area)
@@ -117,6 +121,8 @@ export function RestaurantListClient(
         <h1 className="text-[22px] font-bold tracking-tight">식당 전체 리스트</h1>
         <span className="text-[13px] text-ink-soft">{matched.length}곳</span>
       </div>
+
+      <RestaurantMaybeClosedLink items={maybeClosed} />
 
       <div className="mt-3">
         <SearchBox value={q} onChange={reset(setQ)} placeholder="식당명 검색" />

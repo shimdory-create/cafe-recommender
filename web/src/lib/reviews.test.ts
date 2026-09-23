@@ -2,7 +2,8 @@ import { describe, it, expect } from 'vitest'
 import {
   applyReviewPatch, parseReviewInput, removeReview, summarize, sortByNewest,
   addVisit, removeVisit, todayInSeoul,
-  MAX_COMMENT, MAX_NICKNAME, type Review, type VisitRow,
+  addAlive, removeAlive, isConfirmedAlive, ALIVE_GRACE_DAYS,
+  MAX_COMMENT, MAX_NICKNAME, type Review, type VisitRow, type AliveRow,
 } from './reviews'
 
 const NOW = new Date('2026-08-20T14:30:00Z')
@@ -246,5 +247,39 @@ describe('removeReview', () => {
 
   it('없는 id 는 아무것도 안 한다 — 두 번 눌러도 안전하다', () => {
     expect(removeReview(rows, 'zzz')).toEqual(rows)
+  })
+})
+
+describe('addAlive / removeAlive / isConfirmedAlive', () => {
+  it('확인하면 목록에 추가된다', () => {
+    const rows = addAlive([], '1', '2026-08-20T00:00:00.000Z')
+    expect(rows).toEqual([{ kakaoPlaceId: '1', confirmedAt: '2026-08-20T00:00:00.000Z' }])
+  })
+
+  it('같은 곳을 또 확인하면 확인 시각만 최신으로 미룬다 (중복 안 쌓인다)', () => {
+    const rows = addAlive(
+      [{ kakaoPlaceId: '1', confirmedAt: '2026-01-01T00:00:00.000Z' }],
+      '1', '2026-08-20T00:00:00.000Z',
+    )
+    expect(rows).toEqual([{ kakaoPlaceId: '1', confirmedAt: '2026-08-20T00:00:00.000Z' }])
+  })
+
+  it('removeAlive는 해당 id만 지운다', () => {
+    const rows: AliveRow[] = [{ kakaoPlaceId: '1', confirmedAt: NOW.toISOString() }]
+    expect(removeAlive(rows, '1')).toEqual([])
+  })
+
+  it(`확인한 지 ${ALIVE_GRACE_DAYS}일이 안 지났으면 살아있는 걸로 본다`, () => {
+    const rows: AliveRow[] = [{ kakaoPlaceId: '1', confirmedAt: '2026-08-01T00:00:00.000Z' }]
+    expect(isConfirmedAlive(rows, '1', new Date('2026-08-20T00:00:00.000Z'))).toBe(true)
+  })
+
+  it(`확인한 지 ${ALIVE_GRACE_DAYS}일이 지나면 다시 폐업 의심 대상이다`, () => {
+    const rows: AliveRow[] = [{ kakaoPlaceId: '1', confirmedAt: '2026-01-01T00:00:00.000Z' }]
+    expect(isConfirmedAlive(rows, '1', new Date('2026-08-20T00:00:00.000Z'))).toBe(false)
+  })
+
+  it('확인 기록이 없으면 false다', () => {
+    expect(isConfirmedAlive([], '1', NOW)).toBe(false)
   })
 })

@@ -20,6 +20,7 @@ export default async function RestaurantListPage(
     <RestaurantListClient
       restaurants={restaurantPayload.restaurants.map(toRestaurantListRow)}
       initial={initial}
+      maybeClosed={restaurantPayload.maybeClosed}
     />
   )
 }
