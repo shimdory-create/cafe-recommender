@@ -41,6 +41,15 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 방금 active 로 확정된 곳을 site.json 을 만들기 전에 바로 실측한다.
+      # 예전엔 실측이 주 1회(weekly-drive)뿐이라 active 확정과 실측 사이에
+      # 최대 6일 공백이 있었고, 그 사이 카드엔 직선거리 추정치가 그대로
+      # 노출됐다(2026-09-24, 사용자 리포트로 발견). --limit 500 은 안전판 —
+      # 하루 두 번 classify 가 늘리는 신규 active 수보다 훨씬 크다.
+      - run: npm run drive -- --limit 500
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       # 커밋·푸시 규칙은 scripts/commit-data.sh 한 곳에 있다.
       # 생성물(site.json)은 병합하지 않고 다시 만든다 — 파생물이라
       # 합쳐진 JSON 은 어느 쪽 데이터와도 일치하지 않는다.

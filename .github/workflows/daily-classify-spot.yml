@@ -31,5 +31,11 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # daily-classify.yml 과 같은 이유 — active 확정과 실측 사이 공백을
+      # 없앤다(2026-09-24).
+      - run: npm run spot-drive -- --limit 500
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: 데이터 커밋
         run: bash scripts/commit-data.sh "가볼 곳 판정 갱신"

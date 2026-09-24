@@ -35,6 +35,12 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # daily-classify.yml 과 같은 이유 — active 확정과 실측 사이 공백을
+      # 없앤다(2026-09-24).
+      - run: npm run restaurant-drive -- --limit 500
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       # 커밋·푸시 규칙은 scripts/commit-data.sh 한 곳에 있다 — 카페와 공용.
       # npm run --silent site 가 카페·식당 페이로드를 둘 다 다시 만든다
       # (2단계 웹 화면이 생긴 뒤로는 이걸 건너뛰면 화면이 절대 안 갱신된다).
