@@ -10,6 +10,7 @@ import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
 import { BlacklistHeart } from './blacklist-heart'
 import { SpotNearbySections } from './nearby-sections'
+import { StaleBanner } from './stale-banner'
 
 export function generateStaticParams() {
   return spotPayload.spots.map((s) => ({ id: s.id }))
@@ -71,6 +72,12 @@ export default async function SpotDetail({ params }: { params: Promise<{ id: str
           {spot.visitedOn} 에 다녀왔어요
         </p>
       )}
+
+      <StaleBanner
+        kakaoPlaceId={spot.id}
+        lastSeenAt={spot.lastSeenAt}
+        visited={spot.visitedOn !== null}
+      />
 
       {spot.tags.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-1.5">

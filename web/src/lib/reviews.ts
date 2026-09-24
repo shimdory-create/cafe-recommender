@@ -208,9 +208,15 @@ export function removeDismiss(rows: DismissRow[], kakaoPlaceId: string): Dismiss
   return removeByPlaceId(rows, kakaoPlaceId)
 }
 
-/** "확인함, 아직 있어요" — 같은 곳을 또 확인하면 확인 시각만 최신으로 미룬다 */
+/**
+ * "확인함, 아직 있어요" — 같은 곳을 또 확인하면 확인 시각만 최신으로 미룬다.
+ * 쓰는 김에 유예 기간이 지나 다시는 안 쓰일 기록도 같이 지운다 — 파일이
+ * 몇 년 뒤에도 무한정 커지지 않게.
+ */
 export function addAlive(rows: AliveRow[], kakaoPlaceId: string, confirmedAt: string): AliveRow[] {
-  return [...removeByPlaceId(rows, kakaoPlaceId), { kakaoPlaceId, confirmedAt }]
+  const now = new Date(confirmedAt)
+  const kept = rows.filter((r) => isConfirmedAlive(rows, r.kakaoPlaceId, now))
+  return [...removeByPlaceId(kept, kakaoPlaceId), { kakaoPlaceId, confirmedAt }]
 }
 
 export function removeAlive(rows: AliveRow[], kakaoPlaceId: string): AliveRow[] {

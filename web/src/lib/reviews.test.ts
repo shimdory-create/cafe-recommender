@@ -282,4 +282,16 @@ describe('addAlive / removeAlive / isConfirmedAlive', () => {
   it('확인 기록이 없으면 false다', () => {
     expect(isConfirmedAlive([], '1', NOW)).toBe(false)
   })
+
+  it(`쓸 때마다 유예 기간(${ALIVE_GRACE_DAYS}일) 지난 다른 곳 기록을 같이 지운다`, () => {
+    const rows: AliveRow[] = [
+      { kakaoPlaceId: 'old', confirmedAt: '2026-01-01T00:00:00.000Z' }, // 231일 전 — 정리 대상
+      { kakaoPlaceId: 'recent', confirmedAt: '2026-08-10T00:00:00.000Z' }, // 10일 전 — 유지
+    ]
+    const result = addAlive(rows, 'new', '2026-08-20T00:00:00.000Z')
+    expect(result).toEqual([
+      { kakaoPlaceId: 'recent', confirmedAt: '2026-08-10T00:00:00.000Z' },
+      { kakaoPlaceId: 'new', confirmedAt: '2026-08-20T00:00:00.000Z' },
+    ])
+  })
 })

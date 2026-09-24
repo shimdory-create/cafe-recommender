@@ -10,6 +10,7 @@ import { BackLink } from '../../cafe/[id]/back-link'
 import { WishHeart } from './wish-heart'
 import { BlacklistHeart } from './blacklist-heart'
 import { RestaurantNearbySections } from './nearby-sections'
+import { StaleBanner } from './stale-banner'
 
 export function generateStaticParams() {
   return restaurantPayload.restaurants.map((r) => ({ id: r.id }))
@@ -70,6 +71,12 @@ export default async function RestaurantDetail({ params }: { params: Promise<{ i
           {restaurant.visitedOn} 에 다녀왔어요
         </p>
       )}
+
+      <StaleBanner
+        kakaoPlaceId={restaurant.id}
+        lastSeenAt={restaurant.lastSeenAt}
+        visited={restaurant.visitedOn !== null}
+      />
 
       {restaurant.tags.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-1.5">
