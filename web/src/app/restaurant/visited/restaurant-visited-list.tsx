@@ -96,7 +96,8 @@ export function filterRestaurantVisited<T extends SiteRestaurantVisited>(
   rows: T[], f: VisitedFilter,
 ): T[] {
   return rows.filter((v) => {
-    if (f.area.length > 0 && !f.area.includes(v.area)) return false
+    // area 는 매크로(서울/인천/경기)와 그 안의 시군구가 섞여 들어올 수 있다
+    if (f.area.length > 0 && !f.area.includes(v.area) && !f.area.includes(v.sigungu)) return false
     if (f.q && !matchesQuery(v.name, f.q)) return false
     return f.tags.every((t) => v.tags.includes(t))
   })
@@ -108,6 +109,25 @@ export function restaurantVisitedAreas(rows: SiteRestaurantVisited[]): AreaCount
   return [...map.entries()]
     .map(([area, count]) => ({ area, label: areaLabel(area), count, nearest: 0 }))
     .sort((a, b) => b.count - a.count || a.area.localeCompare(b.area))
+}
+
+/** 매크로(서울/인천/경기) 안의 시군구별 개수. `restaurantVisitedAreas` 의 2단 버전 */
+export function restaurantVisitedSigunguCounts(
+  rows: SiteRestaurantVisited[],
+): Record<string, AreaCount[]> {
+  const byArea = new Map<string, Map<string, number>>()
+  for (const v of rows) {
+    let bySigungu = byArea.get(v.area)
+    if (!bySigungu) { bySigungu = new Map(); byArea.set(v.area, bySigungu) }
+    bySigungu.set(v.sigungu, (bySigungu.get(v.sigungu) ?? 0) + 1)
+  }
+  const result: Record<string, AreaCount[]> = {}
+  for (const [area, bySigungu] of byArea) {
+    result[area] = [...bySigungu.entries()]
+      .map(([sigungu, count]) => ({ area: sigungu, label: areaLabel(sigungu), count, nearest: 0 }))
+      .sort((a, b) => b.count - a.count || a.area.localeCompare(b.area))
+  }
+  return result
 }
 
 export function restaurantVisitedTags(rows: SiteRestaurantVisited[]): { tag: string; count: number }[] {
@@ -134,7 +154,6 @@ export function RestaurantVisitedList({
   const [tags, setTags] = useState<string[]>(initial.tags)
   const [order, setOrder] = useState<VisitedSort>(initial.visitedSort)
   const [viewOnly, setViewOnly] = useState(VIEW_ONLY)
-  const [expanded, setExpanded] = useState(false)
 
   useUrlSync(listParamsToQuery({ ...initial, q, area, tags, visitedSort: order }))
 
@@ -186,6 +205,7 @@ export function RestaurantVisitedList({
   }
 
   const areas = useMemo(() => restaurantVisitedAreas(rows), [rows])
+  const subAreas = useMemo(() => restaurantVisitedSigunguCounts(rows), [rows])
   const tagList = useMemo(() => restaurantVisitedTags(rows), [rows])
   const shown = useMemo(
     () => sortVisited(filterRestaurantVisited(rows, { q, area, tags }), order),
@@ -193,8 +213,6 @@ export function RestaurantVisitedList({
   )
   const toggle = (t: string) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
-  const toggleArea = (a: string) =>
-    setArea((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]))
   const dirty = q !== '' || area.length > 0 || tags.length > 0
 
   if (rows.length === 0) {
@@ -233,10 +251,7 @@ export function RestaurantVisitedList({
 
           {areas.length > 1 && (
             <div className="mt-3">
-              <AreaChips
-                counts={areas} value={area} onToggle={toggleArea} onClear={() => setArea([])}
-                expanded={expanded} onExpand={setExpanded}
-              />
+              <AreaChips counts={areas} sub={subAreas} value={area} onChange={setArea} />
             </div>
           )}
 

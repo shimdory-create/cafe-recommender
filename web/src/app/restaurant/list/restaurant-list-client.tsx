@@ -5,7 +5,8 @@ import {
   CUISINE_LABEL, restaurantIsStale, restaurantRecentlyVisited, type RestaurantListRow,
 } from '@/lib/restaurant-site'
 import {
-  areaCounts, countMatching, filterAndSort, groupBySigungu, PAGE_CHUNK, SPLIT_AREAS, type Sort,
+  areaCounts, countMatching, filterAndSort, groupBySigungu, PAGE_CHUNK, sigunguCountsByArea,
+  SPLIT_AREAS, type Sort,
 } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
@@ -44,8 +45,6 @@ export function RestaurantListClient(
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
   const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
   const [shownCount, setShownCount] = useState(initial.shown)
-  // 고른 지역이 접힌 구간에 있으면 처음부터 펴 둔다
-  const [expanded, setExpanded] = useState(false)
   const { wished, toggle: toggleWish } = useRestaurantWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useRestaurantBlacklist()
   const { dismissed, dismiss } = useRestaurantDismissed()
@@ -89,6 +88,10 @@ export function RestaurantListClient(
     () => areaCounts(wishFiltered, { city, tags: cuisineTags, query: q }),
     [wishFiltered, city, cuisineTags, q],
   )
+  const subAreas = useMemo(
+    () => sigunguCountsByArea(wishFiltered, { city, tags: cuisineTags, query: q }),
+    [wishFiltered, city, cuisineTags, q],
+  )
   // matched 와 같은 필터를 쓰고 newOnly 만 강제한다 — 배지 숫자가
   // "지금 NEW 를 누르면 나올 개수" 와 구조적으로 어긋날 수 없게 한다.
   const newCount = useMemo(
@@ -113,8 +116,6 @@ export function RestaurantListClient(
   // 이미 선택된 걸 다시 누르면 해제, 아니면 기존 선택을 대체한다 (누적
   // 아님 — cuisineType 은 식당당 하나뿐이므로).
   const selectCuisine = reset<string>((t) => setCuisine((prev) => (prev === t ? null : t)))
-  const toggleArea = reset<string>((a) =>
-    setArea((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a])))
   const dirty = cuisine !== null || area.length > 0 || q !== '' || newOnly || wishOnly || blacklistOnly
 
   return (
@@ -133,11 +134,9 @@ export function RestaurantListClient(
       <div className="mt-3">
         <AreaChips
           counts={areas}
+          sub={subAreas}
           value={area}
-          onToggle={toggleArea}
-          onClear={() => { setArea([]); setShownCount(PAGE_CHUNK) }}
-          expanded={expanded}
-          onExpand={setExpanded}
+          onChange={reset(setArea)}
           leading={newCount > 0 ? (
             <Chip
               on={newOnly}

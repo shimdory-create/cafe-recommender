@@ -5,7 +5,8 @@ import {
   SPOT_TAG_LABEL, spotIsStale, spotRecentlyVisited, type SpotListRow,
 } from '@/lib/spot-site'
 import {
-  areaCounts, countMatching, filterAndSort, groupBySigungu, PAGE_CHUNK, SPLIT_AREAS, type Sort,
+  areaCounts, countMatching, filterAndSort, groupBySigungu, PAGE_CHUNK, sigunguCountsByArea,
+  SPLIT_AREAS, type Sort,
 } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
@@ -32,7 +33,6 @@ export function SpotListClient(
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
   const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
   const [shownCount, setShownCount] = useState(initial.shown)
-  const [expanded, setExpanded] = useState(false)
   const { wished, toggle: toggleWish } = useSpotWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useSpotBlacklist()
   const { dismissed, dismiss } = useSpotDismissed()
@@ -68,6 +68,10 @@ export function SpotListClient(
     () => areaCounts(wishFiltered, { city, tags, query: q }),
     [wishFiltered, city, tags, q],
   )
+  const subAreas = useMemo(
+    () => sigunguCountsByArea(wishFiltered, { city, tags, query: q }),
+    [wishFiltered, city, tags, q],
+  )
   const newCount = useMemo(
     () => countMatching(wishFiltered, { tags, sort, city, area, query: q, newOnly: true }),
     [wishFiltered, tags, sort, city, area, q],
@@ -85,8 +89,6 @@ export function SpotListClient(
   }
   const toggle = reset<string>((t) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const toggleArea = reset<string>((a) =>
-    setArea((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a])))
   const dirty = tags.length > 0 || area.length > 0 || q !== '' || newOnly || wishOnly || blacklistOnly
 
   return (
@@ -105,11 +107,9 @@ export function SpotListClient(
       <div className="mt-3">
         <AreaChips
           counts={areas}
+          sub={subAreas}
           value={area}
-          onToggle={toggleArea}
-          onClear={() => { setArea([]); setShownCount(PAGE_CHUNK) }}
-          expanded={expanded}
-          onExpand={setExpanded}
+          onChange={reset(setArea)}
           leading={newCount > 0 ? (
             <Chip
               on={newOnly}

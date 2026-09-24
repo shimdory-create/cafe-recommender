@@ -96,7 +96,8 @@ export function filterSpotVisited<T extends SiteSpotVisited>(
   rows: T[], f: VisitedFilter,
 ): T[] {
   return rows.filter((v) => {
-    if (f.area.length > 0 && !f.area.includes(v.area)) return false
+    // area 는 매크로(서울/인천/경기)와 그 안의 시군구가 섞여 들어올 수 있다
+    if (f.area.length > 0 && !f.area.includes(v.area) && !f.area.includes(v.sigungu)) return false
     if (f.q && !matchesQuery(v.name, f.q)) return false
     return f.tags.every((t) => v.tags.includes(t))
   })
@@ -108,6 +109,23 @@ export function spotVisitedAreas(rows: SiteSpotVisited[]): AreaCount[] {
   return [...map.entries()]
     .map(([area, count]) => ({ area, label: areaLabel(area), count, nearest: 0 }))
     .sort((a, b) => b.count - a.count || a.area.localeCompare(b.area))
+}
+
+/** 매크로(서울/인천/경기) 안의 시군구별 개수. `spotVisitedAreas` 의 2단 버전 */
+export function spotVisitedSigunguCounts(rows: SiteSpotVisited[]): Record<string, AreaCount[]> {
+  const byArea = new Map<string, Map<string, number>>()
+  for (const v of rows) {
+    let bySigungu = byArea.get(v.area)
+    if (!bySigungu) { bySigungu = new Map(); byArea.set(v.area, bySigungu) }
+    bySigungu.set(v.sigungu, (bySigungu.get(v.sigungu) ?? 0) + 1)
+  }
+  const result: Record<string, AreaCount[]> = {}
+  for (const [area, bySigungu] of byArea) {
+    result[area] = [...bySigungu.entries()]
+      .map(([sigungu, count]) => ({ area: sigungu, label: areaLabel(sigungu), count, nearest: 0 }))
+      .sort((a, b) => b.count - a.count || a.area.localeCompare(b.area))
+  }
+  return result
 }
 
 export function spotVisitedTags(rows: SiteSpotVisited[]): { tag: string; count: number }[] {
@@ -134,7 +152,6 @@ export function SpotVisitedList({
   const [tags, setTags] = useState<string[]>(initial.tags)
   const [order, setOrder] = useState<VisitedSort>(initial.visitedSort)
   const [viewOnly, setViewOnly] = useState(VIEW_ONLY)
-  const [expanded, setExpanded] = useState(false)
 
   useUrlSync(listParamsToQuery({ ...initial, q, area, tags, visitedSort: order }))
 
@@ -186,6 +203,7 @@ export function SpotVisitedList({
   }
 
   const areas = useMemo(() => spotVisitedAreas(rows), [rows])
+  const subAreas = useMemo(() => spotVisitedSigunguCounts(rows), [rows])
   const tagList = useMemo(() => spotVisitedTags(rows), [rows])
   const shown = useMemo(
     () => sortVisited(filterSpotVisited(rows, { q, area, tags }), order),
@@ -193,8 +211,6 @@ export function SpotVisitedList({
   )
   const toggle = (t: string) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]))
-  const toggleArea = (a: string) =>
-    setArea((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]))
   const dirty = q !== '' || area.length > 0 || tags.length > 0
 
   if (rows.length === 0) {
@@ -233,10 +249,7 @@ export function SpotVisitedList({
 
           {areas.length > 1 && (
             <div className="mt-3">
-              <AreaChips
-                counts={areas} value={area} onToggle={toggleArea} onClear={() => setArea([])}
-                expanded={expanded} onExpand={setExpanded}
-              />
+              <AreaChips counts={areas} sub={subAreas} value={area} onChange={setArea} />
             </div>
           )}
 

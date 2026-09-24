@@ -5,7 +5,8 @@ import {
   ALL_TAGS, isStale, recentlyVisited, type ListRow,
 } from '@/lib/site'
 import {
-  areaCounts, countMatching, filterAndSort, groupBySigungu, PAGE_CHUNK, SPLIT_AREAS, type Sort,
+  areaCounts, countMatching, filterAndSort, groupBySigungu, PAGE_CHUNK, sigunguCountsByArea,
+  SPLIT_AREAS, type Sort,
 } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
@@ -37,8 +38,6 @@ export function ListClient(
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
   const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
   const [shownCount, setShownCount] = useState(initial.shown)
-  // 고른 지역이 접힌 구간에 있으면 처음부터 펴 둔다
-  const [expanded, setExpanded] = useState(false)
   const { wished, toggle: toggleWish } = useWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useBlacklist()
   const { dismissed, dismiss } = useDismissed()
@@ -82,6 +81,10 @@ export function ListClient(
     () => areaCounts(wishFiltered, { city, tags, query: q }),
     [wishFiltered, city, tags, q],
   )
+  const subAreas = useMemo(
+    () => sigunguCountsByArea(wishFiltered, { city, tags, query: q }),
+    [wishFiltered, city, tags, q],
+  )
   // matched 와 같은 필터를 쓰고 newOnly 만 강제한다 — 배지 숫자가
   // "지금 NEW 를 누르면 나올 개수" 와 구조적으로 어긋날 수 없게 한다.
   // 정렬은 필요 없어 countMatching 으로 그 비용을 안 낸다.
@@ -109,8 +112,6 @@ export function ListClient(
   }
   const toggle = reset<string>((t) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const toggleArea = reset<string>((a) =>
-    setArea((prev) => (prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a])))
   const dirty = tags.length > 0 || area.length > 0 || q !== '' || newOnly || wishOnly || blacklistOnly
 
   return (
@@ -131,11 +132,9 @@ export function ListClient(
       <div className="mt-3">
         <AreaChips
           counts={areas}
+          sub={subAreas}
           value={area}
-          onToggle={toggleArea}
-          onClear={() => { setArea([]); setShownCount(PAGE_CHUNK) }}
-          expanded={expanded}
-          onExpand={setExpanded}
+          onChange={reset(setArea)}
           leading={newCount > 0 ? (
             <Chip
               on={newOnly}

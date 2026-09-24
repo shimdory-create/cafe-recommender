@@ -205,9 +205,11 @@ describe('mergeSpotVisits', () => {
 
 describe('다녀온 곳 필터', () => {
   const rows: SiteSpotVisited[] = [
-    built({ id: '1', name: '두물머리', area: '양평군', tags: ['공원'] }),
-    built({ id: '2', name: '남산타워', area: '서울', tags: ['전망'] }),
-    built({ id: '3', name: '아침고요수목원', area: '양평군', tags: ['자연', '공원'] }),
+    built({ id: '1', name: '두물머리', sigungu: '양평군', area: '양평군', tags: ['공원'] }),
+    built({ id: '2', name: '남산타워', sigungu: '중구', area: '서울', tags: ['전망'] }),
+    built({
+      id: '3', name: '아침고요수목원', sigungu: '양평군', area: '양평군', tags: ['자연', '공원'],
+    }),
   ]
 
   it('지역으로 거른다', () => {

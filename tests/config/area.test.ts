@@ -8,14 +8,14 @@ describe('areaOf', () => {
     expect(areaOf({ sigungu: '강남구', roadAddress: '서울 강남구 도산대로 1' })).toBe('서울')
   })
 
-  it('인천도 하나로 묶는다 — 집이 부평이라 안에서 가를 이유가 없다', () => {
+  it('인천도 하나로 묶는다', () => {
     expect(areaOf({ sigungu: '연수구', roadAddress: '인천 연수구 컨벤시아대로 1' })).toBe('인천')
     expect(areaOf({ sigungu: '강화군', address: '인천 강화군 길상면' })).toBe('인천')
   })
 
-  it('경기는 시군 그대로다 — 이미 시 단위로 저장돼 있다', () => {
-    expect(areaOf({ sigungu: '용인시', roadAddress: '경기 용인시 처인구 백령로 1' })).toBe('용인시')
-    expect(areaOf({ sigungu: '양평군', roadAddress: '경기 양평군 서종면 북한강로 1' })).toBe('양평군')
+  it('경기도 하나로 묶는다 — 시군구는 sigungu 필드가 따로 갖고 있다', () => {
+    expect(areaOf({ sigungu: '용인시', roadAddress: '경기 용인시 처인구 백령로 1' })).toBe('경기')
+    expect(areaOf({ sigungu: '양평군', roadAddress: '경기 양평군 서종면 북한강로 1' })).toBe('경기')
   })
 
   it('동명 시군구는 시도로 가른다 — 순서가 바뀌면 서울 중구가 인천으로 간다', () => {
@@ -26,7 +26,7 @@ describe('areaOf', () => {
   it('주소가 없으면 보조 신호로 판단한다', () => {
     expect(areaOf({ sigungu: '종로구', zone: 'seoul' })).toBe('서울')
     expect(areaOf({ sigungu: '부평구' })).toBe('인천')
-    expect(areaOf({ sigungu: '파주시' })).toBe('파주시')
+    expect(areaOf({ sigungu: '파주시' })).toBe('경기')
   })
 
   it('도로명이 지번보다 우선이다', () => {
@@ -42,13 +42,13 @@ describe('areaOf', () => {
     for (const r of REGIONS) {
       if (r.excluded) continue
       const city = areaOf({ sigungu: r.sigungu, roadAddress: `${r.sido} ${r.sigungu} 1` })
-      expect(city === '서울' || city === '인천' || city === r.sigungu).toBe(true)
+      expect(['서울', '인천', '경기']).toContain(city)
     }
   })
 })
 
 describe('areaLabel', () => {
-  it('칩에서는 접미사를 줄인다 — 29개를 나란히 놓으면 한 글자가 줄 수를 바꾼다', () => {
+  it('칩에서는 접미사를 줄인다 — 시군구 칩을 나란히 놓으면 한 글자가 줄 수를 바꾼다', () => {
     expect(areaLabel('남양주시')).toBe('남양주')
     expect(areaLabel('양평군')).toBe('양평')
   })

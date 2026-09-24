@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   areaCounts, areaLabel, countMatching, filterAndSort, groupBySigungu, matchesQuery,
+  sigunguCountsByArea, toggleAreaSelection,
   type FilterState,
 } from './filter'
 import { driveLabel, hiddenByVisit, recentlyVisited, REVISIT_DAYS, type SiteCafe } from './site'
@@ -176,6 +177,17 @@ describe('지역 묶음 (시 단위)', () => {
     expect(out).toHaveLength(5) // 도심전용 1곳 제외
   })
 
+  it('매크로 칩을 펼쳐서 고른 시군구로도 걸린다', () => {
+    // area 배열엔 매크로(서울/인천/경기)와 그 안의 시군구가 섞여 들어올 수
+    // 있다 — 매크로 자체가 아니라 구체적인 구/시로 좁힌 경우다
+    const incheon = [
+      cafe({ id: 'a', area: '인천', sigungu: '부평구', driveMinutes: 10 }),
+      cafe({ id: 'b', area: '인천', sigungu: '연수구', driveMinutes: 25 }),
+    ]
+    const out = filterAndSort(incheon, { tags: [], sort: 'near', city: false, area: ['부평구'] })
+    expect(out.map((r) => r.id)).toEqual(['a'])
+  })
+
   it('지역과 태그는 함께 걸린다 (AND)', () => {
     const withTag = [...rows, cafe({ id: '7', area: '파주시', tags: ['대형카페', '뷰맛집'] })]
     const out = filterAndSort(withTag, {
@@ -222,6 +234,63 @@ describe('지역 묶음 (시 단위)', () => {
       cafe({ id: 'b', sigungu: '김포시', driveMinutes: 25 }),
     ])
     expect(groups.map((g) => g.sigungu)).toEqual(['김포시', '미상군'])
+  })
+})
+
+describe('sigunguCountsByArea — 매크로 지역칩을 펼쳤을 때의 시군구별 개수', () => {
+  const rows = [
+    cafe({ id: '1', area: '인천', sigungu: '부평구', driveMinutes: 10 }),
+    cafe({ id: '2', area: '인천', sigungu: '부평구', driveMinutes: 15 }),
+    cafe({ id: '3', area: '인천', sigungu: '연수구', driveMinutes: 25 }),
+    cafe({ id: '4', area: '경기', sigungu: '파주시', driveMinutes: 40, cityOnly: true }),
+    cafe({ id: '5', area: '경기', sigungu: '수원시', driveMinutes: 50 }),
+  ]
+
+  it('매크로별로 시군구를 나눈다', () => {
+    const byArea = sigunguCountsByArea(rows, { city: true })
+    expect(byArea['인천']!.map((s) => s.area)).toEqual(['부평구', '연수구'])
+    expect(byArea['인천']!.find((s) => s.area === '부평구')!.count).toBe(2)
+    expect(byArea['경기']!.map((s) => s.area)).toEqual(['파주시', '수원시'])
+  })
+
+  it('가까운 시군구부터 놓는다', () => {
+    const byArea = sigunguCountsByArea(rows, { city: true })
+    expect(byArea['경기']!.map((s) => s.area)).toEqual(['파주시', '수원시'])
+  })
+
+  it('도심 전용은 areaCounts 와 같은 기준으로 뺀다', () => {
+    const byArea = sigunguCountsByArea(rows, { city: false })
+    expect(byArea['경기']!.map((s) => s.area)).toEqual(['수원시'])
+  })
+
+  it('시군구 이름도 접미사를 줄인다', () => {
+    const byArea = sigunguCountsByArea(rows, { city: true })
+    expect(byArea['인천']!.find((s) => s.area === '부평구')!.label).toBe('부평')
+  })
+})
+
+describe('toggleAreaSelection — 매크로/시군구 칩이 섞여도 꼬이지 않게', () => {
+  const sub = {
+    인천: [{ area: '부평구', label: '부평', count: 2, nearest: 10 }],
+    경기: [{ area: '파주시', label: '파주', count: 1, nearest: 40 }],
+  }
+
+  it('매크로를 고르면 그 안의 시군구 선택은 지운다', () => {
+    expect(toggleAreaSelection(['부평구'], '인천', sub)).toEqual(['인천'])
+  })
+
+  it('시군구를 고르면 그 매크로 선택은 지운다', () => {
+    expect(toggleAreaSelection(['인천'], '부평구', sub)).toEqual(['부평구'])
+  })
+
+  it('이미 고른 것을 다시 누르면 뺀다', () => {
+    expect(toggleAreaSelection(['인천'], '인천', sub)).toEqual([])
+    expect(toggleAreaSelection(['부평구'], '부평구', sub)).toEqual([])
+  })
+
+  it('다른 매크로·시군구 선택은 그대로 둔다 — OR 다중 선택', () => {
+    expect(toggleAreaSelection(['경기'], '인천', sub)).toEqual(['경기', '인천'])
+    expect(toggleAreaSelection(['파주시'], '부평구', sub)).toEqual(['파주시', '부평구'])
   })
 })
 

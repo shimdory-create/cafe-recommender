@@ -1,7 +1,7 @@
 'use client'
 
-import { useId } from 'react'
-import { AREA_CHIPS_COLLAPSED, type AreaCount } from '@/lib/filter'
+import { useId, useState } from 'react'
+import { AREA_CHIPS_COLLAPSED, toggleAreaSelection, type AreaCount } from '@/lib/filter'
 
 /**
  * 목록 위에 얹는 조작들. 전체 탭과 다녀온 곳 탭이 같은 것을 쓴다.
@@ -104,11 +104,14 @@ export function SearchBox({
 }
 
 /**
- * 지역 칩 (시 단위).
+ * 지역 칩. 매크로(서울·인천·경기) 셋을 위에 두고, 하나를 누르면 그 안의
+ * 시군구가 바로 밑에 펼쳐진다(2026-09-24) — 인천을 하나로 묶으니 너무
+ * 커져서, 구 단위로 다시 좁힐 수 있게 했다. 경기·서울도 같은 방식으로
+ * 통일했다(원래도 경기는 시군 단위였지만, 접었다 펼치는 조작까지 맞췄다).
  *
- * 32개를 다 펴면 모바일에서 일곱 줄을 먹는다. 가까운 여덟 곳만 두고 나머지는
- * 접는다 — 우리가 실제로 가는 곳은 앞쪽에 몰려 있고, 먼 곳을 찾을 때는
- * 대개 이름을 알고 있어 검색이 더 빠르다.
+ * 매크로 칩을 누르면 선택과 펼침이 함께 일어난다 — 다시 누르면 접히고
+ * 선택도 풀린다. 시군구 칩은 `toggleAreaSelection` 이 매크로 선택과 서로
+ * 배타적으로 정리한다(둘 다 뽑혀 있으면 의미가 없다).
  *
  * 복수 선택이 가능하다(2026-09-08) — "인천 또는 부천" 처럼 OR 로 걸린다.
  * 태그 칩(AND)과 섞여도 헷갈리지 않는다 — 지역은 한 카페가 하나만 갖는
@@ -116,60 +119,92 @@ export function SearchBox({
  * 자연스럽게 드러난다.
  */
 export function AreaChips({
-  counts, value, onToggle, onClear, expanded, onExpand, leading,
+  counts, sub, value, onChange, leading,
 }: {
+  /** 매크로 레벨 개수 (`areaCounts`) */
   counts: AreaCount[]
-  /** 고른 지역들. 비어 있으면 전체 */
+  /** 매크로 안의 시군구별 개수 (`sigunguCountsByArea`) */
+  sub: Record<string, AreaCount[]>
+  /** 고른 지역들 — 매크로와 시군구가 섞여 들어올 수 있다. 비어 있으면 전체 */
   value: string[]
-  /** 칩 하나를 눌렀을 때 — 이미 골랐으면 빼고, 아니면 더한다 */
-  onToggle: (area: string) => void
-  /** "전체" 칩을 눌렀을 때 — 전부 지운다 */
-  onClear: () => void
-  expanded: boolean
-  onExpand: (v: boolean) => void
+  onChange: (next: string[]) => void
   /** NEW 칩처럼 앞에 붙일 것 */
   leading?: React.ReactNode
 }) {
-  // 고른 지역이 접힌 구간에 있으면 그것들만 끌어올린다 — 고른 칩이 안 보이면
-  // 무엇으로 걸러진 목록인지 알 수 없다
-  const head = counts.slice(0, AREA_CHIPS_COLLAPSED)
-  const tail = counts.slice(AREA_CHIPS_COLLAPSED)
-  const pinned = !expanded ? tail.filter((a) => value.includes(a.area)) : []
-  const shown = expanded ? counts : [...head, ...pinned]
-  const hiddenCount = counts.length - shown.length
+  // 사용자가 직접 펼친 매크로. 고른 시군구가 있는 매크로는 이것과 별개로
+  // 항상 펼쳐 보인다(아래 isOpen) — URL 로 시군구가 바로 선택된 채 들어와도
+  // 무엇으로 걸러졌는지 보여야 한다.
+  const [openedByUser, setOpenedByUser] = useState<Set<string>>(new Set())
+  // 시군구가 8개 넘는 매크로(경기 등)를 "더 보기" 로 펼친 상태
+  const [subExpanded, setSubExpanded] = useState<Set<string>>(new Set())
+
+  const clickMacro = (area: string) => {
+    const next = toggleAreaSelection(value, area, sub)
+    onChange(next)
+    setOpenedByUser((prev) => {
+      const copy = new Set(prev)
+      if (next.includes(area)) copy.add(area)
+      else copy.delete(area)
+      return copy
+    })
+  }
+  const clickSub = (sigungu: string) => onChange(toggleAreaSelection(value, sigungu, sub))
+  const clear = () => { onChange([]); setOpenedByUser(new Set()) }
 
   return (
-    <div className="flex flex-wrap gap-1.5">
-      <Chip on={value.length === 0} onClick={onClear}>전체</Chip>
-      {leading}
-      {shown.map((a) => (
-        <Chip
-          key={a.area}
-          on={value.includes(a.area)}
-          count={a.count}
-          onClick={() => onToggle(a.area)}
-        >
-          {a.label}
-        </Chip>
-      ))}
-      {hiddenCount > 0 && (
-        <button
-          type="button"
-          onClick={() => onExpand(true)}
-          className={`${CHIP_BASE} border-dashed border-line bg-card text-ink-soft`}
-        >
-          ＋{hiddenCount}개 더
-        </button>
-      )}
-      {expanded && counts.length > AREA_CHIPS_COLLAPSED && (
-        <button
-          type="button"
-          onClick={() => onExpand(false)}
-          className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
-        >
-          접기
-        </button>
-      )}
+    <div className="flex flex-col gap-1.5">
+      <div className="flex flex-wrap gap-1.5">
+        <Chip on={value.length === 0} onClick={clear}>전체</Chip>
+        {leading}
+        {counts.map((a) => (
+          <Chip
+            key={a.area}
+            on={value.includes(a.area)}
+            count={a.count}
+            onClick={() => clickMacro(a.area)}
+          >
+            {a.label}
+          </Chip>
+        ))}
+      </div>
+
+      {counts.map((a) => {
+        const subs = sub[a.area] ?? []
+        const isOpen = openedByUser.has(a.area) || subs.some((s) => value.includes(s.area))
+        if (!isOpen || subs.length === 0) return null
+
+        const isSubExpanded = subExpanded.has(a.area)
+        const head = subs.slice(0, AREA_CHIPS_COLLAPSED)
+        const tail = subs.slice(AREA_CHIPS_COLLAPSED)
+        // 고른 시군구가 접힌 구간에 있으면 끌어올린다 — 상위 지역 칩과 같은 규칙
+        const pinned = !isSubExpanded ? tail.filter((s) => value.includes(s.area)) : []
+        const shown = isSubExpanded ? subs : [...head, ...pinned]
+        const hiddenCount = subs.length - shown.length
+
+        return (
+          <div key={a.area} className="ml-2.5 flex flex-wrap gap-1.5 border-l-2 border-line pl-2.5">
+            {shown.map((s) => (
+              <Chip
+                key={s.area}
+                on={value.includes(s.area)}
+                count={s.count}
+                onClick={() => clickSub(s.area)}
+              >
+                {s.label}
+              </Chip>
+            ))}
+            {hiddenCount > 0 && (
+              <button
+                type="button"
+                onClick={() => setSubExpanded((prev) => new Set(prev).add(a.area))}
+                className={`${CHIP_BASE} border-dashed border-line bg-card text-ink-soft`}
+              >
+                ＋{hiddenCount}개 더
+              </button>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }

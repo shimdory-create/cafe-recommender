@@ -25,10 +25,14 @@ export type Sort = 'hot' | 'near' | 'new'
  *
  * 한 줄짜리 규칙을 옮겨 적는 편이, 웹에서 `src/` 를 import 해 Vercel 빌드를
  * 깨뜨리는 것보다 낫다 (그 실패는 두 번 겪었다 — `site-types.ts` 주석 참고).
+ *
+ * 매크로 칩(서울/인천/경기)은 그대로 두고, 시군구는 접미사를 뗀다. 인천을
+ * 펼쳤을 때 나오는 구(부평구 등)도 여기를 지나므로 `구` 도 뗀다
+ * (2026-09-24, 2단 지역 칩을 추가하며 넓혔다).
  */
 export function areaLabel(area: string): string {
   if (area === '서울' || area === '인천') return area
-  return area.replace(/[시군]$/, '')
+  return area.replace(/[시군구]$/, '')
 }
 
 /** 서울은 늘 마지막이다 — "거의 안 간다" 는 것이 이 목록의 전제다 */
@@ -80,7 +84,11 @@ export interface FilterState {
 function filterRows<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
   return cafes.filter((c) => {
     if (c.cityOnly && !s.city) return false
-    if (s.area && s.area.length > 0 && !s.area.includes(c.area)) return false
+    // area 는 매크로(서울/인천/경기)와 그 안의 시군구가 섞여 들어올 수 있다 —
+    // 매크로 칩을 펼쳐서 시군구를 고른 경우다 (AreaChips 참고).
+    if (s.area && s.area.length > 0 && !s.area.includes(c.area) && !s.area.includes(c.sigungu)) {
+      return false
+    }
     if (s.newOnly && !c.isNew) return false
     if (s.query && !matchesQuery(c.name, s.query)) return false
     return s.tags.every((t) => c.tags.includes(t))
@@ -162,12 +170,61 @@ export function areaCounts<T extends FilterableRow>(
 }
 
 /**
- * 서울·인천만 안에서 다시 가른다.
- *
- * 나머지 시군은 칩 하나가 곧 한 지역이라 더 쪼갤 것이 없다. 서울 175곳과
- * 인천 58곳은 한 덩어리로 두면 스크롤이 길어져서 구별로 묶는다.
+ * 매크로 지역(서울·인천·경기) — 이 셋을 고르면 그 안을 시군구로 다시 가른다
+ * (`groupBySigungu`, `AreaChips`). `c.area` 는 이 셋 중 하나로만 온다
+ * (`src/config/area.ts`) — 시군구는 `c.sigungu` 가 따로 갖고 있다.
  */
-export const SPLIT_AREAS = new Set(['서울', '인천'])
+export const SPLIT_AREAS = new Set(['서울', '인천', '경기'])
+
+/**
+ * 매크로 안의 시군구별 개수. `AreaChips` 가 매크로 칩을 펼쳤을 때 쓴다.
+ * `areaCounts` 와 같은 필터를 적용하되 `c.sigungu` 로 센다.
+ */
+export function sigunguCountsByArea<T extends FilterableRow>(
+  cafes: T[],
+  opts: { city: boolean; tags?: string[]; query?: string; newOnly?: boolean },
+): Record<string, AreaCount[]> {
+  const byArea = new Map<string, Map<string, { count: number; nearest: number }>>()
+  for (const c of cafes) {
+    if (c.cityOnly && !opts.city) continue
+    if (opts.newOnly && !c.isNew) continue
+    if (opts.query && !matchesQuery(c.name, opts.query)) continue
+    if (opts.tags && !opts.tags.every((t) => c.tags.includes(t))) continue
+    let bySigungu = byArea.get(c.area)
+    if (!bySigungu) { bySigungu = new Map(); byArea.set(c.area, bySigungu) }
+    const cur = bySigungu.get(c.sigungu) ?? { count: 0, nearest: Number.POSITIVE_INFINITY }
+    cur.count += 1
+    cur.nearest = Math.min(cur.nearest, c.driveMinutes ?? Number.POSITIVE_INFINITY)
+    bySigungu.set(c.sigungu, cur)
+  }
+  const result: Record<string, AreaCount[]> = {}
+  for (const [area, bySigungu] of byArea) {
+    result[area] = [...bySigungu.entries()]
+      .map(([sigungu, v]) => ({ area: sigungu, label: areaLabel(sigungu), count: v.count, nearest: v.nearest }))
+      .sort((a, b) => (a.nearest !== b.nearest ? a.nearest - b.nearest : a.area.localeCompare(b.area)))
+  }
+  return result
+}
+
+/**
+ * 지역 칩 클릭 처리. 매크로(서울/인천/경기)와 그 안의 시군구 칩이 섞여도
+ * 선택이 꼬이지 않게 한다 — 매크로를 고르면 그 밑 시군구 선택은 지우고,
+ * 시군구를 고르면 그 매크로 선택은 지운다. 같은 지역이 두 겹(매크로 전체 +
+ * 그 안의 구 하나)으로 뽑혀 있는, 의미 없이 헷갈리는 상태를 만들지 않는다.
+ */
+export function toggleAreaSelection(
+  value: string[],
+  clicked: string,
+  sub: Record<string, AreaCount[]>,
+): string[] {
+  if (value.includes(clicked)) return value.filter((v) => v !== clicked)
+  if (SPLIT_AREAS.has(clicked)) {
+    const children = new Set((sub[clicked] ?? []).map((s) => s.area))
+    return [...value.filter((v) => !children.has(v)), clicked]
+  }
+  const macro = Object.keys(sub).find((m) => sub[m]!.some((s) => s.area === clicked))
+  return [...value.filter((v) => v !== macro), clicked]
+}
 
 export interface SigunguGroup<T> {
   sigungu: string

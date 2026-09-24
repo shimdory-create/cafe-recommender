@@ -22,7 +22,7 @@ const row = (over: Partial<SiteCafe> & { id: string }): SiteCafe => ({
   name: '카페',
   sigungu: '양평군',
   zone: 'east',
-  area: '양평군',
+  area: '경기',
   driveMinutes: 60,
   lat: 37.5,
   lng: 127.0,
