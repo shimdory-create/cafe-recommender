@@ -133,9 +133,9 @@ describe('runDriveTimes', () => {
       },
     })
     await runDriveTimes(h.deps)
-    // 인천 부평 (스펙 2절)
-    expect(origin.lat).toBeCloseTo(37.5074, 3)
-    expect(origin.lng).toBeCloseTo(126.7218, 3)
+    // 인천 부평구 수변로 334 (실제 집주소)
+    expect(origin.lat).toBeCloseTo(37.5151091, 3)
+    expect(origin.lng).toBeCloseTo(126.7398273, 3)
   })
 })
 

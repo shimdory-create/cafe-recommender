@@ -3,8 +3,12 @@ export interface LatLng {
   lng: number
 }
 
-/** 출발지: 인천 부평. 순수 함수를 유지하기 위해 상수로도 둔다. */
-export const HOME: LatLng = { lat: 37.5074, lng: 126.7218 }
+/**
+ * 출발지: 인천 부평구 수변로 334 (실제 집주소, 카카오 주소 검색으로 확인 —
+ * 2026-09-24). 이전 값(37.5074, 126.7218)은 실제 주소보다 약 1.8km
+ * 남서쪽으로 치우쳐 있어 모든 실측·근사 거리가 그만큼 어긋나 있었다.
+ */
+export const HOME: LatLng = { lat: 37.5151091, lng: 126.7398273 }
 
 const EARTH_RADIUS_KM = 6371
 

@@ -13,8 +13,8 @@ describe('loadEnv', () => {
 
   it('출발지 좌표를 부평 기본값으로 채운다', () => {
     const env = loadEnv(valid)
-    expect(env.HOME_LAT).toBeCloseTo(37.5074, 4)
-    expect(env.HOME_LNG).toBeCloseTo(126.7218, 4)
+    expect(env.HOME_LAT).toBeCloseTo(37.5151091, 4)
+    expect(env.HOME_LNG).toBeCloseTo(126.7398273, 4)
   })
 
   it('좌표를 문자열로 주면 숫자로 변환한다', () => {

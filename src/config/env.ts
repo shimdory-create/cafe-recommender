@@ -13,9 +13,9 @@ const EnvSchema = z
     // 저장: DB 없음. JSON in git (스펙 v3 9절)
     DATA_DIR: z.string().min(1).default('data'),
 
-    // 출발지: 인천 부평
-    HOME_LAT: z.coerce.number().default(37.5074),
-    HOME_LNG: z.coerce.number().default(126.7218),
+    // 출발지: 인천 부평구 수변로 334 (pipeline/geo.ts 의 HOME 과 같은 값)
+    HOME_LAT: z.coerce.number().default(37.5151091),
+    HOME_LNG: z.coerce.number().default(126.7398273),
   })
   .superRefine((v, ctx) => {
     // 고른 provider 의 키만 요구한다. 둘 다 강제하면 무료 경로를 쓰는
