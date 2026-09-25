@@ -332,9 +332,9 @@ export function VisitedList({
             </span>
           </div>
 
-          {tagList.length > 1 && (
+          {(tagList.length > 1 || dirty) && (
             <div className="mt-3 flex flex-wrap gap-1.5">
-              {tagList.map((t) => (
+              {tagList.length > 1 && tagList.map((t) => (
                 <Chip
                   key={t.tag}
                   on={tags.includes(t.tag)}

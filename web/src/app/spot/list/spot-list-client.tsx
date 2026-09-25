@@ -32,6 +32,7 @@ export function SpotListClient(
   const [newOnly, setNewOnly] = useState(initial.newOnly)
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
   const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
+  const [hideVisited, setHideVisited] = useState(initial.hideVisited)
   const [shownCount, setShownCount] = useState(initial.shown)
   const { wished, toggle: toggleWish } = useSpotWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useSpotBlacklist()
@@ -39,7 +40,8 @@ export function SpotListClient(
   const { aliveIds, confirm } = useAliveConfirmed('/api/spot/alive')
 
   useUrlSync(listParamsToQuery({
-    ...initial, q, area, tags, sort, city, newOnly, wishOnly, blacklistOnly, shown: shownCount,
+    ...initial, q, area, tags, sort, city, newOnly, wishOnly, blacklistOnly, hideVisited,
+    shown: shownCount,
   }))
 
   const notDismissed = useMemo(
@@ -57,24 +59,29 @@ export function SpotListClient(
     () => (wishOnly ? visible.filter((s) => wished.has(s.id)) : visible),
     [visible, wishOnly, wished],
   )
+  // 다녀온 곳 제외도 같은 이유로 먼저 뺀다 — 최근(6개월 이내) 다녀온 곳만 뺀다
+  const notRecentlyVisited = useMemo(
+    () => (hideVisited ? wishFiltered.filter((s) => !spotRecentlyVisited(s.visitedOn)) : wishFiltered),
+    [wishFiltered, hideVisited],
+  )
 
   const matched = useMemo(
-    () => filterAndSort(wishFiltered, { tags, sort, city, area, query: q, newOnly }),
-    [wishFiltered, tags, sort, city, area, q, newOnly],
+    () => filterAndSort(notRecentlyVisited, { tags, sort, city, area, query: q, newOnly }),
+    [notRecentlyVisited, tags, sort, city, area, q, newOnly],
   )
   const shown = useMemo(() => matched.slice(0, shownCount), [matched, shownCount])
   const rest = matched.length - shown.length
   const areas = useMemo(
-    () => areaCounts(wishFiltered, { city, tags, query: q }),
-    [wishFiltered, city, tags, q],
+    () => areaCounts(notRecentlyVisited, { city, tags, query: q }),
+    [notRecentlyVisited, city, tags, q],
   )
   const subAreas = useMemo(
-    () => sigunguCountsByArea(wishFiltered, { city, tags, query: q }),
-    [wishFiltered, city, tags, q],
+    () => sigunguCountsByArea(notRecentlyVisited, { city, tags, query: q }),
+    [notRecentlyVisited, city, tags, q],
   )
   const newCount = useMemo(
-    () => countMatching(wishFiltered, { tags, sort, city, area, query: q, newOnly: true }),
-    [wishFiltered, tags, sort, city, area, q],
+    () => countMatching(notRecentlyVisited, { tags, sort, city, area, query: q, newOnly: true }),
+    [notRecentlyVisited, tags, sort, city, area, q],
   )
   // 복수 지역을 고르면 묶어서 보여줄 기준이 애매해지므로 딱 하나만 고르고
   // 그게 서울·인천일 때만 묶는다.
@@ -89,7 +96,8 @@ export function SpotListClient(
   }
   const toggle = reset<string>((t) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const dirty = tags.length > 0 || area.length > 0 || q !== '' || newOnly || wishOnly || blacklistOnly
+  const dirty = tags.length > 0 || area.length > 0 || q !== '' || newOnly || wishOnly
+    || blacklistOnly || hideVisited
 
   return (
     <div className="py-5">
@@ -136,6 +144,12 @@ export function SpotListClient(
         >
           ⊘ 블랙리스트
         </Chip>
+        <Chip
+          on={hideVisited}
+          onClick={() => { setHideVisited((v) => !v); setShownCount(PAGE_CHUNK) }}
+        >
+          다녀온 곳 제외
+        </Chip>
         {SPOT_TAG_CHIPS.map((t) => (
           <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{SPOT_TAG_LABEL[t]}</Chip>
         ))}
@@ -144,7 +158,7 @@ export function SpotListClient(
             type="button"
             onClick={() => {
               setTags([]); setArea([]); setQ(''); setNewOnly(false); setWishOnly(false)
-              setBlacklistOnly(false)
+              setBlacklistOnly(false); setHideVisited(false)
               setShownCount(PAGE_CHUNK)
             }}
             className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"

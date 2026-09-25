@@ -37,6 +37,7 @@ export function ListClient(
   const [newOnly, setNewOnly] = useState(initial.newOnly)
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
   const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
+  const [hideVisited, setHideVisited] = useState(initial.hideVisited)
   const [shownCount, setShownCount] = useState(initial.shown)
   const { wished, toggle: toggleWish } = useWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useBlacklist()
@@ -44,7 +45,8 @@ export function ListClient(
   const { aliveIds, confirm } = useAliveConfirmed('/api/alive')
 
   useUrlSync(listParamsToQuery({
-    ...initial, q, area, tags, sort, city, newOnly, wishOnly, blacklistOnly, shown: shownCount,
+    ...initial, q, area, tags, sort, city, newOnly, wishOnly, blacklistOnly, hideVisited,
+    shown: shownCount,
   }))
 
   // 폐업 의심으로 숨긴 곳은 다른 모든 필터보다 먼저 뺀다 — 지역·태그 숫자에도
@@ -68,29 +70,35 @@ export function ListClient(
     () => (wishOnly ? visible.filter((c) => wished.has(c.id)) : visible),
     [visible, wishOnly, wished],
   )
+  // 다녀온 곳 제외도 같은 이유로 먼저 뺀다 — 최근(6개월 이내) 다녀온 곳만
+  // 뺀다. 카드의 "다녀옴" 배지와 같은 기준이라 뭐가 빠졌는지 헷갈리지 않는다.
+  const notRecentlyVisited = useMemo(
+    () => (hideVisited ? wishFiltered.filter((c) => !recentlyVisited(c.visitedOn)) : wishFiltered),
+    [wishFiltered, hideVisited],
+  )
 
   const matched = useMemo(
-    () => filterAndSort(wishFiltered, { tags, sort, city, area, query: q, newOnly }),
-    [wishFiltered, tags, sort, city, area, q, newOnly],
+    () => filterAndSort(notRecentlyVisited, { tags, sort, city, area, query: q, newOnly }),
+    [notRecentlyVisited, tags, sort, city, area, q, newOnly],
   )
   // 한 번에 다 그리면 카드 664개에 DOM 노드 15,000개가 된다 (실측). 검색·칩으로
   // 좁히면 대개 한 묶음 안에 들어와서 버튼은 잘 보이지 않는다
   const shown = useMemo(() => matched.slice(0, shownCount), [matched, shownCount])
   const rest = matched.length - shown.length
   const areas = useMemo(
-    () => areaCounts(wishFiltered, { city, tags, query: q }),
-    [wishFiltered, city, tags, q],
+    () => areaCounts(notRecentlyVisited, { city, tags, query: q }),
+    [notRecentlyVisited, city, tags, q],
   )
   const subAreas = useMemo(
-    () => sigunguCountsByArea(wishFiltered, { city, tags, query: q }),
-    [wishFiltered, city, tags, q],
+    () => sigunguCountsByArea(notRecentlyVisited, { city, tags, query: q }),
+    [notRecentlyVisited, city, tags, q],
   )
   // matched 와 같은 필터를 쓰고 newOnly 만 강제한다 — 배지 숫자가
   // "지금 NEW 를 누르면 나올 개수" 와 구조적으로 어긋날 수 없게 한다.
   // 정렬은 필요 없어 countMatching 으로 그 비용을 안 낸다.
   const newCount = useMemo(
-    () => countMatching(wishFiltered, { tags, sort, city, area, query: q, newOnly: true }),
-    [wishFiltered, tags, sort, city, area, q],
+    () => countMatching(notRecentlyVisited, { tags, sort, city, area, query: q, newOnly: true }),
+    [notRecentlyVisited, tags, sort, city, area, q],
   )
   // 서울·인천만 안에서 구별로 다시 묶는다. 나머지는 칩 하나가 곧 한 지역이다.
   // 복수 지역을 고르면(예: 서울 + 김포) 묶어서 보여줄 기준이 애매해지므로
@@ -112,7 +120,8 @@ export function ListClient(
   }
   const toggle = reset<string>((t) =>
     setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t])))
-  const dirty = tags.length > 0 || area.length > 0 || q !== '' || newOnly || wishOnly || blacklistOnly
+  const dirty = tags.length > 0 || area.length > 0 || q !== '' || newOnly || wishOnly
+    || blacklistOnly || hideVisited
 
   return (
     <div className="py-5">
@@ -161,6 +170,12 @@ export function ListClient(
         >
           ⊘ 블랙리스트
         </Chip>
+        <Chip
+          on={hideVisited}
+          onClick={() => { setHideVisited((v) => !v); setShownCount(PAGE_CHUNK) }}
+        >
+          다녀온 곳 제외
+        </Chip>
         {ALL_TAGS.map((t) => (
           <Chip key={t} on={tags.includes(t)} onClick={() => toggle(t)}>{t}</Chip>
         ))}
@@ -169,7 +184,7 @@ export function ListClient(
             type="button"
             onClick={() => {
               setTags([]); setArea([]); setQ(''); setNewOnly(false); setWishOnly(false)
-              setBlacklistOnly(false)
+              setBlacklistOnly(false); setHideVisited(false)
               setShownCount(PAGE_CHUNK)
             }}
             className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"

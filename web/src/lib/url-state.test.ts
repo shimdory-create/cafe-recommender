@@ -10,6 +10,7 @@ describe('목록 상태를 주소에 싣기', () => {
     const p = {
       q: '테라', area: ['김포시', '파주시'], tags: ['대형카페', '뷰맛집'],
       sort: 'near' as const, city: true, newOnly: true, wishOnly: true, blacklistOnly: true,
+      hideVisited: true,
       visitedSort: { by: 'rating' as const, desc: false },
       shown: 180,
     }
@@ -23,12 +24,15 @@ describe('목록 상태를 주소에 싣기', () => {
   })
 
   it('이상한 값은 기본값으로 떨어진다', () => {
-    const p = readListParams({ s: '아무거나', c: 'yes', n: '0', w: '0', b: '0', a: '  ', t: ' , ,' })
+    const p = readListParams({
+      s: '아무거나', c: 'yes', n: '0', w: '0', b: '0', x: '0', a: '  ', t: ' , ,',
+    })
     expect(p.sort).toBe('new')
     expect(p.city).toBe(false)
     expect(p.newOnly).toBe(false)
     expect(p.wishOnly).toBe(false)
     expect(p.blacklistOnly).toBe(false)
+    expect(p.hideVisited).toBe(false)
     expect(p.area).toEqual([])
     expect(p.tags).toEqual([])
   })

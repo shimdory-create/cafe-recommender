@@ -44,6 +44,7 @@ export function RestaurantListClient(
   const [newOnly, setNewOnly] = useState(initial.newOnly)
   const [wishOnly, setWishOnly] = useState(initial.wishOnly)
   const [blacklistOnly, setBlacklistOnly] = useState(initial.blacklistOnly)
+  const [hideVisited, setHideVisited] = useState(initial.hideVisited)
   const [shownCount, setShownCount] = useState(initial.shown)
   const { wished, toggle: toggleWish } = useRestaurantWishlist()
   const { blacklisted, toggle: toggleBlacklist } = useRestaurantBlacklist()
@@ -55,7 +56,8 @@ export function RestaurantListClient(
   const cuisineTags = useMemo(() => (cuisine ? [cuisine] : []), [cuisine])
 
   useUrlSync(listParamsToQuery({
-    ...initial, q, area, tags: cuisineTags, sort, city, newOnly, wishOnly, blacklistOnly, shown: shownCount,
+    ...initial, q, area, tags: cuisineTags, sort, city, newOnly, wishOnly, blacklistOnly,
+    hideVisited, shown: shownCount,
   }))
 
   // 폐업 의심으로 숨긴 곳은 다른 모든 필터보다 먼저 뺀다 — 지역·태그 숫자에도
@@ -77,26 +79,31 @@ export function RestaurantListClient(
     () => (wishOnly ? visible.filter((r) => wished.has(r.id)) : visible),
     [visible, wishOnly, wished],
   )
+  // 다녀온 곳 제외도 같은 이유로 먼저 뺀다 — 최근(6개월 이내) 다녀온 곳만 뺀다
+  const notRecentlyVisited = useMemo(
+    () => (hideVisited ? wishFiltered.filter((r) => !restaurantRecentlyVisited(r.visitedOn)) : wishFiltered),
+    [wishFiltered, hideVisited],
+  )
 
   const matched = useMemo(
-    () => filterAndSort(wishFiltered, { tags: cuisineTags, sort, city, area, query: q, newOnly }),
-    [wishFiltered, cuisineTags, sort, city, area, q, newOnly],
+    () => filterAndSort(notRecentlyVisited, { tags: cuisineTags, sort, city, area, query: q, newOnly }),
+    [notRecentlyVisited, cuisineTags, sort, city, area, q, newOnly],
   )
   const shown = useMemo(() => matched.slice(0, shownCount), [matched, shownCount])
   const rest = matched.length - shown.length
   const areas = useMemo(
-    () => areaCounts(wishFiltered, { city, tags: cuisineTags, query: q }),
-    [wishFiltered, city, cuisineTags, q],
+    () => areaCounts(notRecentlyVisited, { city, tags: cuisineTags, query: q }),
+    [notRecentlyVisited, city, cuisineTags, q],
   )
   const subAreas = useMemo(
-    () => sigunguCountsByArea(wishFiltered, { city, tags: cuisineTags, query: q }),
-    [wishFiltered, city, cuisineTags, q],
+    () => sigunguCountsByArea(notRecentlyVisited, { city, tags: cuisineTags, query: q }),
+    [notRecentlyVisited, city, cuisineTags, q],
   )
   // matched 와 같은 필터를 쓰고 newOnly 만 강제한다 — 배지 숫자가
   // "지금 NEW 를 누르면 나올 개수" 와 구조적으로 어긋날 수 없게 한다.
   const newCount = useMemo(
-    () => countMatching(wishFiltered, { tags: cuisineTags, sort, city, area, query: q, newOnly: true }),
-    [wishFiltered, cuisineTags, sort, city, area, q],
+    () => countMatching(notRecentlyVisited, { tags: cuisineTags, sort, city, area, query: q, newOnly: true }),
+    [notRecentlyVisited, cuisineTags, sort, city, area, q],
   )
   // 서울·인천만 안에서 구별로 다시 묶는다. 나머지는 칩 하나가 곧 한 지역이다.
   // 복수 지역을 고르면 묶어서 보여줄 기준이 애매해지므로 딱 하나만 고르고
@@ -116,7 +123,8 @@ export function RestaurantListClient(
   // 이미 선택된 걸 다시 누르면 해제, 아니면 기존 선택을 대체한다 (누적
   // 아님 — cuisineType 은 식당당 하나뿐이므로).
   const selectCuisine = reset<string>((t) => setCuisine((prev) => (prev === t ? null : t)))
-  const dirty = cuisine !== null || area.length > 0 || q !== '' || newOnly || wishOnly || blacklistOnly
+  const dirty = cuisine !== null || area.length > 0 || q !== '' || newOnly || wishOnly
+    || blacklistOnly || hideVisited
 
   return (
     <div className="py-5">
@@ -163,6 +171,12 @@ export function RestaurantListClient(
         >
           ⊘ 블랙리스트
         </Chip>
+        <Chip
+          on={hideVisited}
+          onClick={() => { setHideVisited((v) => !v); setShownCount(PAGE_CHUNK) }}
+        >
+          다녀온 곳 제외
+        </Chip>
         {CUISINE_CHIPS.map((t) => (
           <Chip key={t} on={cuisine === t} onClick={() => selectCuisine(t)}>{CUISINE_LABEL[t]}</Chip>
         ))}
@@ -171,7 +185,7 @@ export function RestaurantListClient(
             type="button"
             onClick={() => {
               setCuisine(null); setArea([]); setQ(''); setNewOnly(false); setWishOnly(false)
-              setBlacklistOnly(false)
+              setBlacklistOnly(false); setHideVisited(false)
               setShownCount(PAGE_CHUNK)
             }}
             className="min-h-[40px] rounded-full px-3 text-[13px] text-ink-soft underline"
