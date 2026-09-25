@@ -51,12 +51,12 @@ export function nearbyForSpot(id: string) {
   }
 }
 
-export const SPOT_REVISIT_DAYS = spotPayload.stats.revisitDays
-
-export function spotRecentlyVisited(visitedOn: string | null, now = new Date()): boolean {
-  if (!visitedOn) return false
-  const days = (now.getTime() - new Date(visitedOn).getTime()) / 86_400_000
-  return days >= 0 && days <= SPOT_REVISIT_DAYS
+/**
+ * 다녀온 적이 있는가 (카드 "다녀옴" 배지·추천 제외용). 2026-09-25 개정 —
+ * 기간 없이 영구 제외다. `web/src/lib/site.ts` 의 `recentlyVisited`와 같다.
+ */
+export function spotRecentlyVisited(visitedOn: string | null): boolean {
+  return visitedOn !== null
 }
 
 export const SPOT_STALE_DAYS = spotPayload.stats.staleDays
@@ -67,18 +67,19 @@ export function spotIsStale(lastSeenAt: string | null, now = new Date()): boolea
   return days > SPOT_STALE_DAYS
 }
 
+/**
+ * 실시간 방문 기록에서 **추천에서 내려가 있어야 할** 장소 id 만 고른다.
+ * 다녀온 곳은 영구 제외라 기록에 있는 것 전부다.
+ */
 export function spotHiddenByVisit(
   visits: { kakaoPlaceId: string; visitedOn: string }[],
-  now = new Date(),
 ): Set<string> {
-  return new Set(
-    visits.filter((v) => spotRecentlyVisited(v.visitedOn, now)).map((v) => v.kakaoPlaceId),
-  )
+  return new Set(visits.map((v) => v.kakaoPlaceId))
 }
 
 /** 이번 주 추천. 카페·식당의 homeFeed와 동일한 로직 */
-export function spotHomeFeed(now = new Date()): SiteSpot[] {
-  const fresh = (s: SiteSpot) => !s.cityOnly && !spotRecentlyVisited(s.visitedOn, now)
+export function spotHomeFeed(): SiteSpot[] {
+  const fresh = (s: SiteSpot) => !s.cityOnly && !spotRecentlyVisited(s.visitedOn)
   const ranked = spotPayload.week
     .map((w) => spotById(w.id))
     .filter((s): s is SiteSpot => s !== undefined && fresh(s))

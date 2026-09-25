@@ -244,7 +244,7 @@ async function main() {
       })
       await ctx.store.writeVisits(visits)
       console.log(`기록했습니다: ${found.cafe.sigungu} ${found.cafe.name} — ${visitedOn}`)
-      console.log('추천에서 6개월간 내려갑니다.')
+      console.log('추천에서 영구히 내려갑니다.')
       break
     }
 

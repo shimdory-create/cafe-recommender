@@ -1,6 +1,5 @@
 import { PARKING_MULT } from './score.js'
 
-const DAY = 86_400_000
 const clamp = (x: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, x))
 
 export interface SpotFitInput {
@@ -30,11 +29,8 @@ export function spotFamilyFit(i: SpotFitInput, now: Date): number {
   const parking = PARKING_MULT[i.parkingGrade]
   const kidsBonus = i.hasKidsTag ? 1.1 : 1.0
 
-  let unvisited = 1.0
-  if (i.lastVisitedOn) {
-    const days = (now.getTime() - new Date(i.lastVisitedOn).getTime()) / DAY
-    unvisited = days <= 180 ? 0.15 : days <= 365 ? 0.5 : 0.8
-  }
+  // 다녀온 곳은 추천에서 영구 제외다(2026-09-25 개정) — score.ts 참고
+  const unvisited = i.lastVisitedOn ? 0 : 1.0
 
   const month = now.getUTCMonth() + 1
   const harsh = (month >= 7 && month <= 8) || month === 12 || month <= 2

@@ -4,7 +4,7 @@ import { excludeVisited } from '../pipeline/maybe-closed.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
-import { isRevisitReady, REVISIT_DAYS } from '../pipeline/revisit.js'
+import { isRevisitReady } from '../pipeline/revisit.js'
 import { REGIONS } from '../config/regions.js'
 import { naverMapLink } from '../pipeline/place-query.js'
 import { spotFamilyFit } from '../pipeline/spot-score.js'
@@ -219,7 +219,6 @@ export function buildSpotSitePayload(input: SpotPayloadInput): SpotSitePayload {
       regions: new Set(deduped.map((r) => r.sigungu)).size,
       scannedRegions: REGIONS.filter((r) => !r.excluded).length,
       driveMeasured: deduped.filter((r) => byId.get(r.id)?.driveMinutes != null).length,
-      revisitDays: REVISIT_DAYS,
       cityOnly: deduped.filter((r) => r.cityOnly).length,
       staleDays: STALE_DAYS,
     },

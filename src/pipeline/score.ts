@@ -57,12 +57,11 @@ export function familyFit(i: FitInput, now: Date): number {
   const parking = PARKING_MULT[i.parkingGrade]
   const menu = i.menuLevel >= 3 ? 1.0 : i.menuLevel === 2 ? 0.95 : 0.75
 
-  let unvisited = 1.0
-  if (i.lastVisitedOn) {
-    const days = (now.getTime() - new Date(i.lastVisitedOn).getTime()) / DAY
-    // 0 으로 두지 않는 이유는 "거기 또 가고 싶다"를 허용하기 위함이다.
-    unvisited = days <= 180 ? 0.15 : days <= 365 ? 0.5 : 0.8
-  }
+  // 다녀온 곳은 추천에서 영구 제외다(스펙 8.2, 2026-09-25 개정 — 예전엔
+  // 기간 지나면 점수를 되돌렸다). 0으로 둬서 "이번 주 후보" 뽑는 단계부터
+  // 자리를 안 차지하게 한다 — 어차피 페이로드가 다녀온 곳을 하드 필터로도
+  // 빼므로(`isRevisitReady`), 여기서 살려 둬도 후보 자리만 낭비한다.
+  const unvisited = i.lastVisitedOn ? 0 : 1.0
 
   const month = now.getUTCMonth() + 1
   const harsh = (month >= 7 && month <= 8) || month === 12 || month <= 2

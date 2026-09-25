@@ -62,7 +62,7 @@ describe('SiteRestaurantSchema (2단계 웹 표시용)', () => {
       restaurants: [], visited: [], maybeClosed: [],
       stats: {
         discovered: 0, passed: 0, regions: 0, scannedRegions: 0,
-        driveMeasured: 0, revisitDays: 180, cityOnly: 0, staleDays: 21,
+        driveMeasured: 0, cityOnly: 0, staleDays: 21,
       },
     }
     expect(() => RestaurantSitePayloadSchema.parse(payload)).not.toThrow()

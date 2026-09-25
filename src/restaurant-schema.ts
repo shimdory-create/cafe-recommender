@@ -138,7 +138,6 @@ export const RestaurantSitePayloadSchema = z.object({
     regions: z.number().int(),
     scannedRegions: z.number().int(),
     driveMeasured: z.number().int(),
-    revisitDays: z.number().int(),
     cityOnly: z.number().int(),
     staleDays: z.number().int(),
   }),

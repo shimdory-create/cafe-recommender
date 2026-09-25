@@ -108,8 +108,6 @@ export interface SitePayload {
     scannedRegions: number
     /** 실제 길찾기로 이동시간을 잰 카페 수 */
     driveMeasured: number
-    /** 다녀온 곳을 추천에서 내리는 기간(일) */
-    revisitDays: number
     cityOnly: number
     /** 이 날수를 넘도록 안 보이면 폐업 의심 배지를 띄운다 */
     staleDays: number

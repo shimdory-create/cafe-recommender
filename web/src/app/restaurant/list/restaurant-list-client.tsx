@@ -79,7 +79,7 @@ export function RestaurantListClient(
     () => (wishOnly ? visible.filter((r) => wished.has(r.id)) : visible),
     [visible, wishOnly, wished],
   )
-  // 다녀온 곳 제외도 같은 이유로 먼저 뺀다 — 최근(6개월 이내) 다녀온 곳만 뺀다
+  // 다녀온 곳 제외도 같은 이유로 먼저 뺀다 — 다녀온 적 있으면 영구히 뺀다
   const notRecentlyVisited = useMemo(
     () => (hideVisited ? wishFiltered.filter((r) => !restaurantRecentlyVisited(r.visitedOn)) : wishFiltered),
     [wishFiltered, hideVisited],

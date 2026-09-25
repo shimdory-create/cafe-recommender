@@ -196,7 +196,7 @@ describe('buildSitePayload', () => {
   })
 
   it('주중에 다녀온 곳은 이번 주 목록에서 빠지고 뒤가 당겨진다', () => {
-    // 목록은 목요일 밤에 굳는데 다녀온 곳은 6개월간 내려간다. 실측 2026-08-24:
+    // 목록은 목요일 밤에 굳는데 다녀온 곳은 영구히 내려간다. 실측 2026-08-24:
     // 열 곳 중 넷을 이미 다녀와서 화면에는 여섯 곳만 남았다
     const p = build([cafe('1'), cafe('2'), cafe('3')], [buzz('1'), buzz('2'), buzz('3')], {
       suggestions: [
@@ -211,14 +211,14 @@ describe('buildSitePayload', () => {
     expect(p.week.map((w) => w.rank)).toEqual([1, 2])
   })
 
-  it('6개월이 지난 방문은 다시 올라온다', () => {
+  it('아무리 오래전에 다녀왔어도 영구히 안 올라온다', () => {
     const p = build([cafe('1')], [buzz('1')], {
       suggestions: [
         { weekOf: '2026-08-17', kakaoPlaceId: '1', rank: 1, finalScore: 30, reason: {} },
       ],
-      visits: [{ kakaoPlaceId: '1', visitedOn: '2026-01-01' }],
+      visits: [{ kakaoPlaceId: '1', visitedOn: '2020-01-01' }],
     })
-    expect(p.week.map((w) => w.id)).toEqual(['1'])
+    expect(p.week.map((w) => w.id)).toEqual([])
   })
 
   it('후보가 많아도 열 곳까지만 싣는다', () => {

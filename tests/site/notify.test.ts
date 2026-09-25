@@ -52,7 +52,7 @@ const payload = (cafes: SiteCafe[]): SitePayload => ({
   maybeClosed: [],
   stats: {
     discovered: 100, passed: cafes.length, regions: 3,
-    scannedRegions: 69, revisitDays: 180, driveMeasured: cafes.length, cityOnly: 0, staleDays: 21,
+    scannedRegions: 69, driveMeasured: cafes.length, cityOnly: 0, staleDays: 21,
   },
 })
 
@@ -211,12 +211,12 @@ describe('다녀온 곳은 문구에서 뺀다', () => {
     expect(text).toContain('새로운카페')
   })
 
-  it('6개월이 지난 곳은 다시 나온다', () => {
+  it('아무리 오래전에 다녀왔어도 영구히 안 나온다', () => {
     const text = buildNotifyText({
-      payload: payload([cafe({ id: '1', name: '오래전', visitedOn: '2026-01-01' })]),
+      payload: payload([cafe({ id: '1', name: '오래전', visitedOn: '2020-01-01' })]),
       now,
     })
-    expect(text).toContain('오래전')
+    expect(text).not.toContain('오래전')
   })
 
   it('전부 다녀왔으면 빈 주라고 말한다', () => {

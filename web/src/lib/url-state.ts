@@ -26,7 +26,7 @@ export interface ListParams {
   wishOnly: boolean
   /** 블랙리스트만. 기본은 반대로 블랙리스트를 뺀 나머지를 보여준다 */
   blacklistOnly: boolean
-  /** 다녀온 곳(최근 6개월 이내) 제외 — 전체 탭에서 갈 곳만 추리고 싶을 때 */
+  /** 다녀온 곳 제외(영구) — 전체 탭에서 갈 곳만 추리고 싶을 때 */
   hideVisited: boolean
   /** 다녀온 곳 정렬. 전체 탭에서는 쓰지 않는다 */
   visitedSort: VisitedSort

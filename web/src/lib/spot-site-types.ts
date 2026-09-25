@@ -78,7 +78,6 @@ export interface SpotSitePayload {
     regions: number
     scannedRegions: number
     driveMeasured: number
-    revisitDays: number
     cityOnly: number
     staleDays: number
   }

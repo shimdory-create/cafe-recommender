@@ -1,4 +1,4 @@
-import { restaurantPayload, RESTAURANT_REVISIT_DAYS } from '@/lib/restaurant-site'
+import { restaurantPayload } from '@/lib/restaurant-site'
 import { readListParams } from '@/lib/url-state'
 import { RestaurantVisitedList, type KnownRestaurant } from './restaurant-visited-list'
 
@@ -20,7 +20,7 @@ export default async function RestaurantVisitedPage(
       <RestaurantVisitedList built={restaurantPayload.visited} known={known} initial={initial} />
 
       <p className="mt-6 text-center text-[12px] leading-relaxed text-ink-soft">
-        다녀온 곳은 {Math.round(RESTAURANT_REVISIT_DAYS / 30)}개월간 추천에서 내려갑니다.
+        다녀온 곳은 추천에서 영구히 내려갑니다.
         <br />
         또 가고 싶으면 전체 리스트에서 찾을 수 있어요.
       </p>

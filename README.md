@@ -78,7 +78,7 @@ npm run suggest     # 주말 후보 10곳. --city 로 도심 포함
 npm run site        # 웹앱용 페이로드 생성
 npm run notify      # 카카오톡 문구 (200자). 발송하지 않는다
 
-npm run visited "카페 이름"    # 다녀왔어요 — 6개월간 추천에서 내려간다
+npm run visited "카페 이름"    # 다녀왔어요 — 추천에서 영구히 내려간다
 npm run label                  # 골든셋 O/X. --report 로 측정값
 npm run inspect "카페 이름"    # 판정 근거 전체
 npm run hide "카페 이름"       # 협찬 티가 나는 곳 즉시 제외

@@ -200,14 +200,14 @@ describe('buildRestaurantSitePayload', () => {
     expect(p.week.map((w) => w.rank)).toEqual([1, 2])
   })
 
-  it('6개월이 지난 방문은 다시 올라온다', () => {
+  it('아무리 오래전에 다녀왔어도 영구히 안 올라온다', () => {
     const p = build([restaurant('1')], [buzz('1')], {
       suggestions: [
         { weekOf: '2026-08-17', kakaoPlaceId: '1', rank: 1, finalScore: 30, reason: {} },
       ],
-      visits: [{ kakaoPlaceId: '1', visitedOn: '2026-01-01' }],
+      visits: [{ kakaoPlaceId: '1', visitedOn: '2020-01-01' }],
     })
-    expect(p.week.map((w) => w.id)).toEqual(['1'])
+    expect(p.week.map((w) => w.id)).toEqual([])
   })
 
   it('후보가 많아도 열 곳까지만 싣는다', () => {

@@ -81,19 +81,11 @@ export function nearbyForRestaurant(id: string) {
 }
 
 /**
- * 다녀온 곳을 추천에서 내리는 기간.
- *
- * 값은 파이프라인의 REVISIT_DAYS(src/pipeline/revisit.ts)와 같지만, 식당
- * 화면은 카페 payload 상태에 결합되면 안 되므로 restaurantPayload.stats에서
- * 새로 읽는다.
+ * 다녀온 적이 있는가 (카드 "다녀옴" 배지·추천 제외용). 2026-09-25 개정 —
+ * 기간 없이 영구 제외다. `web/src/lib/site.ts` 의 `recentlyVisited`와 같다.
  */
-export const RESTAURANT_REVISIT_DAYS = restaurantPayload.stats.revisitDays
-
-/** 방문 후 재방문 기간이 지나지 않았는가 (카드 배지용) */
-export function restaurantRecentlyVisited(visitedOn: string | null, now = new Date()): boolean {
-  if (!visitedOn) return false
-  const days = (now.getTime() - new Date(visitedOn).getTime()) / 86_400_000
-  return days >= 0 && days <= RESTAURANT_REVISIT_DAYS
+export function restaurantRecentlyVisited(visitedOn: string | null): boolean {
+  return visitedOn !== null
 }
 
 /**
@@ -110,20 +102,18 @@ export function restaurantIsStale(lastSeenAt: string | null, now = new Date()): 
 }
 
 /**
- * 실시간 방문 기록에서 **아직 추천에서 내려가 있어야 할** 식당 id 만 고른다.
+ * 실시간 방문 기록에서 **추천에서 내려가 있어야 할** 식당 id 만 고른다.
+ * 다녀온 곳은 영구 제외라 기록에 있는 것 전부다.
  */
 export function restaurantHiddenByVisit(
   visits: { kakaoPlaceId: string; visitedOn: string }[],
-  now = new Date(),
 ): Set<string> {
-  return new Set(
-    visits.filter((v) => restaurantRecentlyVisited(v.visitedOn, now)).map((v) => v.kakaoPlaceId),
-  )
+  return new Set(visits.map((v) => v.kakaoPlaceId))
 }
 
 /** 이번 주 추천. 카페의 homeFeed와 동일한 로직 */
-export function restaurantHomeFeed(now = new Date()): SiteRestaurant[] {
-  const fresh = (r: SiteRestaurant) => !r.cityOnly && !restaurantRecentlyVisited(r.visitedOn, now)
+export function restaurantHomeFeed(): SiteRestaurant[] {
+  const fresh = (r: SiteRestaurant) => !r.cityOnly && !restaurantRecentlyVisited(r.visitedOn)
   const ranked = restaurantPayload.week
     .map((w) => restaurantById(w.id))
     .filter((r): r is SiteRestaurant => r !== undefined && fresh(r))

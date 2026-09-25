@@ -91,14 +91,9 @@ describe('familyFit', () => {
     expect(fit({ parkingGrade: '?' })).toBeGreaterThan(fit({ parkingGrade: 'C' }))
   })
 
-  it('최근 6개월 내 방문한 곳은 크게 깎인다', () => {
-    const recent = fit({ lastVisitedOn: '2026-07-01' })
-    expect(recent).toBeLessThan(fit() * 0.3)
-    expect(recent).toBeGreaterThan(0) // 0 은 아니다 — "또 가고 싶다"를 허용
-  })
-
-  it('오래 전 방문은 거의 깎이지 않는다', () => {
-    expect(fit({ lastVisitedOn: '2023-01-01' })).toBeGreaterThan(fit() * 0.7)
+  it('다녀온 곳은 영구히 0점이다 — 아무리 오래전이어도', () => {
+    expect(fit({ lastVisitedOn: '2026-07-01' })).toBe(0)
+    expect(fit({ lastVisitedOn: '2020-01-01' })).toBe(0)
   })
 
   it('음료만 파는 곳(Lv1)은 감점된다', () => {

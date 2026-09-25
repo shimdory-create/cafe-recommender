@@ -1,4 +1,4 @@
-import { payload, REVISIT_DAYS } from '@/lib/site'
+import { payload } from '@/lib/site'
 import { VIEW_ONLY } from '@/lib/view-only'
 import { CHANGELOG } from '@/lib/changelog'
 import { UPDATE_SCHEDULE } from '@/lib/update-schedule'
@@ -46,7 +46,7 @@ export default function Info() {
       </>
     )],
     ['다녀온 곳은 내린다',
-      `별점을 남기면 다녀온 곳으로 자동 기록되고, ${Math.round(REVISIT_DAYS / 30)}개월간 추천에서 빠져요. 다녀온 곳 탭에서 빼면 다시 올라옵니다.`],
+      '별점을 남기면 다녀온 곳으로 자동 기록되고, 추천에서 영구히 빠져요. 다녀온 곳 탭에서 빼면 다시 올라옵니다.'],
   ]
 
   /**

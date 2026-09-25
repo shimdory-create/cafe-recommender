@@ -92,11 +92,11 @@ export function nearbyForCafe(id: string) {
  * 4인 가족이 취향을 맞추려면 폭이 필요하다. 그래서 "3곳 + 끝" 이 아니라
  * 끊기지 않는 피드로 만든다.
  */
-export function homeFeed(now = new Date()): SiteCafe[] {
-  // 다녀온 곳은 6개월간 추천에서 내려간다 (스펙 8.2). 점수를 깎는 것으로는
-  // 목록에 계속 남아 "또 거기?" 가 되므로 아예 뺀다. 전체 리스트에서는
-  // 계속 찾을 수 있다.
-  const fresh = (c: SiteCafe) => !c.cityOnly && !recentlyVisited(c.visitedOn, now)
+export function homeFeed(): SiteCafe[] {
+  // 다녀온 곳은 추천에서 영구히 내려간다 (스펙 8.2, 2026-09-25 개정). 점수를
+  // 깎는 것으로는 목록에 계속 남아 "또 거기?" 가 되므로 아예 뺀다. 전체
+  // 리스트에서는 계속 찾을 수 있다.
+  const fresh = (c: SiteCafe) => !c.cityOnly && !recentlyVisited(c.visitedOn)
   const ranked = payload.week
     .map((w) => byId(w.id))
     .filter((c): c is SiteCafe => c !== undefined && fresh(c))
@@ -126,19 +126,14 @@ export const ALL_TAGS = [
 ] as const
 
 /**
- * 다녀온 곳을 추천에서 내리는 기간.
+ * 다녀온 적이 있는가 (카드 "다녀옴" 배지·추천 제외용).
  *
- * **파이프라인이 정한 값을 그대로 쓴다** (`src/pipeline/revisit.ts`). 여기에
- * 숫자를 적어 두면 두 곳이 갈라져 "카톡에는 있는데 눌러보면 없는" 상태가
- * 된다 — 실제로 한 번 그랬다.
+ * 2026-09-25 개정 — 예전엔 180일 지나면 다시 "안 다녀온 것"으로 쳤는데,
+ * 파이프라인(`src/pipeline/revisit.ts`)이 기간 없이 영구 제외로 바뀌면서
+ * 여기도 같이 바꿨다. 이름은 그대로 뒀지만 이제 "한 번이라도 다녀왔는가"다.
  */
-export const REVISIT_DAYS = payload.stats.revisitDays
-
-/** 방문 후 재방문 기간이 지나지 않았는가 (카드 배지용) */
-export function recentlyVisited(visitedOn: string | null, now = new Date()): boolean {
-  if (!visitedOn) return false
-  const days = (now.getTime() - new Date(visitedOn).getTime()) / 86_400_000
-  return days >= 0 && days <= REVISIT_DAYS
+export function recentlyVisited(visitedOn: string | null): boolean {
+  return visitedOn !== null
 }
 
 /**
@@ -156,17 +151,11 @@ export function isStale(lastSeenAt: string | null, now = new Date()): boolean {
 }
 
 /**
- * 실시간 방문 기록에서 **아직 추천에서 내려가 있어야 할** 카페 id 만 고른다.
- *
- * 홈 피드가 이것으로 거른다. 날짜를 안 보고 "기록이 있으면 제외" 로 두었더니
- * 페이로드(`recentlyVisited` 로 거름)와 기준이 갈렸다 — 재방문 기간이 지난
- * 곳이 영영 안 올라온다. 기록이 전부 이번 달이라 증상이 없었을 뿐이다.
+ * 실시간 방문 기록에서 **추천에서 내려가 있어야 할** 카페 id 만 고른다.
+ * 다녀온 곳은 영구 제외라 기록에 있는 것 전부다. 홈 피드가 이것으로 거른다.
  */
 export function hiddenByVisit(
   visits: { kakaoPlaceId: string; visitedOn: string }[],
-  now = new Date(),
 ): Set<string> {
-  return new Set(
-    visits.filter((v) => recentlyVisited(v.visitedOn, now)).map((v) => v.kakaoPlaceId),
-  )
+  return new Set(visits.map((v) => v.kakaoPlaceId))
 }

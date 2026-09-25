@@ -70,7 +70,7 @@ function input(over: Partial<AuditInput> = {}): AuditInput {
     visited: [],
     maybeClosed: [],
     stats: {
-      discovered: 1, passed: 1, regions: 1, scannedRegions: 69, revisitDays: 180,
+      discovered: 1, passed: 1, regions: 1, scannedRegions: 69,
       driveMeasured: 1, cityOnly: 0, staleDays: 21,
     },
   }

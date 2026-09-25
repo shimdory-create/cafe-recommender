@@ -80,7 +80,6 @@ export interface RestaurantSitePayload {
     regions: number
     scannedRegions: number
     driveMeasured: number
-    revisitDays: number
     cityOnly: number
     staleDays: number
   }

@@ -4,7 +4,7 @@ import { excludeVisited } from '../pipeline/maybe-closed.js'
 import { zoneOf } from '../config/zones.js'
 import { areaOf } from '../config/area.js'
 import { isNewCafe } from '../config/newness.js'
-import { isRevisitReady, REVISIT_DAYS } from '../pipeline/revisit.js'
+import { isRevisitReady } from '../pipeline/revisit.js'
 import { REGIONS } from '../config/regions.js'
 import { naverMapLink } from '../pipeline/place-query.js'
 import { familyFit, finalScore, hotScore } from '../pipeline/score.js'
@@ -123,7 +123,7 @@ export function pickWeek(
   weekOf: string,
   ids: Set<string>,
   opts: {
-    /** 마지막 방문일. 6개월이 안 지났으면 뺀다 */
+    /** 마지막 방문일. 다녀온 적 있으면 뺀다 (영구) */
     lastVisit?: Map<string, string>
     now?: Date
     size?: number
@@ -304,7 +304,6 @@ export function buildSitePayload(input: PayloadInput): SitePayload {
       // `65개 시군구` 라고 말하는 동안 실제로는 69개였다 (2026-08-25)
       scannedRegions: REGIONS.filter((r) => !r.excluded).length,
       driveMeasured: deduped.filter((r) => byId.get(r.id)?.driveMinutes != null).length,
-      revisitDays: REVISIT_DAYS,
       cityOnly: deduped.filter((r) => r.cityOnly).length,
       staleDays: STALE_DAYS,
     },
