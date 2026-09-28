@@ -44,11 +44,14 @@ export function TopThree({ cafe }: { cafe: ListRow }) {
 }
 
 export function CafeCard({
-  cafe, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss, onAlive,
-  postsOverride,
+  cafe, rank, rankInfo, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
+  onAlive, postsOverride,
 }: {
   cafe: ListRow
   rank?: number
+  /** 전체 리스트 화면의 종합순위 배지(화제·거리순 기준 고정). 홈 피드의
+   * `rank`(우선순위 큐레이션 번호)와는 다른 용도라 별도 prop 으로 둔다 */
+  rankInfo?: { filter: number; overall: number }
   /** 위시리스트 상태. 부모가 안 넘기면(서버 렌더 폴백 등) 하트 자체를 그리지 않는다 */
   wished?: boolean
   onToggleWish?: () => void
@@ -143,6 +146,11 @@ export function CafeCard({
             <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {postsOverride ?? postsLabel(cafe.posts30, cafe.posts90)}
             </p>
+            {rankInfo && (
+              <p className="mt-0.5 text-[13px] text-ink-soft">
+                {rankInfo.filter}위/전체{rankInfo.overall}위
+              </p>
+            )}
 
             <div className="mt-1.5">
               <TopThree cafe={cafe} />

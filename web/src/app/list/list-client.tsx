@@ -5,8 +5,8 @@ import {
   ALL_TAGS, isStale, recentlyVisited, type ListRow,
 } from '@/lib/site'
 import {
-  areaCounts, countMatching, filterAndSort, groupBySigungu, PAGE_CHUNK, sigunguCountsByArea,
-  SPLIT_AREAS, type Sort,
+  areaCounts, countMatching, filterAndSort, filterRows, groupBySigungu, PAGE_CHUNK, scoreRankMap,
+  sigunguCountsByArea, SPLIT_AREAS, type Sort,
 } from '@/lib/filter'
 import { listParamsToQuery, type ListParams } from '@/lib/url-state'
 import { useUrlSync } from '@/lib/use-url-sync'
@@ -79,6 +79,14 @@ export function ListClient(
 
   const matched = useMemo(
     () => filterAndSort(notRecentlyVisited, { tags, sort, city, area, query: q, newOnly }),
+    [notRecentlyVisited, tags, sort, city, area, q, newOnly],
+  )
+  // 배지 숫자(종합순위)는 지금 고른 정렬(sort)과 무관하게 항상 화제·거리
+  // 종합점수 기준으로 고정한다 — 화면 순서가 "화제순"이어도 배지 뜻은
+  // 안 바뀌어야 카드마다 설명을 안 달아도 된다.
+  const overallRank = useMemo(() => scoreRankMap(cafes), [cafes])
+  const filterRank = useMemo(
+    () => scoreRankMap(filterRows(notRecentlyVisited, { tags, sort, city, area, query: q, newOnly })),
     [notRecentlyVisited, tags, sort, city, area, q, newOnly],
   )
   // 한 번에 다 그리면 카드 664개에 DOM 노드 15,000개가 된다 (실측). 검색·칩으로
@@ -196,7 +204,9 @@ export function ListClient(
 
       <div className="mt-3 flex items-center gap-2">
         <div className="flex overflow-hidden rounded-full border border-line">
-          {([['hot', '화제순'], ['near', '가까운순'], ['new', '최신순']] as const).map(([k, label]) => (
+          {(
+            [['new', '최신순'], ['hot', '화제순'], ['near', '거리순'], ['final', '화제·거리순']] as const
+          ).map(([k, label]) => (
             <button
               key={k}
               type="button"
@@ -217,13 +227,20 @@ export function ListClient(
             city ? 'border-bean bg-bean text-white font-semibold' : 'border-line bg-card text-ink-soft'
           }`}
         >
-          도심 포함
+          주차 불편 포함
         </button>
       </div>
 
+      {/* 배지가 항상 화제·거리 종합순위 기준이라, 다른 정렬(화제순 등)로
+          보면 화면 순서와 배지 숫자가 나란히 안 늘어날 수 있다 — 가족이
+          같이 쓰는 화면이라 그 이유를 여기 한 번만 적어둔다 */}
+      <p className="mt-2 text-[12px] text-ink-soft">
+        카드의 순위는 화제와 거리를 함께 본 종합 기준이에요. 정렬을 바꿔도 이 숫자는 그대로예요.
+      </p>
+
       {city && (
         <p className="mt-2 text-[12px] text-ink-soft">
-          주차가 어려운 도심 카페도 함께 보여줍니다.
+          주차가 불편한 카페도 함께 보여줍니다.
         </p>
       )}
 
@@ -246,6 +263,7 @@ export function ListClient(
                   <CafeCard
                     key={c.id}
                     cafe={c}
+                    rankInfo={{ filter: filterRank.get(c.id) ?? 0, overall: overallRank.get(c.id) ?? 0 }}
                     wished={wished.has(c.id)}
                     onToggleWish={() => toggleWish(c.id)}
                     blacklisted={blacklisted.has(c.id)}
@@ -265,6 +283,7 @@ export function ListClient(
             <CafeCard
               key={c.id}
               cafe={c}
+              rankInfo={{ filter: filterRank.get(c.id) ?? 0, overall: overallRank.get(c.id) ?? 0 }}
               wished={wished.has(c.id)}
               onToggleWish={() => toggleWish(c.id)}
               blacklisted={blacklisted.has(c.id)}

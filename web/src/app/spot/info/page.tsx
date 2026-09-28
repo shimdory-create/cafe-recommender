@@ -41,7 +41,7 @@ export default function SpotInfo() {
   const stats2: [string, string][] = [
     ['찾은 곳', `${stats.discovered.toLocaleString()}곳`],
     ['전체 탭에 보이는 곳', `${stats.passed.toLocaleString()}곳`],
-    ['「도심 포함」 을 켜면', `${shown.toLocaleString()}곳 (+${stats.cityOnly})`],
+    ['「주차 불편 포함」 을 켜면', `${shown.toLocaleString()}곳 (+${stats.cityOnly})`],
     ['운전 시간 실측', `${stats.driveMeasured.toLocaleString()} / ${shown.toLocaleString()}곳`],
     ['훑는 지역', `${stats.scannedRegions}개 시군구`],
     ['가볼 곳이 있는 지역', `${stats.regions}개 시군구`],
@@ -146,7 +146,7 @@ export default function SpotInfo() {
         </summary>
         <div className="mt-2 flex flex-col gap-2">
           {CHANGELOG.map((entry) => (
-            <details key={entry.date} className="group/entry rounded-2xl border border-line bg-card p-4">
+            <details key={entry.date + entry.title} className="group/entry rounded-2xl border border-line bg-card p-4">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-2 font-semibold">
                 <span>{entry.title}</span>
                 <span className="flex shrink-0 items-center gap-1.5 text-[12px] font-normal text-ink-soft">

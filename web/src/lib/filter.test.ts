@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import {
-  areaCounts, areaLabel, countMatching, filterAndSort, groupBySigungu, matchesQuery,
+  areaCounts, areaLabel, countMatching, filterAndSort, groupBySigungu, matchesQuery, scoreRankMap,
   sigunguCountsByArea, toggleAreaSelection,
   type FilterState,
 } from './filter'
@@ -109,6 +109,14 @@ describe('filterAndSort', () => {
     expect(rows.map((c) => c.id)).toEqual(['far', 'unknown'])
   })
 
+  it('화제·거리순(final)은 종합점수 내림차순이다', () => {
+    const rows = filterAndSort(
+      [cafe({ id: 'a', finalScore: 10 }), cafe({ id: 'b', finalScore: 90 })],
+      { ...base, sort: 'final' },
+    )
+    expect(rows.map((c) => c.id)).toEqual(['b', 'a'])
+  })
+
   it('원본 배열을 바꾸지 않는다', () => {
     const input = [cafe({ id: 'a', hotScore: 1 }), cafe({ id: 'b', hotScore: 9 })]
     filterAndSort(input, base)
@@ -117,6 +125,28 @@ describe('filterAndSort', () => {
 
   it('빈 입력에서도 던지지 않는다', () => {
     expect(filterAndSort([], base)).toEqual([])
+  })
+})
+
+describe('scoreRankMap — 배지용 종합순위(정렬 기준과 무관하게 고정)', () => {
+  it('종합점수 내림차순으로 1위부터 매긴다', () => {
+    const map = scoreRankMap([
+      cafe({ id: 'low', finalScore: 5 }),
+      cafe({ id: 'high', finalScore: 90 }),
+      cafe({ id: 'mid', finalScore: 40 }),
+    ])
+    expect(map.get('high')).toBe(1)
+    expect(map.get('mid')).toBe(2)
+    expect(map.get('low')).toBe(3)
+  })
+
+  it('점수가 같으면 id 로 안정 정렬한다', () => {
+    const map = scoreRankMap([
+      cafe({ id: 'z', finalScore: 10 }),
+      cafe({ id: 'a', finalScore: 10 }),
+    ])
+    expect(map.get('a')).toBe(1)
+    expect(map.get('z')).toBe(2)
   })
 })
 

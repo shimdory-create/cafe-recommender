@@ -41,11 +41,12 @@ export function SpotTopThree({ spot }: { spot: SpotListRow }) {
 }
 
 export function SpotCard({
-  spot, rank, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss, onAlive,
-  postsOverride,
+  spot, rank, rankInfo, wished, onToggleWish, blacklisted, onToggleBlacklist, stale, onDismiss,
+  onAlive, postsOverride,
 }: {
   spot: SpotListRow
   rank?: number
+  rankInfo?: { filter: number; overall: number }
   wished?: boolean
   onToggleWish?: () => void
   blacklisted?: boolean
@@ -131,6 +132,11 @@ export function SpotCard({
             <p className="mt-0.5 truncate text-[13px] text-ink-soft">
               {postsOverride ?? postsLabel(spot.posts30, spot.posts90)}
             </p>
+            {rankInfo && (
+              <p className="mt-0.5 text-[13px] text-ink-soft">
+                {rankInfo.filter}위/전체{rankInfo.overall}위
+              </p>
+            )}
 
             <div className="mt-1.5">
               <SpotTopThree spot={spot} />

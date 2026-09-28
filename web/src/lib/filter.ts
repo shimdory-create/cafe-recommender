@@ -13,12 +13,13 @@ export interface FilterableRow {
   driveMinutes: number | null
   tags: string[]
   hotScore: number
+  finalScore: number
   cityOnly: boolean
   isNew: boolean
   firstSeenAt: string
 }
 
-export type Sort = 'hot' | 'near' | 'new'
+export type Sort = 'hot' | 'near' | 'new' | 'final'
 
 /**
  * 지역 묶음의 짧은 이름. 파이프라인 `src/config/area.ts` 와 같은 규칙이다.
@@ -81,7 +82,7 @@ export interface FilterState {
  * NEW 칩을 누르면 된다(그 안에서도 고른 정렬 기준을 그대로 따른다).
  */
 /** filterAndSort 의 필터링 부분만. 정렬 없이 개수만 필요할 때 정렬 비용을 안 낸다 */
-function filterRows<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
+export function filterRows<T extends FilterableRow>(cafes: T[], s: FilterState): T[] {
   return cafes.filter((c) => {
     if (c.cityOnly && !s.city) return false
     // area 는 매크로(서울/인천/경기)와 그 안의 시군구가 섞여 들어올 수 있다 —
@@ -115,11 +116,30 @@ export function filterAndSort<T extends FilterableRow>(cafes: T[], s: FilterStat
       return b.hotScore - a.hotScore
     }
     if (s.sort === 'new') return byNewest(a, b)
+    if (s.sort === 'final') {
+      if (b.finalScore !== a.finalScore) return b.finalScore - a.finalScore
+      return a.id.localeCompare(b.id)
+    }
     if (b.hotScore !== a.hotScore) return b.hotScore - a.hotScore
     return a.id.localeCompare(b.id)
   }
 
   return [...rows].sort(rank)
+}
+
+/**
+ * 종합순위(finalScore) 배지용. 화면에 어떤 정렬을 골랐든 배지 숫자는 이
+ * 기준 하나로 고정한다 — "화제순으로 봤더니 배지 순서랑 안 맞다" 는
+ * 혼란을 각 카드마다 설명할 수 없으니, 숫자의 뜻을 하나로 고정해 어디서
+ * 봐도 같게 만든다(설명은 화면에 한 번만 캡션으로 띄운다).
+ */
+export function scoreRankMap<T extends { id: string; finalScore: number }>(
+  rows: T[],
+): Map<string, number> {
+  const sorted = [...rows].sort((a, b) => b.finalScore - a.finalScore || a.id.localeCompare(b.id))
+  const map = new Map<string, number>()
+  sorted.forEach((r, i) => map.set(r.id, i + 1))
+  return map
 }
 
 /** 최근에 등록된 것부터. 같으면 순서가 흔들리지 않게 id 로 마무리한다 */
