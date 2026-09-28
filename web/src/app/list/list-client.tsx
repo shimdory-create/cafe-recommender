@@ -202,8 +202,11 @@ export function ListClient(
         )}
       </div>
 
-      <div className="mt-3 flex items-center gap-2">
-        <div className="flex overflow-hidden rounded-full border border-line">
+      {/* flex-wrap + shrink-0 — 정렬 4개 + 주차 토글까지 합치면 360px 화면엔
+          한 줄에 다 안 들어간다. shrink 를 막지 않으면 버튼 안에서 글자가
+          세로로 쪼개진다(실측, 2026-09-29) — 대신 통째로 다음 줄로 넘긴다. */}
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <div className="flex shrink-0 overflow-hidden rounded-full border border-line">
           {(
             [['new', '최신순'], ['hot', '화제순'], ['near', '거리순'], ['final', '화제·거리순']] as const
           ).map(([k, label]) => (
@@ -211,7 +214,7 @@ export function ListClient(
               key={k}
               type="button"
               onClick={() => { setSort(k); setShownCount(PAGE_CHUNK) }}
-              className={`min-h-[40px] px-3.5 text-[13px] ${
+              className={`min-h-[40px] whitespace-nowrap px-3.5 text-[13px] ${
                 sort === k ? 'bg-bean text-white font-semibold' : 'bg-card text-ink-soft'
               }`}
             >
@@ -223,7 +226,7 @@ export function ListClient(
           type="button"
           onClick={() => { setCity((v) => !v); setShownCount(PAGE_CHUNK) }}
           aria-pressed={city}
-          className={`min-h-[40px] rounded-full border px-3.5 text-[13px] ${
+          className={`min-h-[40px] shrink-0 whitespace-nowrap rounded-full border px-3.5 text-[13px] ${
             city ? 'border-bean bg-bean text-white font-semibold' : 'border-line bg-card text-ink-soft'
           }`}
         >

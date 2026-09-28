@@ -86,13 +86,18 @@ export async function runDormantRecheck(
     }
   }
 
-  const latest = new Map<string, BuzzSnapshot>()
-  for (const r of rows) {
-    const prev = latest.get(r.kakaoPlaceId)
-    if (!prev || r.capturedAt > prev.capturedAt) latest.set(r.kakaoPlaceId, r)
+  // dormant 가 0곳이면(지금 당장은 늘 이 경우다 — 180일 유예 때문) 아무것도
+  // 재지 않았으니 buzz.json 도 그대로 둔다. 여기서 무조건 다시 쓰면 격주로
+  // 아무 변화 없이 파일만 재기록하는, 이 설계가 막으려던 바로 그 낭비가 된다.
+  if (dormant.length > 0) {
+    const latest = new Map<string, BuzzSnapshot>()
+    for (const r of rows) {
+      const prev = latest.get(r.kakaoPlaceId)
+      if (!prev || r.capturedAt > prev.capturedAt) latest.set(r.kakaoPlaceId, r)
+    }
+    await store.writeBuzz([...latest.values()])
+    await store.writeCafes(cafes)
   }
-  await store.writeBuzz([...latest.values()])
-  if (dormant.length > 0) await store.writeCafes(cafes)
   if (dormant.length - failed > 0) await recordSuccess(store, 'kakao-blog', now)
 
   return { checked: dormant.length, recovered, stillQuiet, failed }

@@ -54,6 +54,21 @@ function harness(input: Cafe[], over: Partial<DormantRecheckDeps> = {}) {
 }
 
 describe('runDormantRecheck', () => {
+  it('dormant 가 0곳이면 buzz·cafes 어느 쪽도 다시 쓰지 않는다', async () => {
+    // 격주로 돌 때 대상이 없으면 아무 파일도 안 건드려야 한다 — 여기서
+    // buzz.json 을 무조건 다시 쓰면 이 기능이 막으려던 "무의미한 재기록"이
+    // 격주 주기로 그대로 재현된다.
+    let buzzWrites = 0
+    let cafeWrites = 0
+    const h = harness([cafe('1', { status: 'active', quietSince: null })])
+    h.deps.store.writeBuzz = async () => { buzzWrites++ }
+    h.deps.store.writeCafes = async () => { cafeWrites++ }
+    const r = await runDormantRecheck(h.deps)
+    expect(r.checked).toBe(0)
+    expect(buzzWrites).toBe(0)
+    expect(cafeWrites).toBe(0)
+  })
+
   it('화제량이 없으면(빈 문서) 그대로 dormant 다', async () => {
     const h = harness([cafe('1')])
     const r = await runDormantRecheck(h.deps)

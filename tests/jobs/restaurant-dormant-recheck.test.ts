@@ -47,6 +47,18 @@ function harness(input: Restaurant[]) {
 }
 
 describe('runRestaurantDormantRecheck', () => {
+  it('dormant 가 0곳이면 buzz·restaurants 어느 쪽도 다시 쓰지 않는다', async () => {
+    let buzzWrites = 0
+    let restaurantWrites = 0
+    const h = harness([restaurant('1', { status: 'active', quietSince: null })])
+    h.deps.store.writeRestaurantBuzz = async () => { buzzWrites++ }
+    h.deps.store.writeRestaurants = async () => { restaurantWrites++ }
+    const r = await runRestaurantDormantRecheck(h.deps)
+    expect(r.checked).toBe(0)
+    expect(buzzWrites).toBe(0)
+    expect(restaurantWrites).toBe(0)
+  })
+
   it('화제량이 없으면 그대로 dormant 다', async () => {
     const h = harness([restaurant('1')])
     const r = await runRestaurantDormantRecheck(h.deps)

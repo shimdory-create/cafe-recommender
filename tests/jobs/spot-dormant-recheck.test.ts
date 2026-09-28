@@ -47,6 +47,18 @@ function harness(input: Spot[]) {
 }
 
 describe('runSpotDormantRecheck', () => {
+  it('dormant 가 0곳이면 buzz·spots 어느 쪽도 다시 쓰지 않는다', async () => {
+    let buzzWrites = 0
+    let spotWrites = 0
+    const h = harness([spot('1', { status: 'active', quietSince: null })])
+    h.deps.store.writeSpotBuzz = async () => { buzzWrites++ }
+    h.deps.store.writeSpots = async () => { spotWrites++ }
+    const r = await runSpotDormantRecheck(h.deps)
+    expect(r.checked).toBe(0)
+    expect(buzzWrites).toBe(0)
+    expect(spotWrites).toBe(0)
+  })
+
   it('화제량이 없으면 그대로 dormant 다', async () => {
     const h = harness([spot('1')])
     const r = await runSpotDormantRecheck(h.deps)

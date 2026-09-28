@@ -72,13 +72,17 @@ export async function runSpotDormantRecheck(
     }
   }
 
-  const latest = new Map<string, BuzzSnapshot>()
-  for (const row of rows) {
-    const prev = latest.get(row.kakaoPlaceId)
-    if (!prev || row.capturedAt > prev.capturedAt) latest.set(row.kakaoPlaceId, row)
+  // dormant 0곳이면 재측정이 없었으니 buzz 파일도 그대로 둔다(카페 쪽과
+  // 같은 이유 — 격주 무의미 재기록을 막는다).
+  if (dormant.length > 0) {
+    const latest = new Map<string, BuzzSnapshot>()
+    for (const row of rows) {
+      const prev = latest.get(row.kakaoPlaceId)
+      if (!prev || row.capturedAt > prev.capturedAt) latest.set(row.kakaoPlaceId, row)
+    }
+    await store.writeSpotBuzz([...latest.values()])
+    await store.writeSpots(spots)
   }
-  await store.writeSpotBuzz([...latest.values()])
-  if (dormant.length > 0) await store.writeSpots(spots)
   if (dormant.length - failed > 0) await recordSuccess(store, 'kakao-blog-spot', now)
 
   return { checked: dormant.length, recovered, stillQuiet, failed }

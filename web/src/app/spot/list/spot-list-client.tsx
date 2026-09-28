@@ -174,8 +174,8 @@ export function SpotListClient(
         )}
       </div>
 
-      <div className="mt-3 flex items-center gap-2">
-        <div className="flex overflow-hidden rounded-full border border-line">
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <div className="flex shrink-0 overflow-hidden rounded-full border border-line">
           {(
             [['new', '최신순'], ['hot', '화제순'], ['near', '거리순'], ['final', '화제·거리순']] as const
           ).map(([k, label]) => (
@@ -183,7 +183,7 @@ export function SpotListClient(
               key={k}
               type="button"
               onClick={() => { setSort(k); setShownCount(PAGE_CHUNK) }}
-              className={`min-h-[40px] px-3.5 text-[13px] ${
+              className={`min-h-[40px] whitespace-nowrap px-3.5 text-[13px] ${
                 sort === k ? 'bg-bean text-white font-semibold' : 'bg-card text-ink-soft'
               }`}
             >
@@ -195,7 +195,7 @@ export function SpotListClient(
           type="button"
           onClick={() => { setCity((v) => !v); setShownCount(PAGE_CHUNK) }}
           aria-pressed={city}
-          className={`min-h-[40px] rounded-full border px-3.5 text-[13px] ${
+          className={`min-h-[40px] shrink-0 whitespace-nowrap rounded-full border px-3.5 text-[13px] ${
             city ? 'border-bean bg-bean text-white font-semibold' : 'border-line bg-card text-ink-soft'
           }`}
         >
