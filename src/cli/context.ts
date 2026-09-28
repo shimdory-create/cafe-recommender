@@ -25,8 +25,20 @@ export function createContext(): Context {
   const env = loadEnv()
   // 카카오 초당 10건 상한 (Global Constraints)
   const kakaoLimit = createRateLimiter({ perSecond: 10 })
-  // LLM 은 더 보수적으로. 무료 티어 분당 한도를 넘지 않게.
-  const llmLimit = createRateLimiter({ perSecond: 1 })
+  /**
+   * Gemini 무료 티어 실제 한도는 분당 15건(RPM)인데, 이전 값(초당 1건 =
+   * 분당 최대 60건)은 그 4배로 느슨해서 사실상 방어가 안 됐다 — classify가
+   * 통과 후보를 순차 처리할 때 응답 지연(약 1.9초/건)만으로도 자연스럽게
+   * 분당 30건 안팎이 나와 15건을 넘겼다(2026-09-29, AI Studio 대시보드
+   * 실측 RPM 429 확인).
+   *
+   * 게다가 이 GEMINI_API_KEY 는 다른 프로젝트(healthcare-radar)와 같은
+   * Google 프로젝트를 공유한다 — 그쪽은 분당 13.3건으로 이미 낮춰뒀다.
+   * 두 프로젝트가 같은 15 RPM 을 나눠 쓰는 구조라, 이쪽도 여유 있게
+   * 12건(초당 0.2건)으로 낮춘다. 근본 해결은 프로젝트별로 API 키를
+   * 분리하는 것 — 그전까지는 두 프로젝트 다 자기 몫을 아껴 써야 한다.
+   */
+  const llmLimit = createRateLimiter({ perSecond: 0.2 })
 
   return {
     env,
