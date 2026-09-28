@@ -26,19 +26,19 @@ export function createContext(): Context {
   // 카카오 초당 10건 상한 (Global Constraints)
   const kakaoLimit = createRateLimiter({ perSecond: 10 })
   /**
-   * Gemini 무료 티어 실제 한도는 분당 15건(RPM)인데, 이전 값(초당 1건 =
-   * 분당 최대 60건)은 그 4배로 느슨해서 사실상 방어가 안 됐다 — classify가
-   * 통과 후보를 순차 처리할 때 응답 지연(약 1.9초/건)만으로도 자연스럽게
-   * 분당 30건 안팎이 나와 15건을 넘겼다(2026-09-29, AI Studio 대시보드
-   * 실측 RPM 429 확인).
+   * Gemini 무료 티어 실제 한도는 분당 15건(RPM). 이 GEMINI_API_KEY 는
+   * 다른 프로젝트(healthcare-radar)와 같은 Google 프로젝트를 공유한다
+   * (2026-09-29 확인 — 키를 프로젝트별로 분리하려 했으나 이 계정의 새
+   * 프로젝트는 서비스 계정 바인딩이 강제돼 우리 코드의 단순 API 키
+   * 인증이 안 통한다. OAuth2 재구현은 범위가 커서 보류하고, 당분간은
+   * 나눠 쓰는 걸 전제로 서로 합이 15를 넘지 않게 맞춘다).
    *
-   * 게다가 이 GEMINI_API_KEY 는 다른 프로젝트(healthcare-radar)와 같은
-   * Google 프로젝트를 공유한다 — 그쪽은 분당 13.3건으로 이미 낮춰뒀다.
-   * 두 프로젝트가 같은 15 RPM 을 나눠 쓰는 구조라, 이쪽도 여유 있게
-   * 12건(초당 0.2건)으로 낮춘다. 근본 해결은 프로젝트별로 API 키를
-   * 분리하는 것 — 그전까지는 두 프로젝트 다 자기 몫을 아껴 써야 한다.
+   * healthcare-radar 가 분당 9건(6.7초 간격)으로 맞췄고, 이쪽은 평소
+   * 부담이 적어 분당 6건(초당 0.1건)으로 더 낮춰 합을 15로 맞춘다 —
+   * 레이다 쪽과 합의된 배분(2026-09-29). 스케줄이 안 겹치게 조율되면
+   * 더 여유를 줄 수 있다.
    */
-  const llmLimit = createRateLimiter({ perSecond: 0.2 })
+  const llmLimit = createRateLimiter({ perSecond: 0.1 })
 
   return {
     env,
