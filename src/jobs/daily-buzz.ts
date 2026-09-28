@@ -1,4 +1,5 @@
-import { computeBuzz, pickThumbnail } from '../pipeline/buzz.js'
+import { computeBuzz, passesLayer2, pickThumbnail } from '../pipeline/buzz.js'
+import { nextQuietState } from '../pipeline/dormancy.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import type { BlogDoc } from '../sources/kakao-blog.js'
 import type { BuzzSnapshot } from '../schema.js'
@@ -65,6 +66,8 @@ export interface DailyBuzzResult {
   active: number
   /** 오늘 회전분으로 잡힌 판정 대기 수 */
   rotated: number
+  /** 오늘 화제 식음으로 넘어간 수 (연속 21일 기준 미달) */
+  dormant: number
 }
 
 /**
@@ -121,9 +124,12 @@ export async function runDailyBuzz(
   const targets = [...active, ...pending].slice(0, opts.limit ?? Infinity)
   const activeTargets = targets.filter((c) => c.status === 'active').length
   const capturedAt = now.toISOString().slice(0, 10)
+  const driveOf = (c: { driveMinutes?: number | null; driveMinutesEst?: number | null }): number =>
+    c.driveMinutes ?? c.driveMinutesEst ?? Number.POSITIVE_INFINITY
   let updated = 0
   let failed = 0
   let images = 0
+  let dormant = 0
 
   for (const c of targets) {
     try {
@@ -140,6 +146,26 @@ export async function runDailyBuzz(
       if (i >= 0) rows[i] = snap
       else rows.push(snap)
       updated++
+
+      // 화제 식음 후보 판정 — active 로 재는 것만 대상이다(pending 은 아직
+      // 한 번도 통과 못 한 곳이라 이 개념이 안 맞는다). 이 잡이 이미 방금
+      // 잰 화제량을 들고 있으므로 추가 API 호출이 없다.
+      if (c.status === 'active') {
+        const l2 = passesLayer2(m, { now, driveMinutes: driveOf(c) })
+        const q = nextQuietState({
+          quietSince: c.quietSince ?? null,
+          firstSeenAt: c.firstSeenAt,
+          passesBuzz: l2.pass,
+          now,
+          today: capturedAt,
+        })
+        c.quietSince = q.quietSince
+        if (q.shouldGoDormant) {
+          c.status = 'dormant'
+          c.excludeReason = '화제 식음 — 21일 연속 화제량 미달'
+          dormant++
+        }
+      }
 
       // 대표 이미지도 여기서 얻는다. 이 잡이 이미 카페별로 블로그를 부르므로
       // 추가 호출이 없고, 매일 돌면서 깨진 URL 이 자동으로 회복된다.
@@ -164,10 +190,12 @@ export async function runDailyBuzz(
   const dropped = rows.length - kept.length
 
   await store.writeBuzz(kept)
-  if (images > 0) await store.writeCafes(cafes)
+  // activeTargets 가 하나라도 있으면 quietSince 가 바뀌었을 수 있다(스트릭
+  // 시작·초기화·dormant 전환) — images 여부와 무관하게 저장해야 한다.
+  if (images > 0 || activeTargets > 0) await store.writeCafes(cafes)
   if (updated > 0) await recordSuccess(store, 'kakao-blog', now)
   return {
-    updated, failed, dropped, images,
+    updated, failed, dropped, images, dormant,
     active: activeTargets,
     rotated: targets.length - activeTargets,
   }

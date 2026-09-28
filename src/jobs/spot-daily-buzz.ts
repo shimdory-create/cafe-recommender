@@ -1,4 +1,5 @@
-import { computeBuzz, pickThumbnail } from '../pipeline/buzz.js'
+import { computeBuzz, passesLayer2, pickThumbnail } from '../pipeline/buzz.js'
+import { nextQuietState } from '../pipeline/dormancy.js'
 import { isSpotRelevant } from '../pipeline/spot-relevance.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import type { BlogDoc } from '../sources/kakao-blog.js'
@@ -32,6 +33,8 @@ export interface SpotDailyBuzzResult {
   images: number
   active: number
   rotated: number
+  /** 오늘 화제 식음으로 넘어간 수 (연속 21일 기준 미달) */
+  dormant: number
 }
 
 export async function runSpotDailyBuzz(
@@ -68,9 +71,12 @@ export async function runSpotDailyBuzz(
   const targets = [...active, ...pending].slice(0, opts.limit ?? Infinity)
   const activeTargets = targets.filter((s) => s.status === 'active').length
   const capturedAt = now.toISOString().slice(0, 10)
+  const driveOf = (s: { driveMinutes?: number | null; driveMinutesEst?: number | null }): number =>
+    s.driveMinutes ?? s.driveMinutesEst ?? Number.POSITIVE_INFINITY
   let updated = 0
   let failed = 0
   let images = 0
+  let dormant = 0
 
   for (const s of targets) {
     try {
@@ -88,6 +94,23 @@ export async function runSpotDailyBuzz(
       if (i >= 0) rows[i] = snap
       else rows.push(snap)
       updated++
+
+      if (s.status === 'active') {
+        const l2 = passesLayer2(m, { now, driveMinutes: driveOf(s) })
+        const q = nextQuietState({
+          quietSince: s.quietSince ?? null,
+          firstSeenAt: s.firstSeenAt,
+          passesBuzz: l2.pass,
+          now,
+          today: capturedAt,
+        })
+        s.quietSince = q.quietSince
+        if (q.shouldGoDormant) {
+          s.status = 'dormant'
+          s.excludeReason = '화제 식음 — 21일 연속 화제량 미달'
+          dormant++
+        }
+      }
 
       const thumb = pickThumbnail({
         docs: res.docs, cafeName: s.name, isRelevant: isSpotRelevant,
@@ -111,10 +134,10 @@ export async function runSpotDailyBuzz(
   const dropped = rows.length - kept.length
 
   await store.writeSpotBuzz(kept)
-  if (images > 0) await store.writeSpots(spots)
+  if (images > 0 || activeTargets > 0) await store.writeSpots(spots)
   if (updated > 0) await recordSuccess(store, 'kakao-blog-spot', now)
   return {
-    updated, failed, dropped, images,
+    updated, failed, dropped, images, dormant,
     active: activeTargets, rotated: targets.length - activeTargets,
   }
 }

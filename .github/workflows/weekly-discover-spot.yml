@@ -44,6 +44,13 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 화제 식음(dormant) 후보를 신규 발굴과 같은 격주 주기로 재확인한다
+      # (2026-09-28, src/jobs/spot-dormant-recheck.ts).
+      - run: npm run spot-dormant-recheck
+        if: steps.week-check.outputs.run == 'true'
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: 데이터 커밋
         if: steps.week-check.outputs.run == 'true'
         run: bash scripts/commit-data.sh "가볼 곳 신규 발굴"

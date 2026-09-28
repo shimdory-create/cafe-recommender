@@ -71,8 +71,14 @@ export const CafeSchema = z.object({
    * `npm run liveness` 가 주 1회 다시 찾아보고 이 값을 갱신한다.
    */
   lastSeenAt: z.string().optional(),
-  status: z.enum(['active', 'hidden', 'excluded_auto', 'pending_extraction']),
+  status: z.enum(['active', 'hidden', 'excluded_auto', 'pending_extraction', 'dormant']),
   excludeReason: z.string().nullable().optional(),
+  /**
+   * 화제량이 기준 미달 상태로 이어진 첫 날짜(YYYY-MM-DD). null 이면 지금은
+   * 기준을 통과 중이라는 뜻이다. dormant 로 넘어가기 전 단계를 추적한다
+   * (2026-09-28, "화제 식음 후보" — src/pipeline/dormancy.ts 참고).
+   */
+  quietSince: z.string().nullable().optional(),
   /** 일반명사 상호. 골든셋 경계 구간으로 강제 편입된다 (스펙 Layer 2) */
   ambiguousName: z.boolean().default(false),
   /** 대표 이미지 (카카오 블로그 썸네일 130x130). 매일 갱신되므로 깨지면 회복된다 */

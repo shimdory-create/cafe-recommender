@@ -48,6 +48,15 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 화제 식음(dormant) 후보를 신규 발굴과 같은 격주 주기로 재확인한다
+      # (2026-09-28, src/jobs/dormant-recheck.ts). daily-buzz 의 매일
+      # 회전에는 일부러 안 끼워 뒀다 — 거기 끼우면 상한제를 만든 목적
+      # (하루 재기록 비용 억제)이 도로 무너진다.
+      - run: npm run dormant-recheck
+        if: steps.week-check.outputs.run == 'true'
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       # 커밋·푸시 규칙은 scripts/commit-data.sh 한 곳에 있다.
       # 생성물(site.json)은 병합하지 않고 다시 만든다 — 파생물이라
       # 합쳐진 JSON 은 어느 쪽 데이터와도 일치하지 않는다.

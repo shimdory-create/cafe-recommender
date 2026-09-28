@@ -126,3 +126,55 @@ describe('runRestaurantDailyBuzz', () => {
     expect(byId.get('r3')!.capturedAt).toBe('2026-09-01')
   })
 })
+
+describe('runRestaurantDailyBuzz — 화제 식음 후보 (dormant)', () => {
+  const NOW = new Date('2026-09-01')
+  const daysAgo = (n: number) => new Date(NOW.getTime() - n * 86_400_000).toISOString()
+  const oldEnough = daysAgo(200) // 180일 유예를 지난 등록일
+
+  it('21일 연속 기준 미달이면 dormant 로 넘어간다', async () => {
+    const h = harness()
+    h.deps.store.readRestaurants = async () => [
+      { ...h.restaurants()[0]!, firstSeenAt: oldEnough, quietSince: daysAgo(21) },
+    ]
+    h.deps.blog.search = async () => ({ docs: [], payload: {} })
+    const r = await runRestaurantDailyBuzz(h.deps)
+    expect(r.dormant).toBe(1)
+    expect(h.restaurants()[0]!.status).toBe('dormant')
+    expect(h.restaurants()[0]!.excludeReason).toMatch(/화제 식음/)
+  })
+
+  it('기준 미달이 21일 미만이면 아직 active 로 남는다', async () => {
+    const h = harness()
+    h.deps.store.readRestaurants = async () => [
+      { ...h.restaurants()[0]!, firstSeenAt: oldEnough, quietSince: daysAgo(10) },
+    ]
+    h.deps.blog.search = async () => ({ docs: [], payload: {} })
+    const r = await runRestaurantDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.restaurants()[0]!.status).toBe('active')
+  })
+
+  it('등록한 지 180일이 안 됐으면 화제량이 없어도 넘어가지 않는다', async () => {
+    const h = harness()
+    h.deps.store.readRestaurants = async () => [
+      { ...h.restaurants()[0]!, firstSeenAt: daysAgo(30), quietSince: null },
+    ]
+    h.deps.blog.search = async () => ({ docs: [], payload: {} })
+    const r = await runRestaurantDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.restaurants()[0]!.status).toBe('active')
+  })
+
+  it('화제량이 다시 기준을 넘으면 streak 를 초기화한다', async () => {
+    const h = harness()
+    h.deps.store.readRestaurants = async () => [
+      { ...h.restaurants()[0]!, firstSeenAt: oldEnough, quietSince: daysAgo(25) },
+    ]
+    // 기본 harness 의 blog.search 는 최근 글을 주므로 신규 오픈 구제로 통과한다
+    const r = await runRestaurantDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.restaurants()[0]!.status).toBe('active')
+    expect(h.restaurants()[0]!.quietSince).toBeNull()
+  })
+})

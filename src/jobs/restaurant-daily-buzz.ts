@@ -1,4 +1,5 @@
-import { computeBuzz, pickThumbnail } from '../pipeline/buzz.js'
+import { computeBuzz, passesLayer2, pickThumbnail } from '../pipeline/buzz.js'
+import { nextQuietState } from '../pipeline/dormancy.js'
 import { isRestaurantRelevant } from '../pipeline/restaurant-relevance.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import type { BlogDoc } from '../sources/kakao-blog.js'
@@ -33,6 +34,8 @@ export interface RestaurantDailyBuzzResult {
   images: number
   active: number
   rotated: number
+  /** 오늘 화제 식음으로 넘어간 수 (연속 21일 기준 미달) */
+  dormant: number
 }
 
 export async function runRestaurantDailyBuzz(
@@ -69,9 +72,12 @@ export async function runRestaurantDailyBuzz(
   const targets = [...active, ...pending].slice(0, opts.limit ?? Infinity)
   const activeTargets = targets.filter((r) => r.status === 'active').length
   const capturedAt = now.toISOString().slice(0, 10)
+  const driveOf = (r: { driveMinutes?: number | null; driveMinutesEst?: number | null }): number =>
+    r.driveMinutes ?? r.driveMinutesEst ?? Number.POSITIVE_INFINITY
   let updated = 0
   let failed = 0
   let images = 0
+  let dormant = 0
 
   for (const r of targets) {
     try {
@@ -89,6 +95,23 @@ export async function runRestaurantDailyBuzz(
       if (i >= 0) rows[i] = snap
       else rows.push(snap)
       updated++
+
+      if (r.status === 'active') {
+        const l2 = passesLayer2(m, { now, driveMinutes: driveOf(r) })
+        const q = nextQuietState({
+          quietSince: r.quietSince ?? null,
+          firstSeenAt: r.firstSeenAt,
+          passesBuzz: l2.pass,
+          now,
+          today: capturedAt,
+        })
+        r.quietSince = q.quietSince
+        if (q.shouldGoDormant) {
+          r.status = 'dormant'
+          r.excludeReason = '화제 식음 — 21일 연속 화제량 미달'
+          dormant++
+        }
+      }
 
       const thumb = pickThumbnail({
         docs: res.docs, cafeName: r.name, isRelevant: isRestaurantRelevant,
@@ -112,10 +135,10 @@ export async function runRestaurantDailyBuzz(
   const dropped = rows.length - kept.length
 
   await store.writeRestaurantBuzz(kept)
-  if (images > 0) await store.writeRestaurants(restaurants)
+  if (images > 0 || activeTargets > 0) await store.writeRestaurants(restaurants)
   if (updated > 0) await recordSuccess(store, 'kakao-blog-restaurant', now)
   return {
-    updated, failed, dropped, images,
+    updated, failed, dropped, images, dormant,
     active: activeTargets, rotated: targets.length - activeTargets,
   }
 }

@@ -273,6 +273,60 @@ describe('runDailyBuzz', () => {
     })
     expect((await runDailyBuzz(h.deps)).images).toBe(0)
   })
+
+  const daysAgo = (n: number) => new Date(NOW.getTime() - n * 86_400_000).toISOString()
+  const emptyBlog = { search: async () => ({ docs: [], payload: {} }) }
+
+  it('21일 연속 기준 미달이면 dormant 로 넘어간다', async () => {
+    // 기본 cafe() 는 firstSeenAt 2026-01-01 — NOW(8/20) 기준 231일이라
+    // 180일 유예는 이미 지났다. quietSince 를 21일 전으로 미리 심어둔다.
+    const h = harness([cafe('1', { quietSince: daysAgo(21) })], [], { blog: emptyBlog })
+    const r = await runDailyBuzz(h.deps)
+    expect(r.dormant).toBe(1)
+    expect(h.cafes()[0]!.status).toBe('dormant')
+    expect(h.cafes()[0]!.excludeReason).toMatch(/화제 식음/)
+  })
+
+  it('기준 미달이 21일 미만이면 아직 active 로 남는다', async () => {
+    const h = harness([cafe('1', { quietSince: daysAgo(10) })], [], { blog: emptyBlog })
+    const r = await runDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.cafes()[0]!.status).toBe('active')
+    expect(h.cafes()[0]!.quietSince).toBe(daysAgo(10))
+  })
+
+  it('등록한 지 180일이 안 됐으면 화제량이 없어도 넘어가지 않는다', async () => {
+    const h = harness(
+      [cafe('1', { firstSeenAt: daysAgo(30), quietSince: null })],
+      [],
+      { blog: emptyBlog },
+    )
+    const r = await runDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.cafes()[0]!.status).toBe('active')
+    expect(h.cafes()[0]!.quietSince).toBeNull()
+  })
+
+  it('화제량이 다시 기준을 넘으면 streak 를 초기화한다', async () => {
+    // relDoc 은 최근 글이라 "신규 오픈 구제" 로 항상 Layer2 를 통과한다
+    const h = harness([cafe('1', { quietSince: daysAgo(25) })], [])
+    const r = await runDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.cafes()[0]!.status).toBe('active')
+    expect(h.cafes()[0]!.quietSince).toBeNull()
+  })
+
+  it('pending_extraction 은 화제 식음 판정 대상이 아니다', async () => {
+    const h = harness(
+      [cafe('1', { status: 'pending_extraction' })],
+      [],
+      { blog: emptyBlog },
+    )
+    const r = await runDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.cafes()[0]!.status).toBe('pending_extraction')
+    expect(h.cafes()[0]!.quietSince ?? null).toBeNull()
+  })
 })
 
 describe('runDailyBuzz — 회전 수집', () => {

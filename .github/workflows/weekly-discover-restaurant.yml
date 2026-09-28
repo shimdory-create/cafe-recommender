@@ -46,6 +46,13 @@ jobs:
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      # 화제 식음(dormant) 후보를 신규 발굴과 같은 격주 주기로 재확인한다
+      # (2026-09-28, src/jobs/restaurant-dormant-recheck.ts).
+      - run: npm run restaurant-dormant-recheck
+        if: steps.week-check.outputs.run == 'true'
+        env:
+          KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       # 커밋·푸시 규칙은 scripts/commit-data.sh 한 곳에 있다 — 카페와 공용.
       # npm run --silent site 가 카페·식당 페이로드를 둘 다 다시 만든다
       # (2단계 웹 화면이 생긴 뒤로는 이걸 건너뛰면 화면이 절대 안 갱신된다).

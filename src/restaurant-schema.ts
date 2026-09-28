@@ -47,8 +47,10 @@ export const RestaurantSchema = z.object({
   tollWon: z.number().int().nullable().optional(),
   firstSeenAt: z.string(),
   lastSeenAt: z.string().optional(),
-  status: z.enum(['active', 'hidden', 'excluded_auto', 'pending_extraction']),
+  status: z.enum(['active', 'hidden', 'excluded_auto', 'pending_extraction', 'dormant']),
   excludeReason: z.string().nullable().optional(),
+  /** 화제량이 기준 미달 상태로 이어진 첫 날짜. src/pipeline/dormancy.ts 참고 */
+  quietSince: z.string().nullable().optional(),
   ambiguousName: z.boolean().default(false),
   imageUrl: z.string().nullable().optional(),
   attributes: RestaurantAttributesSchema.nullable().optional(),

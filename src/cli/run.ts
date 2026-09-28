@@ -3,6 +3,7 @@
  *
  *   npm run discover   -- [--region 양평군] [--skip-harvest]
  *   npm run buzz       -- [--limit 200]
+ *   npm run dormant-recheck   (화제 식음 후보를 격주로 재확인 — 신규 발굴과 같은 주기)
  *   npm run classify   -- [--limit 200] [--redo-stale] [--order file]
  *   npm run label      -- [--report] [--redo]
  *   npm run drive      -- [--limit 500] [--force]
@@ -29,6 +30,7 @@ import { applyRequeue, requeueTargets } from '../jobs/requeue.js'
 import { runLiveness, STALE_DAYS } from '../jobs/liveness.js'
 import { resolveSigungu } from '../pipeline/district.js'
 import { runDailyBuzz } from '../jobs/daily-buzz.js'
+import { runDormantRecheck } from '../jobs/dormant-recheck.js'
 import { runClassify } from '../jobs/classify.js'
 import { runWeeklySuggest } from '../jobs/weekly-suggest.js'
 import { runDriveTimes, driveMinutesOf } from '../jobs/drive-times.js'
@@ -47,6 +49,7 @@ import { buildSpotSitePayload } from '../site/spot-payload.js'
 import { buildNearbyPayloads } from '../site/nearby-payload.js'
 import { runRestaurantDiscover } from '../jobs/restaurant-discover.js'
 import { runRestaurantDailyBuzz } from '../jobs/restaurant-daily-buzz.js'
+import { runRestaurantDormantRecheck } from '../jobs/restaurant-dormant-recheck.js'
 import { runRestaurantClassify } from '../jobs/restaurant-classify.js'
 import { evaluateRestaurantExclusion } from '../pipeline/restaurant-exclude.js'
 import { runRestaurantWeeklySuggest } from '../jobs/restaurant-suggest.js'
@@ -55,6 +58,7 @@ import { runRestaurantDriveTimes } from '../jobs/restaurant-drive-times.js'
 import { createSpotJsonStore } from '../store/spot-json-store.js'
 import { runSpotDiscover } from '../jobs/spot-discover.js'
 import { runSpotDailyBuzz } from '../jobs/spot-daily-buzz.js'
+import { runSpotDormantRecheck } from '../jobs/spot-dormant-recheck.js'
 import { runSpotClassify } from '../jobs/spot-classify.js'
 import { isFoodCategory } from '../pipeline/spot-relevance.js'
 import { runSpotWeeklySuggest } from '../jobs/spot-suggest.js'
@@ -124,7 +128,20 @@ async function main() {
       console.log(
         `  추천 대상 ${r.active}곳 + 회전분 ${r.rotated}곳`
         + ` -> 갱신 ${r.updated}곳 / 실패 ${r.failed}곳`
-        + ` / 정리 ${r.dropped}건 / 대표 이미지 ${r.images}곳`,
+        + ` / 정리 ${r.dropped}건 / 대표 이미지 ${r.images}곳`
+        + `${r.dormant > 0 ? ` / 화제 식음 ${r.dormant}곳` : ''}`,
+      )
+      break
+    }
+
+    case 'dormant-recheck': {
+      // 화제 식음(dormant)을 격주로 다시 재서 회복됐으면 active 로 되돌린다.
+      // weekly-discover.yml 과 같은 격주 주기로 돈다(scripts/biweekly-gate.sh).
+      const ctx = createContext()
+      const r = await runDormantRecheck(ctx)
+      console.log(
+        `  화제 식음 재확인 ${r.checked}곳 -> 복귀 ${r.recovered}곳`
+        + ` / 계속 식음 ${r.stillQuiet}곳 / 실패 ${r.failed}곳`,
       )
       break
     }
@@ -678,7 +695,24 @@ async function main() {
       }
       const limit = numFlag(rest, 'limit')
       const r = await runRestaurantDailyBuzz(ctx, { limit })
-      console.log(`  갱신 ${r.updated}곳 · 실패 ${r.failed}곳 · 이미지 ${r.images}곳`)
+      console.log(
+        `  갱신 ${r.updated}곳 · 실패 ${r.failed}곳 · 이미지 ${r.images}곳`
+        + `${r.dormant > 0 ? ` · 화제 식음 ${r.dormant}곳` : ''}`,
+      )
+      break
+    }
+
+    case 'restaurant-dormant-recheck': {
+      const base = createContext()
+      const ctx = {
+        store: createRestaurantJsonStore(base.env.DATA_DIR),
+        blog: base.blog,
+      }
+      const r = await runRestaurantDormantRecheck(ctx)
+      console.log(
+        `  화제 식음 재확인 ${r.checked}곳 -> 복귀 ${r.recovered}곳`
+        + ` / 계속 식음 ${r.stillQuiet}곳 / 실패 ${r.failed}곳`,
+      )
       break
     }
 
@@ -817,7 +851,24 @@ async function main() {
       }
       const limit = numFlag(rest, 'limit')
       const r = await runSpotDailyBuzz(ctx, { limit })
-      console.log(`  갱신 ${r.updated}곳 · 실패 ${r.failed}곳 · 이미지 ${r.images}곳`)
+      console.log(
+        `  갱신 ${r.updated}곳 · 실패 ${r.failed}곳 · 이미지 ${r.images}곳`
+        + `${r.dormant > 0 ? ` · 화제 식음 ${r.dormant}곳` : ''}`,
+      )
+      break
+    }
+
+    case 'spot-dormant-recheck': {
+      const base = createContext()
+      const ctx = {
+        store: createSpotJsonStore(base.env.DATA_DIR),
+        blog: base.blog,
+      }
+      const r = await runSpotDormantRecheck(ctx)
+      console.log(
+        `  화제 식음 재확인 ${r.checked}곳 -> 복귀 ${r.recovered}곳`
+        + ` / 계속 식음 ${r.stillQuiet}곳 / 실패 ${r.failed}곳`,
+      )
       break
     }
 
@@ -924,11 +975,12 @@ async function main() {
     default:
       die(
         '사용법: tsx src/cli/run.ts'
-          + ' <discover|buzz|classify|label|drive|suggest|site|notify|visited|inspect|health|watch|audit|normalize|hide'
-          + '|restaurant-discover|restaurant-buzz|restaurant-classify|restaurant-suggest'
-          + '|restaurant-liveness|restaurant-drive|restaurant-declassify-cafe'
-          + '|spot-discover|spot-buzz|spot-classify|spot-suggest|spot-liveness|spot-drive'
-          + '|spot-declassify-food>',
+          + ' <discover|buzz|dormant-recheck|classify|label|drive|suggest|site|notify|visited'
+          + '|inspect|health|watch|audit|normalize|hide'
+          + '|restaurant-discover|restaurant-buzz|restaurant-dormant-recheck|restaurant-classify'
+          + '|restaurant-suggest|restaurant-liveness|restaurant-drive|restaurant-declassify-cafe'
+          + '|spot-discover|spot-buzz|spot-dormant-recheck|spot-classify|spot-suggest|spot-liveness'
+          + '|spot-drive|spot-declassify-food>',
       )
   }
 }
@@ -941,11 +993,11 @@ async function main() {
  * 실주행 측정(2분)을 동시에 돌려 실측 298곳을 잃을 뻔했다.
  */
 const MUTATING = new Set([
-  'discover', 'buzz', 'classify', 'drive', 'suggest', 'visited', 'hide', 'label',
-  'restaurant-discover', 'restaurant-buzz', 'restaurant-classify', 'restaurant-drive', 'restaurant-suggest',
-  'restaurant-liveness', 'restaurant-declassify-cafe',
-  'spot-discover', 'spot-buzz', 'spot-classify', 'spot-drive', 'spot-suggest', 'spot-liveness',
-  'spot-declassify-food',
+  'discover', 'buzz', 'dormant-recheck', 'classify', 'drive', 'suggest', 'visited', 'hide', 'label',
+  'restaurant-discover', 'restaurant-buzz', 'restaurant-dormant-recheck', 'restaurant-classify',
+  'restaurant-drive', 'restaurant-suggest', 'restaurant-liveness', 'restaurant-declassify-cafe',
+  'spot-discover', 'spot-buzz', 'spot-dormant-recheck', 'spot-classify', 'spot-drive', 'spot-suggest',
+  'spot-liveness', 'spot-declassify-food',
   'nearby-drive',
 ])
 

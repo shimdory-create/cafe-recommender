@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest'
 import { runSpotDailyBuzz } from '../../src/jobs/spot-daily-buzz.js'
+import type { Spot } from '../../src/spot-schema.js'
 
 function harness() {
-  let spots = [{
+  let spots: Spot[] = [{
     kakaoPlaceId: '1', name: '아무개공원', sigungu: '부평구', lat: 37.5, lng: 126.7,
     firstSeenAt: '2026-09-02T00:00:00.000Z', status: 'active' as const,
     ambiguousName: false, attributes: null, tags: ['자연/공원'],
@@ -31,7 +32,7 @@ function harness() {
     },
     now: new Date('2026-09-02'),
   }
-  return { deps, buzz: () => buzz }
+  return { deps, buzz: () => buzz, spots: () => spots }
 }
 
 describe('runSpotDailyBuzz', () => {
@@ -67,5 +68,56 @@ describe('runSpotDailyBuzz', () => {
     expect(byId.get('s1')!.capturedAt).toBe('2026-09-01')
     expect(byId.get('s2')!.capturedAt).toBe('2026-09-02')
     expect(byId.get('s3')!.capturedAt).toBe('2026-09-02')
+  })
+})
+
+describe('runSpotDailyBuzz — 화제 식음 후보 (dormant)', () => {
+  const NOW = new Date('2026-09-02')
+  const daysAgo = (n: number) => new Date(NOW.getTime() - n * 86_400_000).toISOString()
+  const oldEnough = daysAgo(200)
+
+  it('21일 연속 기준 미달이면 dormant 로 넘어간다', async () => {
+    const h = harness()
+    h.deps.store.readSpots = async () => [
+      { ...h.spots()[0]!, firstSeenAt: oldEnough, quietSince: daysAgo(21) },
+    ]
+    h.deps.blog.search = async () => ({ docs: [], payload: {} })
+    const r = await runSpotDailyBuzz(h.deps)
+    expect(r.dormant).toBe(1)
+    expect(h.spots()[0]!.status).toBe('dormant')
+    expect(h.spots()[0]!.excludeReason).toMatch(/화제 식음/)
+  })
+
+  it('기준 미달이 21일 미만이면 아직 active 로 남는다', async () => {
+    const h = harness()
+    h.deps.store.readSpots = async () => [
+      { ...h.spots()[0]!, firstSeenAt: oldEnough, quietSince: daysAgo(10) },
+    ]
+    h.deps.blog.search = async () => ({ docs: [], payload: {} })
+    const r = await runSpotDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.spots()[0]!.status).toBe('active')
+  })
+
+  it('등록한 지 180일이 안 됐으면 화제량이 없어도 넘어가지 않는다', async () => {
+    const h = harness()
+    h.deps.store.readSpots = async () => [
+      { ...h.spots()[0]!, firstSeenAt: daysAgo(30), quietSince: null },
+    ]
+    h.deps.blog.search = async () => ({ docs: [], payload: {} })
+    const r = await runSpotDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.spots()[0]!.status).toBe('active')
+  })
+
+  it('화제량이 다시 기준을 넘으면 streak 를 초기화한다', async () => {
+    const h = harness()
+    h.deps.store.readSpots = async () => [
+      { ...h.spots()[0]!, firstSeenAt: oldEnough, quietSince: daysAgo(25) },
+    ]
+    const r = await runSpotDailyBuzz(h.deps)
+    expect(r.dormant).toBe(0)
+    expect(h.spots()[0]!.status).toBe('active')
+    expect(h.spots()[0]!.quietSince).toBeNull()
   })
 })
