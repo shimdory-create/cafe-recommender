@@ -7,6 +7,14 @@ import type { SpotStore } from '../store/spot-json-store.js'
 
 export const PENDING_PER_DAY = 800
 
+/**
+ * 하루에 다시 재는 활성 장소 수 (2026-09-28 도입, 카페의 ACTIVE_PER_DAY와
+ * 같은 이유 — GitHub Actions 무료 한도 보호). 900은 지금 활성 장소 수
+ * (~815곳)보다 넉넉해서 당장은 매일 전부 재는 것과 동일하고, 앞으로 늘어도
+ * 하루 비용이 여기서 더 안 커지게 막아 둔 상한이다.
+ */
+export const ACTIVE_PER_DAY = 900
+
 export interface SpotDailyBuzzDeps {
   store: Pick<
     SpotStore,
@@ -28,14 +36,22 @@ export interface SpotDailyBuzzResult {
 
 export async function runSpotDailyBuzz(
   deps: SpotDailyBuzzDeps,
-  opts: { limit?: number; pendingPerDay?: number } = {},
+  opts: { limit?: number; pendingPerDay?: number; activePerDay?: number } = {},
 ): Promise<SpotDailyBuzzResult> {
   const { store, blog, now = new Date() } = deps
   const spots = await store.readSpots()
   const rows = await store.readSpotBuzz()
 
-  const active = spots.filter((s) => s.status === 'active')
+  // 한 번도 안 잰 곳이 가장 먼저다. active·pending 둘 다 이 기준으로
+  // 회전한다 (2026-09-28, ACTIVE_PER_DAY 주석 참고).
   const measuredAt = new Map(rows.map((r) => [r.kakaoPlaceId, r.capturedAt]))
+  const byStaleness = (x: { kakaoPlaceId: string }, y: { kakaoPlaceId: string }) =>
+    (measuredAt.get(x.kakaoPlaceId) ?? '').localeCompare(measuredAt.get(y.kakaoPlaceId) ?? '')
+
+  const active = spots
+    .filter((s) => s.status === 'active')
+    .sort(byStaleness)
+    .slice(0, opts.activePerDay ?? ACTIVE_PER_DAY)
   const pending = spots
     .filter((s) => s.status === 'pending_extraction')
     .sort((a, b) => {

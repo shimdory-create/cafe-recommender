@@ -300,7 +300,7 @@ describe('runDailyBuzz — 회전 수집', () => {
     return { deps, queries }
   }
 
-  it('active 는 매일 전부 잰다 — 순위와 대표 이미지가 여기서 나온다', async () => {
+  it('active 는 activePerDay 안에 다 들어오면 전부 잰다', async () => {
     const h = spy(
       [cafe('a1'), cafe('a2'), cafe('p1', { status: 'pending_extraction' })],
       [],
@@ -308,6 +308,19 @@ describe('runDailyBuzz — 회전 수집', () => {
     await runDailyBuzz(h.deps, { pendingPerDay: 0 })
     expect(h.queries).toHaveLength(2)
     expect(h.queries.join(' ')).not.toContain('카페p1')
+  })
+
+  it('activePerDay 상한을 넘기면 오래 안 잰 것부터 회전한다', async () => {
+    // 예전엔 active 전체를 무조건 매일 쟀다 — 카페 수가 늘면서 이 잡 혼자
+    // GitHub Actions 무료 한도를 갉아먹는 주원인이 됐다(2026-09월 한도
+    // 소진). pending 과 같은 회전 방식을 active 에도 적용한다.
+    const h = spy(
+      [cafe('a1'), cafe('a2'), cafe('a3')],
+      [buzzRow('a1', { capturedAt: '2026-08-19' })], // a2·a3 는 한 번도 안 쟀다
+    )
+    await runDailyBuzz(h.deps, { activePerDay: 2, pendingPerDay: 0 })
+    expect(h.queries).toHaveLength(2)
+    expect(h.queries.join(' ')).not.toContain('카페a1')
   })
 
   it('판정 대기는 가장 오래 안 잰 것부터 고른다', async () => {

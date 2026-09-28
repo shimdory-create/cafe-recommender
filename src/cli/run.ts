@@ -117,8 +117,10 @@ async function main() {
       const limit = numFlag(rest, 'limit')
       // 판정 대기는 회전식으로 잰다. 기본값은 daily-buzz.ts 의 PENDING_PER_DAY.
       const pendingPerDay = numFlag(rest, 'pending')
+      // 활성 카페도 2026-09-28 부터 회전식이다. 기본값은 ACTIVE_PER_DAY.
+      const activePerDay = numFlag(rest, 'active')
       console.log(`화제량 수집 시작${limit ? ` (최대 ${limit}곳)` : ''}`)
-      const r = await runDailyBuzz(ctx, { limit, pendingPerDay })
+      const r = await runDailyBuzz(ctx, { limit, pendingPerDay, activePerDay })
       console.log(
         `  추천 대상 ${r.active}곳 + 회전분 ${r.rotated}곳`
         + ` -> 갱신 ${r.updated}곳 / 실패 ${r.failed}곳`

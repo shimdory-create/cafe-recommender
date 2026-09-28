@@ -100,4 +100,29 @@ describe('runRestaurantDailyBuzz', () => {
     const healthRows = h.health() as { source: string }[]
     expect(healthRows.some((r2) => r2.source === 'kakao-blog-restaurant')).toBe(true)
   })
+
+  it('activePerDay 상한을 넘기면 오래 안 잰 것부터 회전한다', async () => {
+    // 예전엔 active 식당 전체를 무조건 매일 쟀다 — 식당이 4,200여 곳까지
+    // 늘면서 이 잡 혼자 하루 20분대까지 커져 GitHub Actions 무료 한도
+    // 소진의 주원인이 됐다(2026-09월). pending 과 같은 회전 방식을 쓴다.
+    const base = { ...harness().restaurants()[0]! }
+    const h = harness()
+    h.deps.store.readRestaurants = async () => [
+      { ...base, kakaoPlaceId: 'r1', name: '식당r1' },
+      { ...base, kakaoPlaceId: 'r2', name: '식당r2' },
+      { ...base, kakaoPlaceId: 'r3', name: '식당r3' },
+    ]
+    // r1 만 이미 쟀다 -> r2·r3 가 우선이다
+    h.deps.store.readRestaurantBuzz = async () =>
+      [{ kakaoPlaceId: 'r1', capturedAt: '2026-08-31' }] as never
+    const r = await runRestaurantDailyBuzz(h.deps, { activePerDay: 2 })
+    expect(r.updated).toBe(2)
+    const byId = new Map(
+      (h.buzz() as { kakaoPlaceId: string; capturedAt: string }[]).map((b) => [b.kakaoPlaceId, b]),
+    )
+    // r1 은 회전에서 빠져 예전 스냅샷 그대로다. r2·r3 만 오늘 날짜로 갱신됐다
+    expect(byId.get('r1')!.capturedAt).toBe('2026-08-31')
+    expect(byId.get('r2')!.capturedAt).toBe('2026-09-01')
+    expect(byId.get('r3')!.capturedAt).toBe('2026-09-01')
+  })
 })
