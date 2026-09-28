@@ -121,6 +121,25 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
     }
   }
 
+  // 1.5. 오늘 쿼터/속도제한 오류 — 회차 끝에 하나라도 통과하면 위 1번은
+  //      lastError 를 지워버려서 429가 있었다는 사실 자체가 사라진다.
+  //      이 카운터는 recordSuccess 가 못 건드리므로 남는다(2026-09-29,
+  //      GEMINI_API_KEY 를 공유하는 다른 프로젝트와의 RPM 충돌을 이
+  //      감시가 놓쳤던 사건 이후 추가). 판정이 계속 진행 중이어도 알린다 —
+  //      "괜찮아 보이는데 사실 자주 걸리고 있었다"를 잡는 게 목적이다.
+  for (const h of health) {
+    if ((h.quotaErrorsToday ?? 0) > 0 && h.quotaErrorsDate && isFresh(h.quotaErrorsDate, now)) {
+      out.push({
+        level: 'warn',
+        code: 'quota_hits_today',
+        message:
+          `${h.source} 오늘 쿼터/속도제한(429) ${h.quotaErrorsToday}건`
+          + ` — 판정 자체는 계속되고 있을 수 있다. 반복되면 API 키를 같이`
+          + ` 쓰는 다른 프로젝트와 부딪혔을 가능성도 확인한다.`,
+      })
+    }
+  }
+
   // 2. 소스 실패 — 쿼터가 아니어도 연속 실패는 알린다
   for (const h of health) {
     if (h.consecutiveFailures > 0 && !(h.lastError && isQuotaError(h.lastError))) {
@@ -258,6 +277,7 @@ export function formatWatch(anomalies: Anomaly[], input: WatchInput): string {
 /** 이상 코드를 사람 말로. 카톡 한 줄에 들어가야 하므로 짧게 */
 const LABELS: Record<string, string> = {
   quota_error: '쿼터 오류',
+  quota_hits_today: '속도제한 발생',
   source_failing: '수집 실패',
   source_stale: '수집 멈춤',
   buzz_drop: '화제량 측정 부족',

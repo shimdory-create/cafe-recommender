@@ -185,6 +185,16 @@ export const HealthSchema = z.object({
   lastError: z.string().nullable(),
   consecutiveFailures: z.number().int().default(0),
   updatedAt: z.string(),
+  /**
+   * 오늘 쿼터/속도제한(429) 오류를 몇 번 만났는지. `recordSuccess`가
+   * 지우지 않는다 — 회차 안에서 몇 곳이라도 통과하면 consecutiveFailures·
+   * lastError 는 0/null 로 리셋되어 429가 있었다는 흔적이 사라지는데,
+   * 이 둘은 그 흔적을 보존하려고 따로 둔 값이다(2026-09-29, GEMINI_API_KEY
+   * 공유 프로젝트와의 RPM 충돌을 daily-watch 가 놓친 사건 이후 추가).
+   * 날짜(YYYY-MM-DD)가 바뀌면 0으로 되돌아간다.
+   */
+  quotaErrorsToday: z.number().int().nonnegative().default(0).optional(),
+  quotaErrorsDate: z.string().nullable().optional(),
 })
 export type Health = z.infer<typeof HealthSchema>
 

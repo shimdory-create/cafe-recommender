@@ -355,6 +355,11 @@ describe('runClassify', () => {
     expect(r.failed).toBe(3)
     // 실패한 3곳도 pending 으로 남으므로 20곳 전부가 다음 회차 대상이다
     expect(h.saved().filter((c) => c.status === 'pending_extraction')).toHaveLength(20)
+    // 오늘 쿼터 오류 수도 health 에 남는다 (daily-watch 가 recordSuccess
+    // 로 지워지지 않는 이 값을 보고 429가 있었다는 걸 안다)
+    const classifyHealth = h.health().find((row) => row.source === 'classify') as
+      { quotaErrorsToday?: number; quotaErrorsDate?: string } | undefined
+    expect(classifyHealth?.quotaErrorsToday).toBe(3)
   })
 
   it('쿼터가 아닌 오류는 계속 진행한다', async () => {

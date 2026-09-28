@@ -111,6 +111,34 @@ describe('detectAnomalies', () => {
     expect(out.some((a) => a.code === 'classify_stalled' && a.level === 'alert')).toBe(true)
   })
 
+  it('오늘 쿼터 오류가 있으면 consecutiveFailures·lastError 가 지워져도 알린다', () => {
+    // recordSuccess 가 회차 끝에 그 둘을 지워도 quotaErrorsToday 는 남는다
+    // — daily-watch 가 놓쳤던 실제 사건(2026-09-29)의 재현.
+    const input = healthy()
+    input.health = [
+      health({
+        source: 'classify', lastError: null, consecutiveFailures: 0,
+        quotaErrorsToday: 3, quotaErrorsDate: TODAY,
+      }),
+    ]
+    const out = detectAnomalies(input)
+    const found = out.find((a) => a.code === 'quota_hits_today')
+    expect(found?.level).toBe('warn')
+    expect(found?.message).toContain('3건')
+  })
+
+  it('오늘 쿼터 오류가 0건이면 알리지 않는다', () => {
+    const input = healthy()
+    input.health = [health({ quotaErrorsToday: 0, quotaErrorsDate: TODAY })]
+    expect(detectAnomalies(input).some((a) => a.code === 'quota_hits_today')).toBe(false)
+  })
+
+  it('날짜가 오늘이 아니면(어제 이전) 쓰다 남은 값으로 오탐하지 않는다', () => {
+    const input = healthy()
+    input.health = [health({ quotaErrorsToday: 5, quotaErrorsDate: '2026-08-01' })]
+    expect(detectAnomalies(input).some((a) => a.code === 'quota_hits_today')).toBe(false)
+  })
+
   it('RESOURCE_EXHAUSTED 도 쿼터로 본다 (provider 마다 문구가 다르다)', () => {
     const input = healthy()
     input.health = [health({ lastError: 'RESOURCE_EXHAUSTED', consecutiveFailures: 1 })]

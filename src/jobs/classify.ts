@@ -3,7 +3,7 @@ import { passesLayer2 } from '../pipeline/buzz.js'
 import { extractAttributes } from '../pipeline/extract.js'
 import { assignTags } from '../pipeline/tag.js'
 import { passesHardGate } from '../pipeline/gate.js'
-import { recordFailure, recordSuccess } from '../sources/health.js'
+import { recordFailure, recordQuotaError, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
 import type { BuzzSnapshot, Cafe } from '../schema.js'
 import type { LlmClient } from '../llm/types.js'
@@ -229,6 +229,9 @@ export async function runClassify(
       // 쿼터 소진은 카페 문제가 아니라 그날의 한도 문제다. 계속 시도해도
       // 전부 같은 오류이므로 멈춘다.
       if (e instanceof SourceError && e.status === 429) {
+        // 뒤에 통과하는 곳이 하나라도 있으면 recordSuccess 가 lastError를
+        // 지운다 — 이 카운터는 그것과 무관하게 오늘 있었다는 사실을 남긴다.
+        await recordQuotaError(store, 'classify', now)
         if (++quotaErrors >= QUOTA_GIVE_UP) {
           quotaExhausted = true
           break

@@ -3,7 +3,7 @@ import { passesLayer2 } from '../pipeline/buzz.js'
 import { extractRestaurantAttributes } from '../pipeline/restaurant-extract.js'
 import { assignRestaurantTags } from '../pipeline/restaurant-tag.js'
 import { passesHardGate } from '../pipeline/gate.js'
-import { recordFailure, recordSuccess } from '../sources/health.js'
+import { recordFailure, recordQuotaError, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
 import type { BuzzSnapshot } from '../schema.js'
 import type { Restaurant } from '../restaurant-schema.js'
@@ -156,6 +156,7 @@ export async function runRestaurantClassify(
       failed++
       await recordFailure(store, 'classify-restaurant', e, now)
       if (e instanceof SourceError && e.status === 429) {
+        await recordQuotaError(store, 'classify-restaurant', now)
         if (++quotaErrors >= QUOTA_GIVE_UP) {
           quotaExhausted = true
           break

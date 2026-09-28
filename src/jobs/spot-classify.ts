@@ -4,7 +4,7 @@ import { extractSpotAttributes } from '../pipeline/spot-extract.js'
 import { assignSpotTags } from '../pipeline/spot-tag.js'
 import { passesHardGate } from '../pipeline/gate.js'
 import { isFoodCategory } from '../pipeline/spot-relevance.js'
-import { recordFailure, recordSuccess } from '../sources/health.js'
+import { recordFailure, recordQuotaError, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
 import type { BuzzSnapshot } from '../schema.js'
 import type { Spot } from '../spot-schema.js'
@@ -165,6 +165,7 @@ export async function runSpotClassify(
       failed++
       await recordFailure(store, 'classify-spot', e, now)
       if (e instanceof SourceError && e.status === 429) {
+        await recordQuotaError(store, 'classify-spot', now)
         if (++quotaErrors >= QUOTA_GIVE_UP) {
           quotaExhausted = true
           break

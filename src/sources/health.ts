@@ -58,3 +58,28 @@ export async function recordFailure(
     now,
   )
 }
+
+/**
+ * 오늘 쿼터/속도제한(429) 오류가 있었다는 걸 남긴다. `recordFailure`와
+ * 별도로 부른다 — `recordSuccess`가 그 둘을 지워도 이 카운터는 남는다.
+ * 날짜가 바뀌면 새로 센다.
+ */
+export async function recordQuotaError(
+  store: Pick<Store, 'readHealth' | 'writeHealth'>,
+  source: string,
+  now: Date = new Date(),
+): Promise<void> {
+  const rows = await store.readHealth()
+  const prevRow = rows.find((r) => r.source === source)
+  const today = now.toISOString().slice(0, 10)
+  const sameDay = prevRow?.quotaErrorsDate === today
+  await upsert(
+    store,
+    source,
+    {
+      quotaErrorsToday: (sameDay ? prevRow?.quotaErrorsToday ?? 0 : 0) + 1,
+      quotaErrorsDate: today,
+    },
+    now,
+  )
+}
