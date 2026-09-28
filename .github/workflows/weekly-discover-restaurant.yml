@@ -27,14 +27,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      # 2026-09-28: 격주 실행 (weekly-discover.yml 상단 주석·
+      # scripts/biweekly-gate.sh 참고) — 카페와 같은 기준일을 써서 같은
+      # 2주 주기로 맞물린다.
+      - id: week-check
+        run: bash scripts/biweekly-gate.sh
       - uses: actions/setup-node@v7
+        if: steps.week-check.outputs.run == 'true'
         with:
           node-version: 24
           cache: npm
       - run: npm ci
+        if: steps.week-check.outputs.run == 'true'
       # 파일럿 지역(부평구·계양구·서구·김포시·검단구)에서 118곳 판정까지
       # 검증 완료(2026-09-02) — 카페처럼 수도권 전체(66개 시군구)로 확장한다.
       - run: npm run restaurant-discover
+        if: steps.week-check.outputs.run == 'true'
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -42,4 +50,5 @@ jobs:
       # npm run --silent site 가 카페·식당 페이로드를 둘 다 다시 만든다
       # (2단계 웹 화면이 생긴 뒤로는 이걸 건너뛰면 화면이 절대 안 갱신된다).
       - name: 데이터 커밋
+        if: steps.week-check.outputs.run == 'true'
         run: bash scripts/commit-data.sh "식당 신규 발굴"

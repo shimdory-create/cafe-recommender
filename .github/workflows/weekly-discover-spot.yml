@@ -25,16 +25,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      # 2026-09-28: 격주 실행 (weekly-discover.yml 상단 주석·
+      # scripts/biweekly-gate.sh 참고) — 카페와 같은 기준일을 써서 같은
+      # 2주 주기로 맞물린다.
+      - id: week-check
+        run: bash scripts/biweekly-gate.sh
       - uses: actions/setup-node@v7
+        if: steps.week-check.outputs.run == 'true'
         with:
           node-version: 24
           cache: npm
       - run: npm ci
+        if: steps.week-check.outputs.run == 'true'
       # 파일럿 지역(부평구·계양구·서구·김포시·검단구)에서 판정까지 검증
       # 완료(2026-09-02) — 식당·카페처럼 수도권 전체로 확장한다.
       - run: npm run spot-discover
+        if: steps.week-check.outputs.run == 'true'
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: 데이터 커밋
+        if: steps.week-check.outputs.run == 'true'
         run: bash scripts/commit-data.sh "가볼 곳 신규 발굴"

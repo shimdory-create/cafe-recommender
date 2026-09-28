@@ -31,12 +31,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      # 2026-09-28: GitHub Actions 무료 한도 소진 계기로 격주 실행으로
+      # 낮췄다 (scripts/biweekly-gate.sh 참고). 이 스텝만 돌고 몇 초 만에
+      # 끝나는 주가 절반이다 — 정상이다.
+      - id: week-check
+        run: bash scripts/biweekly-gate.sh
       - uses: actions/setup-node@v7
+        if: steps.week-check.outputs.run == 'true'
         with:
           node-version: 24
           cache: npm
       - run: npm ci
+        if: steps.week-check.outputs.run == 'true'
       - run: npm run discover
+        if: steps.week-check.outputs.run == 'true'
         env:
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -44,4 +52,5 @@ jobs:
       # 생성물(site.json)은 병합하지 않고 다시 만든다 — 파생물이라
       # 합쳐진 JSON 은 어느 쪽 데이터와도 일치하지 않는다.
       - name: 데이터 커밋
+        if: steps.week-check.outputs.run == 'true'
         run: bash scripts/commit-data.sh "신규 발굴"
