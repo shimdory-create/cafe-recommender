@@ -30,15 +30,15 @@ export function createContext(): Context {
    * 다른 프로젝트(healthcare-radar)와 같은 Google 프로젝트를 공유한다
    * (2026-09-29 확인 — 키를 프로젝트별로 분리하려 했으나 이 계정의 새
    * 프로젝트는 서비스 계정 바인딩이 강제돼 우리 코드의 단순 API 키
-   * 인증이 안 통한다. OAuth2 재구현은 범위가 커서 보류하고, 당분간은
-   * 나눠 쓰는 걸 전제로 서로 합이 15를 넘지 않게 맞춘다).
+   * 인증이 안 통한다. OAuth2 재구현은 범위가 커서 보류).
    *
-   * healthcare-radar 가 분당 9건(6.7초 간격)으로 맞췄고, 이쪽은 평소
-   * 부담이 적어 분당 6건(초당 0.1건)으로 더 낮춰 합을 15로 맞춘다 —
-   * 레이다 쪽과 합의된 배분(2026-09-29). 스케줄이 안 겹치게 조율되면
-   * 더 여유를 줄 수 있다.
+   * 처음엔 9+6=15로 맞췄는데 여유가 0이라 우연히 겹치는 순간을 못
+   * 막았다. healthcare-radar 가 7로, 이쪽은 5(초당 5/60건)로 더 낮춰
+   * 합 12로 완충 여유(3건)를 뒀다 — 레이다 쪽과 합의된 배분
+   * (2026-09-29). 실제 429를 맞았을 때의 추가 완충은 classify.ts 의
+   * COOLDOWN_ON_QUOTA_ERROR_MS 참고.
    */
-  const llmLimit = createRateLimiter({ perSecond: 0.1 })
+  const llmLimit = createRateLimiter({ perSecond: 5 / 60 })
 
   return {
     env,
