@@ -72,6 +72,8 @@ function harness(cafes: Cafe[], buzzRows: BuzzSnapshot[], over: Partial<Classify
     blog: { search: async () => ({ docs: [], payload: {} }) },
     llm: { name: 'f', modelVersion: 'gemini-3.1-flash-lite', extract: async () => goodAttrs as never },
     now: NOW,
+    // 429 쿨다운은 실제로는 60초 쉰다 — 테스트에서는 기다리지 않는다
+    sleep: async () => {},
     ...over,
   }
   return { deps, saved: () => saved, health: () => health }
@@ -360,6 +362,24 @@ describe('runClassify', () => {
     const classifyHealth = h.health().find((row) => row.source === 'classify') as
       { quotaErrorsToday?: number; quotaErrorsDate?: string } | undefined
     expect(classifyHealth?.quotaErrorsToday).toBe(3)
+  })
+
+  it('429를 실제로 맞으면 포기하기 전까지는 추가로 쉰다', async () => {
+    // 합의한 분당 한도(healthcare-radar 와 합쳐 15건)는 정적인 숫자라
+    // 우연히 겹치는 순간을 못 막는다 — 실제로 부딪히면 스스로 더
+    // 느려지는 게 유일한 완충재다(2026-09-29).
+    const sleeps: number[] = []
+    const cafes = Array.from({ length: 20 }, (_, i) => cafe(String(i)))
+    const h = harness(cafes, cafes.map((c) => buzz(c.kakaoPlaceId)), {
+      llm: {
+        name: 'f', modelVersion: 'v',
+        extract: async () => { throw new SourceError('429', 429) },
+      },
+      sleep: async (ms) => { sleeps.push(ms) },
+    })
+    await runClassify(h.deps)
+    // QUOTA_GIVE_UP=3 이니 1·2번째 실패 뒤에만 쉬고, 3번째는 바로 포기한다
+    expect(sleeps).toEqual([60_000, 60_000])
   })
 
   it('쿼터가 아닌 오류는 계속 진행한다', async () => {

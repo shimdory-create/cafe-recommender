@@ -23,6 +23,8 @@ export interface SpotClassifyDeps {
   }
   llm: LlmClient
   now?: Date
+  /** 주입 가능 — 테스트에서 실제로 기다리지 않는다 */
+  sleep?: (ms: number) => Promise<void>
 }
 
 export interface SpotClassifyResult {
@@ -36,6 +38,9 @@ export interface SpotClassifyResult {
 const QUOTA_GIVE_UP = 3
 const FLUSH_EVERY = 20
 const NEAR_SHARE = 0.3
+/** 카페용 classify.ts 와 같은 이유(2026-09-29) — 실제 429를 맞으면 추가로 쉰다 */
+const COOLDOWN_ON_QUOTA_ERROR_MS = 60_000
+const realSleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
 export function isStaleSpotExtraction(s: Spot): boolean {
   return s.attributes != null && !s.attributes.modelVersion.endsWith(`+${SPOT_PROMPT_VERSION}`)
@@ -84,7 +89,7 @@ export async function runSpotClassify(
   deps: SpotClassifyDeps,
   opts: { limit?: number; redoStale?: boolean; order?: 'hot' | 'near' | 'file' | 'mixed' } = {},
 ): Promise<SpotClassifyResult> {
-  const { store, blog, llm, now = new Date() } = deps
+  const { store, blog, llm, now = new Date(), sleep = realSleep } = deps
   const spots = await store.readSpots()
   const buzz = await store.readSpotBuzz()
 
@@ -170,6 +175,7 @@ export async function runSpotClassify(
           quotaExhausted = true
           break
         }
+        await sleep(COOLDOWN_ON_QUOTA_ERROR_MS)
       } else {
         quotaErrors = 0
       }

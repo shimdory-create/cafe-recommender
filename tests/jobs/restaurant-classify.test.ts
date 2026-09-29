@@ -74,6 +74,7 @@ function harness(
     blog: { search: async () => ({ docs: [], payload: {} }) },
     llm: { modelVersion: 'fake-1', extract: async () => goodAttrs as never } as never,
     now: NOW,
+    sleep: async () => {},
     ...over,
   }
   return { deps, saved: () => saved, health: () => health }

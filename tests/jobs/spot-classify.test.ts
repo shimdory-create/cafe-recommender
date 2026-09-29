@@ -51,6 +51,7 @@ function harness(opts?: {
       }),
     }) as never,
     now: NOW,
+    sleep: async () => {},
   }
   return { deps, spots: () => spots, health: () => health }
 }

@@ -22,6 +22,8 @@ export interface ClassifyDeps {
   }
   llm: LlmClient
   now?: Date
+  /** 주입 가능 — 테스트에서 실제로 기다리지 않는다 */
+  sleep?: (ms: number) => Promise<void>
 }
 
 export interface ClassifyResult {
@@ -42,6 +44,17 @@ export interface ClassifyResult {
  * 220회). 일찍 멈추는 것이 쿼터도 로그도 아낀다.
  */
 const QUOTA_GIVE_UP = 3
+
+/**
+ * 429 를 실제로 맞으면(그 앞에서 이미 rate limiter 가 내부 재시도로
+ * 걸러낸 뒤에도 남은 것이니 일시적 잡음이 아니다) 다음 시도 전에 추가로
+ * 쉰다. 합의한 분당 한도(healthcare-radar 와 합쳐 15건, 2026-09-29)는
+ * 정적인 숫자라 우연히 같은 순간에 겹치는 걸 막지 못한다 — 실제로
+ * 부딪힌 순간엔 스스로 더 느려지는 게 상대방과 재협의 없이 할 수 있는
+ * 유일한 완충재다.
+ */
+const COOLDOWN_ON_QUOTA_ERROR_MS = 60_000
+const realSleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms))
 
 /** 프롬프트 판본이 낡아 재추출해야 하는가 */
 export function isStaleExtraction(c: Cafe): boolean {
@@ -129,7 +142,7 @@ export async function runClassify(
   deps: ClassifyDeps,
   opts: { limit?: number; redoStale?: boolean; order?: 'hot' | 'near' | 'file' | 'mixed' } = {},
 ): Promise<ClassifyResult> {
-  const { store, blog, llm, now = new Date() } = deps
+  const { store, blog, llm, now = new Date(), sleep = realSleep } = deps
   const cafes = await store.readCafes()
   const buzz = await store.readBuzz()
 
@@ -236,6 +249,7 @@ export async function runClassify(
           quotaExhausted = true
           break
         }
+        await sleep(COOLDOWN_ON_QUOTA_ERROR_MS)
       } else {
         quotaErrors = 0
       }
