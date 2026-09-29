@@ -4,7 +4,7 @@ import { HOME, haversineKm, estimateDriveMinutes } from '../pipeline/geo.js'
 import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousSpotName, isFoodCategory } from '../pipeline/spot-relevance.js'
 import { harvestCuratedSpots } from '../pipeline/spot-harvest.js'
-import { recordFailure, recordSuccess } from '../sources/health.js'
+import { recordFailure, recordQuotaError, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
 import { resolveSigungu } from '../pipeline/district.js'
 import type { Spot } from '../spot-schema.js'
@@ -75,6 +75,13 @@ export async function runSpotDiscover(
   const foodCategoryIds = new Set<string>()
   let quotaErrors = 0
   let quotaExhausted = false
+  // weekly-discover.ts 와 같은 이유(2026-09-29 감사) — 그물별로 지역을 다
+  // 돈 뒤 한 번만 성공을 기록한다. 지역마다 즉시 기록하면 실패 뒤에 온
+  // 성공이 그 실패 증거를 지운다.
+  let localAttempted = 0
+  let localSucceeded = 0
+  let harvestAttempted = 0
+  let harvestSucceeded = 0
 
   const add = (p: KakaoPlace, region: Region) => {
     if (!p.id || byId.has(p.id)) return
@@ -91,6 +98,7 @@ export async function runSpotDiscover(
   }
 
   for (const region of opts.regions) {
+    localAttempted++
     try {
       for (const kw of SPOT_SEARCH_KEYWORDS) {
         const query = `${regionLabel(region)} ${kw}`
@@ -101,23 +109,25 @@ export async function runSpotDiscover(
           if (res.isEnd) break
         }
       }
-      await recordSuccess(store, 'kakao-local-spot', now)
+      localSucceeded++
     } catch (e) {
       errors.push(`${region.sigungu}: ${(e as Error).message}`)
       await recordFailure(store, 'kakao-local-spot', e, now)
     }
 
     if (opts.skipHarvest) continue
+    harvestAttempted++
     try {
       const harvested = await harvestCuratedSpots({ blog, local, llm, store }, region)
       harvested.places.forEach((p) => add(p, region))
-      await recordSuccess(store, 'harvest-spot', now)
+      harvestSucceeded++
       quotaErrors = 0
     } catch (e) {
       errors.push(`${region.sigungu} 수확: ${(e as Error).message}`)
       await recordFailure(store, 'harvest-spot', e, now)
 
       if (e instanceof SourceError && e.status === 429) {
+        await recordQuotaError(store, 'harvest-spot', now)
         if (++quotaErrors >= QUOTA_GIVE_UP) {
           quotaExhausted = true
           break
@@ -126,6 +136,13 @@ export async function runSpotDiscover(
         quotaErrors = 0
       }
     }
+  }
+
+  if (localAttempted === 0 || localSucceeded > 0) {
+    await recordSuccess(store, 'kakao-local-spot', now)
+  }
+  if (opts.skipHarvest || harvestAttempted === 0 || harvestSucceeded > 0) {
+    await recordSuccess(store, 'harvest-spot', now)
   }
 
   await store.writeSpots([...byId.values()])

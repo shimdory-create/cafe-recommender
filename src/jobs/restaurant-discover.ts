@@ -5,7 +5,7 @@ import { evaluateRestaurantExclusion } from '../pipeline/restaurant-exclude.js'
 import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousRestaurantName } from '../pipeline/restaurant-relevance.js'
 import { harvestCuratedRestaurants } from '../pipeline/restaurant-harvest.js'
-import { recordFailure, recordSuccess } from '../sources/health.js'
+import { recordFailure, recordQuotaError, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
 import { resolveSigungu } from '../pipeline/district.js'
 import type { Restaurant, BlacklistEntry } from '../restaurant-schema.js'
@@ -80,6 +80,13 @@ export async function runRestaurantDiscover(
   const offRegionIds = new Set<string>()
   let quotaErrors = 0
   let quotaExhausted = false
+  // weekly-discover.ts 와 같은 이유(2026-09-29 감사) — 그물별로 지역을 다
+  // 돈 뒤 한 번만 성공을 기록한다. 지역마다 즉시 기록하면 실패 뒤에 온
+  // 성공이 그 실패 증거를 지운다.
+  let localAttempted = 0
+  let localSucceeded = 0
+  let harvestAttempted = 0
+  let harvestSucceeded = 0
 
   const add = (p: KakaoPlace, region: Region) => {
     if (!p.id || byId.has(p.id)) return
@@ -102,6 +109,7 @@ export async function runRestaurantDiscover(
   }
 
   for (const region of opts.regions) {
+    localAttempted++
     try {
       for (const kw of RESTAURANT_SEARCH_KEYWORDS) {
         const query = `${regionLabel(region)} ${kw}`
@@ -112,23 +120,25 @@ export async function runRestaurantDiscover(
           if (res.isEnd) break
         }
       }
-      await recordSuccess(store, 'kakao-local-restaurant', now)
+      localSucceeded++
     } catch (e) {
       errors.push(`${region.sigungu}: ${(e as Error).message}`)
       await recordFailure(store, 'kakao-local-restaurant', e, now)
     }
 
     if (opts.skipHarvest) continue
+    harvestAttempted++
     try {
       const harvested = await harvestCuratedRestaurants({ blog, local, llm, store }, region)
       harvested.places.forEach((p) => add(p, region))
-      await recordSuccess(store, 'harvest-restaurant', now)
+      harvestSucceeded++
       quotaErrors = 0
     } catch (e) {
       errors.push(`${region.sigungu} 수확: ${(e as Error).message}`)
       await recordFailure(store, 'harvest-restaurant', e, now)
 
       if (e instanceof SourceError && e.status === 429) {
+        await recordQuotaError(store, 'harvest-restaurant', now)
         if (++quotaErrors >= QUOTA_GIVE_UP) {
           quotaExhausted = true
           break
@@ -137,6 +147,13 @@ export async function runRestaurantDiscover(
         quotaErrors = 0
       }
     }
+  }
+
+  if (localAttempted === 0 || localSucceeded > 0) {
+    await recordSuccess(store, 'kakao-local-restaurant', now)
+  }
+  if (opts.skipHarvest || harvestAttempted === 0 || harvestSucceeded > 0) {
+    await recordSuccess(store, 'harvest-restaurant', now)
   }
 
   await store.writeRestaurants([...byId.values()])

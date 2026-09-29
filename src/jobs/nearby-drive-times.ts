@@ -1,6 +1,6 @@
 import { planNearbyDriveFetches } from '../site/nearby-drive-plan.js'
 import { buildPairIndex, pairKeyOf } from '../site/nearby-drive-cache.js'
-import { recordFailure, recordSuccess } from '../sources/health.js'
+import { recordFailure, recordQuotaError, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
 import type { Coord, Route } from '../sources/kakao-directions.js'
 import type { Cafe, Health, NearbyDrivePair } from '../schema.js'
@@ -107,6 +107,9 @@ export async function runNearbyDriveTimes(
       failed++
       await recordFailure(store, NEARBY_DRIVE_SOURCE, e, now)
       if (e instanceof SourceError && e.status === 429) {
+        // classify.ts 와 같은 이유(2026-09-29) — 뒤에 성공한 건이 하나라도
+        // 있으면 recordSuccess 가 lastError 를 지운다.
+        await recordQuotaError(store, NEARBY_DRIVE_SOURCE, now)
         if (++quotaErrors >= QUOTA_GIVE_UP) {
           quotaExhausted = true
           break

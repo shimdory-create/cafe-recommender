@@ -5,7 +5,7 @@ import { evaluateExclusion } from '../pipeline/exclude.js'
 import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousName } from '../pipeline/relevance.js'
 import { harvestCurated } from '../pipeline/harvest.js'
-import { recordFailure, recordSuccess } from '../sources/health.js'
+import { recordFailure, recordQuotaError, recordSuccess } from '../sources/health.js'
 import { SourceError } from '../sources/rate-limiter.js'
 import { resolveSigungu } from '../pipeline/district.js'
 import type { Cafe, BlacklistEntry } from '../schema.js'
@@ -114,6 +114,14 @@ export async function runDiscover(
   const offRegionIds = new Set<string>()
   let quotaErrors = 0
   let quotaExhausted = false
+  // 그물별로 지역을 다 돈 **뒤에 한 번만** 성공을 기록한다(2026-09-29 감사).
+  // 지역마다 즉시 recordSuccess 를 찍으면, 실패한 지역 뒤에 성공한 지역이
+  // 오면 그 실패 증거(lastError/consecutiveFailures)가 지워진다 — 실측
+  // 순서가 성공 여부를 결정하는 건 우연이지 신호가 아니다.
+  let localAttempted = 0
+  let localSucceeded = 0
+  let harvestAttempted = 0
+  let harvestSucceeded = 0
 
   const add = (p: KakaoPlace, region: Region) => {
     if (!p.id || byId.has(p.id)) return
@@ -142,6 +150,7 @@ export async function runDiscover(
   // `kakao-local` 실패로 적혔다** — 실측: kakao-local 에 "gemini HTTP 429" 가
   // 64건. 어디가 아픈지 모르는 건강 기록은 없는 것보다 나쁘다.
   for (const region of opts.regions) {
+    localAttempted++
     try {
       // --- 그물 A: 키워드 검색 (시도명 포함 — 동명 시군구 때문) ---
       for (const kw of SEARCH_KEYWORDS) {
@@ -153,7 +162,7 @@ export async function runDiscover(
           if (res.isEnd) break
         }
       }
-      await recordSuccess(store, 'kakao-local', now)
+      localSucceeded++
     } catch (e) {
       errors.push(`${region.sigungu}: ${(e as Error).message}`)
       await recordFailure(store, 'kakao-local', e, now)
@@ -161,10 +170,11 @@ export async function runDiscover(
 
     // --- 그물 C: 블로그 큐레이션 수확 (블로그 + LLM + 장소 정규화) ---
     if (opts.skipHarvest) continue
+    harvestAttempted++
     try {
       const harvested = await harvestCurated({ blog, local, llm, store }, region)
       harvested.places.forEach((p) => add(p, region))
-      await recordSuccess(store, 'harvest', now)
+      harvestSucceeded++
       quotaErrors = 0
     } catch (e) {
       errors.push(`${region.sigungu} 수확: ${(e as Error).message}`)
@@ -173,6 +183,10 @@ export async function runDiscover(
       // 쿼터 소진은 지역 문제가 아니라 그날의 한도 문제다. 계속 시도해도
       // 전부 같은 오류이므로 멈춘다.
       if (e instanceof SourceError && e.status === 429) {
+        // classify.ts 와 같은 이유(2026-09-29) — 뒤에 통과하는 지역이
+        // 하나라도 있으면 recordSuccess 가 lastError 를 지운다. 이 카운터는
+        // 그것과 무관하게 오늘 쿼터 오류가 있었다는 사실을 남긴다.
+        await recordQuotaError(store, 'harvest', now)
         if (++quotaErrors >= QUOTA_GIVE_UP) {
           quotaExhausted = true
           break
@@ -181,6 +195,16 @@ export async function runDiscover(
         quotaErrors = 0
       }
     }
+  }
+
+  // 그물별로 한 번만 성공을 기록한다 — 시도한 지역이 없거나(스킵) 하나라도
+  // 성공했으면 성공. 전부 실패했다면 마지막 recordFailure 가 남긴 증거를
+  // 그대로 둔다(2026-09-29 감사, jobs/classify.ts 와 같은 패턴).
+  if (localAttempted === 0 || localSucceeded > 0) {
+    await recordSuccess(store, 'kakao-local', now)
+  }
+  if (opts.skipHarvest || harvestAttempted === 0 || harvestSucceeded > 0) {
+    await recordSuccess(store, 'harvest', now)
   }
 
   await store.writeCafes([...byId.values()])
