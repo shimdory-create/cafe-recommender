@@ -13,7 +13,10 @@ const EnvSchema = z
     // 저장: DB 없음. JSON in git (스펙 v3 9절)
     DATA_DIR: z.string().min(1).default('data'),
 
-    // 출발지: 인천 부평구 수변로 334 (pipeline/geo.ts 의 HOME 과 같은 값)
+    // 출발지 좌표. 기본값은 실제 사용 중인 위치 — cli/context.ts 가
+    // 이 값을 Context.home 으로 만들어 발굴·실주행 잡에 넘긴다
+    // (2026-09-29 배선 수정 전엔 pipeline/geo.ts 의 상수를 각 잡이 직접
+    // import 해서 이 환경변수가 무시됐다).
     HOME_LAT: z.coerce.number().default(37.5151091),
     HOME_LNG: z.coerce.number().default(126.7398273),
   })

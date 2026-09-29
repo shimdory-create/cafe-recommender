@@ -1,6 +1,6 @@
 import { SPOT_SEARCH_KEYWORDS } from '../config/spot-keywords.js'
 import { regionLabel, type Region } from '../config/regions.js'
-import { HOME, haversineKm, estimateDriveMinutes } from '../pipeline/geo.js'
+import { haversineKm, estimateDriveMinutes, type LatLng } from '../pipeline/geo.js'
 import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousSpotName, isFoodCategory } from '../pipeline/spot-relevance.js'
 import { harvestCuratedSpots } from '../pipeline/spot-harvest.js'
@@ -26,6 +26,8 @@ export interface SpotDiscoverDeps {
   }
   llm: LlmClient
   now?: Date
+  /** 출발지 — 주지 않으면 cli/context.ts 배선 전 기본값을 쓴다 */
+  home?: LatLng
 }
 
 export interface SpotDiscoverResult {
@@ -45,8 +47,8 @@ const QUOTA_GIVE_UP = 3
 export const spotNaverMapUrl = (sigungu: string, name: string) =>
   `https://map.naver.com/p/search/${encodeURIComponent(`${sigungu} ${name}`)}`
 
-function toSpot(p: KakaoPlace, region: Region, now: Date): Spot {
-  const straightKm = haversineKm(HOME, { lat: p.lat, lng: p.lng })
+function toSpot(p: KakaoPlace, region: Region, now: Date, home: LatLng): Spot {
+  const straightKm = haversineKm(home, { lat: p.lat, lng: p.lng })
   const sigungu = resolveSigungu({
     roadAddress: p.roadAddressName, address: p.addressName, scanned: region.sigungu,
   })
@@ -66,7 +68,10 @@ export async function runSpotDiscover(
   deps: SpotDiscoverDeps,
   opts: { regions: Region[]; skipHarvest?: boolean },
 ): Promise<SpotDiscoverResult> {
-  const { store, local, blog, llm, now = new Date() } = deps
+  const {
+    store, local, blog, llm, now = new Date(),
+    home = { lat: 37.5151091, lng: 126.7398273 },
+  } = deps
   const errors: string[] = []
   const existing = await store.readSpots()
   const byId = new Map<string, Spot>(existing.map((s) => [s.kakaoPlaceId, s]))
@@ -93,7 +98,7 @@ export async function runSpotDiscover(
       foodCategoryIds.add(p.id)
       return
     }
-    byId.set(p.id, toSpot(p, region, now))
+    byId.set(p.id, toSpot(p, region, now, home))
     discovered++
   }
 

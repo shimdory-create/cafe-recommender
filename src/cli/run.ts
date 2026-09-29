@@ -681,6 +681,7 @@ async function main() {
         local: base.local,
         blog: base.blog,
         llm: base.llm,
+        home: base.home,
       }
       // --pilot: 처음엔 가까운 시군구 5곳만 스캔한다 (파일럿 지역, Task 15).
       const PILOT_SIGUNGU = ['부평구', '계양구', '서구', '김포시', '검단구']
@@ -822,6 +823,7 @@ async function main() {
       const ctx = {
         store: createRestaurantJsonStore(base.env.DATA_DIR),
         directions: base.directions,
+        home: base.home,
       }
       const limit = numFlag(rest, 'limit')
       const force = flag(rest, 'force') !== undefined
@@ -837,6 +839,7 @@ async function main() {
         local: base.local,
         blog: base.blog,
         llm: base.llm,
+        home: base.home,
       }
       // --pilot: 처음엔 가까운 시군구 5곳만 스캔한다 (파일럿 지역, 설계 문서 4절).
       const PILOT_SIGUNGU = ['부평구', '계양구', '서구', '김포시', '검단구']
@@ -974,6 +977,7 @@ async function main() {
       const ctx = {
         store: createSpotJsonStore(base.env.DATA_DIR),
         directions: base.directions,
+        home: base.home,
       }
       const limit = numFlag(rest, 'limit')
       const force = flag(rest, 'force') !== undefined

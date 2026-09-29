@@ -7,6 +7,7 @@ import { createKakaoDirections } from '../sources/kakao-directions.js'
 import { createLlm } from '../llm/index.js'
 import type { Store } from '../store/types.js'
 import type { LlmClient } from '../llm/types.js'
+import type { LatLng } from '../pipeline/geo.js'
 
 /**
  * CLI·잡이 쓰는 배선. 실제 의존을 한곳에서 조립한다.
@@ -19,6 +20,7 @@ export interface Context {
   blog: ReturnType<typeof createKakaoBlog>
   directions: ReturnType<typeof createKakaoDirections>
   llm: LlmClient
+  home: LatLng
 }
 
 export function createContext(): Context {
@@ -59,6 +61,7 @@ export function createContext(): Context {
       limit: kakaoLimit,
     }),
     llm: createLlm(env, { fetcher: fetch, limit: llmLimit }),
+    home: { lat: env.HOME_LAT, lng: env.HOME_LNG },
   }
 }
 

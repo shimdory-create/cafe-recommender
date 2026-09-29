@@ -1,6 +1,6 @@
-import { HOME } from '../pipeline/geo.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import type { Coord, Route } from '../sources/kakao-directions.js'
+import type { LatLng } from '../pipeline/geo.js'
 import type { Spot } from '../spot-schema.js'
 import type { SpotStore } from '../store/spot-json-store.js'
 
@@ -9,6 +9,8 @@ export interface SpotDriveDeps {
     & Pick<SpotStore, 'readHealth' | 'writeHealth'>
   directions: { route: (o: Coord, d: Coord) => Promise<{ route: Route | null; payload: unknown }> }
   now?: Date
+  /** 출발지 — 주지 않으면 cli/context.ts 배선 전 기본값을 쓴다 */
+  home?: LatLng
 }
 
 export interface SpotDriveResult {
@@ -30,7 +32,7 @@ export async function runSpotDriveTimes(
   deps: SpotDriveDeps,
   opts: { limit?: number; force?: boolean } = {},
 ): Promise<SpotDriveResult> {
-  const { store, directions, now = new Date() } = deps
+  const { store, directions, now = new Date(), home = { lat: 37.5151091, lng: 126.7398273 } } = deps
   const spots = await store.readSpots()
 
   const targets = spots
@@ -45,7 +47,7 @@ export async function runSpotDriveTimes(
   for (const [i, s] of targets.entries()) {
     if (i > 0 && i % FLUSH_EVERY === 0) await store.writeSpots(spots)
     try {
-      const { route, payload } = await directions.route(HOME, { lat: s.lat, lng: s.lng })
+      const { route, payload } = await directions.route(home, { lat: s.lat, lng: s.lng })
       await store.appendRaw(SPOT_DIRECTIONS_SOURCE, `${s.sigungu} ${s.name}`, payload, now)
       if (!route) {
         unroutable++

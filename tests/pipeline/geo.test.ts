@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest'
-import { haversineKm, estimateDriveMinutes, HOME } from '../../src/pipeline/geo.js'
+import { haversineKm, estimateDriveMinutes } from '../../src/pipeline/geo.js'
+
+// 출발지는 더 이상 geo.ts 에 상수로 없다 — cli/context.ts 가 환경변수에서
+// 만들어 각 잡에 넘긴다(2026-09-29 배선 수정). 여기선 좌표 계산만
+// 검증하면 되므로 부평 근처의 임의 고정값을 픽스처로 쓴다.
+const HOME = { lat: 37.5151091, lng: 126.7398273 }
 
 describe('haversineKm', () => {
   it('같은 지점은 0이다', () => {

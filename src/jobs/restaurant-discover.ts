@@ -1,6 +1,6 @@
 import { RESTAURANT_SEARCH_KEYWORDS } from '../config/restaurant-keywords.js'
 import { regionLabel, type Region } from '../config/regions.js'
-import { HOME, haversineKm, estimateDriveMinutes } from '../pipeline/geo.js'
+import { haversineKm, estimateDriveMinutes, type LatLng } from '../pipeline/geo.js'
 import { evaluateRestaurantExclusion } from '../pipeline/restaurant-exclude.js'
 import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousRestaurantName } from '../pipeline/restaurant-relevance.js'
@@ -31,6 +31,8 @@ export interface RestaurantDiscoverDeps {
   }
   llm: LlmClient
   now?: Date
+  /** 출발지 — 주지 않으면 cli/context.ts 배선 전 기본값을 쓴다 */
+  home?: LatLng
 }
 
 export interface RestaurantDiscoverResult {
@@ -49,8 +51,8 @@ const QUOTA_GIVE_UP = 3
 export const restaurantNaverMapUrl = (sigungu: string, name: string) =>
   `https://map.naver.com/p/search/${encodeURIComponent(`${sigungu} ${name}`)}`
 
-function toRestaurant(p: KakaoPlace, region: Region, now: Date): Restaurant {
-  const straightKm = haversineKm(HOME, { lat: p.lat, lng: p.lng })
+function toRestaurant(p: KakaoPlace, region: Region, now: Date, home: LatLng): Restaurant {
+  const straightKm = haversineKm(home, { lat: p.lat, lng: p.lng })
   const sigungu = resolveSigungu({
     roadAddress: p.roadAddressName, address: p.addressName, scanned: region.sigungu,
   })
@@ -70,7 +72,10 @@ export async function runRestaurantDiscover(
   deps: RestaurantDiscoverDeps,
   opts: { regions: Region[]; skipHarvest?: boolean },
 ): Promise<RestaurantDiscoverResult> {
-  const { store, local, blog, llm, now = new Date() } = deps
+  const {
+    store, local, blog, llm, now = new Date(),
+    home = { lat: 37.5151091, lng: 126.7398273 },
+  } = deps
   const errors: string[] = []
   const existing = await store.readRestaurants()
   const byId = new Map<string, Restaurant>(existing.map((r) => [r.kakaoPlaceId, r]))
@@ -94,7 +99,7 @@ export async function runRestaurantDiscover(
       offRegionIds.add(p.id)
       return
     }
-    const restaurant = toRestaurant(p, region, now)
+    const restaurant = toRestaurant(p, region, now, home)
     const reason = evaluateRestaurantExclusion(
       { name: p.placeName, categoryName: p.categoryName }, blacklist,
     )

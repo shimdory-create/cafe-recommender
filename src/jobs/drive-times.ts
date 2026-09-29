@@ -1,6 +1,6 @@
-import { HOME } from '../pipeline/geo.js'
 import { recordFailure, recordSuccess } from '../sources/health.js'
 import type { Coord, Route } from '../sources/kakao-directions.js'
+import type { LatLng } from '../pipeline/geo.js'
 import type { Cafe } from '../schema.js'
 import type { Store } from '../store/types.js'
 
@@ -10,6 +10,8 @@ export interface DriveDeps {
     route: (o: Coord, d: Coord) => Promise<{ route: Route | null; payload: unknown }>
   }
   now?: Date
+  /** 출발지 — 주지 않으면 cli/context.ts 배선 전 기본값을 쓴다 */
+  home?: LatLng
 }
 
 export interface DriveResult {
@@ -34,7 +36,7 @@ export async function runDriveTimes(
   deps: DriveDeps,
   opts: { limit?: number; force?: boolean } = {},
 ): Promise<DriveResult> {
-  const { store, directions, now = new Date() } = deps
+  const { store, directions, now = new Date(), home = { lat: 37.5151091, lng: 126.7398273 } } = deps
   const cafes = await store.readCafes()
 
   const targets = cafes
@@ -49,7 +51,7 @@ export async function runDriveTimes(
   for (const [i, c] of targets.entries()) {
     if (i > 0 && i % FLUSH_EVERY === 0) await store.writeCafes(cafes)
     try {
-      const { route, payload } = await directions.route(HOME, { lat: c.lat, lng: c.lng })
+      const { route, payload } = await directions.route(home, { lat: c.lat, lng: c.lng })
       await store.appendRaw('kakao-directions', `${c.sigungu} ${c.name}`, payload, now)
       if (!route) {
         unroutable++

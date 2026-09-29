@@ -1,6 +1,6 @@
 import { SEARCH_KEYWORDS } from '../config/keywords.js'
 import { regionLabel, type Region } from '../config/regions.js'
-import { HOME, haversineKm, estimateDriveMinutes } from '../pipeline/geo.js'
+import { haversineKm, estimateDriveMinutes, type LatLng } from '../pipeline/geo.js'
 import { evaluateExclusion } from '../pipeline/exclude.js'
 import { belongsToRegion } from '../pipeline/region-match.js'
 import { isAmbiguousName } from '../pipeline/relevance.js'
@@ -32,6 +32,8 @@ export interface DiscoverDeps {
   }
   llm: LlmClient
   now?: Date
+  /** 출발지 — 주지 않으면 cli/context.ts 배선 전 기본값을 쓴다 */
+  home?: LatLng
 }
 
 export interface DiscoverResult {
@@ -59,8 +61,8 @@ const QUOTA_GIVE_UP = 3
 export const naverMapUrl = (sigungu: string, name: string) =>
   `https://map.naver.com/p/search/${encodeURIComponent(`${sigungu} ${name}`)}`
 
-function toCafe(p: KakaoPlace, region: Region, now: Date): Cafe {
-  const straightKm = haversineKm(HOME, { lat: p.lat, lng: p.lng })
+function toCafe(p: KakaoPlace, region: Region, now: Date, home: LatLng): Cafe {
+  const straightKm = haversineKm(home, { lat: p.lat, lng: p.lng })
   // 검색한 지역이 아니라 **주소의 행정구역**을 쓴다. 키워드 검색은 경계 너머
   // 카페도 주므로, 검색 지역을 그대로 저장하면 카드·지도 링크·지역 묶음이
   // 모두 어긋난다 (실측 20/299). 자세한 이유는 pipeline/district.ts.
@@ -103,7 +105,10 @@ export async function runDiscover(
   deps: DiscoverDeps,
   opts: { regions: Region[]; skipHarvest?: boolean },
 ): Promise<DiscoverResult> {
-  const { store, local, blog, llm, now = new Date() } = deps
+  const {
+    store, local, blog, llm, now = new Date(),
+    home = { lat: 37.5151091, lng: 126.7398273 },
+  } = deps
   const errors: string[] = []
   const existing = await store.readCafes()
   const byId = new Map<string, Cafe>(existing.map((c) => [c.kakaoPlaceId, c]))
@@ -131,7 +136,7 @@ export async function runDiscover(
       offRegionIds.add(p.id)
       return
     }
-    const cafe = toCafe(p, region, now)
+    const cafe = toCafe(p, region, now, home)
     const reason = evaluateExclusion(
       { name: p.placeName, categoryName: p.categoryName },
       blacklist,
