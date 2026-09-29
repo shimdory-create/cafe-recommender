@@ -65,6 +65,7 @@ import { runSpotWeeklySuggest } from '../jobs/spot-suggest.js'
 import { runSpotLiveness } from '../jobs/spot-liveness.js'
 import { runSpotDriveTimes } from '../jobs/spot-drive-times.js'
 import { runNearbyDriveTimes } from '../jobs/nearby-drive-times.js'
+import { recordFailure, recordSuccess } from '../sources/health.js'
 import { familyActivityIds } from '../pipeline/family-activity.js'
 
 const argv = process.argv.slice(2)
@@ -521,8 +522,13 @@ async function main() {
           `${restOut}\n  식당 ${restPayload.restaurants.length}곳`
           + ` (일반 ${restPayload.stats.passed} / 도심전용 ${restPayload.stats.cityOnly})`,
         )
+        await recordSuccess(store, 'site-restaurant', now)
       } catch (e) {
+        // 콘솔 로그만으로는 Actions 로그가 지워지면 증거가 안 남는다
+        // (2026-09-29 감사) — health 에도 남겨 usage-watch 의 source_failing
+        // 이 잡게 한다.
         console.error(`[!] 식당 페이로드 생성 실패 — 카페 빌드는 계속 진행한다: ${(e as Error).message}`)
+        await recordFailure(store, 'site-restaurant', e, now)
       }
 
       // 가볼 곳 페이로드도 같은 case 에서 만든다 — 독립된 try/catch로 감싼다.
@@ -546,8 +552,10 @@ async function main() {
           `${spotOut}\n  가볼 곳 ${spotPayload.spots.length}곳`
           + ` (일반 ${spotPayload.stats.passed} / 도심전용 ${spotPayload.stats.cityOnly})`,
         )
+        await recordSuccess(store, 'site-spot', now)
       } catch (e) {
         console.error(`[!] 가볼 곳 페이로드 생성 실패 — 카페·식당 빌드는 계속 진행한다: ${(e as Error).message}`)
+        await recordFailure(store, 'site-spot', e, now)
       }
 
       // 근처 추천 3파일 — 카페·식당·가볼 곳 페이로드가 전부 준비된 뒤에만
@@ -574,8 +582,10 @@ async function main() {
           + `· 식당 ${Object.keys(nearby.restaurant).length}곳 `
           + `· 가볼 곳 ${Object.keys(nearby.spot).length}곳)`,
         )
+        await recordSuccess(store, 'site-nearby', now)
       } catch (e) {
         console.error(`[!] 근처 추천 계산 실패 — 다른 페이로드는 이미 써졌다: ${(e as Error).message}`)
+        await recordFailure(store, 'site-nearby', e, now)
       }
       break
     }
