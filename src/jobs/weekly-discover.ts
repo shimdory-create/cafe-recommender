@@ -197,13 +197,19 @@ export async function runDiscover(
     }
   }
 
-  // 그물별로 한 번만 성공을 기록한다 — 시도한 지역이 없거나(스킵) 하나라도
-  // 성공했으면 성공. 전부 실패했다면 마지막 recordFailure 가 남긴 증거를
-  // 그대로 둔다(2026-09-29 감사, jobs/classify.ts 와 같은 패턴).
-  if (localAttempted === 0 || localSucceeded > 0) {
+  // 그물별로 한 번만 성공을 기록한다 — **전부** 성공했을 때만이다(스킵도
+  // 성공 취급). classify.ts 의 "하나라도 성공하면 성공"과는 다른 기준을
+  // 쓴다 — 여기서 catch 에 걸리는 실패는 이미 rate limiter 가 내부에서
+  // 4회 재시도한 뒤에도 남은 것이라 노이즈가 아니라 그 지역이 계속 아프다는
+  // 뜻이다. "하나라도 성공하면 성공"으로 하면 1개 지역만 빼고 항상
+  // 실패하는 상황도 영원히 건강하다고 나온다(2026-09-29 감사 + 실사 중
+  // 발견 — 처음엔 하나라도 성공하면 성공으로 짰었는데, 마지막 지역만
+  // 계속 성공하는 시나리오에서 앞선 지역들의 지속적 실패가 그대로 가려짐을
+  // 검증 중 확인했다).
+  if (localAttempted === 0 || localSucceeded === localAttempted) {
     await recordSuccess(store, 'kakao-local', now)
   }
-  if (opts.skipHarvest || harvestAttempted === 0 || harvestSucceeded > 0) {
+  if (opts.skipHarvest || harvestAttempted === 0 || harvestSucceeded === harvestAttempted) {
     await recordSuccess(store, 'harvest', now)
   }
 

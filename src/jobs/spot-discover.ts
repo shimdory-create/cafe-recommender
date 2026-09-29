@@ -138,10 +138,13 @@ export async function runSpotDiscover(
     }
   }
 
-  if (localAttempted === 0 || localSucceeded > 0) {
+  // **전부** 성공했을 때만 기록한다 — weekly-discover.ts 참고(2026-09-29
+  // 감사 + 실사 중 발견, "하나라도 성공하면 성공"은 한 지역만 빼고 항상
+  // 실패해도 영원히 건강하다고 나오는 재발 버그였다).
+  if (localAttempted === 0 || localSucceeded === localAttempted) {
     await recordSuccess(store, 'kakao-local-spot', now)
   }
-  if (opts.skipHarvest || harvestAttempted === 0 || harvestSucceeded > 0) {
+  if (opts.skipHarvest || harvestAttempted === 0 || harvestSucceeded === harvestAttempted) {
     await recordSuccess(store, 'harvest-spot', now)
   }
 

@@ -165,6 +165,36 @@ describe('runDiscover', () => {
     expect(local?.lastError).toContain('장애')
   })
 
+  it('한 지역이 계속 실패해도 다른 지역이 성공하면 kakao-local 성공을 기록하지 않는다', async () => {
+    // 2026-09-29 실사 중 발견 — 처음엔 "하나라도 성공하면 성공"으로 짰는데,
+    // 지역 하나가 매번 실패해도 다른 지역이 매번 성공하면 그 실패가 영원히
+    // 안 보였다. 전부 성공해야만 성공을 기록해야 이런 지속적 부분 장애가
+    // health 에 남는다.
+    const health: { source: string; lastError: string | null; consecutiveFailures: number }[] = []
+    const regions: Region[] = [
+      { sido: '경기', sigungu: '지역0' },
+      { sido: '경기', sigungu: '지역1' },
+      { sido: '경기', sigungu: '지역2' },
+    ]
+    const h = harness({
+      local: {
+        searchKeyword: async (q: string) => {
+          if (q.includes('지역0')) throw new Error('지역0 계속 장애')
+          return { places: [], isEnd: true, payload: {} }
+        },
+      },
+      llm: { name: 'f', modelVersion: 'v', extract: async () => ({ names: [] }) as never },
+    })
+    h.deps.store.writeHealth = async (rows) => {
+      health.length = 0
+      health.push(...rows)
+    }
+    await runDiscover(h.deps, { regions, skipHarvest: true })
+    const local = health.find((x) => x.source === 'kakao-local')
+    expect(local?.lastError).toContain('지역0')
+    expect(local?.consecutiveFailures).toBeGreaterThan(0)
+  })
+
   it('그물 C 로 찾은 카페도 추가한다', async () => {
     const h = harness({
       blog: {
