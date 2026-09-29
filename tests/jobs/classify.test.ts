@@ -435,4 +435,19 @@ describe('runClassify', () => {
     const classifyHealth = h.health().find((x) => x.source === 'classify')
     expect(classifyHealth?.lastSuccessAt).toBeFalsy()
   })
+
+  it('Layer 2 탈락만 있고 실제 API 호출은 전부 실패하면 성공을 기록하지 않는다', async () => {
+    // 2026-09-29 감사: excluded>0 만 보면 Layer 2 탈락(API 미사용)이 키가
+    // 완전히 죽은 것까지 "성공"으로 가려버린다.
+    const h = harness(
+      [cafe('1'), cafe('2')],
+      [buzz('1', { precision: 0.1, postsPer30: 2 }), buzz('2')],
+      { llm: { name: 'f', modelVersion: 'v', extract: async () => { throw new Error('401 invalid key') } } },
+    )
+    const r = await runClassify(h.deps)
+    expect(r.excluded).toBe(1) // '1' 은 Layer 2 탈락
+    expect(r.failed).toBe(1) // '2' 는 API 시도 후 실패
+    const classifyHealth = h.health().find((x) => x.source === 'classify')
+    expect(classifyHealth?.lastSuccessAt).toBeFalsy()
+  })
 })

@@ -170,6 +170,11 @@ export async function runClassify(
   let failed = 0
   let quotaErrors = 0
   let quotaExhausted = false
+  // Layer 2 탈락은 API 를 전혀 안 쓴다 — 그것만으로 excluded>0 이 되면
+  // 키가 완전히 죽어도(모든 실제 호출 실패) "성공"으로 찍힌다(2026-09-29
+  // 감사에서 발견). 실제로 블로그/LLM 을 탄 시도·성공만 건강 신호로 쓴다.
+  let apiAttempted = 0
+  let apiSucceeded = 0
 
   for (const [i, c] of targets.entries()) {
     // 200곳이면 30분 넘게 돈다. 끝에서 한 번만 쓰면 중간에 죽을 때
@@ -195,6 +200,7 @@ export async function runClassify(
       // --- 주차 전용 스니펫 (스펙 7.3) ---
       // 한국 블로거는 주차를 거의 항상 쓴다. 전용 검색 1회가 등급
       // 정확도를 크게 올린다.
+      apiAttempted++
       const parkingQuery = `${c.sigungu} ${c.name} 주차`
       const parkingRes = await blog.search(parkingQuery, { size: 10, sort: 'accuracy' })
       await store.appendRaw('kakao-blog-parking', parkingQuery, parkingRes.payload, now)
@@ -214,6 +220,7 @@ export async function runClassify(
           parkingSnippets: parkingRes.docs.map((d) => `${d.title} ${d.contents}`),
         },
       )
+      apiSucceeded++
       c.attributes = attributes
 
       // --- Layer 4 ---
@@ -260,7 +267,14 @@ export async function runClassify(
   // targets 가 0곳이면 판정 대기 큐가 실제로 비어 있는 정상 상태다 — 통과 0곳과
   // 구분 못 하면(2026-09) 큐가 빈 채로 며칠만 지나도 daily-watch 의 36시간
   // source_stale 경보가 오탐으로 울린다.
-  if (targets.length === 0 || classified + excluded > 0) {
+  //
+  // apiAttempted===0 도 같은 이유로 정상이다 — 이번 회차 후보가 전부
+  // Layer 2에서 걸러져 애초에 API를 탈 일이 없었을 뿐이다. 반대로 하나라도
+  // API를 탔는데 전부 실패했다면(키 무효화 등) apiSucceeded 가 0으로
+  // 남아 recordSuccess 를 막는다 — excluded 만으로는 이 차이를 못 본다
+  // (2026-09-29 감사: Layer 2 탈락도 excluded 에 잡혀 100% API 실패가
+  // "성공"으로 찍혔다).
+  if (targets.length === 0 || apiAttempted === 0 || apiSucceeded > 0) {
     await recordSuccess(store, 'classify', now)
   }
   return { classified, excluded, skipped, failed, quotaExhausted }

@@ -223,6 +223,24 @@ describe('runRestaurantClassify', () => {
     )
     expect(health?.lastSuccessAt).toBeFalsy()
   })
+
+  it('Layer 2 탈락만 있고 실제 API 호출은 전부 실패하면 성공을 기록하지 않는다', async () => {
+    // 2026-09-29 감사: excluded>0 만 보면 Layer 2 탈락(API 미사용)이 키가
+    // 완전히 죽은 것까지 "성공"으로 가려버린다.
+    const h = harness(
+      [restaurant('1'), restaurant('2')],
+      [buzz('1', { precision: 0.1, postsPer30: 2 }), buzz('2')],
+      { llm: { modelVersion: 'v', extract: async () => { throw new Error('401 invalid key') } } as never },
+    )
+    const r = await runRestaurantClassify(h.deps)
+    expect(r.excluded).toBe(1) // '1' 은 Layer 2 탈락
+    expect(r.failed).toBe(1) // '2' 는 API 시도 후 실패
+    const health = h.health().find(
+      (x): x is { source: string; lastSuccessAt: string | null } =>
+        (x as { source?: string }).source === 'classify-restaurant',
+    )
+    expect(health?.lastSuccessAt).toBeFalsy()
+  })
 })
 
 describe('orderPendingRestaurants', () => {

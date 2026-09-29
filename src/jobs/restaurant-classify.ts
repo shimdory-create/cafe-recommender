@@ -112,6 +112,11 @@ export async function runRestaurantClassify(
   let failed = 0
   let quotaErrors = 0
   let quotaExhausted = false
+  // classify.ts 와 같은 이유(2026-09-29 감사) — Layer 2 탈락은 API 를
+  // 전혀 안 쓰므로 excluded>0 만으로 성공을 판정하면 키가 완전히
+  // 죽어도(실제 호출 전부 실패) 성공으로 찍힌다.
+  let apiAttempted = 0
+  let apiSucceeded = 0
 
   for (const [i, r] of targets.entries()) {
     if (i > 0 && i % FLUSH_EVERY === 0) await store.writeRestaurants(restaurants)
@@ -130,6 +135,7 @@ export async function runRestaurantClassify(
         continue
       }
 
+      apiAttempted++
       const parkingQuery = `${r.sigungu} ${r.name} 주차`
       const parkingRes = await blog.search(parkingQuery, { size: 10, sort: 'accuracy' })
       await store.appendRaw('kakao-blog-parking-restaurant', parkingQuery, parkingRes.payload, now)
@@ -143,6 +149,7 @@ export async function runRestaurantClassify(
         snippets: mainRes.docs.map((d) => `${d.title} ${d.contents}`),
         parkingSnippets: parkingRes.docs.map((d) => `${d.title} ${d.contents}`),
       })
+      apiSucceeded++
       r.attributes = attributes
       r.tags = assignRestaurantTags(attributes)
 
@@ -175,8 +182,10 @@ export async function runRestaurantClassify(
 
   await store.writeRestaurants(restaurants)
   // targets 가 0곳이면 판정 대기 큐가 실제로 비어 있는 정상 상태다 — 카페와
-  // 같은 이유로 구분한다 (jobs/classify.ts 참고, daily-watch 오탐 방지)
-  if (targets.length === 0 || classified + excluded > 0) {
+  // 같은 이유로 구분한다 (jobs/classify.ts 참고, daily-watch 오탐 방지).
+  // apiAttempted===0 도 정상(전부 Layer 2 탈락) — apiSucceeded 로만 실제
+  // API 건강을 본다 (2026-09-29 감사, jobs/classify.ts 참고).
+  if (targets.length === 0 || apiAttempted === 0 || apiSucceeded > 0) {
     await recordSuccess(store, 'classify-restaurant', now)
   }
   return { classified, excluded, skipped, failed, quotaExhausted }

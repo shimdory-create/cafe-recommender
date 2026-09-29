@@ -101,4 +101,44 @@ describe('runSpotClassify', () => {
     const health = h.health().find((x) => x.source === 'classify-spot')
     expect(health?.lastSuccessAt).toBeFalsy()
   })
+
+  it('Layer 2 탈락만 있고 실제 API 호출은 전부 실패하면 성공을 기록하지 않는다', async () => {
+    // 2026-09-29 감사: excluded>0 만 보면 Layer 2 탈락(API 미사용)이 키가
+    // 완전히 죽은 것까지 "성공"으로 가려버린다. API 를 탄 시도가 하나라도
+    // 있고 그게 전부 실패했다면 excluded 가 0 이 아니어도 실패로 남아야 한다.
+    const h = harness({
+      spots: [
+        {
+          kakaoPlaceId: '1', name: '탈락공원', sigungu: '부평구', lat: 37.5, lng: 126.7,
+          firstSeenAt: '2026-01-01T00:00:00.000Z', status: 'pending_extraction' as const,
+          ambiguousName: false, attributes: null, tags: [],
+        },
+        {
+          kakaoPlaceId: '2', name: '진짜공원', sigungu: '부평구', lat: 37.5, lng: 126.7,
+          firstSeenAt: '2026-01-01T00:00:00.000Z', status: 'pending_extraction' as const,
+          ambiguousName: false, attributes: null, tags: [],
+        },
+      ],
+      buzz: [
+        {
+          kakaoPlaceId: '1', capturedAt: '2026-09-02', receivedCount: 10, relevantCount: 1,
+          precision: 0.1, spanDays: 20, postsPer30: 15, posts30d: 8, postsPrev: 4,
+          firstPostDate: '2026-01-01', latestPostDate: '2026-08-30', acceleration: 1.5,
+          suspectAmbiguous: false,
+        },
+        {
+          kakaoPlaceId: '2', capturedAt: '2026-09-02', receivedCount: 10, relevantCount: 8,
+          precision: 0.8, spanDays: 20, postsPer30: 15, posts30d: 8, postsPrev: 4,
+          firstPostDate: '2026-01-01', latestPostDate: '2026-08-30', acceleration: 1.5,
+          suspectAmbiguous: false,
+        },
+      ],
+      llm: { modelVersion: 'v', extract: async () => { throw new Error('401 invalid key') } },
+    })
+    const r = await runSpotClassify(h.deps)
+    expect(r.excluded).toBe(1) // '1' 은 Layer 2 탈락
+    expect(r.failed).toBe(1) // '2' 는 API 시도 후 실패
+    const health = h.health().find((x) => x.source === 'classify-spot')
+    expect(health?.lastSuccessAt).toBeFalsy()
+  })
 })
