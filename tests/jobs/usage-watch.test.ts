@@ -168,6 +168,18 @@ describe('detectAnomalies', () => {
     expect(detectAnomalies(input).some((a) => a.code === 'source_stale')).toBe(false)
   })
 
+  it('격주 소스(신규 발굴)는 14일 지나도 알리지 않는다 (쉬는 주가 정상)', () => {
+    const input = healthy()
+    input.health = [health({ source: 'kakao-local', lastSuccessAt: '2026-08-07T22:40:00.000Z' })]
+    expect(detectAnomalies(input).some((a) => a.code === 'source_stale')).toBe(false)
+  })
+
+  it('격주 소스가 16일 넘게 조용하면 알린다', () => {
+    const input = healthy()
+    input.health = [health({ source: 'kakao-local', lastSuccessAt: '2026-08-04T22:40:00.000Z' })]
+    expect(detectAnomalies(input).some((a) => a.code === 'source_stale')).toBe(true)
+  })
+
   it('한 번도 성공하지 않은 소스는 판단하지 않는다 (첫 실행 오탐 방지)', () => {
     const input = healthy()
     input.health = [health({ lastSuccessAt: null })]

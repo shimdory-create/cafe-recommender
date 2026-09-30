@@ -39,16 +39,35 @@ const DAILY_SOURCES = [
   'kakao-blog-spot', 'classify-spot',
 ] as const
 const DAILY_STALE_HOURS = 36
-/** 주 1회 도는 소스 */
+/**
+ * 주 1회 도는 소스 — 실측 이동시간(daily-classify 가 매일 채우고
+ * weekly-drive 가 주 1회 안전망)과 실존확인(weekly-liveness*, 격주 전환
+ * 대상이 아니다 — scripts/biweekly-gate.sh 를 쓰지 않는 워크플로).
+ */
 const WEEKLY_SOURCES = [
-  'kakao-local', 'kakao-directions', 'harvest', LIVENESS_SOURCE,
-  'kakao-local-restaurant', 'kakao-directions-restaurant', 'harvest-restaurant',
-  RESTAURANT_LIVENESS_SOURCE,
-  'kakao-local-spot', 'kakao-directions-spot', 'harvest-spot',
-  SPOT_LIVENESS_SOURCE,
+  'kakao-directions', 'kakao-directions-restaurant', 'kakao-directions-spot',
   'kakao-directions-nearby',
+  LIVENESS_SOURCE, RESTAURANT_LIVENESS_SOURCE, SPOT_LIVENESS_SOURCE,
 ] as const
 const WEEKLY_STALE_HOURS = 24 * 9
+
+/**
+ * 격주 1회 도는 소스 (신규 발굴 — kakao-local/harvest 만 해당).
+ *
+ * 2026-09-28, GitHub Actions 무료 한도 소진 계기가 된 weekly-discover 를
+ * 주 1회 → 격주 1회로 낮췄다(scripts/biweekly-gate.sh). 실존확인은 별도
+ * 워크플로(weekly-liveness*)라 그대로 매주 도니 WEEKLY_SOURCES 에 남긴다
+ * — discover.ts 가 기록하는 이 두 소스만 주기가 늘었으므로 기준도 따로
+ * 뗀다. 예전처럼 WEEKLY_STALE_HOURS(9일)에 묶어두면 "쉬는 주"마다 매번
+ * 거짓 source_stale 경보가 뜬다.
+ */
+const BIWEEKLY_SOURCES = [
+  'kakao-local', 'harvest',
+  'kakao-local-restaurant', 'harvest-restaurant',
+  'kakao-local-spot', 'harvest-spot',
+] as const
+/** 14일 주기 + 옛 기준과 같은 +2일 여유 */
+const BIWEEKLY_STALE_HOURS = 24 * 16
 
 /** 쿼터 소진을 가리키는 문구. provider 마다 다르게 말한다 */
 const QUOTA_HINTS = ['429', 'quota', 'RESOURCE_EXHAUSTED', 'rate limit', 'too many requests']
@@ -159,7 +178,9 @@ export function detectAnomalies(input: WatchInput): Anomaly[] {
       ? DAILY_STALE_HOURS
       : (WEEKLY_SOURCES as readonly string[]).includes(source)
         ? WEEKLY_STALE_HOURS
-        : null
+        : (BIWEEKLY_SOURCES as readonly string[]).includes(source)
+          ? BIWEEKLY_STALE_HOURS
+          : null
   for (const h of health) {
     const limit = staleOf(h.source)
     if (limit === null) continue
