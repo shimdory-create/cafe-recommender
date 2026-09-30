@@ -104,6 +104,10 @@ export default function RestaurantInfo() {
         스케줄이 밀리는 걸 피하려고 일부러 나눠뒀어요. 그래서 같은 순간에 봐도
         카페는 방금 갱신됐는데 가볼 곳은 아직 순서 전일 수 있어요 — 정상입니다.
       </p>
+      <p className="mt-2 text-[12px] leading-relaxed text-ink-soft">
+        신규 발굴은 2주에 한 번만 돌아요 — 그래서 새 후보가 2주 가까이 안 보여도
+        정상입니다. 그사이엔 화제량·판정·운전 시간 실측은 매일 그대로 갱신돼요.
+      </p>
 
       <h2 className="mt-7 text-[17px] font-bold">화면의 표시</h2>
       <dl className="mt-2 flex flex-col gap-3">
