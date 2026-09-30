@@ -8287,62 +8287,6 @@
       }
     ]
   },
-  "8543847": {
-    "cafes": [
-      {
-        "id": "243642075",
-        "distanceKm": 0.2,
-        "driveMinutes": 1
-      },
-      {
-        "id": "793846823",
-        "distanceKm": 0.3,
-        "driveMinutes": 1
-      },
-      {
-        "id": "1481044539",
-        "distanceKm": 0.4,
-        "driveMinutes": 2
-      },
-      {
-        "id": "1257677993",
-        "distanceKm": 0.5,
-        "driveMinutes": 2
-      },
-      {
-        "id": "1734514263",
-        "distanceKm": 0.6,
-        "driveMinutes": 2
-      }
-    ],
-    "spots": [
-      {
-        "id": "530952844",
-        "distanceKm": 2.3,
-        "driveMinutes": null
-      },
-      {
-        "id": "199726499",
-        "distanceKm": 2.9,
-        "driveMinutes": null
-      },
-      {
-        "id": "27600206",
-        "distanceKm": 3.2,
-        "driveMinutes": null
-      },
-      {
-        "id": "24286083",
-        "distanceKm": 3.5,
-        "driveMinutes": null
-      },
-      {
-        "id": "1017195100",
-        "distanceKm": 4.7,
-        "driveMinutes": null
-      }
-    ]
-  },
   "8545659": {
     "cafes": [
       {
@@ -9468,17 +9412,12 @@
       {
         "id": "1870858217",
         "distanceKm": 4,
-        "driveMinutes": null
+        "driveMinutes": 9
       },
       {
         "id": "498385747",
         "distanceKm": 4.1,
-        "driveMinutes": null
-      },
-      {
-        "id": "1619160525",
-        "distanceKm": 7.2,
-        "driveMinutes": null
+        "driveMinutes": 14
       },
       {
         "id": "165425627",
@@ -9488,6 +9427,11 @@
       {
         "id": "1114285659",
         "distanceKm": 13.5,
+        "driveMinutes": null
+      },
+      {
+        "id": "1681629835",
+        "distanceKm": 14.3,
         "driveMinutes": null
       }
     ],
@@ -12931,6 +12875,62 @@
       {
         "id": "2028946938",
         "distanceKm": 2.9,
+        "driveMinutes": null
+      }
+    ]
+  },
+  "9367368": {
+    "cafes": [
+      {
+        "id": "342916195",
+        "distanceKm": 2.9,
+        "driveMinutes": null
+      },
+      {
+        "id": "1481044539",
+        "distanceKm": 3.8,
+        "driveMinutes": null
+      },
+      {
+        "id": "243642075",
+        "distanceKm": 3.9,
+        "driveMinutes": null
+      },
+      {
+        "id": "1039808824",
+        "distanceKm": 3.9,
+        "driveMinutes": null
+      },
+      {
+        "id": "618245003",
+        "distanceKm": 4,
+        "driveMinutes": null
+      }
+    ],
+    "spots": [
+      {
+        "id": "199726499",
+        "distanceKm": 1.2,
+        "driveMinutes": null
+      },
+      {
+        "id": "27600206",
+        "distanceKm": 3.4,
+        "driveMinutes": null
+      },
+      {
+        "id": "2012790493",
+        "distanceKm": 3.6,
+        "driveMinutes": null
+      },
+      {
+        "id": "7991903",
+        "distanceKm": 4,
+        "driveMinutes": null
+      },
+      {
+        "id": "10286439",
+        "distanceKm": 4.3,
         "driveMinutes": null
       }
     ]
@@ -56385,7 +56385,7 @@
         "driveMinutes": null
       },
       {
-        "id": "24876765",
+        "id": "8246129",
         "distanceKm": 1.9,
         "driveMinutes": null
       }
@@ -119533,29 +119533,29 @@
     ],
     "spots": [
       {
+        "id": "25175741",
+        "distanceKm": 3.4,
+        "driveMinutes": null
+      },
+      {
         "id": "1664189539",
         "distanceKm": 1.1,
-        "driveMinutes": null
+        "driveMinutes": 7
       },
       {
         "id": "27079251",
         "distanceKm": 1.7,
-        "driveMinutes": null
+        "driveMinutes": 8
       },
       {
         "id": "491649483",
         "distanceKm": 2.3,
-        "driveMinutes": null
-      },
-      {
-        "id": "27135217",
-        "distanceKm": 2.5,
-        "driveMinutes": null
+        "driveMinutes": 9
       },
       {
         "id": "2056768526",
         "distanceKm": 2.7,
-        "driveMinutes": null
+        "driveMinutes": 10
       }
     ]
   },
@@ -149580,7 +149580,7 @@
       {
         "id": "111198818",
         "distanceKm": 2.1,
-        "driveMinutes": null
+        "driveMinutes": 5
       },
       {
         "id": "299866755",
@@ -171613,29 +171613,29 @@
     ],
     "spots": [
       {
-        "id": "24912443",
-        "distanceKm": 1.2,
-        "driveMinutes": null
-      },
-      {
         "id": "19529404",
         "distanceKm": 1.5,
-        "driveMinutes": null
-      },
-      {
-        "id": "8538273",
-        "distanceKm": 1.6,
-        "driveMinutes": null
+        "driveMinutes": 10
       },
       {
         "id": "25043739",
         "distanceKm": 1.6,
-        "driveMinutes": null
+        "driveMinutes": 11
       },
       {
-        "id": "24877789",
+        "id": "8603142",
         "distanceKm": 1.7,
-        "driveMinutes": null
+        "driveMinutes": 11
+      },
+      {
+        "id": "292590679",
+        "distanceKm": 1.8,
+        "driveMinutes": 11
+      },
+      {
+        "id": "24912443",
+        "distanceKm": 1.2,
+        "driveMinutes": 12
       }
     ]
   },
@@ -180519,27 +180519,27 @@
       {
         "id": "1502527376",
         "distanceKm": 0.3,
-        "driveMinutes": null
+        "driveMinutes": 2
       },
       {
         "id": "1814088536",
         "distanceKm": 0.5,
-        "driveMinutes": null
+        "driveMinutes": 4
       },
       {
         "id": "1164966384",
         "distanceKm": 1.4,
-        "driveMinutes": null
-      },
-      {
-        "id": "1873127229",
-        "distanceKm": 1.7,
-        "driveMinutes": null
+        "driveMinutes": 8
       },
       {
         "id": "8651724",
         "distanceKm": 1.8,
-        "driveMinutes": null
+        "driveMinutes": 8
+      },
+      {
+        "id": "1873127229",
+        "distanceKm": 1.7,
+        "driveMinutes": 10
       }
     ]
   },
@@ -232785,7 +232785,7 @@
         "driveMinutes": null
       },
       {
-        "id": "24876765",
+        "id": "8246129",
         "distanceKm": 1.8,
         "driveMinutes": null
       }
