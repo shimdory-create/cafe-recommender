@@ -41,18 +41,18 @@
   },
   {
     "source": "kakao-local-restaurant",
-    "lastSuccessAt": "2026-09-21T19:40:39.049Z",
+    "lastSuccessAt": "2026-10-06T00:54:48.053Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-09-21T19:40:39.049Z",
+    "updatedAt": "2026-10-06T00:54:48.053Z",
     "quotaErrorsToday": 0
   },
   {
     "source": "harvest-restaurant",
     "lastSuccessAt": "2026-09-21T19:40:39.049Z",
-    "lastError": null,
-    "consecutiveFailures": 0,
-    "updatedAt": "2026-09-21T19:40:39.049Z",
+    "lastError": "LLM 스키마 검증 실패 (2회 시도): JSON 파싱 실패",
+    "consecutiveFailures": 6,
+    "updatedAt": "2026-10-06T00:54:48.053Z",
     "quotaErrorsToday": 0
   },
   {
