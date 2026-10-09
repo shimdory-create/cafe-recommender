@@ -1,57 +1,57 @@
 {
-  "generatedAt": "2026-10-09T00:29:02.762Z",
+  "generatedAt": "2026-10-09T00:29:35.220Z",
   "weekOf": "2026-10-05",
   "pipelineStatus": "점검 필요: 수집 실패·수집 멈춤",
   "week": [
     {
       "rank": 1,
       "id": "7825528",
-      "finalScore": 89.86
+      "finalScore": 88.18
     },
     {
       "rank": 2,
       "id": "924729634",
-      "finalScore": 88.286
+      "finalScore": 87.428
     },
     {
       "rank": 3,
-      "id": "506853856",
-      "finalScore": 66.181
+      "id": "917678488",
+      "finalScore": 78.509
     },
     {
       "rank": 4,
       "id": "358379614",
-      "finalScore": 62.223
+      "finalScore": 67.586
     },
     {
       "rank": 5,
-      "id": "1083248979",
-      "finalScore": 60.422
+      "id": "506853856",
+      "finalScore": 67.395
     },
     {
       "rank": 6,
-      "id": "776933867",
-      "finalScore": 48.388
+      "id": "2125477791",
+      "finalScore": 39.054
     },
     {
       "rank": 7,
       "id": "957762986",
-      "finalScore": 82.402
+      "finalScore": 84.397
     },
     {
       "rank": 8,
       "id": "915943921",
-      "finalScore": 77.751
+      "finalScore": 79.959
     },
     {
       "rank": 9,
-      "id": "1573898067",
-      "finalScore": 77.449
+      "id": "1950333348",
+      "finalScore": 75.661
     },
     {
       "rank": 10,
-      "id": "1950333348",
-      "finalScore": 75.179
+      "id": "22984610",
+      "finalScore": 69.744
     }
   ],
   "restaurants": [
@@ -26354,7 +26354,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EA%B4%80%EC%95%85%EA%B5%AC%20%EC%A0%95%EC%88%99%EC%84%B1",
       "kakaoPlaceUrl": "http://place.map.kakao.com/84785078",
       "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GQhZE8KtsoR",
-      "hotScore": 43.2,
+      "hotScore": 43.1,
       "finalScore": 21.3,
       "postsPer30": 22.24,
       "posts30": 19,
@@ -91951,7 +91951,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%ED%8C%8C%EC%A3%BC%EC%8B%9C%20%EC%8B%AC%ED%95%99%EC%82%B0%EB%91%90%EB%B6%80%EB%A7%88%EC%9D%84",
       "kakaoPlaceUrl": "http://place.map.kakao.com/27518429",
       "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/Fjz1KPMkunx",
-      "hotScore": 22.6,
+      "hotScore": 22.5,
       "finalScore": 9.8,
       "postsPer30": 18.83,
       "posts30": 12,
@@ -165741,46 +165741,6 @@
       "lastSeenAt": "2026-10-06T02:54:32.118Z"
     },
     {
-      "id": "16055426",
-      "lat": 37.484221442211,
-      "lng": 127.038315749212,
-      "name": "영동족발 3호점",
-      "sigungu": "서초구",
-      "zone": "seoul",
-      "area": "서울",
-      "driveMinutes": 67,
-      "cuisineType": "한식",
-      "hasRoom": null,
-      "reservable": null,
-      "parkingGrade": "C",
-      "tags": [
-        "한식"
-      ],
-      "evidence": "서울 3대 족발, 국내산 앞... 왕족발(대) 2026.01.영수증",
-      "parkingEvidence": "주차 공간이 매우 협소하고 골목이 혼잡하므로 대중교통 이용을 강력히 추천합니다",
-      "viewTypes": [],
-      "outdoorSeating": null,
-      "teenAppeal": 3.5,
-      "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EC%98%81%EB%8F%99%EC%A1%B1%EB%B0%9C%203%ED%98%B8%EC%A0%90",
-      "kakaoPlaceUrl": "http://place.map.kakao.com/16055426",
-      "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/IS2pWRgao2f",
-      "hotScore": 21.2,
-      "finalScore": 3.5,
-      "postsPer30": 5.92,
-      "posts30": 8,
-      "posts90": 23,
-      "acceleration": 1.0476,
-      "trend": "steady",
-      "ratingAvg": 0,
-      "ratingCount": 0,
-      "familyReviews": [],
-      "cityOnly": true,
-      "visitedOn": null,
-      "firstSeenAt": "2026-09-01T23:12:32.836Z",
-      "isNew": false,
-      "lastSeenAt": "2026-10-06T02:54:32.118Z"
-    },
-    {
       "id": "16846910",
       "lat": 37.4780827852694,
       "lng": 126.958761480961,
@@ -167067,6 +167027,46 @@
       "posts30": 6,
       "posts90": 28,
       "acceleration": 0.6429,
+      "trend": "steady",
+      "ratingAvg": 0,
+      "ratingCount": 0,
+      "familyReviews": [],
+      "cityOnly": true,
+      "visitedOn": null,
+      "firstSeenAt": "2026-09-01T23:12:32.836Z",
+      "isNew": false,
+      "lastSeenAt": "2026-10-06T02:54:32.118Z"
+    },
+    {
+      "id": "16055426",
+      "lat": 37.484221442211,
+      "lng": 127.038315749212,
+      "name": "영동족발 3호점",
+      "sigungu": "서초구",
+      "zone": "seoul",
+      "area": "서울",
+      "driveMinutes": 67,
+      "cuisineType": "한식",
+      "hasRoom": null,
+      "reservable": null,
+      "parkingGrade": "C",
+      "tags": [
+        "한식"
+      ],
+      "evidence": "서울 3대 족발, 국내산 앞... 왕족발(대) 2026.01.영수증",
+      "parkingEvidence": "주차 공간이 매우 협소하고 골목이 혼잡하므로 대중교통 이용을 강력히 추천합니다",
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "teenAppeal": 3.5,
+      "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%9C%EC%B4%88%EA%B5%AC%20%EC%98%81%EB%8F%99%EC%A1%B1%EB%B0%9C%203%ED%98%B8%EC%A0%90",
+      "kakaoPlaceUrl": "http://place.map.kakao.com/16055426",
+      "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/IS2pWRgao2f",
+      "hotScore": 21.2,
+      "finalScore": 3.4,
+      "postsPer30": 5.92,
+      "posts30": 8,
+      "posts90": 23,
+      "acceleration": 1.0476,
       "trend": "steady",
       "ratingAvg": 0,
       "ratingCount": 0,
