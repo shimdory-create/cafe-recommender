@@ -8287,6 +8287,62 @@
       }
     ]
   },
+  "8543847": {
+    "cafes": [
+      {
+        "id": "243642075",
+        "distanceKm": 0.2,
+        "driveMinutes": 1
+      },
+      {
+        "id": "793846823",
+        "distanceKm": 0.3,
+        "driveMinutes": 1
+      },
+      {
+        "id": "1481044539",
+        "distanceKm": 0.4,
+        "driveMinutes": 2
+      },
+      {
+        "id": "1257677993",
+        "distanceKm": 0.5,
+        "driveMinutes": 2
+      },
+      {
+        "id": "1734514263",
+        "distanceKm": 0.6,
+        "driveMinutes": 2
+      }
+    ],
+    "spots": [
+      {
+        "id": "530952844",
+        "distanceKm": 2.3,
+        "driveMinutes": null
+      },
+      {
+        "id": "199726499",
+        "distanceKm": 2.9,
+        "driveMinutes": null
+      },
+      {
+        "id": "27600206",
+        "distanceKm": 3.2,
+        "driveMinutes": null
+      },
+      {
+        "id": "24286083",
+        "distanceKm": 3.5,
+        "driveMinutes": null
+      },
+      {
+        "id": "1017195100",
+        "distanceKm": 4.7,
+        "driveMinutes": null
+      }
+    ]
+  },
   "8545659": {
     "cafes": [
       {
@@ -12931,62 +12987,6 @@
       {
         "id": "2028946938",
         "distanceKm": 2.9,
-        "driveMinutes": null
-      }
-    ]
-  },
-  "9367368": {
-    "cafes": [
-      {
-        "id": "342916195",
-        "distanceKm": 2.9,
-        "driveMinutes": null
-      },
-      {
-        "id": "1481044539",
-        "distanceKm": 3.8,
-        "driveMinutes": null
-      },
-      {
-        "id": "243642075",
-        "distanceKm": 3.9,
-        "driveMinutes": null
-      },
-      {
-        "id": "1039808824",
-        "distanceKm": 3.9,
-        "driveMinutes": null
-      },
-      {
-        "id": "618245003",
-        "distanceKm": 4,
-        "driveMinutes": null
-      }
-    ],
-    "spots": [
-      {
-        "id": "199726499",
-        "distanceKm": 1.2,
-        "driveMinutes": null
-      },
-      {
-        "id": "27600206",
-        "distanceKm": 3.4,
-        "driveMinutes": null
-      },
-      {
-        "id": "2012790493",
-        "distanceKm": 3.6,
-        "driveMinutes": null
-      },
-      {
-        "id": "7991903",
-        "distanceKm": 4,
-        "driveMinutes": null
-      },
-      {
-        "id": "10286439",
-        "distanceKm": 4.3,
         "driveMinutes": null
       }
     ]
