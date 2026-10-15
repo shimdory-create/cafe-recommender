@@ -1,57 +1,57 @@
 {
-  "generatedAt": "2026-10-15T22:46:15.105Z",
+  "generatedAt": "2026-10-15T22:46:54.046Z",
   "weekOf": "2026-10-12",
   "pipelineStatus": "점검 필요: 수집 실패·수집 멈춤",
   "week": [
     {
       "rank": 1,
       "id": "1684481940",
-      "finalScore": 53.739
+      "finalScore": 55.504
     },
     {
       "rank": 2,
-      "id": "2071706696",
-      "finalScore": 53.511
+      "id": "1117535327",
+      "finalScore": 52.46
     },
     {
       "rank": 3,
       "id": "1493430671",
-      "finalScore": 29.993
+      "finalScore": 36.136
     },
     {
       "rank": 4,
-      "id": "2090519049",
-      "finalScore": 23.81
+      "id": "1780788642",
+      "finalScore": 24.604
     },
     {
       "rank": 5,
-      "id": "1117535327",
-      "finalScore": 51.735
+      "id": "85665859",
+      "finalScore": 52.709
     },
     {
       "rank": 6,
-      "id": "1848894949",
-      "finalScore": 51.679
+      "id": "1854263126",
+      "finalScore": 52.551
     },
     {
       "rank": 7,
-      "id": "1854263126",
-      "finalScore": 50.767
+      "id": "2071706696",
+      "finalScore": 51.753
     },
     {
       "rank": 8,
-      "id": "949870503",
-      "finalScore": 48.365
+      "id": "1413787647",
+      "finalScore": 49.749
     },
     {
       "rank": 9,
-      "id": "766412829",
-      "finalScore": 47.949
+      "id": "1535511118",
+      "finalScore": 49.135
     },
     {
       "rank": 10,
       "id": "643694944",
-      "finalScore": 47.841
+      "finalScore": 48.949
     }
   ],
   "cafes": [
@@ -13060,7 +13060,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%B9%B4%ED%8E%98%EA%B3%B5%EB%AA%85%20%ED%99%8D%EB%8C%80%EC%A0%90",
       "kakaoPlaceUrl": "http://place.map.kakao.com/193594597",
       "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/D4GxoJaf3jN",
-      "hotScore": 82.8,
+      "hotScore": 82.7,
       "finalScore": 19.1,
       "postsPer30": 60,
       "posts30": 45,
@@ -16785,55 +16785,6 @@
       "lastSeenAt": "2026-10-12T01:37:38.937Z"
     },
     {
-      "id": "1393412778",
-      "lat": 37.6961785503317,
-      "lng": 126.798869832375,
-      "name": "숏컷로스터스",
-      "sigungu": "고양시",
-      "zone": "north",
-      "area": "경기",
-      "driveMinutes": 51,
-      "scale": "대형",
-      "parkingGrade": "A",
-      "menuLevel": 2,
-      "tags": [
-        "대형카페",
-        "대형베이커리",
-        "디저트특화"
-      ],
-      "evidence": "일산 로스터리 카페 숏컷로스터스, 커피가 정말 맛있는 로스터리 카페, 티라미수 케이크는 적당히 촉촉하고 적당히 달달하고 제대로 만들었다.",
-      "parkingEvidence": "카페 앞 주차 공간도 넉넉해서 차를 가져오기 편한 점도 마음에 들었습니다.",
-      "signatureMenu": "아메리카노, 티라미수",
-      "viewTypes": [],
-      "mealTypes": [
-        "커피",
-        "디저트",
-        "케이크",
-        "소금빵"
-      ],
-      "outdoorSeating": null,
-      "teenAppeal": 3,
-      "stayDuration": "1시간~2시간",
-      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EA%B3%A0%EC%96%91%EC%8B%9C%20%EC%88%8F%EC%BB%B7%EB%A1%9C%EC%8A%A4%ED%84%B0%EC%8A%A4",
-      "kakaoPlaceUrl": "http://place.map.kakao.com/1393412778",
-      "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/3jjzuG7QVao",
-      "hotScore": 36.1,
-      "finalScore": 17.1,
-      "postsPer30": 18.91,
-      "posts30": 12,
-      "posts90": 44,
-      "acceleration": 0.7895,
-      "trend": "unknown",
-      "ratingAvg": 0,
-      "ratingCount": 0,
-      "familyReviews": [],
-      "cityOnly": false,
-      "visitedOn": null,
-      "firstSeenAt": "2026-08-20T11:11:35.623Z",
-      "isNew": false,
-      "lastSeenAt": "2026-10-12T01:37:38.937Z"
-    },
-    {
       "id": "1673225955",
       "lat": 37.56055751671499,
       "lng": 126.83860948293064,
@@ -17023,6 +16974,55 @@
       "posts90": 30,
       "acceleration": 1.7143,
       "trend": "rising",
+      "ratingAvg": 0,
+      "ratingCount": 0,
+      "familyReviews": [],
+      "cityOnly": false,
+      "visitedOn": null,
+      "firstSeenAt": "2026-08-20T11:11:35.623Z",
+      "isNew": false,
+      "lastSeenAt": "2026-10-12T01:37:38.937Z"
+    },
+    {
+      "id": "1393412778",
+      "lat": 37.6961785503317,
+      "lng": 126.798869832375,
+      "name": "숏컷로스터스",
+      "sigungu": "고양시",
+      "zone": "north",
+      "area": "경기",
+      "driveMinutes": 51,
+      "scale": "대형",
+      "parkingGrade": "A",
+      "menuLevel": 2,
+      "tags": [
+        "대형카페",
+        "대형베이커리",
+        "디저트특화"
+      ],
+      "evidence": "일산 로스터리 카페 숏컷로스터스, 커피가 정말 맛있는 로스터리 카페, 티라미수 케이크는 적당히 촉촉하고 적당히 달달하고 제대로 만들었다.",
+      "parkingEvidence": "카페 앞 주차 공간도 넉넉해서 차를 가져오기 편한 점도 마음에 들었습니다.",
+      "signatureMenu": "아메리카노, 티라미수",
+      "viewTypes": [],
+      "mealTypes": [
+        "커피",
+        "디저트",
+        "케이크",
+        "소금빵"
+      ],
+      "outdoorSeating": null,
+      "teenAppeal": 3,
+      "stayDuration": "1시간~2시간",
+      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EA%B3%A0%EC%96%91%EC%8B%9C%20%EC%88%8F%EC%BB%B7%EB%A1%9C%EC%8A%A4%ED%84%B0%EC%8A%A4",
+      "kakaoPlaceUrl": "http://place.map.kakao.com/1393412778",
+      "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/3jjzuG7QVao",
+      "hotScore": 36.1,
+      "finalScore": 17,
+      "postsPer30": 18.91,
+      "posts30": 12,
+      "posts90": 44,
+      "acceleration": 0.7895,
+      "trend": "unknown",
       "ratingAvg": 0,
       "ratingCount": 0,
       "familyReviews": [],
@@ -66487,7 +66487,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EA%B4%91%EC%A7%84%EA%B5%AC%20%ED%94%8C%EB%A0%88%EC%96%B4%EC%97%90%EC%8A%A4%ED%94%84%EB%A0%88%EC%86%8C%EB%B0%94",
       "kakaoPlaceUrl": "http://place.map.kakao.com/225360357",
       "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/1h5albVkStf",
-      "hotScore": 26.4,
+      "hotScore": 26.3,
       "finalScore": 4.3,
       "postsPer30": 7.89,
       "posts30": 5,
