@@ -1,57 +1,57 @@
 {
-  "generatedAt": "2026-10-15T23:09:41.610Z",
+  "generatedAt": "2026-10-15T23:20:41.519Z",
   "weekOf": "2026-10-12",
   "pipelineStatus": "점검 필요: 수집 실패·수집 멈춤",
   "week": [
     {
       "rank": 1,
       "id": "160128426",
-      "finalScore": 58.12
+      "finalScore": 60.723
     },
     {
       "rank": 2,
-      "id": "8650085",
-      "finalScore": 55.638
+      "id": "8429832",
+      "finalScore": 46.563
     },
     {
       "rank": 3,
-      "id": "7923766",
-      "finalScore": 39.675
+      "id": "2063674600",
+      "finalScore": 42.654
     },
     {
       "rank": 4,
-      "id": "8616522",
-      "finalScore": 22.669
+      "id": "301683287",
+      "finalScore": 27.835
     },
     {
       "rank": 5,
-      "id": "20438283",
-      "finalScore": 21.455
+      "id": "8616522",
+      "finalScore": 20.16
     },
     {
       "rank": 6,
-      "id": "308332123",
-      "finalScore": 19.055
+      "id": "410710417",
+      "finalScore": 15.57
     },
     {
       "rank": 7,
-      "id": "10370423",
-      "finalScore": 48.402
+      "id": "491649483",
+      "finalScore": 46.834
     },
     {
       "rank": 8,
       "id": "8019963",
-      "finalScore": 47.589
+      "finalScore": 44.349
     },
     {
       "rank": 9,
       "id": "26967473",
-      "finalScore": 44.286
+      "finalScore": 42.95
     },
     {
       "rank": 10,
-      "id": "980790804",
-      "finalScore": 42.469
+      "id": "27052852",
+      "finalScore": 42.399
     }
   ],
   "spots": [
@@ -206,7 +206,7 @@
       "kakaoPlaceUrl": "http://place.map.kakao.com/8019963",
       "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1jwh1pCyONB",
       "hotScore": 51.1,
-      "finalScore": 44.4,
+      "finalScore": 44.3,
       "postsPer30": 22.4,
       "posts30": 22,
       "posts90": 34,
@@ -246,7 +246,7 @@
       "kakaoPlaceUrl": "http://place.map.kakao.com/26967473",
       "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/4fKBJpvUv13",
       "hotScore": 56.2,
-      "finalScore": 43,
+      "finalScore": 42.9,
       "postsPer30": 44.58,
       "posts30": 31,
       "posts90": 31,
@@ -3270,48 +3270,6 @@
       "lastSeenAt": "2026-10-14T02:07:44.733Z"
     },
     {
-      "id": "13107321",
-      "lat": 37.5923053399404,
-      "lng": 127.195120903122,
-      "name": "한강공원삼패지구",
-      "sigungu": "남양주시",
-      "zone": "east",
-      "area": "경기",
-      "driveMinutes": 87,
-      "tags": [
-        "자연/공원",
-        "관광지/명소",
-        "드라이브",
-        "계절명소",
-        "아이와 가기 좋은 곳"
-      ],
-      "parkingGrade": "B",
-      "evidence": "한강변을 따라 주황빛 황화 코스모스가 끝없이 펼쳐져 있어 입이 떡 벌어지더라고요. 코스모스길뿐만 아니라 자작나무 숲길, 맨발 걷기길까지 알차게 조성되어 있어 꽃구경하며 산책하기에도 좋았습니다.",
-      "parkingEvidence": "주차 요금: 입차 후 1시간 무료, 60분 초과 10분마다 200원, 1일 최대 7,000원",
-      "stayDuration": null,
-      "indoorOutdoor": "outdoor",
-      "season": "가을",
-      "teenAppeal": 4,
-      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EB%82%A8%EC%96%91%EC%A3%BC%EC%8B%9C%20%ED%95%9C%EA%B0%95%EA%B3%B5%EC%9B%90%EC%82%BC%ED%8C%A8%EC%A7%80%EA%B5%AC",
-      "kakaoPlaceUrl": "http://place.map.kakao.com/13107321",
-      "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/JmEkcXHFA21",
-      "hotScore": 64.5,
-      "finalScore": 22.8,
-      "postsPer30": 92.84,
-      "posts30": 34,
-      "posts90": 34,
-      "acceleration": 12.3333,
-      "trend": "unknown",
-      "ratingAvg": 0,
-      "ratingCount": 0,
-      "familyReviews": [],
-      "cityOnly": false,
-      "visitedOn": null,
-      "firstSeenAt": "2026-09-07T20:15:14.430Z",
-      "isNew": false,
-      "lastSeenAt": "2026-10-14T02:07:44.733Z"
-    },
-    {
       "id": "8471638",
       "lat": 37.52186591898916,
       "lng": 126.9828336430597,
@@ -3352,6 +3310,48 @@
       "lastSeenAt": "2026-10-14T02:07:44.733Z"
     },
     {
+      "id": "13107321",
+      "lat": 37.5923053399404,
+      "lng": 127.195120903122,
+      "name": "한강공원삼패지구",
+      "sigungu": "남양주시",
+      "zone": "east",
+      "area": "경기",
+      "driveMinutes": 87,
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "드라이브",
+        "계절명소",
+        "아이와 가기 좋은 곳"
+      ],
+      "parkingGrade": "B",
+      "evidence": "한강변을 따라 주황빛 황화 코스모스가 끝없이 펼쳐져 있어 입이 떡 벌어지더라고요. 코스모스길뿐만 아니라 자작나무 숲길, 맨발 걷기길까지 알차게 조성되어 있어 꽃구경하며 산책하기에도 좋았습니다.",
+      "parkingEvidence": "주차 요금: 입차 후 1시간 무료, 60분 초과 10분마다 200원, 1일 최대 7,000원",
+      "stayDuration": null,
+      "indoorOutdoor": "outdoor",
+      "season": "가을",
+      "teenAppeal": 4,
+      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EB%82%A8%EC%96%91%EC%A3%BC%EC%8B%9C%20%ED%95%9C%EA%B0%95%EA%B3%B5%EC%9B%90%EC%82%BC%ED%8C%A8%EC%A7%80%EA%B5%AC",
+      "kakaoPlaceUrl": "http://place.map.kakao.com/13107321",
+      "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/JmEkcXHFA21",
+      "hotScore": 64.5,
+      "finalScore": 22.7,
+      "postsPer30": 92.84,
+      "posts30": 34,
+      "posts90": 34,
+      "acceleration": 12.3333,
+      "trend": "unknown",
+      "ratingAvg": 0,
+      "ratingCount": 0,
+      "familyReviews": [],
+      "cityOnly": false,
+      "visitedOn": null,
+      "firstSeenAt": "2026-09-07T20:15:14.430Z",
+      "isNew": false,
+      "lastSeenAt": "2026-10-14T02:07:44.733Z"
+    },
+    {
       "id": "1181196403",
       "lat": 37.68932970378081,
       "lng": 126.85498582423483,
@@ -3376,7 +3376,7 @@
       "kakaoPlaceUrl": "http://place.map.kakao.com/1181196403",
       "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Ap4qFwh5Oj0",
       "hotScore": 44.9,
-      "finalScore": 22.7,
+      "finalScore": 22.6,
       "postsPer30": 44.22,
       "posts30": 25,
       "posts90": 25,
@@ -3581,7 +3581,7 @@
       "kakaoPlaceUrl": "http://place.map.kakao.com/494314318",
       "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Ae1ZA2N3eFk",
       "hotScore": 67.7,
-      "finalScore": 22.3,
+      "finalScore": 22.2,
       "postsPer30": 252.42,
       "posts30": 34,
       "posts90": 34,
@@ -7867,7 +7867,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EB%85%B8%EC%9B%90%EA%B5%AC%20%EB%8B%B9%ED%98%84%EC%B2%9C",
       "kakaoPlaceUrl": "http://place.map.kakao.com/10262262",
       "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Av9ztAjvupn",
-      "hotScore": 95.6,
+      "hotScore": 95.5,
       "finalScore": 15.9,
       "postsPer30": 527.78,
       "posts30": 48,
@@ -9502,7 +9502,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%9D%80%ED%8F%89%EA%B5%AC%20%ED%95%9C%EB%AC%B8%ED%99%94%EA%B3%B5%EC%98%81%EC%A3%BC%EC%B0%A8%EC%9E%A5",
       "kakaoPlaceUrl": "http://place.map.kakao.com/1636505220",
       "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/uQDAK5id1e",
-      "hotScore": 33.9,
+      "hotScore": 33.8,
       "finalScore": 14.6,
       "postsPer30": 16.64,
       "posts30": 16,
@@ -13548,46 +13548,6 @@
       "lastSeenAt": "2026-10-14T02:07:44.733Z"
     },
     {
-      "id": "7947620",
-      "lat": 37.66334313347279,
-      "lng": 126.86834440918219,
-      "name": "서삼릉",
-      "sigungu": "고양시",
-      "zone": "north",
-      "area": "경기",
-      "driveMinutes": 54,
-      "tags": [
-        "자연/공원",
-        "관광지/명소",
-        "드라이브"
-      ],
-      "parkingGrade": "A",
-      "evidence": "고양시 세계문화유산 서삼릉 산책하며 둘러보기 좋은 조선왕릉과 고양 원당목장 조용하고 한적하게 둘러보기 좋은 세계문화유산 고양시 서삼릉에 다녀왔어요",
-      "parkingEvidence": "서삼릉 전용 주차장 이용 ▶주차 요금 : 무료 ▶주차 이용 대수 : 30대 가량, 길가에도 주차 가능",
-      "stayDuration": null,
-      "indoorOutdoor": "outdoor",
-      "season": null,
-      "teenAppeal": 1,
-      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EA%B3%A0%EC%96%91%EC%8B%9C%20%EC%84%9C%EC%82%BC%EB%A6%89",
-      "kakaoPlaceUrl": "http://place.map.kakao.com/7947620",
-      "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CEN9zkur5O5",
-      "hotScore": 23.7,
-      "finalScore": 12,
-      "postsPer30": 51.02,
-      "posts30": 13,
-      "posts90": 13,
-      "acceleration": 5.3333,
-      "trend": "unknown",
-      "ratingAvg": 0,
-      "ratingCount": 0,
-      "familyReviews": [],
-      "cityOnly": false,
-      "visitedOn": null,
-      "firstSeenAt": "2026-09-07T20:15:14.430Z",
-      "isNew": false,
-      "lastSeenAt": "2026-10-14T02:07:44.733Z"
-    },
-    {
       "id": "15147707",
       "lat": 37.79714771854964,
       "lng": 127.1628973340941,
@@ -13665,6 +13625,46 @@
       "cityOnly": false,
       "visitedOn": null,
       "firstSeenAt": "2026-09-02T04:37:41.456Z",
+      "isNew": false,
+      "lastSeenAt": "2026-10-14T02:07:44.733Z"
+    },
+    {
+      "id": "7947620",
+      "lat": 37.66334313347279,
+      "lng": 126.86834440918219,
+      "name": "서삼릉",
+      "sigungu": "고양시",
+      "zone": "north",
+      "area": "경기",
+      "driveMinutes": 54,
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "드라이브"
+      ],
+      "parkingGrade": "A",
+      "evidence": "고양시 세계문화유산 서삼릉 산책하며 둘러보기 좋은 조선왕릉과 고양 원당목장 조용하고 한적하게 둘러보기 좋은 세계문화유산 고양시 서삼릉에 다녀왔어요",
+      "parkingEvidence": "서삼릉 전용 주차장 이용 ▶주차 요금 : 무료 ▶주차 이용 대수 : 30대 가량, 길가에도 주차 가능",
+      "stayDuration": null,
+      "indoorOutdoor": "outdoor",
+      "season": null,
+      "teenAppeal": 1,
+      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EA%B3%A0%EC%96%91%EC%8B%9C%20%EC%84%9C%EC%82%BC%EB%A6%89",
+      "kakaoPlaceUrl": "http://place.map.kakao.com/7947620",
+      "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CEN9zkur5O5",
+      "hotScore": 23.7,
+      "finalScore": 11.9,
+      "postsPer30": 51.02,
+      "posts30": 13,
+      "posts90": 13,
+      "acceleration": 5.3333,
+      "trend": "unknown",
+      "ratingAvg": 0,
+      "ratingCount": 0,
+      "familyReviews": [],
+      "cityOnly": false,
+      "visitedOn": null,
+      "firstSeenAt": "2026-09-07T20:15:14.430Z",
       "isNew": false,
       "lastSeenAt": "2026-10-14T02:07:44.733Z"
     },
@@ -16333,7 +16333,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EC%84%9C%ED%95%B4%EA%B5%AC%20%EB%8F%8C%EB%8B%B4%EA%B8%B8%20%EC%88%98%EA%B5%AD%EC%9B%90",
       "kakaoPlaceUrl": "http://place.map.kakao.com/567375563",
       "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LpyGs32IOuk",
-      "hotScore": 17,
+      "hotScore": 16.9,
       "finalScore": 10.6,
       "postsPer30": 3.37,
       "posts30": 2,
@@ -19446,7 +19446,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%ED%8F%AC%EC%B2%9C%EC%8B%9C%20%EC%96%B4%EB%A9%94%EC%9D%B4%EC%A7%95%ED%8C%8C%ED%81%AC",
       "kakaoPlaceUrl": "http://place.map.kakao.com/25450123",
       "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Kifv1hXCmAi",
-      "hotScore": 46.2,
+      "hotScore": 46.1,
       "finalScore": 9,
       "postsPer30": 24.53,
       "posts30": 20,
@@ -23937,7 +23937,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%9D%B4%EC%B2%9C%EC%8B%9C%20%ED%85%8C%EB%A5%B4%EB%A9%94%EB%8D%B4",
       "kakaoPlaceUrl": "http://place.map.kakao.com/1023232784",
       "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Dkl21cDCkD",
-      "hotScore": 28.5,
+      "hotScore": 28.4,
       "finalScore": 6.9,
       "postsPer30": 86.05,
       "posts30": 15,
@@ -25196,7 +25196,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%9D%B8%EC%B2%9C%20%EC%97%B0%EC%88%98%EA%B5%AC%20%EC%84%A0%ED%95%99%EA%B5%AD%EC%A0%9C%EB%B9%99%EC%83%81%EA%B2%BD%EA%B8%B0%EC%9E%A5",
       "kakaoPlaceUrl": "http://place.map.kakao.com/20459639",
       "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/AriQBnJy8MP",
-      "hotScore": 10.1,
+      "hotScore": 10,
       "finalScore": 6.3,
       "postsPer30": 5.11,
       "posts30": 3,
