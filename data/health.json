@@ -81,18 +81,18 @@
   },
   {
     "source": "kakao-local-spot",
-    "lastSuccessAt": "2026-10-06T23:43:51.228Z",
+    "lastSuccessAt": "2026-10-20T23:05:53.764Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-10-06T23:43:51.228Z",
+    "updatedAt": "2026-10-20T23:05:53.764Z",
     "quotaErrorsToday": 0
   },
   {
     "source": "harvest-spot",
     "lastSuccessAt": "2026-09-22T20:16:38.188Z",
-    "lastError": "kakao-local HTTP 400: {\"code\":-2, \"msg\":\"Max (query) length 100\"}",
-    "consecutiveFailures": 3,
-    "updatedAt": "2026-10-06T23:43:51.228Z",
+    "lastError": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n",
+    "consecutiveFailures": 5,
+    "updatedAt": "2026-10-20T23:05:53.764Z",
     "quotaErrorsToday": 0
   },
   {
