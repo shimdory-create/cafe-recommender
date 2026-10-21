@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-21T00:08:00.282Z",
+  "generatedAt": "2026-10-21T00:08:37.437Z",
   "weekOf": "2026-10-19",
   "pipelineStatus": "점검 필요: 수집 실패·수집 멈춤",
   "week": [
@@ -1526,7 +1526,7 @@
       "kakaoPlaceUrl": "http://place.map.kakao.com/2583079",
       "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6Bo5TJ3yCUQ",
       "hotScore": 82.1,
-      "finalScore": 39.9,
+      "finalScore": 39.8,
       "postsPer30": 71.05,
       "posts30": 44,
       "posts90": 44,
@@ -9066,55 +9066,6 @@
       "lastSeenAt": "2026-10-19T00:23:37.797Z"
     },
     {
-      "id": "1655193621",
-      "lat": 37.3122849101347,
-      "lng": 126.943697612657,
-      "name": "초평가배",
-      "sigungu": "의왕시",
-      "zone": "south",
-      "area": "경기",
-      "driveMinutes": 54,
-      "scale": "대형",
-      "parkingGrade": "A",
-      "menuLevel": 2,
-      "tags": [
-        "대형카페",
-        "뷰맛집",
-        "디저트특화"
-      ],
-      "evidence": "한옥의 느낌을 살리면서도 현대적인 건축 스타일을 함께 담아놓은 곳이라 일반적인 대형 카페와는 다른 분위기가 있었습니다.",
-      "parkingEvidence": "초평가배는 주차장이 넓게 잘 되어 있어서 초보자분들도 차 끌고 오기 편할 것 같아요",
-      "signatureMenu": "홍시 아이스크림, 앙버터 모나카",
-      "viewTypes": [
-        "호수",
-        "논밭"
-      ],
-      "mealTypes": [
-        "디저트"
-      ],
-      "outdoorSeating": true,
-      "teenAppeal": 4,
-      "stayDuration": null,
-      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%9D%98%EC%99%95%EC%8B%9C%20%EC%B4%88%ED%8F%89%EA%B0%80%EB%B0%B0",
-      "kakaoPlaceUrl": "http://place.map.kakao.com/1655193621",
-      "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8xPgeNvq7MF",
-      "hotScore": 47.1,
-      "finalScore": 22.6,
-      "postsPer30": 22.14,
-      "posts30": 20,
-      "posts90": 42,
-      "acceleration": 1.6429,
-      "trend": "unknown",
-      "ratingAvg": 0,
-      "ratingCount": 0,
-      "familyReviews": [],
-      "cityOnly": false,
-      "visitedOn": null,
-      "firstSeenAt": "2026-09-13T18:58:40.157Z",
-      "isNew": false,
-      "lastSeenAt": "2026-10-19T00:23:37.797Z"
-    },
-    {
       "id": "2090519049",
       "lat": 37.2790013345091,
       "lng": 127.400001873652,
@@ -9165,6 +9116,55 @@
       "cityOnly": false,
       "visitedOn": null,
       "firstSeenAt": "2026-08-20T11:11:35.623Z",
+      "isNew": false,
+      "lastSeenAt": "2026-10-19T00:23:37.797Z"
+    },
+    {
+      "id": "1655193621",
+      "lat": 37.3122849101347,
+      "lng": 126.943697612657,
+      "name": "초평가배",
+      "sigungu": "의왕시",
+      "zone": "south",
+      "area": "경기",
+      "driveMinutes": 54,
+      "scale": "대형",
+      "parkingGrade": "A",
+      "menuLevel": 2,
+      "tags": [
+        "대형카페",
+        "뷰맛집",
+        "디저트특화"
+      ],
+      "evidence": "한옥의 느낌을 살리면서도 현대적인 건축 스타일을 함께 담아놓은 곳이라 일반적인 대형 카페와는 다른 분위기가 있었습니다.",
+      "parkingEvidence": "초평가배는 주차장이 넓게 잘 되어 있어서 초보자분들도 차 끌고 오기 편할 것 같아요",
+      "signatureMenu": "홍시 아이스크림, 앙버터 모나카",
+      "viewTypes": [
+        "호수",
+        "논밭"
+      ],
+      "mealTypes": [
+        "디저트"
+      ],
+      "outdoorSeating": true,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%9D%98%EC%99%95%EC%8B%9C%20%EC%B4%88%ED%8F%89%EA%B0%80%EB%B0%B0",
+      "kakaoPlaceUrl": "http://place.map.kakao.com/1655193621",
+      "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8xPgeNvq7MF",
+      "hotScore": 47.1,
+      "finalScore": 22.5,
+      "postsPer30": 22.14,
+      "posts30": 20,
+      "posts90": 42,
+      "acceleration": 1.6429,
+      "trend": "unknown",
+      "ratingAvg": 0,
+      "ratingCount": 0,
+      "familyReviews": [],
+      "cityOnly": false,
+      "visitedOn": null,
+      "firstSeenAt": "2026-09-13T18:58:40.157Z",
       "isNew": false,
       "lastSeenAt": "2026-10-19T00:23:37.797Z"
     },
