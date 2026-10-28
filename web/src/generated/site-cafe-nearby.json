@@ -9634,11 +9634,6 @@
   "134193411": {
     "restaurants": [
       {
-        "id": "7870142",
-        "distanceKm": 1.4,
-        "driveMinutes": null
-      },
-      {
         "id": "10510805",
         "distanceKm": 0.2,
         "driveMinutes": 4
@@ -9657,6 +9652,11 @@
         "id": "451303082",
         "distanceKm": 0.7,
         "driveMinutes": 5
+      },
+      {
+        "id": "27410815",
+        "distanceKm": 1,
+        "driveMinutes": 6
       }
     ],
     "spots": [
@@ -15519,11 +15519,6 @@
         "driveMinutes": 0
       },
       {
-        "id": "617760632",
-        "distanceKm": 2.7,
-        "driveMinutes": null
-      },
-      {
         "id": "800623340",
         "distanceKm": 1.7,
         "driveMinutes": 6
@@ -15531,6 +15526,11 @@
       {
         "id": "26390419",
         "distanceKm": 2.1,
+        "driveMinutes": 6
+      },
+      {
+        "id": "617760632",
+        "distanceKm": 2.7,
         "driveMinutes": 6
       },
       {
@@ -15575,11 +15575,6 @@
         "driveMinutes": 1
       },
       {
-        "id": "9501806",
-        "distanceKm": 1.9,
-        "driveMinutes": null
-      },
-      {
         "id": "282482500",
         "distanceKm": 0.5,
         "driveMinutes": 4
@@ -15593,6 +15588,11 @@
         "id": "1676142968",
         "distanceKm": 1.2,
         "driveMinutes": 7
+      },
+      {
+        "id": "1766145519",
+        "distanceKm": 1.4,
+        "driveMinutes": 9
       }
     ],
     "spots": [
@@ -52642,11 +52642,6 @@
   "1269760803": {
     "restaurants": [
       {
-        "id": "27515600",
-        "distanceKm": 2.5,
-        "driveMinutes": null
-      },
-      {
         "id": "1813567007",
         "distanceKm": 0.6,
         "driveMinutes": 5
@@ -52664,6 +52659,11 @@
       {
         "id": "27190391",
         "distanceKm": 1.6,
+        "driveMinutes": 7
+      },
+      {
+        "id": "1314070147",
+        "distanceKm": 2.2,
         "driveMinutes": 7
       }
     ],
@@ -63007,14 +63007,14 @@
         "driveMinutes": 3
       },
       {
-        "id": "695258969",
-        "distanceKm": 2.2,
-        "driveMinutes": null
-      },
-      {
         "id": "1493285916",
         "distanceKm": 2.1,
         "driveMinutes": 4
+      },
+      {
+        "id": "695258969",
+        "distanceKm": 2.2,
+        "driveMinutes": 5
       },
       {
         "id": "26423892",
@@ -66866,11 +66866,6 @@
   "1586970601": {
     "restaurants": [
       {
-        "id": "566404422",
-        "distanceKm": 0.5,
-        "driveMinutes": null
-      },
-      {
         "id": "9284088",
         "distanceKm": 0.3,
         "driveMinutes": 2
@@ -66888,6 +66883,11 @@
       {
         "id": "10695073",
         "distanceKm": 0.4,
+        "driveMinutes": 3
+      },
+      {
+        "id": "810028985",
+        "distanceKm": 0.5,
         "driveMinutes": 3
       }
     ],
@@ -77745,13 +77745,13 @@
         "driveMinutes": 1
       },
       {
-        "id": "975426666",
-        "distanceKm": 0.8,
-        "driveMinutes": null
-      },
-      {
         "id": "10695073",
         "distanceKm": 0.4,
+        "driveMinutes": 3
+      },
+      {
+        "id": "9284088",
+        "distanceKm": 0.5,
         "driveMinutes": 3
       }
     ],
