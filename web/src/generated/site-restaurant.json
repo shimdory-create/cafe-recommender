@@ -1,57 +1,57 @@
 {
-  "generatedAt": "2026-10-30T00:01:58.728Z",
+  "generatedAt": "2026-10-30T00:02:34.529Z",
   "weekOf": "2026-10-26",
   "pipelineStatus": "점검 필요: 수집 실패·수집 멈춤",
   "week": [
     {
       "rank": 1,
       "id": "957762986",
-      "finalScore": 85.421
+      "finalScore": 87.475
     },
     {
       "rank": 2,
-      "id": "917678488",
-      "finalScore": 75.452
+      "id": "1945373228",
+      "finalScore": 70.924
     },
     {
       "rank": 3,
-      "id": "915943921",
-      "finalScore": 71.961
+      "id": "1782432130",
+      "finalScore": 67.165
     },
     {
       "rank": 4,
-      "id": "1147327857",
-      "finalScore": 58.108
+      "id": "111495501",
+      "finalScore": 59.615
     },
     {
       "rank": 5,
       "id": "776933867",
-      "finalScore": 41.623
+      "finalScore": 48.362
     },
     {
       "rank": 6,
-      "id": "1950333348",
-      "finalScore": 75.305
+      "id": "924729634",
+      "finalScore": 70.205
     },
     {
       "rank": 7,
-      "id": "1782432130",
-      "finalScore": 74.123
+      "id": "467298468",
+      "finalScore": 69.855
     },
     {
       "rank": 8,
-      "id": "22984610",
-      "finalScore": 73.196
+      "id": "428211557",
+      "finalScore": 69.07
     },
     {
       "rank": 9,
-      "id": "467298468",
-      "finalScore": 69.905
+      "id": "1950333348",
+      "finalScore": 67.625
     },
     {
       "rank": 10,
       "id": "506853856",
-      "finalScore": 69.57
+      "finalScore": 67.195
     }
   ],
   "restaurants": [
@@ -37579,7 +37579,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%8B%9C%ED%9D%A5%EC%8B%9C%20814%EB%B0%94%EB%B2%A0%ED%81%90",
       "kakaoPlaceUrl": "http://place.map.kakao.com/237993827",
       "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4AX1XAtGWgv",
-      "hotScore": 27.2,
+      "hotScore": 27.1,
       "finalScore": 17.7,
       "postsPer30": 13.72,
       "posts30": 3,
@@ -48958,46 +48958,6 @@
       "lastSeenAt": "2026-10-27T02:00:09.330Z"
     },
     {
-      "id": "20941633",
-      "lat": 37.280963826021775,
-      "lng": 126.5701897102741,
-      "name": "포도밭할머니칼국수",
-      "sigungu": "안산시",
-      "zone": "south",
-      "area": "경기",
-      "driveMinutes": 76,
-      "cuisineType": "한식",
-      "hasRoom": null,
-      "reservable": false,
-      "parkingGrade": "A",
-      "tags": [
-        "한식"
-      ],
-      "evidence": "안산 대부도 전통 로컬 맛집으로 신선한 통바지락이 푸짐하게 들어간 칼국수 전문점이랍니다",
-      "parkingEvidence": "가게 앞 초대형 주차장 보유",
-      "viewTypes": [],
-      "outdoorSeating": null,
-      "teenAppeal": 2,
-      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%ED%8F%AC%EB%8F%84%EB%B0%AD%ED%95%A0%EB%A8%B8%EB%8B%88%EC%B9%BC%EA%B5%AD%EC%88%98",
-      "kakaoPlaceUrl": "http://place.map.kakao.com/20941633",
-      "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4arY58hV7dA",
-      "hotScore": 46.6,
-      "finalScore": 15.3,
-      "postsPer30": 41.99,
-      "posts30": 26,
-      "posts90": 26,
-      "acceleration": 9.6667,
-      "trend": "unknown",
-      "ratingAvg": 0,
-      "ratingCount": 0,
-      "familyReviews": [],
-      "cityOnly": false,
-      "visitedOn": null,
-      "firstSeenAt": "2026-09-01T23:12:32.836Z",
-      "isNew": false,
-      "lastSeenAt": "2026-10-27T02:00:09.330Z"
-    },
-    {
       "id": "2132957583",
       "lat": 37.5531350772798,
       "lng": 126.852356376667,
@@ -49612,6 +49572,46 @@
       "ratingCount": 0,
       "familyReviews": [],
       "cityOnly": true,
+      "visitedOn": null,
+      "firstSeenAt": "2026-09-01T23:12:32.836Z",
+      "isNew": false,
+      "lastSeenAt": "2026-10-27T02:00:09.330Z"
+    },
+    {
+      "id": "20941633",
+      "lat": 37.280963826021775,
+      "lng": 126.5701897102741,
+      "name": "포도밭할머니칼국수",
+      "sigungu": "안산시",
+      "zone": "south",
+      "area": "경기",
+      "driveMinutes": 76,
+      "cuisineType": "한식",
+      "hasRoom": null,
+      "reservable": false,
+      "parkingGrade": "A",
+      "tags": [
+        "한식"
+      ],
+      "evidence": "안산 대부도 전통 로컬 맛집으로 신선한 통바지락이 푸짐하게 들어간 칼국수 전문점이랍니다",
+      "parkingEvidence": "가게 앞 초대형 주차장 보유",
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "teenAppeal": 2,
+      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%95%88%EC%82%B0%EC%8B%9C%20%ED%8F%AC%EB%8F%84%EB%B0%AD%ED%95%A0%EB%A8%B8%EB%8B%88%EC%B9%BC%EA%B5%AD%EC%88%98",
+      "kakaoPlaceUrl": "http://place.map.kakao.com/20941633",
+      "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4arY58hV7dA",
+      "hotScore": 46.6,
+      "finalScore": 15.2,
+      "postsPer30": 41.99,
+      "posts30": 26,
+      "posts90": 26,
+      "acceleration": 9.6667,
+      "trend": "unknown",
+      "ratingAvg": 0,
+      "ratingCount": 0,
+      "familyReviews": [],
+      "cityOnly": false,
       "visitedOn": null,
       "firstSeenAt": "2026-09-01T23:12:32.836Z",
       "isNew": false,
