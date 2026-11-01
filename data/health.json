@@ -1,10 +1,10 @@
 [
   {
     "source": "kakao-local",
-    "lastSuccessAt": "2026-10-18T21:06:17.646Z",
+    "lastSuccessAt": "2026-11-01T22:28:44.857Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-10-18T21:06:17.646Z",
+    "updatedAt": "2026-11-01T22:28:44.857Z",
     "quotaErrorsToday": 0
   },
   {
@@ -34,9 +34,9 @@
   {
     "source": "harvest",
     "lastSuccessAt": "2026-10-18T21:06:17.646Z",
-    "lastError": null,
-    "consecutiveFailures": 0,
-    "updatedAt": "2026-10-18T21:06:17.646Z",
+    "lastError": "gemini HTTP 503: {\n  \"error\": {\n    \"code\": 503,\n    \"message\": \"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\n    \"status\": \"UNAVAILABLE\"\n  }\n}\n",
+    "consecutiveFailures": 1,
+    "updatedAt": "2026-11-01T22:28:44.857Z",
     "quotaErrorsToday": 0
   },
   {
