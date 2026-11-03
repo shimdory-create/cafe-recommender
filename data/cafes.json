@@ -232130,12 +232130,43 @@
     "straightKm": 22.58,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/JlgY2zbqjZv"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/JlgY2zbqjZv",
+    "attributes": {
+      "scale": "중형",
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "수제로 만든 디저트 맛집",
+      "menuLevel": 3,
+      "mealTypes": [
+        "디저트",
+        "산도",
+        "푸딩",
+        "테린느",
+        "에그타르트"
+      ],
+      "signatureMenu": "후르츠 산도",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차 불가",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": "여유롭게 이야기 나눌 곳",
+      "confidence": 1,
+      "evidence": "무화과 산도·커스터드 푸딩 후기",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페",
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "1849776839",
@@ -232152,8 +232183,8 @@
     "straightKm": 21.8,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -232173,12 +232204,39 @@
     "straightKm": 22.76,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8KsISbejhon"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8KsISbejhon",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": false,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 1,
+      "mealTypes": [
+        "디저트",
+        "아이스크림"
+      ],
+      "signatureMenu": "젤라또",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차는 불가입니다.",
+      "photoSpot": 4,
+      "teenAppeal": 5,
+      "stayDuration": "짧음",
+      "confidence": 0.9,
+      "evidence": "123젤라또 안국점은 안국역 2, 3, 5번 출구 건너편에 있어요. 젤라또 전문점 123젤라또 안국점 서울특별시 종로구 율곡로 61 1층",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "499490341",
@@ -232195,12 +232253,40 @@
     "straightKm": 23.03,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LRY66b5lVLK"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LRY66b5lVLK",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "베이글 맛집",
+      "menuLevel": 3,
+      "mealTypes": [
+        "베이글",
+        "샌드위치",
+        "브런치"
+      ],
+      "signatureMenu": "베이글",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차 : 불가, 종로3가역 또는 낙원상가 근처 유료주차장 이용",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "익선동 브런치 맛집 한옥에서 먹는 감성 베이글 샌드위치",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페"
+    ]
   },
   {
     "kakaoPlaceId": "2068241629",
@@ -232217,12 +232303,47 @@
     "straightKm": 24.34,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5sMWksGoMAM"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5sMWksGoMAM",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "생식빵 맛집",
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "생식빵",
+        "토스트"
+      ],
+      "signatureMenu": "생식빵",
+      "viewStrength": 3,
+      "viewTypes": [
+        "도심"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "B",
+      "parkingEvidence": "최초 60분 무료(추가 요금 10분당 1,000원) 발렛 가능 3,000",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "주차 가능한 서울 중구 대형 브런치 카페 스트라이프 커피 약수점",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "브런치카페"
+    ],
+    "driveMinutes": 53,
+    "driveKm": 30.9,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1474422750",
@@ -232239,12 +232360,47 @@
     "straightKm": 23.33,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Bz6El0ouu0J"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Bz6El0ouu0J",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 4,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "커피",
+        "와인",
+        "위스키",
+        "칵테일"
+      ],
+      "signatureMenu": null,
+      "viewStrength": 3,
+      "viewTypes": [
+        "도심"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "C",
+      "parkingEvidence": "주차가능 🚗 을지로 노상 공영주차장 대림상가 노상 주차장",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "을지로 세운상가옆 자정까지 즐기는 씨티뷰 감성카페 을지정밀",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "브런치카페"
+    ],
+    "driveMinutes": 55,
+    "driveKm": 29.8,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "870695455",
@@ -232261,12 +232417,12 @@
     "straightKm": 21.81,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/G4yldThJg9D",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/G4yldThJg9D"
+    "tags": []
   },
   {
     "kakaoPlaceId": "924945192",
@@ -232283,8 +232439,8 @@
     "straightKm": 19.79,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": true,
     "attributes": null,
     "tags": []
@@ -232304,12 +232460,47 @@
     "straightKm": 22.62,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/B4PBcrZIDWU"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/B4PBcrZIDWU",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 4,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 1,
+      "mealTypes": [
+        "커피",
+        "디저트",
+        "주류"
+      ],
+      "signatureMenu": null,
+      "viewStrength": 5,
+      "viewTypes": [
+        "강",
+        "도심"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "C",
+      "parkingEvidence": "카페 전용 주차 자리는 2대만 이용할 수 있으니 참고해 주세요",
+      "photoSpot": 5,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "마하 한남은 건축가의 서재를 컨셉으로, 폐업한 목욕탕 건물을 개조해서 만든 카페라고 해요. 한강뷰 느좋 신상 카페 입니다. 한강을 사이에 두고 서울이라는 도시의 시간과 지금의 모습이 묘하게 공존하는 풍경을 바라보는 곳.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "뷰맛집",
+      "디저트특화"
+    ],
+    "driveMinutes": 43,
+    "driveKm": 28.5,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1724006766",
@@ -232326,8 +232517,8 @@
     "straightKm": 28.07,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -232347,12 +232538,40 @@
     "straightKm": 28.23,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3Gy2H8KuP0i"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3Gy2H8KuP0i",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "케이크",
+        "산도"
+      ],
+      "signatureMenu": "딸기초코생크림 케이크",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차: 매장 주차 불가",
+      "photoSpot": null,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "주문 메뉴: 딸기 산도, 옥수수... 아쿠아산타 성수카페의 시그니처 메뉴인 딸기초코생크림 케이크를 주문했어요",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "833806192",
@@ -232369,8 +232588,8 @@
     "straightKm": 28.66,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -232390,12 +232609,39 @@
     "straightKm": 30.19,
     "driveMinutesEst": 41,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/L06CNl3nTtc"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/L06CNl3nTtc",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "베이커리",
+      "menuLevel": 2,
+      "mealTypes": [
+        "빵",
+        "디저트"
+      ],
+      "signatureMenu": "부들이",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차 불가",
+      "photoSpot": null,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "다양한 베이커리 및 구움과자",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "2119155239",
@@ -232412,12 +232658,12 @@
     "straightKm": 31.47,
     "driveMinutesEst": 42,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.4건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/HTd4oi1hrJt",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/HTd4oi1hrJt"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1218875080",
@@ -232434,8 +232680,8 @@
     "straightKm": 33.74,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -232455,12 +232701,40 @@
     "straightKm": 29.81,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1dBLMp3KOMT"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1dBLMp3KOMT",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트"
+      ],
+      "signatureMenu": "피스타치오 티라미수",
+      "viewStrength": 3,
+      "viewTypes": [
+        "도심"
+      ],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차 : 불가",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "머신뒤 창에 은행나무가 파릇해서 지금도 예쁜데 이제 곧 노랗게 변하면 더 예쁘겠죠 진짜.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "60415970",
@@ -232477,12 +232751,40 @@
     "straightKm": 24.53,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": true,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FNbalOzWOwj"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FNbalOzWOwj",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "베이커리 카페",
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "샌드위치",
+        "베이커리"
+      ],
+      "signatureMenu": "풀드포크 토스티, 머쉬룸 에그 오픈샌드위치",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "피뽀는 전용 주차장이 없어 주차가 불가해요.",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "신당동 유럽감성 신상 브런치 카페 “피뽀” 입니다! ... 풀드포크 토스티 맛집 후기 ... 머쉬룸 에그 오픈샌드위치 후기",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페"
+    ]
   },
   {
     "kakaoPlaceId": "596520774",
@@ -232499,12 +232801,37 @@
     "straightKm": 24.55,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "동네 카페 (성격 태그 0개)",
     "ambiguousName": true,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CW4udiGRTTI"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CW4udiGRTTI",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": 16,
+      "floors": 1,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 1,
+      "mealTypes": [
+        "커피",
+        "음료"
+      ],
+      "signatureMenu": "월간브루잉",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": true,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차 불가",
+      "photoSpot": 3,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "브루잉 커피와 라떼가 맛있는 카페예요",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": []
   },
   {
     "kakaoPlaceId": "199460585",
@@ -232521,12 +232848,44 @@
     "straightKm": 26.23,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1JxDo6Gm7J7"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1JxDo6Gm7J7",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "커피"
+      ],
+      "signatureMenu": "무화과 피스타치오 타르트",
+      "viewStrength": 3,
+      "viewTypes": [
+        "도심"
+      ],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "매장 앞 무료 주차 가능",
+      "photoSpot": 3,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "성북천 길목에 조용히 자리한 카페인데요. 매장 앞 주차도 가능해 차량... 성북천 뷰 카페 솔직후기",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 60,
+    "driveKm": 39.3,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1134485748",
@@ -232564,12 +232923,12 @@
     "straightKm": 24.57,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": true,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/5exMZ7Tnlkk",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/5exMZ7Tnlkk"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1765439725",
@@ -232607,12 +232966,12 @@
     "straightKm": 23.96,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/LhEo2hprH8a",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/LhEo2hprH8a"
+    "tags": []
   },
   {
     "kakaoPlaceId": "762894073",
@@ -232629,8 +232988,8 @@
     "straightKm": 25.35,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -232650,12 +233009,47 @@
     "straightKm": 25.14,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": true,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HAU2kM2BEoV"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HAU2kM2BEoV",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": "오븐에 저온으로 구워낸 수제 카라멜라이즈드 토스트",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "다과"
+      ],
+      "signatureMenu": "말차 다과 디저트",
+      "viewStrength": 5,
+      "viewTypes": [
+        "산",
+        "정원"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "C",
+      "parkingEvidence": "차담 전용 주차장(무료) 빌라 주차장을 계약해 운영하고 있어 3~4대 정도 주차가 가능합니다. 만차 시에는 국민대 주차장(유료) (2시간 2,000원 할인권 구매 가능)",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": "2시간",
+      "confidence": 0.9,
+      "evidence": "자연 채광 가득한 통창 뷰와 테라스 좌석을 갖춘 국민대 성북구 카페 차담의 고즈넉한 공간 분위기와 추천 메뉴 후기를 정리해 드립니다.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "뷰맛집",
+      "정원마당형",
+      "디저트특화"
+    ],
+    "driveMinutes": 56,
+    "driveKm": 35.8,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "8238897",
@@ -232672,12 +233066,12 @@
     "straightKm": 24.3,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/7opDezjln7l",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/7opDezjln7l"
+    "tags": []
   },
   {
     "kakaoPlaceId": "651602143",
@@ -232694,12 +233088,12 @@
     "straightKm": 29.22,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.7건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/AmSY9VecfSG",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/AmSY9VecfSG"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1539696218",
@@ -232716,12 +233110,12 @@
     "straightKm": 32.54,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 3.4건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DMB5mcBu0Kf",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DMB5mcBu0Kf"
+    "tags": []
   },
   {
     "kakaoPlaceId": "771359874",
@@ -232738,8 +233132,8 @@
     "straightKm": 22.68,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -232759,12 +233153,43 @@
     "straightKm": 28.85,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/81QJIc835MV"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/81QJIc835MV",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": 30,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "베이커리 카페",
+      "menuLevel": 2,
+      "mealTypes": [
+        "빵",
+        "케이크",
+        "디저트"
+      ],
+      "signatureMenu": "북한산 포시즌",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "델리 이용시 1시간 무료 (주말/평일 동일하게 적용)",
+      "photoSpot": null,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "담백한 빵, 소시지빵, 머핀, 케이크, 빙수 등 다양한 디저트들 판매중이어서 디저트 좋아하는 사람들이라면 방문 추천!!",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 63,
+    "driveKm": 53.6,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "697233345",
@@ -232802,8 +233227,8 @@
     "straightKm": 34.67,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -232823,12 +233248,12 @@
     "straightKm": 32.87,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.2건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/B5CDpyPBuAY",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/B5CDpyPBuAY"
+    "tags": []
   },
   {
     "kakaoPlaceId": "27229512",
@@ -232845,12 +233270,12 @@
     "straightKm": 32.81,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 24% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9CQJFzwhBf0",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9CQJFzwhBf0"
+    "tags": []
   },
   {
     "kakaoPlaceId": "706132623",
@@ -232867,12 +233292,12 @@
     "straightKm": 32.19,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/73yjWNMy3Wu",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/73yjWNMy3Wu"
+    "tags": []
   },
   {
     "kakaoPlaceId": "459071226",
@@ -232889,12 +233314,47 @@
     "straightKm": 20.77,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/EngywIKahhN"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/EngywIKahhN",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "한식",
+        "양식",
+        "중식",
+        "일식",
+        "디저트",
+        "음료"
+      ],
+      "signatureMenu": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "주차 3시간 무료/발렛 5,000원/예약 가능/단체 이용 가능/포장 가능/와이파이... 호텔 주차장에 발렛주차도 가능함",
+      "photoSpot": null,
+      "teenAppeal": 2,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "한식, 양식, 중식, 일식, 디저트, 음료 등 메뉴도 다양해 가족모임으로도 좋았던 신라스테이 서대문 카페 리뷰 시작!",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페",
+      "디저트특화"
+    ],
+    "driveMinutes": 38,
+    "driveKm": 26.3,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "16326529",
@@ -232911,12 +233371,12 @@
     "straightKm": 17.59,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.1건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/6jGQq4FA46K",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/6jGQq4FA46K"
+    "tags": []
   },
   {
     "kakaoPlaceId": "310389086",
@@ -232933,12 +233393,12 @@
     "straightKm": 20.44,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.7건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/zNj1x4VrGD",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/zNj1x4VrGD"
+    "tags": []
   },
   {
     "kakaoPlaceId": "779152149",
@@ -232955,8 +233415,8 @@
     "straightKm": 16.29,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -232976,12 +233436,42 @@
     "straightKm": 17.06,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/I3Nrcci1IIj"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/I3Nrcci1IIj",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 3,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "디저트와 음료 맛있어요",
+      "menuLevel": 3,
+      "mealTypes": [
+        "디저트",
+        "브런치"
+      ],
+      "signatureMenu": "남해 유자차, 레몬토르테케이크, 유자캐모마일",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차는 불가능하지만 근처에 유료주차장이 있고",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "홍대 대형카페 플로라운지, 200평 규모의 대형 플라워 카페, 브런치로 간단",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "브런치카페",
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "1198900329",
@@ -232998,8 +233488,8 @@
     "straightKm": 17.68,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -233019,12 +233509,12 @@
     "straightKm": 16.88,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.1건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4NF6b3uPm6v",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4NF6b3uPm6v"
+    "tags": []
   },
   {
     "kakaoPlaceId": "848271685",
@@ -233041,12 +233531,38 @@
     "straightKm": 16.24,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/4GqzDMEMZuL"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/4GqzDMEMZuL",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "비건 디저트, 비건 케이크, 휘낭시에, 마들렌",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트"
+      ],
+      "signatureMenu": "콩볼",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": true,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차장 여부 : 주차 불가 (근처 공영주차장 이용 가능)",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "비건 디저트 최고!! 저당 최고!! 르 미에트",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "19623005",
@@ -233063,12 +233579,12 @@
     "straightKm": 13.44,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 5% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6r8scBmVscf",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6r8scBmVscf"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1101865366",
@@ -233085,8 +233601,8 @@
     "straightKm": 16.49,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -233127,12 +233643,37 @@
     "straightKm": 9.44,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "동네 카페 (성격 태그 0개)",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LDDgG9i2Iw1"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LDDgG9i2Iw1",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "스콘 맛있어요",
+      "menuLevel": 2,
+      "mealTypes": [
+        "커피",
+        "스콘"
+      ],
+      "signatureMenu": "라떼",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "주차 : 건물 지하 주차장 이용",
+      "photoSpot": 3,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "호주식 커피 맛집 & 촉촉 스콘 후기",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": []
   },
   {
     "kakaoPlaceId": "1669818931",
@@ -233149,8 +233690,8 @@
     "straightKm": 14.61,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -233170,12 +233711,12 @@
     "straightKm": 12.72,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/2fk5O85kZRX",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/2fk5O85kZRX"
+    "tags": []
   },
   {
     "kakaoPlaceId": "659257382",
@@ -233192,12 +233733,42 @@
     "straightKm": 14.62,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/6VJpfOsvVLz"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/6VJpfOsvVLz",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "식사"
+      ],
+      "signatureMenu": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": false,
+      "parkingGrade": "B",
+      "parkingEvidence": "롯데마트 맥스 금천점 주차장을 이용 4시간 무료 주차",
+      "photoSpot": null,
+      "teenAppeal": 1,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "동물들을 만나는 공간 옆으로 정글짐과 볼풀, 오락실, 식당까지 있었어요.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "브런치카페"
+    ],
+    "driveMinutes": 37,
+    "driveKm": 21.7,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "1202365504",
@@ -233214,12 +233785,12 @@
     "straightKm": 14.78,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1tJcGNrXJsE",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1tJcGNrXJsE"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1807309244",
@@ -233236,12 +233807,42 @@
     "straightKm": 15.23,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/D7Heq22m59"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/D7Heq22m59",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "소금빵, 치아바타, 바게트, 마들렌 맛집",
+      "menuLevel": 2,
+      "mealTypes": [
+        "빵",
+        "디저트"
+      ],
+      "signatureMenu": "소금빵",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "신길힐스테이트 아파트 무료주차 가능하다는점 참고하세요!",
+      "photoSpot": 2,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "영등포 베어바이트 브레드는 신길힐스테이트아파트 상가 건물 1층에 위치한 소금빵, 치아바타, 바게트, 마들렌 맛집이에요",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 34,
+    "driveKm": 23.7,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1624859413",
@@ -233258,12 +233859,46 @@
     "straightKm": 17.71,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LAKNF7BjSTj"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LAKNF7BjSTj",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "에그타르트 맛집",
+      "menuLevel": 2,
+      "mealTypes": [
+        "커피",
+        "차",
+        "디저트",
+        "에그타르트",
+        "치즈케이크",
+        "스콘"
+      ],
+      "signatureMenu": "에그타르트",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "A",
+      "parkingEvidence": "건물 뒤편으로 서울 한복판의 카페답지 않게 꽤 넉넉한 주차공간이 있어요",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "건물 뒤편으로 서울 한복판의 카페답지 않게 꽤 넉넉한 주차공간이 있어요",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 38,
+    "driveKm": 26,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "2106161951",
@@ -233280,12 +233915,40 @@
     "straightKm": 19.21,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": true,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/93gTN4p3S6a"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/93gTN4p3S6a",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "디저트",
+        "피자"
+      ],
+      "signatureMenu": "박씨우커피, 아보카도스무디, 에그크림 밀크티, 바나나튀김, 달랏 피자",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차안되니 대중교통 이용!",
+      "photoSpot": null,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "베트남식 디저트와 티를 즐길 수 있었답니다 :) / 달랏 피자가 있는! '렝겡' 후기!",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페",
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "1938080312",
@@ -233302,12 +233965,12 @@
     "straightKm": 19.23,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 3.0건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9hE15FeQAuC",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9hE15FeQAuC"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1150514383",
@@ -233345,12 +234008,12 @@
     "straightKm": 22.75,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/GGPLVPM1I61",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/GGPLVPM1I61"
+    "tags": []
   },
   {
     "kakaoPlaceId": "27286587",
@@ -233367,12 +234030,12 @@
     "straightKm": 22.52,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4ZedpkrcH5a",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4ZedpkrcH5a"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1824837103",
@@ -233389,12 +234052,40 @@
     "straightKm": 24.43,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GrueQv3MMSM"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GrueQv3MMSM",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "쿠키와 함께! 블루베리 크림치즈를 바른 갓 구운 베이글",
+      "menuLevel": 2,
+      "mealTypes": [
+        "커피",
+        "음료",
+        "디저트"
+      ],
+      "signatureMenu": "시그니처829라떼, 시그니처바닐라라떼, 시그니처크림라떼",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차 불가",
+      "photoSpot": null,
+      "teenAppeal": 2,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "테이크아웃 전문 카페로",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "13594458",
@@ -233411,12 +234102,12 @@
     "straightKm": 25.76,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.4건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/9tW2jyblSR0",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/9tW2jyblSR0"
+    "tags": []
   },
   {
     "kakaoPlaceId": "110702985",
@@ -233433,12 +234124,12 @@
     "straightKm": 22.85,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/L54LzicnBsD",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/L54LzicnBsD"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1311366247",
@@ -233455,12 +234146,41 @@
     "straightKm": 22.71,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BaNaR6L7BsY"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BaNaR6L7BsY",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트"
+      ],
+      "signatureMenu": "허시코, 샤케라또",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": true,
+      "parkingGrade": "C",
+      "parkingEvidence": "매장주차공간은 별도로 없지만 멀지않은거리에 공용주차장이 있어서 활용하는것도... 주차는 불가 하며 주차가 필요할 경우 도보 5분 정도 거리에 있는 방배열린문화센터 공영주차장",
+      "photoSpot": 3,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "휘낭시에와 파운드케이크 등 다양한 구움과자도 준비되어 있어 간단한 디저트와 함께 여유로운 티타임을 보내기에도 좋습니다.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 42,
+    "driveKm": 28.2,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1944529689",
@@ -233477,8 +234197,8 @@
     "straightKm": 28.85,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -233498,12 +234218,45 @@
     "straightKm": 26.63,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/6MSpskInrAv"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/6MSpskInrAv",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "매일 직접 굽는 빵을 이용한 브런치를 판매하는 곳",
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "파니니",
+        "파스타",
+        "샐러드",
+        "스프"
+      ],
+      "signatureMenu": "버섯 파스타, 비프 타르타르 파니니",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": true,
+      "parkingGrade": "C",
+      "parkingEvidence": "매장 앞 2~3대 주차 가능 주차 이용 시 매장 연락 후 방문",
+      "photoSpot": 3,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "매일 직접 굽는 빵을 이용한 브런치를 판매하는 곳인데요! 바로 선정릉역 인근에 위치한 '튜니니(TUNINI)' 입니다",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페"
+    ],
+    "driveMinutes": 52,
+    "driveKm": 32.1,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "779537287",
@@ -233520,12 +234273,12 @@
     "straightKm": 26.16,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3o4UhJdrq0M",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3o4UhJdrq0M"
+    "tags": []
   },
   {
     "kakaoPlaceId": "17198184",
@@ -233542,8 +234295,8 @@
     "straightKm": 27.7,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -233563,8 +234316,8 @@
     "straightKm": 34.67,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -233584,12 +234337,39 @@
     "straightKm": 32.59,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/A65pScoCYnA"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/A65pScoCYnA",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "만겹 크로와상",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "빵"
+      ],
+      "signatureMenu": "만겹 크로와상",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차 : 전용 주차장 없음",
+      "photoSpot": 3,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "만겹 크로와상이라는 이 곳만의 디저트를 파는 곳으로 유명합니다.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "627061184",
@@ -233606,12 +234386,42 @@
     "straightKm": 35.45,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/924wcx94f3e"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/924wcx94f3e",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "수제 구움과자 맛집",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "구움과자"
+      ],
+      "signatureMenu": "에그타르트, 스카치라떼",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "건물 뒷편에 주차가 가능해서 너무 편했어요",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": "느긋하게 주말 오후 보내고 왔습니다",
+      "confidence": 0.9,
+      "evidence": "시그니처 에그타르트를 비롯해 스콘, 휘낭시에, 브라우니 등 다양한 구움과자를 직접 만드는 곳이에요.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 71,
+    "driveKm": 46.5,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1842525967",
@@ -233628,12 +234438,43 @@
     "straightKm": 31.35,
     "driveMinutesEst": 42,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Eu89SKyD3sX"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Eu89SKyD3sX",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "베이커리 카페",
+      "menuLevel": 3,
+      "mealTypes": [
+        "샌드위치",
+        "수프",
+        "바게트"
+      ],
+      "signatureMenu": "바게트 샌드위치",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "주차가능(2대정도)",
+      "photoSpot": 3,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "다양한 샌드위치가 맛있는 카페 화르르",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페"
+    ],
+    "driveMinutes": 58,
+    "driveKm": 39.2,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "12706144",
@@ -233650,12 +234491,46 @@
     "straightKm": 32.04,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/21djHqhO4yN"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/21djHqhO4yN",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "샌드위치",
+        "파니니"
+      ],
+      "signatureMenu": "직화불고기 파니니",
+      "viewStrength": 3,
+      "viewTypes": [
+        "호수"
+      ],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "지하 주차장 이용 (2시간 30분까지 무료",
+      "photoSpot": null,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "위례 브런치 카페 더 베네치아 I 직화불고기 파니니 2인 세트 솔직 후기... 카페 더 베네치아는 장지천 위례호수공원 바로 옆 성희프라자 1층에 위치해있어요... 위례호수공원이 내려다보이는 위례 브런치 & 커피 맛집",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페",
+      "뷰맛집"
+    ],
+    "driveMinutes": 56,
+    "driveKm": 40.1,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1886576749",
@@ -233672,12 +234547,46 @@
     "straightKm": 33.95,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/6enGdQfcwfM"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/6enGdQfcwfM",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "아티산 베이커리",
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "샌드위치",
+        "사워도우",
+        "포카치아",
+        "카다멈번",
+        "포테이토파이"
+      ],
+      "signatureMenu": "사워도우, 카다멈번",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "건물 주차장에3대정도 주차가능!!! 만차 시 근처 공영주차장을 이용하셔야 합니다!",
+      "photoSpot": 3,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "천호역과 암사역 사이에 있어요. 아침에 눈을 뜨자마자 브런치가 먹고싶어! 해서 찾아간 더브렉퍼스트클럽",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페"
+    ],
+    "driveMinutes": 54,
+    "driveKm": 41.9,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "2031824575",
@@ -233694,12 +234603,41 @@
     "straightKm": 35.34,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/I04ZOMmn1P"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/I04ZOMmn1P",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "수제로 만든 수플레와 휘낭시에",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트"
+      ],
+      "signatureMenu": "수플레",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "주차 : 인근 공영 주차장 이용",
+      "photoSpot": 3,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "강동구 고덕동 수플레 맛집 카페둘셋 고덕점 카페둘셋 고덕점은 수제로 만든 수플레와 휘낭시에 맛있기로 유명한 고덕동 디저트 맛집이에요!!",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 64,
+    "driveKm": 44,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "22854035",
@@ -233716,12 +234654,12 @@
     "straightKm": 9.3,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/285D9OvOHyl",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/285D9OvOHyl"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1350611803",
@@ -233738,12 +234676,43 @@
     "straightKm": 13.07,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/9oL1FaVIdfu"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/9oL1FaVIdfu",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": "직접 로스팅한 맛있는 커피를 즐길 수 있어요",
+      "menuLevel": 3,
+      "mealTypes": [
+        "디저트",
+        "샌드위치"
+      ],
+      "signatureMenu": "핸드드립, 티라미수, 오픈샌드위치",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "주차장이 있는 것만도 매우 다행... 주차가 약간 불편할 수 있어요... 건물 앞 주차 가능(약 4대) 인근 골목 주차 가능... 주차장 구비(협소), 주변 주차 가능",
+      "photoSpot": 3,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "오픈샌드위치와 커피 맛집크로마이트커피... 수제 티라미수 후기까지 상세히 정리해 드립니다.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페",
+      "디저트특화"
+    ],
+    "driveMinutes": 35,
+    "driveKm": 19.5,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "1461632928",
@@ -233760,12 +234729,12 @@
     "straightKm": 2.38,
     "driveMinutesEst": 3,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 15% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/GQxbrpUgDVU",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/GQxbrpUgDVU"
+    "tags": []
   },
   {
     "kakaoPlaceId": "833141481",
@@ -233782,12 +234751,41 @@
     "straightKm": 5.78,
     "driveMinutesEst": 8,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/1jC5Awi0tDe"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/1jC5Awi0tDe",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "직접 만든 디저트",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "케이크"
+      ],
+      "signatureMenu": "복숭아 케이크",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차장 없어 주차 불가",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": "2시간",
+      "confidence": 1,
+      "evidence": "직접 만든 디저트도 판매하고 있었는데~ 🍞🍪🍰",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "디저트특화"
+    ]
   },
   {
     "kakaoPlaceId": "252962034",
@@ -233804,12 +234802,12 @@
     "straightKm": 35.14,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/K4kmb6OBW9r",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/K4kmb6OBW9r"
+    "tags": []
   },
   {
     "kakaoPlaceId": "24576520",
@@ -233826,12 +234824,12 @@
     "straightKm": 10.1,
     "driveMinutesEst": 14,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/916Ssi4tZi8",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/916Ssi4tZi8"
+    "tags": []
   },
   {
     "kakaoPlaceId": "394819177",
@@ -233848,12 +234846,12 @@
     "straightKm": 15.52,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6lDcvYCguQg",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6lDcvYCguQg"
+    "tags": []
   },
   {
     "kakaoPlaceId": "165784502",
@@ -233870,12 +234868,42 @@
     "straightKm": 33.05,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4VsOXCelEmC"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4VsOXCelEmC",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 3,
+      "hasBakery": false,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "장어구이"
+      ],
+      "signatureMenu": "민물장어",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "매장 이용시 최대 2시간 무료고, 이후 30분당 1,000원 추가",
+      "photoSpot": null,
+      "teenAppeal": 0,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "민물장어를 직접 골라 숯불에 구워 먹을 수 있는 대형 장어 전문점이에요",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "브런치카페"
+    ],
+    "driveMinutes": 55,
+    "driveKm": 42.8,
+    "tollWon": 2000
   },
   {
     "kakaoPlaceId": "655120315",
@@ -233892,8 +234920,8 @@
     "straightKm": 14.13,
     "driveMinutesEst": 19,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -233955,12 +234983,12 @@
     "straightKm": 9.33,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 13% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/B4hhOT1raoK",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/B4hhOT1raoK"
+    "tags": []
   },
   {
     "kakaoPlaceId": "698980077",
@@ -233977,12 +235005,42 @@
     "straightKm": 7.65,
     "driveMinutesEst": 10,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/6FLG3lWUsCm"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/6FLG3lWUsCm",
+    "attributes": {
+      "scale": "중형",
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "떡집 카페",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "떡"
+      ],
+      "signatureMenu": "찹쌀떡",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "다만 주차 공간이 협소한 편이라 연락처는 꼭 기재해야 해요!",
+      "photoSpot": null,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "떡디저트 맛집 음료 종류도 다양하고 떡도 개별 포장되어 있어서 선물용으로도 괜찮아 보이더라고요. 가격도 저렴한 편이라 부담 없이 방문하기 좋았답니다.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 32,
+    "driveKm": 12.5,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "562608369",
@@ -234020,12 +235078,42 @@
     "straightKm": 7.99,
     "driveMinutesEst": 11,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/7Yx3ndAUMh3"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/7Yx3ndAUMh3",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 3,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "버거"
+      ],
+      "signatureMenu": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "A",
+      "parkingEvidence": "매장 바로 앞에 넓은 주차장이 있어서 주말... 주차장이 따로 있고, 주차장이 꽤 넓은 편이라 주차 고민 없이 편하게 주차했어요",
+      "photoSpot": 5,
+      "teenAppeal": 5,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "1층에 카페와 프랭크버거집도 있으니 참고하세요",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "브런치카페"
+    ],
+    "driveMinutes": 27,
+    "driveKm": 12.8,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "12242887",
@@ -234042,12 +235130,12 @@
     "straightKm": 33.23,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KnqsMnsVQNN",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KnqsMnsVQNN"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1996244008",
@@ -234064,12 +235152,42 @@
     "straightKm": 41.97,
     "driveMinutesEst": 57,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4zvOLDdQKDZ"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4zvOLDdQKDZ",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "크로플",
+        "오픈샌드위치",
+        "파스타",
+        "망고빙수"
+      ],
+      "signatureMenu": "브라운치즈 크로플",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "D",
+      "parkingEvidence": "주차공간은 별도로 없기 때문에",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "식사가 가능한 영통역 가성비 카페 '이너프 '추천",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페"
+    ]
   },
   {
     "kakaoPlaceId": "276471712",
@@ -234086,12 +235204,12 @@
     "straightKm": 35.85,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 4.4건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JYQ9f199shG",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JYQ9f199shG"
+    "tags": []
   },
   {
     "kakaoPlaceId": "319024915",
@@ -234108,12 +235226,12 @@
     "straightKm": 34.8,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 3.7건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ELpGUodPZAs",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ELpGUodPZAs"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1565094669",
@@ -234130,12 +235248,12 @@
     "straightKm": 35.01,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IGWaR5cUSPj",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IGWaR5cUSPj"
+    "tags": []
   },
   {
     "kakaoPlaceId": "19883305",
@@ -234152,12 +235270,12 @@
     "straightKm": 30.66,
     "driveMinutesEst": 41,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8smiKcM2vxB",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8smiKcM2vxB"
+    "tags": []
   },
   {
     "kakaoPlaceId": "655965292",
@@ -234174,12 +235292,41 @@
     "straightKm": 35.58,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/86MHre5rJDy"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/86MHre5rJDy",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "수제 디저트 맛집",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트"
+      ],
+      "signatureMenu": "스콘, 휘낭시에",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "매장 앞이랑 옆쪽으로 6~7대 정도 주차할 수 있는 전용 공간이 마련되어... 골목에 3대 정도 가능합니다",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "스페셜티 원두와 수제 디저트 맛집으로도 입소문난 위례카페 플랑리브르",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 52,
+    "driveKm": 54.7,
+    "tollWon": 2900
   },
   {
     "kakaoPlaceId": "916961046",
@@ -234196,12 +235343,12 @@
     "straightKm": 36.12,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 3.4건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AeDTI3XU5KY",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AeDTI3XU5KY"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1561731133",
@@ -234218,12 +235365,47 @@
     "straightKm": 20.06,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/7ZaSw93jlOm"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/7ZaSw93jlOm",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 3,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "디저트",
+        "브런치"
+      ],
+      "signatureMenu": "바스크 치즈케익",
+      "viewStrength": 3,
+      "viewTypes": [
+        "계곡"
+      ],
+      "outdoorSeating": null,
+      "parkingGrade": "A",
+      "parkingEvidence": "더메카닉 단독 주차장이 있어요. 필로티 건물이라 1층이 통째로 주차 공간으로 이루어져있고... 🅿️ 입구앞 야외주차장 넉넉",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "1층이 통째로 주차 공간으로 이루어져있고... 3층 규모의 대형 카페였는데... 계곡이 바로 보이는 위치에 있는 대형 카페 더메카닉을 방문했어요... 브런치 카페",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "브런치카페",
+      "뷰맛집",
+      "디저트특화"
+    ],
+    "driveMinutes": 34,
+    "driveKm": 24.8,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "582849982",
@@ -234261,12 +235443,12 @@
     "straightKm": 20.43,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/ITjbp0pj89T",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/ITjbp0pj89T"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1626328822",
@@ -234283,12 +235465,49 @@
     "straightKm": 9.56,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3iGyYhJRKH7"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3iGyYhJRKH7",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "베이커리 카페",
+      "menuLevel": 2,
+      "mealTypes": [
+        "커피",
+        "베이커리",
+        "디저트"
+      ],
+      "signatureMenu": "카이막 브레드",
+      "viewStrength": 3,
+      "viewTypes": [
+        "논밭",
+        "철길"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "A",
+      "parkingEvidence": "매장 내부 자체적인 대형주차공간 구축(무료주차) 시간제한없음",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "코홀트커피 옥길점은 매장 규모가 꽤 큰 편이에요 무엇보다 마음에 들었던 건 주차장이 정말 넓었다는 것! 주말에 카페 갈 때 주차 때문에 스트레스받는 경우가 많은데 여기...",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "뷰맛집",
+      "디저트특화"
+    ],
+    "driveMinutes": 28,
+    "driveKm": 15.6,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "26582694",
@@ -234305,8 +235524,8 @@
     "straightKm": 65.71,
     "driveMinutesEst": 89,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -234347,12 +235566,12 @@
     "straightKm": 60.24,
     "driveMinutesEst": 81,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.0건 < 8건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/1pYwY944Y0Z",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/1pYwY944Y0Z"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1313703474",
@@ -234369,8 +235588,8 @@
     "straightKm": 24.47,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": true,
     "attributes": null,
     "tags": []
@@ -234390,12 +235609,12 @@
     "straightKm": 18.93,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.3건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/C8nvGNdXRYh",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/C8nvGNdXRYh"
+    "tags": []
   },
   {
     "kakaoPlaceId": "2050252348",
@@ -234412,12 +235631,12 @@
     "straightKm": 21.29,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.6건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3oeD7D1EO9f",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3oeD7D1EO9f"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1447251286",
@@ -234434,12 +235653,12 @@
     "straightKm": 24.51,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.7건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GIVyPI8zDH3",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GIVyPI8zDH3"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1800436107",
@@ -234456,12 +235675,12 @@
     "straightKm": 35.67,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CLB2KcJ3Bzp",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CLB2KcJ3Bzp"
+    "tags": []
   },
   {
     "kakaoPlaceId": "209425998",
@@ -234478,12 +235697,12 @@
     "straightKm": 36.72,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.3건 < 6건",
     "ambiguousName": true,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/GPVBLglw5zs",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/GPVBLglw5zs"
+    "tags": []
   },
   {
     "kakaoPlaceId": "700301230",
@@ -234500,12 +235719,52 @@
     "straightKm": 48.24,
     "driveMinutesEst": 65,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/ou67rFqDzB"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/ou67rFqDzB",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "팬케이크",
+        "샐러드",
+        "파스타",
+        "와인"
+      ],
+      "signatureMenu": "팬케이크",
+      "viewStrength": 5,
+      "viewTypes": [
+        "산",
+        "정원"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "A",
+      "parkingEvidence": "카페 앞 미아무 전용 주차공간도 넓은데 혹시 만차일 경우는 바로 아래쪽에 천마산 공용주차장 이용하셔도 되고 주차지원도 해주신답니다",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "남양주 브런치 카페 미아무는 1층과 2층으로 이루어진 건물인데 큼직큼직하게 창이 나 있어서 전혀 답답하지 않고 천마산 숲뷰를 즐길 수 있다.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "브런치카페",
+      "뷰맛집",
+      "정원마당형",
+      "디저트특화"
+    ],
+    "driveMinutes": 68,
+    "driveKm": 68.3,
+    "tollWon": 4100
   },
   {
     "kakaoPlaceId": "931473883",
@@ -234522,12 +235781,12 @@
     "straightKm": 37.92,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/9Sbk1bdC2y1",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/9Sbk1bdC2y1"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1233192403",
@@ -234544,8 +235803,8 @@
     "straightKm": 37.81,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -234565,12 +235824,12 @@
     "straightKm": 46.37,
     "driveMinutesEst": 63,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.8건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HePM9EBkYYC",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HePM9EBkYYC"
+    "tags": []
   },
   {
     "kakaoPlaceId": "429123115",
@@ -234587,12 +235846,12 @@
     "straightKm": 15.69,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.7건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/99cPJ5EZdwK",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/99cPJ5EZdwK"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1135218140",
@@ -234609,12 +235868,12 @@
     "straightKm": 9.3,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HlQrJ1oWH69",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HlQrJ1oWH69"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1212434698",
@@ -234631,8 +235890,8 @@
     "straightKm": 16.36,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -234652,12 +235911,12 @@
     "straightKm": 16.55,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/2n85TyhHGQ2",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/2n85TyhHGQ2"
+    "tags": []
   },
   {
     "kakaoPlaceId": "622772514",
@@ -234674,12 +235933,12 @@
     "straightKm": 17.87,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Fm5W8zwzQuJ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Fm5W8zwzQuJ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1911788407",
@@ -234696,12 +235955,47 @@
     "straightKm": 24.89,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/1rF976whIWt"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/1rF976whIWt",
+    "attributes": {
+      "scale": "중형",
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "수제붕어빵",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "붕어빵",
+        "케이크",
+        "빙수"
+      ],
+      "signatureMenu": "찹쌀미니붕어빵",
+      "viewStrength": 3,
+      "viewTypes": [
+        "호수"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "B",
+      "parkingEvidence": "가게 앞 8대까지 주차 가능 , 만차시 반월호수 공영주차장에",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": "1시간~2시간",
+      "confidence": 0.9,
+      "evidence": "군포 반월호수뷰 루프탑카페 커갤 반월호수점",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "뷰맛집",
+      "디저트특화"
+    ],
+    "driveMinutes": 45,
+    "driveKm": 36.5,
+    "tollWon": 2300
   },
   {
     "kakaoPlaceId": "258509463",
@@ -234718,12 +236012,12 @@
     "straightKm": 24.45,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LmydLzJKMBY",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LmydLzJKMBY"
+    "tags": []
   },
   {
     "kakaoPlaceId": "866651662",
@@ -234740,12 +236034,12 @@
     "straightKm": 29.04,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GZjkz8psYER",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GZjkz8psYER"
+    "tags": []
   },
   {
     "kakaoPlaceId": "959024653",
@@ -234762,12 +236056,42 @@
     "straightKm": 27.83,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HLXOyxZwWY7"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HLXOyxZwWY7",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 1,
+      "mealTypes": [
+        "전통차",
+        "전통디저트"
+      ],
+      "signatureMenu": "쌍화차, 대추차, 생강차",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "주차는 바로 앞에 7대 정도 할 수 있었답니다~",
+      "photoSpot": 3,
+      "teenAppeal": 2,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "아리곳간전통찻집은 외관부터 전통찻집이라는 느낌이 물씬 풍기는 곳이었어요! 요즘 유행하는 세련... (중략) 대표메뉴 : 쌍화차, 대추차, 생강차 🍯 전통간식 : 오란다, 유과, 과즐 등 수제...",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 40,
+    "driveKm": 34.2,
+    "tollWon": 2100
   },
   {
     "kakaoPlaceId": "1243493995",
@@ -234784,12 +236108,45 @@
     "straightKm": 41.98,
     "driveMinutesEst": 57,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/6y6U690LQIA"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/6y6U690LQIA",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "용인베이커리카페",
+      "menuLevel": 3,
+      "mealTypes": [
+        "식사빵",
+        "베이글산도",
+        "소금빵",
+        "치아바타",
+        "과일모찌"
+      ],
+      "signatureMenu": "베이글산도",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "A",
+      "parkingEvidence": "건물 뒤쪽에 넓은 지상주차장이 있어서 자차로 오더라도 주차 걱정 없이 편하게 방문할 수 있어요",
+      "photoSpot": 3,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "건강하고 속 편한 천연발효종 식사빵부터 요즘 핫한 과일모찌까지 만나볼 수 있는 곳 용인 대표 빵지순례 맛집 브레드랩이다.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "브런치카페"
+    ],
+    "driveMinutes": 64,
+    "driveKm": 52,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1437269984",
@@ -234806,12 +236163,12 @@
     "straightKm": 42.8,
     "driveMinutesEst": 58,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.0건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JHPLaXXkpMX",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JHPLaXXkpMX"
+    "tags": []
   },
   {
     "kakaoPlaceId": "564929003",
@@ -234828,12 +236185,51 @@
     "straightKm": 45.11,
     "driveMinutesEst": 61,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/ILQ0oncQfJm"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/ILQ0oncQfJm",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "마들렌, 치아바타, 크로와상",
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "샌드위치",
+        "디저트",
+        "빙수"
+      ],
+      "signatureMenu": "말차라떼, 바스크 치즈케이크, 치아바타 샌드위치",
+      "viewStrength": 3,
+      "viewTypes": [
+        "산",
+        "정원"
+      ],
+      "outdoorSeating": null,
+      "parkingGrade": "A",
+      "parkingEvidence": "카페 앞 넓은 주차장 있음",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "용인 브런치 카페 데이던스, 기흥아울렛 근처 한적한 대형 브런치 카페",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "브런치카페",
+      "뷰맛집",
+      "디저트특화"
+    ],
+    "driveMinutes": 71,
+    "driveKm": 62,
+    "tollWon": 3600
   },
   {
     "kakaoPlaceId": "2042290187",
@@ -234850,12 +236246,12 @@
     "straightKm": 50.5,
     "driveMinutesEst": 68,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 22% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3PLURbigYVx",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3PLURbigYVx"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1836191774",
@@ -234872,12 +236268,48 @@
     "straightKm": 37.74,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9UaHRxFmezu"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9UaHRxFmezu",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 3,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "베이커리",
+      "menuLevel": 3,
+      "mealTypes": [
+        "빵",
+        "케이크",
+        "샌드위치",
+        "샐러드",
+        "브런치"
+      ],
+      "signatureMenu": "케이크",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": true,
+      "parkingGrade": "A",
+      "parkingEvidence": "카페 뒤쪽으로 전용 주차장이 널찍하게 있다. 평일에도 주차 요원",
+      "photoSpot": 3,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "브런치도 가능한 샐러드나 샌드위치도 있어요.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "브런치카페",
+      "디저트특화"
+    ],
+    "driveMinutes": 52,
+    "driveKm": 48.3,
+    "tollWon": 3000
   },
   {
     "kakaoPlaceId": "1731053459",
@@ -234894,12 +236326,12 @@
     "straightKm": 52,
     "driveMinutesEst": 70,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.1건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/24ojSC7AFOi",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/24ojSC7AFOi"
+    "tags": []
   },
   {
     "kakaoPlaceId": "27597461",
@@ -234916,12 +236348,12 @@
     "straightKm": 23.01,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.5건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5bLjZJQmoyY",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5bLjZJQmoyY"
+    "tags": []
   },
   {
     "kakaoPlaceId": "123256426",
@@ -234938,12 +236370,42 @@
     "straightKm": 22.7,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DHtfgKfIfBq"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DHtfgKfIfBq",
+    "attributes": {
+      "scale": "소형",
+      "seatsEstimate": null,
+      "floors": 1,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "베이커리 맛집",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "베이커리"
+      ],
+      "signatureMenu": "왁뿌소금빵, 후르츠산도",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "B",
+      "parkingEvidence": "건물 뒤편에 입구가 있는 지하주차장에 하시면 됩니다 약 10대 정도 가능해요",
+      "photoSpot": 4,
+      "teenAppeal": 5,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "파주 운정 카페 디저트 맛집 미니랜드 후르츠산도 왁뿌소금빵 후기 라떼, 씨 쏠트 라떼, 버터 크림 라떼가 있어요! 패키지 포장 박스, 종이 쇼핑백, 보냉백까지 고급스러워 선물용 디저트 사러 방문하는 사람이 많은 파주 미니랜드",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "디저트특화"
+    ],
+    "driveMinutes": 40,
+    "driveKm": 34.1,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "1416529908",
@@ -234960,8 +236422,8 @@
     "straightKm": 23.93,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -234981,12 +236443,45 @@
     "straightKm": 21.87,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KOAcvCJuMuj"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KOAcvCJuMuj",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "커피",
+        "차",
+        "빵",
+        "돈가스"
+      ],
+      "signatureMenu": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": true,
+      "parkingGrade": "A",
+      "parkingEvidence": "밀크북 전용 주차장 5시간 무료 이용 도로 공영 주차장 무료 이용",
+      "photoSpot": 3,
+      "teenAppeal": 3,
+      "stayDuration": "하루종일",
+      "confidence": 0.9,
+      "evidence": "밀크북은 어린이책을 자유롭게 읽으면서... 차를 마시는 카페, 어린이책과 중고서적을 둘러보는 책방, 그리고 영화를 보는 극장까지. 한 건물 안에서도... 근처에서 돈가쓰도 먹었어요.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "브런치카페"
+    ],
+    "driveMinutes": 37,
+    "driveKm": 32.6,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "368127419",
@@ -235003,12 +236498,46 @@
     "straightKm": 67.27,
     "driveMinutesEst": 91,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/64LQXeIEWsC"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/64LQXeIEWsC",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "매일 직접 정성껏 준비한 바게트 샌드위치",
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "바게트 샌드위치",
+        "파스타",
+        "라자냐"
+      ],
+      "signatureMenu": "바게트 샌드위치, 파스타, 라자냐",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "공영주차장이 바로 앞에 있는 주택개조 브런치카페",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "매일 직접 정성껏 준비한 바게트 샌드위치와 신선한 재료로 만드는 파스타를 즐길 수 있는 곳",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "브런치카페"
+    ],
+    "driveMinutes": 88,
+    "driveKm": 80.4,
+    "tollWon": 2800
   },
   {
     "kakaoPlaceId": "1247055756",
@@ -235025,12 +236554,49 @@
     "straightKm": 82.88,
     "driveMinutesEst": 112,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/68JWzpc0Xho"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/68JWzpc0Xho",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "수제 두유식빵, 가마솥식빵",
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "빵"
+      ],
+      "signatureMenu": "된장라떼, 두유식빵",
+      "viewStrength": 3,
+      "viewTypes": [
+        "정원",
+        "산"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "A",
+      "parkingEvidence": "매장 앞 무료 주차 가능",
+      "photoSpot": 5,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "안성 대형카페 풍물기행 한옥카페는 수제 두유식빵과... 브런치·가마솥식빵· 정보 기록하는 도팔입니다",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "브런치카페",
+      "뷰맛집",
+      "정원마당형"
+    ],
+    "driveMinutes": 95,
+    "driveKm": 108.6,
+    "tollWon": 5400
   },
   {
     "kakaoPlaceId": "1600098852",
@@ -235047,12 +236613,51 @@
     "straightKm": 22.02,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FOvtkKzQ3FT"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FOvtkKzQ3FT",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 4,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "대한민국 제과 기능장이 만드는 다양한 베이커리부터 쿠키, 케이크",
+      "menuLevel": 3,
+      "mealTypes": [
+        "베이커리",
+        "브런치",
+        "파스타",
+        "피자"
+      ],
+      "signatureMenu": null,
+      "viewStrength": 3,
+      "viewTypes": [
+        "논밭",
+        "바다"
+      ],
+      "outdoorSeating": null,
+      "parkingGrade": "A",
+      "parkingEvidence": "주차장도 넉넉하게 잘 준비되어 있어서 주차 걱정 없이 편하게 다녀올 수 있었습니다",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "대한민국 제과 기능장이 만드는 다양한 베이커리부터 쿠키, 케이크, 아이들 음료와 브런치까지 메뉴가 다양해요",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "브런치카페",
+      "뷰맛집",
+      "디저트특화"
+    ],
+    "driveMinutes": 48,
+    "driveKm": 33.8,
+    "tollWon": 1700
   },
   {
     "kakaoPlaceId": "359264662",
@@ -235069,12 +236674,46 @@
     "straightKm": 16.01,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CrcJGE24P2Y"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CrcJGE24P2Y",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 2,
+      "hasBakery": null,
+      "breadBakedOnsite": null,
+      "bakerySignal": null,
+      "menuLevel": 3,
+      "mealTypes": [
+        "쿠킹클래스"
+      ],
+      "signatureMenu": null,
+      "viewStrength": 3,
+      "viewTypes": [
+        "정원"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "A",
+      "parkingEvidence": "전용 주차장 이용 (주차 무료)",
+      "photoSpot": 4,
+      "teenAppeal": 2,
+      "stayDuration": "3시간",
+      "confidence": 0.9,
+      "evidence": "여울정원은 건물 앞쪽으로 넓은 야외공간이 마련되어 있는 김포 야외 키즈카페...너무 이쁜 정원과 건물이 나온답니다",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "브런치카페",
+      "뷰맛집",
+      "정원마당형"
+    ],
+    "driveMinutes": 45,
+    "driveKm": 22.4,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "1649396281",
@@ -235091,12 +236730,12 @@
     "straightKm": 40.83,
     "driveMinutesEst": 55,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.8건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/IXfYe8NHSUO",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/IXfYe8NHSUO"
+    "tags": []
   },
   {
     "kakaoPlaceId": "442438559",
@@ -235113,12 +236752,12 @@
     "straightKm": 29.65,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 3.1건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/uvK1FH3dnN",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/uvK1FH3dnN"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1444118183",
@@ -235135,12 +236774,12 @@
     "straightKm": 27.93,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/v9BDCdbr6D",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/v9BDCdbr6D"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1213655072",
@@ -235157,12 +236796,45 @@
     "straightKm": 27.9,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/B0KyK52vlVD"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/B0KyK52vlVD",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": 3,
+      "hasBakery": true,
+      "breadBakedOnsite": true,
+      "bakerySignal": "매장에서 직접 구운 빵",
+      "menuLevel": 3,
+      "mealTypes": [
+        "브런치",
+        "파스타",
+        "빵"
+      ],
+      "signatureMenu": "소금빵, 몽블랑",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "parkingGrade": "C",
+      "parkingEvidence": "가게 주변이나 건물 바로 뒤 송산그린시티주1 공영주차장에 1시간 30분 무료주차 가능하니 주차 걱정 놉!!!",
+      "photoSpot": null,
+      "teenAppeal": 3,
+      "stayDuration": null,
+      "confidence": 1,
+      "evidence": "매장에서 직접 구운 빵과 브런치를 함께 즐길 수 있는 곳이다.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "브런치카페"
+    ],
+    "driveMinutes": 50,
+    "driveKm": 38.6,
+    "tollWon": 1000
   },
   {
     "kakaoPlaceId": "1402571793",
@@ -235179,12 +236851,44 @@
     "straightKm": 52.67,
     "driveMinutesEst": 71,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3CXpY03QXh1"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3CXpY03QXh1",
+    "attributes": {
+      "scale": "대형",
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "수제 디저트 맛집",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "베이커리"
+      ],
+      "signatureMenu": "청사과레몬칠러, 흑임자크림라떼, 바스크치즈케이크",
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": true,
+      "parkingGrade": "A",
+      "parkingEvidence": "카페 앞, 옆으로 주차 공간이 있어서 30대 정도 주차가 가능",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "다이얼6은 넓고 분위기 좋은 공간에서 음료와 수제 디저트를 즐길 수 있는 포천 대형카페예요.",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "대형카페",
+      "대형베이커리",
+      "디저트특화"
+    ],
+    "driveMinutes": 70,
+    "driveKm": 71.8,
+    "tollWon": 4500
   },
   {
     "kakaoPlaceId": "27045352",
@@ -235201,12 +236905,12 @@
     "straightKm": 68.44,
     "driveMinutesEst": 92,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.1건 < 8건",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BMtDGufpeWu",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BMtDGufpeWu"
+    "tags": []
   },
   {
     "kakaoPlaceId": "10669495",
@@ -235223,12 +236927,12 @@
     "straightKm": 84.74,
     "driveMinutesEst": 114,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 24% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BeyJt9CIqZw",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BeyJt9CIqZw"
+    "tags": []
   },
   {
     "kakaoPlaceId": "522617590",
@@ -235245,12 +236949,12 @@
     "straightKm": 64.88,
     "driveMinutesEst": 88,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.7건 < 8건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/GRgKPpyqbZt",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/GRgKPpyqbZt"
+    "tags": []
   },
   {
     "kakaoPlaceId": "184131128",
@@ -235267,11 +236971,46 @@
     "straightKm": 62.92,
     "driveMinutesEst": 85,
     "firstSeenAt": "2026-11-01T22:28:44.857Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": true,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/4qEfq2BTIuk"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/4qEfq2BTIuk",
+    "attributes": {
+      "scale": null,
+      "seatsEstimate": null,
+      "floors": null,
+      "hasBakery": true,
+      "breadBakedOnsite": null,
+      "bakerySignal": "소금빵도 엄청 기름 좔좔 느낌은 아니고 담백해서 남녀노소 호불호 없이 먹을 수 있는 맛이더라구요",
+      "menuLevel": 2,
+      "mealTypes": [
+        "디저트",
+        "커피"
+      ],
+      "signatureMenu": "아보카도 스무디카노, 지리산 산딸기라떼, 전국팔도 미숫가루, 쑥인절미와플",
+      "viewStrength": 3,
+      "viewTypes": [
+        "정원",
+        "강"
+      ],
+      "outdoorSeating": true,
+      "parkingGrade": "A",
+      "parkingEvidence": "주차: 스트레스 없는 넓은 전용 공간 인기 있는 핫플 카페에 갈 때 가장 걱정되는 게 주차인데요. 이곳은 입구부터 주차장이 굉장히 넓게 확보되어...",
+      "photoSpot": 4,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "confidence": 0.9,
+      "evidence": "양평한옥카페 녹원 애견동반 그만큼 정원에 대한 애정이 곳곳에서 느껴지는 공간이다 지나치게 인위적이지 않고 자연스럽게 꾸며진 정원이라 이 아기자기한 느낌이 더 좋은 양평한옥카페 녹원",
+      "extractedAt": "2026-11-03T02:58:06.811Z",
+      "modelVersion": "gemini-3.1-flash-lite+p2"
+    },
+    "tags": [
+      "뷰맛집",
+      "정원마당형",
+      "디저트특화"
+    ],
+    "driveMinutes": 97,
+    "driveKm": 79.9,
+    "tollWon": 2700
   }
 ]
