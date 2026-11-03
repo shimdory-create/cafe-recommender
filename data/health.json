@@ -41,18 +41,18 @@
   },
   {
     "source": "kakao-local-restaurant",
-    "lastSuccessAt": "2026-10-19T23:00:14.130Z",
+    "lastSuccessAt": "2026-11-03T01:44:01.953Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-10-19T23:00:14.130Z",
+    "updatedAt": "2026-11-03T01:44:01.953Z",
     "quotaErrorsToday": 0
   },
   {
     "source": "harvest-restaurant",
     "lastSuccessAt": "2026-09-21T19:40:39.049Z",
-    "lastError": "kakao-local HTTP 400: {\"code\":-2, \"msg\":\"Max (query) length 100\"}",
-    "consecutiveFailures": 8,
-    "updatedAt": "2026-10-19T23:00:14.130Z",
+    "lastError": "LLM 스키마 검증 실패 (2회 시도): JSON 객체를 찾을 수 없음",
+    "consecutiveFailures": 11,
+    "updatedAt": "2026-11-03T01:44:01.953Z",
     "quotaErrorsToday": 0
   },
   {
