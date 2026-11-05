@@ -581109,12 +581109,33 @@
     "straightKm": 14.62,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-03T01:44:01.953Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7bgzl3XYfdr",
-    "attributes": null,
-    "tags": []
+    "attributes": {
+      "cuisineType": "고기구이",
+      "evidence": "숯불에 구워 먹는 맛있는 닭갈비와 다양한 사이드 메뉴까지! 영등포에서 맛있는 숯불구이가 생각날 때 방문하기 좋은 여의도 숯닭",
+      "parkingGrade": "C",
+      "parkingEvidence": "매장 앞 주차는 불가하지만 인근 주차장 (영등포유원시티) 를 이용하면 비용 지원 해주십니다!",
+      "hasRoom": true,
+      "reservable": true,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "teenAppeal": 3.5,
+      "confidence": 1,
+      "extractedAt": "2026-11-05T01:58:36.009Z",
+      "modelVersion": "gemini-3.1-flash-lite+r1"
+    },
+    "tags": [
+      "고기구이",
+      "룸있음",
+      "예약가능"
+    ],
+    "driveMinutes": 34,
+    "driveKm": 18.5,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "2139016998",
@@ -582378,12 +582399,32 @@
     "straightKm": 28.23,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-03T01:44:01.953Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/FzxDQ6kfJCx",
-    "attributes": null,
-    "tags": []
+    "attributes": {
+      "cuisineType": "한식",
+      "evidence": "곰탕랩은 곰탕이라는 전통적인 메뉴를 현대적으로 풀어낸 사례로 주목받고 있습니다.",
+      "parkingGrade": "B",
+      "parkingEvidence": "주차는 식당 이용 시 2시간 무료 가능",
+      "hasRoom": true,
+      "reservable": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "teenAppeal": 2,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-05T01:58:36.009Z",
+      "modelVersion": "gemini-3.1-flash-lite+r1"
+    },
+    "tags": [
+      "한식",
+      "룸있음"
+    ],
+    "driveMinutes": 65,
+    "driveKm": 37.1,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1291804365",
@@ -588233,11 +588274,25 @@
     "straightKm": 21.21,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-03T01:44:01.953Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "동네 카페 (성격 태그 0개)",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/K9F9oGKTKpT",
-    "attributes": null,
+    "attributes": {
+      "cuisineType": null,
+      "evidence": "지축역 빵집 '태호당' 고양시 쌀빵 맛집",
+      "parkingGrade": "C",
+      "parkingEvidence": "매장 앞 주차장에 주차가 가능한데 3대 정도 주차가 가능해서 조금 협소한 편이에요",
+      "hasRoom": null,
+      "reservable": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "teenAppeal": 4.5,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-05T01:58:36.009Z",
+      "modelVersion": "gemini-3.1-flash-lite+r1"
+    },
     "tags": []
   },
   {
@@ -588713,12 +588768,31 @@
     "straightKm": 43.65,
     "driveMinutesEst": 59,
     "firstSeenAt": "2026-11-03T01:44:01.953Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DoYq470NO0o",
-    "attributes": null,
-    "tags": []
+    "attributes": {
+      "cuisineType": "한식",
+      "evidence": "남양주 한식 하면 임꺽정곰탕짜글이입니다!!",
+      "parkingGrade": "C",
+      "parkingEvidence": "주차는 매장 바로 옆 전용 공간에 차량 1~2대 정도 파킹이 가능합니다.",
+      "hasRoom": null,
+      "reservable": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "teenAppeal": 2,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-05T01:58:36.009Z",
+      "modelVersion": "gemini-3.1-flash-lite+r1"
+    },
+    "tags": [
+      "한식"
+    ],
+    "driveMinutes": 67,
+    "driveKm": 64.3,
+    "tollWon": 4100
   },
   {
     "kakaoPlaceId": "855144438",
@@ -589078,12 +589152,31 @@
     "straightKm": 23.1,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-03T01:44:01.953Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/IznUCimTMBK",
-    "attributes": null,
-    "tags": []
+    "attributes": {
+      "cuisineType": "양식",
+      "evidence": "이탈리안 레스토랑 일피아토(IL PIATTO)!",
+      "parkingGrade": "C",
+      "parkingEvidence": "주차장이 엄청 많이 매우 협소해서 매장에는 주차를 못 한다는 점 + 근처...",
+      "hasRoom": null,
+      "reservable": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "teenAppeal": 3,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-05T01:58:36.009Z",
+      "modelVersion": "gemini-3.1-flash-lite+r1"
+    },
+    "tags": [
+      "양식"
+    ],
+    "driveMinutes": 37,
+    "driveKm": 30.5,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "1935651622",
