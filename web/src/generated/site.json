@@ -1,57 +1,57 @@
 {
-  "generatedAt": "2026-11-06T00:38:52.062Z",
+  "generatedAt": "2026-11-06T00:39:30.922Z",
   "weekOf": "2026-11-02",
   "pipelineStatus": "점검 필요: 수집 실패·수집 멈춤",
   "week": [
     {
       "rank": 1,
-      "id": "85665859",
-      "finalScore": 56.891
+      "id": "1117535327",
+      "finalScore": 54.157
     },
     {
       "rank": 2,
-      "id": "1117535327",
-      "finalScore": 53.698
+      "id": "85665859",
+      "finalScore": 53.51
     },
     {
       "rank": 3,
       "id": "1493430671",
-      "finalScore": 39.581
+      "finalScore": 45.835
     },
     {
       "rank": 4,
       "id": "1780788642",
-      "finalScore": 33.353
+      "finalScore": 28.513
     },
     {
       "rank": 5,
-      "id": "1854263126",
-      "finalScore": 53.171
+      "id": "1684481940",
+      "finalScore": 52.559
     },
     {
       "rank": 6,
-      "id": "1684481940",
-      "finalScore": 52.607
+      "id": "1854263126",
+      "finalScore": 51.711
     },
     {
       "rank": 7,
-      "id": "949870503",
-      "finalScore": 50.166
+      "id": "666626077",
+      "finalScore": 49.76
     },
     {
       "rank": 8,
-      "id": "666626077",
-      "finalScore": 49.126
+      "id": "949870503",
+      "finalScore": 49.525
     },
     {
       "rank": 9,
-      "id": "956290678",
-      "finalScore": 49.082
+      "id": "1535511118",
+      "finalScore": 48.367
     },
     {
       "rank": 10,
-      "id": "1413787647",
-      "finalScore": 48.827
+      "id": "224974613",
+      "finalScore": 44.493
     }
   ],
   "cafes": [
@@ -2209,7 +2209,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%9A%A9%EC%9D%B8%EC%8B%9C%20SETT",
       "kakaoPlaceUrl": "http://place.map.kakao.com/1734514263",
       "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/JU2vmcSQfW",
-      "hotScore": 86.8,
+      "hotScore": 86.7,
       "finalScore": 33.1,
       "postsPer30": 39.37,
       "posts30": 35,
@@ -19644,55 +19644,6 @@
       "lastSeenAt": "2026-11-02T01:43:09.051Z"
     },
     {
-      "id": "1555683985",
-      "lat": 37.3696571275717,
-      "lng": 126.726537915859,
-      "name": "캄",
-      "sigungu": "시흥시",
-      "zone": "near",
-      "area": "경기",
-      "driveMinutes": 37,
-      "scale": null,
-      "parkingGrade": "B",
-      "menuLevel": 2,
-      "tags": [
-        "뷰맛집",
-        "디저트특화"
-      ],
-      "evidence": "시흥 배곧 카페 캄(ka:m) 내돈내산 후기, 분위기 좋은 디저트 카페 ㅎㅎ 특히 제가 방문했던 시간이 저녁이라 통창으로 보이는 시티뷰가 멋있어서 낮과는 또 다른 분위기인 듯 해요.",
-      "parkingEvidence": "주차는 아브뉴프랑 센트럴 레드동 지하주차장을 이용했어요.",
-      "signatureMenu": "생망고빙수",
-      "viewTypes": [
-        "도심",
-        "정원"
-      ],
-      "mealTypes": [
-        "디저트",
-        "빙수"
-      ],
-      "outdoorSeating": null,
-      "teenAppeal": 4,
-      "stayDuration": null,
-      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%8B%9C%ED%9D%A5%EC%8B%9C%20%EC%BA%84",
-      "kakaoPlaceUrl": "http://place.map.kakao.com/1555683985",
-      "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CiRUlXnHUPK",
-      "hotScore": 29.6,
-      "finalScore": 15.4,
-      "postsPer30": 21.75,
-      "posts30": 13,
-      "posts90": 27,
-      "acceleration": 1.6,
-      "trend": "unknown",
-      "ratingAvg": 0,
-      "ratingCount": 0,
-      "familyReviews": [],
-      "cityOnly": false,
-      "visitedOn": null,
-      "firstSeenAt": "2026-08-20T11:11:35.623Z",
-      "isNew": false,
-      "lastSeenAt": "2026-11-02T01:43:09.051Z"
-    },
-    {
       "id": "1564879520",
       "lat": 37.55869109163398,
       "lng": 126.97969808296419,
@@ -20029,6 +19980,55 @@
       "cityOnly": false,
       "visitedOn": null,
       "firstSeenAt": "2026-09-13T18:58:40.157Z",
+      "isNew": false,
+      "lastSeenAt": "2026-11-02T01:43:09.051Z"
+    },
+    {
+      "id": "1555683985",
+      "lat": 37.3696571275717,
+      "lng": 126.726537915859,
+      "name": "캄",
+      "sigungu": "시흥시",
+      "zone": "near",
+      "area": "경기",
+      "driveMinutes": 37,
+      "scale": null,
+      "parkingGrade": "B",
+      "menuLevel": 2,
+      "tags": [
+        "뷰맛집",
+        "디저트특화"
+      ],
+      "evidence": "시흥 배곧 카페 캄(ka:m) 내돈내산 후기, 분위기 좋은 디저트 카페 ㅎㅎ 특히 제가 방문했던 시간이 저녁이라 통창으로 보이는 시티뷰가 멋있어서 낮과는 또 다른 분위기인 듯 해요.",
+      "parkingEvidence": "주차는 아브뉴프랑 센트럴 레드동 지하주차장을 이용했어요.",
+      "signatureMenu": "생망고빙수",
+      "viewTypes": [
+        "도심",
+        "정원"
+      ],
+      "mealTypes": [
+        "디저트",
+        "빙수"
+      ],
+      "outdoorSeating": null,
+      "teenAppeal": 4,
+      "stayDuration": null,
+      "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%8B%9C%ED%9D%A5%EC%8B%9C%20%EC%BA%84",
+      "kakaoPlaceUrl": "http://place.map.kakao.com/1555683985",
+      "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CiRUlXnHUPK",
+      "hotScore": 29.6,
+      "finalScore": 15.3,
+      "postsPer30": 21.75,
+      "posts30": 13,
+      "posts90": 27,
+      "acceleration": 1.6,
+      "trend": "unknown",
+      "ratingAvg": 0,
+      "ratingCount": 0,
+      "familyReviews": [],
+      "cityOnly": false,
+      "visitedOn": null,
+      "firstSeenAt": "2026-08-20T11:11:35.623Z",
       "isNew": false,
       "lastSeenAt": "2026-11-02T01:43:09.051Z"
     },
@@ -30615,7 +30615,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%ED%8F%AC%EC%B2%9C%EC%8B%9C%20%EB%A7%88%EB%A5%B4%EC%BD%94%EB%B2%A0%EC%9D%B4%EC%BB%A4%EB%A6%AC",
       "kakaoPlaceUrl": "http://place.map.kakao.com/1375167923",
       "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Bg6V3xd6kbN",
-      "hotScore": 44.8,
+      "hotScore": 44.7,
       "finalScore": 11.7,
       "postsPer30": 9.38,
       "posts30": 13,
@@ -41904,7 +41904,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%20%EC%9A%A9%EC%9D%B8%EC%8B%9C%20%EB%A3%A8%EB%82%98%EA%B0%80%EB%93%A0%20%EB%B2%A0%EC%9D%B4%EC%BB%A4%EB%A6%AC%26%EB%8B%A4%EC%9D%B4%EB%8B%9D",
       "kakaoPlaceUrl": "http://place.map.kakao.com/549825421",
       "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/74CMVUOqtp7",
-      "hotScore": 21.2,
+      "hotScore": 21.1,
       "finalScore": 9.1,
       "postsPer30": 9.82,
       "posts30": 10,
@@ -63298,7 +63298,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%B6%81%EA%B5%AC%20%ED%8E%98%EB%A5%B4%EB%A9%94%EC%95%84%EB%A0%88",
       "kakaoPlaceUrl": "http://place.map.kakao.com/1078600205",
       "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/GIpF3KUDvM4",
-      "hotScore": 32,
+      "hotScore": 31.9,
       "finalScore": 5,
       "postsPer30": 9.43,
       "posts30": 6,
@@ -70145,7 +70145,7 @@
       "naverMapUrl": "https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%84%B1%EB%8F%99%EA%B5%AC%20%EC%9D%B4%ED%8A%B8%EC%95%A4%EB%93%9C%EB%A7%81%ED%81%AC",
       "kakaoPlaceUrl": "http://place.map.kakao.com/1442573117",
       "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A0GjVN9mYTW",
-      "hotScore": 24.1,
+      "hotScore": 24,
       "finalScore": 3.9,
       "postsPer30": 5.36,
       "posts30": 3,
