@@ -311255,6 +311255,9 @@
     "phone": null,
     "straightKm": 23.91,
     "driveMinutesEst": 32,
+    "driveMinutes": 65,
+    "driveKm": 31.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -311281,10 +311284,7 @@
       "자연/공원",
       "관광지/명소",
       "계절명소"
-    ],
-    "driveMinutes": 65,
-    "driveKm": 31.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1602317080",
@@ -311476,8 +311476,8 @@
     "straightKm": 21.75,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311497,8 +311497,8 @@
     "straightKm": 21.38,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311518,8 +311518,8 @@
     "straightKm": 17.07,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311604,8 +311604,8 @@
     "straightKm": 23.93,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311668,8 +311668,8 @@
     "straightKm": 20.96,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311733,8 +311733,8 @@
     "straightKm": 26.48,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311754,8 +311754,8 @@
     "straightKm": 26.6,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311797,8 +311797,8 @@
     "straightKm": 28.08,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311861,8 +311861,8 @@
     "straightKm": 26.79,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311882,8 +311882,8 @@
     "straightKm": 32.63,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311967,8 +311967,8 @@
     "straightKm": 29.27,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311988,8 +311988,8 @@
     "straightKm": 30.78,
     "driveMinutesEst": 42,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312008,6 +312008,9 @@
     "phone": "02-3780-0517",
     "straightKm": 28.75,
     "driveMinutesEst": 39,
+    "driveMinutes": 63,
+    "driveKm": 38.3,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -312036,10 +312039,7 @@
       "전시/박물관",
       "체험",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 63,
-    "driveKm": 38.3,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "581788972",
@@ -312100,8 +312100,8 @@
     "straightKm": 29.02,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312229,6 +312229,9 @@
     "phone": null,
     "straightKm": 33.89,
     "driveMinutesEst": 46,
+    "driveMinutes": 67,
+    "driveKm": 49.9,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -312257,10 +312260,7 @@
       "시장/전통거리",
       "체험",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 67,
-    "driveKm": 49.9,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "8238992",
@@ -312386,8 +312386,8 @@
     "straightKm": 25.98,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312407,8 +312407,8 @@
     "straightKm": 27.85,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312560,8 +312560,8 @@
     "straightKm": 29.64,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312581,8 +312581,8 @@
     "straightKm": 33.16,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312801,8 +312801,8 @@
     "straightKm": 22.4,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312843,8 +312843,8 @@
     "straightKm": 21.03,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312864,8 +312864,8 @@
     "straightKm": 21.03,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313959,8 +313959,8 @@
     "straightKm": 27.3,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314153,8 +314153,8 @@
     "straightKm": 27.92,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314260,8 +314260,8 @@
     "straightKm": 34.21,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314281,8 +314281,8 @@
     "straightKm": 33.22,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314324,8 +314324,8 @@
     "straightKm": 34.17,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314755,8 +314755,8 @@
     "straightKm": 20.99,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315290,6 +315290,9 @@
     "phone": null,
     "straightKm": 9.84,
     "driveMinutesEst": 13,
+    "driveMinutes": 25,
+    "driveKm": 12.9,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -315318,10 +315321,7 @@
       "관광지/명소",
       "체험",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 25,
-    "driveKm": 12.9,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "19176378",
@@ -315554,8 +315554,8 @@
     "straightKm": 18.35,
     "driveMinutesEst": 25,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315658,6 +315658,9 @@
     "phone": null,
     "straightKm": 9.12,
     "driveMinutesEst": 12,
+    "driveMinutes": 32,
+    "driveKm": 12.3,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -315682,10 +315685,7 @@
     "tags": [
       "체험",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 32,
-    "driveKm": 12.3,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "27149640",
@@ -315701,6 +315701,9 @@
     "phone": "032-456-2100",
     "straightKm": 7.49,
     "driveMinutesEst": 10,
+    "driveMinutes": 23,
+    "driveKm": 10.8,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -315727,10 +315730,7 @@
       "관광지/명소",
       "전시/박물관",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 23,
-    "driveKm": 10.8,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "26357794",
@@ -315747,8 +315747,8 @@
     "straightKm": 32.37,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315896,6 +315896,9 @@
     "phone": "031-695-0900",
     "straightKm": 35.41,
     "driveMinutesEst": 48,
+    "driveMinutes": 54,
+    "driveKm": 47.8,
+    "tollWon": 1900,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -315920,10 +315923,7 @@
     "tags": [
       "관광지/명소",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 54,
-    "driveKm": 47.8,
-    "tollWon": 1900
+    ]
   },
   {
     "kakaoPlaceId": "8052945",
@@ -315983,8 +315983,8 @@
     "straightKm": 33.67,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316048,8 +316048,8 @@
     "straightKm": 36.58,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316069,8 +316069,8 @@
     "straightKm": 39.3,
     "driveMinutesEst": 53,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316175,6 +316175,9 @@
     "phone": null,
     "straightKm": 40.13,
     "driveMinutesEst": 54,
+    "driveMinutes": 59,
+    "driveKm": 55,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -316201,10 +316204,7 @@
       "자연/공원",
       "관광지/명소",
       "계절명소"
-    ],
-    "driveMinutes": 59,
-    "driveKm": 55,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "12746779",
@@ -316479,6 +316479,9 @@
     "phone": null,
     "straightKm": 25.03,
     "driveMinutesEst": 34,
+    "driveMinutes": 38,
+    "driveKm": 33.1,
+    "tollWon": 2100,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -316505,10 +316508,7 @@
       "자연/공원",
       "관광지/명소",
       "계절명소"
-    ],
-    "driveMinutes": 38,
-    "driveKm": 33.1,
-    "tollWon": 2100
+    ]
   },
   {
     "kakaoPlaceId": "26347631",
@@ -316525,8 +316525,8 @@
     "straightKm": 18.81,
     "driveMinutesEst": 25,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316587,6 +316587,9 @@
     "phone": "031-687-0548",
     "straightKm": 19.54,
     "driveMinutesEst": 26,
+    "driveMinutes": 33,
+    "driveKm": 24.2,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -316613,10 +316616,7 @@
       "자연/공원",
       "관광지/명소",
       "전시/박물관"
-    ],
-    "driveMinutes": 33,
-    "driveKm": 24.2,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "483217678",
@@ -316633,8 +316633,8 @@
     "straightKm": 20.52,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317126,8 +317126,8 @@
     "straightKm": 66.52,
     "driveMinutesEst": 90,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317366,8 +317366,8 @@
     "straightKm": 25.43,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317408,8 +317408,8 @@
     "straightKm": 20.39,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317451,8 +317451,8 @@
     "straightKm": 16.71,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317558,8 +317558,8 @@
     "straightKm": 44.02,
     "driveMinutesEst": 59,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317579,8 +317579,8 @@
     "straightKm": 44.02,
     "driveMinutesEst": 59,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317621,8 +317621,8 @@
     "straightKm": 40.95,
     "driveMinutesEst": 55,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317728,8 +317728,8 @@
     "straightKm": 21.56,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317878,8 +317878,8 @@
     "straightKm": 24.46,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317898,6 +317898,9 @@
     "phone": "031-396-4000",
     "straightKm": 23.58,
     "driveMinutesEst": 32,
+    "driveMinutes": 37,
+    "driveKm": 31.9,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -317922,10 +317925,7 @@
     "tags": [
       "관광지/명소",
       "전시/박물관"
-    ],
-    "driveMinutes": 37,
-    "driveKm": 31.9,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "648582740",
@@ -318092,8 +318092,8 @@
     "straightKm": 41.53,
     "driveMinutesEst": 56,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318219,8 +318219,8 @@
     "straightKm": 37.32,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318261,8 +318261,8 @@
     "straightKm": 42.61,
     "driveMinutesEst": 58,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318325,8 +318325,8 @@
     "straightKm": 38.02,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318367,6 +318367,9 @@
     "phone": "031-274-7715",
     "straightKm": 46.48,
     "driveMinutesEst": 63,
+    "driveMinutes": 67,
+    "driveKm": 58.9,
+    "tollWon": 3400,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -318393,10 +318396,7 @@
       "쇼핑/아울렛",
       "소품샵/편집숍",
       "드라이브"
-    ],
-    "driveMinutes": 67,
-    "driveKm": 58.9,
-    "tollWon": 3400
+    ]
   },
   {
     "kakaoPlaceId": "17806938",
@@ -318539,6 +318539,9 @@
     "phone": "031-955-3727",
     "straightKm": 22.7,
     "driveMinutesEst": 31,
+    "driveMinutes": 38,
+    "driveKm": 33.2,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -318567,10 +318570,7 @@
       "전시/박물관",
       "체험",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 38,
-    "driveKm": 33.2,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1463005690",
@@ -318609,8 +318609,8 @@
     "straightKm": 23.39,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318651,6 +318651,9 @@
     "phone": "031-955-4100",
     "straightKm": 22.87,
     "driveMinutesEst": 31,
+    "driveMinutes": 38,
+    "driveKm": 33.4,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -318679,10 +318682,7 @@
       "전시/박물관",
       "드라이브",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 38,
-    "driveKm": 33.4,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1355847264",
@@ -318892,6 +318892,9 @@
     "phone": "031-673-0776",
     "straightKm": 79.64,
     "driveMinutesEst": 108,
+    "driveMinutes": 106,
+    "driveKm": 102.6,
+    "tollWon": 4200,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -318920,10 +318923,7 @@
       "관광지/명소",
       "체험",
       "계절명소"
-    ],
-    "driveMinutes": 106,
-    "driveKm": 102.6,
-    "tollWon": 4200
+    ]
   },
   {
     "kakaoPlaceId": "2029457829",
@@ -318940,8 +318940,8 @@
     "straightKm": 68.19,
     "driveMinutesEst": 92,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319244,8 +319244,8 @@
     "straightKm": 31.85,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319285,6 +319285,9 @@
     "phone": null,
     "straightKm": 49.68,
     "driveMinutesEst": 67,
+    "driveMinutes": 73,
+    "driveKm": 65,
+    "tollWon": 3100,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -319311,10 +319314,7 @@
       "관광지/명소",
       "드라이브",
       "계절명소"
-    ],
-    "driveMinutes": 73,
-    "driveKm": 65,
-    "tollWon": 3100
+    ]
   },
   {
     "kakaoPlaceId": "1533969440",
@@ -319419,8 +319419,8 @@
     "straightKm": 49.53,
     "driveMinutesEst": 67,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319440,8 +319440,8 @@
     "straightKm": 45.33,
     "driveMinutesEst": 61,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319505,8 +319505,8 @@
     "straightKm": 42.98,
     "driveMinutesEst": 58,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319547,8 +319547,8 @@
     "straightKm": 38.41,
     "driveMinutesEst": 52,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319700,8 +319700,8 @@
     "straightKm": 83.68,
     "driveMinutesEst": 113,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319764,6 +319764,9 @@
     "phone": "031-883-0031",
     "straightKm": 63.54,
     "driveMinutesEst": 86,
+    "driveMinutes": 78,
+    "driveKm": 75.2,
+    "tollWon": 3900,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -319792,10 +319795,7 @@
       "체험",
       "계절명소",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 78,
-    "driveKm": 75.2,
-    "tollWon": 3900
+    ]
   },
   {
     "kakaoPlaceId": "7792489",
@@ -319856,8 +319856,8 @@
     "straightKm": 85.84,
     "driveMinutesEst": 116,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319941,8 +319941,8 @@
     "straightKm": 63.71,
     "driveMinutesEst": 86,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -320006,8 +320006,8 @@
     "straightKm": 67.16,
     "driveMinutesEst": 91,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -320069,6 +320069,9 @@
     "phone": "010-5186-5182",
     "straightKm": 67.64,
     "driveMinutesEst": 91,
+    "driveMinutes": 99,
+    "driveKm": 96.3,
+    "tollWon": 3700,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
     "status": "active",
     "excludeReason": null,
@@ -320099,9 +320102,6 @@
       "드라이브",
       "계절명소",
       "아이와 가기 좋은 곳"
-    ],
-    "driveMinutes": 99,
-    "driveKm": 96.3,
-    "tollWon": 3700
+    ]
   }
 ]
