@@ -311256,12 +311256,35 @@
     "straightKm": 23.91,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/Hab2DcJO1oX"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/Hab2DcJO1oX",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "계절명소"
+      ],
+      "evidence": "이곳은 거대한 은행나무가 여러 그루 있어서 가을이 되면 종로 데이트 코스로 사랑받는 곳이다",
+      "parkingGrade": "B",
+      "parkingEvidence": "성균관대학교 교내 주차장을 이용할 수 있지만... 최초 30분 2,000원/ 이후 10분 5,00원 / 2시간이후 10분당 1,000원",
+      "stayDuration": "40분~1시간",
+      "indoorOutdoor": "outdoor",
+      "season": "가을",
+      "teenAppeal": 3,
+      "confidence": 1,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "계절명소"
+    ],
+    "driveMinutes": 65,
+    "driveKm": 31.7,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1602317080",
@@ -311278,12 +311301,12 @@
     "straightKm": 21.34,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 3.4건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/E9sW5ofcN9o",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/E9sW5ofcN9o"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1362036888",
@@ -311300,8 +311323,8 @@
     "straightKm": 24.36,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311321,12 +311344,12 @@
     "straightKm": 23.58,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8KooEeJ4ojJ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8KooEeJ4ojJ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8116578",
@@ -311343,12 +311366,12 @@
     "straightKm": 23.68,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1oXNb2VY5Pz",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1oXNb2VY5Pz"
+    "tags": []
   },
   {
     "kakaoPlaceId": "11002870",
@@ -311365,12 +311388,12 @@
     "straightKm": 23.65,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1oXNb2VY5Pz",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1oXNb2VY5Pz"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1645854601",
@@ -311387,12 +311410,12 @@
     "straightKm": 21.79,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2TUqOzb5yLZ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2TUqOzb5yLZ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8610929",
@@ -311409,12 +311432,12 @@
     "straightKm": 22.21,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DiF2Tv1502e",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DiF2Tv1502e"
+    "tags": []
   },
   {
     "kakaoPlaceId": "21631695",
@@ -311431,12 +311454,12 @@
     "straightKm": 21.32,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KDaqq6p9NrW",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KDaqq6p9NrW"
+    "tags": []
   },
   {
     "kakaoPlaceId": "990535361",
@@ -311516,12 +311539,12 @@
     "straightKm": 20.33,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/pJi3Xr8qGH",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/pJi3Xr8qGH"
+    "tags": []
   },
   {
     "kakaoPlaceId": "18411998",
@@ -311538,8 +311561,8 @@
     "straightKm": 21.75,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311559,12 +311582,12 @@
     "straightKm": 21.06,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Fr6n4vppiPV",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Fr6n4vppiPV"
+    "tags": []
   },
   {
     "kakaoPlaceId": "2100848819",
@@ -311602,8 +311625,8 @@
     "straightKm": 20.88,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311623,12 +311646,12 @@
     "straightKm": 21.02,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LPdX3Nl1wbp",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LPdX3Nl1wbp"
+    "tags": []
   },
   {
     "kakaoPlaceId": "373645951",
@@ -311666,12 +311689,12 @@
     "straightKm": 22.82,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 22% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IGWTzdQskXX",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IGWTzdQskXX"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1182526918",
@@ -311688,12 +311711,12 @@
     "straightKm": 22.24,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ApBDEA514tG",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ApBDEA514tG"
+    "tags": []
   },
   {
     "kakaoPlaceId": "279941437",
@@ -311752,12 +311775,12 @@
     "straightKm": 26.82,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HfgPtXUzC3O",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HfgPtXUzC3O"
+    "tags": []
   },
   {
     "kakaoPlaceId": "215838380",
@@ -311795,12 +311818,12 @@
     "straightKm": 28.3,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IeMWsHU1YHP",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IeMWsHU1YHP"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1481311255",
@@ -311817,8 +311840,8 @@
     "straightKm": 26.79,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311880,12 +311903,12 @@
     "straightKm": 31.55,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 13% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/34b4ffdjG9b",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/34b4ffdjG9b"
+    "tags": []
   },
   {
     "kakaoPlaceId": "25045830",
@@ -311902,8 +311925,8 @@
     "straightKm": 26.15,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311923,8 +311946,8 @@
     "straightKm": 30.06,
     "driveMinutesEst": 41,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -311986,12 +312009,37 @@
     "straightKm": 28.75,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Akdocy8PlBA"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Akdocy8PlBA",
+    "attributes": {
+      "tags": [
+        "관광지/명소",
+        "전시/박물관",
+        "체험",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "한강플플(한강 플레이 플레이스)은 서울시가 지난 2025년 12월 뚝섬한강공원에 문을 연 시설입니다. 뚝섬한강공원 실내 체험존부터 수달놀이터까지! 뚝섬한강공원 실내놀거리 '한강플플' 무료로 즐기는 복합문화시설",
+      "parkingGrade": "B",
+      "parkingEvidence": "가장 가까운 추천 주차장 뚝섬한강공원 뚝섬3주차장...주차장 상황에 따라 혼잡할 수 있으니 참고하면 좋겠다.",
+      "stayDuration": "2시간",
+      "indoorOutdoor": "indoor",
+      "season": null,
+      "teenAppeal": 2,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "관광지/명소",
+      "전시/박물관",
+      "체험",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 63,
+    "driveKm": 38.3,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "581788972",
@@ -312008,12 +312056,12 @@
     "straightKm": 30.05,
     "driveMinutesEst": 41,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CTLQUstP0Jk",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CTLQUstP0Jk"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1275247130",
@@ -312030,12 +312078,12 @@
     "straightKm": 27.95,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LF1HNPnx5Pm",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LF1HNPnx5Pm"
+    "tags": []
   },
   {
     "kakaoPlaceId": "21160662",
@@ -312073,12 +312121,12 @@
     "straightKm": 24.36,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5TaPCduV1NJ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5TaPCduV1NJ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "27034969",
@@ -312095,12 +312143,12 @@
     "straightKm": 33.32,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CozCYMo0V5u",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CozCYMo0V5u"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1220788754",
@@ -312117,8 +312165,8 @@
     "straightKm": 32.65,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312138,12 +312186,12 @@
     "straightKm": 33.66,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4lvrpM6woWC",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4lvrpM6woWC"
+    "tags": []
   },
   {
     "kakaoPlaceId": "911081038",
@@ -312160,12 +312208,12 @@
     "straightKm": 32.38,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.2건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/lUOVVRXw3s",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/lUOVVRXw3s"
+    "tags": []
   },
   {
     "kakaoPlaceId": "153153615",
@@ -312182,12 +312230,37 @@
     "straightKm": 33.89,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/5lZtD2pjslh"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/5lZtD2pjslh",
+    "attributes": {
+      "tags": [
+        "관광지/명소",
+        "시장/전통거리",
+        "체험",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "중랑구 양원숲길 골목형상점가에서 10월 31일 책과 음식, 산책을 연결한 2026 양원숲길 오싹한 도서관이 열립니다. 책 속에 등장하는 음식을 한정 메뉴로 맛보고 야외 독서 공간과 작가 초청 북토크를 즐길 수 있는 가을 행사입니다.",
+      "parkingGrade": "?",
+      "parkingEvidence": "대중교통·주차와 비 오는 날 운영 여부는 발표 자료에 없으므로 가려는 시장의 문의처에 미리 확인",
+      "stayDuration": "4시간",
+      "indoorOutdoor": "outdoor",
+      "season": "가을",
+      "teenAppeal": 3,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "관광지/명소",
+      "시장/전통거리",
+      "체험",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 67,
+    "driveKm": 49.9,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "8238992",
@@ -312204,12 +312277,12 @@
     "straightKm": 33.38,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9r6rJVkwGIT",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9r6rJVkwGIT"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8238385",
@@ -312226,12 +312299,12 @@
     "straightKm": 27.7,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 11% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ARx7E0rZSpE",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ARx7E0rZSpE"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1067177558",
@@ -312248,8 +312321,8 @@
     "straightKm": 24.45,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312269,12 +312342,12 @@
     "straightKm": 24.29,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 11% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/HilA7Bbu0AO",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/HilA7Bbu0AO"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8129111",
@@ -312291,12 +312364,12 @@
     "straightKm": 24.29,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9mmcHu6MGf8",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9mmcHu6MGf8"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8058560",
@@ -312355,12 +312428,12 @@
     "straightKm": 27.1,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/1fUI0HMVY9T",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/1fUI0HMVY9T"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1811060925",
@@ -312377,12 +312450,12 @@
     "straightKm": 28.9,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/9OV2viMsDzp",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/9OV2viMsDzp"
+    "tags": []
   },
   {
     "kakaoPlaceId": "692612069",
@@ -312399,12 +312472,12 @@
     "straightKm": 33.92,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/B61IlwTSScL",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/B61IlwTSScL"
+    "tags": []
   },
   {
     "kakaoPlaceId": "25729934",
@@ -312421,12 +312494,12 @@
     "straightKm": 32.01,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/HmUMOUgJLpk",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/HmUMOUgJLpk"
+    "tags": []
   },
   {
     "kakaoPlaceId": "22454382",
@@ -312443,12 +312516,12 @@
     "straightKm": 29.77,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/K2tjVLN7yLs",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/K2tjVLN7yLs"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26791891",
@@ -312465,12 +312538,12 @@
     "straightKm": 32.98,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5WwwJkM4iIo",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5WwwJkM4iIo"
+    "tags": []
   },
   {
     "kakaoPlaceId": "485621076",
@@ -312529,12 +312602,12 @@
     "straightKm": 29.64,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CbSntHZGNzF",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CbSntHZGNzF"
+    "tags": []
   },
   {
     "kakaoPlaceId": "354856721",
@@ -312551,12 +312624,12 @@
     "straightKm": 32.62,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BFnKrT0B8ek",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BFnKrT0B8ek"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1658648966",
@@ -312573,12 +312646,12 @@
     "straightKm": 32.14,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/FozZnBQTmZg",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/FozZnBQTmZg"
+    "tags": []
   },
   {
     "kakaoPlaceId": "25215250",
@@ -312595,12 +312668,12 @@
     "straightKm": 35.91,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/B5L1HXGd6it",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/B5L1HXGd6it"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1536126949",
@@ -312617,12 +312690,36 @@
     "straightKm": 32.37,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "주차 불가 — 차로 갈 수 없다",
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LPiBTXckDu3"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/LPiBTXckDu3",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "전시/박물관",
+        "계절명소",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "당현천을 수놓은 눈부신 작품들부터 인생샷을 톡톡히 남길 수 있는 포토존",
+      "parkingGrade": "D",
+      "parkingEvidence": "노원달빛산책은 행사 전용 주차장이 따로 운영되지 않아요. 공식 안내에서도 도보나 대중교통 이용을 권장하고 있습니다.",
+      "stayDuration": null,
+      "indoorOutdoor": "outdoor",
+      "season": "가을",
+      "teenAppeal": 3,
+      "confidence": 1,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "전시/박물관",
+      "계절명소",
+      "아이와 가기 좋은 곳"
+    ]
   },
   {
     "kakaoPlaceId": "759234886",
@@ -312639,12 +312736,12 @@
     "straightKm": 32.55,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.3건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IP671XSyIFs",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IP671XSyIFs"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1873367569",
@@ -312661,12 +312758,12 @@
     "straightKm": 18.93,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/YoY7FMas6F",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/YoY7FMas6F"
+    "tags": []
   },
   {
     "kakaoPlaceId": "15166851",
@@ -312683,8 +312780,8 @@
     "straightKm": 23.18,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312725,8 +312822,8 @@
     "straightKm": 19.41,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312788,8 +312885,8 @@
     "straightKm": 18.17,
     "driveMinutesEst": 25,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312809,12 +312906,12 @@
     "straightKm": 17.1,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KYWjmYH0AFu",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KYWjmYH0AFu"
+    "tags": []
   },
   {
     "kakaoPlaceId": "404387412",
@@ -312831,12 +312928,12 @@
     "straightKm": 16.77,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 7% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/EodLrBcEYZF",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/EodLrBcEYZF"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26431813",
@@ -312853,12 +312950,12 @@
     "straightKm": 20.77,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8drz6WYoNi",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8drz6WYoNi"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1577869384",
@@ -312875,8 +312972,8 @@
     "straightKm": 17.14,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312896,12 +312993,12 @@
     "straightKm": 19.3,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3d9E4cfOfpJ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3d9E4cfOfpJ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1409181465",
@@ -312918,8 +313015,8 @@
     "straightKm": 18.93,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312939,8 +313036,8 @@
     "straightKm": 15.79,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -312960,12 +313057,12 @@
     "straightKm": 15.8,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6CHntpYCtWy",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6CHntpYCtWy"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1958197425",
@@ -312982,12 +313079,12 @@
     "straightKm": 17.29,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.3건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/JFa6ghGamCl",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/JFa6ghGamCl"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1501749338",
@@ -313004,8 +313101,8 @@
     "straightKm": 17.19,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313025,12 +313122,12 @@
     "straightKm": 15.33,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 24% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Jbb09vR2cbO",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Jbb09vR2cbO"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1114802422",
@@ -313047,12 +313144,12 @@
     "straightKm": 8.32,
     "driveMinutesEst": 11,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/1B4JOc8gUpr",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/1B4JOc8gUpr"
+    "tags": []
   },
   {
     "kakaoPlaceId": "12558280",
@@ -313069,12 +313166,12 @@
     "straightKm": 8.36,
     "driveMinutesEst": 11,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/7xGPAmeCZNO",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/7xGPAmeCZNO"
+    "tags": []
   },
   {
     "kakaoPlaceId": "174106210",
@@ -313091,12 +313188,12 @@
     "straightKm": 14.65,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8dkUbRI1BG9",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8dkUbRI1BG9"
+    "tags": []
   },
   {
     "kakaoPlaceId": "21160533",
@@ -313113,8 +313210,8 @@
     "straightKm": 9.99,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313134,8 +313231,8 @@
     "straightKm": 10.94,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313155,8 +313252,8 @@
     "straightKm": 11.88,
     "driveMinutesEst": 16,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313176,12 +313273,12 @@
     "straightKm": 8.91,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JrIF95bT7RP",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JrIF95bT7RP"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1189003617",
@@ -313198,12 +313295,12 @@
     "straightKm": 11.24,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8i5RqQweJ7w",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8i5RqQweJ7w"
+    "tags": []
   },
   {
     "kakaoPlaceId": "15292216",
@@ -313220,8 +313317,8 @@
     "straightKm": 10.05,
     "driveMinutesEst": 14,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313241,8 +313338,8 @@
     "straightKm": 9.62,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313262,8 +313359,8 @@
     "straightKm": 14.82,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313283,12 +313380,12 @@
     "straightKm": 9.49,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8wWGd8SQbeA",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8wWGd8SQbeA"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1668111626",
@@ -313305,8 +313402,8 @@
     "straightKm": 10.14,
     "driveMinutesEst": 14,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313326,12 +313423,12 @@
     "straightKm": 10.88,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/GTmwlagbArn",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/GTmwlagbArn"
+    "tags": []
   },
   {
     "kakaoPlaceId": "717841525",
@@ -313348,8 +313445,8 @@
     "straightKm": 13.38,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313369,8 +313466,8 @@
     "straightKm": 9.18,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313390,8 +313487,8 @@
     "straightKm": 9.45,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313411,12 +313508,12 @@
     "straightKm": 11.77,
     "driveMinutesEst": 16,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/JFd3lbMdOBD",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/JFd3lbMdOBD"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1464800764",
@@ -313433,12 +313530,12 @@
     "straightKm": 13.24,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/50ovRoGOznW",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/50ovRoGOznW"
+    "tags": []
   },
   {
     "kakaoPlaceId": "2051429629",
@@ -313455,8 +313552,8 @@
     "straightKm": 8.78,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313476,8 +313573,8 @@
     "straightKm": 15.2,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313497,12 +313594,12 @@
     "straightKm": 15.76,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5IiSImmMdtB",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5IiSImmMdtB"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1763182107",
@@ -313519,8 +313616,8 @@
     "straightKm": 15.09,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313540,12 +313637,12 @@
     "straightKm": 14.31,
     "driveMinutesEst": 19,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 13% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8RbmckgZ9Es",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8RbmckgZ9Es"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1400533719",
@@ -313562,12 +313659,12 @@
     "straightKm": 13.5,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 24% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/JkmBnRCaUEB",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/JkmBnRCaUEB"
+    "tags": []
   },
   {
     "kakaoPlaceId": "25449358",
@@ -313584,12 +313681,12 @@
     "straightKm": 15.08,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7MFpbEGgLV6",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7MFpbEGgLV6"
+    "tags": []
   },
   {
     "kakaoPlaceId": "146513754",
@@ -313606,12 +313703,12 @@
     "straightKm": 14.6,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2dBPx6C8CRN",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2dBPx6C8CRN"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1608703935",
@@ -313628,12 +313725,12 @@
     "straightKm": 16.47,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FC8p38Wm8rL",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FC8p38Wm8rL"
+    "tags": []
   },
   {
     "kakaoPlaceId": "11072508",
@@ -313650,8 +313747,8 @@
     "straightKm": 16.47,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313671,8 +313768,8 @@
     "straightKm": 21.72,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313692,8 +313789,8 @@
     "straightKm": 21.73,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313713,8 +313810,8 @@
     "straightKm": 20.58,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313734,12 +313831,12 @@
     "straightKm": 19.34,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/xRPhyeKqi7",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/xRPhyeKqi7"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1785251649",
@@ -313756,12 +313853,12 @@
     "straightKm": 18.24,
     "driveMinutesEst": 25,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1mVz5hELq3h",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1mVz5hELq3h"
+    "tags": []
   },
   {
     "kakaoPlaceId": "13561940",
@@ -313778,8 +313875,8 @@
     "straightKm": 19.96,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313799,8 +313896,8 @@
     "straightKm": 26.65,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313820,8 +313917,8 @@
     "straightKm": 26.92,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313841,8 +313938,8 @@
     "straightKm": 21.81,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313883,12 +313980,12 @@
     "straightKm": 27.33,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": true,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/KWP2VOzn8qv",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/KWP2VOzn8qv"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26563540",
@@ -313905,12 +314002,12 @@
     "straightKm": 27.48,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CeTYLSnfrhi",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CeTYLSnfrhi"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1683540251",
@@ -313927,8 +314024,8 @@
     "straightKm": 28.73,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -313948,12 +314045,12 @@
     "straightKm": 27.91,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 24% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3W05mfaHYpy",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3W05mfaHYpy"
+    "tags": []
   },
   {
     "kakaoPlaceId": "500799854",
@@ -313970,12 +314067,12 @@
     "straightKm": 27.19,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DZeESUWPao3",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DZeESUWPao3"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1136480686",
@@ -313992,8 +314089,8 @@
     "straightKm": 28.19,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314013,8 +314110,8 @@
     "straightKm": 25.15,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314034,12 +314131,12 @@
     "straightKm": 28.22,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IkkcHzYPHTe",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IkkcHzYPHTe"
+    "tags": []
   },
   {
     "kakaoPlaceId": "7876224",
@@ -314077,12 +314174,12 @@
     "straightKm": 25.36,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/LVSXf5p1qYs",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/LVSXf5p1qYs"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1191796037",
@@ -314099,12 +314196,12 @@
     "straightKm": 32,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DQLobqtOwvr",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DQLobqtOwvr"
+    "tags": []
   },
   {
     "kakaoPlaceId": "17583818",
@@ -314121,8 +314218,8 @@
     "straightKm": 31.87,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314142,8 +314239,8 @@
     "straightKm": 33.48,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314205,12 +314302,12 @@
     "straightKm": 34.28,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/GrmoHKXr3Tx",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/GrmoHKXr3Tx"
+    "tags": []
   },
   {
     "kakaoPlaceId": "662640093",
@@ -314248,8 +314345,8 @@
     "straightKm": 35.63,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314269,12 +314366,12 @@
     "straightKm": 36.79,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1b1wBwu9ron",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1b1wBwu9ron"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1843264999",
@@ -314291,8 +314388,8 @@
     "straightKm": 34.18,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314312,12 +314409,12 @@
     "straightKm": 35.12,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4WlIL7FGqYy",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4WlIL7FGqYy"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26135848",
@@ -314334,12 +314431,12 @@
     "straightKm": 11.45,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HmHtBRyMlgn",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HmHtBRyMlgn"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1693887774",
@@ -314356,12 +314453,12 @@
     "straightKm": 10.68,
     "driveMinutesEst": 14,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": true,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/5cVpyEp2xGG",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/5cVpyEp2xGG"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1166826619",
@@ -314378,8 +314475,8 @@
     "straightKm": 11.36,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314399,12 +314496,12 @@
     "straightKm": 9.35,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CmvE1EWvdGZ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CmvE1EWvdGZ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "804225941",
@@ -314421,8 +314518,8 @@
     "straightKm": 12.73,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314442,12 +314539,12 @@
     "straightKm": 6.77,
     "driveMinutesEst": 9,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/3e9tBvb7Cj0",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/3e9tBvb7Cj0"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1870377332",
@@ -314464,8 +314561,8 @@
     "straightKm": 6.88,
     "driveMinutesEst": 9,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314485,12 +314582,12 @@
     "straightKm": 9.61,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ARIEe92BD79",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ARIEe92BD79"
+    "tags": []
   },
   {
     "kakaoPlaceId": "328994082",
@@ -314507,8 +314604,8 @@
     "straightKm": 9.14,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314528,12 +314625,12 @@
     "straightKm": 8.97,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/AKD1s1vMrja",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/AKD1s1vMrja"
+    "tags": []
   },
   {
     "kakaoPlaceId": "15151635",
@@ -314550,8 +314647,8 @@
     "straightKm": 9.74,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314571,12 +314668,12 @@
     "straightKm": 7.72,
     "driveMinutesEst": 10,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 19% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KLgGTXAR6S8",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KLgGTXAR6S8"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8053132",
@@ -314593,12 +314690,12 @@
     "straightKm": 9.08,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8zTGxPUIMvq",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8zTGxPUIMvq"
+    "tags": []
   },
   {
     "kakaoPlaceId": "744935852",
@@ -314615,8 +314712,8 @@
     "straightKm": 8.45,
     "driveMinutesEst": 11,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314636,12 +314733,12 @@
     "straightKm": 11.02,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8tU3dbzwXu3",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8tU3dbzwXu3"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1948356239",
@@ -314679,8 +314776,8 @@
     "straightKm": 12.88,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314700,8 +314797,8 @@
     "straightKm": 15.59,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314721,8 +314818,8 @@
     "straightKm": 16.33,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314742,8 +314839,8 @@
     "straightKm": 13.03,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314763,8 +314860,8 @@
     "straightKm": 7.02,
     "driveMinutesEst": 9,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314784,12 +314881,12 @@
     "straightKm": 12.61,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.2건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/746Dg0SJrJu",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/746Dg0SJrJu"
+    "tags": []
   },
   {
     "kakaoPlaceId": "49939696",
@@ -314806,12 +314903,12 @@
     "straightKm": 12.09,
     "driveMinutesEst": 16,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/D64GVm4mP6q",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/D64GVm4mP6q"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1766402315",
@@ -314828,8 +314925,8 @@
     "straightKm": 16.67,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314849,12 +314946,12 @@
     "straightKm": 12.49,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3yRu6UNWRBi",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3yRu6UNWRBi"
+    "tags": []
   },
   {
     "kakaoPlaceId": "445884016",
@@ -314871,8 +314968,8 @@
     "straightKm": 15.24,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -314892,12 +314989,12 @@
     "straightKm": 11.95,
     "driveMinutesEst": 16,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/DkA5RsIM0wM",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/DkA5RsIM0wM"
+    "tags": []
   },
   {
     "kakaoPlaceId": "589091523",
@@ -314914,12 +315011,12 @@
     "straightKm": 12.55,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1krsaJhfxih",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1krsaJhfxih"
+    "tags": []
   },
   {
     "kakaoPlaceId": "264551268",
@@ -314936,12 +315033,12 @@
     "straightKm": 12.41,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1krsaJhfxih",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1krsaJhfxih"
+    "tags": []
   },
   {
     "kakaoPlaceId": "17562580",
@@ -314958,12 +315055,12 @@
     "straightKm": 16.78,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JMlFZ9vjH8x",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JMlFZ9vjH8x"
+    "tags": []
   },
   {
     "kakaoPlaceId": "2031445857",
@@ -314980,8 +315077,8 @@
     "straightKm": 12.23,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315001,8 +315098,8 @@
     "straightKm": 7.71,
     "driveMinutesEst": 10,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315022,8 +315119,8 @@
     "straightKm": 8.96,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315043,12 +315140,12 @@
     "straightKm": 8.61,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BNbfZkPU3Hq",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BNbfZkPU3Hq"
+    "tags": []
   },
   {
     "kakaoPlaceId": "11128408",
@@ -315065,12 +315162,12 @@
     "straightKm": 2.58,
     "driveMinutesEst": 3,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CQrEqYDNLQp",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CQrEqYDNLQp"
+    "tags": []
   },
   {
     "kakaoPlaceId": "528850947",
@@ -315087,12 +315184,12 @@
     "straightKm": 2.79,
     "driveMinutesEst": 4,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CFcLWDNMTDl",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CFcLWDNMTDl"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1436068988",
@@ -315109,8 +315206,8 @@
     "straightKm": 2.26,
     "driveMinutesEst": 3,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315130,12 +315227,12 @@
     "straightKm": 5.73,
     "driveMinutesEst": 8,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 5% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HWtkeluP5dJ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HWtkeluP5dJ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "722762889",
@@ -315152,8 +315249,8 @@
     "straightKm": 3.69,
     "driveMinutesEst": 5,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315173,8 +315270,8 @@
     "straightKm": 11.27,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315194,12 +315291,37 @@
     "straightKm": 9.84,
     "driveMinutesEst": 13,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/gg6GiekdaL"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/gg6GiekdaL",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "체험",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "청라달빛나루터에서는 특별한 수상레저를 즐길 수 있어요. 청라호수공원 달빛나루터 보트 운영 정보 타면 재밌긴 할 것 같은데",
+      "parkingGrade": "B",
+      "parkingEvidence": "주차는 청라호수공원 제1주차장이 가장 가깝습니다. 주차장 요금은 무료 주말에는 복잡할 수 있는데, 큰 길 갓길에도 댈 수 있어요",
+      "stayDuration": null,
+      "indoorOutdoor": "outdoor",
+      "season": null,
+      "teenAppeal": 3,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "체험",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 25,
+    "driveKm": 12.9,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "19176378",
@@ -315216,12 +315338,12 @@
     "straightKm": 30.7,
     "driveMinutesEst": 41,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3q0QouX3nZV",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3q0QouX3nZV"
+    "tags": []
   },
   {
     "kakaoPlaceId": "505574924",
@@ -315238,12 +315360,12 @@
     "straightKm": 33.41,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BxgFrByX5Dg",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BxgFrByX5Dg"
+    "tags": []
   },
   {
     "kakaoPlaceId": "195584649",
@@ -315260,12 +315382,12 @@
     "straightKm": 11.34,
     "driveMinutesEst": 15,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/EPj9lNkvLSv",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/EPj9lNkvLSv"
+    "tags": []
   },
   {
     "kakaoPlaceId": "19182817",
@@ -315282,8 +315404,8 @@
     "straightKm": 10.1,
     "driveMinutesEst": 14,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315303,12 +315425,12 @@
     "straightKm": 9,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/I63MYKjfWZG",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/I63MYKjfWZG"
+    "tags": []
   },
   {
     "kakaoPlaceId": "648157327",
@@ -315325,8 +315447,8 @@
     "straightKm": 20.1,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315346,8 +315468,8 @@
     "straightKm": 21.22,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315367,8 +315489,8 @@
     "straightKm": 20.93,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315388,12 +315510,12 @@
     "straightKm": 15.04,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.7건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/yBOkCgjz8o",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/yBOkCgjz8o"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1827422976",
@@ -315410,12 +315532,12 @@
     "straightKm": 31.28,
     "driveMinutesEst": 42,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/7cTJ1ay4eEM",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/7cTJ1ay4eEM"
+    "tags": []
   },
   {
     "kakaoPlaceId": "2080693765",
@@ -315453,8 +315575,8 @@
     "straightKm": 14.52,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315474,8 +315596,8 @@
     "straightKm": 9.04,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315495,8 +315617,8 @@
     "straightKm": 8.99,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315516,8 +315638,8 @@
     "straightKm": 9.04,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315537,12 +315659,33 @@
     "straightKm": 9.12,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BykhSfMVPRk"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BykhSfMVPRk",
+    "attributes": {
+      "tags": [
+        "체험",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "인천 레이저사격 KSLS 검단점 검단놀거리 공기권총 체험 특공대 출신 아빠가 다녀왔어요",
+      "parkingGrade": "B",
+      "parkingEvidence": "주차장이 넓고 주차 지원도 가능해서 방문하기에 매우",
+      "stayDuration": null,
+      "indoorOutdoor": "indoor",
+      "season": null,
+      "teenAppeal": 4,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "체험",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 32,
+    "driveKm": 12.3,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "27149640",
@@ -315559,12 +315702,35 @@
     "straightKm": 7.49,
     "driveMinutesEst": 10,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/64L74jO5Jrs"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/64L74jO5Jrs",
+    "attributes": {
+      "tags": [
+        "관광지/명소",
+        "전시/박물관",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "인천아시아드기념관에서 2014아시아경기대회의 순간을 느껴보고, 16일간의 소통화 화합의 순간을 담은 2014아시아경기대회가 열린 인천아시아드경기장에서 그때의 감동과...",
+      "parkingGrade": "A",
+      "parkingEvidence": "내부 주차 공간이 넉넉하게 마련되어 있어서 주말이나 휴일에도 주차 걱정 없이 차를 댈 수... 아시아드경기장은 서해구 예식장중에 잘 알려져있을뿐만 아니라 주차가 무료입니다 약 2천대 들어가",
+      "stayDuration": null,
+      "indoorOutdoor": "indoor",
+      "season": "사계절",
+      "teenAppeal": 2,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "관광지/명소",
+      "전시/박물관",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 23,
+    "driveKm": 10.8,
+    "tollWon": 0
   },
   {
     "kakaoPlaceId": "26357794",
@@ -315602,12 +315768,12 @@
     "straightKm": 41.42,
     "driveMinutesEst": 56,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8vAueZzt53A",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8vAueZzt53A"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1840375002",
@@ -315624,8 +315790,8 @@
     "straightKm": 38.04,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315645,8 +315811,8 @@
     "straightKm": 44.16,
     "driveMinutesEst": 60,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315666,12 +315832,12 @@
     "straightKm": 37.15,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9OFtce0Ms77",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9OFtce0Ms77"
+    "tags": []
   },
   {
     "kakaoPlaceId": "7964504",
@@ -315688,12 +315854,12 @@
     "straightKm": 33.74,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Gbr2hr8gnSj",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Gbr2hr8gnSj"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26344892",
@@ -315710,8 +315876,8 @@
     "straightKm": 36.72,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315731,12 +315897,33 @@
     "straightKm": 35.41,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/J49HpeE51RO"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/J49HpeE51RO",
+    "attributes": {
+      "tags": [
+        "관광지/명소",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "연무동 공영주차장은 수원 화성, 수원 방화수류정 근처에 위치하고 있어서 행궁동 공영주차장이나 행궁동 주차장소를 찾고 계시는 분들께서 이용하기 좋은 주차장입니다",
+      "parkingGrade": "B",
+      "parkingEvidence": "최초 60분 무료, 이후 10분당 300원, 1일 최대 7,000원",
+      "stayDuration": null,
+      "indoorOutdoor": "indoor",
+      "season": null,
+      "teenAppeal": null,
+      "confidence": 1,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "관광지/명소",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 54,
+    "driveKm": 47.8,
+    "tollWon": 1900
   },
   {
     "kakaoPlaceId": "8052945",
@@ -315753,12 +315940,12 @@
     "straightKm": 33.55,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FXqFiJiXhxJ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FXqFiJiXhxJ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1188567277",
@@ -315775,8 +315962,8 @@
     "straightKm": 33.69,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315817,12 +316004,12 @@
     "straightKm": 38,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/GkKqRrRMey6",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/GkKqRrRMey6"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1451412381",
@@ -315839,12 +316026,12 @@
     "straightKm": 32.8,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/9UyHeNiespO",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/9UyHeNiespO"
+    "tags": []
   },
   {
     "kakaoPlaceId": "824968163",
@@ -315903,8 +316090,8 @@
     "straightKm": 35.63,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315924,8 +316111,8 @@
     "straightKm": 35.71,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -315945,12 +316132,12 @@
     "straightKm": 35.36,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/434IUNWNVR7",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/434IUNWNVR7"
+    "tags": []
   },
   {
     "kakaoPlaceId": "508324821",
@@ -315967,12 +316154,12 @@
     "straightKm": 36.91,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.9건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/FbFA1MhzXnh",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/FbFA1MhzXnh"
+    "tags": []
   },
   {
     "kakaoPlaceId": "25726180",
@@ -315989,12 +316176,35 @@
     "straightKm": 40.13,
     "driveMinutesEst": 54,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8goMQKTVJ3Y"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8goMQKTVJ3Y",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "계절명소"
+      ],
+      "evidence": "의정부 하천에 방풍시설 비닐하우스 설치 의정부 하천 <따숨길ㆍ따숨터> 겨울 산책, 시민 편의 제공 의정부에는 6개의 지방하천(중랑천ㆍ부용천ㆍ민락천ㆍ백석천ㆍ회룡천ㆍ호원천)이 있고, 하천변마다 산책로와 자전거길이 조성되어 있습니다.",
+      "parkingGrade": "B",
+      "parkingEvidence": "맞은편에 자리한 송산사지 근린공원에 주차를 한 후 활기체육공원에서 부터 벚꽃 산책을 시작했다.",
+      "stayDuration": null,
+      "indoorOutdoor": "outdoor",
+      "season": "사계절",
+      "teenAppeal": 3,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "계절명소"
+    ],
+    "driveMinutes": 59,
+    "driveKm": 55,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "12746779",
@@ -316011,8 +316221,8 @@
     "straightKm": 34.05,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316032,12 +316242,12 @@
     "straightKm": 36.1,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Ix7CF3D9wvf",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Ix7CF3D9wvf"
+    "tags": []
   },
   {
     "kakaoPlaceId": "651841828",
@@ -316054,12 +316264,12 @@
     "straightKm": 39.23,
     "driveMinutesEst": 53,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.0건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CPEHMLWUCYh",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CPEHMLWUCYh"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1432445317",
@@ -316076,8 +316286,8 @@
     "straightKm": 36.61,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316097,12 +316307,12 @@
     "straightKm": 34.67,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LyZEKvITSoK",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LyZEKvITSoK"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1274710384",
@@ -316119,8 +316329,8 @@
     "straightKm": 41.76,
     "driveMinutesEst": 56,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316140,8 +316350,8 @@
     "straightKm": 38.97,
     "driveMinutesEst": 53,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316161,12 +316371,12 @@
     "straightKm": 42.39,
     "driveMinutesEst": 57,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/29AZqhBSNyJ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/29AZqhBSNyJ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "11910253",
@@ -316183,12 +316393,12 @@
     "straightKm": 36.94,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Bedyvh4nxCC",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Bedyvh4nxCC"
+    "tags": []
   },
   {
     "kakaoPlaceId": "23811295",
@@ -316205,12 +316415,12 @@
     "straightKm": 37.94,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/A9hzvdfFTSb",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/A9hzvdfFTSb"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1826244504",
@@ -316227,8 +316437,8 @@
     "straightKm": 19.2,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316248,12 +316458,12 @@
     "straightKm": 17.89,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 22% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GW1mogu8D52",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GW1mogu8D52"
+    "tags": []
   },
   {
     "kakaoPlaceId": "25730764",
@@ -316270,12 +316480,35 @@
     "straightKm": 25.03,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/52LQdGvsaYT"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/52LQdGvsaYT",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "계절명소"
+      ],
+      "evidence": "의왕시 백운산 백운호수에서 발원한 학의천은 안양시 비산동 부근에서 안양천으로 유입되는 지방하천이랍니다. 서울 근교 접근성도 좋고, 천 따라 길게 이어진 개나리 군락의 노란 물결이 아름다운 곳입니다. 산책과 사진 그리고 힐링까지 모두 챙길...",
+      "parkingGrade": "C",
+      "parkingEvidence": "별도의 전용 주차장이 없으므로 안양종합운동장 주차장이나 인근 공영주차장에 주차 후 도보로 이동하시는 것을 권장합니다.",
+      "stayDuration": "1시간",
+      "indoorOutdoor": "outdoor",
+      "season": "사계절",
+      "teenAppeal": 2,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "계절명소"
+    ],
+    "driveMinutes": 38,
+    "driveKm": 33.1,
+    "tollWon": 2100
   },
   {
     "kakaoPlaceId": "26347631",
@@ -316313,8 +316546,8 @@
     "straightKm": 25.02,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316334,8 +316567,8 @@
     "straightKm": 25.22,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316355,12 +316588,35 @@
     "straightKm": 19.54,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Ip6vZ9rPRKd"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Ip6vZ9rPRKd",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "전시/박물관"
+      ],
+      "evidence": "안양파빌리온은 20세기 건축의 거장이라 불리는 알바로 시자 비에이라가 아시아에서 최초로 설계한 건축물로 예술공원에는 많이 방문했지만 파리빌온에 직접 들어오는것은 처음이다. 입구에 들어서자마자 보여지는 책장이 있는 거대한 벽이다.",
+      "parkingGrade": "B",
+      "parkingEvidence": "이 곳은 주차가 불가하니, 안양예술공원 공영주차장에 주차하고서 도보 10분정도 걸어 오면 된다.",
+      "stayDuration": "20분",
+      "indoorOutdoor": "mixed",
+      "season": null,
+      "teenAppeal": 3,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "전시/박물관"
+    ],
+    "driveMinutes": 33,
+    "driveKm": 24.2,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "483217678",
@@ -316398,8 +316654,8 @@
     "straightKm": 21.07,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316419,8 +316675,8 @@
     "straightKm": 22.04,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316440,12 +316696,12 @@
     "straightKm": 22.11,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LbJpBhwzTbf",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LbJpBhwzTbf"
+    "tags": []
   },
   {
     "kakaoPlaceId": "870755817",
@@ -316462,8 +316718,8 @@
     "straightKm": 0.76,
     "driveMinutesEst": 1,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316483,8 +316739,8 @@
     "straightKm": 3.36,
     "driveMinutesEst": 5,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316504,12 +316760,12 @@
     "straightKm": 4,
     "driveMinutesEst": 5,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5dfVQeVIjPG",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5dfVQeVIjPG"
+    "tags": []
   },
   {
     "kakaoPlaceId": "16164308",
@@ -316526,8 +316782,8 @@
     "straightKm": 0.8,
     "driveMinutesEst": 1,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316547,8 +316803,8 @@
     "straightKm": 3.94,
     "driveMinutesEst": 5,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316568,8 +316824,8 @@
     "straightKm": 3.68,
     "driveMinutesEst": 5,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316589,12 +316845,12 @@
     "straightKm": 3.84,
     "driveMinutesEst": 5,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 22% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HMDBbmwoecE",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HMDBbmwoecE"
+    "tags": []
   },
   {
     "kakaoPlaceId": "27218189",
@@ -316611,8 +316867,8 @@
     "straightKm": 2.07,
     "driveMinutesEst": 3,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316632,8 +316888,8 @@
     "straightKm": 5.32,
     "driveMinutesEst": 7,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316653,12 +316909,12 @@
     "straightKm": 0.67,
     "driveMinutesEst": 1,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Hk4N7nMOV2l",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Hk4N7nMOV2l"
+    "tags": []
   },
   {
     "kakaoPlaceId": "255309789",
@@ -316675,12 +316931,12 @@
     "straightKm": 15.12,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CGB8LeYWUfq",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CGB8LeYWUfq"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1177954795",
@@ -316697,8 +316953,8 @@
     "straightKm": 16.66,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316718,8 +316974,8 @@
     "straightKm": 12.27,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316739,12 +316995,12 @@
     "straightKm": 67.22,
     "driveMinutesEst": 91,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/EEs29OjdHpg",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/EEs29OjdHpg"
+    "tags": []
   },
   {
     "kakaoPlaceId": "7871658",
@@ -316761,12 +317017,12 @@
     "straightKm": 51.23,
     "driveMinutesEst": 69,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3npKWbp0KeE",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3npKWbp0KeE"
+    "tags": []
   },
   {
     "kakaoPlaceId": "632711229",
@@ -316783,12 +317039,12 @@
     "straightKm": 64.66,
     "driveMinutesEst": 87,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.4건 < 8건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Wia9IB9f6N",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Wia9IB9f6N"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1307769255",
@@ -316805,12 +317061,12 @@
     "straightKm": 58.84,
     "driveMinutesEst": 79,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8gyM7p85O2Y",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8gyM7p85O2Y"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1326118229",
@@ -316827,12 +317083,12 @@
     "straightKm": 67.2,
     "driveMinutesEst": 91,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8LEtoWBZTM6",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/8LEtoWBZTM6"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26348543",
@@ -316849,8 +317105,8 @@
     "straightKm": 65.49,
     "driveMinutesEst": 88,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316891,12 +317147,12 @@
     "straightKm": 59.8,
     "driveMinutesEst": 81,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9ziAxiBhefe",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9ziAxiBhefe"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8473119",
@@ -316913,12 +317169,12 @@
     "straightKm": 65.88,
     "driveMinutesEst": 89,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CcQjclHDfPh",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CcQjclHDfPh"
+    "tags": []
   },
   {
     "kakaoPlaceId": "11054884",
@@ -316935,8 +317191,8 @@
     "straightKm": 51.55,
     "driveMinutesEst": 70,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -316956,12 +317212,12 @@
     "straightKm": 55.51,
     "driveMinutesEst": 75,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/LXVTR7BR67F",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/LXVTR7BR67F"
+    "tags": []
   },
   {
     "kakaoPlaceId": "357428080",
@@ -316978,12 +317234,12 @@
     "straightKm": 24.02,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DMv2wxzxc9t",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DMv2wxzxc9t"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26348573",
@@ -317000,12 +317256,12 @@
     "straightKm": 26.59,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CPjNyI6MzSn",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CPjNyI6MzSn"
+    "tags": []
   },
   {
     "kakaoPlaceId": "17385270",
@@ -317022,12 +317278,12 @@
     "straightKm": 24.14,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 22% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/62oAl2oxst8",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/62oAl2oxst8"
+    "tags": []
   },
   {
     "kakaoPlaceId": "15148251",
@@ -317044,12 +317300,12 @@
     "straightKm": 25.06,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 24% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/2fWgGsMrfhG",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/2fWgGsMrfhG"
+    "tags": []
   },
   {
     "kakaoPlaceId": "12572680",
@@ -317066,12 +317322,12 @@
     "straightKm": 26.31,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3IO8kRvKg2W",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3IO8kRvKg2W"
+    "tags": []
   },
   {
     "kakaoPlaceId": "392670920",
@@ -317088,12 +317344,12 @@
     "straightKm": 24.39,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CmVUWhn44Gp",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CmVUWhn44Gp"
+    "tags": []
   },
   {
     "kakaoPlaceId": "359134528",
@@ -317131,8 +317387,8 @@
     "straightKm": 15.24,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317173,12 +317429,12 @@
     "straightKm": 15.4,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gZlslpgZlE",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9gZlslpgZlE"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26557842",
@@ -317216,12 +317472,12 @@
     "straightKm": 16.42,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JBP2sVst9Tr",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JBP2sVst9Tr"
+    "tags": []
   },
   {
     "kakaoPlaceId": "18038908",
@@ -317238,8 +317494,8 @@
     "straightKm": 25.27,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317259,12 +317515,12 @@
     "straightKm": 46.7,
     "driveMinutesEst": 63,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/4crAyLzNvkN",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/4crAyLzNvkN"
+    "tags": []
   },
   {
     "kakaoPlaceId": "381241732",
@@ -317281,8 +317537,8 @@
     "straightKm": 37.14,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317344,8 +317600,8 @@
     "straightKm": 45.62,
     "driveMinutesEst": 62,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317386,12 +317642,12 @@
     "straightKm": 48.3,
     "driveMinutesEst": 65,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 3% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JQGLfwRlfYH",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JQGLfwRlfYH"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1724048303",
@@ -317408,8 +317664,8 @@
     "straightKm": 45.75,
     "driveMinutesEst": 62,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317429,8 +317685,8 @@
     "straightKm": 46.09,
     "driveMinutesEst": 62,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317450,12 +317706,12 @@
     "straightKm": 16.93,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3Y9CRk7Ah8C",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3Y9CRk7Ah8C"
+    "tags": []
   },
   {
     "kakaoPlaceId": "637741428",
@@ -317493,8 +317749,8 @@
     "straightKm": 8.85,
     "driveMinutesEst": 12,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317514,12 +317770,12 @@
     "straightKm": 16.23,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5MG1b7oR0Za",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5MG1b7oR0Za"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1756603984",
@@ -317536,12 +317792,12 @@
     "straightKm": 24.26,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 11% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/97b80uTlQcd",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/97b80uTlQcd"
+    "tags": []
   },
   {
     "kakaoPlaceId": "14882574",
@@ -317558,8 +317814,8 @@
     "straightKm": 24.86,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317579,8 +317835,8 @@
     "straightKm": 25.29,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317600,12 +317856,12 @@
     "straightKm": 23.54,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HIhEyTqrwUp",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HIhEyTqrwUp"
+    "tags": []
   },
   {
     "kakaoPlaceId": "20518257",
@@ -317643,12 +317899,33 @@
     "straightKm": 23.58,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/3ZGILnhC7Pe"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/3ZGILnhC7Pe",
+    "attributes": {
+      "tags": [
+        "관광지/명소",
+        "전시/박물관"
+      ],
+      "evidence": "군산여행 코스에서 빼놓을 수 없는 명소 중 하나가 바로 초원사진관인데요. 영화 8월의 크리스마스 촬영지로도 잘 알려진 곳",
+      "parkingGrade": "C",
+      "parkingEvidence": "주차장은 따로 없더라구요. 저는 주변에 대고 이동을 했어요.",
+      "stayDuration": null,
+      "indoorOutdoor": "mixed",
+      "season": null,
+      "teenAppeal": 3,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "관광지/명소",
+      "전시/박물관"
+    ],
+    "driveMinutes": 37,
+    "driveKm": 31.9,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "648582740",
@@ -317665,12 +317942,12 @@
     "straightKm": 26.21,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/AtMj0Buu1Ao",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/AtMj0Buu1Ao"
+    "tags": []
   },
   {
     "kakaoPlaceId": "874209621",
@@ -317687,8 +317964,8 @@
     "straightKm": 27.37,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317708,8 +317985,8 @@
     "straightKm": 28.43,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317729,12 +318006,12 @@
     "straightKm": 28.57,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/GIPLDdK248T",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/GIPLDdK248T"
+    "tags": []
   },
   {
     "kakaoPlaceId": "11446488",
@@ -317751,12 +318028,12 @@
     "straightKm": 28.34,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Ab8unpK0mF7",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Ab8unpK0mF7"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1579660943",
@@ -317773,8 +318050,8 @@
     "straightKm": 28.46,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317794,8 +318071,8 @@
     "straightKm": 39.34,
     "driveMinutesEst": 53,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317836,8 +318113,8 @@
     "straightKm": 41.38,
     "driveMinutesEst": 56,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317857,8 +318134,8 @@
     "straightKm": 43.76,
     "driveMinutesEst": 59,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317878,8 +318155,8 @@
     "straightKm": 43.56,
     "driveMinutesEst": 59,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317899,12 +318176,12 @@
     "straightKm": 40.8,
     "driveMinutesEst": 55,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 24% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CnB6mu5v14K",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CnB6mu5v14K"
+    "tags": []
   },
   {
     "kakaoPlaceId": "7975096",
@@ -317921,8 +318198,8 @@
     "straightKm": 38.07,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -317963,8 +318240,8 @@
     "straightKm": 44.9,
     "driveMinutesEst": 61,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318005,8 +318282,8 @@
     "straightKm": 47.73,
     "driveMinutesEst": 64,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318026,12 +318303,12 @@
     "straightKm": 47.5,
     "driveMinutesEst": 64,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/EbjqXRD0jDk",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/EbjqXRD0jDk"
+    "tags": []
   },
   {
     "kakaoPlaceId": "563544801",
@@ -318069,12 +318346,12 @@
     "straightKm": 53.75,
     "driveMinutesEst": 73,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.0건 < 8건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2uJd92QPRuE",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2uJd92QPRuE"
+    "tags": []
   },
   {
     "kakaoPlaceId": "237629232",
@@ -318091,12 +318368,35 @@
     "straightKm": 46.48,
     "driveMinutesEst": 63,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3SPCaxRn5oF"
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/3SPCaxRn5oF",
+    "attributes": {
+      "tags": [
+        "쇼핑/아울렛",
+        "소품샵/편집숍",
+        "드라이브"
+      ],
+      "evidence": "용인 그릇 아울렛 림하우스에 다녀온 후기를 가져왔어요",
+      "parkingGrade": "A",
+      "parkingEvidence": "주차장도 워낙 넓어서 주차 걱정도 전혀...",
+      "stayDuration": null,
+      "indoorOutdoor": "indoor",
+      "season": null,
+      "teenAppeal": 1,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "쇼핑/아울렛",
+      "소품샵/편집숍",
+      "드라이브"
+    ],
+    "driveMinutes": 67,
+    "driveKm": 58.9,
+    "tollWon": 3400
   },
   {
     "kakaoPlaceId": "17806938",
@@ -318113,8 +318413,8 @@
     "straightKm": 44.24,
     "driveMinutesEst": 60,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318134,8 +318434,8 @@
     "straightKm": 47.9,
     "driveMinutesEst": 65,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318155,8 +318455,8 @@
     "straightKm": 43.22,
     "driveMinutesEst": 58,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318176,8 +318476,8 @@
     "straightKm": 24.21,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318197,12 +318497,12 @@
     "straightKm": 24.04,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/5Vlx8K0lYBu",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/5Vlx8K0lYBu"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1181746557",
@@ -318219,8 +318519,8 @@
     "straightKm": 25.98,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318240,12 +318540,37 @@
     "straightKm": 22.7,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/EyEv2dN17jQ"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/EyEv2dN17jQ",
+    "attributes": {
+      "tags": [
+        "관광지/명소",
+        "전시/박물관",
+        "체험",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "파주출판도시에 위치한 나비나라박물관은 2008년 개관한 나비·곤충 전문 박물관이에요, 곤충 표본 만들기 체험 다녀왔어요",
+      "parkingGrade": "B",
+      "parkingEvidence": "박물관 옆에는 별도의 주차장이 마련되어 있습니다. 주차장이 만차일 경우에는 주변 도로에서도 주차 금지구간을 제외하고 노상주차가 가능한 곳이 있어서 주변에 주차를 하고 방문하시면 됩니다., 주차장은 넓지 않았는데 딱 한자리 남았길래 무사주차 했습니다 ㅋㅋ",
+      "stayDuration": null,
+      "indoorOutdoor": "indoor",
+      "season": null,
+      "teenAppeal": 2,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "관광지/명소",
+      "전시/박물관",
+      "체험",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 38,
+    "driveKm": 33.2,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "1463005690",
@@ -318262,12 +318587,12 @@
     "straightKm": 39.39,
     "driveMinutesEst": 53,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CW5f0wLLF6K",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/CW5f0wLLF6K"
+    "tags": []
   },
   {
     "kakaoPlaceId": "19061888",
@@ -318305,12 +318630,12 @@
     "straightKm": 29.66,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 3.5건 < 4건",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KNUTAZ1qCpB",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KNUTAZ1qCpB"
+    "tags": []
   },
   {
     "kakaoPlaceId": "13272490",
@@ -318327,12 +318652,37 @@
     "straightKm": 22.87,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/LgXRdYWz9fl"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/LgXRdYWz9fl",
+    "attributes": {
+      "tags": [
+        "관광지/명소",
+        "전시/박물관",
+        "드라이브",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "전시도 보고, 독특한 건축물과 가을 풍경까지 즐길 수 있어 파주 가볼만한곳으로 정말 좋았답니다! 미메시스 아트 뮤지엄은 아이랑 방문할 수 있는 미술관이다.",
+      "parkingGrade": "B",
+      "parkingEvidence": "미술관 자체 주차장이 마련되어 있습니다. 주차장이 넓진 않아서, 만차일 경우 맞은 편에 있는 영진미디어 건물에 주차해야됩니다",
+      "stayDuration": "2시간",
+      "indoorOutdoor": "mixed",
+      "season": null,
+      "teenAppeal": 3,
+      "confidence": 1,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "관광지/명소",
+      "전시/박물관",
+      "드라이브",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 38,
+    "driveKm": 33.4,
+    "tollWon": 900
   },
   {
     "kakaoPlaceId": "1355847264",
@@ -318349,8 +318699,8 @@
     "straightKm": 39.07,
     "driveMinutesEst": 53,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318370,12 +318720,12 @@
     "straightKm": 65.16,
     "driveMinutesEst": 88,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HdJ844qB0YQ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HdJ844qB0YQ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "24021012",
@@ -318392,12 +318742,12 @@
     "straightKm": 62.74,
     "driveMinutesEst": 85,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JvaOQqer12o",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/JvaOQqer12o"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26348633",
@@ -318414,8 +318764,8 @@
     "straightKm": 72.8,
     "driveMinutesEst": 98,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318435,8 +318785,8 @@
     "straightKm": 67.07,
     "driveMinutesEst": 91,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318456,8 +318806,8 @@
     "straightKm": 76.97,
     "driveMinutesEst": 104,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318477,12 +318827,12 @@
     "straightKm": 61.97,
     "driveMinutesEst": 84,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DJ8bxZCx1Ns",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DJ8bxZCx1Ns"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1240524152",
@@ -318499,12 +318849,12 @@
     "straightKm": 62.02,
     "driveMinutesEst": 84,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4SPvwizZsGh",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4SPvwizZsGh"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1914288570",
@@ -318521,12 +318871,12 @@
     "straightKm": 81.02,
     "driveMinutesEst": 109,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/IrivPp4ZhHO",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/IrivPp4ZhHO"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8105057",
@@ -318543,12 +318893,37 @@
     "straightKm": 79.64,
     "driveMinutesEst": 108,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/dmOmQbmC5I"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/dmOmQbmC5I",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "체험",
+        "계절명소"
+      ],
+      "evidence": "천년고찰 칠장사로 오랜 역사와 문화재 자연 풍광을 함께 볼 수 있는 대표적인 전통사찰입니다",
+      "parkingGrade": "A",
+      "parkingEvidence": "칠장사주차장에 무료 주차 가능",
+      "stayDuration": "1시간",
+      "indoorOutdoor": "mixed",
+      "season": "가을",
+      "teenAppeal": 3,
+      "confidence": 1,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "체험",
+      "계절명소"
+    ],
+    "driveMinutes": 106,
+    "driveKm": 102.6,
+    "tollWon": 4200
   },
   {
     "kakaoPlaceId": "2029457829",
@@ -318586,12 +318961,12 @@
     "straightKm": 68.9,
     "driveMinutesEst": 93,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": true,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/6u7MPq7Gozp",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/6u7MPq7Gozp"
+    "tags": []
   },
   {
     "kakaoPlaceId": "21055187",
@@ -318608,12 +318983,12 @@
     "straightKm": 80.82,
     "driveMinutesEst": 109,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KrBmuAOBwXL",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/KrBmuAOBwXL"
+    "tags": []
   },
   {
     "kakaoPlaceId": "11468278",
@@ -318630,12 +319005,12 @@
     "straightKm": 27.98,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/DfYAHhCPwr5",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/DfYAHhCPwr5"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1717662749",
@@ -318652,8 +319027,8 @@
     "straightKm": 16.28,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318673,12 +319048,12 @@
     "straightKm": 22.98,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/B4eK4OhtwEh",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/B4eK4OhtwEh"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1897772140",
@@ -318695,12 +319070,12 @@
     "straightKm": 12.59,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/2aTvJ1BGX1G",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/2aTvJ1BGX1G"
+    "tags": []
   },
   {
     "kakaoPlaceId": "478233195",
@@ -318717,12 +319092,12 @@
     "straightKm": 18.17,
     "driveMinutesEst": 25,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8GnmjBKV536",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/8GnmjBKV536"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1376292930",
@@ -318739,8 +319114,8 @@
     "straightKm": 11.81,
     "driveMinutesEst": 16,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318760,8 +319135,8 @@
     "straightKm": 12.46,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318781,12 +319156,12 @@
     "straightKm": 16.05,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 22% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/Lt6gvBmrz2X",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/Lt6gvBmrz2X"
+    "tags": []
   },
   {
     "kakaoPlaceId": "21930899",
@@ -318803,12 +319178,12 @@
     "straightKm": 22.23,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DVllNrcpLaE",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DVllNrcpLaE"
+    "tags": []
   },
   {
     "kakaoPlaceId": "877161094",
@@ -318825,12 +319200,12 @@
     "straightKm": 39.07,
     "driveMinutesEst": 53,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Ie9UXH7t1Jo",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Ie9UXH7t1Jo"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1569211913",
@@ -318847,12 +319222,12 @@
     "straightKm": 27.62,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Fx5n8bRsS96",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Fx5n8bRsS96"
+    "tags": []
   },
   {
     "kakaoPlaceId": "667705916",
@@ -318890,8 +319265,8 @@
     "straightKm": 44.38,
     "driveMinutesEst": 60,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -318911,12 +319286,35 @@
     "straightKm": 49.68,
     "driveMinutesEst": 67,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/AhBx6UaoeeS"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/AhBx6UaoeeS",
+    "attributes": {
+      "tags": [
+        "관광지/명소",
+        "드라이브",
+        "계절명소"
+      ],
+      "evidence": "무봉산 품에 안긴 화성 절",
+      "parkingGrade": "A",
+      "parkingEvidence": "만의사 앞 주차공간 많음",
+      "stayDuration": null,
+      "indoorOutdoor": "mixed",
+      "season": "사계절",
+      "teenAppeal": null,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "관광지/명소",
+      "드라이브",
+      "계절명소"
+    ],
+    "driveMinutes": 73,
+    "driveKm": 65,
+    "tollWon": 3100
   },
   {
     "kakaoPlaceId": "1533969440",
@@ -318933,12 +319331,12 @@
     "straightKm": 47.05,
     "driveMinutesEst": 64,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.1건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/F2N37O5RPDz",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/F2N37O5RPDz"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1084309411",
@@ -318955,12 +319353,12 @@
     "straightKm": 51.04,
     "driveMinutesEst": 69,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Kam9ebAA3M3",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Kam9ebAA3M3"
+    "tags": []
   },
   {
     "kakaoPlaceId": "14565822",
@@ -318977,12 +319375,12 @@
     "straightKm": 45.9,
     "driveMinutesEst": 62,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Fk0jBLZjzTW",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Fk0jBLZjzTW"
+    "tags": []
   },
   {
     "kakaoPlaceId": "635417473",
@@ -318999,12 +319397,12 @@
     "straightKm": 47.74,
     "driveMinutesEst": 64,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/GZJlzDQBySJ",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/GZJlzDQBySJ"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1946556537",
@@ -319063,12 +319461,12 @@
     "straightKm": 58.25,
     "driveMinutesEst": 79,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/680Btgwk86Z",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/680Btgwk86Z"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1114211088",
@@ -319085,12 +319483,12 @@
     "straightKm": 53.37,
     "driveMinutesEst": 72,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LXYuadkdCko",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LXYuadkdCko"
+    "tags": []
   },
   {
     "kakaoPlaceId": "26349095",
@@ -319128,8 +319526,8 @@
     "straightKm": 37.44,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319170,12 +319568,12 @@
     "straightKm": 71.95,
     "driveMinutesEst": 97,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/DmqqVeHqnxt",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/DmqqVeHqnxt"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1322787747",
@@ -319192,8 +319590,8 @@
     "straightKm": 63,
     "driveMinutesEst": 85,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319213,8 +319611,8 @@
     "straightKm": 75.96,
     "driveMinutesEst": 103,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319234,12 +319632,36 @@
     "straightKm": 45.53,
     "driveMinutesEst": 61,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5SAidp0zBQk"
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5SAidp0zBQk",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "체험",
+        "계절명소",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "포천 국립수목원 안에 있는 육림호 카페... 맑은 하늘 아래 육림호를 바라보고 전나무 숲길을 걸으며 가을 산책을 즐길 수 있어 좋았다.",
+      "parkingGrade": "B",
+      "parkingEvidence": "국립수목원 주차장은 예약한 차량만 진입할 수 있어요.",
+      "stayDuration": null,
+      "indoorOutdoor": "mixed",
+      "season": "사계절",
+      "teenAppeal": 2,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "체험",
+      "계절명소",
+      "아이와 가기 좋은 곳"
+    ]
   },
   {
     "kakaoPlaceId": "27105732",
@@ -319256,12 +319678,12 @@
     "straightKm": 48.55,
     "driveMinutesEst": 66,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.3건 < 6건",
     "ambiguousName": false,
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/40i2rOiDinh",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/40i2rOiDinh"
+    "tags": []
   },
   {
     "kakaoPlaceId": "203495072",
@@ -319299,12 +319721,12 @@
     "straightKm": 71.66,
     "driveMinutesEst": 97,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/2bj56XY8DWG",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/2bj56XY8DWG"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1851115583",
@@ -319321,12 +319743,12 @@
     "straightKm": 72.35,
     "driveMinutesEst": 98,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/ES9YkVBzYZy",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/ES9YkVBzYZy"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1165418713",
@@ -319343,12 +319765,37 @@
     "straightKm": 63.54,
     "driveMinutesEst": 86,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9Io8WZy7z28"
+    "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9Io8WZy7z28",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "체험",
+        "계절명소",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "22년 전통의 산북품실축제가 올해는 AI 기술을 접목해 새롭게 재탄생했는데요. 직접 김장도 담가보고 전통문화와 AI 체험도... 여주 산북체육공원에서 진행되는데요.",
+      "parkingGrade": "A",
+      "parkingEvidence": "이번 축제에서는 총 7개 주차장, 약 300대 규모의 주차 공간을 마련했어요.",
+      "stayDuration": null,
+      "indoorOutdoor": "outdoor",
+      "season": "가을",
+      "teenAppeal": 2,
+      "confidence": 1,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "체험",
+      "계절명소",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 78,
+    "driveKm": 75.2,
+    "tollWon": 3900
   },
   {
     "kakaoPlaceId": "7792489",
@@ -319365,12 +319812,12 @@
     "straightKm": 77.35,
     "driveMinutesEst": 104,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8AS6WLW9tHt",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8AS6WLW9tHt"
+    "tags": []
   },
   {
     "kakaoPlaceId": "510053435",
@@ -319387,12 +319834,12 @@
     "straightKm": 84.39,
     "driveMinutesEst": 114,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/4osVHVuhaNd",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/4osVHVuhaNd"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8445912",
@@ -319430,8 +319877,8 @@
     "straightKm": 83.08,
     "driveMinutesEst": 112,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319451,8 +319898,8 @@
     "straightKm": 53.33,
     "driveMinutesEst": 72,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319472,12 +319919,12 @@
     "straightKm": 72.63,
     "driveMinutesEst": 98,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HKDOys0gZqn",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HKDOys0gZqn"
+    "tags": []
   },
   {
     "kakaoPlaceId": "8060578",
@@ -319515,12 +319962,12 @@
     "straightKm": 73.21,
     "driveMinutesEst": 99,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/FXE1csd6xDr",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/FXE1csd6xDr"
+    "tags": []
   },
   {
     "kakaoPlaceId": "1673519846",
@@ -319537,12 +319984,12 @@
     "straightKm": 64.47,
     "driveMinutesEst": 87,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DdgViFsSRoC",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DdgViFsSRoC"
+    "tags": []
   },
   {
     "kakaoPlaceId": "2018730494",
@@ -319580,8 +320027,8 @@
     "straightKm": 54.47,
     "driveMinutesEst": 74,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -319601,12 +320048,12 @@
     "straightKm": 59.86,
     "driveMinutesEst": 81,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
+    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/DMEyG3mNrYx",
     "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/DMEyG3mNrYx"
+    "tags": []
   },
   {
     "kakaoPlaceId": "7921547",
@@ -319623,11 +320070,38 @@
     "straightKm": 67.64,
     "driveMinutesEst": 91,
     "firstSeenAt": "2026-11-11T00:32:15.669Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
-    "attributes": null,
-    "tags": [],
-    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2QGNUwnmiwk"
+    "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2QGNUwnmiwk",
+    "attributes": {
+      "tags": [
+        "자연/공원",
+        "관광지/명소",
+        "드라이브",
+        "계절명소",
+        "아이와 가기 좋은 곳"
+      ],
+      "evidence": "양평 사나사는 사나사 계곡으로 워낙 유명하지만 알고 보니 천년의 역사를 간직한 사찰이더라구요",
+      "parkingGrade": "B",
+      "parkingEvidence": "사나사계곡 공용 주차장 이용 (무료)",
+      "stayDuration": null,
+      "indoorOutdoor": "mixed",
+      "season": "여름",
+      "teenAppeal": 3,
+      "confidence": 1,
+      "extractedAt": "2026-11-12T03:10:41.192Z",
+      "modelVersion": "gemini-3.1-flash-lite+s1"
+    },
+    "tags": [
+      "자연/공원",
+      "관광지/명소",
+      "드라이브",
+      "계절명소",
+      "아이와 가기 좋은 곳"
+    ],
+    "driveMinutes": 99,
+    "driveKm": 96.3,
+    "tollWon": 3700
   }
 ]
