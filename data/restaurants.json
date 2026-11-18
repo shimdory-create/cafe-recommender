@@ -592782,8 +592782,8 @@
     "straightKm": 22.67,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/K5unf6sFUp7",
     "attributes": null,
@@ -592803,6 +592803,9 @@
     "phone": "070-8860-9007",
     "straightKm": 22.53,
     "driveMinutesEst": 30,
+    "driveMinutes": 57,
+    "driveKm": 28.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -592827,10 +592830,7 @@
       "중식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 57,
-    "driveKm": 28.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "10388142",
@@ -592869,8 +592869,8 @@
     "straightKm": 22.33,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -592889,6 +592889,9 @@
     "phone": "02-766-1801",
     "straightKm": 23.02,
     "driveMinutesEst": 31,
+    "driveMinutes": 66,
+    "driveKm": 29.9,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -592913,10 +592916,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 66,
-    "driveKm": 29.9,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "906872061",
@@ -592993,8 +592993,8 @@
     "straightKm": 25.68,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.6건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/EsSmAodmrT",
     "attributes": null,
@@ -593075,8 +593075,8 @@
     "straightKm": 24.39,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/FvYUbBPU1d7",
     "attributes": null,
@@ -593137,8 +593137,8 @@
     "straightKm": 21.53,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -593157,6 +593157,9 @@
     "phone": null,
     "straightKm": 24.36,
     "driveMinutesEst": 33,
+    "driveMinutes": 60,
+    "driveKm": 36.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593181,10 +593184,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 60,
-    "driveKm": 36.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "875452852",
@@ -593200,6 +593200,9 @@
     "phone": null,
     "straightKm": 24.35,
     "driveMinutesEst": 33,
+    "driveMinutes": 60,
+    "driveKm": 36.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593223,10 +593226,7 @@
     "tags": [
       "한식",
       "룸있음"
-    ],
-    "driveMinutes": 60,
-    "driveKm": 36.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "2076024159",
@@ -593283,8 +593283,8 @@
     "straightKm": 24.26,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.9건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/k1KyS9r7AM",
     "attributes": null,
@@ -593304,6 +593304,9 @@
     "phone": "02-796-9990",
     "straightKm": 21.93,
     "driveMinutesEst": 30,
+    "driveMinutes": 49,
+    "driveKm": 32.2,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593330,10 +593333,7 @@
       "양식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 49,
-    "driveKm": 32.2,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1225462114",
@@ -593350,8 +593350,8 @@
     "straightKm": 19.49,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BIaYRKfq3y4",
     "attributes": null,
@@ -593393,6 +593393,9 @@
     "phone": null,
     "straightKm": 23.55,
     "driveMinutesEst": 32,
+    "driveMinutes": 47,
+    "driveKm": 30.3,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593417,10 +593420,7 @@
       "일식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 47,
-    "driveKm": 30.3,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "442572058",
@@ -593436,6 +593436,9 @@
     "phone": "02-792-7445",
     "straightKm": 22.99,
     "driveMinutesEst": 31,
+    "driveMinutes": 51,
+    "driveKm": 28.8,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593459,10 +593462,7 @@
     "tags": [
       "중식",
       "예약가능"
-    ],
-    "driveMinutes": 51,
-    "driveKm": 28.8,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1924399542",
@@ -593478,6 +593478,9 @@
     "phone": "02-6389-3300",
     "straightKm": 20.24,
     "driveMinutesEst": 27,
+    "driveMinutes": 41,
+    "driveKm": 25.9,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593502,10 +593505,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 41,
-    "driveKm": 25.9,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "460216775",
@@ -593542,6 +593542,9 @@
     "phone": "02-2088-4027",
     "straightKm": 20.66,
     "driveMinutesEst": 28,
+    "driveMinutes": 44,
+    "driveKm": 26.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593566,10 +593569,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 44,
-    "driveKm": 26.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "278346343",
@@ -593585,6 +593585,9 @@
     "phone": null,
     "straightKm": 19.71,
     "driveMinutesEst": 27,
+    "driveMinutes": 40,
+    "driveKm": 25.6,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593609,10 +593612,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 40,
-    "driveKm": 25.6,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "16734601",
@@ -593712,8 +593712,8 @@
     "straightKm": 29.75,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.1건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HaUdGkidFp6",
     "attributes": null,
@@ -593754,6 +593754,9 @@
     "phone": "02-498-8886",
     "straightKm": 28.96,
     "driveMinutesEst": 39,
+    "driveMinutes": 52,
+    "driveKm": 36.6,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593778,10 +593781,7 @@
       "중식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 52,
-    "driveKm": 36.6,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1228089283",
@@ -593835,6 +593835,9 @@
     "phone": "02-6012-0463",
     "straightKm": 29.32,
     "driveMinutesEst": 40,
+    "driveMinutes": 58,
+    "driveKm": 37.4,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593859,10 +593862,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 58,
-    "driveKm": 37.4,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1299447472",
@@ -593879,8 +593879,8 @@
     "straightKm": 29.91,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.8건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9JNeh12oX0G",
     "attributes": null,
@@ -593900,6 +593900,9 @@
     "phone": "010-9210-4304",
     "straightKm": 31.2,
     "driveMinutesEst": 42,
+    "driveMinutes": 63,
+    "driveKm": 43.6,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -593923,10 +593926,7 @@
     "tags": [
       "일식",
       "예약가능"
-    ],
-    "driveMinutes": 63,
-    "driveKm": 43.6,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "797514655",
@@ -593943,8 +593943,8 @@
     "straightKm": 29.33,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.8건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/1w9PwMRoH4",
     "attributes": null,
@@ -594026,8 +594026,8 @@
     "straightKm": 27.91,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.3건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/EiN539kxu5s",
     "attributes": null,
@@ -594048,8 +594048,8 @@
     "straightKm": 28.84,
     "driveMinutesEst": 39,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.3건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/V4bXXn6t7C",
     "attributes": null,
@@ -594070,8 +594070,8 @@
     "straightKm": 30.03,
     "driveMinutesEst": 41,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -594129,8 +594129,8 @@
     "straightKm": 26.33,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -594150,8 +594150,8 @@
     "straightKm": 28.19,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.8건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8jFkH4vi8XF",
     "attributes": null,
@@ -594254,8 +594254,8 @@
     "straightKm": 24.32,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/I3Gzv3SzDQX",
     "attributes": null,
@@ -594276,8 +594276,8 @@
     "straightKm": 24.17,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/B2FRW9uDoMZ",
     "attributes": null,
@@ -594320,8 +594320,8 @@
     "straightKm": 33.1,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8hiy0obPx1",
     "attributes": null,
@@ -594342,8 +594342,8 @@
     "straightKm": 26.74,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.6건 < 4건",
     "ambiguousName": true,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/HqW6XG0Taq2",
     "attributes": null,
@@ -594385,6 +594385,9 @@
     "phone": null,
     "straightKm": 25.16,
     "driveMinutesEst": 34,
+    "driveMinutes": 64,
+    "driveKm": 43,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -594407,10 +594410,7 @@
     },
     "tags": [
       "일식"
-    ],
-    "driveMinutes": 64,
-    "driveKm": 43,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1423744277",
@@ -594427,8 +594427,8 @@
     "straightKm": 25.89,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DVs7xtj0l1U",
     "attributes": null,
@@ -594449,8 +594449,8 @@
     "straightKm": 24.37,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/6a3QWszsynI",
     "attributes": null,
@@ -594531,8 +594531,8 @@
     "straightKm": 26.01,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.8건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/V8xxFLPmVa",
     "attributes": null,
@@ -594552,6 +594552,9 @@
     "phone": "02-926-9477",
     "straightKm": 25.96,
     "driveMinutesEst": 35,
+    "driveMinutes": 63,
+    "driveKm": 35.8,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -594575,10 +594578,7 @@
     "tags": [
       "고기구이",
       "룸있음"
-    ],
-    "driveMinutes": 63,
-    "driveKm": 35.8,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1079262431",
@@ -594595,8 +594595,8 @@
     "straightKm": 30.77,
     "driveMinutesEst": 42,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BQiHa79qCy4",
     "attributes": null,
@@ -594617,8 +594617,8 @@
     "straightKm": 28.04,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -594638,8 +594638,8 @@
     "straightKm": 27.15,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.7건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/FaesJQtpLik",
     "attributes": null,
@@ -594660,8 +594660,8 @@
     "straightKm": 27.52,
     "driveMinutesEst": 37,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -594724,6 +594724,9 @@
     "phone": "02-999-9119",
     "straightKm": 29.19,
     "driveMinutesEst": 39,
+    "driveMinutes": 64,
+    "driveKm": 54,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -594749,10 +594752,7 @@
     "tags": [
       "한식",
       "룸있음"
-    ],
-    "driveMinutes": 64,
-    "driveKm": 54,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "198411926",
@@ -594790,8 +594790,8 @@
     "straightKm": 28.45,
     "driveMinutesEst": 38,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": true,
     "attributes": null,
     "tags": []
@@ -594833,8 +594833,8 @@
     "straightKm": 31.22,
     "driveMinutesEst": 42,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 23% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4cOvmPBGf1O",
     "attributes": null,
@@ -594855,8 +594855,8 @@
     "straightKm": 29.8,
     "driveMinutesEst": 40,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/IiHoPK2xRxR",
     "attributes": null,
@@ -594877,8 +594877,8 @@
     "straightKm": 31.84,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.9건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/J7208fyFTnT",
     "attributes": null,
@@ -594986,8 +594986,8 @@
     "straightKm": 32.3,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 13% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/4iScENvMXr3",
     "attributes": null,
@@ -595008,8 +595008,8 @@
     "straightKm": 32.78,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -595028,6 +595028,9 @@
     "phone": null,
     "straightKm": 32.46,
     "driveMinutesEst": 44,
+    "driveMinutes": 51,
+    "driveKm": 50.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -595051,10 +595054,7 @@
     "tags": [
       "일식",
       "룸있음"
-    ],
-    "driveMinutes": 51,
-    "driveKm": 50.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1296157492",
@@ -595130,6 +595130,9 @@
     "phone": "02-381-3300",
     "straightKm": 23.39,
     "driveMinutesEst": 32,
+    "driveMinutes": 42,
+    "driveKm": 34.9,
+    "tollWon": 1900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -595152,10 +595155,7 @@
     },
     "tags": [
       "한식"
-    ],
-    "driveMinutes": 42,
-    "driveKm": 34.9,
-    "tollWon": 1900
+    ]
   },
   {
     "kakaoPlaceId": "460463962",
@@ -595172,8 +595172,8 @@
     "straightKm": 19.65,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.7건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/GCbIbgenFDJ",
     "attributes": null,
@@ -595194,8 +595194,8 @@
     "straightKm": 17.74,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/Dtghy5IxGiP",
     "attributes": null,
@@ -595216,8 +595216,8 @@
     "straightKm": 18.59,
     "driveMinutesEst": 25,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.4건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/6bKts3kkKcQ",
     "attributes": null,
@@ -595238,8 +595238,8 @@
     "straightKm": 20.39,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2tdunBu8HE8",
     "attributes": null,
@@ -595260,8 +595260,8 @@
     "straightKm": 17.63,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.4건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1tdoQtcT2Uq",
     "attributes": null,
@@ -595282,8 +595282,8 @@
     "straightKm": 19.08,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DIN7Zw1uKIE",
     "attributes": null,
@@ -595303,6 +595303,9 @@
     "phone": "02-388-3690",
     "straightKm": 19.8,
     "driveMinutesEst": 27,
+    "driveMinutes": 47,
+    "driveKm": 32.7,
+    "tollWon": 1800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -595327,10 +595330,7 @@
       "일식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 47,
-    "driveKm": 32.7,
-    "tollWon": 1800
+    ]
   },
   {
     "kakaoPlaceId": "1532744172",
@@ -595386,6 +595386,9 @@
     "phone": "02-381-1990",
     "straightKm": 23.72,
     "driveMinutesEst": 32,
+    "driveMinutes": 42,
+    "driveKm": 35.1,
+    "tollWon": 1900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -595411,10 +595414,7 @@
     "tags": [
       "한식",
       "룸있음"
-    ],
-    "driveMinutes": 42,
-    "driveKm": 35.1,
-    "tollWon": 1900
+    ]
   },
   {
     "kakaoPlaceId": "1746871025",
@@ -595431,8 +595431,8 @@
     "straightKm": 19.87,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 13% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/40lthWyXPEF",
     "attributes": null,
@@ -595475,8 +595475,8 @@
     "straightKm": 18.88,
     "driveMinutesEst": 25,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.1건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/IyoMg57wqoX",
     "attributes": null,
@@ -595541,8 +595541,8 @@
     "straightKm": 19.69,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.9건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9g8T02oKGNd",
     "attributes": null,
@@ -595641,8 +595641,8 @@
     "straightKm": 17.8,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/6yH5RNr0YL6",
     "attributes": null,
@@ -595663,8 +595663,8 @@
     "straightKm": 18.08,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/DsSnHCh1vOm",
     "attributes": null,
@@ -595728,8 +595728,8 @@
     "straightKm": 17.11,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.9건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/9edZOTL2tRA",
     "attributes": null,
@@ -595834,8 +595834,8 @@
     "straightKm": 17.87,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/LJql9tXGQfs",
     "attributes": null,
@@ -595876,6 +595876,9 @@
     "phone": null,
     "straightKm": 19.17,
     "driveMinutesEst": 26,
+    "driveMinutes": 36,
+    "driveKm": 24.2,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -595899,10 +595902,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 36,
-    "driveKm": 24.2,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1673759413",
@@ -595957,6 +595957,9 @@
     "phone": "02-2649-5522",
     "straightKm": 15.35,
     "driveMinutesEst": 21,
+    "driveMinutes": 36,
+    "driveKm": 27.3,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -595981,10 +595984,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 36,
-    "driveKm": 27.3,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1438894064",
@@ -596106,8 +596106,8 @@
     "straightKm": 12.73,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -596273,6 +596273,9 @@
     "phone": "0507-1344-1375",
     "straightKm": 9.57,
     "driveMinutesEst": 13,
+    "driveMinutes": 33,
+    "driveKm": 13.6,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -596297,10 +596300,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 33,
-    "driveKm": 13.6,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "16040079",
@@ -596381,6 +596381,9 @@
     "phone": null,
     "straightKm": 11.03,
     "driveMinutesEst": 15,
+    "driveMinutes": 31,
+    "driveKm": 15.2,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -596405,10 +596408,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 31,
-    "driveKm": 15.2,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "835627963",
@@ -596424,6 +596424,9 @@
     "phone": null,
     "straightKm": 9.47,
     "driveMinutesEst": 13,
+    "driveMinutes": 32,
+    "driveKm": 13.3,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -596448,10 +596451,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 32,
-    "driveKm": 13.3,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "957718645",
@@ -596489,6 +596489,9 @@
     "phone": "0507-1418-1356",
     "straightKm": 9.34,
     "driveMinutesEst": 13,
+    "driveMinutes": 30,
+    "driveKm": 13.1,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -596512,10 +596515,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 30,
-    "driveKm": 13.1,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "9833047",
@@ -596554,8 +596554,8 @@
     "straightKm": 14.16,
     "driveMinutesEst": 19,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -596575,8 +596575,8 @@
     "straightKm": 13.47,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.5건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/9qIgTsKgNuE",
     "attributes": null,
@@ -596661,6 +596661,9 @@
     "phone": "02-2068-6111",
     "straightKm": 13.21,
     "driveMinutesEst": 18,
+    "driveMinutes": 38,
+    "driveKm": 19,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -596685,10 +596688,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 38,
-    "driveKm": 19,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1792171327",
@@ -596705,8 +596705,8 @@
     "straightKm": 14.05,
     "driveMinutesEst": 19,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 24% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/2tETsy8pk55",
     "attributes": null,
@@ -596727,8 +596727,8 @@
     "straightKm": 14.27,
     "driveMinutesEst": 19,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/I3O9TYJUqO2",
     "attributes": null,
@@ -596748,6 +596748,9 @@
     "phone": "02-857-3664",
     "straightKm": 14.06,
     "driveMinutesEst": 19,
+    "driveMinutes": 37,
+    "driveKm": 19.9,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -596772,10 +596775,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 37,
-    "driveKm": 19.9,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "2052939664",
@@ -596792,8 +596792,8 @@
     "straightKm": 13.03,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -596813,8 +596813,8 @@
     "straightKm": 15.66,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.1건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/2MvmJ1IZT0Y",
     "attributes": null,
@@ -596875,8 +596875,8 @@
     "straightKm": 15.4,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/9cSvzVnLP4Q",
     "attributes": null,
@@ -596897,8 +596897,8 @@
     "straightKm": 15.87,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/AkjyZaYTAkS",
     "attributes": null,
@@ -596919,8 +596919,8 @@
     "straightKm": 14.84,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.3건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DPGhlOPuHDC",
     "attributes": null,
@@ -596940,6 +596940,9 @@
     "phone": null,
     "straightKm": 14.18,
     "driveMinutesEst": 19,
+    "driveMinutes": 34,
+    "driveKm": 21.9,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -596963,10 +596966,7 @@
     "tags": [
       "중식",
       "룸있음"
-    ],
-    "driveMinutes": 34,
-    "driveKm": 21.9,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "17136798",
@@ -596983,8 +596983,8 @@
     "straightKm": 16.68,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -597004,8 +597004,8 @@
     "straightKm": 16.11,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.3건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3F3s3ukNfxy",
     "attributes": null,
@@ -597026,8 +597026,8 @@
     "straightKm": 16.44,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": true,
     "attributes": null,
     "tags": []
@@ -597047,8 +597047,8 @@
     "straightKm": 16.57,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/EATyIIxU1wa",
     "attributes": null,
@@ -597068,6 +597068,9 @@
     "phone": null,
     "straightKm": 13.44,
     "driveMinutesEst": 18,
+    "driveMinutes": 36,
+    "driveKm": 18.4,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -597092,10 +597095,7 @@
       "분식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 36,
-    "driveKm": 18.4,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1529227712",
@@ -597111,6 +597111,9 @@
     "phone": "02-6368-8230",
     "straightKm": 14.96,
     "driveMinutesEst": 20,
+    "driveMinutes": 34,
+    "driveKm": 22.1,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -597133,10 +597136,7 @@
     },
     "tags": [
       "고기구이"
-    ],
-    "driveMinutes": 34,
-    "driveKm": 22.1,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "2060466134",
@@ -597152,6 +597152,9 @@
     "phone": null,
     "straightKm": 14.73,
     "driveMinutesEst": 20,
+    "driveMinutes": 44,
+    "driveKm": 22.8,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -597176,10 +597179,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 44,
-    "driveKm": 22.8,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1776358441",
@@ -597234,8 +597234,8 @@
     "straightKm": 16.52,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -597255,8 +597255,8 @@
     "straightKm": 14.62,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.0건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KDERG5zmt7w",
     "attributes": null,
@@ -597337,8 +597337,8 @@
     "straightKm": 18.96,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.4건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/7h2RQgh0VgO",
     "attributes": null,
@@ -597359,8 +597359,8 @@
     "straightKm": 21.43,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.3건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/JW7xna4NnkS",
     "attributes": null,
@@ -597381,8 +597381,8 @@
     "straightKm": 18.06,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/1eomltXdTbV",
     "attributes": null,
@@ -597402,6 +597402,9 @@
     "phone": null,
     "straightKm": 21.51,
     "driveMinutesEst": 29,
+    "driveMinutes": 43,
+    "driveKm": 33.4,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -597424,10 +597427,7 @@
     },
     "tags": [
       "양식"
-    ],
-    "driveMinutes": 43,
-    "driveKm": 33.4,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "1858074915",
@@ -597466,8 +597466,8 @@
     "straightKm": 18.96,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.1건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AhmjYLxE1FD",
     "attributes": null,
@@ -597488,8 +597488,8 @@
     "straightKm": 21.64,
     "driveMinutesEst": 29,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.1건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/4vkXjdEdgKi",
     "attributes": null,
@@ -597571,8 +597571,8 @@
     "straightKm": 16.67,
     "driveMinutesEst": 23,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.6건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3JG22WfRnU4",
     "attributes": null,
@@ -597593,8 +597593,8 @@
     "straightKm": 18.27,
     "driveMinutesEst": 25,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LG4pmpvL52L",
     "attributes": null,
@@ -597615,8 +597615,8 @@
     "straightKm": 16.54,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.3건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/6Nd9IZ0qn0N",
     "attributes": null,
@@ -597681,8 +597681,8 @@
     "straightKm": 12.95,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -597702,8 +597702,8 @@
     "straightKm": 19.78,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -597723,8 +597723,8 @@
     "straightKm": 14.78,
     "driveMinutesEst": 20,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.6건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/4q6gzujr10W",
     "attributes": null,
@@ -597745,8 +597745,8 @@
     "straightKm": 19.75,
     "driveMinutesEst": 27,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -597765,6 +597765,9 @@
     "phone": "02-521-3901",
     "straightKm": 21.79,
     "driveMinutesEst": 29,
+    "driveMinutes": 43,
+    "driveKm": 33.4,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -597790,10 +597793,7 @@
     "tags": [
       "일식",
       "예약가능"
-    ],
-    "driveMinutes": 43,
-    "driveKm": 33.4,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "1230373002",
@@ -597810,8 +597810,8 @@
     "straightKm": 22.54,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 19% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/11X1iTftmPB",
     "attributes": null,
@@ -597832,8 +597832,8 @@
     "straightKm": 24.39,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/DHiwg0bz1ko",
     "attributes": null,
@@ -597853,6 +597853,9 @@
     "phone": null,
     "straightKm": 25.57,
     "driveMinutesEst": 35,
+    "driveMinutes": 56,
+    "driveKm": 31.6,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -597876,10 +597879,7 @@
     "tags": [
       "한식",
       "룸있음"
-    ],
-    "driveMinutes": 56,
-    "driveKm": 31.6,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1834140363",
@@ -597916,6 +597916,9 @@
     "phone": "02-2088-8320",
     "straightKm": 24.33,
     "driveMinutesEst": 33,
+    "driveMinutes": 52,
+    "driveKm": 30.5,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -597940,10 +597943,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 52,
-    "driveKm": 30.5,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "255156070",
@@ -597980,6 +597980,9 @@
     "phone": "02-555-1215",
     "straightKm": 25.45,
     "driveMinutesEst": 34,
+    "driveMinutes": 54,
+    "driveKm": 31,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598005,10 +598008,7 @@
     "tags": [
       "양식",
       "예약가능"
-    ],
-    "driveMinutes": 54,
-    "driveKm": 31,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1572981106",
@@ -598024,6 +598024,9 @@
     "phone": "02-572-2628",
     "straightKm": 27.78,
     "driveMinutesEst": 38,
+    "driveMinutes": 63,
+    "driveKm": 38,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598048,10 +598051,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 63,
-    "driveKm": 38,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1367362615",
@@ -598067,6 +598067,9 @@
     "phone": "02-6952-7807",
     "straightKm": 27.75,
     "driveMinutesEst": 37,
+    "driveMinutes": 64,
+    "driveKm": 34,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598089,10 +598092,7 @@
     },
     "tags": [
       "한식"
-    ],
-    "driveMinutes": 64,
-    "driveKm": 34,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "10082619",
@@ -598109,8 +598109,8 @@
     "straightKm": 25.99,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -598170,8 +598170,8 @@
     "straightKm": 25.61,
     "driveMinutesEst": 35,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 2.0건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/3F54ODO2ev4",
     "attributes": null,
@@ -598235,6 +598235,9 @@
     "phone": "02-558-3592",
     "straightKm": 25.84,
     "driveMinutesEst": 35,
+    "driveMinutes": 59,
+    "driveKm": 31.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598259,10 +598262,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 59,
-    "driveKm": 31.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1710836098",
@@ -598339,6 +598339,9 @@
     "phone": "02-430-4300",
     "straightKm": 34.86,
     "driveMinutesEst": 47,
+    "driveMinutes": 62,
+    "driveKm": 48.4,
+    "tollWon": 4700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598362,10 +598365,7 @@
     "tags": [
       "한식",
       "룸있음"
-    ],
-    "driveMinutes": 62,
-    "driveKm": 48.4,
-    "tollWon": 4700
+    ]
   },
   {
     "kakaoPlaceId": "569946456",
@@ -598443,6 +598443,9 @@
     "phone": "02-423-7818",
     "straightKm": 31.94,
     "driveMinutesEst": 43,
+    "driveMinutes": 56,
+    "driveKm": 39.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598465,10 +598468,7 @@
     },
     "tags": [
       "분식"
-    ],
-    "driveMinutes": 56,
-    "driveKm": 39.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1376853425",
@@ -598524,6 +598524,9 @@
     "phone": "02-2008-1576",
     "straightKm": 33.63,
     "driveMinutesEst": 45,
+    "driveMinutes": 58,
+    "driveKm": 46.1,
+    "tollWon": 4700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598547,10 +598550,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 58,
-    "driveKm": 46.1,
-    "tollWon": 4700
+    ]
   },
   {
     "kakaoPlaceId": "442337483",
@@ -598567,8 +598567,8 @@
     "straightKm": 31.66,
     "driveMinutesEst": 43,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/HtnG9lHWdx3",
     "attributes": null,
@@ -598626,6 +598626,9 @@
     "phone": "02-406-8481",
     "straightKm": 35.83,
     "driveMinutesEst": 48,
+    "driveMinutes": 64,
+    "driveKm": 44.8,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598649,10 +598652,7 @@
     "tags": [
       "양식",
       "예약가능"
-    ],
-    "driveMinutes": 64,
-    "driveKm": 44.8,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "471487171",
@@ -598669,8 +598669,8 @@
     "straightKm": 33.79,
     "driveMinutesEst": 46,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1nwdosYa63V",
     "attributes": null,
@@ -598690,6 +598690,9 @@
     "phone": "02-400-9979",
     "straightKm": 33.75,
     "driveMinutesEst": 46,
+    "driveMinutes": 64,
+    "driveKm": 43.5,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598714,10 +598717,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 64,
-    "driveKm": 43.5,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "23974574",
@@ -598798,8 +598798,8 @@
     "straightKm": 36,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.4건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/A7PGdFoonXa",
     "attributes": null,
@@ -598820,8 +598820,8 @@
     "straightKm": 34.75,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -598841,8 +598841,8 @@
     "straightKm": 34.65,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -598862,8 +598862,8 @@
     "straightKm": 38.1,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/IxdQ63ij8G1",
     "attributes": null,
@@ -598883,6 +598883,9 @@
     "phone": "02-477-9233",
     "straightKm": 34.98,
     "driveMinutesEst": 47,
+    "driveMinutes": 63,
+    "driveKm": 43.5,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598906,10 +598909,7 @@
     "tags": [
       "고기구이",
       "룸있음"
-    ],
-    "driveMinutes": 63,
-    "driveKm": 43.5,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "786614149",
@@ -598969,6 +598969,9 @@
     "phone": null,
     "straightKm": 36.85,
     "driveMinutesEst": 50,
+    "driveMinutes": 64,
+    "driveKm": 47.6,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -598991,10 +598994,7 @@
     },
     "tags": [
       "양식"
-    ],
-    "driveMinutes": 64,
-    "driveKm": 47.6,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1810947433",
@@ -599193,8 +599193,8 @@
     "straightKm": 13.71,
     "driveMinutesEst": 19,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -599234,6 +599234,9 @@
     "phone": "032-888-6682",
     "straightKm": 11.67,
     "driveMinutesEst": 16,
+    "driveMinutes": 34,
+    "driveKm": 21.2,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -599257,10 +599260,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 34,
-    "driveKm": 21.2,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "13031792",
@@ -599297,6 +599297,9 @@
     "phone": "032-868-9476",
     "straightKm": 10.43,
     "driveMinutesEst": 14,
+    "driveMinutes": 34,
+    "driveKm": 17.4,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -599320,10 +599323,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 34,
-    "driveKm": 17.4,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1320980939",
@@ -599532,6 +599532,9 @@
     "phone": null,
     "straightKm": 8.81,
     "driveMinutesEst": 12,
+    "driveMinutes": 28,
+    "driveKm": 15.5,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -599554,10 +599557,7 @@
     },
     "tags": [
       "일식"
-    ],
-    "driveMinutes": 28,
-    "driveKm": 15.5,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "21334316",
@@ -599573,6 +599573,9 @@
     "phone": "032-815-7052",
     "straightKm": 12.3,
     "driveMinutesEst": 17,
+    "driveMinutes": 33,
+    "driveKm": 17.6,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -599595,10 +599598,7 @@
     },
     "tags": [
       "고기구이"
-    ],
-    "driveMinutes": 33,
-    "driveKm": 17.6,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1979637700",
@@ -599637,8 +599637,8 @@
     "straightKm": 16.32,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -599658,8 +599658,8 @@
     "straightKm": 15.29,
     "driveMinutesEst": 21,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/IsVnGwUSI8i",
     "attributes": null,
@@ -599701,6 +599701,9 @@
     "phone": "032-713-4411",
     "straightKm": 12.45,
     "driveMinutesEst": 17,
+    "driveMinutes": 34,
+    "driveKm": 17.7,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -599724,10 +599727,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 34,
-    "driveKm": 17.7,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1495747966",
@@ -599743,6 +599743,9 @@
     "phone": null,
     "straightKm": 13.23,
     "driveMinutesEst": 18,
+    "driveMinutes": 34,
+    "driveKm": 19.4,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -599767,10 +599770,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 34,
-    "driveKm": 19.4,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "973501080",
@@ -599786,6 +599786,9 @@
     "phone": "032-833-9296",
     "straightKm": 16.91,
     "driveMinutesEst": 23,
+    "driveMinutes": 39,
+    "driveKm": 27.5,
+    "tollWon": 1300,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -599810,10 +599813,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 39,
-    "driveKm": 27.5,
-    "tollWon": 1300
+    ]
   },
   {
     "kakaoPlaceId": "2002684388",
@@ -599829,6 +599829,9 @@
     "phone": "032-811-2800",
     "straightKm": 13.64,
     "driveMinutesEst": 18,
+    "driveMinutes": 37,
+    "driveKm": 19.7,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -599853,10 +599856,7 @@
       "중식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 37,
-    "driveKm": 19.7,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "337153285",
@@ -599998,6 +599998,9 @@
     "phone": null,
     "straightKm": 13.12,
     "driveMinutesEst": 18,
+    "driveMinutes": 36,
+    "driveKm": 18.1,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600022,10 +600025,7 @@
       "양식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 36,
-    "driveKm": 18.1,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "39264079",
@@ -600063,8 +600063,8 @@
     "straightKm": 13.18,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.3건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/IFD1RZSBEnH",
     "attributes": null,
@@ -600084,6 +600084,9 @@
     "phone": null,
     "straightKm": 6.83,
     "driveMinutesEst": 9,
+    "driveMinutes": 24,
+    "driveKm": 11,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600106,10 +600109,7 @@
     },
     "tags": [
       "고기구이"
-    ],
-    "driveMinutes": 24,
-    "driveKm": 11,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "950580856",
@@ -600125,6 +600125,9 @@
     "phone": "032-881-7273",
     "straightKm": 7.64,
     "driveMinutesEst": 10,
+    "driveMinutes": 26,
+    "driveKm": 11.9,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600149,10 +600152,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 26,
-    "driveKm": 11.9,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "38402492",
@@ -600168,6 +600168,9 @@
     "phone": "032-710-5382",
     "straightKm": 6.17,
     "driveMinutesEst": 8,
+    "driveMinutes": 20,
+    "driveKm": 7.2,
+    "tollWon": 800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600192,10 +600195,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 20,
-    "driveKm": 7.2,
-    "tollWon": 800
+    ]
   },
   {
     "kakaoPlaceId": "21319150",
@@ -600357,6 +600357,9 @@
     "phone": "032-508-2282",
     "straightKm": 4.37,
     "driveMinutesEst": 6,
+    "driveMinutes": 22,
+    "driveKm": 5.9,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600379,10 +600382,7 @@
     },
     "tags": [
       "고기구이"
-    ],
-    "driveMinutes": 22,
-    "driveKm": 5.9,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "110609111",
@@ -600398,6 +600398,9 @@
     "phone": null,
     "straightKm": 2.65,
     "driveMinutesEst": 4,
+    "driveMinutes": 16,
+    "driveKm": 4.4,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600421,10 +600424,7 @@
     "tags": [
       "일식",
       "예약가능"
-    ],
-    "driveMinutes": 16,
-    "driveKm": 4.4,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "424468525",
@@ -600440,6 +600440,9 @@
     "phone": null,
     "straightKm": 1.72,
     "driveMinutesEst": 2,
+    "driveMinutes": 9,
+    "driveKm": 2.4,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600464,10 +600467,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 9,
-    "driveKm": 2.4,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "574504764",
@@ -600483,6 +600483,9 @@
     "phone": "032-512-1982",
     "straightKm": 2.77,
     "driveMinutesEst": 4,
+    "driveMinutes": 14,
+    "driveKm": 3.6,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600507,10 +600510,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 14,
-    "driveKm": 3.6,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "37950411",
@@ -600526,6 +600526,9 @@
     "phone": "010-9744-1615",
     "straightKm": 2.78,
     "driveMinutesEst": 4,
+    "driveMinutes": 16,
+    "driveKm": 4.3,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600548,10 +600551,7 @@
     },
     "tags": [
       "일식"
-    ],
-    "driveMinutes": 16,
-    "driveKm": 4.3,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1864182227",
@@ -600567,6 +600567,9 @@
     "phone": null,
     "straightKm": 1.8,
     "driveMinutesEst": 2,
+    "driveMinutes": 12,
+    "driveKm": 3.2,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600591,10 +600594,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 12,
-    "driveKm": 3.2,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1122658273",
@@ -600761,6 +600761,9 @@
     "phone": "032-544-0077",
     "straightKm": 3.56,
     "driveMinutesEst": 5,
+    "driveMinutes": 17,
+    "driveKm": 5.5,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600785,10 +600788,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 17,
-    "driveKm": 5.5,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "400833310",
@@ -600868,6 +600868,9 @@
     "phone": "032-576-3939",
     "straightKm": 7.3,
     "driveMinutesEst": 10,
+    "driveMinutes": 25,
+    "driveKm": 10.1,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600890,10 +600893,7 @@
     },
     "tags": [
       "한식"
-    ],
-    "driveMinutes": 25,
-    "driveKm": 10.1,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "636815872",
@@ -600931,6 +600931,9 @@
     "phone": "0507-1442-9330",
     "straightKm": 7.66,
     "driveMinutesEst": 10,
+    "driveMinutes": 24,
+    "driveKm": 9.4,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -600957,10 +600960,7 @@
       "중식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 24,
-    "driveKm": 9.4,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "27436804",
@@ -601042,6 +601042,9 @@
     "phone": "032-561-7770",
     "straightKm": 7.06,
     "driveMinutesEst": 10,
+    "driveMinutes": 26,
+    "driveKm": 10.1,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601065,10 +601068,7 @@
     "tags": [
       "한식",
       "룸있음"
-    ],
-    "driveMinutes": 26,
-    "driveKm": 10.1,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1823276224",
@@ -601084,6 +601084,9 @@
     "phone": "032-566-8777",
     "straightKm": 8.45,
     "driveMinutesEst": 11,
+    "driveMinutes": 26,
+    "driveKm": 11.3,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601108,10 +601111,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 26,
-    "driveKm": 11.3,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1506099176",
@@ -601148,6 +601148,9 @@
     "phone": null,
     "straightKm": 6.74,
     "driveMinutesEst": 9,
+    "driveMinutes": 24,
+    "driveKm": 9,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601170,10 +601173,7 @@
     },
     "tags": [
       "고기구이"
-    ],
-    "driveMinutes": 24,
-    "driveKm": 9,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "2112688282",
@@ -601190,8 +601190,8 @@
     "straightKm": 24.77,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.8건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/7xM7jIbZmim",
     "attributes": null,
@@ -601211,6 +601211,9 @@
     "phone": null,
     "straightKm": 34.35,
     "driveMinutesEst": 46,
+    "driveMinutes": 64,
+    "driveKm": 47.4,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601233,10 +601236,7 @@
     },
     "tags": [
       "분식"
-    ],
-    "driveMinutes": 64,
-    "driveKm": 47.4,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1356863558",
@@ -601253,8 +601253,8 @@
     "straightKm": 50.04,
     "driveMinutesEst": 68,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -601274,8 +601274,8 @@
     "straightKm": 32.51,
     "driveMinutesEst": 44,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/pOurlNWy00",
     "attributes": null,
@@ -601296,8 +601296,8 @@
     "straightKm": 26.34,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -601317,8 +601317,8 @@
     "straightKm": 41.72,
     "driveMinutesEst": 56,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/CYQYa5grYUv",
     "attributes": null,
@@ -601382,8 +601382,8 @@
     "straightKm": 13.56,
     "driveMinutesEst": 18,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.0건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/CvCKzxoIz53",
     "attributes": null,
@@ -601404,8 +601404,8 @@
     "straightKm": 12.72,
     "driveMinutesEst": 17,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 13% < 30%",
     "ambiguousName": true,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Ez5Nn0SYhCU",
     "attributes": null,
@@ -601510,6 +601510,9 @@
     "phone": "032-752-0919",
     "straightKm": 21.75,
     "driveMinutesEst": 29,
+    "driveMinutes": 40,
+    "driveKm": 26.4,
+    "tollWon": 2000,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601532,10 +601535,7 @@
     },
     "tags": [
       "한식"
-    ],
-    "driveMinutes": 40,
-    "driveKm": 26.4,
-    "tollWon": 2000
+    ]
   },
   {
     "kakaoPlaceId": "2146928921",
@@ -601552,8 +601552,8 @@
     "straightKm": 15.93,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -601573,8 +601573,8 @@
     "straightKm": 25.11,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.6건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Jqmgjw6gx6B",
     "attributes": null,
@@ -601594,6 +601594,9 @@
     "phone": "032-752-3683",
     "straightKm": 15.86,
     "driveMinutesEst": 21,
+    "driveMinutes": 36,
+    "driveKm": 20.7,
+    "tollWon": 2000,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601616,10 +601619,7 @@
     },
     "tags": [
       "고기구이"
-    ],
-    "driveMinutes": 36,
-    "driveKm": 20.7,
-    "tollWon": 2000
+    ]
   },
   {
     "kakaoPlaceId": "1850757244",
@@ -601635,6 +601635,9 @@
     "phone": null,
     "straightKm": 16.17,
     "driveMinutesEst": 22,
+    "driveMinutes": 35,
+    "driveKm": 20.6,
+    "tollWon": 2000,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601659,10 +601662,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 35,
-    "driveKm": 20.6,
-    "tollWon": 2000
+    ]
   },
   {
     "kakaoPlaceId": "1536936400",
@@ -601762,6 +601762,9 @@
     "phone": "032-710-0053",
     "straightKm": 9.91,
     "driveMinutesEst": 13,
+    "driveMinutes": 32,
+    "driveKm": 13.5,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601785,10 +601788,7 @@
     "tags": [
       "양식",
       "예약가능"
-    ],
-    "driveMinutes": 32,
-    "driveKm": 13.5,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "21748771",
@@ -601804,6 +601804,9 @@
     "phone": "032-562-8250",
     "straightKm": 9.57,
     "driveMinutesEst": 13,
+    "driveMinutes": 35,
+    "driveKm": 13.5,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601826,10 +601829,7 @@
     },
     "tags": [
       "분식"
-    ],
-    "driveMinutes": 35,
-    "driveKm": 13.5,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "97388364",
@@ -601845,6 +601845,9 @@
     "phone": null,
     "straightKm": 9,
     "driveMinutesEst": 12,
+    "driveMinutes": 33,
+    "driveKm": 12.2,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601869,10 +601872,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 33,
-    "driveKm": 12.2,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "324590061",
@@ -601952,6 +601952,9 @@
     "phone": "032-564-8845",
     "straightKm": 6.17,
     "driveMinutesEst": 8,
+    "driveMinutes": 24,
+    "driveKm": 9.4,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -601976,10 +601979,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 24,
-    "driveKm": 9.4,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1726192461",
@@ -601995,6 +601995,9 @@
     "phone": null,
     "straightKm": 7.87,
     "driveMinutesEst": 11,
+    "driveMinutes": 29,
+    "driveKm": 11,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -602017,10 +602020,7 @@
     },
     "tags": [
       "한식"
-    ],
-    "driveMinutes": 29,
-    "driveKm": 11,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1912917317",
@@ -602163,8 +602163,8 @@
     "straightKm": 38.32,
     "driveMinutesEst": 52,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/B6uQNPGHn9T",
     "attributes": null,
@@ -602226,6 +602226,9 @@
     "phone": "031-252-6659",
     "straightKm": 35.11,
     "driveMinutesEst": 47,
+    "driveMinutes": 54,
+    "driveKm": 48.8,
+    "tollWon": 3000,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -602248,10 +602251,7 @@
     },
     "tags": [
       "한식"
-    ],
-    "driveMinutes": 54,
-    "driveKm": 48.8,
-    "tollWon": 3000
+    ]
   },
   {
     "kakaoPlaceId": "922879127",
@@ -602268,8 +602268,8 @@
     "straightKm": 38.04,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CAOMtTsBDVv",
     "attributes": null,
@@ -602311,6 +602311,9 @@
     "phone": "031-8019-7880",
     "straightKm": 32.72,
     "driveMinutesEst": 44,
+    "driveMinutes": 47,
+    "driveKm": 43.5,
+    "tollWon": 2300,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -602335,10 +602338,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 47,
-    "driveKm": 43.5,
-    "tollWon": 2300
+    ]
   },
   {
     "kakaoPlaceId": "12643620",
@@ -602421,8 +602421,8 @@
     "straightKm": 36.91,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -602441,6 +602441,9 @@
     "phone": "031-717-0226",
     "straightKm": 36.53,
     "driveMinutesEst": 49,
+    "driveMinutes": 50,
+    "driveKm": 47.8,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -602463,10 +602466,7 @@
     },
     "tags": [
       "분식"
-    ],
-    "driveMinutes": 50,
-    "driveKm": 47.8,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "1472931042",
@@ -602483,8 +602483,8 @@
     "straightKm": 34.46,
     "driveMinutesEst": 47,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -602547,6 +602547,9 @@
     "phone": "070-8880-7763",
     "straightKm": 36.72,
     "driveMinutesEst": 50,
+    "driveMinutes": 47,
+    "driveKm": 46,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -602570,10 +602573,7 @@
     "tags": [
       "양식",
       "예약가능"
-    ],
-    "driveMinutes": 47,
-    "driveKm": 46,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "467902285",
@@ -602590,8 +602590,8 @@
     "straightKm": 36.06,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.2건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1EUtizs5CDU",
     "attributes": null,
@@ -602633,6 +602633,9 @@
     "phone": "010-9891-3739",
     "straightKm": 36.76,
     "driveMinutesEst": 50,
+    "driveMinutes": 47,
+    "driveKm": 46.2,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -602656,10 +602659,7 @@
     "tags": [
       "고기구이",
       "예약가능"
-    ],
-    "driveMinutes": 47,
-    "driveKm": 46.2,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "18291213",
@@ -602712,8 +602712,8 @@
     "straightKm": 37.05,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Dr18m8uCM1t",
     "attributes": null,
@@ -602734,8 +602734,8 @@
     "straightKm": 36.69,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.3건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/ytl6UKq19p",
     "attributes": null,
@@ -602756,8 +602756,8 @@
     "straightKm": 35.58,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.7건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/D05n5TvsPWC",
     "attributes": null,
@@ -602836,8 +602836,8 @@
     "straightKm": 20.76,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.2건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/2Kbq6lRhQWa",
     "attributes": null,
@@ -602858,8 +602858,8 @@
     "straightKm": 20.94,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7YNV98oElaF",
     "attributes": null,
@@ -602880,8 +602880,8 @@
     "straightKm": 23.34,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.4건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/3IapBh3RDW0",
     "attributes": null,
@@ -602924,8 +602924,8 @@
     "straightKm": 20.51,
     "driveMinutesEst": 28,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/GT0pei9ei4r",
     "attributes": null,
@@ -602945,6 +602945,9 @@
     "phone": "031-471-7766",
     "straightKm": 18.22,
     "driveMinutesEst": 25,
+    "driveMinutes": 30,
+    "driveKm": 24.3,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -602969,10 +602972,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 30,
-    "driveKm": 24.3,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "142850509",
@@ -603010,6 +603010,9 @@
     "phone": "031-473-2228",
     "straightKm": 20.09,
     "driveMinutesEst": 27,
+    "driveMinutes": 34,
+    "driveKm": 24.8,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -603036,10 +603039,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 34,
-    "driveKm": 24.8,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "176508111",
@@ -603137,8 +603137,8 @@
     "straightKm": 23.13,
     "driveMinutesEst": 31,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.4건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/1NH2Az4VYhh",
     "attributes": null,
@@ -603181,8 +603181,8 @@
     "straightKm": 23.49,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/JR9OWQ81OWx",
     "attributes": null,
@@ -603351,6 +603351,9 @@
     "phone": "032-325-6692",
     "straightKm": 3.3,
     "driveMinutesEst": 4,
+    "driveMinutes": 15,
+    "driveKm": 4.3,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -603375,10 +603378,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 15,
-    "driveKm": 4.3,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1671533242",
@@ -603394,6 +603394,9 @@
     "phone": "032-713-9295",
     "straightKm": 1.74,
     "driveMinutesEst": 2,
+    "driveMinutes": 12,
+    "driveKm": 3,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -603417,10 +603420,7 @@
     "tags": [
       "고기구이",
       "예약가능"
-    ],
-    "driveMinutes": 12,
-    "driveKm": 3,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1454173713",
@@ -603584,8 +603584,8 @@
     "straightKm": 59.39,
     "driveMinutesEst": 80,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.8건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/1Mu3mvhWWbz",
     "attributes": null,
@@ -603628,8 +603628,8 @@
     "straightKm": 65.87,
     "driveMinutesEst": 89,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.6건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/8qzX5Md9dW2",
     "attributes": null,
@@ -603650,8 +603650,8 @@
     "straightKm": 62.25,
     "driveMinutesEst": 84,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/7tdSsUc8W1f",
     "attributes": null,
@@ -603694,8 +603694,8 @@
     "straightKm": 65.54,
     "driveMinutesEst": 88,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -603715,8 +603715,8 @@
     "straightKm": 65.84,
     "driveMinutesEst": 89,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -603736,8 +603736,8 @@
     "straightKm": 65.93,
     "driveMinutesEst": 89,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -603757,8 +603757,8 @@
     "straightKm": 64.49,
     "driveMinutesEst": 87,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CF7RAGiDEaA",
     "attributes": null,
@@ -603779,8 +603779,8 @@
     "straightKm": 59.12,
     "driveMinutesEst": 80,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -603799,6 +603799,9 @@
     "phone": "031-683-1605",
     "straightKm": 61.51,
     "driveMinutesEst": 83,
+    "driveMinutes": 67,
+    "driveKm": 72.3,
+    "tollWon": 3900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -603822,10 +603825,7 @@
     "tags": [
       "일식",
       "예약가능"
-    ],
-    "driveMinutes": 67,
-    "driveKm": 72.3,
-    "tollWon": 3900
+    ]
   },
   {
     "kakaoPlaceId": "1644845791",
@@ -603841,6 +603841,9 @@
     "phone": null,
     "straightKm": 65.74,
     "driveMinutesEst": 89,
+    "driveMinutes": 78,
+    "driveKm": 81.4,
+    "tollWon": 4500,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -603865,10 +603868,7 @@
       "중식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 78,
-    "driveKm": 81.4,
-    "tollWon": 4500
+    ]
   },
   {
     "kakaoPlaceId": "1872152866",
@@ -603906,6 +603906,9 @@
     "phone": null,
     "straightKm": 66.04,
     "driveMinutesEst": 89,
+    "driveMinutes": 80,
+    "driveKm": 84.3,
+    "tollWon": 4500,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -603929,10 +603932,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 80,
-    "driveKm": 84.3,
-    "tollWon": 4500
+    ]
   },
   {
     "kakaoPlaceId": "1621497639",
@@ -603949,8 +603949,8 @@
     "straightKm": 50.01,
     "driveMinutesEst": 68,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -603970,8 +603970,8 @@
     "straightKm": 50.24,
     "driveMinutesEst": 68,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/F2jQ9PBMTkf",
     "attributes": null,
@@ -603992,8 +603992,8 @@
     "straightKm": 50.72,
     "driveMinutesEst": 68,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9dBoGpGz6Ax",
     "attributes": null,
@@ -604057,12 +604057,32 @@
     "straightKm": 50.68,
     "driveMinutesEst": 68,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/L6Xxll0rar8",
-    "attributes": null,
-    "tags": []
+    "attributes": {
+      "cuisineType": "한식",
+      "evidence": "처갓집양념치킨 동두천생연점",
+      "parkingGrade": "C",
+      "parkingEvidence": "매장 앞에 주차 라인 두 개가 그려져 있는데 세 대 정도 주차가 가능해 보였어요",
+      "hasRoom": true,
+      "reservable": null,
+      "viewStrength": 0,
+      "viewTypes": [],
+      "outdoorSeating": null,
+      "teenAppeal": 4.5,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-18T18:26:05.836Z",
+      "modelVersion": "gemini-3.1-flash-lite+r1"
+    },
+    "tags": [
+      "한식",
+      "룸있음"
+    ],
+    "driveMinutes": 59,
+    "driveKm": 73.3,
+    "tollWon": 2700
   },
   {
     "kakaoPlaceId": "1385317373",
@@ -604079,8 +604099,8 @@
     "straightKm": 51.51,
     "driveMinutesEst": 70,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.1건 < 6건",
     "ambiguousName": true,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/9l6Mx44hbgD",
     "attributes": null,
@@ -604101,8 +604121,8 @@
     "straightKm": 50.13,
     "driveMinutesEst": 68,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 14% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/CIzkLaczhd6",
     "attributes": null,
@@ -604123,8 +604143,8 @@
     "straightKm": 23.69,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 4% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -604144,8 +604164,8 @@
     "straightKm": 33.04,
     "driveMinutesEst": 45,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BmsYNWL2HNx",
     "attributes": null,
@@ -604165,6 +604185,9 @@
     "phone": "032-888-0006",
     "straightKm": 29.02,
     "driveMinutesEst": 39,
+    "driveMinutes": 50,
+    "driveKm": 37,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604188,10 +604211,7 @@
     "tags": [
       "중식",
       "예약가능"
-    ],
-    "driveMinutes": 50,
-    "driveKm": 37,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1770013033",
@@ -604251,6 +604271,9 @@
     "phone": "010-2290-7780",
     "straightKm": 26.49,
     "driveMinutesEst": 36,
+    "driveMinutes": 45,
+    "driveKm": 38.4,
+    "tollWon": 2400,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604274,10 +604297,7 @@
     "tags": [
       "고기구이",
       "예약가능"
-    ],
-    "driveMinutes": 45,
-    "driveKm": 38.4,
-    "tollWon": 2400
+    ]
   },
   {
     "kakaoPlaceId": "595225169",
@@ -604314,6 +604334,9 @@
     "phone": "031-480-8312",
     "straightKm": 23.63,
     "driveMinutesEst": 32,
+    "driveMinutes": 40,
+    "driveKm": 31.8,
+    "tollWon": 2100,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604337,10 +604360,7 @@
     "tags": [
       "고기구이",
       "룸있음"
-    ],
-    "driveMinutes": 40,
-    "driveKm": 31.8,
-    "tollWon": 2100
+    ]
   },
   {
     "kakaoPlaceId": "424827019",
@@ -604357,8 +604377,8 @@
     "straightKm": 26.81,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/9RadoNuveW7",
     "attributes": null,
@@ -604421,6 +604441,9 @@
     "phone": null,
     "straightKm": 24.11,
     "driveMinutesEst": 33,
+    "driveMinutes": 45,
+    "driveKm": 33.1,
+    "tollWon": 1000,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604445,10 +604468,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 45,
-    "driveKm": 33.1,
-    "tollWon": 1000
+    ]
   },
   {
     "kakaoPlaceId": "583839161",
@@ -604464,6 +604484,9 @@
     "phone": "031-475-1100",
     "straightKm": 21.23,
     "driveMinutesEst": 29,
+    "driveMinutes": 40,
+    "driveKm": 27.6,
+    "tollWon": 1200,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604488,10 +604511,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 40,
-    "driveKm": 27.6,
-    "tollWon": 1200
+    ]
   },
   {
     "kakaoPlaceId": "8340647",
@@ -604507,6 +604527,9 @@
     "phone": "031-918-8333",
     "straightKm": 17.93,
     "driveMinutesEst": 24,
+    "driveMinutes": 35,
+    "driveKm": 25.9,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604530,10 +604553,7 @@
     "tags": [
       "한식",
       "룸있음"
-    ],
-    "driveMinutes": 35,
-    "driveKm": 25.9,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "936952497",
@@ -604571,6 +604591,9 @@
     "phone": "02-3159-2008",
     "straightKm": 16.18,
     "driveMinutesEst": 22,
+    "driveMinutes": 40,
+    "driveKm": 28.8,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604597,10 +604620,7 @@
       "양식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 40,
-    "driveKm": 28.8,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1917389932",
@@ -604616,6 +604636,9 @@
     "phone": null,
     "straightKm": 16.52,
     "driveMinutesEst": 22,
+    "driveMinutes": 29,
+    "driveKm": 25.1,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604642,10 +604665,7 @@
       "양식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 29,
-    "driveKm": 25.1,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "557464990",
@@ -604662,8 +604682,8 @@
     "straightKm": 16.22,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -604744,6 +604764,9 @@
     "phone": null,
     "straightKm": 18.1,
     "driveMinutesEst": 24,
+    "driveMinutes": 35,
+    "driveKm": 28.5,
+    "tollWon": 1800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604768,10 +604791,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 35,
-    "driveKm": 28.5,
-    "tollWon": 1800
+    ]
   },
   {
     "kakaoPlaceId": "235585759",
@@ -604787,6 +604807,9 @@
     "phone": null,
     "straightKm": 14.95,
     "driveMinutesEst": 20,
+    "driveMinutes": 28,
+    "driveKm": 20.8,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -604809,10 +604832,7 @@
     },
     "tags": [
       "중식"
-    ],
-    "driveMinutes": 28,
-    "driveKm": 20.8,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1662093778",
@@ -604888,8 +604908,8 @@
     "straightKm": 24.05,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DTmTVd09HFa",
     "attributes": null,
@@ -604910,8 +604930,8 @@
     "straightKm": 23.92,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/LuAexUd2sAk",
     "attributes": null,
@@ -604993,6 +605013,9 @@
     "phone": null,
     "straightKm": 24.05,
     "driveMinutesEst": 32,
+    "driveMinutes": 42,
+    "driveKm": 34.7,
+    "tollWon": 2100,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -605017,10 +605040,7 @@
       "양식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 42,
-    "driveKm": 34.7,
-    "tollWon": 2100
+    ]
   },
   {
     "kakaoPlaceId": "1516816214",
@@ -605036,6 +605056,9 @@
     "phone": null,
     "straightKm": 24.05,
     "driveMinutesEst": 32,
+    "driveMinutes": 42,
+    "driveKm": 34.7,
+    "tollWon": 2100,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -605058,10 +605081,7 @@
     },
     "tags": [
       "양식"
-    ],
-    "driveMinutes": 42,
-    "driveKm": 34.7,
-    "tollWon": 2100
+    ]
   },
   {
     "kakaoPlaceId": "100451458",
@@ -605078,8 +605098,8 @@
     "straightKm": 36.39,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -605099,8 +605119,8 @@
     "straightKm": 36.27,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -605120,8 +605140,8 @@
     "straightKm": 36.16,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/2EyxNFGQKDh",
     "attributes": null,
@@ -605142,8 +605162,8 @@
     "straightKm": 36.4,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.1건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BUIvUD6j3KJ",
     "attributes": null,
@@ -605164,8 +605184,8 @@
     "straightKm": 36.19,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -605229,8 +605249,8 @@
     "straightKm": 36.34,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.7건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BRyj6HRPBGI",
     "attributes": null,
@@ -605251,8 +605271,8 @@
     "straightKm": 36.58,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.6건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Ko031YJq35k",
     "attributes": null,
@@ -605273,8 +605293,8 @@
     "straightKm": 36.32,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.6건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/5hFaMde0VdF",
     "attributes": null,
@@ -605295,8 +605315,8 @@
     "straightKm": 49.65,
     "driveMinutesEst": 67,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/IwM7CR0nW0t",
     "attributes": null,
@@ -605338,8 +605358,8 @@
     "straightKm": 36.96,
     "driveMinutesEst": 50,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.1건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/ERdEONW1mJ4",
     "attributes": null,
@@ -605360,8 +605380,8 @@
     "straightKm": 39.11,
     "driveMinutesEst": 53,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 12% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8RUWtkkQBrd",
     "attributes": null,
@@ -605382,8 +605402,8 @@
     "straightKm": 46.85,
     "driveMinutesEst": 63,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 22% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/5iw9HjIIrT7",
     "attributes": null,
@@ -605404,12 +605424,33 @@
     "straightKm": 35.47,
     "driveMinutesEst": 48,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
+    "status": "active",
     "excludeReason": null,
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/GAfDYXbpxfP",
-    "attributes": null,
-    "tags": []
+    "attributes": {
+      "cuisineType": "일식",
+      "evidence": "일본 감성 가득한 공간에서 맛있는 스키야키도 즐기고, 신선한 재료에 진한 국물까지 ! 스키야키에 진심인 우리 주인도 인정한 곳이라 더더욱...",
+      "parkingGrade": "C",
+      "parkingEvidence": "매장 앞 3대 무료 주차 만차 시 약 50m 직진 후 스크린골프장 건물 왼편 공터 이용",
+      "hasRoom": null,
+      "reservable": null,
+      "viewStrength": 1,
+      "viewTypes": [
+        "정원"
+      ],
+      "outdoorSeating": null,
+      "teenAppeal": 2,
+      "confidence": 0.9,
+      "extractedAt": "2026-11-18T18:26:05.836Z",
+      "modelVersion": "gemini-3.1-flash-lite+r1"
+    },
+    "tags": [
+      "일식"
+    ],
+    "driveMinutes": 40,
+    "driveKm": 54.2,
+    "tollWon": 3800
   },
   {
     "kakaoPlaceId": "268506020",
@@ -605425,6 +605466,9 @@
     "phone": "070-4513-1480",
     "straightKm": 37.9,
     "driveMinutesEst": 51,
+    "driveMinutes": 54,
+    "driveKm": 59.7,
+    "tollWon": 4100,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -605449,10 +605493,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 54,
-    "driveKm": 59.7,
-    "tollWon": 4100
+    ]
   },
   {
     "kakaoPlaceId": "981926743",
@@ -605468,6 +605509,9 @@
     "phone": "031-572-2620",
     "straightKm": 37.45,
     "driveMinutesEst": 51,
+    "driveMinutes": 51,
+    "driveKm": 55.8,
+    "tollWon": 3800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -605491,10 +605535,7 @@
     "tags": [
       "일식",
       "예약가능"
-    ],
-    "driveMinutes": 51,
-    "driveKm": 55.8,
-    "tollWon": 3800
+    ]
   },
   {
     "kakaoPlaceId": "638546015",
@@ -605510,6 +605551,9 @@
     "phone": "031-593-8339",
     "straightKm": 47.18,
     "driveMinutesEst": 64,
+    "driveMinutes": 62,
+    "driveKm": 67.4,
+    "tollWon": 4100,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -605533,10 +605577,7 @@
     "tags": [
       "중식",
       "룸있음"
-    ],
-    "driveMinutes": 62,
-    "driveKm": 67.4,
-    "tollWon": 4100
+    ]
   },
   {
     "kakaoPlaceId": "1594761589",
@@ -605553,8 +605594,8 @@
     "straightKm": 49.86,
     "driveMinutesEst": 67,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -605618,8 +605659,8 @@
     "straightKm": 19.11,
     "driveMinutesEst": 26,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/AowKFSBClb9",
     "attributes": null,
@@ -605640,8 +605681,8 @@
     "straightKm": 18.12,
     "driveMinutesEst": 24,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.4건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/H8lgVJkWPGj",
     "attributes": null,
@@ -605683,6 +605724,9 @@
     "phone": null,
     "straightKm": 9.27,
     "driveMinutesEst": 13,
+    "driveMinutes": 21,
+    "driveKm": 12.1,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -605706,10 +605750,7 @@
     "tags": [
       "양식",
       "룸있음"
-    ],
-    "driveMinutes": 21,
-    "driveKm": 12.1,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "1528183574",
@@ -605725,6 +605766,9 @@
     "phone": "070-4323-1238",
     "straightKm": 15.84,
     "driveMinutesEst": 21,
+    "driveMinutes": 33,
+    "driveKm": 22.7,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -605747,10 +605791,7 @@
     },
     "tags": [
       "일식"
-    ],
-    "driveMinutes": 33,
-    "driveKm": 22.7,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "660397595",
@@ -605788,8 +605829,8 @@
     "straightKm": 24.17,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.9건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/L2eJv89uqyu",
     "attributes": null,
@@ -605810,8 +605851,8 @@
     "straightKm": 23.68,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.7건 < 4건",
     "ambiguousName": true,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/FrLdPvkhsGk",
     "attributes": null,
@@ -605832,8 +605873,8 @@
     "straightKm": 23.98,
     "driveMinutesEst": 32,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 25% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/K5m9IFnSjtk",
     "attributes": null,
@@ -605963,8 +606004,8 @@
     "straightKm": 24.91,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BNy027V51WE",
     "attributes": null,
@@ -605985,8 +606026,8 @@
     "straightKm": 24.22,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 4건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BzrfW0UMg3b",
     "attributes": null,
@@ -606007,8 +606048,8 @@
     "straightKm": 24.19,
     "driveMinutesEst": 33,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/7YtfHT8xNjx",
     "attributes": null,
@@ -606085,6 +606126,9 @@
     "phone": "031-427-2757",
     "straightKm": 24.29,
     "driveMinutesEst": 33,
+    "driveMinutes": 37,
+    "driveKm": 31.9,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -606107,10 +606151,7 @@
     },
     "tags": [
       "한식"
-    ],
-    "driveMinutes": 37,
-    "driveKm": 31.9,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1327475806",
@@ -606126,6 +606167,9 @@
     "phone": "031-437-3335",
     "straightKm": 24.87,
     "driveMinutesEst": 34,
+    "driveMinutes": 43,
+    "driveKm": 35.7,
+    "tollWon": 2300,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -606153,10 +606197,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 43,
-    "driveKm": 35.7,
-    "tollWon": 2300
+    ]
   },
   {
     "kakaoPlaceId": "20053752",
@@ -606216,8 +606257,8 @@
     "straightKm": 25.13,
     "driveMinutesEst": 34,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -606236,6 +606277,9 @@
     "phone": "0507-1323-0855",
     "straightKm": 41.65,
     "driveMinutesEst": 56,
+    "driveMinutes": 64,
+    "driveKm": 53.3,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -606259,10 +606303,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 64,
-    "driveKm": 53.3,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "179237040",
@@ -606300,6 +606341,9 @@
     "phone": "031-796-5229",
     "straightKm": 41.55,
     "driveMinutesEst": 56,
+    "driveMinutes": 66,
+    "driveKm": 52.4,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -606325,10 +606369,7 @@
     "tags": [
       "양식",
       "예약가능"
-    ],
-    "driveMinutes": 66,
-    "driveKm": 52.4,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "303933513",
@@ -606367,8 +606408,8 @@
     "straightKm": 41.12,
     "driveMinutesEst": 56,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/IQYQ6wyekMP",
     "attributes": null,
@@ -606388,6 +606429,9 @@
     "phone": "0502-5550-8862",
     "straightKm": 40.27,
     "driveMinutesEst": 54,
+    "driveMinutes": 67,
+    "driveKm": 52.7,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -606411,10 +606455,7 @@
     "tags": [
       "일식",
       "예약가능"
-    ],
-    "driveMinutes": 67,
-    "driveKm": 52.7,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1223826807",
@@ -606430,6 +606471,9 @@
     "phone": "010-5618-0452",
     "straightKm": 40.15,
     "driveMinutesEst": 54,
+    "driveMinutes": 68,
+    "driveKm": 53.2,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -606454,10 +606498,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 68,
-    "driveKm": 53.2,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "719133536",
@@ -606473,6 +606514,9 @@
     "phone": "031-8072-1527",
     "straightKm": 42.82,
     "driveMinutesEst": 58,
+    "driveMinutes": 67,
+    "driveKm": 55.5,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -606497,10 +606541,7 @@
       "중식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 67,
-    "driveKm": 55.5,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "1357861523",
@@ -606555,8 +606596,8 @@
     "straightKm": 42.74,
     "driveMinutesEst": 58,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -606598,8 +606639,8 @@
     "straightKm": 38.7,
     "driveMinutesEst": 52,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -606619,8 +606660,8 @@
     "straightKm": 37.94,
     "driveMinutesEst": 51,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -606640,8 +606681,8 @@
     "straightKm": 49.92,
     "driveMinutesEst": 67,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -606682,8 +606723,8 @@
     "straightKm": 49.49,
     "driveMinutesEst": 67,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.7건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/H8HOcLNPsqV",
     "attributes": null,
@@ -606739,6 +606780,9 @@
     "phone": null,
     "straightKm": 50.86,
     "driveMinutesEst": 69,
+    "driveMinutes": 71,
+    "driveKm": 68.3,
+    "tollWon": 3800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -606762,10 +606806,7 @@
     "tags": [
       "한식",
       "룸있음"
-    ],
-    "driveMinutes": 71,
-    "driveKm": 68.3,
-    "tollWon": 3800
+    ]
   },
   {
     "kakaoPlaceId": "243642075",
@@ -606824,8 +606865,8 @@
     "straightKm": 22.19,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/BaiaruSjs3p",
     "attributes": null,
@@ -606846,8 +606887,8 @@
     "straightKm": 31.19,
     "driveMinutesEst": 42,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": true,
     "attributes": null,
     "tags": []
@@ -606867,8 +606908,8 @@
     "straightKm": 26.45,
     "driveMinutesEst": 36,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 18% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/16W3NAQ9SLU",
     "attributes": null,
@@ -606889,8 +606930,8 @@
     "straightKm": 21.99,
     "driveMinutesEst": 30,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -607038,6 +607079,9 @@
     "phone": null,
     "straightKm": 27.08,
     "driveMinutesEst": 37,
+    "driveMinutes": 42,
+    "driveKm": 39,
+    "tollWon": 2900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607062,10 +607106,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 42,
-    "driveKm": 39,
-    "tollWon": 2900
+    ]
   },
   {
     "kakaoPlaceId": "1762956802",
@@ -607081,6 +607122,9 @@
     "phone": "031-949-5757",
     "straightKm": 21.69,
     "driveMinutesEst": 29,
+    "driveMinutes": 38,
+    "driveKm": 33.5,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607103,10 +607147,7 @@
     },
     "tags": [
       "고기구이"
-    ],
-    "driveMinutes": 38,
-    "driveKm": 33.5,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1342402012",
@@ -607144,8 +607185,8 @@
     "straightKm": 67.36,
     "driveMinutesEst": 91,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/Aex5JtTW3Qn",
     "attributes": null,
@@ -607166,8 +607207,8 @@
     "straightKm": 71.23,
     "driveMinutesEst": 96,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.6건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/KNx1MPrwjDC",
     "attributes": null,
@@ -607188,8 +607229,8 @@
     "straightKm": 67.46,
     "driveMinutesEst": 91,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 28% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BNFqvliyP2h",
     "attributes": null,
@@ -607210,8 +607251,8 @@
     "straightKm": 75.4,
     "driveMinutesEst": 102,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/FNasHzv7VEs",
     "attributes": null,
@@ -607298,8 +607339,8 @@
     "straightKm": 72.15,
     "driveMinutesEst": 97,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 15% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/K5O4pdWV6Vq",
     "attributes": null,
@@ -607320,8 +607361,8 @@
     "straightKm": 73.15,
     "driveMinutesEst": 99,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -607341,8 +607382,8 @@
     "straightKm": 70.38,
     "driveMinutesEst": 95,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/FggWMkWuP2C",
     "attributes": null,
@@ -607363,8 +607404,8 @@
     "straightKm": 75.33,
     "driveMinutesEst": 102,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 8건",
     "ambiguousName": true,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/LJWpsFzKQyl",
     "attributes": null,
@@ -607384,6 +607425,9 @@
     "phone": "031-677-7496",
     "straightKm": 75.07,
     "driveMinutesEst": 101,
+    "driveMinutes": 86,
+    "driveKm": 94.6,
+    "tollWon": 5400,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607407,10 +607451,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 86,
-    "driveKm": 94.6,
-    "tollWon": 5400
+    ]
   },
   {
     "kakaoPlaceId": "49596034",
@@ -607426,6 +607467,9 @@
     "phone": "0507-1370-2800",
     "straightKm": 67.89,
     "driveMinutesEst": 92,
+    "driveMinutes": 76,
+    "driveKm": 85.4,
+    "tollWon": 5100,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607450,10 +607494,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 76,
-    "driveKm": 85.4,
-    "tollWon": 5100
+    ]
   },
   {
     "kakaoPlaceId": "1420922039",
@@ -607470,8 +607511,8 @@
     "straightKm": 16.1,
     "driveMinutesEst": 22,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/ERmwKOHpFWf",
     "attributes": null,
@@ -607491,6 +607532,9 @@
     "phone": null,
     "straightKm": 16.03,
     "driveMinutesEst": 22,
+    "driveMinutes": 34,
+    "driveKm": 25.9,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607513,10 +607557,7 @@
     },
     "tags": [
       "양식"
-    ],
-    "driveMinutes": 34,
-    "driveKm": 25.9,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "781511223",
@@ -607532,6 +607573,9 @@
     "phone": null,
     "straightKm": 11.76,
     "driveMinutesEst": 16,
+    "driveMinutes": 29,
+    "driveKm": 19.4,
+    "tollWon": 900,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607554,10 +607598,7 @@
     },
     "tags": [
       "분식"
-    ],
-    "driveMinutes": 29,
-    "driveKm": 19.4,
-    "tollWon": 900
+    ]
   },
   {
     "kakaoPlaceId": "1155492769",
@@ -607573,6 +607614,9 @@
     "phone": "070-7543-7885",
     "straightKm": 17.55,
     "driveMinutesEst": 24,
+    "driveMinutes": 47,
+    "driveKm": 22.4,
+    "tollWon": 0,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607597,10 +607641,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 47,
-    "driveKm": 22.4,
-    "tollWon": 0
+    ]
   },
   {
     "kakaoPlaceId": "815647993",
@@ -607617,8 +607658,8 @@
     "straightKm": 45.26,
     "driveMinutesEst": 61,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.6건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/ACcMjqqN8NQ",
     "attributes": null,
@@ -607639,8 +607680,8 @@
     "straightKm": 36.66,
     "driveMinutesEst": 49,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/DvagyXIXi4k",
     "attributes": null,
@@ -607682,6 +607723,9 @@
     "phone": "031-355-5245",
     "straightKm": 35.38,
     "driveMinutesEst": 48,
+    "driveMinutes": 53,
+    "driveKm": 47.5,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607706,10 +607750,7 @@
       "고기구이",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 53,
-    "driveKm": 47.5,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "1918239927",
@@ -607748,8 +607789,8 @@
     "straightKm": 52.45,
     "driveMinutesEst": 71,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -607855,6 +607896,9 @@
     "phone": null,
     "straightKm": 35.23,
     "driveMinutesEst": 48,
+    "driveMinutes": 53,
+    "driveKm": 48.6,
+    "tollWon": 3000,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607878,10 +607922,7 @@
     "tags": [
       "양식",
       "예약가능"
-    ],
-    "driveMinutes": 53,
-    "driveKm": 48.6,
-    "tollWon": 3000
+    ]
   },
   {
     "kakaoPlaceId": "837643447",
@@ -607897,6 +607938,9 @@
     "phone": "031-763-1993",
     "straightKm": 46.16,
     "driveMinutesEst": 62,
+    "driveMinutes": 52,
+    "driveKm": 56.7,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -607919,10 +607963,7 @@
     },
     "tags": [
       "일식"
-    ],
-    "driveMinutes": 52,
-    "driveKm": 56.7,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "487052586",
@@ -607939,8 +607980,8 @@
     "straightKm": 43.93,
     "driveMinutesEst": 59,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 6% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/Ir1aFjbpp2K",
     "attributes": null,
@@ -607961,8 +608002,8 @@
     "straightKm": 45.75,
     "driveMinutesEst": 62,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 8% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/BwqSorgLjvw",
     "attributes": null,
@@ -607982,6 +608023,9 @@
     "phone": "0507-1340-2209",
     "straightKm": 54.92,
     "driveMinutesEst": 74,
+    "driveMinutes": 76,
+    "driveKm": 67.7,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -608006,10 +608050,7 @@
       "한식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 76,
-    "driveKm": 67.7,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "858747932",
@@ -608025,6 +608066,9 @@
     "phone": "031-762-9993",
     "straightKm": 53.53,
     "driveMinutesEst": 72,
+    "driveMinutes": 61,
+    "driveKm": 63.1,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -608048,10 +608092,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 61,
-    "driveKm": 63.1,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "152434761",
@@ -608112,8 +608153,8 @@
     "straightKm": 41.62,
     "driveMinutesEst": 56,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.9건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/3Q2SWqeoHWr",
     "attributes": null,
@@ -608134,8 +608175,8 @@
     "straightKm": 39.99,
     "driveMinutesEst": 54,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 10% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/A4o9yWPIZx5",
     "attributes": null,
@@ -608156,8 +608197,8 @@
     "straightKm": 42.95,
     "driveMinutesEst": 58,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.8건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/Cd6LZPUnwUA",
     "attributes": null,
@@ -608178,8 +608219,8 @@
     "straightKm": 40.67,
     "driveMinutesEst": 55,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 26% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/LheZ3gnmgJY",
     "attributes": null,
@@ -608200,8 +608241,8 @@
     "straightKm": 42.94,
     "driveMinutesEst": 58,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/2LLNddPoZp6",
     "attributes": null,
@@ -608222,8 +608263,8 @@
     "straightKm": 43.28,
     "driveMinutesEst": 58,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.6건 < 6건",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/FhyTug4VEKL",
     "attributes": null,
@@ -608243,6 +608284,9 @@
     "phone": "031-848-4757",
     "straightKm": 43.85,
     "driveMinutesEst": 59,
+    "driveMinutes": 60,
+    "driveKm": 63.1,
+    "tollWon": 2700,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -608268,10 +608312,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 60,
-    "driveKm": 63.1,
-    "tollWon": 2700
+    ]
   },
   {
     "kakaoPlaceId": "76157948",
@@ -608288,8 +608329,8 @@
     "straightKm": 47,
     "driveMinutesEst": 63,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -608374,8 +608415,8 @@
     "straightKm": 83.6,
     "driveMinutesEst": 113,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 1.2건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/3Nq0xdNpibP",
     "attributes": null,
@@ -608440,8 +608481,8 @@
     "straightKm": 82.29,
     "driveMinutesEst": 111,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.7건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/5FFomGzF4EH",
     "attributes": null,
@@ -608462,8 +608503,8 @@
     "straightKm": 71.45,
     "driveMinutesEst": 96,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.5건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/8gGmQKfSufh",
     "attributes": null,
@@ -608483,6 +608524,9 @@
     "phone": null,
     "straightKm": 63.74,
     "driveMinutesEst": 86,
+    "driveMinutes": 80,
+    "driveKm": 88.2,
+    "tollWon": 3400,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -608507,10 +608551,7 @@
       "양식",
       "룸있음",
       "예약가능"
-    ],
-    "driveMinutes": 80,
-    "driveKm": 88.2,
-    "tollWon": 3400
+    ]
   },
   {
     "kakaoPlaceId": "1027381827",
@@ -608527,8 +608568,8 @@
     "straightKm": 63.73,
     "driveMinutesEst": 86,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.3건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/DrpTuuftfZA",
     "attributes": null,
@@ -608571,8 +608612,8 @@
     "straightKm": 71.43,
     "driveMinutesEst": 96,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 23% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/JYObh9dq2DO",
     "attributes": null,
@@ -608593,8 +608634,8 @@
     "straightKm": 63.51,
     "driveMinutesEst": 86,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 16% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search3.kakaocdn.net/argon/130x130_85_c/HXtlcY120oB",
     "attributes": null,
@@ -608615,8 +608656,8 @@
     "straightKm": 62.14,
     "driveMinutesEst": 84,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -608636,8 +608677,8 @@
     "straightKm": 65.97,
     "driveMinutesEst": 89,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 0% < 30%",
     "ambiguousName": false,
     "attributes": null,
     "tags": []
@@ -608656,6 +608697,9 @@
     "phone": "031-585-0519",
     "straightKm": 60.8,
     "driveMinutesEst": 82,
+    "driveMinutes": 94,
+    "driveKm": 100.4,
+    "tollWon": 4100,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -608679,10 +608723,7 @@
     "tags": [
       "한식",
       "예약가능"
-    ],
-    "driveMinutes": 94,
-    "driveKm": 100.4,
-    "tollWon": 4100
+    ]
   },
   {
     "kakaoPlaceId": "2044786970",
@@ -608699,8 +608740,8 @@
     "straightKm": 66.36,
     "driveMinutesEst": 90,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.2건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search1.kakaocdn.net/argon/130x130_85_c/9D72gP3ssHW",
     "attributes": null,
@@ -608721,8 +608762,8 @@
     "straightKm": 59.8,
     "driveMinutesEst": 81,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 20% < 30%",
     "ambiguousName": true,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/A1zxJexvJpM",
     "attributes": null,
@@ -608743,8 +608784,8 @@
     "straightKm": 75.47,
     "driveMinutesEst": 102,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "정밀도 2% < 30%",
     "ambiguousName": false,
     "imageUrl": "https://search4.kakaocdn.net/argon/130x130_85_c/AZ56aSdv2P9",
     "attributes": null,
@@ -608765,8 +608806,8 @@
     "straightKm": 75.22,
     "driveMinutesEst": 102,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
-    "status": "pending_extraction",
-    "excludeReason": null,
+    "status": "excluded_auto",
+    "excludeReason": "월 0.0건 < 8건",
     "ambiguousName": false,
     "imageUrl": "https://search2.kakaocdn.net/argon/130x130_85_c/BTek381JgAk",
     "attributes": null,
@@ -608808,6 +608849,9 @@
     "phone": "031-772-8591",
     "straightKm": 59.05,
     "driveMinutesEst": 80,
+    "driveMinutes": 86,
+    "driveKm": 79.5,
+    "tollWon": 2800,
     "firstSeenAt": "2026-11-17T02:34:43.025Z",
     "status": "active",
     "excludeReason": null,
@@ -608833,10 +608877,7 @@
     "tags": [
       "고기구이",
       "룸있음"
-    ],
-    "driveMinutes": 86,
-    "driveKm": 79.5,
-    "tollWon": 2800
+    ]
   },
   {
     "kakaoPlaceId": "1891099382",
