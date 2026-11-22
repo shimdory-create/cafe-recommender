@@ -105,18 +105,18 @@
   },
   {
     "source": "classify-spot",
-    "lastSuccessAt": "2026-11-21T17:43:37.738Z",
+    "lastSuccessAt": "2026-11-22T02:25:55.319Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-11-21T17:43:37.738Z",
+    "updatedAt": "2026-11-22T02:25:55.319Z",
     "quotaErrorsToday": 0
   },
   {
     "source": "kakao-directions-spot",
     "lastSuccessAt": "2026-11-12T03:14:33.365Z",
-    "lastError": null,
-    "consecutiveFailures": 0,
-    "updatedAt": "2026-11-12T03:14:33.365Z",
+    "lastError": "fetch failed",
+    "consecutiveFailures": 24,
+    "updatedAt": "2026-11-22T02:25:56.152Z",
     "quotaErrorsToday": 0
   },
   {
