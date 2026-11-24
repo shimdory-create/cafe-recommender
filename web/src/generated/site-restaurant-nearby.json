@@ -582,7 +582,7 @@
         "driveMinutes": 4
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0.4,
         "driveMinutes": 4
       }
@@ -694,7 +694,7 @@
         "driveMinutes": 8
       },
       {
-        "id": "403021672",
+        "id": "1459413277",
         "distanceKm": 1.3,
         "driveMinutes": 9
       }
@@ -2313,12 +2313,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.5,
         "driveMinutes": 3
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.5,
         "driveMinutes": 3
       }
@@ -3143,6 +3143,11 @@
         "driveMinutes": 0
       },
       {
+        "id": "2058991126",
+        "distanceKm": 1.4,
+        "driveMinutes": null
+      },
+      {
         "id": "1168135576",
         "distanceKm": 0.3,
         "driveMinutes": 3
@@ -3155,11 +3160,6 @@
       {
         "id": "1193039649",
         "distanceKm": 0.4,
-        "driveMinutes": 6
-      },
-      {
-        "id": "1228346130",
-        "distanceKm": 1.3,
         "driveMinutes": 6
       }
     ],
@@ -4268,6 +4268,11 @@
         "driveMinutes": null
       },
       {
+        "id": "19237495",
+        "distanceKm": 1.9,
+        "driveMinutes": null
+      },
+      {
         "id": "1641825044",
         "distanceKm": 0.9,
         "driveMinutes": 6
@@ -4276,11 +4281,6 @@
         "id": "1678015703",
         "distanceKm": 1.4,
         "driveMinutes": 6
-      },
-      {
-        "id": "65633748",
-        "distanceKm": 1.8,
-        "driveMinutes": 7
       }
     ],
     "spots": [
@@ -5495,12 +5495,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.6,
         "driveMinutes": 3
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.6,
         "driveMinutes": 3
       },
@@ -6630,7 +6630,7 @@
         "driveMinutes": 13
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 4.8,
         "driveMinutes": 13
       }
@@ -8679,62 +8679,6 @@
       }
     ]
   },
-  "8543847": {
-    "cafes": [
-      {
-        "id": "243642075",
-        "distanceKm": 0.2,
-        "driveMinutes": 1
-      },
-      {
-        "id": "793846823",
-        "distanceKm": 0.3,
-        "driveMinutes": 1
-      },
-      {
-        "id": "1481044539",
-        "distanceKm": 0.4,
-        "driveMinutes": 2
-      },
-      {
-        "id": "1257677993",
-        "distanceKm": 0.5,
-        "driveMinutes": 2
-      },
-      {
-        "id": "1734514263",
-        "distanceKm": 0.6,
-        "driveMinutes": 2
-      }
-    ],
-    "spots": [
-      {
-        "id": "530952844",
-        "distanceKm": 2.3,
-        "driveMinutes": null
-      },
-      {
-        "id": "199726499",
-        "distanceKm": 2.9,
-        "driveMinutes": null
-      },
-      {
-        "id": "27600206",
-        "distanceKm": 3.2,
-        "driveMinutes": null
-      },
-      {
-        "id": "24286083",
-        "distanceKm": 3.5,
-        "driveMinutes": null
-      },
-      {
-        "id": "1017195100",
-        "distanceKm": 4.7,
-        "driveMinutes": null
-      }
-    ]
-  },
   "8545659": {
     "cafes": [
       {
@@ -10036,12 +9980,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "1678015703",
+        "id": "2058991126",
         "distanceKm": 0.3,
         "driveMinutes": 3
       },
       {
-        "id": "2058991126",
+        "id": "1678015703",
         "distanceKm": 0.3,
         "driveMinutes": 3
       },
@@ -10662,7 +10606,7 @@
         "driveMinutes": 1
       },
       {
-        "id": "1493430671",
+        "id": "866715417",
         "distanceKm": 1.2,
         "driveMinutes": null
       }
@@ -13495,6 +13439,62 @@
       }
     ]
   },
+  "9367368": {
+    "cafes": [
+      {
+        "id": "1129201793",
+        "distanceKm": 0.8,
+        "driveMinutes": 8
+      },
+      {
+        "id": "1907681069",
+        "distanceKm": 0.8,
+        "driveMinutes": 8
+      },
+      {
+        "id": "1836191774",
+        "distanceKm": 3.3,
+        "driveMinutes": 13
+      },
+      {
+        "id": "1706937137",
+        "distanceKm": 1.5,
+        "driveMinutes": 15
+      },
+      {
+        "id": "342916195",
+        "distanceKm": 2.9,
+        "driveMinutes": 15
+      }
+    ],
+    "spots": [
+      {
+        "id": "199726499",
+        "distanceKm": 1.2,
+        "driveMinutes": null
+      },
+      {
+        "id": "27600206",
+        "distanceKm": 3.4,
+        "driveMinutes": null
+      },
+      {
+        "id": "2012790493",
+        "distanceKm": 3.6,
+        "driveMinutes": null
+      },
+      {
+        "id": "7991903",
+        "distanceKm": 4,
+        "driveMinutes": null
+      },
+      {
+        "id": "10286439",
+        "distanceKm": 4.3,
+        "driveMinutes": null
+      }
+    ]
+  },
   "9370927": {
     "cafes": [
       {
@@ -16028,7 +16028,7 @@
         "driveMinutes": 2
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 3,
         "driveMinutes": null
       },
@@ -20350,7 +20350,7 @@
         "driveMinutes": 14
       },
       {
-        "id": "1629692286",
+        "id": "545490708",
         "distanceKm": 3.5,
         "driveMinutes": 14
       }
@@ -22020,12 +22020,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "1176184443",
+        "id": "689537775",
         "distanceKm": 0.9,
         "driveMinutes": 4
       },
       {
-        "id": "689537775",
+        "id": "1176184443",
         "distanceKm": 0.9,
         "driveMinutes": 4
       },
@@ -22290,6 +22290,11 @@
   "10846293": {
     "cafes": [
       {
+        "id": "659257382",
+        "distanceKm": 3,
+        "driveMinutes": null
+      },
+      {
         "id": "195605913",
         "distanceKm": 1.6,
         "driveMinutes": 10
@@ -22302,11 +22307,6 @@
       {
         "id": "113715465",
         "distanceKm": 1.3,
-        "driveMinutes": 11
-      },
-      {
-        "id": "408980873",
-        "distanceKm": 3,
         "driveMinutes": 11
       },
       {
@@ -23430,9 +23430,9 @@
         "driveMinutes": 4
       },
       {
-        "id": "710829529",
-        "distanceKm": 0.2,
-        "driveMinutes": 5
+        "id": "19237495",
+        "distanceKm": 0.8,
+        "driveMinutes": 4
       }
     ],
     "spots": [
@@ -24148,12 +24148,12 @@
         "driveMinutes": 7
       },
       {
-        "id": "1793192192",
+        "id": "1612963391",
         "distanceKm": 1.6,
         "driveMinutes": 7
       },
       {
-        "id": "1612963391",
+        "id": "1793192192",
         "distanceKm": 1.6,
         "driveMinutes": 7
       },
@@ -29234,12 +29234,12 @@
   "12394987": {
     "cafes": [
       {
-        "id": "1917308615",
+        "id": "631501149",
         "distanceKm": 1.2,
         "driveMinutes": 5
       },
       {
-        "id": "631501149",
+        "id": "1917308615",
         "distanceKm": 1.2,
         "driveMinutes": 5
       },
@@ -29850,6 +29850,11 @@
   "12522374": {
     "cafes": [
       {
+        "id": "1889581040",
+        "distanceKm": 3.2,
+        "driveMinutes": null
+      },
+      {
         "id": "2038818073",
         "distanceKm": 2.1,
         "driveMinutes": 7
@@ -29867,11 +29872,6 @@
       {
         "id": "1597307835",
         "distanceKm": 2.2,
-        "driveMinutes": 8
-      },
-      {
-        "id": "823094876",
-        "distanceKm": 2.5,
         "driveMinutes": 8
       }
     ],
@@ -29967,12 +29967,12 @@
         "driveMinutes": 12
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 7.8,
         "driveMinutes": 12
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 7.8,
         "driveMinutes": 12
       },
@@ -30028,12 +30028,12 @@
         "driveMinutes": 8
       },
       {
-        "id": "1133418082",
+        "id": "678770748",
         "distanceKm": 2.6,
         "driveMinutes": 9
       },
       {
-        "id": "678770748",
+        "id": "1133418082",
         "distanceKm": 2.6,
         "driveMinutes": 9
       },
@@ -32650,6 +32650,11 @@
   "13333156": {
     "cafes": [
       {
+        "id": "730524741",
+        "distanceKm": 3.1,
+        "driveMinutes": null
+      },
+      {
         "id": "148120199",
         "distanceKm": 1.1,
         "driveMinutes": 7
@@ -32668,11 +32673,6 @@
         "id": "129874972",
         "distanceKm": 2.7,
         "driveMinutes": 9
-      },
-      {
-        "id": "1572962342",
-        "distanceKm": 3.1,
-        "driveMinutes": 10
       }
     ],
     "spots": [
@@ -33042,12 +33042,12 @@
   "13559837": {
     "cafes": [
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 1.1,
         "driveMinutes": 4
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 1.1,
         "driveMinutes": 4
       },
@@ -35058,12 +35058,12 @@
   "14612458": {
     "cafes": [
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.4,
         "driveMinutes": 3
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.4,
         "driveMinutes": 3
       },
@@ -35399,6 +35399,11 @@
         "driveMinutes": 4
       },
       {
+        "id": "2047149434",
+        "distanceKm": 3.5,
+        "driveMinutes": null
+      },
+      {
         "id": "924717447",
         "distanceKm": 2.2,
         "driveMinutes": 10
@@ -35412,11 +35417,6 @@
         "id": "2062416952",
         "distanceKm": 2.3,
         "driveMinutes": 10
-      },
-      {
-        "id": "82148624",
-        "distanceKm": 2.4,
-        "driveMinutes": 11
       }
     ],
     "spots": [
@@ -38148,12 +38148,12 @@
         "driveMinutes": 9
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 2,
         "driveMinutes": 9
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 2,
         "driveMinutes": 9
       },
@@ -44868,12 +44868,12 @@
         "driveMinutes": 16
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.2,
         "driveMinutes": 23
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.2,
         "driveMinutes": 23
       },
@@ -45204,12 +45204,12 @@
         "driveMinutes": 11
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 6,
         "driveMinutes": 12
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 6,
         "driveMinutes": 12
       },
@@ -45662,7 +45662,7 @@
         "driveMinutes": 14
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 4.1,
         "driveMinutes": 14
       }
@@ -48106,12 +48106,12 @@
   "18252704": {
     "cafes": [
       {
-        "id": "758322129",
+        "id": "1807309244",
         "distanceKm": 2.8,
         "driveMinutes": null
       },
       {
-        "id": "1807309244",
+        "id": "758322129",
         "distanceKm": 2.8,
         "driveMinutes": null
       },
@@ -48294,7 +48294,7 @@
         "driveMinutes": 5
       },
       {
-        "id": "1678015703",
+        "id": "2058991126",
         "distanceKm": 0.5,
         "driveMinutes": 5
       }
@@ -48625,12 +48625,12 @@
         "driveMinutes": 14
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.6,
         "driveMinutes": 15
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.6,
         "driveMinutes": 15
       }
@@ -50076,12 +50076,12 @@
         "driveMinutes": 3
       },
       {
-        "id": "823094876",
+        "id": "1889581040",
         "distanceKm": 0.6,
         "driveMinutes": 4
       },
       {
-        "id": "1889581040",
+        "id": "823094876",
         "distanceKm": 0.6,
         "driveMinutes": 4
       },
@@ -52703,12 +52703,12 @@
         "driveMinutes": 8
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 2.2,
         "driveMinutes": 10
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 2.2,
         "driveMinutes": 10
       },
@@ -54378,6 +54378,11 @@
   "20743738": {
     "cafes": [
       {
+        "id": "19237495",
+        "distanceKm": 2.3,
+        "driveMinutes": null
+      },
+      {
         "id": "9496658",
         "distanceKm": 0.2,
         "driveMinutes": 6
@@ -54395,11 +54400,6 @@
       {
         "id": "2058991126",
         "distanceKm": 1.9,
-        "driveMinutes": 9
-      },
-      {
-        "id": "1228346130",
-        "distanceKm": 2.1,
         "driveMinutes": 9
       }
     ],
@@ -54938,12 +54938,12 @@
   "20952981": {
     "cafes": [
       {
-        "id": "986222311",
+        "id": "1047930408",
         "distanceKm": 0.8,
         "driveMinutes": null
       },
       {
-        "id": "1047930408",
+        "id": "986222311",
         "distanceKm": 0.8,
         "driveMinutes": null
       },
@@ -56236,12 +56236,12 @@
         "driveMinutes": 1
       },
       {
-        "id": "886982693",
+        "id": "2119929720",
         "distanceKm": 3.5,
         "driveMinutes": 10
       },
       {
-        "id": "2119929720",
+        "id": "886982693",
         "distanceKm": 3.5,
         "driveMinutes": 10
       },
@@ -57514,12 +57514,12 @@
   "21405323": {
     "cafes": [
       {
-        "id": "1917308615",
+        "id": "631501149",
         "distanceKm": 1.2,
         "driveMinutes": 6
       },
       {
-        "id": "631501149",
+        "id": "1917308615",
         "distanceKm": 1.2,
         "driveMinutes": 6
       },
@@ -57911,12 +57911,12 @@
         "driveMinutes": 9
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 2.3,
         "driveMinutes": 9
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 2.3,
         "driveMinutes": 9
       },
@@ -58980,12 +58980,12 @@
         "driveMinutes": 8
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 2,
         "driveMinutes": 10
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 2,
         "driveMinutes": 10
       },
@@ -60105,12 +60105,12 @@
         "driveMinutes": 8
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 3.8,
         "driveMinutes": 8
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 3.8,
         "driveMinutes": 8
       }
@@ -60889,12 +60889,12 @@
         "driveMinutes": 11
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.8,
         "driveMinutes": 12
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.8,
         "driveMinutes": 12
       }
@@ -63974,7 +63974,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0.8,
         "driveMinutes": 3
       }
@@ -64122,6 +64122,11 @@
   "24768213": {
     "cafes": [
       {
+        "id": "19237495",
+        "distanceKm": 0.8,
+        "driveMinutes": null
+      },
+      {
         "id": "710829529",
         "distanceKm": 0.3,
         "driveMinutes": 3
@@ -64139,11 +64144,6 @@
       {
         "id": "2058991126",
         "distanceKm": 0.5,
-        "driveMinutes": 4
-      },
-      {
-        "id": "1854560181",
-        "distanceKm": 0.7,
         "driveMinutes": 4
       }
     ],
@@ -66382,7 +66382,7 @@
         "driveMinutes": 2
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0.2,
         "driveMinutes": 2
       }
@@ -67431,12 +67431,12 @@
         "driveMinutes": 1
       },
       {
-        "id": "1133418082",
+        "id": "678770748",
         "distanceKm": 0.9,
         "driveMinutes": 2
       },
       {
-        "id": "678770748",
+        "id": "1133418082",
         "distanceKm": 0.9,
         "driveMinutes": 2
       },
@@ -68210,11 +68210,6 @@
   "26409461": {
     "cafes": [
       {
-        "id": "1385414945",
-        "distanceKm": 4.1,
-        "driveMinutes": null
-      },
-      {
         "id": "106306638",
         "distanceKm": 1.4,
         "driveMinutes": 7
@@ -68233,6 +68228,11 @@
         "id": "1865900883",
         "distanceKm": 2.8,
         "driveMinutes": 10
+      },
+      {
+        "id": "1117582099",
+        "distanceKm": 2.9,
+        "driveMinutes": 13
       }
     ],
     "spots": [
@@ -70506,12 +70506,12 @@
   "26797884": {
     "cafes": [
       {
-        "id": "1702812863",
+        "id": "7932458",
         "distanceKm": 1.3,
         "driveMinutes": 6
       },
       {
-        "id": "7932458",
+        "id": "1702812863",
         "distanceKm": 1.3,
         "driveMinutes": 6
       },
@@ -72934,7 +72934,7 @@
         "driveMinutes": 6
       },
       {
-        "id": "1688655704",
+        "id": "59137466",
         "distanceKm": 1.3,
         "driveMinutes": 7
       }
@@ -74202,6 +74202,11 @@
   "27226002": {
     "cafes": [
       {
+        "id": "689537775",
+        "distanceKm": 4.9,
+        "driveMinutes": null
+      },
+      {
         "id": "671137689",
         "distanceKm": 4.8,
         "driveMinutes": 12
@@ -74219,11 +74224,6 @@
       {
         "id": "1311916412",
         "distanceKm": 4.6,
-        "driveMinutes": 14
-      },
-      {
-        "id": "384754782",
-        "distanceKm": 4.7,
         "driveMinutes": 14
       }
     ],
@@ -74268,12 +74268,12 @@
         "driveMinutes": 6
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 2.5,
         "driveMinutes": 9
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 2.5,
         "driveMinutes": 9
       },
@@ -76620,17 +76620,17 @@
         "driveMinutes": null
       },
       {
-        "id": "1338037294",
-        "distanceKm": 2,
-        "driveMinutes": null
-      },
-      {
         "id": "838021460",
         "distanceKm": 0.5,
         "driveMinutes": 5
       },
       {
         "id": "730955875",
+        "distanceKm": 0.8,
+        "driveMinutes": 7
+      },
+      {
+        "id": "27404727",
         "distanceKm": 0.8,
         "driveMinutes": 7
       }
@@ -78590,7 +78590,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "692138051",
+        "id": "545490708",
         "distanceKm": 0.3,
         "driveMinutes": 3
       }
@@ -78702,7 +78702,7 @@
         "driveMinutes": 6
       },
       {
-        "id": "497073467",
+        "id": "1889581040",
         "distanceKm": 1.4,
         "driveMinutes": 6
       }
@@ -79868,12 +79868,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0.5,
         "driveMinutes": 4
       },
       {
-        "id": "1629692286",
+        "id": "146931773",
         "distanceKm": 0.5,
         "driveMinutes": 4
       },
@@ -80418,6 +80418,11 @@
   "34482794": {
     "cafes": [
       {
+        "id": "1560674601",
+        "distanceKm": 2.8,
+        "driveMinutes": null
+      },
+      {
         "id": "141840729",
         "distanceKm": 2.1,
         "driveMinutes": 7
@@ -80435,11 +80440,6 @@
       {
         "id": "631501149",
         "distanceKm": 2.3,
-        "driveMinutes": 9
-      },
-      {
-        "id": "27524253",
-        "distanceKm": 2.5,
         "driveMinutes": 9
       }
     ],
@@ -80652,12 +80652,12 @@
         "driveMinutes": 5
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 1,
         "driveMinutes": 6
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 1,
         "driveMinutes": 6
       },
@@ -82882,6 +82882,11 @@
   "65719531": {
     "cafes": [
       {
+        "id": "1629692286",
+        "distanceKm": 2.7,
+        "driveMinutes": null
+      },
+      {
         "id": "1005168074",
         "distanceKm": 1.2,
         "driveMinutes": 5
@@ -82900,11 +82905,6 @@
         "id": "1192272888",
         "distanceKm": 1.4,
         "driveMinutes": 9
-      },
-      {
-        "id": "1032488440",
-        "distanceKm": 1.6,
-        "driveMinutes": 10
       }
     ],
     "spots": [
@@ -85804,12 +85804,12 @@
         "driveMinutes": 7
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 1.2,
         "driveMinutes": 8
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 1.2,
         "driveMinutes": 8
       },
@@ -86980,7 +86980,7 @@
         "driveMinutes": 2
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 3.1,
         "driveMinutes": null
       },
@@ -90569,12 +90569,12 @@
         "driveMinutes": 7
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 2.7,
         "driveMinutes": 9
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 2.7,
         "driveMinutes": 9
       }
@@ -92514,12 +92514,12 @@
   "150094462": {
     "cafes": [
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.7,
         "driveMinutes": 4
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.7,
         "driveMinutes": 4
       },
@@ -92865,12 +92865,12 @@
         "driveMinutes": 7
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 1.8,
         "driveMinutes": 9
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 1.8,
         "driveMinutes": 9
       }
@@ -92911,12 +92911,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 0.9,
         "driveMinutes": 5
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 0.9,
         "driveMinutes": 5
       },
@@ -94886,7 +94886,7 @@
         "driveMinutes": 4
       },
       {
-        "id": "1946085948",
+        "id": "545490708",
         "distanceKm": 0.4,
         "driveMinutes": 4
       }
@@ -95314,12 +95314,12 @@
   "187050325": {
     "cafes": [
       {
-        "id": "1366999935",
+        "id": "1572962342",
         "distanceKm": 0.2,
         "driveMinutes": 3
       },
       {
-        "id": "1572962342",
+        "id": "1366999935",
         "distanceKm": 0.2,
         "driveMinutes": 3
       },
@@ -95665,12 +95665,12 @@
         "driveMinutes": 10
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 4.3,
         "driveMinutes": 10
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 4.3,
         "driveMinutes": 10
       }
@@ -97111,7 +97111,7 @@
         "driveMinutes": null
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 2.7,
         "driveMinutes": null
       },
@@ -97228,7 +97228,7 @@
         "driveMinutes": 2
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 3,
         "driveMinutes": null
       },
@@ -97462,7 +97462,7 @@
         "driveMinutes": 5
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0.1,
         "driveMinutes": 5
       }
@@ -97503,12 +97503,12 @@
         "driveMinutes": null
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.5,
         "driveMinutes": 3
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.5,
         "driveMinutes": 3
       },
@@ -98898,12 +98898,12 @@
   "224386807": {
     "cafes": [
       {
-        "id": "986222311",
+        "id": "1047930408",
         "distanceKm": 0.8,
         "driveMinutes": null
       },
       {
-        "id": "1047930408",
+        "id": "986222311",
         "distanceKm": 0.8,
         "driveMinutes": null
       },
@@ -99290,6 +99290,11 @@
   "230989806": {
     "cafes": [
       {
+        "id": "19237495",
+        "distanceKm": 4,
+        "driveMinutes": null
+      },
+      {
         "id": "1672428273",
         "distanceKm": 1.9,
         "driveMinutes": 6
@@ -99308,11 +99313,6 @@
         "id": "879915397",
         "distanceKm": 1.8,
         "driveMinutes": 10
-      },
-      {
-        "id": "156680146",
-        "distanceKm": 3,
-        "driveMinutes": 11
       }
     ],
     "spots": [
@@ -100247,12 +100247,12 @@
         "driveMinutes": 5
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 0.8,
         "driveMinutes": 5
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 0.8,
         "driveMinutes": 5
       },
@@ -103841,12 +103841,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.6,
         "driveMinutes": 4
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.6,
         "driveMinutes": 4
       }
@@ -104518,7 +104518,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "1215144897",
+        "id": "873874188",
         "distanceKm": 0.4,
         "driveMinutes": 3
       }
@@ -104737,12 +104737,12 @@
         "driveMinutes": 12
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.4,
         "driveMinutes": 12
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.4,
         "driveMinutes": 12
       }
@@ -106295,11 +106295,6 @@
         "driveMinutes": 7
       },
       {
-        "id": "80752052",
-        "distanceKm": 6.3,
-        "driveMinutes": null
-      },
-      {
         "id": "1892046709",
         "distanceKm": 3.4,
         "driveMinutes": 12
@@ -106313,6 +106308,11 @@
         "id": "761870038",
         "distanceKm": 3.6,
         "driveMinutes": 13
+      },
+      {
+        "id": "1012952382",
+        "distanceKm": 3.1,
+        "driveMinutes": 15
       }
     ],
     "spots": [
@@ -106865,12 +106865,12 @@
         "driveMinutes": 12
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 6.1,
         "driveMinutes": 12
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 6.1,
         "driveMinutes": 12
       }
@@ -108825,12 +108825,12 @@
         "driveMinutes": 1
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0,
         "driveMinutes": 1
       },
       {
-        "id": "1629692286",
+        "id": "146931773",
         "distanceKm": 0,
         "driveMinutes": 1
       }
@@ -109054,7 +109054,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "195605913",
+        "id": "1756118098",
         "distanceKm": 0.9,
         "driveMinutes": 5
       }
@@ -111233,14 +111233,14 @@
         "driveMinutes": 1
       },
       {
+        "id": "1777641874",
+        "distanceKm": 1.5,
+        "driveMinutes": null
+      },
+      {
         "id": "10778615",
         "distanceKm": 1.1,
         "driveMinutes": 3
-      },
-      {
-        "id": "2029508575",
-        "distanceKm": 1,
-        "driveMinutes": 4
       }
     ],
     "spots": [
@@ -111966,7 +111966,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "1267938420",
+        "id": "1254699372",
         "distanceKm": 0.9,
         "driveMinutes": 4
       }
@@ -113361,12 +113361,12 @@
         "driveMinutes": 11
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.6,
         "driveMinutes": 12
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.6,
         "driveMinutes": 12
       }
@@ -113897,7 +113897,7 @@
         "driveMinutes": null
       },
       {
-        "id": "1669494896",
+        "id": "8264918",
         "distanceKm": 2.5,
         "driveMinutes": null
       }
@@ -115535,12 +115535,12 @@
         "driveMinutes": 6
       },
       {
-        "id": "1624859413",
+        "id": "689537775",
         "distanceKm": 2.5,
         "driveMinutes": 7
       },
       {
-        "id": "689537775",
+        "id": "1624859413",
         "distanceKm": 2.5,
         "driveMinutes": 7
       },
@@ -115983,6 +115983,11 @@
         "driveMinutes": 1
       },
       {
+        "id": "1582905779",
+        "distanceKm": 1.7,
+        "driveMinutes": null
+      },
+      {
         "id": "1244112940",
         "distanceKm": 1,
         "driveMinutes": 3
@@ -115996,11 +116001,6 @@
         "id": "414749953",
         "distanceKm": 1.1,
         "driveMinutes": 4
-      },
-      {
-        "id": "514358708",
-        "distanceKm": 1.6,
-        "driveMinutes": 6
       }
     ],
     "spots": [
@@ -116100,12 +116100,12 @@
         "driveMinutes": 3
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 0.1,
         "driveMinutes": 4
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 0.1,
         "driveMinutes": 4
       },
@@ -116492,12 +116492,12 @@
         "driveMinutes": 15
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.7,
         "driveMinutes": 15
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.7,
         "driveMinutes": 15
       },
@@ -117622,7 +117622,7 @@
         "driveMinutes": 5
       },
       {
-        "id": "1678015703",
+        "id": "2058991126",
         "distanceKm": 0.5,
         "driveMinutes": 5
       }
@@ -121756,17 +121756,17 @@
         "driveMinutes": 4
       },
       {
-        "id": "627061184",
-        "distanceKm": 3.3,
-        "driveMinutes": null
-      },
-      {
         "id": "631501149",
         "distanceKm": 0.6,
         "driveMinutes": 5
       },
       {
         "id": "1772949090",
+        "distanceKm": 0.8,
+        "driveMinutes": 6
+      },
+      {
+        "id": "27524253",
         "distanceKm": 0.8,
         "driveMinutes": 6
       }
@@ -122260,12 +122260,12 @@
         "driveMinutes": 3
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 0.4,
         "driveMinutes": 4
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 0.4,
         "driveMinutes": 4
       },
@@ -122545,12 +122545,12 @@
         "driveMinutes": 8
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 1.6,
         "driveMinutes": 9
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 1.6,
         "driveMinutes": 9
       }
@@ -124734,7 +124734,7 @@
         "driveMinutes": 9
       },
       {
-        "id": "1629692286",
+        "id": "545490708",
         "distanceKm": 2.1,
         "driveMinutes": 9
       }
@@ -128033,12 +128033,12 @@
         "driveMinutes": 5
       },
       {
-        "id": "1193039649",
+        "id": "1228346130",
         "distanceKm": 1.3,
         "driveMinutes": 5
       },
       {
-        "id": "1228346130",
+        "id": "1193039649",
         "distanceKm": 1.3,
         "driveMinutes": 5
       }
@@ -130991,11 +130991,6 @@
         "driveMinutes": 2
       },
       {
-        "id": "82148624",
-        "distanceKm": 2.7,
-        "driveMinutes": null
-      },
-      {
         "id": "156680146",
         "distanceKm": 1.4,
         "driveMinutes": 5
@@ -131008,6 +131003,11 @@
       {
         "id": "1530215201",
         "distanceKm": 1.8,
+        "driveMinutes": 7
+      },
+      {
+        "id": "1732267395",
+        "distanceKm": 2,
         "driveMinutes": 7
       }
     ],
@@ -132274,12 +132274,12 @@
   "617508472": {
     "cafes": [
       {
-        "id": "1150762996",
+        "id": "1096612405",
         "distanceKm": 3.6,
         "driveMinutes": null
       },
       {
-        "id": "1096612405",
+        "id": "1150762996",
         "distanceKm": 3.6,
         "driveMinutes": null
       },
@@ -133002,12 +133002,12 @@
   "623393395": {
     "cafes": [
       {
-        "id": "1530215201",
+        "id": "2047149434",
         "distanceKm": 0.4,
         "driveMinutes": 3
       },
       {
-        "id": "2047149434",
+        "id": "1530215201",
         "distanceKm": 0.4,
         "driveMinutes": 3
       },
@@ -135644,7 +135644,7 @@
         "driveMinutes": 4
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 3,
         "driveMinutes": null
       },
@@ -135690,6 +135690,11 @@
   "651364551": {
     "cafes": [
       {
+        "id": "19237495",
+        "distanceKm": 0.9,
+        "driveMinutes": null
+      },
+      {
         "id": "1228346130",
         "distanceKm": 0.4,
         "driveMinutes": 2
@@ -135707,11 +135712,6 @@
       {
         "id": "710829529",
         "distanceKm": 0.2,
-        "driveMinutes": 3
-      },
-      {
-        "id": "2074851053",
-        "distanceKm": 0.4,
         "driveMinutes": 3
       }
     ],
@@ -135934,7 +135934,7 @@
         "driveMinutes": 5
       },
       {
-        "id": "403021672",
+        "id": "1459413277",
         "distanceKm": 1.6,
         "driveMinutes": 6
       }
@@ -138266,6 +138266,11 @@
   "678533606": {
     "cafes": [
       {
+        "id": "1629692286",
+        "distanceKm": 2.7,
+        "driveMinutes": null
+      },
+      {
         "id": "1005168074",
         "distanceKm": 1.2,
         "driveMinutes": 6
@@ -138283,11 +138288,6 @@
       {
         "id": "1192272888",
         "distanceKm": 1.4,
-        "driveMinutes": 9
-      },
-      {
-        "id": "8858089",
-        "distanceKm": 2.2,
         "driveMinutes": 9
       }
     ],
@@ -140302,7 +140302,7 @@
         "driveMinutes": 10
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 3.8,
         "driveMinutes": 10
       }
@@ -140582,9 +140582,9 @@
         "driveMinutes": 4
       },
       {
-        "id": "1946085948",
-        "distanceKm": 0.4,
-        "driveMinutes": 4
+        "id": "692138051",
+        "distanceKm": 0.1,
+        "driveMinutes": 5
       }
     ],
     "spots": [
@@ -142089,14 +142089,14 @@
         "driveMinutes": 6
       },
       {
-        "id": "1345869702",
-        "distanceKm": 4.2,
-        "driveMinutes": null
-      },
-      {
         "id": "16151919",
         "distanceKm": 2.2,
         "driveMinutes": 7
+      },
+      {
+        "id": "679726610",
+        "distanceKm": 1.9,
+        "driveMinutes": 8
       }
     ],
     "spots": [
@@ -144711,12 +144711,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "961407699",
+        "id": "873874188",
         "distanceKm": 0.4,
         "driveMinutes": 2
       },
       {
-        "id": "873874188",
+        "id": "961407699",
         "distanceKm": 0.4,
         "driveMinutes": 2
       },
@@ -145327,6 +145327,11 @@
         "driveMinutes": null
       },
       {
+        "id": "19237495",
+        "distanceKm": 1.6,
+        "driveMinutes": null
+      },
+      {
         "id": "1678015703",
         "distanceKm": 1,
         "driveMinutes": 5
@@ -145340,11 +145345,6 @@
         "id": "1228346130",
         "distanceKm": 1.2,
         "driveMinutes": 6
-      },
-      {
-        "id": "9496658",
-        "distanceKm": 0.8,
-        "driveMinutes": 7
       }
     ],
     "spots": [
@@ -146177,12 +146177,12 @@
         "driveMinutes": 6
       },
       {
-        "id": "1530215201",
+        "id": "2047149434",
         "distanceKm": 0.4,
         "driveMinutes": 6
       },
       {
-        "id": "2047149434",
+        "id": "1530215201",
         "distanceKm": 0.4,
         "driveMinutes": 6
       }
@@ -148962,12 +148962,12 @@
   "811744471": {
     "cafes": [
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.7,
         "driveMinutes": 3
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.7,
         "driveMinutes": 3
       },
@@ -149018,6 +149018,11 @@
   "812569963": {
     "cafes": [
       {
+        "id": "1629692286",
+        "distanceKm": 2.5,
+        "driveMinutes": null
+      },
+      {
         "id": "1005168074",
         "distanceKm": 1.4,
         "driveMinutes": 6
@@ -149035,11 +149040,6 @@
       {
         "id": "1032488440",
         "distanceKm": 1.4,
-        "driveMinutes": 9
-      },
-      {
-        "id": "40266248",
-        "distanceKm": 1.6,
         "driveMinutes": 9
       }
     ],
@@ -150876,6 +150876,11 @@
         "driveMinutes": 6
       },
       {
+        "id": "2047149434",
+        "distanceKm": 4.2,
+        "driveMinutes": null
+      },
+      {
         "id": "337970195",
         "distanceKm": 2.5,
         "driveMinutes": 8
@@ -150884,11 +150889,6 @@
         "id": "1928816021",
         "distanceKm": 2.6,
         "driveMinutes": 11
-      },
-      {
-        "id": "924717447",
-        "distanceKm": 3.5,
-        "driveMinutes": 12
       }
     ],
     "spots": [
@@ -150988,12 +150988,12 @@
         "driveMinutes": 8
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 4.7,
         "driveMinutes": 8
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 4.7,
         "driveMinutes": 8
       },
@@ -152943,12 +152943,12 @@
         "driveMinutes": 6
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 2.9,
         "driveMinutes": 7
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 2.9,
         "driveMinutes": 7
       },
@@ -155412,12 +155412,12 @@
         "driveMinutes": 5
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 4.4,
         "driveMinutes": 8
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 4.4,
         "driveMinutes": 8
       },
@@ -155687,12 +155687,12 @@
         "driveMinutes": null
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.5,
         "driveMinutes": 3
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.5,
         "driveMinutes": 3
       },
@@ -156186,6 +156186,11 @@
   "892160083": {
     "cafes": [
       {
+        "id": "1629692286",
+        "distanceKm": 2.6,
+        "driveMinutes": null
+      },
+      {
         "id": "1005168074",
         "distanceKm": 1.2,
         "driveMinutes": 5
@@ -156204,11 +156209,6 @@
         "id": "1192272888",
         "distanceKm": 1.3,
         "driveMinutes": 9
-      },
-      {
-        "id": "1032488440",
-        "distanceKm": 1.5,
-        "driveMinutes": 10
       }
     ],
     "spots": [
@@ -157932,12 +157932,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 2.3,
         "driveMinutes": 8
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 2.3,
         "driveMinutes": 8
       },
@@ -159103,12 +159103,12 @@
         "driveMinutes": null
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 1,
         "driveMinutes": 4
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 1,
         "driveMinutes": 4
       },
@@ -162972,12 +162972,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 4.1,
         "driveMinutes": 8
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 4.1,
         "driveMinutes": 8
       },
@@ -163430,7 +163430,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.5,
         "driveMinutes": 3
       }
@@ -168399,6 +168399,11 @@
         "driveMinutes": 1
       },
       {
+        "id": "2058991126",
+        "distanceKm": 1.3,
+        "driveMinutes": null
+      },
+      {
         "id": "1168135576",
         "distanceKm": 0.3,
         "driveMinutes": 4
@@ -168412,11 +168417,6 @@
         "id": "1228346130",
         "distanceKm": 1.2,
         "driveMinutes": 6
-      },
-      {
-        "id": "253560122",
-        "distanceKm": 1.1,
-        "driveMinutes": 7
       }
     ],
     "spots": [
@@ -170242,11 +170242,6 @@
   "1044434257": {
     "cafes": [
       {
-        "id": "195605913",
-        "distanceKm": 2.1,
-        "driveMinutes": null
-      },
-      {
         "id": "2133343910",
         "distanceKm": 0.9,
         "driveMinutes": 5
@@ -170265,6 +170260,11 @@
         "id": "14984169",
         "distanceKm": 1.4,
         "driveMinutes": 6
+      },
+      {
+        "id": "1478411112",
+        "distanceKm": 1.6,
+        "driveMinutes": 9
       }
     ],
     "spots": [
@@ -177873,12 +177873,12 @@
         "driveMinutes": 13
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.4,
         "driveMinutes": 13
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.4,
         "driveMinutes": 13
       }
@@ -184466,12 +184466,12 @@
   "1214823589": {
     "cafes": [
       {
-        "id": "1449249239",
+        "id": "1960353739",
         "distanceKm": 0.2,
         "driveMinutes": 2
       },
       {
-        "id": "1960353739",
+        "id": "1449249239",
         "distanceKm": 0.2,
         "driveMinutes": 2
       },
@@ -186207,12 +186207,12 @@
         "driveMinutes": 6
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 1.6,
         "driveMinutes": 8
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 1.6,
         "driveMinutes": 8
       },
@@ -187678,7 +187678,7 @@
         "driveMinutes": 4
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0.8,
         "driveMinutes": 4
       }
@@ -188839,11 +188839,6 @@
         "driveMinutes": 0
       },
       {
-        "id": "1688655704",
-        "distanceKm": 2.8,
-        "driveMinutes": null
-      },
-      {
         "id": "688515276",
         "distanceKm": 1.2,
         "driveMinutes": 6
@@ -188857,6 +188852,11 @@
         "id": "1860681564",
         "distanceKm": 2.2,
         "driveMinutes": 9
+      },
+      {
+        "id": "21551188",
+        "distanceKm": 1.6,
+        "driveMinutes": 11
       }
     ],
     "spots": [
@@ -190239,12 +190239,12 @@
         "driveMinutes": 13
       },
       {
-        "id": "1133418082",
+        "id": "678770748",
         "distanceKm": 6.3,
         "driveMinutes": 14
       },
       {
-        "id": "678770748",
+        "id": "1133418082",
         "distanceKm": 6.3,
         "driveMinutes": 14
       },
@@ -191369,12 +191369,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.6,
         "driveMinutes": 4
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.6,
         "driveMinutes": 4
       }
@@ -191649,12 +191649,12 @@
         "driveMinutes": 9
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 2.1,
         "driveMinutes": 10
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 2.1,
         "driveMinutes": 10
       }
@@ -192326,9 +192326,9 @@
         "driveMinutes": 2
       },
       {
-        "id": "1191537233",
-        "distanceKm": 1.2,
-        "driveMinutes": 3
+        "id": "866715417",
+        "distanceKm": 1.3,
+        "driveMinutes": null
       }
     ],
     "spots": [
@@ -194159,12 +194159,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "1133418082",
+        "id": "678770748",
         "distanceKm": 0.9,
         "driveMinutes": 2
       },
       {
-        "id": "678770748",
+        "id": "1133418082",
         "distanceKm": 0.9,
         "driveMinutes": 2
       },
@@ -194337,12 +194337,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 0.3,
         "driveMinutes": 4
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 0.3,
         "driveMinutes": 4
       }
@@ -194561,12 +194561,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.5,
         "driveMinutes": 3
       },
       {
-        "id": "19237495",
+        "id": "24725284",
         "distanceKm": 0.5,
         "driveMinutes": 3
       }
@@ -196847,11 +196847,6 @@
         "driveMinutes": 1
       },
       {
-        "id": "1629692286",
-        "distanceKm": 0.4,
-        "driveMinutes": null
-      },
-      {
         "id": "1693980811",
         "distanceKm": 0.1,
         "driveMinutes": 2
@@ -196864,6 +196859,11 @@
       {
         "id": "1946085948",
         "distanceKm": 0.3,
+        "driveMinutes": 4
+      },
+      {
+        "id": "986222311",
+        "distanceKm": 0.4,
         "driveMinutes": 4
       }
     ],
@@ -197010,12 +197010,12 @@
   "1349313781": {
     "cafes": [
       {
-        "id": "1366999935",
+        "id": "1572962342",
         "distanceKm": 0.2,
         "driveMinutes": 3
       },
       {
-        "id": "1572962342",
+        "id": "1366999935",
         "distanceKm": 0.2,
         "driveMinutes": 3
       },
@@ -197412,12 +197412,12 @@
         "driveMinutes": 13
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.8,
         "driveMinutes": 13
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.8,
         "driveMinutes": 13
       },
@@ -197753,12 +197753,12 @@
         "driveMinutes": 1
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0,
         "driveMinutes": 1
       },
       {
-        "id": "1629692286",
+        "id": "146931773",
         "distanceKm": 0,
         "driveMinutes": 1
       }
@@ -201230,9 +201230,9 @@
         "driveMinutes": 14
       },
       {
-        "id": "347243251",
-        "distanceKm": 4.8,
-        "driveMinutes": 14
+        "id": "237233206",
+        "distanceKm": 4.3,
+        "driveMinutes": 15
       }
     ],
     "spots": [
@@ -202569,13 +202569,13 @@
         "driveMinutes": 14
       },
       {
-        "id": "347243251",
-        "distanceKm": 4.8,
-        "driveMinutes": 15
-      },
-      {
         "id": "350639731",
         "distanceKm": 4.2,
+        "driveMinutes": 16
+      },
+      {
+        "id": "237233206",
+        "distanceKm": 4.3,
         "driveMinutes": 16
       }
     ],
@@ -202900,12 +202900,12 @@
         "driveMinutes": null
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0,
         "driveMinutes": 0
       },
       {
-        "id": "1629692286",
+        "id": "146931773",
         "distanceKm": 0,
         "driveMinutes": 0
       },
@@ -202961,12 +202961,12 @@
         "driveMinutes": 3
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 0.3,
         "driveMinutes": 3
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 0.3,
         "driveMinutes": 3
       }
@@ -206586,12 +206586,12 @@
   "1463673632": {
     "cafes": [
       {
-        "id": "986222311",
+        "id": "1047930408",
         "distanceKm": 0.8,
         "driveMinutes": null
       },
       {
-        "id": "1047930408",
+        "id": "986222311",
         "distanceKm": 0.8,
         "driveMinutes": null
       },
@@ -207604,12 +207604,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "497073467",
+        "id": "1889581040",
         "distanceKm": 0.7,
         "driveMinutes": 5
       },
       {
-        "id": "1889581040",
+        "id": "497073467",
         "distanceKm": 0.7,
         "driveMinutes": 5
       },
@@ -207894,7 +207894,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "692138051",
+        "id": "545490708",
         "distanceKm": 0.3,
         "driveMinutes": 3
       }
@@ -208836,12 +208836,12 @@
         "driveMinutes": 6
       },
       {
-        "id": "1472389122",
+        "id": "966895186",
         "distanceKm": 1.4,
         "driveMinutes": 6
       },
       {
-        "id": "966895186",
+        "id": "1472389122",
         "distanceKm": 1.4,
         "driveMinutes": 6
       },
@@ -209055,12 +209055,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 0.4,
         "driveMinutes": 3
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 0.4,
         "driveMinutes": 3
       },
@@ -209284,12 +209284,12 @@
         "driveMinutes": 10
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.4,
         "driveMinutes": 12
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.4,
         "driveMinutes": 12
       },
@@ -209910,7 +209910,7 @@
         "driveMinutes": 2
       },
       {
-        "id": "146931773",
+        "id": "545490708",
         "distanceKm": 0.2,
         "driveMinutes": 2
       }
@@ -211967,6 +211967,11 @@
         "driveMinutes": null
       },
       {
+        "id": "1149316948",
+        "distanceKm": 3,
+        "driveMinutes": null
+      },
+      {
         "id": "93367958",
         "distanceKm": 2.1,
         "driveMinutes": 5
@@ -211979,11 +211984,6 @@
       {
         "id": "2098880330",
         "distanceKm": 1.7,
-        "driveMinutes": 9
-      },
-      {
-        "id": "1059725409",
-        "distanceKm": 2.3,
         "driveMinutes": 9
       }
     ],
@@ -212430,7 +212430,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "24725284",
+        "id": "19237495",
         "distanceKm": 0.4,
         "driveMinutes": 3
       }
@@ -212598,7 +212598,7 @@
         "driveMinutes": 12
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.6,
         "driveMinutes": 13
       }
@@ -213260,12 +213260,12 @@
         "driveMinutes": 3
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 2.9,
         "driveMinutes": 7
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 2.9,
         "driveMinutes": 7
       },
@@ -216686,9 +216686,9 @@
         "driveMinutes": 4
       },
       {
-        "id": "1946085948",
-        "distanceKm": 0.4,
-        "driveMinutes": 4
+        "id": "692138051",
+        "distanceKm": 0.1,
+        "driveMinutes": 5
       }
     ],
     "spots": [
@@ -225575,12 +225575,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 0.4,
         "driveMinutes": 2
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 0.4,
         "driveMinutes": 2
       },
@@ -226858,12 +226858,12 @@
   "1689110747": {
     "cafes": [
       {
-        "id": "72856685",
+        "id": "1907217203",
         "distanceKm": 1.4,
         "driveMinutes": 6
       },
       {
-        "id": "1907217203",
+        "id": "72856685",
         "distanceKm": 1.4,
         "driveMinutes": 6
       },
@@ -227596,12 +227596,12 @@
         "driveMinutes": 9
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.6,
         "driveMinutes": 13
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.6,
         "driveMinutes": 13
       },
@@ -227815,12 +227815,12 @@
         "driveMinutes": 1
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 0.2,
         "driveMinutes": 1
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 0.2,
         "driveMinutes": 1
       },
@@ -230442,6 +230442,11 @@
   "1730789556": {
     "cafes": [
       {
+        "id": "1451559407",
+        "distanceKm": 2.6,
+        "driveMinutes": null
+      },
+      {
         "id": "1918371398",
         "distanceKm": 1.2,
         "driveMinutes": 5
@@ -230458,11 +230463,6 @@
       },
       {
         "id": "801136188",
-        "distanceKm": 2.4,
-        "driveMinutes": 9
-      },
-      {
-        "id": "213343094",
         "distanceKm": 2.4,
         "driveMinutes": 9
       }
@@ -230778,12 +230778,12 @@
   "1734074797": {
     "cafes": [
       {
-        "id": "206498103",
+        "id": "1398571605",
         "distanceKm": 0.1,
         "driveMinutes": 1
       },
       {
-        "id": "1398571605",
+        "id": "206498103",
         "distanceKm": 0.1,
         "driveMinutes": 1
       },
@@ -232127,6 +232127,11 @@
         "driveMinutes": 5
       },
       {
+        "id": "19237495",
+        "distanceKm": 4,
+        "driveMinutes": null
+      },
+      {
         "id": "1392927301",
         "distanceKm": 2,
         "driveMinutes": 8
@@ -232140,11 +232145,6 @@
         "id": "879915397",
         "distanceKm": 1.8,
         "driveMinutes": 10
-      },
-      {
-        "id": "156680146",
-        "distanceKm": 3.1,
-        "driveMinutes": 11
       }
     ],
     "spots": [
@@ -232682,12 +232682,12 @@
   "1759072012": {
     "cafes": [
       {
-        "id": "1449249239",
+        "id": "1960353739",
         "distanceKm": 0.6,
         "driveMinutes": 5
       },
       {
-        "id": "1960353739",
+        "id": "1449249239",
         "distanceKm": 0.6,
         "driveMinutes": 5
       },
@@ -232865,13 +232865,13 @@
         "driveMinutes": 14
       },
       {
-        "id": "1370937668",
-        "distanceKm": 10,
-        "driveMinutes": null
-      },
-      {
         "id": "1684149430",
         "distanceKm": 4.7,
+        "driveMinutes": 15
+      },
+      {
+        "id": "191872894",
+        "distanceKm": 5.8,
         "driveMinutes": 15
       }
     ],
@@ -233878,7 +233878,7 @@
         "driveMinutes": 5
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0.8,
         "driveMinutes": 5
       }
@@ -234927,12 +234927,12 @@
         "driveMinutes": 5
       },
       {
-        "id": "1560493689",
+        "id": "730524741",
         "distanceKm": 0.7,
         "driveMinutes": 5
       },
       {
-        "id": "730524741",
+        "id": "1560493689",
         "distanceKm": 0.7,
         "driveMinutes": 5
       },
@@ -236393,13 +236393,13 @@
         "driveMinutes": 3
       },
       {
-        "id": "692138051",
-        "distanceKm": 0.5,
-        "driveMinutes": 4
+        "id": "545490708",
+        "distanceKm": 0.6,
+        "driveMinutes": 3
       },
       {
-        "id": "1626265862",
-        "distanceKm": 0.6,
+        "id": "692138051",
+        "distanceKm": 0.5,
         "driveMinutes": 4
       }
     ],
@@ -237121,14 +237121,14 @@
         "driveMinutes": 4
       },
       {
-        "id": "1310395158",
-        "distanceKm": 3.3,
-        "driveMinutes": null
-      },
-      {
         "id": "1626387662",
         "distanceKm": 3.1,
         "driveMinutes": 7
+      },
+      {
+        "id": "308329661",
+        "distanceKm": 1.5,
+        "driveMinutes": 8
       }
     ],
     "spots": [
@@ -237545,7 +237545,7 @@
         "driveMinutes": null
       },
       {
-        "id": "1669494896",
+        "id": "8264918",
         "distanceKm": 3,
         "driveMinutes": null
       }
@@ -238282,12 +238282,12 @@
   "1823276224": {
     "cafes": [
       {
-        "id": "986222311",
+        "id": "1047930408",
         "distanceKm": 0.8,
         "driveMinutes": null
       },
       {
-        "id": "1047930408",
+        "id": "986222311",
         "distanceKm": 0.8,
         "driveMinutes": null
       },
@@ -241250,12 +241250,12 @@
   "1858403612": {
     "cafes": [
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 1.1,
         "driveMinutes": 4
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 1.1,
         "driveMinutes": 4
       },
@@ -242146,12 +242146,12 @@
   "1866279324": {
     "cafes": [
       {
-        "id": "403021672",
+        "id": "1459413277",
         "distanceKm": 0.1,
         "driveMinutes": 0
       },
       {
-        "id": "1459413277",
+        "id": "403021672",
         "distanceKm": 0.1,
         "driveMinutes": 0
       },
@@ -248545,12 +248545,12 @@
         "driveMinutes": 1
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0,
         "driveMinutes": 1
       },
       {
-        "id": "1629692286",
+        "id": "146931773",
         "distanceKm": 0,
         "driveMinutes": 1
       }
@@ -249146,6 +249146,11 @@
   "1949561591": {
     "cafes": [
       {
+        "id": "19237495",
+        "distanceKm": 4.6,
+        "driveMinutes": null
+      },
+      {
         "id": "1672428273",
         "distanceKm": 1.6,
         "driveMinutes": 8
@@ -249164,11 +249169,6 @@
         "id": "879915397",
         "distanceKm": 1.4,
         "driveMinutes": 14
-      },
-      {
-        "id": "37000237",
-        "distanceKm": 3.4,
-        "driveMinutes": 15
       }
     ],
     "spots": [
@@ -253524,12 +253524,12 @@
         "driveMinutes": 11
       },
       {
-        "id": "80752052",
+        "id": "875177414",
         "distanceKm": 5.4,
         "driveMinutes": 11
       },
       {
-        "id": "875177414",
+        "id": "80752052",
         "distanceKm": 5.4,
         "driveMinutes": 11
       },
@@ -256558,7 +256558,7 @@
         "driveMinutes": 3
       },
       {
-        "id": "1790031933",
+        "id": "689537775",
         "distanceKm": 1.7,
         "driveMinutes": 7
       }
@@ -258569,12 +258569,12 @@
         "driveMinutes": 9
       },
       {
-        "id": "1366999935",
+        "id": "1292127682",
         "distanceKm": 2.2,
         "driveMinutes": 10
       },
       {
-        "id": "1292127682",
+        "id": "1366999935",
         "distanceKm": 2.2,
         "driveMinutes": 10
       }
@@ -259190,7 +259190,7 @@
         "driveMinutes": 4
       },
       {
-        "id": "1678015703",
+        "id": "2058991126",
         "distanceKm": 0.6,
         "driveMinutes": 4
       }
@@ -259689,12 +259689,12 @@
         "driveMinutes": 4
       },
       {
-        "id": "1394750010",
+        "id": "1582905779",
         "distanceKm": 0.2,
         "driveMinutes": 5
       },
       {
-        "id": "1582905779",
+        "id": "1394750010",
         "distanceKm": 0.2,
         "driveMinutes": 5
       }
@@ -264108,12 +264108,12 @@
         "driveMinutes": 1
       },
       {
-        "id": "886982693",
+        "id": "2119929720",
         "distanceKm": 0.5,
         "driveMinutes": 3
       },
       {
-        "id": "2119929720",
+        "id": "886982693",
         "distanceKm": 0.5,
         "driveMinutes": 3
       },
@@ -264495,11 +264495,6 @@
         "driveMinutes": 2
       },
       {
-        "id": "1673225955",
-        "distanceKm": 3.3,
-        "driveMinutes": null
-      },
-      {
         "id": "443737289",
         "distanceKm": 0.8,
         "driveMinutes": 5
@@ -264513,6 +264508,11 @@
         "id": "1849461475",
         "distanceKm": 2,
         "driveMinutes": 6
+      },
+      {
+        "id": "921191675",
+        "distanceKm": 1.8,
+        "driveMinutes": 7
       }
     ],
     "spots": [
@@ -265396,12 +265396,12 @@
         "driveMinutes": 2
       },
       {
-        "id": "1678015703",
+        "id": "2058991126",
         "distanceKm": 0.3,
         "driveMinutes": 3
       },
       {
-        "id": "2058991126",
+        "id": "1678015703",
         "distanceKm": 0.3,
         "driveMinutes": 3
       },
@@ -265574,7 +265574,7 @@
         "driveMinutes": 4
       },
       {
-        "id": "146931773",
+        "id": "1629692286",
         "distanceKm": 0.8,
         "driveMinutes": 4
       }
@@ -265686,7 +265686,7 @@
         "driveMinutes": 7
       },
       {
-        "id": "403021672",
+        "id": "1459413277",
         "distanceKm": 1.7,
         "driveMinutes": 7
       }
