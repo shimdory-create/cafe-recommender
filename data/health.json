@@ -81,18 +81,18 @@
   },
   {
     "source": "kakao-local-spot",
-    "lastSuccessAt": "2026-11-11T00:32:15.669Z",
+    "lastSuccessAt": "2026-11-25T03:29:22.346Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-11-11T00:32:15.669Z",
+    "updatedAt": "2026-11-25T03:29:22.346Z",
     "quotaErrorsToday": 0
   },
   {
     "source": "harvest-spot",
     "lastSuccessAt": "2026-09-22T20:16:38.188Z",
-    "lastError": "kakao-local HTTP 400: {\"code\":-2, \"msg\":\"Max (query) length 100\"}",
-    "consecutiveFailures": 6,
-    "updatedAt": "2026-11-11T00:32:15.669Z",
+    "lastError": "LLM 스키마 검증 실패 (2회 시도): JSON 파싱 실패",
+    "consecutiveFailures": 8,
+    "updatedAt": "2026-11-25T03:29:22.346Z",
     "quotaErrorsToday": 0
   },
   {
