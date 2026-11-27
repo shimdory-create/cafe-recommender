@@ -65,18 +65,18 @@
   },
   {
     "source": "classify-restaurant",
-    "lastSuccessAt": "2026-11-27T03:55:23.566Z",
+    "lastSuccessAt": "2026-11-27T19:12:40.882Z",
     "lastError": null,
     "consecutiveFailures": 0,
-    "updatedAt": "2026-11-27T03:55:23.566Z",
+    "updatedAt": "2026-11-27T19:12:40.882Z",
     "quotaErrorsToday": 0
   },
   {
     "source": "kakao-directions-restaurant",
     "lastSuccessAt": "2026-11-18T18:27:43.060Z",
     "lastError": "fetch failed",
-    "consecutiveFailures": 1,
-    "updatedAt": "2026-11-20T18:03:32.644Z",
+    "consecutiveFailures": 2,
+    "updatedAt": "2026-11-27T19:12:41.745Z",
     "quotaErrorsToday": 0
   },
   {
